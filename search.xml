@@ -500,7 +500,7 @@ x=l\times l'\tag{3.8}</script><p>证明：</p>
 <h4 id="3-无穷远点"><a href="#3-无穷远点" class="headerlink" title="3.无穷远点"></a>3.无穷远点</h4><p>首先定义无穷远点：平面上一个点的齐次坐标的第三维为0，该点为无穷远点。</p>
 <p>因为转化成欧式坐标后，前两维都除以第三维0，为无穷大，所以是无穷远点。</p>
 <script type="math/tex; mode=display">
-x_\infin =\left[\begin{array}{}
+x_\infty =\left[\begin{array}{}
 x_1\\
 x_2\\
 0
@@ -508,7 +508,7 @@ x_2\\
 <h4 id="4-无穷远直线"><a href="#4-无穷远直线" class="headerlink" title="4.无穷远直线"></a>4.无穷远直线</h4><p>无穷远点集位于无穷远线上。</p>
 <p>无穷远线的向量表示为：</p>
 <script type="math/tex; mode=display">
-l_\infin =\left[\begin{array}{}
+l_\infty =\left[\begin{array}{}
 0\\
 0\\
 1
@@ -520,7 +520,7 @@ A & t \\
 v & b
 \end{array}\right] \tag{3.12}</script><p>无穷远点的<strong>透视变换</strong>：</p>
 <script type="math/tex; mode=display">
-p^{\prime}=Hp_\infin=\left[\begin{array}{l}
+p^{\prime}=Hp_\infty=\left[\begin{array}{l}
 A & t \\
 v & b
 \end{array}\right]\left[\begin{array}{l}
@@ -621,14 +621,14 @@ v=Kd\tag{3.24}</script><p>该式成立的条件是，相机坐标系和世界坐
 <p>证明：</p>
 <p>无穷远点坐标为：</p>
 <script type="math/tex; mode=display">
-X_\infin=\left[\begin{array}{}
+X_\infty=\left[\begin{array}{}
 a\\
 b\\
 c\\
 0
 \end{array}\right]\tag{3.25}</script><p>经过摄像机投影变换后</p>
 <script type="math/tex; mode=display">
-v=MX_\infin=K[I\ \ 0]\left[\begin{array}{}
+v=MX_\infty=K[I\ \ 0]\left[\begin{array}{}
 a\\
 b\\
 c\\
