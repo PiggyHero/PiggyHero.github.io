@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="在linux或mac中编译C++,首先要配置好编译环境。">
+  <meta name="description" content="Markdown常用语法，方便使用时查阅。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VScode编译环境配置">
-<meta property="og:url" content="http://example.com/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="Markdown常用语法">
+<meta property="og:url" content="http://example.com/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/index.html">
 <meta property="og:site_name" content="PiggyHero say Hello">
-<meta property="og:description" content="在linux或mac中编译C++,首先要配置好编译环境。">
+<meta property="og:description" content="Markdown常用语法，方便使用时查阅。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-10-17T21:36:21.000Z">
-<meta property="article:modified_time" content="2021-10-17T21:42:05.732Z">
+<meta property="article:published_time" content="2021-10-17T22:05:12.000Z">
+<meta property="article:modified_time" content="2021-10-17T22:06:06.526Z">
 <meta property="article:author" content="PiggyHero">
-<meta property="article:tag" content="VScode">
-<meta property="article:tag" content="编程">
-<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+<link rel="canonical" href="http://example.com/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>VScode编译环境配置 | PiggyHero say Hello</title>
+  <title>Markdown常用语法 | PiggyHero say Hello</title>
   
 
 
@@ -197,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cutexiaoxin.gif">
@@ -210,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          VScode编译环境配置
+          Markdown常用语法
         </h1>
 
         <div class="post-meta">
@@ -221,7 +219,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-10-18 05:36:21 / 修改时间：05:42:05" itemprop="dateCreated datePublished" datetime="2021-10-18T05:36:21+08:00">2021-10-18</time>
+              <time title="创建时间：2021-10-18 06:05:12 / 修改时间：06:06:06" itemprop="dateCreated datePublished" datetime="2021-10-18T06:05:12+08:00">2021-10-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,14 +249,138 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在linux或mac中编译C++,首先要配置好编译环境。<br><span id="more"></span></p>
-<h1 id="1-首先编写CMakeLists-txt文件"><a href="#1-首先编写CMakeLists-txt文件" class="headerlink" title="1.首先编写CMakeLists.txt文件"></a>1.首先编写CMakeLists.txt文件</h1><p>注意：在<code>c_cpp_properties.json</code>中设置了头文件路径，在编译的过程中就会有头文件内容的提示，但仍需要在<code>CMakeLists.txt</code>中写好包含的头文件路径，否则编译器只会在<code>usr/include文件夹下</code>和<code>CMakeLists.txt</code>所在文件夹下寻找头文件</p>
-<p>如果不在<code>c_cpp_properties.json</code>中设置头文件路径，在写代码的时候可能会没有提示，而且头文件名字下会有红波浪线，但可以正常编译</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(文件名)</span><br><span class="line"></span><br><span class="line"><span class="keyword">aux_source_directory</span>(./ VAR) <span class="comment">#把当前路径下的所有源文件打包程VAR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(添加头文件路径)<span class="comment">#如果在vscode中已经添加了头文件路径了，就不需要再添加了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(搜索库)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;添加库的头文件&#125;</span>）</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_TYPE Debug)<span class="comment">#如果想调试，加上这一句，生成可调试文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS<span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -Wall&quot;</span>)<span class="comment">#生成错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(可执行文件名 <span class="variable">$&#123;VAR&#125;</span>)<span class="comment">#生成可执行文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(可执行文件 库名) <span class="comment">#链接库</span></span><br></pre></td></tr></table></figure>
-<h1 id="2-文件根目录中建立一个build文件夹"><a href="#2-文件根目录中建立一个build文件夹" class="headerlink" title="2.文件根目录中建立一个build文件夹"></a>2.文件根目录中建立一个build文件夹</h1><p>编译过程中生成的中间文件和可执行文件全在该文件夹下，可执行文件的位置可在CMakeLists.txt中改变路径</p>
-<h1 id="3-建立-json文件夹，编写launch-json文件"><a href="#3-建立-json文件夹，编写launch-json文件" class="headerlink" title="3.建立.json文件夹，编写launch.json文件"></a>3.建立.json文件夹，编写launch.json文件</h1><p>新建launch.json文件，该文件是在VSCODE中按F5后所执行的命令</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;g++ - 生成和调试活动文件&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build/可执行文件名&quot;</span>,**<span class="comment">//执行文件的路径加上可执行文件，$&#123;workspaceFolder&#125;为根目录**</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,<span class="comment">//打开外部终端</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;为 gdb 启用整齐打印&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="attr">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;Build&quot;</span>,<span class="comment">//该命令表示执行launch.json的命令之前的预执行任务，要在tasks.json中设置</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>Markdown常用语法，方便使用时查阅。<br><span id="more"></span><br>[toc]</p>
+<h2 id="锚点和目录"><a href="#锚点和目录" class="headerlink" title="锚点和目录"></a>锚点和目录</h2><p>目录在前面用 <code>[toc]</code> 即可。</p>
+<p>锚点: <code>[说明文字](#jump)</code>，然后在要跳跃的位置处写 <code>&lt;span id=&quot;jump&quot;&gt;跳转位置的名字&lt;/span&gt;</code></p>
+<p>例如：<a href="#希腊字母">希腊字母</a> </p>
+<p>超链接：<code>[网页名字](地址)</code>，如<a target="_blank" rel="noopener" href="https://github.com/">github</a></p>
+<h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><ol>
+<li>行内公式：将公式插入到本行内，符号：<script type="math/tex">公式内容</script>，如：$xyz$</li>
+<li>独行公式：将公式插入到新的一行内，并且居中，符号：<script type="math/tex">$公式内容$$$，如：</script>xyz$$</li>
+</ol>
+<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
+<li>上标符号，符号：<code>^</code>，如：$x^4$</li>
+<li>下标符号，符号：<code>_</code>，如：$x_1$</li>
+<li>组合符号，符号：<code>&#123;&#125;</code>，如：${16}_{8}O{2+}_{2}$</li>
+</ol>
+<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
+<li>汉字形式，符号：<code>\mbox&#123;&#125;</code>，如：$V_{\mbox{初始}}$</li>
+<li>字体控制，符号：<code>\displaystyle</code>，如：$\displaystyle \frac{x+y}{y+z}$</li>
+<li>下划线符号，符号：<code>\underline</code>，如：$\underline{x+y}$</li>
+<li>标签，符号<code>\tag&#123;数字&#125;</code>，如：$\tag{11}$</li>
+<li>上大括号，符号：<code>\overbrace&#123;算式&#125;</code>，如：$\overbrace{a+b+c+d}^{2.0}$</li>
+<li>下大括号，符号：<code>\underbrace&#123;算式&#125;</code>，如：$a+\underbrace{b+c}_{1.0}+d$</li>
+<li>上位符号，符号：<code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code>，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</li>
+</ol>
+<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
+<li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
+<li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
+<li>大空格，符号<code>\</code>，如：$x \  y$ </li>
+<li>中空格，符号<code>\:</code>，如：$x \: y$</li>
+<li>小空格，符号<code>\,</code>，如：$x \, y$</li>
+<li>没有空格，符号``，如：$xy$</li>
+<li>紧贴，符号<code>\!</code>，如：$x ! y$</li>
+</ol>
+<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><ol>
+<li>括号，符号：<code>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</code>，如：$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</li>
+<li>中括号，符号：<code>[]</code>，如：$[x+y]$</li>
+<li>大括号，符号：<code>\&#123; \&#125;</code>，如: $\{\}$</li>
+<li>自适应括号，符号：<code>\left \right</code>，如：$\left(x\right)$，$\left(x{yz}\right)$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \choose 下位公式&#125;</code>，如：${n+1 \choose k}={n \choose k}+{n \choose k-1}$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \atop 下位公式&#125;</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</li>
+</ol>
+<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><ol>
+<li>加法运算，符号：<code>+</code>，如：$x+y=z$</li>
+<li>减法运算，符号：<code>-</code>，如：$x-y=z$</li>
+<li>加减运算，符号：<code>\pm</code>，如：$x \pm y=z$</li>
+<li>减加运算，符号：<code>\mp</code>，如：$x \mp y=z$</li>
+<li>乘法运算，符号：<code>\times</code>，如：$x \times y=z$</li>
+<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y=z$</li>
+<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y=z$</li>
+<li>除法运算，符号：<code>\div</code>，如：$x \div y=z$</li>
+<li>斜法运算，符号：<code>/</code>，如：$x/y=z$</li>
+<li>分式表示，符号：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，如：$\frac{x+y}{y+z}$</li>
+<li>分式表示，符号：<code>&#123;分子&#125; \voer &#123;分母&#125;</code>，如：${x+y} \over {y+z}$</li>
+<li>绝对值表示，符号：<code>||</code>，如：$|x+y|$</li>
+</ol>
+<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><ol>
+<li>平均数运算，符号：<code>\overline&#123;算式&#125;</code>，如：$\overline{xyz}$</li>
+<li>开二次方运算，符号：<code>\sqrt</code>，如：$\sqrt x$</li>
+<li>开方运算，符号：<code>\sqrt[开方数]&#123;被开方数&#125;</code>，如：$\sqrt[3]{x+y}$</li>
+<li>对数运算，符号：<code>\log</code>，如：$\log(x)$</li>
+<li>极限运算，符号：<code>\lim</code>，如：$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>极限运算，符号：<code>\displaystyle \lim</code>，如：$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\sum</code>，如：$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\displaystyle \sum</code>，如：$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
+<li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
+<li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
+<li>矩阵表示，符号：<code>\begin&#123;matrix&#125; \end&#123;matrix&#125;</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;5 &amp;6 &amp;\cdots &amp;8\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots&amp; \vdots&amp;\cdots &amp;16\end{matrix} \right]$</li>
+</ol>
+<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
+<li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
+<li>大于运算，符号：<code>&gt;</code>，如：$x+y&gt;z$</li>
+<li>小于运算，符号：<code>&lt;</code>，如：$x+y&lt;z$</li>
+<li>大于等于运算，符号：<code>\geq</code>，如：$x+y \geq z$</li>
+<li>小于等于运算，符号：<code>\leq</code>，如：$x+y \leq z$</li>
+<li>不等于运算，符号：<code>\neq</code>，如：$x+y \neq z$</li>
+<li>不大于等于运算，符号：<code>\ngeq</code>，如：$x+y \ngeq z$</li>
+<li>不大于等于运算，符号：<code>\not\geq</code>，如：$x+y \not\geq z$</li>
+<li>不小于等于运算，符号：<code>\nleq</code>，如：$x+y \nleq z$</li>
+<li>不小于等于运算，符号：<code>\not\leq</code>，如：$x+y \not\leq z$</li>
+<li>约等于运算，符号：<code>\approx</code>，如：$x+y \approx z$</li>
+<li>恒定等于运算，符号：<code>\equiv</code>，如：$x+y \equiv z$</li>
+</ol>
+<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><ol>
+<li>属于运算，符号：<code>\in</code>，如：$x \in y$</li>
+<li>不属于运算，符号：<code>\notin</code>，如：$x \notin y$</li>
+<li>不属于运算，符号：<code>\not\in</code>，如：$x \not\in y$</li>
+<li>子集运算，符号：<code>\subset</code>，如：$x \subset y$</li>
+<li>子集运算，符号：<code>\supset</code>，如：$x \supset y$</li>
+<li>真子集运算，符号：<code>\subseteq</code>，如：$x \subseteq y$</li>
+<li>非真子集运算，符号：<code>\subsetneq</code>，如：$x \subsetneq y$</li>
+<li>真子集运算，符号：<code>\supseteq</code>，如：$x \supseteq y$</li>
+<li>非真子集运算，符号：<code>\supsetneq</code>，如：$x \supsetneq y$</li>
+<li>非子集运算，符号：<code>\not\subset</code>，如：$x \not\subset y$</li>
+<li>非子集运算，符号：<code>\not\supset</code>，如：$x \not\supset y$</li>
+<li>并集运算，符号：<code>\cup</code>，如：$x \cup y$</li>
+<li>交集运算，符号：<code>\cap</code>，如：$x \cap y$</li>
+<li>差集运算，符号：<code>\setminus</code>，如：$x \setminus y$</li>
+<li>同或运算，符号：<code>\bigodot</code>，如：$x \bigodot y$</li>
+<li>同与运算，符号：<code>\bigotimes</code>，如：$x \bigotimes y$</li>
+<li>实数集合，符号：<code>\mathbb&#123;R&#125;</code>，如：<code>\mathbb&#123;R&#125;</code></li>
+<li>自然数集合，符号：<code>\mathbb&#123;Z&#125;</code>，如：<code>\mathbb&#123;Z&#125;</code></li>
+<li>空集，符号：<code>\emptyset</code>，如：$\emptyset$</li>
+</ol>
+<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><ol>
+<li>无穷，符号：<code>\infty</code>，如：$\infty$</li>
+<li>虚数，符号：<code>\imath</code>，如：$\imath$</li>
+<li>虚数，符号：<code>\jmath</code>，如：$\jmath$</li>
+<li>数学符号，符号<code>\hat&#123;a&#125;</code>，如：$\hat{a}$</li>
+<li>数学符号，符号<code>\check&#123;a&#125;</code>，如：$\check{a}$</li>
+<li>数学符号，符号<code>\breve&#123;a&#125;</code>，如：$\breve{a}$</li>
+<li>数学符号，符号<code>\tilde&#123;a&#125;</code>，如：$\tilde{a}$</li>
+<li>数学符号，符号<code>\bar&#123;a&#125;</code>，如：$\bar{a}$</li>
+<li>矢量符号，符号<code>\vec&#123;a&#125;</code>，如：$\vec{a}$</li>
+<li>数学符号，符号<code>\acute&#123;a&#125;</code>，如：$\acute{a}$</li>
+<li>数学符号，符号<code>\grave&#123;a&#125;</code>，如：$\grave{a}$</li>
+<li>数学符号，符号<code>\mathring&#123;a&#125;</code>，如：$\mathring{a}$</li>
+<li>一阶导数符号，符号<code>\dot&#123;a&#125;</code>，如：$\dot{a}$</li>
+<li>二阶导数符号，符号<code>\ddot&#123;a&#125;</code>，如：$\ddot{a}$</li>
+<li>上箭头，符号：<code>\uparrow</code>，如：$\uparrow$</li>
+<li>上箭头，符号：<code>\Uparrow</code>，如：$\Uparrow$</li>
+<li>下箭头，符号：<code>\downarrow</code>，如：$\downarrow$</li>
+<li>下箭头，符号：<code>\Downarrow</code>，如：$\Downarrow$</li>
+<li>左箭头，符号：<code>\leftarrow</code>，如：$\leftarrow$</li>
+<li>左箭头，符号：<code>\Leftarrow</code>，如：$\Leftarrow$</li>
+<li>右箭头，符号：<code>\rightarrow</code>，如：$\rightarrow$</li>
+<li>右箭头，符号：<code>\Rightarrow</code>，如：$\Rightarrow$</li>
+<li>底端对齐的省略号，符号：<code>\ldots</code>，如：$1,2,\ldots,n$</li>
+<li>中线对齐的省略号，符号：<code>\cdots</code>，如：$x_1^2 + x_2^2 + \cdots + x_n^2$</li>
+<li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
+<li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
+</ol>
+<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a><span id="希腊字母">希腊字母</span></h2><p>|      |<br>| —— |</p>
 
     </div>
 
@@ -268,9 +390,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/VScode/" rel="tag"># VScode</a>
-              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
-              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
           </div>
 
         
@@ -279,13 +399,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/18/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="prev" title="三维重建课程笔记">
-      <i class="fa fa-chevron-left"></i> 三维重建课程笔记
+    <a href="/2021/10/18/%E5%8F%A4%E6%9C%88ROS21%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="古月ROS21讲学习笔记">
+      <i class="fa fa-chevron-left"></i> 古月ROS21讲学习笔记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/10/18/Ubuntu%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" rel="next" title="Ubuntu的使用手册">
-      Ubuntu的使用手册 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -344,7 +461,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E9%A6%96%E5%85%88%E7%BC%96%E5%86%99CMakeLists-txt%E6%96%87%E4%BB%B6"><span class="nav-text">1.首先编写CMakeLists.txt文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%96%87%E4%BB%B6%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%AD%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAbuild%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-text">2.文件根目录中建立一个build文件夹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%BB%BA%E7%AB%8B-json%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E7%BC%96%E5%86%99launch-json%E6%96%87%E4%BB%B6"><span class="nav-text">3.建立.json文件夹，编写launch.json文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BC%96%E5%86%99tasks-json%E6%96%87%E4%BB%B6"><span class="nav-text">4.编写tasks.json文件</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%9A%E7%82%B9%E5%92%8C%E7%9B%AE%E5%BD%95"><span class="nav-text">锚点和目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E4%B8%8E%E7%8B%AC%E8%A1%8C"><span class="nav-text">行内与独行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E6%A0%87%E3%80%81%E4%B8%8B%E6%A0%87%E4%B8%8E%E7%BB%84%E5%90%88"><span class="nav-text">上标、下标与组合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%89%E5%AD%97%E3%80%81%E5%AD%97%E4%BD%93%E4%B8%8E%E6%A0%BC%E5%BC%8F"><span class="nav-text">汉字、字体与格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-text">占位符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%95%8C%E7%AC%A6%E4%B8%8E%E7%BB%84%E5%90%88"><span class="nav-text">定界符与组合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97"><span class="nav-text">四则运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E8%BF%90%E7%AE%97"><span class="nav-text">高级运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97"><span class="nav-text">集合运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E7%AC%A6%E5%8F%B7"><span class="nav-text">数学符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%8C%E8%85%8A%E5%AD%97%E6%AF%8D"><span class="nav-text">希腊字母</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
