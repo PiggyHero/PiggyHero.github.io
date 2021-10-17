@@ -997,10 +997,10 @@ p_{u}-p_{u}^{\prime}=\frac{B \cdot f}{z}\tag{5.12}</script><p>知道视差和基
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040434.png" alt="image-20210825181026118" style="zoom: 33%;" /></p>
 <h3 id="C-对应点搜索"><a href="#C-对应点搜索" class="headerlink" title="C.对应点搜索"></a>C.对应点搜索</h3><p>给定一个空间点P，在左右图像中找到相应的观测值，也称为双目融合问题。 </p>
 <p>图像经过校正后，对应点在扫描线上搜索即可。</p>
-<h4 id="1-相关法"><a href="#1-相关法" class="headerlink" title="1.相关法"></a>1.相关法</h4><p><img src="/Users/labixiaoxin/Desktop/三维重建.assets/image-20210825193647040.png" alt="image-20210825193647040" style="zoom:50%;" /></p>
+<h4 id="1-相关法"><a href="#1-相关法" class="headerlink" title="1.相关法"></a>1.相关法</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018051704.png" style="zoom:50%;" /></p>
 <p>首先建立一个窗口</p>
-<p><img src="/Users/labixiaoxin/Desktop/三维重建.assets/image-20210825193829734.png" alt="image-20210825193829734" style="zoom:50%;" /></p>
-<p><img src="三维重建.assets/image-20211009194933364.png" alt="image-20211009194933364" style="zoom: 33%;" /></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018052138.png" alt="image-20210825193829734" style="zoom:50%;" /></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018052251.png" alt="image-20211009194933364" style="zoom: 33%;" /></p>
 <h4 id="2-归一化相关法"><a href="#2-归一化相关法" class="headerlink" title="2.归一化相关法"></a>2.归一化相关法</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040443.png" alt="image-20210825194834081" style="zoom:50%;" /></p>
 <p>当两幅图在光照不同的情况下，会使其像素点的灰度值发生剧烈变化。</p>
 <p>此时只需要将窗口内的像素点的灰度值进行去均值即可。</p>
