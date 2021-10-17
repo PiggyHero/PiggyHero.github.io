@@ -1,3 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
+  <entry>
+    <title>SLAM的数学描述</title>
+    <url>/2021/10/18/SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
+    <content><![CDATA[<p>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
+<span id="more"></span>
+<hr>
+<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
+<ol>
+<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
+<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
+</ol>
+<hr>
+<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：<br>$$<br>\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)<br>$$<br>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
+<p>接下来说关于 <strong><u>观测</u></strong> 的表述：<br>$$<br>\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})<br>$$<br>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
+<hr>
+<p>以二维运动为例：</p>
+<p>如图所示</p>
+<img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023849.png" style="zoom:60%;" />
+
+<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
+<p>$$<br>\begin{aligned}<br>&amp;\vec{x}<em>{k}=\left[x</em>{1}, x_{2}, \theta\right]<em>{k}^{\top} \<br>&amp;\vec{u}</em>{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]<em>{k}^{\top}<br>\end{aligned}<br>$$<br>运动方程为：<br>$$<br>\left[\begin{array}{l}<br>x</em>{1} \<br>x_{2} \<br>\theta<br>\end{array}\right]<em>{k}=\left[\begin{array}{l}<br>x</em>{1} \<br>x_{2} \<br>\theta<br>\end{array}\right]<em>{k-1}+\left[\begin{array}{c}<br>\Delta x</em>{1} \<br>\Delta x_{2} \<br>\Delta \theta<br>\end{array}\right]<em>{k}+\vec{w}</em>{k}<br>$$<br>对于观测方程，以二维激光传感器为例，如图所示：</p>
+<img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023854.png" alt="img" style="zoom:60%;" />
+
+<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
+<p>$$<br>\left[\begin{array}{l}<br>r_{j} \<br>\varphi_{j}<br>\end{array}\right]<em>k=\left[\begin{array}{c}<br>\sqrt{\left(x</em>{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \<br>\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)<br>\end{array}\right]+\vec{v}<br>$$<br>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
+<blockquote>
+<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
+</blockquote>
+<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
+<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
+<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
+<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
+]]></content>
+      <categories>
+        <category>SLAM学习</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
 </search>
