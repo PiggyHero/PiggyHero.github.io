@@ -3418,7 +3418,7 @@ F(X)=H(X)-X\tag{3.3}</script><p>其中 F(X) 为残差项，训练就是对该项
 <p>残差网络可以看作是一种集成模型。</p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018065003.png" alt="image-20210921182857292" style="zoom:67%;" /></p>
 <p>残差网络和Inception V4是公认的推广性能最好的两个分类模型</p>
-<h1 id="4-其他任务"><a href="#4-其他任务" class="headerlink" title="4. 其他任务"></a>4. 其他任务</h1><p>前面我们学习的都是针对图像分类任务提出的解决方案，现在讨论在应对其他任务时的解决方案。</p>
+<h1 id="4-其他任务"><a href="#4-其他任务" class="headerlink" title="4.其他任务"></a>4.其他任务</h1><p>前面我们学习的都是针对图像分类任务提出的解决方案，现在讨论在应对其他任务时的解决方案。</p>
 <ul>
 <li>分类问题：分类问题是对每一张图片进行分类，是整张图片的类别。</li>
 <li>语义分割：本质上也是分类问题，与分类问题不同的是，需要对一张图片上的每一个像素点都进行分类，是像素级别的分类问题。</li>
@@ -3676,7 +3676,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 </ul>
 <h2 id="6-3PixelRNN与PixelCNN"><a href="#6-3PixelRNN与PixelCNN" class="headerlink" title="6.3PixelRNN与PixelCNN"></a>6.3PixelRNN与PixelCNN</h2><h2 id="6-4变分自编码器"><a href="#6-4变分自编码器" class="headerlink" title="6.4变分自编码器"></a>6.4变分自编码器</h2><h2 id="6-5GAN"><a href="#6-5GAN" class="headerlink" title="6.5GAN"></a>6.5GAN</h2>]]></content>
       <categories>
-        <category>SLAM学习</category>
+        <category>计算机视觉</category>
       </categories>
       <tags>
         <tag>计算机视觉</tag>
