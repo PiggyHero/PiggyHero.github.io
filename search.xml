@@ -1,6 +1,336 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Mac电脑操作</title>
+    <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
+<h2 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h2><h3 id="1-强制退出"><a href="#1-强制退出" class="headerlink" title="1.强制退出"></a>1.强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
+<h2 id="二、常见问题"><a href="#二、常见问题" class="headerlink" title="二、常见问题"></a>二、常见问题</h2><h3 id="1-无法打开“-”，因为无法验证开发者"><a href="#1-无法打开“-”，因为无法验证开发者" class="headerlink" title="1.无法打开“*”，因为无法验证开发者"></a>1.无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
+<li>打开方达，在右侧菜单栏选择应用程序</li>
+<li>找到提示无法验证的应用，右键点击打开</li>
+<li>第一次会出现以下提示，继续点击打开即可</li>
+</ol>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MacOS无法抹掉硬盘问题解决</title>
+    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown常用语法</title>
+    <url>/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p>Markdown常用语法，方便使用时查阅。<br><span id="more"></span></p>
+<h2 id="锚点和目录"><a href="#锚点和目录" class="headerlink" title="锚点和目录"></a>锚点和目录</h2><p>目录在前面用 <code>[toc]</code> 即可。</p>
+<p>锚点: <code>[说明文字](#jump)</code>，然后在要跳跃的位置处写 <code>&lt;span id=&quot;jump&quot;&gt;跳转位置的名字&lt;/span&gt;</code></p>
+<p>例如：<a href="#希腊字母">希腊字母</a> </p>
+<p>超链接：<code>[网页名字](地址)</code>，如<a href="https://github.com/">github</a></p>
+<h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><ol>
+<li>行内公式：将公式插入到本行内，符号：<script type="math/tex">公式内容</script>，如：$xyz$</li>
+<li>独行公式：将公式插入到新的一行内，并且居中，符号：<script type="math/tex">$公式内容$$$，如：</script>xyz$$</li>
+</ol>
+<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
+<li>上标符号，符号：<code>^</code>，如：$x^4$</li>
+<li>下标符号，符号：<code>_</code>，如：$x_1$</li>
+<li>组合符号，符号：<code>&#123;&#125;</code>，如：${16}_{8}O{2+}_{2}$</li>
+</ol>
+<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
+<li>汉字形式，符号：<code>\mbox&#123;&#125;</code>，如：$V_{\mbox{初始}}$</li>
+<li>字体控制，符号：<code>\displaystyle</code>，如：$\displaystyle \frac{x+y}{y+z}$</li>
+<li>下划线符号，符号：<code>\underline</code>，如：$\underline{x+y}$</li>
+<li>标签，符号<code>\tag&#123;数字&#125;</code>，如：$\tag{11}$</li>
+<li>上大括号，符号：<code>\overbrace&#123;算式&#125;</code>，如：$\overbrace{a+b+c+d}^{2.0}$</li>
+<li>下大括号，符号：<code>\underbrace&#123;算式&#125;</code>，如：$a+\underbrace{b+c}_{1.0}+d$</li>
+<li>上位符号，符号：<code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code>，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</li>
+</ol>
+<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
+<li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
+<li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
+<li>大空格，符号<code>\</code>，如：$x \  y$ </li>
+<li>中空格，符号<code>\:</code>，如：$x \: y$</li>
+<li>小空格，符号<code>\,</code>，如：$x \, y$</li>
+<li>没有空格，符号``，如：$xy$</li>
+<li>紧贴，符号<code>\!</code>，如：$x ! y$</li>
+</ol>
+<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><ol>
+<li>括号，符号：<code>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</code>，如：$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</li>
+<li>中括号，符号：<code>[]</code>，如：$[x+y]$</li>
+<li>大括号，符号：<code>\&#123; \&#125;</code>，如: $\{\}$</li>
+<li>自适应括号，符号：<code>\left \right</code>，如：$\left(x\right)$，$\left(x{yz}\right)$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \choose 下位公式&#125;</code>，如：${n+1 \choose k}={n \choose k}+{n \choose k-1}$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \atop 下位公式&#125;</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</li>
+</ol>
+<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><ol>
+<li>加法运算，符号：<code>+</code>，如：$x+y=z$</li>
+<li>减法运算，符号：<code>-</code>，如：$x-y=z$</li>
+<li>加减运算，符号：<code>\pm</code>，如：$x \pm y=z$</li>
+<li>减加运算，符号：<code>\mp</code>，如：$x \mp y=z$</li>
+<li>乘法运算，符号：<code>\times</code>，如：$x \times y=z$</li>
+<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y=z$</li>
+<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y=z$</li>
+<li>除法运算，符号：<code>\div</code>，如：$x \div y=z$</li>
+<li>斜法运算，符号：<code>/</code>，如：$x/y=z$</li>
+<li>分式表示，符号：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，如：$\frac{x+y}{y+z}$</li>
+<li>分式表示，符号：<code>&#123;分子&#125; \voer &#123;分母&#125;</code>，如：${x+y} \over {y+z}$</li>
+<li>绝对值表示，符号：<code>||</code>，如：$|x+y|$</li>
+</ol>
+<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><ol>
+<li>平均数运算，符号：<code>\overline&#123;算式&#125;</code>，如：$\overline{xyz}$</li>
+<li>开二次方运算，符号：<code>\sqrt</code>，如：$\sqrt x$</li>
+<li>开方运算，符号：<code>\sqrt[开方数]&#123;被开方数&#125;</code>，如：$\sqrt[3]{x+y}$</li>
+<li>对数运算，符号：<code>\log</code>，如：$\log(x)$</li>
+<li>极限运算，符号：<code>\lim</code>，如：$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>极限运算，符号：<code>\displaystyle \lim</code>，如：$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\sum</code>，如：$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\displaystyle \sum</code>，如：$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
+<li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
+<li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
+<li>矩阵表示，符号：<code>\begin&#123;matrix&#125; \end&#123;matrix&#125;</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;5 &amp;6 &amp;\cdots &amp;8\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots&amp; \vdots&amp;\cdots &amp;16\end{matrix} \right]$</li>
+</ol>
+<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
+<li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
+<li>大于运算，符号：<code>&gt;</code>，如：$x+y&gt;z$</li>
+<li>小于运算，符号：<code>&lt;</code>，如：$x+y&lt;z$</li>
+<li>大于等于运算，符号：<code>\geq</code>，如：$x+y \geq z$</li>
+<li>小于等于运算，符号：<code>\leq</code>，如：$x+y \leq z$</li>
+<li>不等于运算，符号：<code>\neq</code>，如：$x+y \neq z$</li>
+<li>不大于等于运算，符号：<code>\ngeq</code>，如：$x+y \ngeq z$</li>
+<li>不大于等于运算，符号：<code>\not\geq</code>，如：$x+y \not\geq z$</li>
+<li>不小于等于运算，符号：<code>\nleq</code>，如：$x+y \nleq z$</li>
+<li>不小于等于运算，符号：<code>\not\leq</code>，如：$x+y \not\leq z$</li>
+<li>约等于运算，符号：<code>\approx</code>，如：$x+y \approx z$</li>
+<li>恒定等于运算，符号：<code>\equiv</code>，如：$x+y \equiv z$</li>
+</ol>
+<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><ol>
+<li>属于运算，符号：<code>\in</code>，如：$x \in y$</li>
+<li>不属于运算，符号：<code>\notin</code>，如：$x \notin y$</li>
+<li>不属于运算，符号：<code>\not\in</code>，如：$x \not\in y$</li>
+<li>子集运算，符号：<code>\subset</code>，如：$x \subset y$</li>
+<li>子集运算，符号：<code>\supset</code>，如：$x \supset y$</li>
+<li>真子集运算，符号：<code>\subseteq</code>，如：$x \subseteq y$</li>
+<li>非真子集运算，符号：<code>\subsetneq</code>，如：$x \subsetneq y$</li>
+<li>真子集运算，符号：<code>\supseteq</code>，如：$x \supseteq y$</li>
+<li>非真子集运算，符号：<code>\supsetneq</code>，如：$x \supsetneq y$</li>
+<li>非子集运算，符号：<code>\not\subset</code>，如：$x \not\subset y$</li>
+<li>非子集运算，符号：<code>\not\supset</code>，如：$x \not\supset y$</li>
+<li>并集运算，符号：<code>\cup</code>，如：$x \cup y$</li>
+<li>交集运算，符号：<code>\cap</code>，如：$x \cap y$</li>
+<li>差集运算，符号：<code>\setminus</code>，如：$x \setminus y$</li>
+<li>同或运算，符号：<code>\bigodot</code>，如：$x \bigodot y$</li>
+<li>同与运算，符号：<code>\bigotimes</code>，如：$x \bigotimes y$</li>
+<li>实数集合，符号：<code>\mathbb&#123;R&#125;</code>，如：<code>\mathbb&#123;R&#125;</code></li>
+<li>自然数集合，符号：<code>\mathbb&#123;Z&#125;</code>，如：<code>\mathbb&#123;Z&#125;</code></li>
+<li>空集，符号：<code>\emptyset</code>，如：$\emptyset$</li>
+</ol>
+<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><ol>
+<li>无穷，符号：<code>\infty</code>，如：$\infty$</li>
+<li>虚数，符号：<code>\imath</code>，如：$\imath$</li>
+<li>虚数，符号：<code>\jmath</code>，如：$\jmath$</li>
+<li>数学符号，符号<code>\hat&#123;a&#125;</code>，如：$\hat{a}$</li>
+<li>数学符号，符号<code>\check&#123;a&#125;</code>，如：$\check{a}$</li>
+<li>数学符号，符号<code>\breve&#123;a&#125;</code>，如：$\breve{a}$</li>
+<li>数学符号，符号<code>\tilde&#123;a&#125;</code>，如：$\tilde{a}$</li>
+<li>数学符号，符号<code>\bar&#123;a&#125;</code>，如：$\bar{a}$</li>
+<li>矢量符号，符号<code>\vec&#123;a&#125;</code>，如：$\vec{a}$</li>
+<li>数学符号，符号<code>\acute&#123;a&#125;</code>，如：$\acute{a}$</li>
+<li>数学符号，符号<code>\grave&#123;a&#125;</code>，如：$\grave{a}$</li>
+<li>数学符号，符号<code>\mathring&#123;a&#125;</code>，如：$\mathring{a}$</li>
+<li>一阶导数符号，符号<code>\dot&#123;a&#125;</code>，如：$\dot{a}$</li>
+<li>二阶导数符号，符号<code>\ddot&#123;a&#125;</code>，如：$\ddot{a}$</li>
+<li>上箭头，符号：<code>\uparrow</code>，如：$\uparrow$</li>
+<li>上箭头，符号：<code>\Uparrow</code>，如：$\Uparrow$</li>
+<li>下箭头，符号：<code>\downarrow</code>，如：$\downarrow$</li>
+<li>下箭头，符号：<code>\Downarrow</code>，如：$\Downarrow$</li>
+<li>左箭头，符号：<code>\leftarrow</code>，如：$\leftarrow$</li>
+<li>左箭头，符号：<code>\Leftarrow</code>，如：$\Leftarrow$</li>
+<li>右箭头，符号：<code>\rightarrow</code>，如：$\rightarrow$</li>
+<li>右箭头，符号：<code>\Rightarrow</code>，如：$\Rightarrow$</li>
+<li>底端对齐的省略号，符号：<code>\ldots</code>，如：$1,2,\ldots,n$</li>
+<li>中线对齐的省略号，符号：<code>\cdots</code>，如：$x_1^2 + x_2^2 + \cdots + x_n^2$</li>
+<li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
+<li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
+</ol>
+<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a><span id="希腊字母">希腊字母</span></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字母</th>
+<th>实现</th>
+<th>字母</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><code>A</code></td>
+<td>α</td>
+<td><code>\alhpa</code></td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>B</code></td>
+<td>β</td>
+<td><code>\beta</code></td>
+</tr>
+<tr>
+<td>Γ</td>
+<td><code>\Gamma</code></td>
+<td>γ</td>
+<td><code>\gamma</code></td>
+</tr>
+<tr>
+<td>Δ</td>
+<td><code>\Delta</code></td>
+<td>δ</td>
+<td><code>\delta</code></td>
+</tr>
+<tr>
+<td>E</td>
+<td><code>E</code></td>
+<td>ϵ</td>
+<td><code>\epsilon</code></td>
+</tr>
+<tr>
+<td>Z</td>
+<td><code>Z</code></td>
+<td>ζ</td>
+<td><code>\zeta</code></td>
+</tr>
+<tr>
+<td>H</td>
+<td><code>H</code></td>
+<td>η</td>
+<td><code>\eta</code></td>
+</tr>
+<tr>
+<td>Θ</td>
+<td><code>\Theta</code></td>
+<td>θ</td>
+<td><code>\theta</code></td>
+</tr>
+<tr>
+<td>I</td>
+<td><code>I</code></td>
+<td>ι</td>
+<td><code>\iota</code></td>
+</tr>
+<tr>
+<td>K</td>
+<td><code>K</code></td>
+<td>κ</td>
+<td><code>\kappa</code></td>
+</tr>
+<tr>
+<td>Λ</td>
+<td><code>\Lambda</code></td>
+<td>λ</td>
+<td><code>\lambda</code></td>
+</tr>
+<tr>
+<td>M</td>
+<td><code>M</code></td>
+<td>μ</td>
+<td><code>\mu</code></td>
+</tr>
+<tr>
+<td>N</td>
+<td><code>N</code></td>
+<td>ν</td>
+<td><code>\nu</code></td>
+</tr>
+<tr>
+<td>Ξ</td>
+<td><code>\Xi</code></td>
+<td>ξ</td>
+<td><code>\xi</code></td>
+</tr>
+<tr>
+<td>O</td>
+<td><code>O</code></td>
+<td>ο</td>
+<td><code>\omicron</code></td>
+</tr>
+<tr>
+<td>Π</td>
+<td><code>\Pi</code></td>
+<td>π</td>
+<td><code>\pi</code></td>
+</tr>
+<tr>
+<td>P</td>
+<td><code>P</code></td>
+<td>ρ</td>
+<td><code>\rho</code></td>
+</tr>
+<tr>
+<td>Σ</td>
+<td><code>\Sigma</code></td>
+<td>σ</td>
+<td><code>\sigma</code></td>
+</tr>
+<tr>
+<td>T</td>
+<td><code>T</code></td>
+<td>τ</td>
+<td><code>\tau</code></td>
+</tr>
+<tr>
+<td>Υ</td>
+<td><code>\Upsilon</code></td>
+<td>υ</td>
+<td><code>\upsilon</code></td>
+</tr>
+<tr>
+<td>Φ</td>
+<td><code>\Phi</code></td>
+<td>ϕ</td>
+<td><code>\phi</code></td>
+</tr>
+<tr>
+<td>X</td>
+<td><code>X</code></td>
+<td>χ</td>
+<td><code>\chi</code></td>
+</tr>
+<tr>
+<td>Ψ</td>
+<td><code>\Psi</code></td>
+<td>ψ</td>
+<td><code>\psi</code></td>
+</tr>
+<tr>
+<td>Ω</td>
+<td><code>\v</code></td>
+<td>ω</td>
+<td><code>\omega</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SLAM的数学描述</title>
     <url>/2021/10/18/SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
     <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
@@ -85,6 +415,289 @@ r_{j} \\
         <tag>VScode</tag>
         <tag>编程</tag>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Word中使用Endnote插件</title>
+    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
+<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
+<li>关闭word，打开endnote</li>
+<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
+<li>等待完成</li>
+<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
+<li>重启word</li>
+</ol>
+<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
+<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
+<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
+<p>引用文献的格式可以在Word中设置。</p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git的使用手册</title>
+    <url>/2021/10/18/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<p>Git的使用手册，方便使用查阅。<br><span id="more"></span></p>
+<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
+<h2 id="一、最基本的使用"><a href="#一、最基本的使用" class="headerlink" title="一、最基本的使用"></a>一、最基本的使用</h2><p>首先需要知道几个关系         <a href="##三、细细介绍git背后原理">细细介绍git背后的原理</a></p>
+<p>git本地分为工作区、暂存区、本地库三个地方</p>
+<p>工作区(workspace)：即为写代码，写文件的地方</p>
+<p>暂存区(staging area)：保存着待提交的文件</p>
+<p>本地库(local repository)：提交后文件所在的地方</p>
+<p>远程仓库(remote repository)：云端的仓库</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062215.png" alt="image-20210711044151491"></p>
+<p>最主要的是要会使用 <code>git add</code>和<code>git commit</code>两条命令，便可以完成完成最基本的使用</p>
+<ol>
+<li><p>首先当写完一个文件后，用<code>git add .</code>添加所有更改的文件到暂存区，或者指定特定的文件到暂存区</p>
+</li>
+<li><p>然后使用 <code>git commit -m &#39;描述信息&#39;</code> 提交 这次更改，此时本地仓库便完成了这次的变更</p>
+</li>
+<li><p>如果想建立远程仓库，需要在github上建立一个仓库，然后复制下SSH的地址（注意这里需要在github上绑定本地电脑的SSH公共钥匙）</p>
+</li>
+<li><p>然后在终端中到本地仓库所在的文件夹，使用以下代码建立关联</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果再有更改的文件，还是先 <code>git add 文件名</code> 然后 <code>git commit -m &#39;描述信息&#39;</code> 或者用 <code>git commit -am &#39;变更描述&#39;</code>来进行提交，然后再用 <code>git push</code> 完成远程库的变更</p>
+</li>
+</ol>
+<h2 id="二、git-基本命令介绍"><a href="#二、git-基本命令介绍" class="headerlink" title="二、git 基本命令介绍"></a>二、git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
+<p>按F向下翻页，按B向上翻页</p>
+<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
+<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
+<p>（2）全局：只在用户范围内使用该配置</p>
+<p>（3）项目：在该项目范围内，使用该配置</p>
+<p>一般设置用户的配置文件，用global</p>
+<p><code>git config --global 想要配置的东西</code></p>
+<p><code>git config --unset --global</code>   恢复原来的配置</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
+<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
+<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
+<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
+<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
+<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
+<p><code>git status</code></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062228.png" alt="image-20210708115817078"></p>
+<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
+<p>添加要提交的文件</p>
+<p><code>git add 要添加的文件</code></p>
+<p><code>git add .</code>添加所有的文件</p>
+<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
+<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
+<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062230.png" alt="image-20210708120726347"></p>
+<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
+<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
+<p>这里如果没添加文件，会对比所有修改的文件</p>
+<p>红色是修改前的，绿色是修改后的</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062232.png" alt="image-20210708121041581"></p>
+<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
+<blockquote>
+<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
+</blockquote>
+<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
+<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
+<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
+<hr>
+<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
+<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
+<p>git mv也可以移动文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
+<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
+<p>共有三种模式</p>
+<p>(1)—mixed</p>
+<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
+<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
+<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
+<p><code>git reset HEAD^</code> 变更到上一个版本</p>
+<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
+<p><code>git reset 版本号</code>回退到指定的版本</p>
+<p>(2)—soft</p>
+<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
+<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062239.png" alt="img"></p>
+<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
+<p>(3)—hard</p>
+<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062241.gif" alt="img"></p>
+<blockquote>
+<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
+<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
+</blockquote>
+<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
+<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062244.gif" alt="img"></p>
+<h2 id="三、细细介绍git背后原理"><a href="#三、细细介绍git背后原理" class="headerlink" title="三、细细介绍git背后原理"></a>三、细细介绍git背后原理</h2><ul>
+<li>工作区：就是在电脑里能看到的目录</li>
+<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
+<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062250.png" alt="image-20210711045622504"></p>
+<ul>
+<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
+<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
+<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
+<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
+<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
+<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
+</ul>
+<p>如果还不明白，看下图：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062256.png" alt="image-20210711063540634"></p>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu的使用手册</title>
+    <url>/2021/10/18/Ubuntu%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<p>Unbuntu中常用的命令和使用规则。<br><span id="more"></span></p>
+<h2 id="一、软件的安装"><a href="#一、软件的安装" class="headerlink" title="一、软件的安装"></a>一、软件的安装</h2><h3 id="1-软件源"><a href="#1-软件源" class="headerlink" title="1.软件源"></a>1.软件源</h3><p>软件源就是所下载的软件来源，软件源会决定软件的下载速度。</p>
+<p>在<code>软件和更新</code>中可以更换软件源。</p>
+<h3 id="2-安装软件中的一些基本操作"><a href="#2-安装软件中的一些基本操作" class="headerlink" title="2.安装软件中的一些基本操作"></a>2.安装软件中的一些基本操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update  	重新载入软件源，将软件列表更新。</span><br></pre></td></tr></table></figure>
+<h2 id="二、常用命令"><a href="#二、常用命令" class="headerlink" title="二、常用命令"></a>二、常用命令</h2><p>Ubuntu操作系统中，通常是通过命令行来操作的，命令行应用的扩展性和灵活性较好，在早期的Windows系统中也是用命令行来操作电脑的。</p>
+<p>命令行在终端中输入，用 <code>Ctrl</code>+<code>Alt</code>+<code>T</code> 快捷键可以打开终端窗口。</p>
+<h3 id="1-pwd"><a href="#1-pwd" class="headerlink" title="1.pwd"></a>1.pwd</h3><p>查看当前的路径。</p>
+<h3 id="2-cd"><a href="#2-cd" class="headerlink" title="2.cd"></a>2.cd</h3><p>切换当前路径。后面可以接相对路径，也可接绝对路径。</p>
+<h3 id="3-mkdir"><a href="#3-mkdir" class="headerlink" title="3.mkdir"></a>3.mkdir</h3><p>创建文件夹。</p>
+<h3 id="4-ls"><a href="#4-ls" class="headerlink" title="4.ls"></a>4.ls</h3><p>查看当前路径下的文件和文件夹。</p>
+<h3 id="5-touch"><a href="#5-touch" class="headerlink" title="5.touch"></a>5.touch</h3><p>创建文件。</p>
+<h3 id="6-mv"><a href="#6-mv" class="headerlink" title="6.mv"></a>6.mv</h3><p>将一个文件或文件夹移动到另外一个路径，相当于剪切的作用。</p>
+<p>具体用法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
+<p>将一个文件或文件夹拷贝到另一个路径，相当于复制粘贴。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
+<h3 id="8-rm"><a href="#8-rm" class="headerlink" title="8.rm"></a>8.rm</h3><p>删除文件或文件夹。</p>
+<p>具体用法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm file</span><br><span class="line">rm -r folder</span><br></pre></td></tr></table></figure>
+<h3 id="9-sudo"><a href="#9-sudo" class="headerlink" title="9.sudo"></a>9.sudo</h3><p>sudo 的作用是提升当前用户的权限。比如安装软件时，必须要使用sudo命令。</p>
+<h2 id="三、更改文件权限"><a href="#三、更改文件权限" class="headerlink" title="三、更改文件权限"></a>三、更改文件权限</h2><h3 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h3><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
+<p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
+<p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
+<ul>
+<li>chown (change ownerp) ： 修改所属用户与组。</li>
+<li>chmod (change mode) ： 修改用户的权限。</li>
+</ul>
+<p>下图中通过 chown 来授权用户，通过 chmod 为用户设置可以开门的权限。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054806.png" alt="img"></p>
+<p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www /]<span class="comment"># ls -l</span></span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
+<p>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+<ul>
+<li>当为 <strong>d</strong> 则是目录</li>
+<li>当为 <strong>-</strong> 则是文件；</li>
+<li>若是 <strong>l</strong> 则表示为链接文档(link file)；</li>
+<li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+<li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054821.jpg" alt="img"></p>
+<p>每个文件的属性由左边第一部分的 10 个字符来确定（如下图）。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054825.png" alt="363003_1227493859FdXT"></p>
+<p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
+<p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
+<p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
+<p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
+<hr>
+<h3 id="2-Linux文件属主和属组"><a href="#2-Linux文件属主和属组" class="headerlink" title="2.Linux文件属主和属组"></a>2.Linux文件属主和属组</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
+<p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
+<hr>
+<h3 id="3-更改文件属性"><a href="#3-更改文件属性" class="headerlink" title="3.更改文件属性"></a>3.更改文件属性</h3><h4 id="1-chgrp：更改文件属组"><a href="#1-chgrp：更改文件属组" class="headerlink" title="(1)chgrp：更改文件属组"></a>(1)chgrp：更改文件属组</h4><p>语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
+<p>参数选项</p>
+<ul>
+<li>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
+</ul>
+<h4 id="2-chown：更改文件属主，也可以同时更改文件属组"><a href="#2-chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="(2)chown：更改文件属主，也可以同时更改文件属组"></a>(2)chown：更改文件属主，也可以同时更改文件属组</h4><p>语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
+<p>进入 /root 目录（~）将install.log的拥有者改为bin这个账号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">cd</span> ~</span><br><span class="line">[root@www ~]<span class="comment"># chown bin install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+<p>将install.log的拥有者与群组改回为root：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># chown root:root install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+<h4 id="3-chmod：更改文件9个属性"><a href="#3-chmod：更改文件9个属性" class="headerlink" title="(3)chmod：更改文件9个属性"></a>(3)chmod：更改文件9个属性</h4><p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
+<p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<ul>
+<li>r:4</li>
+<li>w:2</li>
+<li>x:1</li>
+</ul>
+<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为： <strong>-rwxrwx—-</strong> 分数则是：</p>
+<ul>
+<li>owner = rwx = 4+2+1 = 7</li>
+<li>group = rwx = 4+2+1 = 7</li>
+<li>others= —- = 0+0+0 = 0</li>
+</ul>
+<p>所以等一下我们设定权限的变更时，该文件的权限数字就是 <strong>770</strong>。变更权限的指令 chmod 的语法是这样的：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>xyz : 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。</li>
+<li>-R : 进行递归(recursive)的持续变更，亦即连同次目录下的所有文件都会变更</li>
+</ul>
+<p>举例来说，如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]<span class="comment"># chmod 777 .bashrc</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
+<p>那如果要将权限变成 <em>-rwxr-xr—</em> 呢？那么权限的分数就成为 [4+2+1][4+0+1][4+0+0]=754。</p>
+<h4 id="4-符号类型改变文件权限"><a href="#4-符号类型改变文件权限" class="headerlink" title="(4)符号类型改变文件权限"></a>(4)符号类型改变文件权限</h4><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
+<ul>
+<li>user：用户</li>
+<li>group：组</li>
+<li>others：其他</li>
+</ul>
+<p>那么我们就可以使用 <strong>u, g, o</strong> 来代表三种身份的权限。</p>
+<p>此外， <strong>a</strong> 则代表 <strong>all</strong>，即全部的身份。读写的权限可以写成 <strong>r, w, x</strong>，也就是可以使用下表的方式来看：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>chmod</th>
+<th>u g o a</th>
+<th>+(加入) -(除去) =(设定)</th>
+<th>r w x</th>
+<th>文件或目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr—</strong> ，可以使用 <strong>chmod u=rwx,g=rx,o=r 文件名</strong> 来设定:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  touch test1    // 创建 test1 文件</span></span><br><span class="line"><span class="comment"># ls -al test1    // 查看 test1 默认权限</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br><span class="line"><span class="comment"># chmod u=rwx,g=rx,o=r  test1    // 修改 test1 权限</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rwxr-xr-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
+<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  chmod  a-x test1</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1440,145 +2053,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>Ubuntu的使用手册</title>
-    <url>/2021/10/18/Ubuntu%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>Unbuntu中常用的命令和使用规则。<br><span id="more"></span></p>
-<h2 id="一、软件的安装"><a href="#一、软件的安装" class="headerlink" title="一、软件的安装"></a>一、软件的安装</h2><h3 id="1-软件源"><a href="#1-软件源" class="headerlink" title="1.软件源"></a>1.软件源</h3><p>软件源就是所下载的软件来源，软件源会决定软件的下载速度。</p>
-<p>在<code>软件和更新</code>中可以更换软件源。</p>
-<h3 id="2-安装软件中的一些基本操作"><a href="#2-安装软件中的一些基本操作" class="headerlink" title="2.安装软件中的一些基本操作"></a>2.安装软件中的一些基本操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update  	重新载入软件源，将软件列表更新。</span><br></pre></td></tr></table></figure>
-<h2 id="二、常用命令"><a href="#二、常用命令" class="headerlink" title="二、常用命令"></a>二、常用命令</h2><p>Ubuntu操作系统中，通常是通过命令行来操作的，命令行应用的扩展性和灵活性较好，在早期的Windows系统中也是用命令行来操作电脑的。</p>
-<p>命令行在终端中输入，用 <code>Ctrl</code>+<code>Alt</code>+<code>T</code> 快捷键可以打开终端窗口。</p>
-<h3 id="1-pwd"><a href="#1-pwd" class="headerlink" title="1.pwd"></a>1.pwd</h3><p>查看当前的路径。</p>
-<h3 id="2-cd"><a href="#2-cd" class="headerlink" title="2.cd"></a>2.cd</h3><p>切换当前路径。后面可以接相对路径，也可接绝对路径。</p>
-<h3 id="3-mkdir"><a href="#3-mkdir" class="headerlink" title="3.mkdir"></a>3.mkdir</h3><p>创建文件夹。</p>
-<h3 id="4-ls"><a href="#4-ls" class="headerlink" title="4.ls"></a>4.ls</h3><p>查看当前路径下的文件和文件夹。</p>
-<h3 id="5-touch"><a href="#5-touch" class="headerlink" title="5.touch"></a>5.touch</h3><p>创建文件。</p>
-<h3 id="6-mv"><a href="#6-mv" class="headerlink" title="6.mv"></a>6.mv</h3><p>将一个文件或文件夹移动到另外一个路径，相当于剪切的作用。</p>
-<p>具体用法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
-<p>将一个文件或文件夹拷贝到另一个路径，相当于复制粘贴。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
-<h3 id="8-rm"><a href="#8-rm" class="headerlink" title="8.rm"></a>8.rm</h3><p>删除文件或文件夹。</p>
-<p>具体用法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm file</span><br><span class="line">rm -r folder</span><br></pre></td></tr></table></figure>
-<h3 id="9-sudo"><a href="#9-sudo" class="headerlink" title="9.sudo"></a>9.sudo</h3><p>sudo 的作用是提升当前用户的权限。比如安装软件时，必须要使用sudo命令。</p>
-<h2 id="三、更改文件权限"><a href="#三、更改文件权限" class="headerlink" title="三、更改文件权限"></a>三、更改文件权限</h2><h3 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h3><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
-<p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
-<p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
-<p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
-<ul>
-<li>chown (change ownerp) ： 修改所属用户与组。</li>
-<li>chmod (change mode) ： 修改用户的权限。</li>
-</ul>
-<p>下图中通过 chown 来授权用户，通过 chmod 为用户设置可以开门的权限。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054806.png" alt="img"></p>
-<p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www /]<span class="comment"># ls -l</span></span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
-<p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
-<p>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
-<ul>
-<li>当为 <strong>d</strong> 则是目录</li>
-<li>当为 <strong>-</strong> 则是文件；</li>
-<li>若是 <strong>l</strong> 则表示为链接文档(link file)；</li>
-<li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
-<li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
-</ul>
-<p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054821.jpg" alt="img"></p>
-<p>每个文件的属性由左边第一部分的 10 个字符来确定（如下图）。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054825.png" alt="363003_1227493859FdXT"></p>
-<p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
-<p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
-<p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
-<p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
-<p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
-<hr>
-<h3 id="2-Linux文件属主和属组"><a href="#2-Linux文件属主和属组" class="headerlink" title="2.Linux文件属主和属组"></a>2.Linux文件属主和属组</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
-<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
-<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
-<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
-<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
-<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
-<p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
-<hr>
-<h3 id="3-更改文件属性"><a href="#3-更改文件属性" class="headerlink" title="3.更改文件属性"></a>3.更改文件属性</h3><h4 id="1-chgrp：更改文件属组"><a href="#1-chgrp：更改文件属组" class="headerlink" title="(1)chgrp：更改文件属组"></a>(1)chgrp：更改文件属组</h4><p>语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
-<p>参数选项</p>
-<ul>
-<li>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
-</ul>
-<h4 id="2-chown：更改文件属主，也可以同时更改文件属组"><a href="#2-chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="(2)chown：更改文件属主，也可以同时更改文件属组"></a>(2)chown：更改文件属主，也可以同时更改文件属组</h4><p>语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
-<p>进入 /root 目录（~）将install.log的拥有者改为bin这个账号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">cd</span> ~</span><br><span class="line">[root@www ~]<span class="comment"># chown bin install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
-<p>将install.log的拥有者与群组改回为root：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># chown root:root install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
-<h4 id="3-chmod：更改文件9个属性"><a href="#3-chmod：更改文件9个属性" class="headerlink" title="(3)chmod：更改文件9个属性"></a>(3)chmod：更改文件9个属性</h4><p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
-<p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
-<p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
-<ul>
-<li>r:4</li>
-<li>w:2</li>
-<li>x:1</li>
-</ul>
-<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为： <strong>-rwxrwx—-</strong> 分数则是：</p>
-<ul>
-<li>owner = rwx = 4+2+1 = 7</li>
-<li>group = rwx = 4+2+1 = 7</li>
-<li>others= —- = 0+0+0 = 0</li>
-</ul>
-<p>所以等一下我们设定权限的变更时，该文件的权限数字就是 <strong>770</strong>。变更权限的指令 chmod 的语法是这样的：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
-<p>选项与参数：</p>
-<ul>
-<li>xyz : 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。</li>
-<li>-R : 进行递归(recursive)的持续变更，亦即连同次目录下的所有文件都会变更</li>
-</ul>
-<p>举例来说，如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]<span class="comment"># chmod 777 .bashrc</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
-<p>那如果要将权限变成 <em>-rwxr-xr—</em> 呢？那么权限的分数就成为 [4+2+1][4+0+1][4+0+0]=754。</p>
-<h4 id="4-符号类型改变文件权限"><a href="#4-符号类型改变文件权限" class="headerlink" title="(4)符号类型改变文件权限"></a>(4)符号类型改变文件权限</h4><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
-<ul>
-<li>user：用户</li>
-<li>group：组</li>
-<li>others：其他</li>
-</ul>
-<p>那么我们就可以使用 <strong>u, g, o</strong> 来代表三种身份的权限。</p>
-<p>此外， <strong>a</strong> 则代表 <strong>all</strong>，即全部的身份。读写的权限可以写成 <strong>r, w, x</strong>，也就是可以使用下表的方式来看：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>chmod</th>
-<th>u g o a</th>
-<th>+(加入) -(除去) =(设定)</th>
-<th>r w x</th>
-<th>文件或目录</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr—</strong> ，可以使用 <strong>chmod u=rwx,g=rx,o=r 文件名</strong> 来设定:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  touch test1    // 创建 test1 文件</span></span><br><span class="line"><span class="comment"># ls -al test1    // 查看 test1 默认权限</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br><span class="line"><span class="comment"># chmod u=rwx,g=rx,o=r  test1    // 修改 test1 权限</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rwxr-xr-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
-<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  chmod  a-x test1</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>软件实践</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>古月ROS21讲学习笔记</title>
     <url>/2021/10/18/%E5%8F%A4%E6%9C%88ROS21%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>学习《古月ROS入门21讲》的学习笔记<br><span id="more"></span><br>课程总览：</p>
@@ -1935,306 +2409,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>Markdown常用语法</title>
-    <url>/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<p>Markdown常用语法，方便使用时查阅。<br><span id="more"></span></p>
-<h2 id="锚点和目录"><a href="#锚点和目录" class="headerlink" title="锚点和目录"></a>锚点和目录</h2><p>目录在前面用 <code>[toc]</code> 即可。</p>
-<p>锚点: <code>[说明文字](#jump)</code>，然后在要跳跃的位置处写 <code>&lt;span id=&quot;jump&quot;&gt;跳转位置的名字&lt;/span&gt;</code></p>
-<p>例如：<a href="#希腊字母">希腊字母</a> </p>
-<p>超链接：<code>[网页名字](地址)</code>，如<a href="https://github.com/">github</a></p>
-<h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><ol>
-<li>行内公式：将公式插入到本行内，符号：<script type="math/tex">公式内容</script>，如：$xyz$</li>
-<li>独行公式：将公式插入到新的一行内，并且居中，符号：<script type="math/tex">$公式内容$$$，如：</script>xyz$$</li>
-</ol>
-<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
-<li>上标符号，符号：<code>^</code>，如：$x^4$</li>
-<li>下标符号，符号：<code>_</code>，如：$x_1$</li>
-<li>组合符号，符号：<code>&#123;&#125;</code>，如：${16}_{8}O{2+}_{2}$</li>
-</ol>
-<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
-<li>汉字形式，符号：<code>\mbox&#123;&#125;</code>，如：$V_{\mbox{初始}}$</li>
-<li>字体控制，符号：<code>\displaystyle</code>，如：$\displaystyle \frac{x+y}{y+z}$</li>
-<li>下划线符号，符号：<code>\underline</code>，如：$\underline{x+y}$</li>
-<li>标签，符号<code>\tag&#123;数字&#125;</code>，如：$\tag{11}$</li>
-<li>上大括号，符号：<code>\overbrace&#123;算式&#125;</code>，如：$\overbrace{a+b+c+d}^{2.0}$</li>
-<li>下大括号，符号：<code>\underbrace&#123;算式&#125;</code>，如：$a+\underbrace{b+c}_{1.0}+d$</li>
-<li>上位符号，符号：<code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code>，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</li>
-</ol>
-<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
-<li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
-<li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
-<li>大空格，符号<code>\</code>，如：$x \  y$ </li>
-<li>中空格，符号<code>\:</code>，如：$x \: y$</li>
-<li>小空格，符号<code>\,</code>，如：$x \, y$</li>
-<li>没有空格，符号``，如：$xy$</li>
-<li>紧贴，符号<code>\!</code>，如：$x ! y$</li>
-</ol>
-<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><ol>
-<li>括号，符号：<code>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</code>，如：$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</li>
-<li>中括号，符号：<code>[]</code>，如：$[x+y]$</li>
-<li>大括号，符号：<code>\&#123; \&#125;</code>，如: $\{\}$</li>
-<li>自适应括号，符号：<code>\left \right</code>，如：$\left(x\right)$，$\left(x{yz}\right)$</li>
-<li>组合公式，符号：<code>&#123;上位公式 \choose 下位公式&#125;</code>，如：${n+1 \choose k}={n \choose k}+{n \choose k-1}$</li>
-<li>组合公式，符号：<code>&#123;上位公式 \atop 下位公式&#125;</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</li>
-</ol>
-<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><ol>
-<li>加法运算，符号：<code>+</code>，如：$x+y=z$</li>
-<li>减法运算，符号：<code>-</code>，如：$x-y=z$</li>
-<li>加减运算，符号：<code>\pm</code>，如：$x \pm y=z$</li>
-<li>减加运算，符号：<code>\mp</code>，如：$x \mp y=z$</li>
-<li>乘法运算，符号：<code>\times</code>，如：$x \times y=z$</li>
-<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y=z$</li>
-<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y=z$</li>
-<li>除法运算，符号：<code>\div</code>，如：$x \div y=z$</li>
-<li>斜法运算，符号：<code>/</code>，如：$x/y=z$</li>
-<li>分式表示，符号：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，如：$\frac{x+y}{y+z}$</li>
-<li>分式表示，符号：<code>&#123;分子&#125; \voer &#123;分母&#125;</code>，如：${x+y} \over {y+z}$</li>
-<li>绝对值表示，符号：<code>||</code>，如：$|x+y|$</li>
-</ol>
-<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><ol>
-<li>平均数运算，符号：<code>\overline&#123;算式&#125;</code>，如：$\overline{xyz}$</li>
-<li>开二次方运算，符号：<code>\sqrt</code>，如：$\sqrt x$</li>
-<li>开方运算，符号：<code>\sqrt[开方数]&#123;被开方数&#125;</code>，如：$\sqrt[3]{x+y}$</li>
-<li>对数运算，符号：<code>\log</code>，如：$\log(x)$</li>
-<li>极限运算，符号：<code>\lim</code>，如：$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>极限运算，符号：<code>\displaystyle \lim</code>，如：$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>求和运算，符号：<code>\sum</code>，如：$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>求和运算，符号：<code>\displaystyle \sum</code>，如：$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
-<li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
-<li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
-<li>矩阵表示，符号：<code>\begin&#123;matrix&#125; \end&#123;matrix&#125;</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;5 &amp;6 &amp;\cdots &amp;8\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots&amp; \vdots&amp;\cdots &amp;16\end{matrix} \right]$</li>
-</ol>
-<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
-<li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
-<li>大于运算，符号：<code>&gt;</code>，如：$x+y&gt;z$</li>
-<li>小于运算，符号：<code>&lt;</code>，如：$x+y&lt;z$</li>
-<li>大于等于运算，符号：<code>\geq</code>，如：$x+y \geq z$</li>
-<li>小于等于运算，符号：<code>\leq</code>，如：$x+y \leq z$</li>
-<li>不等于运算，符号：<code>\neq</code>，如：$x+y \neq z$</li>
-<li>不大于等于运算，符号：<code>\ngeq</code>，如：$x+y \ngeq z$</li>
-<li>不大于等于运算，符号：<code>\not\geq</code>，如：$x+y \not\geq z$</li>
-<li>不小于等于运算，符号：<code>\nleq</code>，如：$x+y \nleq z$</li>
-<li>不小于等于运算，符号：<code>\not\leq</code>，如：$x+y \not\leq z$</li>
-<li>约等于运算，符号：<code>\approx</code>，如：$x+y \approx z$</li>
-<li>恒定等于运算，符号：<code>\equiv</code>，如：$x+y \equiv z$</li>
-</ol>
-<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><ol>
-<li>属于运算，符号：<code>\in</code>，如：$x \in y$</li>
-<li>不属于运算，符号：<code>\notin</code>，如：$x \notin y$</li>
-<li>不属于运算，符号：<code>\not\in</code>，如：$x \not\in y$</li>
-<li>子集运算，符号：<code>\subset</code>，如：$x \subset y$</li>
-<li>子集运算，符号：<code>\supset</code>，如：$x \supset y$</li>
-<li>真子集运算，符号：<code>\subseteq</code>，如：$x \subseteq y$</li>
-<li>非真子集运算，符号：<code>\subsetneq</code>，如：$x \subsetneq y$</li>
-<li>真子集运算，符号：<code>\supseteq</code>，如：$x \supseteq y$</li>
-<li>非真子集运算，符号：<code>\supsetneq</code>，如：$x \supsetneq y$</li>
-<li>非子集运算，符号：<code>\not\subset</code>，如：$x \not\subset y$</li>
-<li>非子集运算，符号：<code>\not\supset</code>，如：$x \not\supset y$</li>
-<li>并集运算，符号：<code>\cup</code>，如：$x \cup y$</li>
-<li>交集运算，符号：<code>\cap</code>，如：$x \cap y$</li>
-<li>差集运算，符号：<code>\setminus</code>，如：$x \setminus y$</li>
-<li>同或运算，符号：<code>\bigodot</code>，如：$x \bigodot y$</li>
-<li>同与运算，符号：<code>\bigotimes</code>，如：$x \bigotimes y$</li>
-<li>实数集合，符号：<code>\mathbb&#123;R&#125;</code>，如：<code>\mathbb&#123;R&#125;</code></li>
-<li>自然数集合，符号：<code>\mathbb&#123;Z&#125;</code>，如：<code>\mathbb&#123;Z&#125;</code></li>
-<li>空集，符号：<code>\emptyset</code>，如：$\emptyset$</li>
-</ol>
-<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><ol>
-<li>无穷，符号：<code>\infty</code>，如：$\infty$</li>
-<li>虚数，符号：<code>\imath</code>，如：$\imath$</li>
-<li>虚数，符号：<code>\jmath</code>，如：$\jmath$</li>
-<li>数学符号，符号<code>\hat&#123;a&#125;</code>，如：$\hat{a}$</li>
-<li>数学符号，符号<code>\check&#123;a&#125;</code>，如：$\check{a}$</li>
-<li>数学符号，符号<code>\breve&#123;a&#125;</code>，如：$\breve{a}$</li>
-<li>数学符号，符号<code>\tilde&#123;a&#125;</code>，如：$\tilde{a}$</li>
-<li>数学符号，符号<code>\bar&#123;a&#125;</code>，如：$\bar{a}$</li>
-<li>矢量符号，符号<code>\vec&#123;a&#125;</code>，如：$\vec{a}$</li>
-<li>数学符号，符号<code>\acute&#123;a&#125;</code>，如：$\acute{a}$</li>
-<li>数学符号，符号<code>\grave&#123;a&#125;</code>，如：$\grave{a}$</li>
-<li>数学符号，符号<code>\mathring&#123;a&#125;</code>，如：$\mathring{a}$</li>
-<li>一阶导数符号，符号<code>\dot&#123;a&#125;</code>，如：$\dot{a}$</li>
-<li>二阶导数符号，符号<code>\ddot&#123;a&#125;</code>，如：$\ddot{a}$</li>
-<li>上箭头，符号：<code>\uparrow</code>，如：$\uparrow$</li>
-<li>上箭头，符号：<code>\Uparrow</code>，如：$\Uparrow$</li>
-<li>下箭头，符号：<code>\downarrow</code>，如：$\downarrow$</li>
-<li>下箭头，符号：<code>\Downarrow</code>，如：$\Downarrow$</li>
-<li>左箭头，符号：<code>\leftarrow</code>，如：$\leftarrow$</li>
-<li>左箭头，符号：<code>\Leftarrow</code>，如：$\Leftarrow$</li>
-<li>右箭头，符号：<code>\rightarrow</code>，如：$\rightarrow$</li>
-<li>右箭头，符号：<code>\Rightarrow</code>，如：$\Rightarrow$</li>
-<li>底端对齐的省略号，符号：<code>\ldots</code>，如：$1,2,\ldots,n$</li>
-<li>中线对齐的省略号，符号：<code>\cdots</code>，如：$x_1^2 + x_2^2 + \cdots + x_n^2$</li>
-<li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
-<li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
-</ol>
-<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a><span id="希腊字母">希腊字母</span></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>字母</th>
-<th>实现</th>
-<th>字母</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td><code>A</code></td>
-<td>α</td>
-<td><code>\alhpa</code></td>
-</tr>
-<tr>
-<td>B</td>
-<td><code>B</code></td>
-<td>β</td>
-<td><code>\beta</code></td>
-</tr>
-<tr>
-<td>Γ</td>
-<td><code>\Gamma</code></td>
-<td>γ</td>
-<td><code>\gamma</code></td>
-</tr>
-<tr>
-<td>Δ</td>
-<td><code>\Delta</code></td>
-<td>δ</td>
-<td><code>\delta</code></td>
-</tr>
-<tr>
-<td>E</td>
-<td><code>E</code></td>
-<td>ϵ</td>
-<td><code>\epsilon</code></td>
-</tr>
-<tr>
-<td>Z</td>
-<td><code>Z</code></td>
-<td>ζ</td>
-<td><code>\zeta</code></td>
-</tr>
-<tr>
-<td>H</td>
-<td><code>H</code></td>
-<td>η</td>
-<td><code>\eta</code></td>
-</tr>
-<tr>
-<td>Θ</td>
-<td><code>\Theta</code></td>
-<td>θ</td>
-<td><code>\theta</code></td>
-</tr>
-<tr>
-<td>I</td>
-<td><code>I</code></td>
-<td>ι</td>
-<td><code>\iota</code></td>
-</tr>
-<tr>
-<td>K</td>
-<td><code>K</code></td>
-<td>κ</td>
-<td><code>\kappa</code></td>
-</tr>
-<tr>
-<td>Λ</td>
-<td><code>\Lambda</code></td>
-<td>λ</td>
-<td><code>\lambda</code></td>
-</tr>
-<tr>
-<td>M</td>
-<td><code>M</code></td>
-<td>μ</td>
-<td><code>\mu</code></td>
-</tr>
-<tr>
-<td>N</td>
-<td><code>N</code></td>
-<td>ν</td>
-<td><code>\nu</code></td>
-</tr>
-<tr>
-<td>Ξ</td>
-<td><code>\Xi</code></td>
-<td>ξ</td>
-<td><code>\xi</code></td>
-</tr>
-<tr>
-<td>O</td>
-<td><code>O</code></td>
-<td>ο</td>
-<td><code>\omicron</code></td>
-</tr>
-<tr>
-<td>Π</td>
-<td><code>\Pi</code></td>
-<td>π</td>
-<td><code>\pi</code></td>
-</tr>
-<tr>
-<td>P</td>
-<td><code>P</code></td>
-<td>ρ</td>
-<td><code>\rho</code></td>
-</tr>
-<tr>
-<td>Σ</td>
-<td><code>\Sigma</code></td>
-<td>σ</td>
-<td><code>\sigma</code></td>
-</tr>
-<tr>
-<td>T</td>
-<td><code>T</code></td>
-<td>τ</td>
-<td><code>\tau</code></td>
-</tr>
-<tr>
-<td>Υ</td>
-<td><code>\Upsilon</code></td>
-<td>υ</td>
-<td><code>\upsilon</code></td>
-</tr>
-<tr>
-<td>Φ</td>
-<td><code>\Phi</code></td>
-<td>ϕ</td>
-<td><code>\phi</code></td>
-</tr>
-<tr>
-<td>X</td>
-<td><code>X</code></td>
-<td>χ</td>
-<td><code>\chi</code></td>
-</tr>
-<tr>
-<td>Ψ</td>
-<td><code>\Psi</code></td>
-<td>ψ</td>
-<td><code>\psi</code></td>
-</tr>
-<tr>
-<td>Ω</td>
-<td><code>\v</code></td>
-<td>ω</td>
-<td><code>\omega</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-]]></content>
-      <categories>
-        <category>软件实践</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>线性代数可视化学习笔记</title>
     <url>/2021/10/18/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>3Blue1Brown 线代课程学习笔记，受益匪浅。<br><span id="more"></span></p>
@@ -2577,6 +2751,20 @@ y^{\prime}
       </tags>
   </entry>
   <entry>
+    <title>视觉SLAM框架</title>
+    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
+<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
+]]></content>
+      <categories>
+        <category>SLAM</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>极大似然估计和后验估计</title>
     <url>/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/</url>
     <content><![CDATA[<p>极大似然估计和后验估计。<br><span id="more"></span></p>
@@ -2656,180 +2844,6 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
       </categories>
       <tags>
         <tag>概率论与数理统计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git的使用手册</title>
-    <url>/2021/10/18/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>Git的使用手册，方便使用查阅。<br><span id="more"></span></p>
-<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
-<h2 id="一、最基本的使用"><a href="#一、最基本的使用" class="headerlink" title="一、最基本的使用"></a>一、最基本的使用</h2><p>首先需要知道几个关系         <a href="##三、细细介绍git背后原理">细细介绍git背后的原理</a></p>
-<p>git本地分为工作区、暂存区、本地库三个地方</p>
-<p>工作区(workspace)：即为写代码，写文件的地方</p>
-<p>暂存区(staging area)：保存着待提交的文件</p>
-<p>本地库(local repository)：提交后文件所在的地方</p>
-<p>远程仓库(remote repository)：云端的仓库</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062215.png" alt="image-20210711044151491"></p>
-<p>最主要的是要会使用 <code>git add</code>和<code>git commit</code>两条命令，便可以完成完成最基本的使用</p>
-<ol>
-<li><p>首先当写完一个文件后，用<code>git add .</code>添加所有更改的文件到暂存区，或者指定特定的文件到暂存区</p>
-</li>
-<li><p>然后使用 <code>git commit -m &#39;描述信息&#39;</code> 提交 这次更改，此时本地仓库便完成了这次的变更</p>
-</li>
-<li><p>如果想建立远程仓库，需要在github上建立一个仓库，然后复制下SSH的地址（注意这里需要在github上绑定本地电脑的SSH公共钥匙）</p>
-</li>
-<li><p>然后在终端中到本地仓库所在的文件夹，使用以下代码建立关联</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果再有更改的文件，还是先 <code>git add 文件名</code> 然后 <code>git commit -m &#39;描述信息&#39;</code> 或者用 <code>git commit -am &#39;变更描述&#39;</code>来进行提交，然后再用 <code>git push</code> 完成远程库的变更</p>
-</li>
-</ol>
-<h2 id="二、git-基本命令介绍"><a href="#二、git-基本命令介绍" class="headerlink" title="二、git 基本命令介绍"></a>二、git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
-<p>按F向下翻页，按B向上翻页</p>
-<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
-<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
-<p>（2）全局：只在用户范围内使用该配置</p>
-<p>（3）项目：在该项目范围内，使用该配置</p>
-<p>一般设置用户的配置文件，用global</p>
-<p><code>git config --global 想要配置的东西</code></p>
-<p><code>git config --unset --global</code>   恢复原来的配置</p>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
-<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
-<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
-<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
-<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
-<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
-<p><code>git status</code></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062228.png" alt="image-20210708115817078"></p>
-<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
-<p>添加要提交的文件</p>
-<p><code>git add 要添加的文件</code></p>
-<p><code>git add .</code>添加所有的文件</p>
-<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
-<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
-<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062230.png" alt="image-20210708120726347"></p>
-<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
-<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
-<p>这里如果没添加文件，会对比所有修改的文件</p>
-<p>红色是修改前的，绿色是修改后的</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062232.png" alt="image-20210708121041581"></p>
-<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
-<blockquote>
-<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
-</blockquote>
-<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
-<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
-<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
-<hr>
-<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
-<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
-<p>git mv也可以移动文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
-<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
-<p>共有三种模式</p>
-<p>(1)—mixed</p>
-<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
-<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
-<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
-<p><code>git reset HEAD^</code> 变更到上一个版本</p>
-<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
-<p><code>git reset 版本号</code>回退到指定的版本</p>
-<p>(2)—soft</p>
-<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
-<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062239.png" alt="img"></p>
-<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
-<p>(3)—hard</p>
-<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062241.gif" alt="img"></p>
-<blockquote>
-<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
-<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
-</blockquote>
-<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
-<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062244.gif" alt="img"></p>
-<h2 id="三、细细介绍git背后原理"><a href="#三、细细介绍git背后原理" class="headerlink" title="三、细细介绍git背后原理"></a>三、细细介绍git背后原理</h2><ul>
-<li>工作区：就是在电脑里能看到的目录</li>
-<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
-<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062250.png" alt="image-20210711045622504"></p>
-<ul>
-<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
-<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
-<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
-<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
-<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
-<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
-</ul>
-<p>如果还不明白，看下图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062256.png" alt="image-20210711063540634"></p>
-]]></content>
-      <categories>
-        <category>软件实践</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MacOS无法抹掉硬盘问题解决</title>
-    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mac电脑操作</title>
-    <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
-<h2 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h2><h3 id="1-强制退出"><a href="#1-强制退出" class="headerlink" title="1.强制退出"></a>1.强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
-<h2 id="二、常见问题"><a href="#二、常见问题" class="headerlink" title="二、常见问题"></a>二、常见问题</h2><h3 id="1-无法打开“-”，因为无法验证开发者"><a href="#1-无法打开“-”，因为无法验证开发者" class="headerlink" title="1.无法打开“*”，因为无法验证开发者"></a>1.无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
-<li>打开方达，在右侧菜单栏选择应用程序</li>
-<li>找到提示无法验证的应用，右键点击打开</li>
-<li>第一次会出现以下提示，继续点击打开即可</li>
-</ol>
-]]></content>
-      <categories>
-        <category>软件实践</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Word中使用Endnote插件</title>
-    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
-<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
-<li>关闭word，打开endnote</li>
-<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
-<li>等待完成</li>
-<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
-<li>重启word</li>
-</ol>
-<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
-<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
-<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
-<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
-<p>引用文献的格式可以在Word中设置。</p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
       </tags>
   </entry>
   <entry>
@@ -4001,20 +4015,6 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
     <title>单应矩阵</title>
     <url>/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/</url>
     <content><![CDATA[<p>单应矩阵学习。<br><span id="more"></span></p>
-]]></content>
-      <categories>
-        <category>SLAM</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>视觉SLAM框架</title>
-    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
-<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
 ]]></content>
       <categories>
         <category>SLAM</category>
