@@ -3007,7 +3007,7 @@ E[a]=w_{1} x+w_{2} y
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018063924.png" alt="image-20210917045648266" style="zoom:50%;" /></p>
 <h4 id="c-参数的标尺空间"><a href="#c-参数的标尺空间" class="headerlink" title="c.参数的标尺空间"></a>c.参数的标尺空间</h4><p>学习率通常在0.00001到1之间，如果在正常的数轴下，由于量级相差太大，意义不大，所以要在log空间中，进行标尺。</p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018063929.png" alt="image-20210917045759168" style="zoom:50%;" /></p>
-<h1 id="2-卷积神经网络"><a href="#2-卷积神经网络" class="headerlink" title="2.卷积神经网络"></a>2.卷积神经网络</h1><h3 id="2-0补充知识"><a href="#2-0补充知识" class="headerlink" title="2.0补充知识"></a>2.0补充知识</h3><h3 id="2-0-1卷积与图像去噪"><a href="#2-0-1卷积与图像去噪" class="headerlink" title="2.0.1卷积与图像去噪"></a>2.0.1卷积与图像去噪</h3><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018063934.png" alt="image-20210918182752556" style="zoom: 50%;" /></p>
+<h1 id="2-卷积神经网络"><a href="#2-卷积神经网络" class="headerlink" title="2.卷积神经网络"></a>2.卷积神经网络</h1><h2 id="2-0补充知识"><a href="#2-0补充知识" class="headerlink" title="2.0补充知识"></a>2.0补充知识</h2><h3 id="2-0-1卷积与图像去噪"><a href="#2-0-1卷积与图像去噪" class="headerlink" title="2.0.1卷积与图像去噪"></a>2.0.1卷积与图像去噪</h3><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018063934.png" alt="image-20210918182752556" style="zoom: 50%;" /></p>
 <p>去除图像中的噪点，一个最直接的办法就是和周围的像素点的灰度值进行加权求和。如下图：</p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018063939.png" alt="image-20210918183118727" style="zoom: 50%;" /></p>
 <p>每一个像素点都经过该操作后，就得到了一张新的去噪后的图片。这里的操作就叫作卷积操作。</p>
