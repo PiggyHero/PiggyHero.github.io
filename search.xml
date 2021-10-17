@@ -151,6 +151,72 @@
       </tags>
   </entry>
   <entry>
+    <title>SLAM的数学描述</title>
+    <url>/2021/10/18/SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
+    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
+<hr>
+<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
+<ol>
+<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
+<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
+</ol>
+<hr>
+<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
+<script type="math/tex; mode=display">
+\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
+<p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
+<script type="math/tex; mode=display">
+\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
+<hr>
+<p>以二维运动为例：</p>
+<p>如图所示</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023849.png" style="zoom:60%;" /></p>
+<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\vec{x}_{k}=\left[x_{1}, x_{2}, \theta\right]_{k}^{\top} \\
+&\vec{u}_{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]_{k}^{\top}
+\end{aligned}</script><p>运动方程为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x_{1} \\
+x_{2} \\
+\theta
+\end{array}\right]_{k}=\left[\begin{array}{l}
+x_{1} \\
+x_{2} \\
+\theta
+\end{array}\right]_{k-1}+\left[\begin{array}{c}
+\Delta x_{1} \\
+\Delta x_{2} \\
+\Delta \theta
+\end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023854.png" alt="img" style="zoom:60%;" /></p>
+<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+r_{j} \\
+\varphi_{j}
+\end{array}\right]_k=\left[\begin{array}{c}
+\sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
+\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
+\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
+<blockquote>
+<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
+</blockquote>
+<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
+<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
+<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
+<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
+]]></content>
+      <categories>
+        <category>SLAM学习</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown常用语法</title>
     <url>/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
     <content><![CDATA[<p>Markdown常用语法，方便使用时查阅。<br><span id="more"></span></p>
@@ -451,63 +517,6 @@
       </tags>
   </entry>
   <entry>
-    <title>VScode编译环境配置</title>
-    <url>/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>在linux或mac中编译C++,首先要配置好编译环境。<br><span id="more"></span></p>
-<h1 id="1-首先编写CMakeLists-txt文件"><a href="#1-首先编写CMakeLists-txt文件" class="headerlink" title="1.首先编写CMakeLists.txt文件"></a>1.首先编写CMakeLists.txt文件</h1><p>注意：在<code>c_cpp_properties.json</code>中设置了头文件路径，在编译的过程中就会有头文件内容的提示，但仍需要在<code>CMakeLists.txt</code>中写好包含的头文件路径，否则编译器只会在<code>usr/include文件夹下</code>和<code>CMakeLists.txt</code>所在文件夹下寻找头文件</p>
-<p>如果不在<code>c_cpp_properties.json</code>中设置头文件路径，在写代码的时候可能会没有提示，而且头文件名字下会有红波浪线，但可以正常编译</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(文件名)</span><br><span class="line"></span><br><span class="line"><span class="keyword">aux_source_directory</span>(./ VAR) <span class="comment">#把当前路径下的所有源文件打包程VAR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(添加头文件路径)<span class="comment">#如果在vscode中已经添加了头文件路径了，就不需要再添加了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(搜索库)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;添加库的头文件&#125;</span>）</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_TYPE Debug)<span class="comment">#如果想调试，加上这一句，生成可调试文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS<span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -Wall&quot;</span>)<span class="comment">#生成错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(可执行文件名 <span class="variable">$&#123;VAR&#125;</span>)<span class="comment">#生成可执行文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(可执行文件 库名) <span class="comment">#链接库</span></span><br></pre></td></tr></table></figure>
-<h1 id="2-文件根目录中建立一个build文件夹"><a href="#2-文件根目录中建立一个build文件夹" class="headerlink" title="2.文件根目录中建立一个build文件夹"></a>2.文件根目录中建立一个build文件夹</h1><p>编译过程中生成的中间文件和可执行文件全在该文件夹下，可执行文件的位置可在CMakeLists.txt中改变路径</p>
-<h1 id="3-建立-json文件夹，编写launch-json文件"><a href="#3-建立-json文件夹，编写launch-json文件" class="headerlink" title="3.建立.json文件夹，编写launch.json文件"></a>3.建立.json文件夹，编写launch.json文件</h1><p>新建launch.json文件，该文件是在VSCODE中按F5后所执行的命令</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;g++ - 生成和调试活动文件&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build/可执行文件名&quot;</span>,**<span class="comment">//执行文件的路径加上可执行文件，$&#123;workspaceFolder&#125;为根目录**</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,<span class="comment">//打开外部终端</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;为 gdb 启用整齐打印&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="attr">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;Build&quot;</span>,<span class="comment">//该命令表示执行launch.json的命令之前的预执行任务，要在tasks.json中设置</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>软件实践</category>
-      </categories>
-      <tags>
-        <tag>VScode</tag>
-        <tag>编程</tag>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Word中使用Endnote插件</title>
-    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
-<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
-<li>关闭word，打开endnote</li>
-<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
-<li>等待完成</li>
-<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
-<li>重启word</li>
-</ol>
-<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
-<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
-<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
-<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
-<p>引用文献的格式可以在Word中设置。</p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>单应矩阵</title>
-    <url>/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>单应矩阵学习。<br><span id="more"></span></p>
-]]></content>
-      <categories>
-        <category>SLAM学习</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Ubuntu的使用手册</title>
     <url>/2021/10/18/Ubuntu%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
     <content><![CDATA[<p>Unbuntu中常用的命令和使用规则。<br><span id="more"></span></p>
@@ -647,63 +656,54 @@
       </tags>
   </entry>
   <entry>
-    <title>SLAM的数学描述</title>
-    <url>/2021/10/18/SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
-    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
-<hr>
-<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
-<ol>
-<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
-<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
+    <title>VScode编译环境配置</title>
+    <url>/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>在linux或mac中编译C++,首先要配置好编译环境。<br><span id="more"></span></p>
+<h1 id="1-首先编写CMakeLists-txt文件"><a href="#1-首先编写CMakeLists-txt文件" class="headerlink" title="1.首先编写CMakeLists.txt文件"></a>1.首先编写CMakeLists.txt文件</h1><p>注意：在<code>c_cpp_properties.json</code>中设置了头文件路径，在编译的过程中就会有头文件内容的提示，但仍需要在<code>CMakeLists.txt</code>中写好包含的头文件路径，否则编译器只会在<code>usr/include文件夹下</code>和<code>CMakeLists.txt</code>所在文件夹下寻找头文件</p>
+<p>如果不在<code>c_cpp_properties.json</code>中设置头文件路径，在写代码的时候可能会没有提示，而且头文件名字下会有红波浪线，但可以正常编译</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(文件名)</span><br><span class="line"></span><br><span class="line"><span class="keyword">aux_source_directory</span>(./ VAR) <span class="comment">#把当前路径下的所有源文件打包程VAR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(添加头文件路径)<span class="comment">#如果在vscode中已经添加了头文件路径了，就不需要再添加了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(搜索库)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;添加库的头文件&#125;</span>）</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_TYPE Debug)<span class="comment">#如果想调试，加上这一句，生成可调试文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS<span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -Wall&quot;</span>)<span class="comment">#生成错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(可执行文件名 <span class="variable">$&#123;VAR&#125;</span>)<span class="comment">#生成可执行文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(可执行文件 库名) <span class="comment">#链接库</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-文件根目录中建立一个build文件夹"><a href="#2-文件根目录中建立一个build文件夹" class="headerlink" title="2.文件根目录中建立一个build文件夹"></a>2.文件根目录中建立一个build文件夹</h1><p>编译过程中生成的中间文件和可执行文件全在该文件夹下，可执行文件的位置可在CMakeLists.txt中改变路径</p>
+<h1 id="3-建立-json文件夹，编写launch-json文件"><a href="#3-建立-json文件夹，编写launch-json文件" class="headerlink" title="3.建立.json文件夹，编写launch.json文件"></a>3.建立.json文件夹，编写launch.json文件</h1><p>新建launch.json文件，该文件是在VSCODE中按F5后所执行的命令</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;g++ - 生成和调试活动文件&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build/可执行文件名&quot;</span>,**<span class="comment">//执行文件的路径加上可执行文件，$&#123;workspaceFolder&#125;为根目录**</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,<span class="comment">//打开外部终端</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;为 gdb 启用整齐打印&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="attr">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;Build&quot;</span>,<span class="comment">//该命令表示执行launch.json的命令之前的预执行任务，要在tasks.json中设置</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>VScode</tag>
+        <tag>编程</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Word中使用Endnote插件</title>
+    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
+<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
+<li>关闭word，打开endnote</li>
+<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
+<li>等待完成</li>
+<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
+<li>重启word</li>
 </ol>
-<hr>
-<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
-<script type="math/tex; mode=display">
-\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
-<p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
-<script type="math/tex; mode=display">
-\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
-<hr>
-<p>以二维运动为例：</p>
-<p>如图所示</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023849.png" style="zoom:60%;" /></p>
-<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\vec{x}_{k}=\left[x_{1}, x_{2}, \theta\right]_{k}^{\top} \\
-&\vec{u}_{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]_{k}^{\top}
-\end{aligned}</script><p>运动方程为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k}=\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k-1}+\left[\begin{array}{c}
-\Delta x_{1} \\
-\Delta x_{2} \\
-\Delta \theta
-\end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023854.png" alt="img" style="zoom:60%;" /></p>
-<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-r_{j} \\
-\varphi_{j}
-\end{array}\right]_k=\left[\begin{array}{c}
-\sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
-\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
-\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
-<blockquote>
-<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
-</blockquote>
-<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
-<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
-<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
-<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
+<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
+<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
+<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
+<p>引用文献的格式可以在Word中设置。</p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单应矩阵</title>
+    <url>/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>单应矩阵学习。<br><span id="more"></span></p>
 ]]></content>
       <categories>
         <category>SLAM学习</category>
@@ -2065,89 +2065,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>极大似然估计和后验估计</title>
-    <url>/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/</url>
-    <content><![CDATA[<p>极大似然估计和后验估计。<br><span id="more"></span></p>
-<h1 id="一、概率和统计的区别"><a href="#一、概率和统计的区别" class="headerlink" title="一、概率和统计的区别"></a>一、概率和统计的区别</h1><h2 id="1-概率研究"><a href="#1-概率研究" class="headerlink" title="1.概率研究"></a>1.概率研究</h2><p>已知一个模型和模型的参数，研究根据这个模型产生结果的概率和结果的一些特性（例如均值，方差等）</p>
-<p>例子：以某地人口的身高统计研究为例，假设已经知道某地的人口的身高呈正态分布，因此根据该模型，可以知道该地人口身高的均值，方差等特点，也可以知道某人身高为1.9的概率</p>
-<h2 id="2-统计研究"><a href="#2-统计研究" class="headerlink" title="2.统计研究"></a>2.统计研究</h2><p>统计研究与概率研究相反，是已知一组数据，但并不知道该模型和模型的具体参数</p>
-<p>例子：已知某地一个小区的人口身高的数据，想要推测出该地整个人口身高分布的数学模型，假设已经知道该模型为正态分布，但不知道正态分布中具体的参数等信息，所以需要统计研究来得出</p>
-<p>总结：概率研究是已知模型和参数，推数据。统计是已知数据，推模型和参数</p>
-<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061947.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
-<p>独立事件A和B，发生的概率为 $p(AB)=p(A)p(B)$</p>
-<p>当A和B有某种关系的时候，也就是说不独立的时候，$p(AB)=p(A|B)p(B)$，可以根据此来判断AB是否独立</p>
-<h1 id="三、极大似然估计和后验估计"><a href="#三、极大似然估计和后验估计" class="headerlink" title="三、极大似然估计和后验估计"></a>三、极大似然估计和后验估计</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><a href="https://zhuanlan.zhihu.com/p/32480810">参考</a></p>
-<p>这两者都属于统计类别下的。对于统计估计出的模型参数$\theta$，有两个学派：</p>
-<p><strong>频率学派</strong>：在进行参数估计时，所估计的参数$\theta$存在唯一的真值，也就是说$p(\theta)=1$。</p>
-<p><strong>贝叶斯学派</strong>：认为$\theta$是一个随机变量，符合一定的概率分布，$p(\theta)$是有概率分布的。</p>
-<p>抽象一点来讲，频率学派和贝叶斯学派对世界的认知有本质不同：频率学派认为世界是确定的，有一个本体，这个本体的真值是不变的，我们的目标就是要找到这个真值或真值所在的范围；而贝叶斯学派认为世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判做调整，我们的目标是要找到最优的描述这个世界的概率分布。</p>
-<p>贝叶斯概率公式：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P(A \mid B)&=\frac{P(A,B)}{P(B)}=\frac{P(B\mid A)P(A)}{P(A,B)+P(\tilde A,B)}\\
-&=\frac{P(B\mid A)P(A)}{P(B\mid  A)P(A)+P(B\mid \tilde A)P(\tilde A)}
-\end{aligned}\tag{1}</script><p><strong>E.g.</strong> 有一辆汽车，它被砸记作事件A，警报器响，记作事件B，现在想求得警报器响时，是车被砸的概率。那么，有以下几种表示：</p>
-<ul>
-<li>$P(A\mid B)$：在B发生时，A发生的概率。即警报器响了，是车被砸了的概率。</li>
-<li>$P(A,B)$ ：A，B同时发生的概率。即警报器响和车被砸同时发生的概率。</li>
-<li>$P(B\mid A)$ ：车被砸了，警报器响的概率。</li>
-<li>$P(B\mid \tilde A)$ ：车没被砸，警报器响的概率。</li>
-</ul>
-<p>现在(1)式中，在警报响时，车被砸的概率=警报响与车被砸同时发生的概率 $\div$ 警报响的概率。</p>
-<p>继续拆分：</p>
-<p>警报响与车被砸同时发生的概率=车被砸的概率 $\times$ 车被砸时，警报响的概率。</p>
-<p>警报响的概率=车被砸警报响的概率+车没被砸警报响的概率。</p>
-<p><strong>在生活中为什么警报响了，通常是车没有被砸呢？</strong></p>
-<p><strong>角度一：</strong></p>
-<p>为了提高警报响时，就是车被砸了的说服力。我们希望警报响时，是车被砸的概率变为1。那么我们再看(1)，当 $P(B\mid \tilde A)P(\tilde A)=0$ 时，也就是车没被砸，警报响的概率为0。这样，我们就避免了干扰情况的影响，提高了说服力。但是，$P(B\mid \tilde A)P(\tilde A)=0$ 会等于0么。虽然车没被砸时，警报响的概率很小，但是车没有被砸的概率很大，接近于1，所以它们的乘积也不会太小。</p>
-<p><strong>角度二：</strong></p>
-<p>我们再来看式(1)，现在我们刨除其他的影响不说（例如，放炮导致的警报响），让其他影响的概率保持不变。来看分子，前面是车被砸时，警报响的概率。这个概率很大，我们可以认为其等于1，但是它还要乘以车被砸的概率，车被砸的概率很小很小，因此它们的乘积也很小。所以，即使是警报响了，车被砸的概率也会很小。在这里，车被砸的概率是<strong>先验</strong>。</p>
-<p>从上面两个角度来看，其实就是$P(B\mid \tilde A)P(\tilde A)和P(B\mid  A)P(A)$ 间的比较，$P(B\mid A)$ 虽然很大，但是 $P(A)$ 很小；$P(B\mid \tilde A)$ 虽然很小，但是 $P(\tilde A)$ 很大。在这个例子中，就是 $P(B\mid \tilde A)比P(A)$ 胜了一筹，也就是车没被砸时警报响的概率比车被砸的大，才导致的即使警报响了，车被砸的概率也很小。</p>
-<p>从以上两个角度，我们可以知道贝叶斯公式考虑事情发生的因素：一件本来就难以发生的事情，就算出现某个证据和它强烈相关，也要谨慎考虑（就是考虑这件事情本身的先验概率）。而一个不是那么相关，但是极其容易发生的事情，也需要考虑。</p>
-<h2 id="2-似然函数"><a href="#2-似然函数" class="headerlink" title="2.似然函数"></a>2.似然函数</h2><p>对于 $P(X\mid \theta)$ 这个函数，它的输入有两个，分别是 $X和\theta$ 。</p>
-<p>当 $\theta$ 已经确定，$X$ 是变量时，这个函数叫做概率函数，它描述对于不同的样本点$x$，其出现的概率为多少。</p>
-<p>当 $X=x$ 时，$\theta$ 是变量时，这个函数就叫做似然函数，它描述对于不同的模型参数，出现$x$这个样本点的概率是多少。 </p>
-<h2 id="3-最大似然估计——MLE"><a href="#3-最大似然估计——MLE" class="headerlink" title="3.最大似然估计——MLE"></a>3.最大似然估计——MLE</h2><p>最大似然估计是<strong>频率学派</strong>的方法，即认为参数 $\theta$ 是一个固定的常数。</p>
-<p>假设数据 $x_1,x_2\cdots x_n$ 是独立同分布的一组样本，那么令 $X=\{x_1,\cdots x_n\}$ 。我们可以计算出出现这样样本的概率：</p>
-<script type="math/tex; mode=display">
-P(X,\theta)=P(X\mid\theta)P(\theta)\tag{2}</script><p>在(2)中，因为 $P(\theta)=1$ ，所以：</p>
-<script type="math/tex; mode=display">
-P(X,\theta)=P(X\mid\theta)\tag{3}</script><p>我们就可以假设我们已经知道了 $\theta$ ，然后求出在该概率模型参数下，出现此时样本的概率，这个概率是 $\theta$ 的函数。因为既然能出现此时的</p>
-<p>样本情况，那么概率函数应该是最大值，所以 $\theta$ 是极大值点。</p>
-<script type="math/tex; mode=display">
-\hat \theta=\max _\theta P(X\mid\theta)\tag{4}</script><p> <strong>E.g.</strong> 我们现在有一个硬币，这个硬币服从二项分布，我们设正面朝上的概率为 $\theta$ 。现在想通过试验来求出硬币的正面朝上的概率为多少。假设我们做了一组试验，扔了10次，其中正面朝上的次数为7。</p>
-<script type="math/tex; mode=display">
-P(X=\{7次正，3次反\},\theta)=P(X\mid\theta)=\theta^7(1-\theta)^3=f(\theta)\tag{5}</script><p>现在既然出现了7次正面向上，3次反面向上的数据样本，我们就可以认为此时的概率一定是所有情况中最大的。我们可以把似然函数$f(\theta)$ 的图像画出来：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061952.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
-<p>可以看出 $\theta=0.7$ 时，似然函数取极大值。但是我们知道，一般的硬币都是均匀分布的，为什么正面朝上的概率会是0.7呢。这就包含了贝叶斯学派的思想，即引入先验估计。</p>
-<h2 id="4-最大后验估计——MAP"><a href="#4-最大后验估计——MAP" class="headerlink" title="4.最大后验估计——MAP"></a>4.最大后验估计——MAP</h2><p>最大后验估计是贝叶斯学派的方法，他们认为参数 $\theta$ 是不确定的，也是一个随机变量。需要求出在该样本情况下，参数的概率分布，然后选取概率最大的样本点。</p>
-<script type="math/tex; mode=display">
-P(\theta\mid X)=\frac{P(X,\theta)}{P(X)}=\frac{P(X\mid\theta)P(\theta)}{P(X)}\tag{6}</script><p>式（6）中，$P(\theta\mid X)$ 是后验估计，实际上我们的目标就是找到 $\theta$ ，让它最大。$P(\theta)$ 是先验估计。$P(X)$ 是试验得到的概率，仅与试验结果有关，当我们已经获取试验结果后，可以认为它是一个常数。</p>
-<script type="math/tex; mode=display">
-\hat\theta=\max_\theta P(\theta \mid X)=\max_\theta P(X\mid\theta)P(\theta)\tag{7}</script><p>最大后验的思想是不仅仅需要似然函数最大，也需要先验的概率很大。</p>
-<p>同样是抛硬币的例子：</p>
-<p>我们先验的知道正面朝上的概率为0.5，因此认为 $\theta$ 服从均值为0.5，方差为1的正态分布。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P(X,\theta)&=P(X\mid\theta)P(\theta)\\
-&=f(\theta)P(\theta)
-\end{aligned}\tag{8}</script><p>图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061954.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
-<p>此时 $\theta$ 已经向左偏移，为0.558。即用最大后验估计，得到的结果。</p>
-<p>当试验次数为1000次，其中正面朝上的次数为700次时，$f(\theta)P(\theta)$ 的图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061956.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
-<p>此时 $\theta=0.696$ 。</p>
-<p>从这个例子可以知道：当数据量增大时，估计的参数分布会越来越向数据靠拢，先验的影响力会越来越小。</p>
-]]></content>
-      <categories>
-        <category>数学基础</category>
-        <category>SLAM学习</category>
-      </categories>
-      <tags>
-        <tag>概率论与数理统计</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>古月ROS21讲学习笔记</title>
     <url>/2021/10/18/%E5%8F%A4%E6%9C%88ROS21%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>学习《古月ROS入门21讲》的学习笔记<br><span id="more"></span><br>课程总览：</p>
@@ -2843,6 +2760,89 @@ y^{\prime}
       </categories>
       <tags>
         <tag>矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>极大似然估计和后验估计</title>
+    <url>/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/</url>
+    <content><![CDATA[<p>极大似然估计和后验估计。<br><span id="more"></span></p>
+<h1 id="一、概率和统计的区别"><a href="#一、概率和统计的区别" class="headerlink" title="一、概率和统计的区别"></a>一、概率和统计的区别</h1><h2 id="1-概率研究"><a href="#1-概率研究" class="headerlink" title="1.概率研究"></a>1.概率研究</h2><p>已知一个模型和模型的参数，研究根据这个模型产生结果的概率和结果的一些特性（例如均值，方差等）</p>
+<p>例子：以某地人口的身高统计研究为例，假设已经知道某地的人口的身高呈正态分布，因此根据该模型，可以知道该地人口身高的均值，方差等特点，也可以知道某人身高为1.9的概率</p>
+<h2 id="2-统计研究"><a href="#2-统计研究" class="headerlink" title="2.统计研究"></a>2.统计研究</h2><p>统计研究与概率研究相反，是已知一组数据，但并不知道该模型和模型的具体参数</p>
+<p>例子：已知某地一个小区的人口身高的数据，想要推测出该地整个人口身高分布的数学模型，假设已经知道该模型为正态分布，但不知道正态分布中具体的参数等信息，所以需要统计研究来得出</p>
+<p>总结：概率研究是已知模型和参数，推数据。统计是已知数据，推模型和参数</p>
+<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061947.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
+<p>独立事件A和B，发生的概率为 $p(AB)=p(A)p(B)$</p>
+<p>当A和B有某种关系的时候，也就是说不独立的时候，$p(AB)=p(A|B)p(B)$，可以根据此来判断AB是否独立</p>
+<h1 id="三、极大似然估计和后验估计"><a href="#三、极大似然估计和后验估计" class="headerlink" title="三、极大似然估计和后验估计"></a>三、极大似然估计和后验估计</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><a href="https://zhuanlan.zhihu.com/p/32480810">参考</a></p>
+<p>这两者都属于统计类别下的。对于统计估计出的模型参数$\theta$，有两个学派：</p>
+<p><strong>频率学派</strong>：在进行参数估计时，所估计的参数$\theta$存在唯一的真值，也就是说$p(\theta)=1$。</p>
+<p><strong>贝叶斯学派</strong>：认为$\theta$是一个随机变量，符合一定的概率分布，$p(\theta)$是有概率分布的。</p>
+<p>抽象一点来讲，频率学派和贝叶斯学派对世界的认知有本质不同：频率学派认为世界是确定的，有一个本体，这个本体的真值是不变的，我们的目标就是要找到这个真值或真值所在的范围；而贝叶斯学派认为世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判做调整，我们的目标是要找到最优的描述这个世界的概率分布。</p>
+<p>贝叶斯概率公式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(A \mid B)&=\frac{P(A,B)}{P(B)}=\frac{P(B\mid A)P(A)}{P(A,B)+P(\tilde A,B)}\\
+&=\frac{P(B\mid A)P(A)}{P(B\mid  A)P(A)+P(B\mid \tilde A)P(\tilde A)}
+\end{aligned}\tag{1}</script><p><strong>E.g.</strong> 有一辆汽车，它被砸记作事件A，警报器响，记作事件B，现在想求得警报器响时，是车被砸的概率。那么，有以下几种表示：</p>
+<ul>
+<li>$P(A\mid B)$：在B发生时，A发生的概率。即警报器响了，是车被砸了的概率。</li>
+<li>$P(A,B)$ ：A，B同时发生的概率。即警报器响和车被砸同时发生的概率。</li>
+<li>$P(B\mid A)$ ：车被砸了，警报器响的概率。</li>
+<li>$P(B\mid \tilde A)$ ：车没被砸，警报器响的概率。</li>
+</ul>
+<p>现在(1)式中，在警报响时，车被砸的概率=警报响与车被砸同时发生的概率 $\div$ 警报响的概率。</p>
+<p>继续拆分：</p>
+<p>警报响与车被砸同时发生的概率=车被砸的概率 $\times$ 车被砸时，警报响的概率。</p>
+<p>警报响的概率=车被砸警报响的概率+车没被砸警报响的概率。</p>
+<p><strong>在生活中为什么警报响了，通常是车没有被砸呢？</strong></p>
+<p><strong>角度一：</strong></p>
+<p>为了提高警报响时，就是车被砸了的说服力。我们希望警报响时，是车被砸的概率变为1。那么我们再看(1)，当 $P(B\mid \tilde A)P(\tilde A)=0$ 时，也就是车没被砸，警报响的概率为0。这样，我们就避免了干扰情况的影响，提高了说服力。但是，$P(B\mid \tilde A)P(\tilde A)=0$ 会等于0么。虽然车没被砸时，警报响的概率很小，但是车没有被砸的概率很大，接近于1，所以它们的乘积也不会太小。</p>
+<p><strong>角度二：</strong></p>
+<p>我们再来看式(1)，现在我们刨除其他的影响不说（例如，放炮导致的警报响），让其他影响的概率保持不变。来看分子，前面是车被砸时，警报响的概率。这个概率很大，我们可以认为其等于1，但是它还要乘以车被砸的概率，车被砸的概率很小很小，因此它们的乘积也很小。所以，即使是警报响了，车被砸的概率也会很小。在这里，车被砸的概率是<strong>先验</strong>。</p>
+<p>从上面两个角度来看，其实就是$P(B\mid \tilde A)P(\tilde A)和P(B\mid  A)P(A)$ 间的比较，$P(B\mid A)$ 虽然很大，但是 $P(A)$ 很小；$P(B\mid \tilde A)$ 虽然很小，但是 $P(\tilde A)$ 很大。在这个例子中，就是 $P(B\mid \tilde A)比P(A)$ 胜了一筹，也就是车没被砸时警报响的概率比车被砸的大，才导致的即使警报响了，车被砸的概率也很小。</p>
+<p>从以上两个角度，我们可以知道贝叶斯公式考虑事情发生的因素：一件本来就难以发生的事情，就算出现某个证据和它强烈相关，也要谨慎考虑（就是考虑这件事情本身的先验概率）。而一个不是那么相关，但是极其容易发生的事情，也需要考虑。</p>
+<h2 id="2-似然函数"><a href="#2-似然函数" class="headerlink" title="2.似然函数"></a>2.似然函数</h2><p>对于 $P(X\mid \theta)$ 这个函数，它的输入有两个，分别是 $X和\theta$ 。</p>
+<p>当 $\theta$ 已经确定，$X$ 是变量时，这个函数叫做概率函数，它描述对于不同的样本点$x$，其出现的概率为多少。</p>
+<p>当 $X=x$ 时，$\theta$ 是变量时，这个函数就叫做似然函数，它描述对于不同的模型参数，出现$x$这个样本点的概率是多少。 </p>
+<h2 id="3-最大似然估计——MLE"><a href="#3-最大似然估计——MLE" class="headerlink" title="3.最大似然估计——MLE"></a>3.最大似然估计——MLE</h2><p>最大似然估计是<strong>频率学派</strong>的方法，即认为参数 $\theta$ 是一个固定的常数。</p>
+<p>假设数据 $x_1,x_2\cdots x_n$ 是独立同分布的一组样本，那么令 $X=\{x_1,\cdots x_n\}$ 。我们可以计算出出现这样样本的概率：</p>
+<script type="math/tex; mode=display">
+P(X,\theta)=P(X\mid\theta)P(\theta)\tag{2}</script><p>在(2)中，因为 $P(\theta)=1$ ，所以：</p>
+<script type="math/tex; mode=display">
+P(X,\theta)=P(X\mid\theta)\tag{3}</script><p>我们就可以假设我们已经知道了 $\theta$ ，然后求出在该概率模型参数下，出现此时样本的概率，这个概率是 $\theta$ 的函数。因为既然能出现此时的</p>
+<p>样本情况，那么概率函数应该是最大值，所以 $\theta$ 是极大值点。</p>
+<script type="math/tex; mode=display">
+\hat \theta=\max _\theta P(X\mid\theta)\tag{4}</script><p> <strong>E.g.</strong> 我们现在有一个硬币，这个硬币服从二项分布，我们设正面朝上的概率为 $\theta$ 。现在想通过试验来求出硬币的正面朝上的概率为多少。假设我们做了一组试验，扔了10次，其中正面朝上的次数为7。</p>
+<script type="math/tex; mode=display">
+P(X=\{7次正，3次反\},\theta)=P(X\mid\theta)=\theta^7(1-\theta)^3=f(\theta)\tag{5}</script><p>现在既然出现了7次正面向上，3次反面向上的数据样本，我们就可以认为此时的概率一定是所有情况中最大的。我们可以把似然函数$f(\theta)$ 的图像画出来：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061952.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
+<p>可以看出 $\theta=0.7$ 时，似然函数取极大值。但是我们知道，一般的硬币都是均匀分布的，为什么正面朝上的概率会是0.7呢。这就包含了贝叶斯学派的思想，即引入先验估计。</p>
+<h2 id="4-最大后验估计——MAP"><a href="#4-最大后验估计——MAP" class="headerlink" title="4.最大后验估计——MAP"></a>4.最大后验估计——MAP</h2><p>最大后验估计是贝叶斯学派的方法，他们认为参数 $\theta$ 是不确定的，也是一个随机变量。需要求出在该样本情况下，参数的概率分布，然后选取概率最大的样本点。</p>
+<script type="math/tex; mode=display">
+P(\theta\mid X)=\frac{P(X,\theta)}{P(X)}=\frac{P(X\mid\theta)P(\theta)}{P(X)}\tag{6}</script><p>式（6）中，$P(\theta\mid X)$ 是后验估计，实际上我们的目标就是找到 $\theta$ ，让它最大。$P(\theta)$ 是先验估计。$P(X)$ 是试验得到的概率，仅与试验结果有关，当我们已经获取试验结果后，可以认为它是一个常数。</p>
+<script type="math/tex; mode=display">
+\hat\theta=\max_\theta P(\theta \mid X)=\max_\theta P(X\mid\theta)P(\theta)\tag{7}</script><p>最大后验的思想是不仅仅需要似然函数最大，也需要先验的概率很大。</p>
+<p>同样是抛硬币的例子：</p>
+<p>我们先验的知道正面朝上的概率为0.5，因此认为 $\theta$ 服从均值为0.5，方差为1的正态分布。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X,\theta)&=P(X\mid\theta)P(\theta)\\
+&=f(\theta)P(\theta)
+\end{aligned}\tag{8}</script><p>图像为：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061954.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
+<p>此时 $\theta$ 已经向左偏移，为0.558。即用最大后验估计，得到的结果。</p>
+<p>当试验次数为1000次，其中正面朝上的次数为700次时，$f(\theta)P(\theta)$ 的图像为：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061956.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
+<p>此时 $\theta=0.696$ 。</p>
+<p>从这个例子可以知道：当数据量增大时，估计的参数分布会越来越向数据靠拢，先验的影响力会越来越小。</p>
+]]></content>
+      <categories>
+        <category>数学基础</category>
+        <category>SLAM学习</category>
+      </categories>
+      <tags>
+        <tag>概率论与数理统计</tag>
       </tags>
   </entry>
   <entry>
