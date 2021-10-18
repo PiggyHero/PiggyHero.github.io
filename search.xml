@@ -2485,9 +2485,10 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
 ]]></content>
       <categories>
         <category>数学基础</category>
-        <category>SLAM学习</category>
+        <category>概率论与数理统计</category>
       </categories>
       <tags>
+        <tag>SLAM</tag>
         <tag>概率论与数理统计</tag>
       </tags>
   </entry>
@@ -2828,6 +2829,7 @@ y^{\prime}
 ]]></content>
       <categories>
         <category>数学基础</category>
+        <category>矩阵理论</category>
       </categories>
       <tags>
         <tag>矩阵</tag>
@@ -4006,7 +4008,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 </ul>
 <h2 id="6-3PixelRNN与PixelCNN"><a href="#6-3PixelRNN与PixelCNN" class="headerlink" title="6.3PixelRNN与PixelCNN"></a>6.3PixelRNN与PixelCNN</h2><h2 id="6-4变分自编码器"><a href="#6-4变分自编码器" class="headerlink" title="6.4变分自编码器"></a>6.4变分自编码器</h2><h2 id="6-5GAN"><a href="#6-5GAN" class="headerlink" title="6.5GAN"></a>6.5GAN</h2>]]></content>
       <categories>
-        <category>计算机视觉</category>
+        <category>SLAM学习</category>
       </categories>
       <tags>
         <tag>计算机视觉</tag>
