@@ -686,26 +686,54 @@ r_{j} \\
     <title>Ubuntu的使用手册</title>
     <url>/2021/10/18/Ubuntu%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
     <content><![CDATA[<p>Unbuntu中常用的命令和使用规则。<br><span id="more"></span></p>
-<h2 id="一、软件的安装"><a href="#一、软件的安装" class="headerlink" title="一、软件的安装"></a>一、软件的安装</h2><h3 id="1-软件源"><a href="#1-软件源" class="headerlink" title="1.软件源"></a>1.软件源</h3><p>软件源就是所下载的软件来源，软件源会决定软件的下载速度。</p>
-<p>在<code>软件和更新</code>中可以更换软件源。</p>
-<h3 id="2-安装软件中的一些基本操作"><a href="#2-安装软件中的一些基本操作" class="headerlink" title="2.安装软件中的一些基本操作"></a>2.安装软件中的一些基本操作</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update  	重新载入软件源，将软件列表更新。</span><br></pre></td></tr></table></figure>
-<h2 id="二、常用命令"><a href="#二、常用命令" class="headerlink" title="二、常用命令"></a>二、常用命令</h2><p>Ubuntu操作系统中，通常是通过命令行来操作的，命令行应用的扩展性和灵活性较好，在早期的Windows系统中也是用命令行来操作电脑的。</p>
+<h1 id="一、软件的安装"><a href="#一、软件的安装" class="headerlink" title="一、软件的安装"></a>一、软件的安装</h1><h2 id="1-软件源介绍"><a href="#1-软件源介绍" class="headerlink" title="1.软件源介绍"></a>1.软件源介绍</h2><p>软件源,在Ubuntu下,它相当于==软件库==,需要什么软件,只要记得正确的软件名就可以用命令安装:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install 软件名</span><br></pre></td></tr></table></figure>
+<p>例如:你要安装gcc软件,那么你就可以再终端中输<code>sudo apt-get install gcc</code>,这样就能帮你装好gcc软件,如果源里没有这个软件时,此命令就没法完成。</p>
+<p>当然,如果你要删除软件时,可以再终端中输入:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get remove 软件名</span><br></pre></td></tr></table></figure>
+<h2 id="2-软件安装方式"><a href="#2-软件安装方式" class="headerlink" title="2.软件安装方式"></a>2.软件安装方式</h2><ul>
+<li>通过apt包管理工具从软件源中安装</li>
+<li>通过deb、snap、AppImage格式的软件包安装</li>
+<li>用软件源码手动编译安装</li>
+</ul>
+<p>其实通过软件源安装软件的原理非常简单，Ubuntu 系统中自带了一个名为 ==apt的软件包管理工具==，它的主要功能就是负责 Ubuntu  系统中所有软件包的管理，包括从软件源中下载软件，卸载系统中已经安装的软件等。而每当我们通过<code>sudo apt-get install  &lt;package-name&gt;</code>命令去安装一个软件时，apt  包管理工具就会从系统中一个叫做==源列表的文件==中去读取软件源的网址信息，查找可以包含该软件的软件源的网址，然后就从这个网址上把指定的软件给下载下来，然后由 apt 包管理工具在本地进行一些解压和安装的其他操作。</p>
+<p>在 Ubuntu 中软件源其实还细分为下面两种：</p>
+<ul>
+<li>Ubuntu 官方软件源</li>
+<li>PPA 软件源</li>
+</ul>
+<p><strong>Ubuntu 官方软件源:</strong><br> Ubuntu 官方软件源中包含了 Ubuntu 系统中所用到的绝大部分的软件，它对应的源列表<br> 是<code>/etc/apt/sources.list</code>。在这个文件中，记录了 Ubuntu 官方源的地址，基本格式内容如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021142953.webp" alt="pic"></p>
+<p>如果想要更换软件源，可以到<a href="https://link.jianshu.com?t=https://segmentfault.com/a/1190000000375848">国内开源镜像站点汇总</a>去找，更换后需要运行<code>sudo apt-get update</code>来更新软件源列表。</p>
+<p><strong>PPA 软件源:</strong></p>
+<p>PPA 源出现的背景是因为系统自带的源是很有限的，我们肯定需要一些其他的软件包然而如果是直接下载deb格式的文件的话，又不能获取到更新和维护，所以这就用到了十分重要的 PPA 源了。</p>
+<p>所谓 PPA 源，就是指 “Personal Package Archives”  ，也就是==个人软件包集==。这其实是一个网站，即launchpad.net。Launchpad 是 Ubuntu 母公司 Canonical 公司所架设的网站，是一个提供维护、支援或联络 Ubuntu 开发者的平台。由于不是所有的软件都能进入 Ubuntu 的官方的软件库，launchpad.net 提供了 PPA，允许开发者建立自己的软件仓库，自由的上传软件。供用户安装和查看更新。</p>
+<p>添加和删除PPA软件源</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:user/ppa-name</span><br><span class="line">sudo add-apt-repository --remove ppa:user/ppa-name    </span><br></pre></td></tr></table></figure>
+<p>例如，我们想要添加一个 Wireshark 软件的 PPA 源，我们可以根据它官网上提供的命令来进行添加，如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021142945.webp" alt="img"></p>
+<p>当我们添加完 PPA 源之后，系统就会在 <code>/etc/apt/sources.list.d/</code>文件夹里创建了两个文件：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021142940.webp" alt="img"></p>
+<p>我们再来打开一下 <code>wireshark-dev-stable-trusty.list</code><br> 文件看看里面的内容是什么：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br><span class="line"># deb-src http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br></pre></td></tr></table></figure>
+<p>哈哈～原来文件里就是添加了一个跟软件源一模一样的东西，他们的作用殊途同归啊。我想这其实是 Ubuntu  为了分辨官方的源和第三方的源才设计成在<code>sources.list</code>和  <code>sources.list.d/</code>这两个地方中存储软件源信息。因为第三方的源毕竟不太可信，如果随便更新的话可是会出事情的。</p>
+<h1 id="二、常用命令"><a href="#二、常用命令" class="headerlink" title="二、常用命令"></a>二、常用命令</h1><p>Ubuntu操作系统中，通常是通过命令行来操作的，命令行应用的扩展性和灵活性较好，在早期的Windows系统中也是用命令行来操作电脑的。</p>
 <p>命令行在终端中输入，用 <code>Ctrl</code>+<code>Alt</code>+<code>T</code> 快捷键可以打开终端窗口。</p>
-<h3 id="1-pwd"><a href="#1-pwd" class="headerlink" title="1.pwd"></a>1.pwd</h3><p>查看当前的路径。</p>
-<h3 id="2-cd"><a href="#2-cd" class="headerlink" title="2.cd"></a>2.cd</h3><p>切换当前路径。后面可以接相对路径，也可接绝对路径。</p>
-<h3 id="3-mkdir"><a href="#3-mkdir" class="headerlink" title="3.mkdir"></a>3.mkdir</h3><p>创建文件夹。</p>
-<h3 id="4-ls"><a href="#4-ls" class="headerlink" title="4.ls"></a>4.ls</h3><p>查看当前路径下的文件和文件夹。</p>
-<h3 id="5-touch"><a href="#5-touch" class="headerlink" title="5.touch"></a>5.touch</h3><p>创建文件。</p>
-<h3 id="6-mv"><a href="#6-mv" class="headerlink" title="6.mv"></a>6.mv</h3><p>将一个文件或文件夹移动到另外一个路径，相当于剪切的作用。</p>
+<h2 id="1-pwd"><a href="#1-pwd" class="headerlink" title="1.pwd"></a>1.pwd</h2><p>查看当前的路径。</p>
+<h2 id="2-cd"><a href="#2-cd" class="headerlink" title="2.cd"></a>2.cd</h2><p>切换当前路径。后面可以接相对路径，也可接绝对路径。</p>
+<h2 id="3-mkdir"><a href="#3-mkdir" class="headerlink" title="3.mkdir"></a>3.mkdir</h2><p>创建文件夹。</p>
+<h2 id="4-ls"><a href="#4-ls" class="headerlink" title="4.ls"></a>4.ls</h2><p>查看当前路径下的文件和文件夹。</p>
+<h2 id="5-touch"><a href="#5-touch" class="headerlink" title="5.touch"></a>5.touch</h2><p>创建文件。</p>
+<h2 id="6-mv"><a href="#6-mv" class="headerlink" title="6.mv"></a>6.mv</h2><p>将一个文件或文件夹移动到另外一个路径，相当于剪切的作用。</p>
 <p>具体用法：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
 <p>将一个文件或文件夹拷贝到另一个路径，相当于复制粘贴。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
-<h3 id="8-rm"><a href="#8-rm" class="headerlink" title="8.rm"></a>8.rm</h3><p>删除文件或文件夹。</p>
+<h2 id="8-rm"><a href="#8-rm" class="headerlink" title="8.rm"></a>8.rm</h2><p>删除文件或文件夹。</p>
 <p>具体用法：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm file</span><br><span class="line">rm -r folder</span><br></pre></td></tr></table></figure>
-<h3 id="9-sudo"><a href="#9-sudo" class="headerlink" title="9.sudo"></a>9.sudo</h3><p>sudo 的作用是提升当前用户的权限。比如安装软件时，必须要使用sudo命令。</p>
-<h2 id="三、更改文件权限"><a href="#三、更改文件权限" class="headerlink" title="三、更改文件权限"></a>三、更改文件权限</h2><h3 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h3><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
+<h2 id="9-sudo"><a href="#9-sudo" class="headerlink" title="9.sudo"></a>9.sudo</h2><p>sudo 的作用是提升当前用户的权限。比如安装软件时，必须要使用sudo命令。</p>
+<h1 id="三、更改文件权限"><a href="#三、更改文件权限" class="headerlink" title="三、更改文件权限"></a>三、更改文件权限</h1><h2 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h2><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
 <p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
 <p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
 <p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
@@ -736,7 +764,7 @@ r_{j} \\
 <p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
 <p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
 <hr>
-<h3 id="2-Linux文件属主和属组"><a href="#2-Linux文件属主和属组" class="headerlink" title="2.Linux文件属主和属组"></a>2.Linux文件属主和属组</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<h2 id="2-Linux文件属主和属组"><a href="#2-Linux文件属主和属组" class="headerlink" title="2.Linux文件属主和属组"></a>2.Linux文件属主和属组</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
 <p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
 <p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
 <p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
@@ -744,19 +772,19 @@ r_{j} \\
 <p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
 <p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
 <hr>
-<h3 id="3-更改文件属性"><a href="#3-更改文件属性" class="headerlink" title="3.更改文件属性"></a>3.更改文件属性</h3><h4 id="1-chgrp：更改文件属组"><a href="#1-chgrp：更改文件属组" class="headerlink" title="(1)chgrp：更改文件属组"></a>(1)chgrp：更改文件属组</h4><p>语法：</p>
+<h2 id="3-更改文件属性"><a href="#3-更改文件属性" class="headerlink" title="3.更改文件属性"></a>3.更改文件属性</h2><h3 id="1-chgrp：更改文件属组"><a href="#1-chgrp：更改文件属组" class="headerlink" title="(1)chgrp：更改文件属组"></a>(1)chgrp：更改文件属组</h3><p>语法：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
 <p>参数选项</p>
 <ul>
 <li>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
 </ul>
-<h4 id="2-chown：更改文件属主，也可以同时更改文件属组"><a href="#2-chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="(2)chown：更改文件属主，也可以同时更改文件属组"></a>(2)chown：更改文件属主，也可以同时更改文件属组</h4><p>语法：</p>
+<h3 id="2-chown：更改文件属主，也可以同时更改文件属组"><a href="#2-chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="(2)chown：更改文件属主，也可以同时更改文件属组"></a>(2)chown：更改文件属主，也可以同时更改文件属组</h3><p>语法：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
 <p>进入 /root 目录（~）将install.log的拥有者改为bin这个账号：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">cd</span> ~</span><br><span class="line">[root@www ~]<span class="comment"># chown bin install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
 <p>将install.log的拥有者与群组改回为root：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># chown root:root install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
-<h4 id="3-chmod：更改文件9个属性"><a href="#3-chmod：更改文件9个属性" class="headerlink" title="(3)chmod：更改文件9个属性"></a>(3)chmod：更改文件9个属性</h4><p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
+<h3 id="3-chmod：更改文件9个属性"><a href="#3-chmod：更改文件9个属性" class="headerlink" title="(3)chmod：更改文件9个属性"></a>(3)chmod：更改文件9个属性</h3><p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
 <p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
 <p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
 <ul>
@@ -780,7 +808,7 @@ r_{j} \\
 <p>举例来说，如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]<span class="comment"># chmod 777 .bashrc</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
 <p>那如果要将权限变成 <em>-rwxr-xr—</em> 呢？那么权限的分数就成为 [4+2+1][4+0+1][4+0+0]=754。</p>
-<h4 id="4-符号类型改变文件权限"><a href="#4-符号类型改变文件权限" class="headerlink" title="(4)符号类型改变文件权限"></a>(4)符号类型改变文件权限</h4><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
+<h3 id="4-符号类型改变文件权限"><a href="#4-符号类型改变文件权限" class="headerlink" title="(4)符号类型改变文件权限"></a>(4)符号类型改变文件权限</h3><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
 <ul>
 <li>user：用户</li>
 <li>group：组</li>
@@ -4128,6 +4156,56 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </categories>
       <tags>
         <tag>ROS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>依赖包是什么</title>
+    <url>/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
+<span id="more"></span>
+<p>依赖包就是某个软件用到的库文件。</p>
+<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
+<p>不同体系用不同的方法解决依赖问题。</p>
+<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
+<ul>
+<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
+<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
+<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
+<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
+</ul>
+<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
+<ul>
+<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
+<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
+<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
+<li>系统中安装的软件越多，越容易出问题。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>头文件,库文件,命名空间的关系</title>
+    <url>/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>以C为例，最早的时候，只有一个C文件，然后需要编译为可执行的二进制文件。但是后来发现，实现复杂功能的时候，代码行数太多了，于是便把这个文件分割一下，分别来看。</p>
+<p>于是，就把方法(函数)和声明单独放在同一个文件中，然后把这个文件加进来，放在头部，这样就可以在C文件中随意的摆放函数了，整理起来比较方便。久而久之，这个文件都是通常放在C文件的头部，因此就有了头文件的名字。头文件就是把一些常量的定义、数据结构的定义、函数的功能实现啥的放在里面，本质上就是一个文本文件，和写在C文件里是一样的，并没有什么特别的。<code>#include</code>进来的头文件都是原封不动的在编译阶段直接插入到C源文件中。</p>
+<p>而库文件是已经编译好的二进制文件，因为没有<code>main()</code>这个入口函数，所以没有办法直接启动，但是里面是实实在在的二进制代码。那么它有什么用呢？</p>
+<p>以前编译一个程序，就是输入C源文件，然后输出一个可执行的二进制文件。但是当C源文件的代码越写越多，越来越复杂，编译的时间特别长。这样一来，只要是修改了代码，就需要整体的重新编译一遍，消耗很多不必要的时间。于是人们为了避免反复的编译未改动的代码，就产生了库文件。</p>
+<p>把一个完整的C文件分开，分成不同功能的文件，然后只要把这些文件编译成一个二进制的软件包，最后把它们拼在一起，就是库文件。这样一来基本不会被改动的代码就不需要再一次编译了，只需要编译改动的文件就可以啦。</p>
+<p>库文件出现了，有的人灵光一闪，我可以只发布库文件啊，源代码还是在我这里，这样不就可以卖钱了吗？真是一个伟大的想法！但是光卖库文件不行啊，都被编译成二进制文件了，里面有哪些方法，有哪些常量别人没法知道啊！没关系我可以写文档啊。但是编译器不知道，而且也不懂读文档怎么办？好办，不是有头文件么，反正头文件只有声明，没有实现代码，就用头文件当编译器的文档好了。就这样人类读文档，编译器读头文件，然后有人卖库文件，一条产业链就此形成。</p>
+<p>后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，在自己写的库中，所有的函数名、常量名、解构名都带上自己的姓名做前缀名，这样就算方法名是一样的，但是有不同的前缀名，这样就能区分到底该链接哪个方法了。后来又来一个聪明人，觉得你们这样在每个方法、常量、结构体中都写上你们的姓名累不累啊，这样，我给你们设计一套规则，只要在库的最前面写上你们的姓名不就行了么，用的时候编译器先去找找你们的姓名，然后再你们的姓名下面找方法，这不就多快好省了么。那这样吧我们就给这个姓名取名字<code>namespace</code>吧。</p>
+]]></content>
+      <categories>
+        <category>软件编程</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
 </search>

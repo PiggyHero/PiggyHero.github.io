@@ -191,6 +191,156 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cutexiaoxin.gif">
+      <meta itemprop="name" content="PiggyHero">
+      <meta itemprop="description" content="不学习咋整啊！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PiggyHero Wiki">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/" class="post-title-link" itemprop="url">头文件,库文件,命名空间的关系</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-21 14:42:49 / 修改时间：14:44:57" itemprop="dateCreated datePublished" datetime="2021-10-21T14:42:49+08:00">2021-10-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">软件编程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <span id="more"></span>
+<p>以C为例，最早的时候，只有一个C文件，然后需要编译为可执行的二进制文件。但是后来发现，实现复杂功能的时候，代码行数太多了，于是便把这个文件分割一下，分别来看。</p>
+<p>于是，就把方法(函数)和声明单独放在同一个文件中，然后把这个文件加进来，放在头部，这样就可以在C文件中随意的摆放函数了，整理起来比较方便。久而久之，这个文件都是通常放在C文件的头部，因此就有了头文件的名字。头文件就是把一些常量的定义、数据结构的定义、函数的功能实现啥的放在里面，本质上就是一个文本文件，和写在C文件里是一样的，并没有什么特别的。<code>#include</code>进来的头文件都是原封不动的在编译阶段直接插入到C源文件中。</p>
+<p>而库文件是已经编译好的二进制文件，因为没有<code>main()</code>这个入口函数，所以没有办法直接启动，但是里面是实实在在的二进制代码。那么它有什么用呢？</p>
+<p>以前编译一个程序，就是输入C源文件，然后输出一个可执行的二进制文件。但是当C源文件的代码越写越多，越来越复杂，编译的时间特别长。这样一来，只要是修改了代码，就需要整体的重新编译一遍，消耗很多不必要的时间。于是人们为了避免反复的编译未改动的代码，就产生了库文件。</p>
+<p>把一个完整的C文件分开，分成不同功能的文件，然后只要把这些文件编译成一个二进制的软件包，最后把它们拼在一起，就是库文件。这样一来基本不会被改动的代码就不需要再一次编译了，只需要编译改动的文件就可以啦。</p>
+<p>库文件出现了，有的人灵光一闪，我可以只发布库文件啊，源代码还是在我这里，这样不就可以卖钱了吗？真是一个伟大的想法！但是光卖库文件不行啊，都被编译成二进制文件了，里面有哪些方法，有哪些常量别人没法知道啊！没关系我可以写文档啊。但是编译器不知道，而且也不懂读文档怎么办？好办，不是有头文件么，反正头文件只有声明，没有实现代码，就用头文件当编译器的文档好了。就这样人类读文档，编译器读头文件，然后有人卖库文件，一条产业链就此形成。</p>
+<p>后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，在自己写的库中，所有的函数名、常量名、解构名都带上自己的姓名做前缀名，这样就算方法名是一样的，但是有不同的前缀名，这样就能区分到底该链接哪个方法了。后来又来一个聪明人，觉得你们这样在每个方法、常量、结构体中都写上你们的姓名累不累啊，这样，我给你们设计一套规则，只要在库的最前面写上你们的姓名不就行了么，用的时候编译器先去找找你们的姓名，然后再你们的姓名下面找方法，这不就多快好省了么。那这样吧我们就给这个姓名取名字<code>namespace</code>吧。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cutexiaoxin.gif">
+      <meta itemprop="name" content="PiggyHero">
+      <meta itemprop="description" content="不学习咋整啊！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PiggyHero Wiki">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/" class="post-title-link" itemprop="url">依赖包是什么</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-21 14:32:36 / 修改时间：14:44:01" itemprop="dateCreated datePublished" datetime="2021-10-21T14:32:36+08:00">2021-10-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">编程实践</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>我们在Ubuntu中常说的依赖是什么呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/URDF%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -792,156 +942,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cutexiaoxin.gif">
-      <meta itemprop="name" content="PiggyHero">
-      <meta itemprop="description" content="不学习咋整啊！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PiggyHero Wiki">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/" class="post-title-link" itemprop="url">极大似然估计和后验估计</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-18 06:20:27 / 修改时间：23:11:36" itemprop="dateCreated datePublished" datetime="2021-10-18T06:20:27+08:00">2021-10-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">数学基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>极大似然估计和后验估计。<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cutexiaoxin.gif">
-      <meta itemprop="name" content="PiggyHero">
-      <meta itemprop="description" content="不学习咋整啊！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PiggyHero Wiki">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/10/18/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">线性代数可视化学习笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-10-18 06:11:03 / 修改时间：23:12:07" itemprop="dateCreated datePublished" datetime="2021-10-18T06:11:03+08:00">2021-10-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">数学基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>3Blue1Brown 线代课程学习笔记，受益匪浅。<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/18/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1013,20 +1013,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
