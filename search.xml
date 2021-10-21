@@ -2293,7 +2293,7 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
 </ul>
 ]]></content>
       <categories>
-        <category>编程实践</category>
+        <category>软件实践</category>
       </categories>
       <tags>
         <tag>ROS</tag>
