@@ -2659,7 +2659,7 @@ r_{j} \\
   <entry>
     <title>头文件,库文件,命名空间的关系</title>
     <url>/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
-    <content><![CDATA[<p>头文件是一个文本文件。里面包括了变量声明，数据结构定义，库文件中函数的使用方法和接口(函数具体的实现都在库文件中)。<br>库文件是二进制文件。<br>命名空间是为了避免不同库中有命名相同的函数，相当于给这些函数加上了姓氏。</p>
+    <content><![CDATA[<p>头文件是一个文本文件。里面包括了变量声明，数据结构定义，库文件中函数的使用方法和接口(函数具体的实现都在库文件中)。库文件是二进制文件。命名空间是为了避免不同库中有命名相同的函数，相当于给这些函数加上了姓氏。</p>
 <span id="more"></span>
 <p>以C为例，最早的时候，只有一个C文件，然后需要编译为可执行的二进制文件。但是后来发现，实现复杂功能的时候，代码行数太多了，于是便把这个文件分割一下，分别来看。</p>
 <p>于是，就把方法(函数)和声明单独放在同一个文件中，然后把这个文件加进来，放在头部，这样就可以在C文件中随意的摆放函数了，整理起来比较方便。久而久之，这个文件都是通常放在C文件的头部，因此就有了头文件的名字。头文件就是把一些常量的定义、数据结构的定义、函数的功能实现啥的放在里面，本质上就是一个文本文件，和写在C文件里是一样的，并没有什么特别的。<code>#include</code>进来的头文件都是原封不动的在编译阶段直接插入到C源文件中。</p>
@@ -4201,6 +4201,86 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055751.png" alt="image-20211007011943519"></p>
 <h2 id="5-Gazebo"><a href="#5-Gazebo" class="headerlink" title="5.Gazebo"></a>5.Gazebo</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055810.png" alt="image-20211007012012849"></p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055801.png" alt="image-20211007012025774"></p>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ROS开发环境搭建</title>
+    <url>/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
+<h1 id="一、文件系统介绍"><a href="#一、文件系统介绍" class="headerlink" title="一、文件系统介绍"></a>一、文件系统介绍</h1><p>首先介绍一下ROS中的文件系统。<br>ROS文件系统指的是在硬盘上，ROS源码的组织形式。大致结构如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png" alt="image-20211021164223501"></p>
+<p>Workspace：为自定义的工作空间。</p>
+<ul>
+<li>build：编译空间，放置编译过程中产生的文件。（我们可以不用管）</li>
+<li>devel：开发空间，用于存放编译后生成的目标文件，包括头文件、动态或静态链接库、可执行文件。</li>
+<li>src：存放源码。各个功能包的源码文件就在该目录下。<ul>
+<li>CMakeLists.txt：存储编译的基本配置。</li>
+<li>Package：功能包，包含多个节点、库与配置文件源码。<ul>
+<li>CMakeLists.txt：配置编译规则(与上层CMakeLists不同的是，此处仅配置该功能包下的编译规则)。</li>
+<li>package.xml：包信息，比如：包名、版本、作者、依赖项等。</li>
+<li>scripts：存储python源文件。</li>
+<li>src：存储C++源文件。</li>
+<li>include：头文件</li>
+<li>msg：存储话题消息通信格式文件。</li>
+<li>srv：存储服务通信格式文件。</li>
+<li>launch：存储launch文件。</li>
+<li>config：存储配置文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>关于文件系统的相关命令</strong></p>
+<h2 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h2><p><code>catkin_create_pkg 自定义包名 依赖包</code>     创建新的ROS功能包</p>
+<p><code>sudo apt install xxx</code>       安装 ROS功能包</p>
+<h2 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h2><p><code>sudo apt purge xxx</code>       删除某个功能包</p>
+<h2 id="3-查"><a href="#3-查" class="headerlink" title="3.查"></a>3.查</h2><p><code>rospack list</code>     列出所有功能包</p>
+<p><code>rospack find 包名</code>      查找某个功能包是否存在，如果存在返回安装路径</p>
+<p><code>roscd 包名</code>      进入某个功能包</p>
+<p><code>rosls 包名</code>        列出某个包下的文件</p>
+<p><code>apt search xxx</code>    搜索某个功能包</p>
+<h2 id="4-改"><a href="#4-改" class="headerlink" title="4.改"></a>4.改</h2><p><code>rosed 包名 文件名</code>        修改功能包文件</p>
+<p>需要安装 vim</p>
+<p><strong>比如:</strong><code>rosed turtlesim Color.msg</code></p>
+<h1 id="二、ROS开发环境搭建"><a href="#二、ROS开发环境搭建" class="headerlink" title="二、ROS开发环境搭建"></a>二、ROS开发环境搭建</h1><p>在介绍完了文件系统后，我们就可以搭建开发环境了。开发环境就是我们写代码然后又能运行所需要的环境。如果想运行我们写的代码，大致分为三个阶段。分别为准备阶段，编写阶段，编译阶段。</p>
+<p>在前期的准备阶段，我们要创建一个写代码的地方。</p>
+<h2 id="1-创建工作空间"><a href="#1-创建工作空间" class="headerlink" title="1.创建工作空间"></a>1.创建工作空间</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p 自定义工作空间名/src</span><br><span class="line"><span class="built_in">cd</span> 自定义工作空间名</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>上述命令，首先会创建一个工作空间以及一个<code>src</code>子目录，然后再进入工作空间调用 catkin_make命令编译。</p>
+<p>==注意：如果想要<code>catkin_make</code>，就必须要有<code>src</code>目录。==</p>
+<h2 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h2><p>环境变量就是让系统知道当前工作空间下的功能包和launch文件的名字，这方便我们在终端可以直接运行这些命令。</p>
+<p>首先在创建完工作空间后，工作空间目录下的<code>devel</code>中，有一个<code>setup.bash</code>的文件。</p>
+<p>然后我们来到linux的用户文件夹下，使用快捷键<code>Ctrl+H</code>显示出隐藏文件。</p>
+<p>找到<code>.bashrc</code>文件，打开。</p>
+<p>在后面添上一句：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span>	setup.bash的路径</span><br></pre></td></tr></table></figure>
+<p>这样就配置好了环境变量，如果不配置，那么每次想要在终端运行该空间中的功能包节点时，就需要source 该文件路径。</p>
+<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3.创建功能包"></a>3.创建功能包</h2><p>==进入工作空间中的<code>src</code>目录==。输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg 自定义的功能包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
+<p>这样就创建了功能包，产生了功能包目录，后面的<code>roscpp</code>等是该功能包的依赖。</p>
+<h2 id="4-编写源文件"><a href="#4-编写源文件" class="headerlink" title="4.编写源文件"></a>4.编写源文件</h2><p>在功能包目录下建立<code>src</code>目录，在这里我们就可以创建要编写的C++源文件了。</p>
+<p>在源文件中，要包括以下几个部分：</p>
+<p>(1)头文件</p>
+<p>(2)节点初始化</p>
+<p>​    在<code>main</code>函数中，使用<code>ros::init(argc,argv,&quot;节点名&quot;)</code>函数初始化节点。这里初始化节点的名字就是运行节点后节点    的名字，但是名字也可在 launch文件中重映射。</p>
+<p>(3)输出信息</p>
+<p>​    可以用<code>ROS_INFO(&quot;输出信息&quot;)</code>函数输出节点运行后的信息，来验证节点是否启动成功。</p>
+<p>C++源文件代码事例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-编写配置文件"><a href="#5-编写配置文件" class="headerlink" title="5.编写配置文件"></a>5.编写配置文件</h2><p>我们写完代码后，如果想要运行该程序，还要进行编译，编译就要按照一定的规则，所以我们要编写编译的规则文件，也就是配置文件<code>CMakeLists.txt</code></p>
+<p>主要改的地方有两个：</p>
+<p>(1)添加生成可执行文件。</p>
+<p>(2)链接库文件。</p>
+<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6.编译"></a>6.编译</h2><p>配置好<code>CMakeLists.txt</code>文件后，我们便可以进行编译了。</p>
+<p>回到工作空间目录，运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>生成了可执行文件，可执行文件存放在工作空间下的<code>devel</code>目录。</p>
+<p>接下来要运行某个功能包的节点，就直接可以使用<code>rosrun</code>命令了。</p>
 ]]></content>
       <categories>
         <category>软件实践</category>

@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="单应矩阵学习。">
+  <meta name="description" content="本文介绍如何创建ROS的工作空间，编程的开发环境。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单应矩阵">
-<meta property="og:url" content="http://example.com/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/index.html">
+<meta property="og:title" content="ROS开发环境搭建">
+<meta property="og:url" content="http://example.com/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="单应矩阵学习。">
+<meta property="og:description" content="本文介绍如何创建ROS的工作空间，编程的开发环境。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-10-17T23:22:48.000Z">
-<meta property="article:modified_time" content="2021-10-18T09:19:25.839Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png">
+<meta property="article:published_time" content="2021-10-21T15:36:38.000Z">
+<meta property="article:modified_time" content="2021-10-21T15:38:38.736Z">
 <meta property="article:author" content="PiggyHero">
-<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="ROS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png">
 
-<link rel="canonical" href="http://example.com/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/">
+<link rel="canonical" href="http://example.com/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
 
 <script id="page-configurations">
@@ -46,7 +48,7 @@
   };
 </script>
 
-  <title>单应矩阵 | PiggyHero Wiki</title>
+  <title>ROS开发环境搭建 | PiggyHero Wiki</title>
   
 
 
@@ -195,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cutexiaoxin.gif">
@@ -208,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          单应矩阵
+          ROS开发环境搭建
         </h1>
 
         <div class="post-meta">
@@ -219,7 +221,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-10-18 07:22:48 / 修改时间：17:19:25" itemprop="dateCreated datePublished" datetime="2021-10-18T07:22:48+08:00">2021-10-18</time>
+              <time title="创建时间：2021-10-21 23:36:38 / 修改时间：23:38:38" itemprop="dateCreated datePublished" datetime="2021-10-21T23:36:38+08:00">2021-10-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +229,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SLAM%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">SLAM学习</span></a>
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">软件实践</span></a>
                 </span>
             </span>
 
@@ -249,7 +251,75 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>单应矩阵学习。<br><span id="more"></span></p>
+        <p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
+<h1 id="一、文件系统介绍"><a href="#一、文件系统介绍" class="headerlink" title="一、文件系统介绍"></a>一、文件系统介绍</h1><p>首先介绍一下ROS中的文件系统。<br>ROS文件系统指的是在硬盘上，ROS源码的组织形式。大致结构如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png" alt="image-20211021164223501"></p>
+<p>Workspace：为自定义的工作空间。</p>
+<ul>
+<li>build：编译空间，放置编译过程中产生的文件。（我们可以不用管）</li>
+<li>devel：开发空间，用于存放编译后生成的目标文件，包括头文件、动态或静态链接库、可执行文件。</li>
+<li>src：存放源码。各个功能包的源码文件就在该目录下。<ul>
+<li>CMakeLists.txt：存储编译的基本配置。</li>
+<li>Package：功能包，包含多个节点、库与配置文件源码。<ul>
+<li>CMakeLists.txt：配置编译规则(与上层CMakeLists不同的是，此处仅配置该功能包下的编译规则)。</li>
+<li>package.xml：包信息，比如：包名、版本、作者、依赖项等。</li>
+<li>scripts：存储python源文件。</li>
+<li>src：存储C++源文件。</li>
+<li>include：头文件</li>
+<li>msg：存储话题消息通信格式文件。</li>
+<li>srv：存储服务通信格式文件。</li>
+<li>launch：存储launch文件。</li>
+<li>config：存储配置文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>关于文件系统的相关命令</strong></p>
+<h2 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h2><p><code>catkin_create_pkg 自定义包名 依赖包</code>     创建新的ROS功能包</p>
+<p><code>sudo apt install xxx</code>       安装 ROS功能包</p>
+<h2 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h2><p><code>sudo apt purge xxx</code>       删除某个功能包</p>
+<h2 id="3-查"><a href="#3-查" class="headerlink" title="3.查"></a>3.查</h2><p><code>rospack list</code>     列出所有功能包</p>
+<p><code>rospack find 包名</code>      查找某个功能包是否存在，如果存在返回安装路径</p>
+<p><code>roscd 包名</code>      进入某个功能包</p>
+<p><code>rosls 包名</code>        列出某个包下的文件</p>
+<p><code>apt search xxx</code>    搜索某个功能包</p>
+<h2 id="4-改"><a href="#4-改" class="headerlink" title="4.改"></a>4.改</h2><p><code>rosed 包名 文件名</code>        修改功能包文件</p>
+<p>需要安装 vim</p>
+<p><strong>比如:</strong><code>rosed turtlesim Color.msg</code></p>
+<h1 id="二、ROS开发环境搭建"><a href="#二、ROS开发环境搭建" class="headerlink" title="二、ROS开发环境搭建"></a>二、ROS开发环境搭建</h1><p>在介绍完了文件系统后，我们就可以搭建开发环境了。开发环境就是我们写代码然后又能运行所需要的环境。如果想运行我们写的代码，大致分为三个阶段。分别为准备阶段，编写阶段，编译阶段。</p>
+<p>在前期的准备阶段，我们要创建一个写代码的地方。</p>
+<h2 id="1-创建工作空间"><a href="#1-创建工作空间" class="headerlink" title="1.创建工作空间"></a>1.创建工作空间</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p 自定义工作空间名/src</span><br><span class="line"><span class="built_in">cd</span> 自定义工作空间名</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>上述命令，首先会创建一个工作空间以及一个<code>src</code>子目录，然后再进入工作空间调用 catkin_make命令编译。</p>
+<p>==注意：如果想要<code>catkin_make</code>，就必须要有<code>src</code>目录。==</p>
+<h2 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h2><p>环境变量就是让系统知道当前工作空间下的功能包和launch文件的名字，这方便我们在终端可以直接运行这些命令。</p>
+<p>首先在创建完工作空间后，工作空间目录下的<code>devel</code>中，有一个<code>setup.bash</code>的文件。</p>
+<p>然后我们来到linux的用户文件夹下，使用快捷键<code>Ctrl+H</code>显示出隐藏文件。</p>
+<p>找到<code>.bashrc</code>文件，打开。</p>
+<p>在后面添上一句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span>	setup.bash的路径</span><br></pre></td></tr></table></figure>
+<p>这样就配置好了环境变量，如果不配置，那么每次想要在终端运行该空间中的功能包节点时，就需要source 该文件路径。</p>
+<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3.创建功能包"></a>3.创建功能包</h2><p>==进入工作空间中的<code>src</code>目录==。输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_create_pkg 自定义的功能包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
+<p>这样就创建了功能包，产生了功能包目录，后面的<code>roscpp</code>等是该功能包的依赖。</p>
+<h2 id="4-编写源文件"><a href="#4-编写源文件" class="headerlink" title="4.编写源文件"></a>4.编写源文件</h2><p>在功能包目录下建立<code>src</code>目录，在这里我们就可以创建要编写的C++源文件了。</p>
+<p>在源文件中，要包括以下几个部分：</p>
+<p>(1)头文件</p>
+<p>(2)节点初始化</p>
+<p>​    在<code>main</code>函数中，使用<code>ros::init(argc,argv,&quot;节点名&quot;)</code>函数初始化节点。这里初始化节点的名字就是运行节点后节点    的名字，但是名字也可在 launch文件中重映射。</p>
+<p>(3)输出信息</p>
+<p>​    可以用<code>ROS_INFO(&quot;输出信息&quot;)</code>函数输出节点运行后的信息，来验证节点是否启动成功。</p>
+<p>C++源文件代码事例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-编写配置文件"><a href="#5-编写配置文件" class="headerlink" title="5.编写配置文件"></a>5.编写配置文件</h2><p>我们写完代码后，如果想要运行该程序，还要进行编译，编译就要按照一定的规则，所以我们要编写编译的规则文件，也就是配置文件<code>CMakeLists.txt</code></p>
+<p>主要改的地方有两个：</p>
+<p>(1)添加生成可执行文件。</p>
+<p>(2)链接库文件。</p>
+<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6.编译"></a>6.编译</h2><p>配置好<code>CMakeLists.txt</code>文件后，我们便可以进行编译了。</p>
+<p>回到工作空间目录，运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>生成了可执行文件，可执行文件存放在工作空间下的<code>devel</code>目录。</p>
+<p>接下来要运行某个功能包的节点，就直接可以使用<code>rosrun</code>命令了。</p>
 
     </div>
 
@@ -259,7 +329,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/ROS/" rel="tag"># ROS</a>
           </div>
 
         
@@ -268,13 +338,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/" rel="prev" title="视觉SLAM框架">
-      <i class="fa fa-chevron-left"></i> 视觉SLAM框架
+    <a href="/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/" rel="prev" title="头文件,库文件,命名空间的关系">
+      <i class="fa fa-chevron-left"></i> 头文件,库文件,命名空间的关系
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/10/18/URDF%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8B/" rel="next" title="使用URDF创建机器人模型">
-      使用URDF创建机器人模型 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -333,6 +400,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D"><span class="nav-text">一、文件系统介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%A2%9E"><span class="nav-text">1.增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%A0"><span class="nav-text">2.删</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9F%A5"><span class="nav-text">3.查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%94%B9"><span class="nav-text">4.改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-text">二、ROS开发环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">1.创建工作空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">2.配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%88%9B%E5%BB%BA%E5%8A%9F%E8%83%BD%E5%8C%85"><span class="nav-text">3.创建功能包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BC%96%E5%86%99%E6%BA%90%E6%96%87%E4%BB%B6"><span class="nav-text">4.编写源文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">5.编写配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%BC%96%E8%AF%91"><span class="nav-text">6.编译</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
