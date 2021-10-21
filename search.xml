@@ -140,149 +140,15 @@
       </tags>
   </entry>
   <entry>
-    <title>ROS开发环境搭建</title>
-    <url>/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
-<h1 id="一、文件系统介绍"><a href="#一、文件系统介绍" class="headerlink" title="一、文件系统介绍"></a>一、文件系统介绍</h1><p>首先介绍一下ROS中的文件系统。<br>ROS文件系统指的是在硬盘上，ROS源码的组织形式。大致结构如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png" alt="image-20211021164223501"></p>
-<p>Workspace：为自定义的工作空间。</p>
-<ul>
-<li>build：编译空间，放置编译过程中产生的文件。（我们可以不用管）</li>
-<li>devel：开发空间，用于存放编译后生成的目标文件，包括头文件、动态或静态链接库、可执行文件。</li>
-<li>src：存放源码。各个功能包的源码文件就在该目录下。<ul>
-<li>CMakeLists.txt：存储编译的基本配置。</li>
-<li>Package：功能包，包含多个节点、库与配置文件源码。<ul>
-<li>CMakeLists.txt：配置编译规则(与上层CMakeLists不同的是，此处仅配置该功能包下的编译规则)。</li>
-<li>package.xml：包信息，比如：包名、版本、作者、依赖项等。</li>
-<li>scripts：存储python源文件。</li>
-<li>src：存储C++源文件。</li>
-<li>include：头文件</li>
-<li>msg：存储话题消息通信格式文件。</li>
-<li>srv：存储服务通信格式文件。</li>
-<li>launch：存储launch文件。</li>
-<li>config：存储配置文件。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>关于文件系统的相关命令</strong></p>
-<h2 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h2><p><code>catkin_create_pkg 自定义包名 依赖包</code>     创建新的ROS功能包</p>
-<p><code>sudo apt install xxx</code>       安装 ROS功能包</p>
-<h2 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h2><p><code>sudo apt purge xxx</code>       删除某个功能包</p>
-<h2 id="3-查"><a href="#3-查" class="headerlink" title="3.查"></a>3.查</h2><p><code>rospack list</code>     列出所有功能包</p>
-<p><code>rospack find 包名</code>      查找某个功能包是否存在，如果存在返回安装路径</p>
-<p><code>roscd 包名</code>      进入某个功能包</p>
-<p><code>rosls 包名</code>        列出某个包下的文件</p>
-<p><code>apt search xxx</code>    搜索某个功能包</p>
-<h2 id="4-改"><a href="#4-改" class="headerlink" title="4.改"></a>4.改</h2><p><code>rosed 包名 文件名</code>        修改功能包文件</p>
-<p>需要安装 vim</p>
-<p><strong>比如:</strong><code>rosed turtlesim Color.msg</code></p>
-<h1 id="二、ROS开发环境搭建"><a href="#二、ROS开发环境搭建" class="headerlink" title="二、ROS开发环境搭建"></a>二、ROS开发环境搭建</h1><p>在介绍完了文件系统后，我们就可以搭建开发环境了。开发环境就是我们写代码然后又能运行所需要的环境。如果想运行我们写的代码，大致分为三个阶段。分别为准备阶段，编写阶段，编译阶段。</p>
-<p>在前期的准备阶段，我们要创建一个写代码的地方。</p>
-<h2 id="1-创建工作空间"><a href="#1-创建工作空间" class="headerlink" title="1.创建工作空间"></a>1.创建工作空间</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p 自定义工作空间名/src</span><br><span class="line"><span class="built_in">cd</span> 自定义工作空间名</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
-<p>上述命令，首先会创建一个工作空间以及一个<code>src</code>子目录，然后再进入工作空间调用 catkin_make命令编译。</p>
-<p>==注意：如果想要<code>catkin_make</code>，就必须要有<code>src</code>目录。==</p>
-<h2 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h2><p>环境变量就是让系统知道当前工作空间下的功能包和launch文件的名字，这方便我们在终端可以直接运行这些命令。</p>
-<p>首先在创建完工作空间后，工作空间目录下的<code>devel</code>中，有一个<code>setup.bash</code>的文件。</p>
-<p>然后我们来到linux的用户文件夹下，使用快捷键<code>Ctrl+H</code>显示出隐藏文件。</p>
-<p>找到<code>.bashrc</code>文件，打开。</p>
-<p>在后面添上一句：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span>	setup.bash的路径</span><br></pre></td></tr></table></figure>
-<p>这样就配置好了环境变量，如果不配置，那么每次想要在终端运行该空间中的功能包节点时，就需要source 该文件路径。</p>
-<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3.创建功能包"></a>3.创建功能包</h2><p>==进入工作空间中的<code>src</code>目录==。输入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg 自定义的功能包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
-<p>这样就创建了功能包，产生了功能包目录，后面的<code>roscpp</code>等是该功能包的依赖。</p>
-<h2 id="4-编写源文件"><a href="#4-编写源文件" class="headerlink" title="4.编写源文件"></a>4.编写源文件</h2><p>在功能包目录下建立<code>src</code>目录，在这里我们就可以创建要编写的C++源文件了。</p>
-<p>在源文件中，要包括以下几个部分：</p>
-<p>(1)头文件</p>
-<p>(2)节点初始化</p>
-<p>​    在<code>main</code>函数中，使用<code>ros::init(argc,argv,&quot;节点名&quot;)</code>函数初始化节点。这里初始化节点的名字就是运行节点后节点    的名字，但是名字也可在 launch文件中重映射。</p>
-<p>(3)输出信息</p>
-<p>​    可以用<code>ROS_INFO(&quot;输出信息&quot;)</code>函数输出节点运行后的信息，来验证节点是否启动成功。</p>
-<p>C++源文件代码事例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="5-编写配置文件"><a href="#5-编写配置文件" class="headerlink" title="5.编写配置文件"></a>5.编写配置文件</h2><p>我们写完代码后，如果想要运行该程序，还要进行编译，编译就要按照一定的规则，所以我们要编写编译的规则文件，也就是配置文件<code>CMakeLists.txt</code></p>
-<p>主要改的地方有两个：</p>
-<p>(1)添加生成可执行文件。</p>
-<p>(2)链接库文件。</p>
-<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6.编译"></a>6.编译</h2><p>配置好<code>CMakeLists.txt</code>文件后，我们便可以进行编译了。</p>
-<p>回到工作空间目录，运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
-<p>生成了可执行文件，可执行文件存放在工作空间下的<code>devel</code>目录。</p>
-<p>接下来要运行某个功能包的节点，就直接可以使用<code>rosrun</code>命令了。</p>
+    <title>MacOS无法抹掉硬盘问题解决</title>
+    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
 ]]></content>
       <categories>
-        <category>软件实践</category>
+        <category>问题解决</category>
       </categories>
       <tags>
-        <tag>ROS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SLAM的数学描述</title>
-    <url>/2021/10/18/SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
-    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
-<hr>
-<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
-<ol>
-<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
-<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
-</ol>
-<hr>
-<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
-<script type="math/tex; mode=display">
-\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
-<p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
-<script type="math/tex; mode=display">
-\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
-<hr>
-<p>以二维运动为例：</p>
-<p>如图所示</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023849.png" style="zoom:60%;" /></p>
-<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\vec{x}_{k}=\left[x_{1}, x_{2}, \theta\right]_{k}^{\top} \\
-&\vec{u}_{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]_{k}^{\top}
-\end{aligned}</script><p>运动方程为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k}=\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k-1}+\left[\begin{array}{c}
-\Delta x_{1} \\
-\Delta x_{2} \\
-\Delta \theta
-\end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023854.png" alt="img" style="zoom:60%;" /></p>
-<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-r_{j} \\
-\varphi_{j}
-\end{array}\right]_k=\left[\begin{array}{c}
-\sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
-\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
-\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
-<blockquote>
-<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
-</blockquote>
-<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
-<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
-<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
-<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
-]]></content>
-      <categories>
-        <category>SLAM学习</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
+        <tag>Mac</tag>
       </tags>
   </entry>
   <entry>
@@ -586,6 +452,262 @@ r_{j} \\
       </tags>
   </entry>
   <entry>
+    <title>ROS开发环境搭建</title>
+    <url>/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
+<h1 id="一、文件系统介绍"><a href="#一、文件系统介绍" class="headerlink" title="一、文件系统介绍"></a>一、文件系统介绍</h1><p>首先介绍一下ROS中的文件系统。<br>ROS文件系统指的是在硬盘上，ROS源码的组织形式。大致结构如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png" alt="image-20211021164223501"></p>
+<p>Workspace：为自定义的工作空间。</p>
+<ul>
+<li>build：编译空间，放置编译过程中产生的文件。（我们可以不用管）</li>
+<li>devel：开发空间，用于存放编译后生成的目标文件，包括头文件、动态或静态链接库、可执行文件。</li>
+<li>src：存放源码。各个功能包的源码文件就在该目录下。<ul>
+<li>CMakeLists.txt：存储编译的基本配置。</li>
+<li>Package：功能包，包含多个节点、库与配置文件源码。<ul>
+<li>CMakeLists.txt：配置编译规则(与上层CMakeLists不同的是，此处仅配置该功能包下的编译规则)。</li>
+<li>package.xml：包信息，比如：包名、版本、作者、依赖项等。</li>
+<li>scripts：存储python源文件。</li>
+<li>src：存储C++源文件。</li>
+<li>include：头文件</li>
+<li>msg：存储话题消息通信格式文件。</li>
+<li>srv：存储服务通信格式文件。</li>
+<li>launch：存储launch文件。</li>
+<li>config：存储配置文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>关于文件系统的相关命令</strong></p>
+<h2 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h2><p><code>catkin_create_pkg 自定义包名 依赖包</code>     创建新的ROS功能包</p>
+<p><code>sudo apt install xxx</code>       安装 ROS功能包</p>
+<h2 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h2><p><code>sudo apt purge xxx</code>       删除某个功能包</p>
+<h2 id="3-查"><a href="#3-查" class="headerlink" title="3.查"></a>3.查</h2><p><code>rospack list</code>     列出所有功能包</p>
+<p><code>rospack find 包名</code>      查找某个功能包是否存在，如果存在返回安装路径</p>
+<p><code>roscd 包名</code>      进入某个功能包</p>
+<p><code>rosls 包名</code>        列出某个包下的文件</p>
+<p><code>apt search xxx</code>    搜索某个功能包</p>
+<h2 id="4-改"><a href="#4-改" class="headerlink" title="4.改"></a>4.改</h2><p><code>rosed 包名 文件名</code>        修改功能包文件</p>
+<p>需要安装 vim</p>
+<p><strong>比如:</strong><code>rosed turtlesim Color.msg</code></p>
+<h1 id="二、ROS开发环境搭建"><a href="#二、ROS开发环境搭建" class="headerlink" title="二、ROS开发环境搭建"></a>二、ROS开发环境搭建</h1><p>在介绍完了文件系统后，我们就可以搭建开发环境了。开发环境就是我们写代码然后又能运行所需要的环境。如果想运行我们写的代码，大致分为三个阶段。分别为准备阶段，编写阶段，编译阶段。</p>
+<p>在前期的准备阶段，我们要创建一个写代码的地方。</p>
+<h2 id="1-创建工作空间"><a href="#1-创建工作空间" class="headerlink" title="1.创建工作空间"></a>1.创建工作空间</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p 自定义工作空间名/src</span><br><span class="line"><span class="built_in">cd</span> 自定义工作空间名</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>上述命令，首先会创建一个工作空间以及一个<code>src</code>子目录，然后再进入工作空间调用 catkin_make命令编译。</p>
+<p>==注意：如果想要<code>catkin_make</code>，就必须要有<code>src</code>目录。==</p>
+<h2 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h2><p>环境变量就是让系统知道当前工作空间下的功能包和launch文件的名字，这方便我们在终端可以直接运行这些命令。</p>
+<p>首先在创建完工作空间后，工作空间目录下的<code>devel</code>中，有一个<code>setup.bash</code>的文件。</p>
+<p>然后我们来到linux的用户文件夹下，使用快捷键<code>Ctrl+H</code>显示出隐藏文件。</p>
+<p>找到<code>.bashrc</code>文件，打开。</p>
+<p>在后面添上一句：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span>	setup.bash的路径</span><br></pre></td></tr></table></figure>
+<p>这样就配置好了环境变量，如果不配置，那么每次想要在终端运行该空间中的功能包节点时，就需要source 该文件路径。</p>
+<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3.创建功能包"></a>3.创建功能包</h2><p>==进入工作空间中的<code>src</code>目录==。输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg 自定义的功能包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
+<p>这样就创建了功能包，产生了功能包目录，后面的<code>roscpp</code>等是该功能包的依赖。</p>
+<h2 id="4-编写源文件"><a href="#4-编写源文件" class="headerlink" title="4.编写源文件"></a>4.编写源文件</h2><p>在功能包目录下建立<code>src</code>目录，在这里我们就可以创建要编写的C++源文件了。</p>
+<p>在源文件中，要包括以下几个部分：</p>
+<p>(1)头文件</p>
+<p>(2)节点初始化</p>
+<p>​    在<code>main</code>函数中，使用<code>ros::init(argc,argv,&quot;节点名&quot;)</code>函数初始化节点。这里初始化节点的名字就是运行节点后节点    的名字，但是名字也可在 launch文件中重映射。</p>
+<p>(3)输出信息</p>
+<p>​    可以用<code>ROS_INFO(&quot;输出信息&quot;)</code>函数输出节点运行后的信息，来验证节点是否启动成功。</p>
+<p>C++源文件代码事例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-编写配置文件"><a href="#5-编写配置文件" class="headerlink" title="5.编写配置文件"></a>5.编写配置文件</h2><p>我们写完代码后，如果想要运行该程序，还要进行编译，编译就要按照一定的规则，所以我们要编写编译的规则文件，也就是配置文件<code>CMakeLists.txt</code></p>
+<p>主要改的地方有两个：</p>
+<p>(1)添加生成可执行文件。</p>
+<p>(2)链接库文件。</p>
+<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6.编译"></a>6.编译</h2><p>配置好<code>CMakeLists.txt</code>文件后，我们便可以进行编译了。</p>
+<p>回到工作空间目录，运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>生成了可执行文件，可执行文件存放在工作空间下的<code>devel</code>目录。</p>
+<p>接下来要运行某个功能包的节点，就直接可以使用<code>rosrun</code>命令了。</p>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SLAM的数学描述</title>
+    <url>/2021/10/18/SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
+    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
+<hr>
+<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
+<ol>
+<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
+<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
+</ol>
+<hr>
+<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
+<script type="math/tex; mode=display">
+\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
+<p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
+<script type="math/tex; mode=display">
+\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
+<hr>
+<p>以二维运动为例：</p>
+<p>如图所示</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023849.png" style="zoom:60%;" /></p>
+<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\vec{x}_{k}=\left[x_{1}, x_{2}, \theta\right]_{k}^{\top} \\
+&\vec{u}_{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]_{k}^{\top}
+\end{aligned}</script><p>运动方程为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x_{1} \\
+x_{2} \\
+\theta
+\end{array}\right]_{k}=\left[\begin{array}{l}
+x_{1} \\
+x_{2} \\
+\theta
+\end{array}\right]_{k-1}+\left[\begin{array}{c}
+\Delta x_{1} \\
+\Delta x_{2} \\
+\Delta \theta
+\end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023854.png" alt="img" style="zoom:60%;" /></p>
+<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+r_{j} \\
+\varphi_{j}
+\end{array}\right]_k=\left[\begin{array}{c}
+\sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
+\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
+\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
+<blockquote>
+<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
+</blockquote>
+<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
+<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
+<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
+<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
+]]></content>
+      <categories>
+        <category>SLAM学习</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用URDF创建机器人模型</title>
+    <url>/2021/10/18/URDF%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>编写urdf文件，创建机器人模型，可以在rviz中可视化或导入到gazebo中仿真。<br><span id="more"></span></p>
+<h1 id="一、介绍urdf"><a href="#一、介绍urdf" class="headerlink" title="一、介绍urdf"></a>一、介绍urdf</h1><p>urdf是一个xml文件，通过参数服务器读取URDF文件，可以建立机器人模型，并在rviz或gazebo中可视化机器人模型。xacro是可编程urdf文件，可以定义宏和变量来优化urdf文件的编写过程，然后在生成urdf文件。</p>
+<p>在仿真的过程中，我们会接触两个软件，一个是rviz，另一个是gazebo。</p>
+<p>rviz是一个可视化工具，它可以将ros中的数据可视化出来。</p>
+<p>gazebo是一个仿真工具，它可以建立真实的物理仿真环境，产生实验结果数据。</p>
+<p>内容包括：</p>
+<ul>
+<li>URDF文件编写</li>
+<li>使用xacro来编写URDF文件</li>
+<li>设置传感器</li>
+</ul>
+<h1 id="二、urdf文件编写与在rviz中可视化"><a href="#二、urdf文件编写与在rviz中可视化" class="headerlink" title="二、urdf文件编写与在rviz中可视化"></a>二、urdf文件编写与在rviz中可视化</h1><h2 id="1-创建功能包"><a href="#1-创建功能包" class="headerlink" title="1.创建功能包"></a>1.创建功能包</h2><p>创建功能包，功能包的依赖有urdf，xacro</p>
+<p>在功能包下建立<code>urdf文件夹</code>，和<code>launch文件夹</code> 。</p>
+<p>在urdf文件夹下建立<code>.urdf</code>文件。</p>
+<h2 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2.代码实现"></a>2.代码实现</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;car&quot;</span> &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;foot_print&quot;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">geometry</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- &lt;cylinder radius=&quot;1&quot; length=&quot;1&quot;/&gt;   --&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- &lt;box size=&quot;length width height&quot;/&gt; --&gt;</span></span><br><span class="line">           			<span class="tag">&lt;<span class="name">sphere</span> <span class="attr">radius</span>=<span class="string">&quot;0.01&quot;</span>/&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- &lt;mesh filename=&quot;package://mesh/xxx.stl&quot; --&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>       <span class="comment">&lt;!--set origin position--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;black&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">color</span> <span class="attr">rbga</span>=<span class="string">&quot;0 0 0 1&quot;</span>/&gt;</span>         <span class="comment">&lt;!--set color--&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;body&quot;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">geometry</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">cylinder</span> <span class="attr">radius</span>=<span class="string">&quot;1&quot;</span> <span class="attr">length</span>=<span class="string">&quot;1&quot;</span>/&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- &lt;box size=&quot;length width height&quot;/&gt; --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- &lt;sphere radius=&quot;r&quot;/&gt; --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- &lt;mesh filename=&quot;package://mesh/xxx.stl&quot; --&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>       <span class="comment">&lt;!--set origin position--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;black&quot;</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">color</span> <span class="attr">rbga</span>=<span class="string">&quot;0 0 0 1&quot;</span>/&gt;</span>         <span class="comment">&lt;!--set color--&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">joint</span> <span class="attr">name</span>=<span class="string">&quot;body2foot_print&quot;</span> <span class="attr">type</span>=<span class="string">&quot;fixed&quot;</span>&gt;</span>   <span class="comment">&lt;!--set joint name and type(such as : fixed continous ...)--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">parent</span> <span class="attr">link</span>=<span class="string">&quot;foot_print&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">child</span> <span class="attr">link</span>=<span class="string">&quot;body&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>    <span class="comment">&lt;!--set joint position--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">axis</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>            <span class="comment">&lt;!--set rotation axis--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">joint</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面代码在编写urdf时可以直接复制，然后修改。</p>
+<h2 id="3-编写launch文件"><a href="#3-编写launch文件" class="headerlink" title="3.编写launch文件"></a>3.编写launch文件</h2><p>在launch文件夹下新建一个.launch文件。</p>
+<p>我们需要启动rviz，并把urdf文件导入。rviz启动后可以自动载入解析urdf文件。</p>
+<p>在ros中，我们要把urdf文件的路径设置到参数服务器中，使用参数名为 <code>robot_description</code> 。</p>
+<p>代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--set parameters--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;robot_description&quot;</span>  <span class="attr">textfile</span>=<span class="string">&quot;$(find package)/urdf/xxx.urdf&quot;</span>/&gt;</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="comment">&lt;!--run rviz node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">type</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rviz&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">	    <span class="comment">&lt;!--run robot and joint state publish node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;robot_state_publisher&quot;</span> /&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;joint_state_publisher&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面还有两句话，是要启动机器人状态和关节状态发布节点。这样才能在rviz中正常显示出机器人。</p>
+<h2 id="4-其他补充"><a href="#4-其他补充" class="headerlink" title="4.其他补充"></a>4.其他补充</h2><h3 id="1-保存和调用rviz配置文件"><a href="#1-保存和调用rviz配置文件" class="headerlink" title="(1)保存和调用rviz配置文件"></a>(1)保存和调用rviz配置文件</h3><p>我们在rviz中，设置的一些配置选项，可以保存成.rviz文件，并保存在功能包下的<code>config</code>文件夹。</p>
+<p>在rviz中的工具栏<code>file</code>中，有<code>save config as</code> ，便可以保存配置信息。</p>
+<p>然后在3中的launch文件中，修改一下最后一行。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--run rviz node--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">type</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">args</span>=<span class="string">&quot;-d $(find package)/config/xxx.rviz/&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-检查urdf文件"><a href="#2-检查urdf文件" class="headerlink" title="(2)检查urdf文件"></a>(2)检查urdf文件</h3><p>在写完urdf文件后，我们并不知道写的对不对，因此可以用<code>check_urdf</code>个工具来进行检查。</p>
+<p>首先要进入urdf的文件目录。</p>
+<p>然后在终端输入<code>check_urdf xxx.urdf</code> 来进行检查。</p>
+<p>如果语法没有问题，终端就会显示root link和child link。</p>
+<h3 id="3-查看刚体结构信息"><a href="#3-查看刚体结构信息" class="headerlink" title="(3)查看刚体结构信息"></a>(3)查看刚体结构信息</h3><p>我们生成的是机器人模型，机器人中各部分的关系我们也可以用图像的方式进行查看。</p>
+<p>首先进入urdf文件所在目录。</p>
+<p>在终端输入<code>urdf_to_graphiz xxx.urdf</code>，然后就会在该目录下生成一个pdf文件，显示各刚体间的关系。</p>
+<h1 id="三、xacro文件编写"><a href="#三、xacro文件编写" class="headerlink" title="三、xacro文件编写"></a>三、xacro文件编写</h1><p>前面我们介绍了urdf文件的编写，但是有一个问题就是，每当编写一个link时，都要写一串代码，不能提高代码的复用率。所以，xacro文件就是一种可以编程的urdf文件，它可以定义宏（也就是函数）和变量，来编辑urdf，这样方便后面的参数修改和代码复用。</p>
+<h2 id="1-代码实现"><a href="#1-代码实现" class="headerlink" title="1.代码实现"></a>1.代码实现</h2><h3 id="1-包含xlmns空间"><a href="#1-包含xlmns空间" class="headerlink" title="(1)包含xlmns空间"></a>(1)包含xlmns空间</h3><p>具体的urdf格式和之前都相同，不同的是就是可以把urdf的代码进行封装和调用。</p>
+<p>这里要注意，使用xacro写urdf时，一定要加上<code>xmlns:xacro=&quot;http://wiki.ros.org/xacro&quot;</code></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;car&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span> </span><br><span class="line">		</span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-变量封装与调用"><a href="#2-变量封装与调用" class="headerlink" title="(2)变量封装与调用"></a>(2)变量封装与调用</h3><p>封装：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:property</span> <span class="attr">name</span>=<span class="string">&quot;Param_Name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;body&quot;</span>/&gt;</span>     </span><br></pre></td></tr></table></figure>
+<p>调用：在调用处，用花括号来使用</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;Param_Name&#125;&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-宏-函数-定义与调用"><a href="#3-宏-函数-定义与调用" class="headerlink" title="(3)宏(函数)定义与调用"></a>(3)宏(函数)定义与调用</h3><p>我们现在以生成刚体为例，首先要写清楚宏的名字，然后传入的变量名。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;creat_link&quot;</span> <span class="attr">params</span>=<span class="string">&quot;name  radius length color&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;name&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">gemometry</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">cylinder</span> <span class="attr">radius</span>=<span class="string">&quot;$&#123;radius&#125;&quot;</span> <span class="attr">length</span>=<span class="string">&quot;$&#123;length&#125;&quot;</span>/&gt;</span>                                    	</span><br><span class="line">         <span class="tag">&lt;/<span class="name">gemometry</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;$&#123;radius/2&#125; 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>调用的时候直接传入参数即可。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:creat_link</span> <span class="attr">name</span>=<span class="string">&quot;body&quot;</span> <span class="attr">radius</span>=<span class="string">&quot;1&quot;</span> <span class="attr">length</span>=<span class="string">&quot;1&quot;</span> <span class="attr">color</span>=<span class="string">&quot;black&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-头文件包含"><a href="#4-头文件包含" class="headerlink" title="(4)头文件包含"></a>(4)头文件包含</h3><p>一个xacro文件可以包含另一个xacro文件，因此我们可以分文件给机器人各个部分建模。</p>
+<p>包含头文件的相对路径为当前xacro文件所在的路径，也可以使用绝对路径。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:include</span> <span class="attr">filename</span>=<span class="string">&quot;xxx.xacro&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-xacro转换为urdf文件"><a href="#2-xacro转换为urdf文件" class="headerlink" title="2.xacro转换为urdf文件"></a>2.xacro转换为urdf文件</h2><p>可以通过ros中的节点将xacro文件转换成urdf文件。</p>
+<p>进入xacro所在目录，在终端中输入<code>rosrun xacro xacro xxx.xacro &gt; xxx.urdf</code></p>
+<h2 id="3-launch文件编写"><a href="#3-launch文件编写" class="headerlink" title="3.launch文件编写"></a>3.launch文件编写</h2><p>如2中所述，我们可以现将xacro文件转换成urdf文件，然后再将其导入参数服务器。</p>
+<p>还有一种方法是不生成中间的urdf文件，在launch文件中编写直接导入到参数服务器。</p>
+<p>代码如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span> = <span class="string">&quot;robot_description&quot;</span> <span class="attr">command</span> = <span class="string">&quot;$(find xacro)/xacro $(find package)/urdf/xxx.xacro&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>加载robot_description 时使用command属性，属性值是调用xacro功能包的xacro程序直接解析xacro文件。</p>
+<p>这样就可以在正常显示机器人了。</p>
+<h1 id="四、urdf集成到gazebo"><a href="#四、urdf集成到gazebo" class="headerlink" title="四、urdf集成到gazebo"></a>四、urdf集成到gazebo</h1><p>从urdf集成到gazebo与集成到rviz不同，因为rviz是可视化工具，所以不需要知道机器人各部分的物理属性，而到gazebo中，则需要将这些物理属性配置出来。</p>
+<p>主要的不同点有：</p>
+<ul>
+<li>在urdf编写时，还要加入<code>&lt;collision&gt;</code>和<code>&lt;inertial&gt;</code>两个标签。</li>
+<li>urdf的颜色属性，由gazebo来配置。</li>
+</ul>
+<p>在创建功能包的时候，我们添加的依赖有urdf,xacro,gazebo_ros,gazebo_ros_control,gazebo_plugins</p>
+<h2 id="1-urdf代码实现"><a href="#1-urdf代码实现" class="headerlink" title="1.urdf代码实现"></a>1.urdf代码实现</h2><h3 id="1-添加-lt-collision-gt-和-lt-inertial-gt"><a href="#1-添加-lt-collision-gt-和-lt-inertial-gt" class="headerlink" title="(1)添加&lt;collision&gt;和&lt;inertial&gt;"></a>(1)添加<code>&lt;collision&gt;</code>和<code>&lt;inertial&gt;</code></h3><p>第一个不同就是要添加<code>&lt;collision&gt;</code>和<code>&lt;inertial&gt;</code>两个标签，<code>&lt;collision&gt;</code>的子标签和<code>&lt;geometry&gt;</code>类似。而<code>&lt;inertial&gt;</code>标签是添加刚体的惯性属性。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;car&quot;</span> &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;foot_print&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">geometry</span>&gt;</span>                           </span><br><span class="line">        		<span class="tag">&lt;<span class="name">sphere</span> <span class="attr">radius</span>=<span class="string">&quot;0.01&quot;</span>/&gt;</span>                              </span><br><span class="line">        <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>       <span class="comment">&lt;!--set origin position--&gt;</span></span><br><span class="line">   		  <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;black&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">color</span> <span class="attr">rbga</span>=<span class="string">&quot;0 0 0 1&quot;</span>/&gt;</span>         <span class="comment">&lt;!--set color--&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line">                    </span><br><span class="line">		<span class="tag">&lt;<span class="name">collision</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">geometry</span>&gt;</span>                           </span><br><span class="line">        		<span class="tag">&lt;<span class="name">sphere</span> <span class="attr">radius</span>=<span class="string">&quot;0.01&quot;</span>/&gt;</span>                              </span><br><span class="line">        <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">collision</span>&gt;</span></span><br><span class="line">                    </span><br><span class="line">		<span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;1&quot;</span> <span class="attr">ixy</span>=<span class="string">&quot;0&quot;</span> <span class="attr">ixz</span>=<span class="string">&quot;0&quot;</span> <span class="attr">iyy</span>=<span class="string">&quot;1&quot;</span> <span class="attr">iyz</span>=<span class="string">&quot;0&quot;</span> <span class="attr">izz</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-计算惯性矩阵宏"><a href="#2-计算惯性矩阵宏" class="headerlink" title="(2)计算惯性矩阵宏"></a>(2)计算惯性矩阵宏</h3><p>在ros中有通过xacro定义的宏来计算。</p>
+<p>球体惯性矩阵</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Macro for inertia matrix --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;sphere_inertial_matrix&quot;</span> <span class="attr">params</span>=<span class="string">&quot;m r&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;m&#125;&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;$&#123;2*m*r*r/5&#125;&quot;</span> <span class="attr">ixy</span>=<span class="string">&quot;0&quot;</span> <span class="attr">ixz</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">iyy</span>=<span class="string">&quot;$&#123;2*m*r*r/5&#125;&quot;</span> <span class="attr">iyz</span>=<span class="string">&quot;0&quot;</span> </span></span><br><span class="line"><span class="tag">                <span class="attr">izz</span>=<span class="string">&quot;$&#123;2*m*r*r/5&#125;&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>圆柱惯性矩阵</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;cylinder_inertial_matrix&quot;</span> <span class="attr">params</span>=<span class="string">&quot;m r h&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;m&#125;&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;$&#123;m*(3*r*r+h*h)/12&#125;&quot;</span> <span class="attr">ixy</span> = <span class="string">&quot;0&quot;</span> <span class="attr">ixz</span> = <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">iyy</span>=<span class="string">&quot;$&#123;m*(3*r*r+h*h)/12&#125;&quot;</span> <span class="attr">iyz</span> = <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">izz</span>=<span class="string">&quot;$&#123;m*r*r/2&#125;&quot;</span> /&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>立方体惯性矩阵</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;Box_inertial_matrix&quot;</span> <span class="attr">params</span>=<span class="string">&quot;m l w h&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;m&#125;&quot;</span> /&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;$&#123;m*(h*h + l*l)/12&#125;&quot;</span> <span class="attr">ixy</span> = <span class="string">&quot;0&quot;</span> <span class="attr">ixz</span> = <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">iyy</span>=<span class="string">&quot;$&#123;m*(w*w + l*l)/12&#125;&quot;</span> <span class="attr">iyz</span>= <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">izz</span>=<span class="string">&quot;$&#123;m*(w*w + h*h)/12&#125;&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>需要注意的是，原则上，除了 base_footprint 外，机器人的每个刚体部分都需要设置惯性矩阵，且惯性矩阵必须经计算得出，如果随意定义刚体部分的惯性矩阵，那么可能会导致机器人在 Gazebo 中出现抖动，移动等现象。</p>
+<h3 id="3-添加颜色"><a href="#3-添加颜色" class="headerlink" title="(3)添加颜色"></a>(3)添加颜色</h3><p>如果要在gazebo中显示link的颜色，必须使用gazebo指定的标签。</p>
+<p>其中Gazebo的G必须大写，颜色首字母也必须大写。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;link_name&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">material</span>&gt;</span>Gazebo/Blue<span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-launch文件"><a href="#2-launch文件" class="headerlink" title="2.launch文件"></a>2.launch文件</h2><p>启动gazebo，我们调用gazebo功能包中的launch文件。</p>
+<p>在这里我们用include包含<code>empty_world.launch</code>文件，然后我们用参数导入我们需要的世界环境。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">file</span>=<span class="string">&quot;$(find gazebo_ros)/launch/empty_world.launch&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">arg</span> <span class="attr">name</span>=<span class="string">&quot;world_name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$(find package)/worlds/box_house.world&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后在gazebo中加载机器人模型</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;gazebo_ros&quot;</span> <span class="attr">type</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">name</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">args</span>=<span class="string">&quot;-urdf -model car -param robot_description&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这句话的意思是启动<code>gazebo_ros</code>中的<code>spawn_model</code>节点，然后加载参数服务器中的<code>robot_description</code>。</p>
+<p><code>-urdf</code>是说加载的是urdf文件 </p>
+<p><code>-model car</code>是把这个模型命名为car</p>
+<p><code>-param robot_description</code> 从参数robot_description 中载入模型。</p>
+<p>最终的launch文件为：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span> = <span class="string">&quot;robot_description&quot;</span> <span class="attr">command</span> = <span class="string">&quot;$(find xacro)/xacro $(find package)/urdf/xxx.xacro&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  	<span class="tag">&lt;<span class="name">include</span> <span class="attr">file</span>=<span class="string">&quot;$(find gazebo_ros)/launch/empty_world.launch&quot;</span>&gt;</span></span><br><span class="line">    				<span class="tag">&lt;<span class="name">arg</span> <span class="attr">name</span>=<span class="string">&quot;world_name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$(find package)/world/xx.world&quot;</span></span></span><br><span class="line"><span class="tag">    &lt;/<span class="attr">include</span>&gt;</span></span><br><span class="line">            </span><br><span class="line">    <span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;gazebo_ros&quot;</span> <span class="attr">type</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">name</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">args</span>=<span class="string">&quot;-urdf -model car  -param robot_description&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-配置传感器"><a href="#3-配置传感器" class="headerlink" title="3.配置传感器"></a>3.配置传感器</h2><p>gazebo作为仿真工具，有一些插件，在urdf文件编写的时候，可以将这些插件赋予机器人的各个部分。</p>
+<p>例如可以为轮子赋予驱动器，也就是电机。为我们建立的相机模型，赋予相机的功能。这些都需要gazebo提供的插件。</p>
+<h3 id="1-运动控制器"><a href="#1-运动控制器" class="headerlink" title="(1)运动控制器"></a>(1)运动控制器</h3><p>gazebo自带运动控制器，它可以为驱动器输入控制信号。</p>
+<p>首先，我们要设置驱动器位置，</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;joint_trans&quot;</span> <span class="attr">params</span>=<span class="string">&quot;joint_name&quot;</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!-- Transmission is important to link the joints and the controller --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">transmission</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;joint_name&#125;_trans&quot;</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">type</span>&gt;</span>transmission_interface/SimpleTransmission<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">joint</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;joint_name&#125;&quot;</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">hardwareInterface</span>&gt;</span>hardware_interface/VelocityJointInterface<span class="tag">&lt;/<span class="name">hardwareInterface</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">joint</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">actuator</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;joint_name&#125;_motor&quot;</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">hardwareInterface</span>&gt;</span>hardware_interface/VelocityJointInterface<span class="tag">&lt;/<span class="name">hardwareInterface</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">mechanicalReduction</span>&gt;</span>1<span class="tag">&lt;/<span class="name">mechanicalReduction</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">actuator</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">transmission</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">xacro:joint_trans</span> <span class="attr">joint_name</span>=<span class="string">&quot;wheel_front_left2body&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">xacro:joint_trans</span> <span class="attr">joint_name</span>=<span class="string">&quot;wheel_front_right2body&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这里我们输入放置驱动器部位的关节名称。</p>
+<p>驱动器建立好后，我们再配置控制器。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gazebo</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;differential_drive_controller&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_diff_drive.so&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">rosDebugLevel</span>&gt;</span>Debug<span class="tag">&lt;/<span class="name">rosDebugLevel</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">publishWheelTF</span>&gt;</span>true<span class="tag">&lt;/<span class="name">publishWheelTF</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">robotNamespace</span>&gt;</span>/<span class="tag">&lt;/<span class="name">robotNamespace</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">publishTf</span>&gt;</span>1<span class="tag">&lt;/<span class="name">publishTf</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">publishWheelJointState</span>&gt;</span>true<span class="tag">&lt;/<span class="name">publishWheelJointState</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>100.0<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">legacyMode</span>&gt;</span>true<span class="tag">&lt;/<span class="name">legacyMode</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">leftJoint</span>&gt;</span>wheel_front_left2body<span class="tag">&lt;/<span class="name">leftJoint</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">rightJoint</span>&gt;</span>wheel_front_right2body<span class="tag">&lt;/<span class="name">rightJoint</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelSeparation</span>&gt;</span>$&#123;body_width * 2&#125;<span class="tag">&lt;/<span class="name">wheelSeparation</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelDiameter</span>&gt;</span>$&#123;wheel_radius * 2&#125;<span class="tag">&lt;/<span class="name">wheelDiameter</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">broadcastTF</span>&gt;</span>1<span class="tag">&lt;/<span class="name">broadcastTF</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelTorque</span>&gt;</span>300<span class="tag">&lt;/<span class="name">wheelTorque</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelAcceleration</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">wheelAcceleration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">commandTopic</span>&gt;</span>cmd_vel<span class="tag">&lt;/<span class="name">commandTopic</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">odometryFrame</span>&gt;</span>odom<span class="tag">&lt;/<span class="name">odometryFrame</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">odometryTopic</span>&gt;</span>odom<span class="tag">&lt;/<span class="name">odometryTopic</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">robotBaseFrame</span>&gt;</span>foot_print<span class="tag">&lt;/<span class="name">robotBaseFrame</span>&gt;</span> </span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-相机"><a href="#2-相机" class="headerlink" title="(2)相机"></a>(2)相机</h3><p>在建立好相机刚体模型后，我们可以为这个刚体模型赋予相机的功能。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;camera&quot;</span>&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;camera&quot;</span> <span class="attr">name</span>=<span class="string">&quot;camera_node&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>30.0<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">      <span class="tag">&lt;<span class="name">camera</span> <span class="attr">name</span>=<span class="string">&quot;head&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">horizontal_fov</span>&gt;</span>1.3962634<span class="tag">&lt;/<span class="name">horizontal_fov</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">width</span>&gt;</span>1280<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">height</span>&gt;</span>720<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">format</span>&gt;</span>R8G8B8<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">clip</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">near</span>&gt;</span>0.02<span class="tag">&lt;/<span class="name">near</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">far</span>&gt;</span>300<span class="tag">&lt;/<span class="name">far</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">noise</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>gaussian<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">mean</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">mean</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">stddev</span>&gt;</span>0.007<span class="tag">&lt;/<span class="name">stddev</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">noise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">camera</span>&gt;</span></span><br><span class="line">      </span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;gazebo_camera&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_camera.so&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cameraName</span>&gt;</span>/camera<span class="tag">&lt;/<span class="name">cameraName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">imageTopicName</span>&gt;</span>image_raw<span class="tag">&lt;/<span class="name">imageTopicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cameraInfoTopicName</span>&gt;</span>camera_info<span class="tag">&lt;/<span class="name">cameraInfoTopicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>camera<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hackBaseline</span>&gt;</span>0.07<span class="tag">&lt;/<span class="name">hackBaseline</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK3</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionT1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionT1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionT2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionT2</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-雷达"><a href="#3-雷达" class="headerlink" title="(3)雷达"></a>(3)雷达</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;laser&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;ray&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rplidar&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">pose</span>&gt;</span>0 0 0 0 0 0<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">visualize</span>&gt;</span>true<span class="tag">&lt;/<span class="name">visualize</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>5.5<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ray</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scan</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">horizontal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">samples</span>&gt;</span>360<span class="tag">&lt;/<span class="name">samples</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">resolution</span>&gt;</span>1<span class="tag">&lt;/<span class="name">resolution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">min_angle</span>&gt;</span>-3<span class="tag">&lt;/<span class="name">min_angle</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">max_angle</span>&gt;</span>3<span class="tag">&lt;/<span class="name">max_angle</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">horizontal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">scan</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">range</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">min</span>&gt;</span>0.10<span class="tag">&lt;/<span class="name">min</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">max</span>&gt;</span>30.0<span class="tag">&lt;/<span class="name">max</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">resolution</span>&gt;</span>0.01<span class="tag">&lt;/<span class="name">resolution</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">range</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">noise</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>gaussian<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">mean</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">mean</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">stddev</span>&gt;</span>0.01<span class="tag">&lt;/<span class="name">stddev</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">noise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ray</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;gazebo_rplidar&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_laser.so&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">topicName</span>&gt;</span>/scan<span class="tag">&lt;/<span class="name">topicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>laser<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-深度相机"><a href="#4-深度相机" class="headerlink" title="(4)深度相机"></a>(4)深度相机</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;support&quot;</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;depth&quot;</span> <span class="attr">name</span>=<span class="string">&quot;camera&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">always_on</span>&gt;</span>true<span class="tag">&lt;/<span class="name">always_on</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>20.0<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">camera</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">horizontal_fov</span>&gt;</span>$&#123;60.0*PI/180.0&#125;<span class="tag">&lt;/<span class="name">horizontal_fov</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">format</span>&gt;</span>R8G8B8<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">width</span>&gt;</span>640<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">height</span>&gt;</span>480<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">clip</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">near</span>&gt;</span>0.05<span class="tag">&lt;/<span class="name">near</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">far</span>&gt;</span>8.0<span class="tag">&lt;/<span class="name">far</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">camera</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;kinect_camera_controller&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_openni_kinect.so&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraName</span>&gt;</span>camera<span class="tag">&lt;/<span class="name">cameraName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>10<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">imageTopicName</span>&gt;</span>rgb/image_raw<span class="tag">&lt;/<span class="name">imageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageTopicName</span>&gt;</span>depth/image_raw<span class="tag">&lt;/<span class="name">depthImageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudTopicName</span>&gt;</span>depth/points<span class="tag">&lt;/<span class="name">pointCloudTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraInfoTopicName</span>&gt;</span>rgb/camera_info<span class="tag">&lt;/<span class="name">cameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageCameraInfoTopicName</span>&gt;</span>depth/camera_info<span class="tag">&lt;/<span class="name">depthImageCameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>body<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">baseline</span>&gt;</span>0.1<span class="tag">&lt;/<span class="name">baseline</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k3</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k3</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudCutoff</span>&gt;</span>0.4<span class="tag">&lt;/<span class="name">pointCloudCutoff</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>软件实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Ubuntu的使用手册</title>
     <url>/2021/10/18/Ubuntu%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
     <content><![CDATA[<p>Unbuntu中常用的命令和使用规则。<br><span id="more"></span></p>
@@ -772,137 +894,34 @@ r_{j} \\
       </tags>
   </entry>
   <entry>
-    <title>使用URDF创建机器人模型</title>
-    <url>/2021/10/18/URDF%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<p>编写urdf文件，创建机器人模型，可以在rviz中可视化或导入到gazebo中仿真。<br><span id="more"></span></p>
-<h1 id="一、介绍urdf"><a href="#一、介绍urdf" class="headerlink" title="一、介绍urdf"></a>一、介绍urdf</h1><p>urdf是一个xml文件，通过参数服务器读取URDF文件，可以建立机器人模型，并在rviz或gazebo中可视化机器人模型。xacro是可编程urdf文件，可以定义宏和变量来优化urdf文件的编写过程，然后在生成urdf文件。</p>
-<p>在仿真的过程中，我们会接触两个软件，一个是rviz，另一个是gazebo。</p>
-<p>rviz是一个可视化工具，它可以将ros中的数据可视化出来。</p>
-<p>gazebo是一个仿真工具，它可以建立真实的物理仿真环境，产生实验结果数据。</p>
-<p>内容包括：</p>
+    <title>依赖包是什么</title>
+    <url>/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
+<span id="more"></span>
+<p>依赖包就是某个软件用到的库文件。</p>
+<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
+<p>不同体系用不同的方法解决依赖问题。</p>
+<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
 <ul>
-<li>URDF文件编写</li>
-<li>使用xacro来编写URDF文件</li>
-<li>设置传感器</li>
+<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
+<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
+<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
+<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
 </ul>
-<h1 id="二、urdf文件编写与在rviz中可视化"><a href="#二、urdf文件编写与在rviz中可视化" class="headerlink" title="二、urdf文件编写与在rviz中可视化"></a>二、urdf文件编写与在rviz中可视化</h1><h2 id="1-创建功能包"><a href="#1-创建功能包" class="headerlink" title="1.创建功能包"></a>1.创建功能包</h2><p>创建功能包，功能包的依赖有urdf，xacro</p>
-<p>在功能包下建立<code>urdf文件夹</code>，和<code>launch文件夹</code> 。</p>
-<p>在urdf文件夹下建立<code>.urdf</code>文件。</p>
-<h2 id="2-代码实现"><a href="#2-代码实现" class="headerlink" title="2.代码实现"></a>2.代码实现</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;car&quot;</span> &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;foot_print&quot;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">geometry</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- &lt;cylinder radius=&quot;1&quot; length=&quot;1&quot;/&gt;   --&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- &lt;box size=&quot;length width height&quot;/&gt; --&gt;</span></span><br><span class="line">           			<span class="tag">&lt;<span class="name">sphere</span> <span class="attr">radius</span>=<span class="string">&quot;0.01&quot;</span>/&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- &lt;mesh filename=&quot;package://mesh/xxx.stl&quot; --&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>       <span class="comment">&lt;!--set origin position--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;black&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">color</span> <span class="attr">rbga</span>=<span class="string">&quot;0 0 0 1&quot;</span>/&gt;</span>         <span class="comment">&lt;!--set color--&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;body&quot;</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">geometry</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">cylinder</span> <span class="attr">radius</span>=<span class="string">&quot;1&quot;</span> <span class="attr">length</span>=<span class="string">&quot;1&quot;</span>/&gt;</span>  </span><br><span class="line">            <span class="comment">&lt;!-- &lt;box size=&quot;length width height&quot;/&gt; --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- &lt;sphere radius=&quot;r&quot;/&gt; --&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- &lt;mesh filename=&quot;package://mesh/xxx.stl&quot; --&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>       <span class="comment">&lt;!--set origin position--&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;black&quot;</span>&gt;</span></span><br><span class="line">                 <span class="tag">&lt;<span class="name">color</span> <span class="attr">rbga</span>=<span class="string">&quot;0 0 0 1&quot;</span>/&gt;</span>         <span class="comment">&lt;!--set color--&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">joint</span> <span class="attr">name</span>=<span class="string">&quot;body2foot_print&quot;</span> <span class="attr">type</span>=<span class="string">&quot;fixed&quot;</span>&gt;</span>   <span class="comment">&lt;!--set joint name and type(such as : fixed continous ...)--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">parent</span> <span class="attr">link</span>=<span class="string">&quot;foot_print&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">child</span> <span class="attr">link</span>=<span class="string">&quot;body&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>    <span class="comment">&lt;!--set joint position--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">axis</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>            <span class="comment">&lt;!--set rotation axis--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">joint</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面代码在编写urdf时可以直接复制，然后修改。</p>
-<h2 id="3-编写launch文件"><a href="#3-编写launch文件" class="headerlink" title="3.编写launch文件"></a>3.编写launch文件</h2><p>在launch文件夹下新建一个.launch文件。</p>
-<p>我们需要启动rviz，并把urdf文件导入。rviz启动后可以自动载入解析urdf文件。</p>
-<p>在ros中，我们要把urdf文件的路径设置到参数服务器中，使用参数名为 <code>robot_description</code> 。</p>
-<p>代码如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--set parameters--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;robot_description&quot;</span>  <span class="attr">textfile</span>=<span class="string">&quot;$(find package)/urdf/xxx.urdf&quot;</span>/&gt;</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="comment">&lt;!--run rviz node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">type</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rviz&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">	    <span class="comment">&lt;!--run robot and joint state publish node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;robot_state_publisher&quot;</span> /&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;joint_state_publisher&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面还有两句话，是要启动机器人状态和关节状态发布节点。这样才能在rviz中正常显示出机器人。</p>
-<h2 id="4-其他补充"><a href="#4-其他补充" class="headerlink" title="4.其他补充"></a>4.其他补充</h2><h3 id="1-保存和调用rviz配置文件"><a href="#1-保存和调用rviz配置文件" class="headerlink" title="(1)保存和调用rviz配置文件"></a>(1)保存和调用rviz配置文件</h3><p>我们在rviz中，设置的一些配置选项，可以保存成.rviz文件，并保存在功能包下的<code>config</code>文件夹。</p>
-<p>在rviz中的工具栏<code>file</code>中，有<code>save config as</code> ，便可以保存配置信息。</p>
-<p>然后在3中的launch文件中，修改一下最后一行。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--run rviz node--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">type</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">args</span>=<span class="string">&quot;-d $(find package)/config/xxx.rviz/&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-检查urdf文件"><a href="#2-检查urdf文件" class="headerlink" title="(2)检查urdf文件"></a>(2)检查urdf文件</h3><p>在写完urdf文件后，我们并不知道写的对不对，因此可以用<code>check_urdf</code>个工具来进行检查。</p>
-<p>首先要进入urdf的文件目录。</p>
-<p>然后在终端输入<code>check_urdf xxx.urdf</code> 来进行检查。</p>
-<p>如果语法没有问题，终端就会显示root link和child link。</p>
-<h3 id="3-查看刚体结构信息"><a href="#3-查看刚体结构信息" class="headerlink" title="(3)查看刚体结构信息"></a>(3)查看刚体结构信息</h3><p>我们生成的是机器人模型，机器人中各部分的关系我们也可以用图像的方式进行查看。</p>
-<p>首先进入urdf文件所在目录。</p>
-<p>在终端输入<code>urdf_to_graphiz xxx.urdf</code>，然后就会在该目录下生成一个pdf文件，显示各刚体间的关系。</p>
-<h1 id="三、xacro文件编写"><a href="#三、xacro文件编写" class="headerlink" title="三、xacro文件编写"></a>三、xacro文件编写</h1><p>前面我们介绍了urdf文件的编写，但是有一个问题就是，每当编写一个link时，都要写一串代码，不能提高代码的复用率。所以，xacro文件就是一种可以编程的urdf文件，它可以定义宏（也就是函数）和变量，来编辑urdf，这样方便后面的参数修改和代码复用。</p>
-<h2 id="1-代码实现"><a href="#1-代码实现" class="headerlink" title="1.代码实现"></a>1.代码实现</h2><h3 id="1-包含xlmns空间"><a href="#1-包含xlmns空间" class="headerlink" title="(1)包含xlmns空间"></a>(1)包含xlmns空间</h3><p>具体的urdf格式和之前都相同，不同的是就是可以把urdf的代码进行封装和调用。</p>
-<p>这里要注意，使用xacro写urdf时，一定要加上<code>xmlns:xacro=&quot;http://wiki.ros.org/xacro&quot;</code></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;car&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span> </span><br><span class="line">		</span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-变量封装与调用"><a href="#2-变量封装与调用" class="headerlink" title="(2)变量封装与调用"></a>(2)变量封装与调用</h3><p>封装：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:property</span> <span class="attr">name</span>=<span class="string">&quot;Param_Name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;body&quot;</span>/&gt;</span>     </span><br></pre></td></tr></table></figure>
-<p>调用：在调用处，用花括号来使用</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;Param_Name&#125;&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-宏-函数-定义与调用"><a href="#3-宏-函数-定义与调用" class="headerlink" title="(3)宏(函数)定义与调用"></a>(3)宏(函数)定义与调用</h3><p>我们现在以生成刚体为例，首先要写清楚宏的名字，然后传入的变量名。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;creat_link&quot;</span> <span class="attr">params</span>=<span class="string">&quot;name  radius length color&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;name&#125;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">gemometry</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">cylinder</span> <span class="attr">radius</span>=<span class="string">&quot;$&#123;radius&#125;&quot;</span> <span class="attr">length</span>=<span class="string">&quot;$&#123;length&#125;&quot;</span>/&gt;</span>                                    	</span><br><span class="line">         <span class="tag">&lt;/<span class="name">gemometry</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span>/&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;$&#123;radius/2&#125; 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>调用的时候直接传入参数即可。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:creat_link</span> <span class="attr">name</span>=<span class="string">&quot;body&quot;</span> <span class="attr">radius</span>=<span class="string">&quot;1&quot;</span> <span class="attr">length</span>=<span class="string">&quot;1&quot;</span> <span class="attr">color</span>=<span class="string">&quot;black&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-头文件包含"><a href="#4-头文件包含" class="headerlink" title="(4)头文件包含"></a>(4)头文件包含</h3><p>一个xacro文件可以包含另一个xacro文件，因此我们可以分文件给机器人各个部分建模。</p>
-<p>包含头文件的相对路径为当前xacro文件所在的路径，也可以使用绝对路径。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:include</span> <span class="attr">filename</span>=<span class="string">&quot;xxx.xacro&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-xacro转换为urdf文件"><a href="#2-xacro转换为urdf文件" class="headerlink" title="2.xacro转换为urdf文件"></a>2.xacro转换为urdf文件</h2><p>可以通过ros中的节点将xacro文件转换成urdf文件。</p>
-<p>进入xacro所在目录，在终端中输入<code>rosrun xacro xacro xxx.xacro &gt; xxx.urdf</code></p>
-<h2 id="3-launch文件编写"><a href="#3-launch文件编写" class="headerlink" title="3.launch文件编写"></a>3.launch文件编写</h2><p>如2中所述，我们可以现将xacro文件转换成urdf文件，然后再将其导入参数服务器。</p>
-<p>还有一种方法是不生成中间的urdf文件，在launch文件中编写直接导入到参数服务器。</p>
-<p>代码如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span> = <span class="string">&quot;robot_description&quot;</span> <span class="attr">command</span> = <span class="string">&quot;$(find xacro)/xacro $(find package)/urdf/xxx.xacro&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>加载robot_description 时使用command属性，属性值是调用xacro功能包的xacro程序直接解析xacro文件。</p>
-<p>这样就可以在正常显示机器人了。</p>
-<h1 id="四、urdf集成到gazebo"><a href="#四、urdf集成到gazebo" class="headerlink" title="四、urdf集成到gazebo"></a>四、urdf集成到gazebo</h1><p>从urdf集成到gazebo与集成到rviz不同，因为rviz是可视化工具，所以不需要知道机器人各部分的物理属性，而到gazebo中，则需要将这些物理属性配置出来。</p>
-<p>主要的不同点有：</p>
+<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
 <ul>
-<li>在urdf编写时，还要加入<code>&lt;collision&gt;</code>和<code>&lt;inertial&gt;</code>两个标签。</li>
-<li>urdf的颜色属性，由gazebo来配置。</li>
+<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
+<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
+<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
+<li>系统中安装的软件越多，越容易出问题。</li>
 </ul>
-<p>在创建功能包的时候，我们添加的依赖有urdf,xacro,gazebo_ros,gazebo_ros_control,gazebo_plugins</p>
-<h2 id="1-urdf代码实现"><a href="#1-urdf代码实现" class="headerlink" title="1.urdf代码实现"></a>1.urdf代码实现</h2><h3 id="1-添加-lt-collision-gt-和-lt-inertial-gt"><a href="#1-添加-lt-collision-gt-和-lt-inertial-gt" class="headerlink" title="(1)添加&lt;collision&gt;和&lt;inertial&gt;"></a>(1)添加<code>&lt;collision&gt;</code>和<code>&lt;inertial&gt;</code></h3><p>第一个不同就是要添加<code>&lt;collision&gt;</code>和<code>&lt;inertial&gt;</code>两个标签，<code>&lt;collision&gt;</code>的子标签和<code>&lt;geometry&gt;</code>类似。而<code>&lt;inertial&gt;</code>标签是添加刚体的惯性属性。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;car&quot;</span> &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">name</span>=<span class="string">&quot;foot_print&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">visual</span>&gt;</span></span><br><span class="line">    		<span class="tag">&lt;<span class="name">geometry</span>&gt;</span>                           </span><br><span class="line">        		<span class="tag">&lt;<span class="name">sphere</span> <span class="attr">radius</span>=<span class="string">&quot;0.01&quot;</span>/&gt;</span>                              </span><br><span class="line">        <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span>       <span class="comment">&lt;!--set origin position--&gt;</span></span><br><span class="line">   		  <span class="tag">&lt;<span class="name">material</span> <span class="attr">name</span>=<span class="string">&quot;black&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">color</span> <span class="attr">rbga</span>=<span class="string">&quot;0 0 0 1&quot;</span>/&gt;</span>         <span class="comment">&lt;!--set color--&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">visual</span>&gt;</span></span><br><span class="line">                    </span><br><span class="line">		<span class="tag">&lt;<span class="name">collision</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">geometry</span>&gt;</span>                           </span><br><span class="line">        		<span class="tag">&lt;<span class="name">sphere</span> <span class="attr">radius</span>=<span class="string">&quot;0.01&quot;</span>/&gt;</span>                              </span><br><span class="line">        <span class="tag">&lt;/<span class="name">geometry</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span> <span class="attr">rpy</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">collision</span>&gt;</span></span><br><span class="line">                    </span><br><span class="line">		<span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">origin</span> <span class="attr">xyz</span>=<span class="string">&quot;0 0 0&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;1&quot;</span> <span class="attr">ixy</span>=<span class="string">&quot;0&quot;</span> <span class="attr">ixz</span>=<span class="string">&quot;0&quot;</span> <span class="attr">iyy</span>=<span class="string">&quot;1&quot;</span> <span class="attr">iyz</span>=<span class="string">&quot;0&quot;</span> <span class="attr">izz</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-计算惯性矩阵宏"><a href="#2-计算惯性矩阵宏" class="headerlink" title="(2)计算惯性矩阵宏"></a>(2)计算惯性矩阵宏</h3><p>在ros中有通过xacro定义的宏来计算。</p>
-<p>球体惯性矩阵</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Macro for inertia matrix --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;sphere_inertial_matrix&quot;</span> <span class="attr">params</span>=<span class="string">&quot;m r&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;m&#125;&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;$&#123;2*m*r*r/5&#125;&quot;</span> <span class="attr">ixy</span>=<span class="string">&quot;0&quot;</span> <span class="attr">ixz</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">iyy</span>=<span class="string">&quot;$&#123;2*m*r*r/5&#125;&quot;</span> <span class="attr">iyz</span>=<span class="string">&quot;0&quot;</span> </span></span><br><span class="line"><span class="tag">                <span class="attr">izz</span>=<span class="string">&quot;$&#123;2*m*r*r/5&#125;&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>圆柱惯性矩阵</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;cylinder_inertial_matrix&quot;</span> <span class="attr">params</span>=<span class="string">&quot;m r h&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;m&#125;&quot;</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;$&#123;m*(3*r*r+h*h)/12&#125;&quot;</span> <span class="attr">ixy</span> = <span class="string">&quot;0&quot;</span> <span class="attr">ixz</span> = <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">iyy</span>=<span class="string">&quot;$&#123;m*(3*r*r+h*h)/12&#125;&quot;</span> <span class="attr">iyz</span> = <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">izz</span>=<span class="string">&quot;$&#123;m*r*r/2&#125;&quot;</span> /&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>立方体惯性矩阵</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;Box_inertial_matrix&quot;</span> <span class="attr">params</span>=<span class="string">&quot;m l w h&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">inertial</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">mass</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;m&#125;&quot;</span> /&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">inertia</span> <span class="attr">ixx</span>=<span class="string">&quot;$&#123;m*(h*h + l*l)/12&#125;&quot;</span> <span class="attr">ixy</span> = <span class="string">&quot;0&quot;</span> <span class="attr">ixz</span> = <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">iyy</span>=<span class="string">&quot;$&#123;m*(w*w + l*l)/12&#125;&quot;</span> <span class="attr">iyz</span>= <span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">izz</span>=<span class="string">&quot;$&#123;m*(w*w + h*h)/12&#125;&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">inertial</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>需要注意的是，原则上，除了 base_footprint 外，机器人的每个刚体部分都需要设置惯性矩阵，且惯性矩阵必须经计算得出，如果随意定义刚体部分的惯性矩阵，那么可能会导致机器人在 Gazebo 中出现抖动，移动等现象。</p>
-<h3 id="3-添加颜色"><a href="#3-添加颜色" class="headerlink" title="(3)添加颜色"></a>(3)添加颜色</h3><p>如果要在gazebo中显示link的颜色，必须使用gazebo指定的标签。</p>
-<p>其中Gazebo的G必须大写，颜色首字母也必须大写。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;link_name&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">material</span>&gt;</span>Gazebo/Blue<span class="tag">&lt;/<span class="name">material</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-launch文件"><a href="#2-launch文件" class="headerlink" title="2.launch文件"></a>2.launch文件</h2><p>启动gazebo，我们调用gazebo功能包中的launch文件。</p>
-<p>在这里我们用include包含<code>empty_world.launch</code>文件，然后我们用参数导入我们需要的世界环境。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">file</span>=<span class="string">&quot;$(find gazebo_ros)/launch/empty_world.launch&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">arg</span> <span class="attr">name</span>=<span class="string">&quot;world_name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$(find package)/worlds/box_house.world&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后在gazebo中加载机器人模型</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;gazebo_ros&quot;</span> <span class="attr">type</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">name</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">args</span>=<span class="string">&quot;-urdf -model car -param robot_description&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这句话的意思是启动<code>gazebo_ros</code>中的<code>spawn_model</code>节点，然后加载参数服务器中的<code>robot_description</code>。</p>
-<p><code>-urdf</code>是说加载的是urdf文件 </p>
-<p><code>-model car</code>是把这个模型命名为car</p>
-<p><code>-param robot_description</code> 从参数robot_description 中载入模型。</p>
-<p>最终的launch文件为：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span> = <span class="string">&quot;robot_description&quot;</span> <span class="attr">command</span> = <span class="string">&quot;$(find xacro)/xacro $(find package)/urdf/xxx.xacro&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">  	<span class="tag">&lt;<span class="name">include</span> <span class="attr">file</span>=<span class="string">&quot;$(find gazebo_ros)/launch/empty_world.launch&quot;</span>&gt;</span></span><br><span class="line">    				<span class="tag">&lt;<span class="name">arg</span> <span class="attr">name</span>=<span class="string">&quot;world_name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$(find package)/world/xx.world&quot;</span></span></span><br><span class="line"><span class="tag">    &lt;/<span class="attr">include</span>&gt;</span></span><br><span class="line">            </span><br><span class="line">    <span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;gazebo_ros&quot;</span> <span class="attr">type</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">name</span>=<span class="string">&quot;spawn_model&quot;</span> <span class="attr">args</span>=<span class="string">&quot;-urdf -model car  -param robot_description&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-配置传感器"><a href="#3-配置传感器" class="headerlink" title="3.配置传感器"></a>3.配置传感器</h2><p>gazebo作为仿真工具，有一些插件，在urdf文件编写的时候，可以将这些插件赋予机器人的各个部分。</p>
-<p>例如可以为轮子赋予驱动器，也就是电机。为我们建立的相机模型，赋予相机的功能。这些都需要gazebo提供的插件。</p>
-<h3 id="1-运动控制器"><a href="#1-运动控制器" class="headerlink" title="(1)运动控制器"></a>(1)运动控制器</h3><p>gazebo自带运动控制器，它可以为驱动器输入控制信号。</p>
-<p>首先，我们要设置驱动器位置，</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xacro:macro</span> <span class="attr">name</span>=<span class="string">&quot;joint_trans&quot;</span> <span class="attr">params</span>=<span class="string">&quot;joint_name&quot;</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!-- Transmission is important to link the joints and the controller --&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">transmission</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;joint_name&#125;_trans&quot;</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">type</span>&gt;</span>transmission_interface/SimpleTransmission<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">joint</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;joint_name&#125;&quot;</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">hardwareInterface</span>&gt;</span>hardware_interface/VelocityJointInterface<span class="tag">&lt;/<span class="name">hardwareInterface</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">joint</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">actuator</span> <span class="attr">name</span>=<span class="string">&quot;$&#123;joint_name&#125;_motor&quot;</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">hardwareInterface</span>&gt;</span>hardware_interface/VelocityJointInterface<span class="tag">&lt;/<span class="name">hardwareInterface</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">mechanicalReduction</span>&gt;</span>1<span class="tag">&lt;/<span class="name">mechanicalReduction</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">actuator</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">transmission</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">xacro:macro</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">xacro:joint_trans</span> <span class="attr">joint_name</span>=<span class="string">&quot;wheel_front_left2body&quot;</span> /&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">xacro:joint_trans</span> <span class="attr">joint_name</span>=<span class="string">&quot;wheel_front_right2body&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在这里我们输入放置驱动器部位的关节名称。</p>
-<p>驱动器建立好后，我们再配置控制器。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">gazebo</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;differential_drive_controller&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_diff_drive.so&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">rosDebugLevel</span>&gt;</span>Debug<span class="tag">&lt;/<span class="name">rosDebugLevel</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">publishWheelTF</span>&gt;</span>true<span class="tag">&lt;/<span class="name">publishWheelTF</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">robotNamespace</span>&gt;</span>/<span class="tag">&lt;/<span class="name">robotNamespace</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">publishTf</span>&gt;</span>1<span class="tag">&lt;/<span class="name">publishTf</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">publishWheelJointState</span>&gt;</span>true<span class="tag">&lt;/<span class="name">publishWheelJointState</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>100.0<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">legacyMode</span>&gt;</span>true<span class="tag">&lt;/<span class="name">legacyMode</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">leftJoint</span>&gt;</span>wheel_front_left2body<span class="tag">&lt;/<span class="name">leftJoint</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">rightJoint</span>&gt;</span>wheel_front_right2body<span class="tag">&lt;/<span class="name">rightJoint</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelSeparation</span>&gt;</span>$&#123;body_width * 2&#125;<span class="tag">&lt;/<span class="name">wheelSeparation</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelDiameter</span>&gt;</span>$&#123;wheel_radius * 2&#125;<span class="tag">&lt;/<span class="name">wheelDiameter</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">broadcastTF</span>&gt;</span>1<span class="tag">&lt;/<span class="name">broadcastTF</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelTorque</span>&gt;</span>300<span class="tag">&lt;/<span class="name">wheelTorque</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">wheelAcceleration</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">wheelAcceleration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">commandTopic</span>&gt;</span>cmd_vel<span class="tag">&lt;/<span class="name">commandTopic</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">odometryFrame</span>&gt;</span>odom<span class="tag">&lt;/<span class="name">odometryFrame</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">odometryTopic</span>&gt;</span>odom<span class="tag">&lt;/<span class="name">odometryTopic</span>&gt;</span> </span><br><span class="line">          <span class="tag">&lt;<span class="name">robotBaseFrame</span>&gt;</span>foot_print<span class="tag">&lt;/<span class="name">robotBaseFrame</span>&gt;</span> </span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-相机"><a href="#2-相机" class="headerlink" title="(2)相机"></a>(2)相机</h3><p>在建立好相机刚体模型后，我们可以为这个刚体模型赋予相机的功能。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;camera&quot;</span>&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;camera&quot;</span> <span class="attr">name</span>=<span class="string">&quot;camera_node&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>30.0<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">      <span class="tag">&lt;<span class="name">camera</span> <span class="attr">name</span>=<span class="string">&quot;head&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">horizontal_fov</span>&gt;</span>1.3962634<span class="tag">&lt;/<span class="name">horizontal_fov</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">width</span>&gt;</span>1280<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">height</span>&gt;</span>720<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">format</span>&gt;</span>R8G8B8<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">clip</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">near</span>&gt;</span>0.02<span class="tag">&lt;/<span class="name">near</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">far</span>&gt;</span>300<span class="tag">&lt;/<span class="name">far</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">noise</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>gaussian<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">mean</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">mean</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">stddev</span>&gt;</span>0.007<span class="tag">&lt;/<span class="name">stddev</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">noise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">camera</span>&gt;</span></span><br><span class="line">      </span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;gazebo_camera&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_camera.so&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cameraName</span>&gt;</span>/camera<span class="tag">&lt;/<span class="name">cameraName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">imageTopicName</span>&gt;</span>image_raw<span class="tag">&lt;/<span class="name">imageTopicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cameraInfoTopicName</span>&gt;</span>camera_info<span class="tag">&lt;/<span class="name">cameraInfoTopicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>camera<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hackBaseline</span>&gt;</span>0.07<span class="tag">&lt;/<span class="name">hackBaseline</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK3</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionT1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionT1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionT2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionT2</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-雷达"><a href="#3-雷达" class="headerlink" title="(3)雷达"></a>(3)雷达</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;laser&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;ray&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rplidar&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">pose</span>&gt;</span>0 0 0 0 0 0<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">visualize</span>&gt;</span>true<span class="tag">&lt;/<span class="name">visualize</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>5.5<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ray</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scan</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">horizontal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">samples</span>&gt;</span>360<span class="tag">&lt;/<span class="name">samples</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">resolution</span>&gt;</span>1<span class="tag">&lt;/<span class="name">resolution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">min_angle</span>&gt;</span>-3<span class="tag">&lt;/<span class="name">min_angle</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">max_angle</span>&gt;</span>3<span class="tag">&lt;/<span class="name">max_angle</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">horizontal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">scan</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">range</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">min</span>&gt;</span>0.10<span class="tag">&lt;/<span class="name">min</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">max</span>&gt;</span>30.0<span class="tag">&lt;/<span class="name">max</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">resolution</span>&gt;</span>0.01<span class="tag">&lt;/<span class="name">resolution</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">range</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">noise</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>gaussian<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">mean</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">mean</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">stddev</span>&gt;</span>0.01<span class="tag">&lt;/<span class="name">stddev</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">noise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ray</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;gazebo_rplidar&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_laser.so&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">topicName</span>&gt;</span>/scan<span class="tag">&lt;/<span class="name">topicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>laser<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="4-深度相机"><a href="#4-深度相机" class="headerlink" title="(4)深度相机"></a>(4)深度相机</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;support&quot;</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;depth&quot;</span> <span class="attr">name</span>=<span class="string">&quot;camera&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">always_on</span>&gt;</span>true<span class="tag">&lt;/<span class="name">always_on</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>20.0<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">camera</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">horizontal_fov</span>&gt;</span>$&#123;60.0*PI/180.0&#125;<span class="tag">&lt;/<span class="name">horizontal_fov</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">format</span>&gt;</span>R8G8B8<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">width</span>&gt;</span>640<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">height</span>&gt;</span>480<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">clip</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">near</span>&gt;</span>0.05<span class="tag">&lt;/<span class="name">near</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">far</span>&gt;</span>8.0<span class="tag">&lt;/<span class="name">far</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">camera</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;kinect_camera_controller&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_openni_kinect.so&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraName</span>&gt;</span>camera<span class="tag">&lt;/<span class="name">cameraName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>10<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">imageTopicName</span>&gt;</span>rgb/image_raw<span class="tag">&lt;/<span class="name">imageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageTopicName</span>&gt;</span>depth/image_raw<span class="tag">&lt;/<span class="name">depthImageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudTopicName</span>&gt;</span>depth/points<span class="tag">&lt;/<span class="name">pointCloudTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraInfoTopicName</span>&gt;</span>rgb/camera_info<span class="tag">&lt;/<span class="name">cameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageCameraInfoTopicName</span>&gt;</span>depth/camera_info<span class="tag">&lt;/<span class="name">depthImageCameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>body<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">baseline</span>&gt;</span>0.1<span class="tag">&lt;/<span class="name">baseline</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k3</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k3</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudCutoff</span>&gt;</span>0.4<span class="tag">&lt;/<span class="name">pointCloudCutoff</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>软件实践</category>
+        <category>编程实践</category>
       </categories>
       <tags>
         <tag>ROS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Word中使用Endnote插件</title>
-    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
-<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
-<li>关闭word，打开endnote</li>
-<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
-<li>等待完成</li>
-<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
-<li>重启word</li>
-</ol>
-<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
-<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
-<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
-<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
-<p>引用文献的格式可以在Word中设置。</p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -2258,37 +2277,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>依赖包是什么</title>
-    <url>/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
-<span id="more"></span>
-<p>依赖包就是某个软件用到的库文件。</p>
-<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
-<p>不同体系用不同的方法解决依赖问题。</p>
-<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
-<ul>
-<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
-<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
-<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
-<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
-</ul>
-<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
-<ul>
-<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
-<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
-<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
-<li>系统中安装的软件越多，越容易出问题。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>编程实践</category>
-      </categories>
-      <tags>
-        <tag>ROS</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>单应矩阵</title>
     <url>/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/</url>
     <content><![CDATA[<p>单应矩阵学习。<br><span id="more"></span></p>
@@ -2298,6 +2286,50 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </categories>
       <tags>
         <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Word中使用Endnote插件</title>
+    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
+<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
+<li>关闭word，打开endnote</li>
+<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
+<li>等待完成</li>
+<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
+<li>重启word</li>
+</ol>
+<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
+<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
+<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
+<p>引用文献的格式可以在Word中设置。</p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>头文件,库文件,命名空间的关系</title>
+    <url>/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[<p>头文件是一个文本文件。里面包括了变量声明，数据结构定义，库文件中函数的使用方法和接口(函数具体的实现都在库文件中)。库文件是二进制文件。命名空间是为了避免不同库中有命名相同的函数，相当于给这些函数加上了姓氏。</p>
+<span id="more"></span>
+<p>以C为例，最早的时候，只有一个C文件，然后需要编译为可执行的二进制文件。但是后来发现，实现复杂功能的时候，代码行数太多了，于是便把这个文件分割一下，分别来看。</p>
+<p>于是，就把方法(函数)和声明单独放在同一个文件中，然后把这个文件加进来，放在头部，这样就可以在C文件中随意的摆放函数了，整理起来比较方便。久而久之，这个文件都是通常放在C文件的头部，因此就有了头文件的名字。头文件就是把一些常量的定义、数据结构的定义、函数的功能实现啥的放在里面，本质上就是一个文本文件，和写在C文件里是一样的，并没有什么特别的。<code>#include</code>进来的头文件都是原封不动的在编译阶段直接插入到C源文件中。</p>
+<p>而库文件是已经编译好的二进制文件，因为没有<code>main()</code>这个入口函数，所以没有办法直接启动，但是里面是实实在在的二进制代码。那么它有什么用呢？</p>
+<p>以前编译一个程序，就是输入C源文件，然后输出一个可执行的二进制文件。但是当C源文件的代码越写越多，越来越复杂，编译的时间特别长。这样一来，只要是修改了代码，就需要整体的重新编译一遍，消耗很多不必要的时间。于是人们为了避免反复的编译未改动的代码，就产生了库文件。</p>
+<p>把一个完整的C文件分开，分成不同功能的文件，然后只要把这些文件编译成一个二进制的软件包，最后把它们拼在一起，就是库文件。这样一来基本不会被改动的代码就不需要再一次编译了，只需要编译改动的文件就可以啦。</p>
+<p>库文件出现了，有的人灵光一闪，我可以只发布库文件啊，源代码还是在我这里，这样不就可以卖钱了吗？真是一个伟大的想法！但是光卖库文件不行啊，都被编译成二进制文件了，里面有哪些方法，有哪些常量别人没法知道啊！没关系我可以写文档啊。但是编译器不知道，而且也不懂读文档怎么办？好办，不是有头文件么，反正头文件只有声明，没有实现代码，就用头文件当编译器的文档好了。就这样人类读文档，编译器读头文件，然后有人卖库文件，一条产业链就此形成。</p>
+<p>后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，在自己写的库中，所有的函数名、常量名、解构名都带上自己的姓名做前缀名，这样就算方法名是一样的，但是有不同的前缀名，这样就能区分到底该链接哪个方法了。后来又来一个聪明人，觉得你们这样在每个方法、常量、结构体中都写上你们的姓名累不累啊，这样，我给你们设计一套规则，只要在库的最前面写上你们的姓名不就行了么，用的时候编译器先去找找你们的姓名，然后再你们的姓名下面找方法，这不就多快好省了么。那这样吧我们就给这个姓名取名字<code>namespace</code>吧。</p>
+]]></content>
+      <categories>
+        <category>软件编程</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -2656,134 +2688,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>MacOS无法抹掉硬盘问题解决</title>
-    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>头文件,库文件,命名空间的关系</title>
-    <url>/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
-    <content><![CDATA[<p>头文件是一个文本文件。里面包括了变量声明，数据结构定义，库文件中函数的使用方法和接口(函数具体的实现都在库文件中)。库文件是二进制文件。命名空间是为了避免不同库中有命名相同的函数，相当于给这些函数加上了姓氏。</p>
-<span id="more"></span>
-<p>以C为例，最早的时候，只有一个C文件，然后需要编译为可执行的二进制文件。但是后来发现，实现复杂功能的时候，代码行数太多了，于是便把这个文件分割一下，分别来看。</p>
-<p>于是，就把方法(函数)和声明单独放在同一个文件中，然后把这个文件加进来，放在头部，这样就可以在C文件中随意的摆放函数了，整理起来比较方便。久而久之，这个文件都是通常放在C文件的头部，因此就有了头文件的名字。头文件就是把一些常量的定义、数据结构的定义、函数的功能实现啥的放在里面，本质上就是一个文本文件，和写在C文件里是一样的，并没有什么特别的。<code>#include</code>进来的头文件都是原封不动的在编译阶段直接插入到C源文件中。</p>
-<p>而库文件是已经编译好的二进制文件，因为没有<code>main()</code>这个入口函数，所以没有办法直接启动，但是里面是实实在在的二进制代码。那么它有什么用呢？</p>
-<p>以前编译一个程序，就是输入C源文件，然后输出一个可执行的二进制文件。但是当C源文件的代码越写越多，越来越复杂，编译的时间特别长。这样一来，只要是修改了代码，就需要整体的重新编译一遍，消耗很多不必要的时间。于是人们为了避免反复的编译未改动的代码，就产生了库文件。</p>
-<p>把一个完整的C文件分开，分成不同功能的文件，然后只要把这些文件编译成一个二进制的软件包，最后把它们拼在一起，就是库文件。这样一来基本不会被改动的代码就不需要再一次编译了，只需要编译改动的文件就可以啦。</p>
-<p>库文件出现了，有的人灵光一闪，我可以只发布库文件啊，源代码还是在我这里，这样不就可以卖钱了吗？真是一个伟大的想法！但是光卖库文件不行啊，都被编译成二进制文件了，里面有哪些方法，有哪些常量别人没法知道啊！没关系我可以写文档啊。但是编译器不知道，而且也不懂读文档怎么办？好办，不是有头文件么，反正头文件只有声明，没有实现代码，就用头文件当编译器的文档好了。就这样人类读文档，编译器读头文件，然后有人卖库文件，一条产业链就此形成。</p>
-<p>后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，在自己写的库中，所有的函数名、常量名、解构名都带上自己的姓名做前缀名，这样就算方法名是一样的，但是有不同的前缀名，这样就能区分到底该链接哪个方法了。后来又来一个聪明人，觉得你们这样在每个方法、常量、结构体中都写上你们的姓名累不累啊，这样，我给你们设计一套规则，只要在库的最前面写上你们的姓名不就行了么，用的时候编译器先去找找你们的姓名，然后再你们的姓名下面找方法，这不就多快好省了么。那这样吧我们就给这个姓名取名字<code>namespace</code>吧。</p>
-]]></content>
-      <categories>
-        <category>软件编程</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>极大似然估计和后验估计</title>
-    <url>/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/</url>
-    <content><![CDATA[<p>极大似然估计和后验估计。<br><span id="more"></span></p>
-<h1 id="一、概率和统计的区别"><a href="#一、概率和统计的区别" class="headerlink" title="一、概率和统计的区别"></a>一、概率和统计的区别</h1><h2 id="1-概率研究"><a href="#1-概率研究" class="headerlink" title="1.概率研究"></a>1.概率研究</h2><p>已知一个模型和模型的参数，研究根据这个模型产生结果的概率和结果的一些特性（例如均值，方差等）</p>
-<p>例子：以某地人口的身高统计研究为例，假设已经知道某地的人口的身高呈正态分布，因此根据该模型，可以知道该地人口身高的均值，方差等特点，也可以知道某人身高为1.9的概率</p>
-<h2 id="2-统计研究"><a href="#2-统计研究" class="headerlink" title="2.统计研究"></a>2.统计研究</h2><p>统计研究与概率研究相反，是已知一组数据，但并不知道该模型和模型的具体参数</p>
-<p>例子：已知某地一个小区的人口身高的数据，想要推测出该地整个人口身高分布的数学模型，假设已经知道该模型为正态分布，但不知道正态分布中具体的参数等信息，所以需要统计研究来得出</p>
-<p>总结：概率研究是已知模型和参数，推数据。统计是已知数据，推模型和参数</p>
-<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061947.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
-<p>独立事件A和B，发生的概率为 $p(AB)=p(A)p(B)$</p>
-<p>当A和B有某种关系的时候，也就是说不独立的时候，$p(AB)=p(A|B)p(B)$，可以根据此来判断AB是否独立</p>
-<h1 id="三、极大似然估计和后验估计"><a href="#三、极大似然估计和后验估计" class="headerlink" title="三、极大似然估计和后验估计"></a>三、极大似然估计和后验估计</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><a href="https://zhuanlan.zhihu.com/p/32480810">参考</a></p>
-<p>这两者都属于统计类别下的。对于统计估计出的模型参数$\theta$，有两个学派：</p>
-<p><strong>频率学派</strong>：在进行参数估计时，所估计的参数$\theta$存在唯一的真值，也就是说$p(\theta)=1$。</p>
-<p><strong>贝叶斯学派</strong>：认为$\theta$是一个随机变量，符合一定的概率分布，$p(\theta)$是有概率分布的。</p>
-<p>抽象一点来讲，频率学派和贝叶斯学派对世界的认知有本质不同：频率学派认为世界是确定的，有一个本体，这个本体的真值是不变的，我们的目标就是要找到这个真值或真值所在的范围；而贝叶斯学派认为世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判做调整，我们的目标是要找到最优的描述这个世界的概率分布。</p>
-<p>贝叶斯概率公式：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P(A \mid B)&=\frac{P(A,B)}{P(B)}=\frac{P(B\mid A)P(A)}{P(A,B)+P(\tilde A,B)}\\
-&=\frac{P(B\mid A)P(A)}{P(B\mid  A)P(A)+P(B\mid \tilde A)P(\tilde A)}
-\end{aligned}\tag{1}</script><p><strong>E.g.</strong> 有一辆汽车，它被砸记作事件A，警报器响，记作事件B，现在想求得警报器响时，是车被砸的概率。那么，有以下几种表示：</p>
-<ul>
-<li>$P(A\mid B)$：在B发生时，A发生的概率。即警报器响了，是车被砸了的概率。</li>
-<li>$P(A,B)$ ：A，B同时发生的概率。即警报器响和车被砸同时发生的概率。</li>
-<li>$P(B\mid A)$ ：车被砸了，警报器响的概率。</li>
-<li>$P(B\mid \tilde A)$ ：车没被砸，警报器响的概率。</li>
-</ul>
-<p>现在(1)式中，在警报响时，车被砸的概率=警报响与车被砸同时发生的概率 $\div$ 警报响的概率。</p>
-<p>继续拆分：</p>
-<p>警报响与车被砸同时发生的概率=车被砸的概率 $\times$ 车被砸时，警报响的概率。</p>
-<p>警报响的概率=车被砸警报响的概率+车没被砸警报响的概率。</p>
-<p><strong>在生活中为什么警报响了，通常是车没有被砸呢？</strong></p>
-<p><strong>角度一：</strong></p>
-<p>为了提高警报响时，就是车被砸了的说服力。我们希望警报响时，是车被砸的概率变为1。那么我们再看(1)，当 $P(B\mid \tilde A)P(\tilde A)=0$ 时，也就是车没被砸，警报响的概率为0。这样，我们就避免了干扰情况的影响，提高了说服力。但是，$P(B\mid \tilde A)P(\tilde A)=0$ 会等于0么。虽然车没被砸时，警报响的概率很小，但是车没有被砸的概率很大，接近于1，所以它们的乘积也不会太小。</p>
-<p><strong>角度二：</strong></p>
-<p>我们再来看式(1)，现在我们刨除其他的影响不说（例如，放炮导致的警报响），让其他影响的概率保持不变。来看分子，前面是车被砸时，警报响的概率。这个概率很大，我们可以认为其等于1，但是它还要乘以车被砸的概率，车被砸的概率很小很小，因此它们的乘积也很小。所以，即使是警报响了，车被砸的概率也会很小。在这里，车被砸的概率是<strong>先验</strong>。</p>
-<p>从上面两个角度来看，其实就是$P(B\mid \tilde A)P(\tilde A)和P(B\mid  A)P(A)$ 间的比较，$P(B\mid A)$ 虽然很大，但是 $P(A)$ 很小；$P(B\mid \tilde A)$ 虽然很小，但是 $P(\tilde A)$ 很大。在这个例子中，就是 $P(B\mid \tilde A)比P(A)$ 胜了一筹，也就是车没被砸时警报响的概率比车被砸的大，才导致的即使警报响了，车被砸的概率也很小。</p>
-<p>从以上两个角度，我们可以知道贝叶斯公式考虑事情发生的因素：一件本来就难以发生的事情，就算出现某个证据和它强烈相关，也要谨慎考虑（就是考虑这件事情本身的先验概率）。而一个不是那么相关，但是极其容易发生的事情，也需要考虑。</p>
-<h2 id="2-似然函数"><a href="#2-似然函数" class="headerlink" title="2.似然函数"></a>2.似然函数</h2><p>对于 $P(X\mid \theta)$ 这个函数，它的输入有两个，分别是 $X和\theta$ 。</p>
-<p>当 $\theta$ 已经确定，$X$ 是变量时，这个函数叫做概率函数，它描述对于不同的样本点$x$，其出现的概率为多少。</p>
-<p>当 $X=x$ 时，$\theta$ 是变量时，这个函数就叫做似然函数，它描述对于不同的模型参数，出现$x$这个样本点的概率是多少。 </p>
-<h2 id="3-最大似然估计——MLE"><a href="#3-最大似然估计——MLE" class="headerlink" title="3.最大似然估计——MLE"></a>3.最大似然估计——MLE</h2><p>最大似然估计是<strong>频率学派</strong>的方法，即认为参数 $\theta$ 是一个固定的常数。</p>
-<p>假设数据 $x_1,x_2\cdots x_n$ 是独立同分布的一组样本，那么令 $X=\{x_1,\cdots x_n\}$ 。我们可以计算出出现这样样本的概率：</p>
-<script type="math/tex; mode=display">
-P(X,\theta)=P(X\mid\theta)P(\theta)\tag{2}</script><p>在(2)中，因为 $P(\theta)=1$ ，所以：</p>
-<script type="math/tex; mode=display">
-P(X,\theta)=P(X\mid\theta)\tag{3}</script><p>我们就可以假设我们已经知道了 $\theta$ ，然后求出在该概率模型参数下，出现此时样本的概率，这个概率是 $\theta$ 的函数。因为既然能出现此时的</p>
-<p>样本情况，那么概率函数应该是最大值，所以 $\theta$ 是极大值点。</p>
-<script type="math/tex; mode=display">
-\hat \theta=\max _\theta P(X\mid\theta)\tag{4}</script><p> <strong>E.g.</strong> 我们现在有一个硬币，这个硬币服从二项分布，我们设正面朝上的概率为 $\theta$ 。现在想通过试验来求出硬币的正面朝上的概率为多少。假设我们做了一组试验，扔了10次，其中正面朝上的次数为7。</p>
-<script type="math/tex; mode=display">
-P(X=\{7次正，3次反\},\theta)=P(X\mid\theta)=\theta^7(1-\theta)^3=f(\theta)\tag{5}</script><p>现在既然出现了7次正面向上，3次反面向上的数据样本，我们就可以认为此时的概率一定是所有情况中最大的。我们可以把似然函数$f(\theta)$ 的图像画出来：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061952.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
-<p>可以看出 $\theta=0.7$ 时，似然函数取极大值。但是我们知道，一般的硬币都是均匀分布的，为什么正面朝上的概率会是0.7呢。这就包含了贝叶斯学派的思想，即引入先验估计。</p>
-<h2 id="4-最大后验估计——MAP"><a href="#4-最大后验估计——MAP" class="headerlink" title="4.最大后验估计——MAP"></a>4.最大后验估计——MAP</h2><p>最大后验估计是贝叶斯学派的方法，他们认为参数 $\theta$ 是不确定的，也是一个随机变量。需要求出在该样本情况下，参数的概率分布，然后选取概率最大的样本点。</p>
-<script type="math/tex; mode=display">
-P(\theta\mid X)=\frac{P(X,\theta)}{P(X)}=\frac{P(X\mid\theta)P(\theta)}{P(X)}\tag{6}</script><p>式（6）中，$P(\theta\mid X)$ 是后验估计，实际上我们的目标就是找到 $\theta$ ，让它最大。$P(\theta)$ 是先验估计。$P(X)$ 是试验得到的概率，仅与试验结果有关，当我们已经获取试验结果后，可以认为它是一个常数。</p>
-<script type="math/tex; mode=display">
-\hat\theta=\max_\theta P(\theta \mid X)=\max_\theta P(X\mid\theta)P(\theta)\tag{7}</script><p>最大后验的思想是不仅仅需要似然函数最大，也需要先验的概率很大。</p>
-<p>同样是抛硬币的例子：</p>
-<p>我们先验的知道正面朝上的概率为0.5，因此认为 $\theta$ 服从均值为0.5，方差为1的正态分布。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P(X,\theta)&=P(X\mid\theta)P(\theta)\\
-&=f(\theta)P(\theta)
-\end{aligned}\tag{8}</script><p>图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061954.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
-<p>此时 $\theta$ 已经向左偏移，为0.558。即用最大后验估计，得到的结果。</p>
-<p>当试验次数为1000次，其中正面朝上的次数为700次时，$f(\theta)P(\theta)$ 的图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061956.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
-<p>此时 $\theta=0.696$ 。</p>
-<p>从这个例子可以知道：当数据量增大时，估计的参数分布会越来越向数据靠拢，先验的影响力会越来越小。</p>
-]]></content>
-      <categories>
-        <category>数学基础</category>
-      </categories>
-      <tags>
-        <tag>概率论与数理统计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>视觉SLAM框架</title>
-    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
-<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
-]]></content>
-      <categories>
-        <category>SLAM学习</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>线性代数可视化学习笔记</title>
     <url>/2021/10/18/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>3Blue1Brown 线代课程学习笔记，受益匪浅。<br><span id="more"></span></p>
@@ -3123,6 +3027,20 @@ y^{\prime}
       </categories>
       <tags>
         <tag>矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>视觉SLAM框架</title>
+    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
+<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
+]]></content>
+      <categories>
+        <category>SLAM学习</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
       </tags>
   </entry>
   <entry>
@@ -4287,6 +4205,88 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </categories>
       <tags>
         <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>极大似然估计和后验估计</title>
+    <url>/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/</url>
+    <content><![CDATA[<p>极大似然估计和后验估计。<br><span id="more"></span></p>
+<h1 id="一、概率和统计的区别"><a href="#一、概率和统计的区别" class="headerlink" title="一、概率和统计的区别"></a>一、概率和统计的区别</h1><h2 id="1-概率研究"><a href="#1-概率研究" class="headerlink" title="1.概率研究"></a>1.概率研究</h2><p>已知一个模型和模型的参数，研究根据这个模型产生结果的概率和结果的一些特性（例如均值，方差等）</p>
+<p>例子：以某地人口的身高统计研究为例，假设已经知道某地的人口的身高呈正态分布，因此根据该模型，可以知道该地人口身高的均值，方差等特点，也可以知道某人身高为1.9的概率</p>
+<h2 id="2-统计研究"><a href="#2-统计研究" class="headerlink" title="2.统计研究"></a>2.统计研究</h2><p>统计研究与概率研究相反，是已知一组数据，但并不知道该模型和模型的具体参数</p>
+<p>例子：已知某地一个小区的人口身高的数据，想要推测出该地整个人口身高分布的数学模型，假设已经知道该模型为正态分布，但不知道正态分布中具体的参数等信息，所以需要统计研究来得出</p>
+<p>总结：概率研究是已知模型和参数，推数据。统计是已知数据，推模型和参数</p>
+<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061947.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
+<p>独立事件A和B，发生的概率为 $p(AB)=p(A)p(B)$</p>
+<p>当A和B有某种关系的时候，也就是说不独立的时候，$p(AB)=p(A|B)p(B)$，可以根据此来判断AB是否独立</p>
+<h1 id="三、极大似然估计和后验估计"><a href="#三、极大似然估计和后验估计" class="headerlink" title="三、极大似然估计和后验估计"></a>三、极大似然估计和后验估计</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><a href="https://zhuanlan.zhihu.com/p/32480810">参考</a></p>
+<p>这两者都属于统计类别下的。对于统计估计出的模型参数$\theta$，有两个学派：</p>
+<p><strong>频率学派</strong>：在进行参数估计时，所估计的参数$\theta$存在唯一的真值，也就是说$p(\theta)=1$。</p>
+<p><strong>贝叶斯学派</strong>：认为$\theta$是一个随机变量，符合一定的概率分布，$p(\theta)$是有概率分布的。</p>
+<p>抽象一点来讲，频率学派和贝叶斯学派对世界的认知有本质不同：频率学派认为世界是确定的，有一个本体，这个本体的真值是不变的，我们的目标就是要找到这个真值或真值所在的范围；而贝叶斯学派认为世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判做调整，我们的目标是要找到最优的描述这个世界的概率分布。</p>
+<p>贝叶斯概率公式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(A \mid B)&=\frac{P(A,B)}{P(B)}=\frac{P(B\mid A)P(A)}{P(A,B)+P(\tilde A,B)}\\
+&=\frac{P(B\mid A)P(A)}{P(B\mid  A)P(A)+P(B\mid \tilde A)P(\tilde A)}
+\end{aligned}\tag{1}</script><p><strong>E.g.</strong> 有一辆汽车，它被砸记作事件A，警报器响，记作事件B，现在想求得警报器响时，是车被砸的概率。那么，有以下几种表示：</p>
+<ul>
+<li>$P(A\mid B)$：在B发生时，A发生的概率。即警报器响了，是车被砸了的概率。</li>
+<li>$P(A,B)$ ：A，B同时发生的概率。即警报器响和车被砸同时发生的概率。</li>
+<li>$P(B\mid A)$ ：车被砸了，警报器响的概率。</li>
+<li>$P(B\mid \tilde A)$ ：车没被砸，警报器响的概率。</li>
+</ul>
+<p>现在(1)式中，在警报响时，车被砸的概率=警报响与车被砸同时发生的概率 $\div$ 警报响的概率。</p>
+<p>继续拆分：</p>
+<p>警报响与车被砸同时发生的概率=车被砸的概率 $\times$ 车被砸时，警报响的概率。</p>
+<p>警报响的概率=车被砸警报响的概率+车没被砸警报响的概率。</p>
+<p><strong>在生活中为什么警报响了，通常是车没有被砸呢？</strong></p>
+<p><strong>角度一：</strong></p>
+<p>为了提高警报响时，就是车被砸了的说服力。我们希望警报响时，是车被砸的概率变为1。那么我们再看(1)，当 $P(B\mid \tilde A)P(\tilde A)=0$ 时，也就是车没被砸，警报响的概率为0。这样，我们就避免了干扰情况的影响，提高了说服力。但是，$P(B\mid \tilde A)P(\tilde A)=0$ 会等于0么。虽然车没被砸时，警报响的概率很小，但是车没有被砸的概率很大，接近于1，所以它们的乘积也不会太小。</p>
+<p><strong>角度二：</strong></p>
+<p>我们再来看式(1)，现在我们刨除其他的影响不说（例如，放炮导致的警报响），让其他影响的概率保持不变。来看分子，前面是车被砸时，警报响的概率。这个概率很大，我们可以认为其等于1，但是它还要乘以车被砸的概率，车被砸的概率很小很小，因此它们的乘积也很小。所以，即使是警报响了，车被砸的概率也会很小。在这里，车被砸的概率是<strong>先验</strong>。</p>
+<p>从上面两个角度来看，其实就是$P(B\mid \tilde A)P(\tilde A)和P(B\mid  A)P(A)$ 间的比较，$P(B\mid A)$ 虽然很大，但是 $P(A)$ 很小；$P(B\mid \tilde A)$ 虽然很小，但是 $P(\tilde A)$ 很大。在这个例子中，就是 $P(B\mid \tilde A)比P(A)$ 胜了一筹，也就是车没被砸时警报响的概率比车被砸的大，才导致的即使警报响了，车被砸的概率也很小。</p>
+<p>从以上两个角度，我们可以知道贝叶斯公式考虑事情发生的因素：一件本来就难以发生的事情，就算出现某个证据和它强烈相关，也要谨慎考虑（就是考虑这件事情本身的先验概率）。而一个不是那么相关，但是极其容易发生的事情，也需要考虑。</p>
+<h2 id="2-似然函数"><a href="#2-似然函数" class="headerlink" title="2.似然函数"></a>2.似然函数</h2><p>对于 $P(X\mid \theta)$ 这个函数，它的输入有两个，分别是 $X和\theta$ 。</p>
+<p>当 $\theta$ 已经确定，$X$ 是变量时，这个函数叫做概率函数，它描述对于不同的样本点$x$，其出现的概率为多少。</p>
+<p>当 $X=x$ 时，$\theta$ 是变量时，这个函数就叫做似然函数，它描述对于不同的模型参数，出现$x$这个样本点的概率是多少。 </p>
+<h2 id="3-最大似然估计——MLE"><a href="#3-最大似然估计——MLE" class="headerlink" title="3.最大似然估计——MLE"></a>3.最大似然估计——MLE</h2><p>最大似然估计是<strong>频率学派</strong>的方法，即认为参数 $\theta$ 是一个固定的常数。</p>
+<p>假设数据 $x_1,x_2\cdots x_n$ 是独立同分布的一组样本，那么令 $X=\{x_1,\cdots x_n\}$ 。我们可以计算出出现这样样本的概率：</p>
+<script type="math/tex; mode=display">
+P(X,\theta)=P(X\mid\theta)P(\theta)\tag{2}</script><p>在(2)中，因为 $P(\theta)=1$ ，所以：</p>
+<script type="math/tex; mode=display">
+P(X,\theta)=P(X\mid\theta)\tag{3}</script><p>我们就可以假设我们已经知道了 $\theta$ ，然后求出在该概率模型参数下，出现此时样本的概率，这个概率是 $\theta$ 的函数。因为既然能出现此时的</p>
+<p>样本情况，那么概率函数应该是最大值，所以 $\theta$ 是极大值点。</p>
+<script type="math/tex; mode=display">
+\hat \theta=\max _\theta P(X\mid\theta)\tag{4}</script><p> <strong>E.g.</strong> 我们现在有一个硬币，这个硬币服从二项分布，我们设正面朝上的概率为 $\theta$ 。现在想通过试验来求出硬币的正面朝上的概率为多少。假设我们做了一组试验，扔了10次，其中正面朝上的次数为7。</p>
+<script type="math/tex; mode=display">
+P(X=\{7次正，3次反\},\theta)=P(X\mid\theta)=\theta^7(1-\theta)^3=f(\theta)\tag{5}</script><p>现在既然出现了7次正面向上，3次反面向上的数据样本，我们就可以认为此时的概率一定是所有情况中最大的。我们可以把似然函数$f(\theta)$ 的图像画出来：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061952.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
+<p>可以看出 $\theta=0.7$ 时，似然函数取极大值。但是我们知道，一般的硬币都是均匀分布的，为什么正面朝上的概率会是0.7呢。这就包含了贝叶斯学派的思想，即引入先验估计。</p>
+<h2 id="4-最大后验估计——MAP"><a href="#4-最大后验估计——MAP" class="headerlink" title="4.最大后验估计——MAP"></a>4.最大后验估计——MAP</h2><p>最大后验估计是贝叶斯学派的方法，他们认为参数 $\theta$ 是不确定的，也是一个随机变量。需要求出在该样本情况下，参数的概率分布，然后选取概率最大的样本点。</p>
+<script type="math/tex; mode=display">
+P(\theta\mid X)=\frac{P(X,\theta)}{P(X)}=\frac{P(X\mid\theta)P(\theta)}{P(X)}\tag{6}</script><p>式（6）中，$P(\theta\mid X)$ 是后验估计，实际上我们的目标就是找到 $\theta$ ，让它最大。$P(\theta)$ 是先验估计。$P(X)$ 是试验得到的概率，仅与试验结果有关，当我们已经获取试验结果后，可以认为它是一个常数。</p>
+<script type="math/tex; mode=display">
+\hat\theta=\max_\theta P(\theta \mid X)=\max_\theta P(X\mid\theta)P(\theta)\tag{7}</script><p>最大后验的思想是不仅仅需要似然函数最大，也需要先验的概率很大。</p>
+<p>同样是抛硬币的例子：</p>
+<p>我们先验的知道正面朝上的概率为0.5，因此认为 $\theta$ 服从均值为0.5，方差为1的正态分布。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X,\theta)&=P(X\mid\theta)P(\theta)\\
+&=f(\theta)P(\theta)
+\end{aligned}\tag{8}</script><p>图像为：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061954.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
+<p>此时 $\theta$ 已经向左偏移，为0.558。即用最大后验估计，得到的结果。</p>
+<p>当试验次数为1000次，其中正面朝上的次数为700次时，$f(\theta)P(\theta)$ 的图像为：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061956.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
+<p>此时 $\theta=0.696$ 。</p>
+<p>从这个例子可以知道：当数据量增大时，估计的参数分布会越来越向数据靠拢，先验的影响力会越来越小。</p>
+]]></content>
+      <categories>
+        <category>数学基础</category>
+      </categories>
+      <tags>
+        <tag>概率论与数理统计</tag>
       </tags>
   </entry>
 </search>
