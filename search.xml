@@ -4389,7 +4389,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </tags>
   </entry>
   <entry>
-    <title>侯捷老师C++学习笔记——大气编程</title>
+    <title>侯捷老师C++学习笔记——大气编程(上)</title>
     <url>/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88c++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<p>本课程要有一点点C或C++的基础，学习效果会更好哦。<br>侯捷老师讲的特别通透，听完收获很大。<br><span id="more"></span></p>
 <h1 id="Lesson1-简介"><a href="#Lesson1-简介" class="headerlink" title="Lesson1 简介"></a>Lesson1 简介</h1><p><strong>课程基础：</strong></p>
@@ -4686,6 +4686,95 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <h1 id="Lesson13-委托相关设计"><a href="#Lesson13-委托相关设计" class="headerlink" title="Lesson13 委托相关设计"></a>Lesson13 委托相关设计</h1><p>本节课介绍了一些设计模式。</p>
 <p>就用到composition, delegation,inheritance这三种模式，进行组合，来解决现实的问题。</p>
 <p>其中delegation+inheritance的功能最强大。</p>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>侯捷老师C++学习笔记——大气编程(下)</title>
+    <url>/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88C++-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8B)/</url>
+    <content><![CDATA[<p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充。</p>
+<span id="more"></span>
+<h1 id="Lesson1-介绍"><a href="#Lesson1-介绍" class="headerlink" title="Lesson1 介绍"></a>Lesson1 介绍</h1><p>本课程会讲的内容：</p>
+<ul>
+<li>泛型编程</li>
+<li>深入探索面向对象继承关系所形成的的对象模型，包括隐藏在底层的this指针，虚指针，虚表等。</li>
+</ul>
+<h1 id="Lesson2-转换函数-conversion-function"><a href="#Lesson2-转换函数-conversion-function" class="headerlink" title="Lesson2 转换函数 conversion function"></a>Lesson2 转换函数 conversion function</h1><p>转换有两个方向，一个是我这个类型转换成那个，也可以是那个转换成这个。</p>
+<p>现在有一个分数class：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110201213.png" alt="image-20211110201213702" style="zoom:33%;" /></p>
+<p>黄色的部分就是转换函数。转换肯定不会改变数据的值，所以要加上const。</p>
+<p>不需要返回值类型，因为很明确，函数名就表示了要转换的那个类型。</p>
+<p>调用的时候：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=<span class="number">3</span>+f;<span class="comment">//调用operator double()将f转为0.6</span></span><br></pre></td></tr></table></figure>
+<p>在这里，编译器会首先找一个全局函数，看是不是有<code>+</code>运算符重载函数，如果没有，就去找转换函数，此时再调用转换函数。</p>
+<p>只要你认为合理，可以有很多个转换函数。</p>
+<h3 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h3><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
+<p>首先构造函数有两个形参，其中一个给了初值。其实调用的时候，只要给一个实参即可。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110202233.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=f+<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>这时在执行上述代码时，类中的运算符重载函数并没有分数加整型数这种情况，只有分数加分数。当看到没有这种重载<code>+</code> 这种函数，所以就想着可不可以把整型数3变为Fraction，那就看其构造函数，如果满足构造函数的参数，那么就会调用构造函数来进行类型的转换。这是让其他类型的数据转化成本类型。</p>
+<p>但是当有下面这种情况时，既可以用构造函数，又可以用类型转换函数。此时编译器会报错，因为它不知道调用哪个函数。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110203235.png" alt="image-20211110203235669" style="zoom:33%;" /></p>
+<h2 id="explicit-one-argument-ctor"><a href="#explicit-one-argument-ctor" class="headerlink" title="explicit-one-argument ctor"></a>explicit-one-argument ctor</h2><p>当在构造函数加上关键字<code>explicit</code>后，就可以避免上述问题发生。expilcit意思为明白的，明确的。在该关键字的限制下，构造函数就是创建新对象的时候调用，告诉编译器，不要在隐形转换的时候调用。</p>
+<p>看下面的例子：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111065659.png" alt="image-20211111065659372" style="zoom: 25%;" /></p>
+<p>这里出错显示：<code>[Error]conversion from &#39;double&#39; to &#39;Fraction&#39; request</code> ，在一开始看到<code>f+4</code>时，编译器会先找重载运算符函数，发现只有分数加分数，所以要把4转化成分数，但是该构造函数前加上了explict，所以不能走这条路。于是又找到类型转换函数，这条路可以走通，最终得到结果4.6，但是要把4.6赋值给d2，没有这种类型转换函数。</p>
+<h1 id="Lesson3-pointer-like-classes"><a href="#Lesson3-pointer-like-classes" class="headerlink" title="Lesson3 pointer-like classes"></a>Lesson3 pointer-like classes</h1><p>设计一个class，让它像指针。为什么这么做呢，就是想设计一个比指针功能更强大的东西。</p>
+<h2 id="关于智能指针"><a href="#关于智能指针" class="headerlink" title="关于智能指针"></a>关于智能指针</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111072414.png" alt="image-20211111072414463"></p>
+<p>shared_ptr是一个智能指针的模板类。我们写了一个Foo类，然后创建一个智能指针sp，这个过程中<code>shared_ptr&lt;Foo&gt; sp(new Foo)</code> 会调用构造函数，向智能指针中传入指针的值。</p>
+<p><code>*sp</code>调用了重载运算符*函数。返回值为该对象。</p>
+<p>这里要注意<code>sp-&gt;method()</code>，这句话会调用重载运算符函数，返回值是一个指针，虽然<code>-&gt;</code>在调用函数后就已经“消耗了”，返回的是一个指针，相当于已经没有了<code>-&gt;</code> ，但是为了保证符号的一致性，总不能写成<code>sp-&gt;-&gt;method()</code>，所以它就相当于<code>px-&gt;method()</code> ，就不用再写一遍了。</p>
+<h2 id="关于迭代器"><a href="#关于迭代器" class="headerlink" title="关于迭代器"></a>关于迭代器</h2><p>迭代器也是一种智能指针，指向容器中的一个元素。但是和上面说的智能指针略有不同。</p>
+<p>它不但要处理<code>* -&gt;</code> ，还要处理 <code>++ -- == !=</code> 等。</p>
+<h1 id="Lesson4-function-like-classes"><a href="#Lesson4-function-like-classes" class="headerlink" title="Lesson4 function-like classes"></a>Lesson4 function-like classes</h1><p>写一个class，让它像一个函数。即仿函数。</p>
+<p>形式为<code>typername()()</code>，前面的括号是创建一个临时对象，然后再加一个括号，是调用运算符重载函数。</p>
+<h1 id="Lesson5-member-template-成员模板"><a href="#Lesson5-member-template-成员模板" class="headerlink" title="Lesson5 member template 成员模板"></a>Lesson5 member template 成员模板</h1><p>模板主要分三大类：</p>
+<ul>
+<li>class template</li>
+<li>function template</li>
+<li>member template</li>
+</ul>
+<p>下面是member template的代码：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111080705.png" alt="image-20211111080704918" style="zoom:33%;" /></p>
+<p>在类中，构造函数为一个模板函数，这样在初始化的时候，会有更大的弹性。 因为模板函数不需要特别指定具体的类型，会自动推导。所以只在外面写好要创建的类，待传入初始化值时，类中的模板函数会自动推导出初始化值得类型。</p>
+<h1 id="Lesson6-模板特化-specialization"><a href="#Lesson6-模板特化-specialization" class="headerlink" title="Lesson6 模板特化(specialization)"></a>Lesson6 模板特化(specialization)</h1><p>在使用模板的时候，我们可以随机指定任何的类型，然后把该类型放到模板中。这就是泛化的概念。</p>
+<p>但是有时候，我们想在一些特定的类型时，不使用泛化的模板，而是有一些特别之处。这就是模板特化。</p>
+<p><strong>语法：</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111082640.png" alt="image-20211111082640173" style="zoom:33%;" /></p>
+<p>在使用的时候，例如上面的例子，编译器会找，泛化也可以，特化也可以，正如代码所写，特别指定的类型是long，所以就找到对应的模板。</p>
+<h1 id="Lesson7-偏特化-partial-specialization"><a href="#Lesson7-偏特化-partial-specialization" class="headerlink" title="Lesson7 偏特化(partial specialization)"></a>Lesson7 偏特化(partial specialization)</h1><h2 id="个数上的偏"><a href="#个数上的偏" class="headerlink" title="个数上的偏"></a>个数上的偏</h2><p><strong>语法：</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083230.png" alt="image-20211111083230419" style="zoom:33%;" /></p>
+<p>在这里，我们只想让模板中的某几个类型特化，如上，我们想让T特化，而且Alloc有默认类型。</p>
+<p>那么语法就是，在下面写上不特化的类型（特化的类型那块还是空着，对比全特化，尖括号里全是空）。</p>
+<h2 id="范围上的偏"><a href="#范围上的偏" class="headerlink" title="范围上的偏"></a>范围上的偏</h2><p>泛化的模板输入的类型可以是任意的，当我们想缩小一下范围，指定具体的某几个类型，例如，是指针类型，但是没有说明是什么的指针。</p>
+<p><strong>语法：</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083910.png" alt="image-20211111083910643" style="zoom:33%;" /></p>
+<p>这是后，obj1用的就是泛化的模板。obj2用的是特化的模板。</p>
+<h1 id="Lesson8-template-template-parameter-模板模板参数"><a href="#Lesson8-template-template-parameter-模板模板参数" class="headerlink" title="Lesson8 template template parameter 模板模板参数"></a>Lesson8 template template parameter 模板模板参数</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111084146.png" alt="image-20211111084146414" style="zoom: 25%;" /></p>
+<p>Container可以是任意的字。模板模板参数就是，尖括号内第一项的模板参数，告诉有T这个模板类型存在。然后第二项模板参数是一个模板类，该模板类还需要模板参数，这样就形成了模板模板参数。</p>
+<p>模板类的名字我们可以指定（因为类就可以当做是一个数据类型）</p>
+<p>就是很绕，但其实不难的。</p>
+<p>然后我们使用的时候，是这样的：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">XCLs&lt;string,list&gt; mylst1;</span><br></pre></td></tr></table></figure>
+<p>这句话虽然是报错的，但是我们写的模板模板参数啥的都没有问题，报错的主要原因是<code>list</code>这个容器的模板参数有好几个，虽然模板参数是有默认值的，但是在模板中使用必须要指出。所以得加上中间那两句话。</p>
+<blockquote>
+<p>模板中参数前面的关键字，有时候是typename，有时也可以是class，有什么区别呢。注意这里只有在 <code>&lt;&gt;</code>中，定义模板参数的时候，是共通的。如<code>template&lt;typename T,class U&gt;</code> ，这是共通的。但是当像上面写模板模板参数的时候，用到的class，这是不能共通的，这里的class表示是一个类，而不是一个模板参数。</p>
+</blockquote>
+<h1 id="Lesson9-关于标准库"><a href="#Lesson9-关于标准库" class="headerlink" title="Lesson9 关于标准库"></a>Lesson9 关于标准库</h1><p>任何语言的标准库都十分重要，应该能熟练的使用。</p>
+<p>C++的标准库主要有以下几个部分：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111093957.png" alt="image-20211111093957659" style="zoom:33%;" /></p>
+<ul>
+<li>容器：就是数据结构。</li>
+<li>算法：实现一些功能的方法。</li>
+</ul>
+<blockquote>
+<p>程序就是靠算法和数据搭建起来的，algorithms+data=program。</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>动手实践</category>
