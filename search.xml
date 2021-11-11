@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MacOS无法抹掉硬盘问题解决</title>
+    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mac电脑操作</title>
+    <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
+<h2 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h2><h3 id="1-强制退出"><a href="#1-强制退出" class="headerlink" title="1.强制退出"></a>1.强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
+<h2 id="二、常见问题"><a href="#二、常见问题" class="headerlink" title="二、常见问题"></a>二、常见问题</h2><h3 id="1-无法打开“-”，因为无法验证开发者"><a href="#1-无法打开“-”，因为无法验证开发者" class="headerlink" title="1.无法打开“*”，因为无法验证开发者"></a>1.无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
+<li>打开方达，在右侧菜单栏选择应用程序</li>
+<li>找到提示无法验证的应用，右键点击打开</li>
+<li>第一次会出现以下提示，继续点击打开即可</li>
+</ol>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git的使用手册</title>
     <url>/2021/10/18/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
     <content><![CDATA[<p>Git的使用手册，方便使用查阅。<br><span id="more"></span></p>
@@ -122,124 +152,303 @@
       </tags>
   </entry>
   <entry>
-    <title>MacOS无法抹掉硬盘问题解决</title>
-    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mac电脑操作</title>
-    <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
-<h2 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h2><h3 id="1-强制退出"><a href="#1-强制退出" class="headerlink" title="1.强制退出"></a>1.强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
-<h2 id="二、常见问题"><a href="#二、常见问题" class="headerlink" title="二、常见问题"></a>二、常见问题</h2><h3 id="1-无法打开“-”，因为无法验证开发者"><a href="#1-无法打开“-”，因为无法验证开发者" class="headerlink" title="1.无法打开“*”，因为无法验证开发者"></a>1.无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
-<li>打开方达，在右侧菜单栏选择应用程序</li>
-<li>找到提示无法验证的应用，右键点击打开</li>
-<li>第一次会出现以下提示，继续点击打开即可</li>
+    <title>Markdown常用语法</title>
+    <url>/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p>Markdown常用语法，方便使用时查阅。<br><span id="more"></span></p>
+<h2 id="锚点和目录"><a href="#锚点和目录" class="headerlink" title="锚点和目录"></a>锚点和目录</h2><p>目录在前面用 <code>[toc]</code> 即可。</p>
+<p>锚点: <code>[说明文字](#jump)</code>，然后在要跳跃的位置处写 <code>&lt;span id=&quot;jump&quot;&gt;跳转位置的名字&lt;/span&gt;</code></p>
+<p>例如：<a href="#希腊字母">希腊字母</a> </p>
+<p>超链接：<code>[网页名字](地址)</code>，如<a href="https://github.com/">github</a></p>
+<h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><ol>
+<li>行内公式：将公式插入到本行内，符号：<script type="math/tex">公式内容</script>，如：$xyz$</li>
+<li>独行公式：将公式插入到新的一行内，并且居中，符号：<script type="math/tex">$公式内容$$$，如：</script>xyz$$</li>
 </ol>
+<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
+<li>上标符号，符号：<code>^</code>，如：$x^4$</li>
+<li>下标符号，符号：<code>_</code>，如：$x_1$</li>
+<li>组合符号，符号：<code>&#123;&#125;</code>，如：${16}_{8}O{2+}_{2}$</li>
+</ol>
+<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
+<li>汉字形式，符号：<code>\mbox&#123;&#125;</code>，如：$V_{\mbox{初始}}$</li>
+<li>字体控制，符号：<code>\displaystyle</code>，如：$\displaystyle \frac{x+y}{y+z}$</li>
+<li>下划线符号，符号：<code>\underline</code>，如：$\underline{x+y}$</li>
+<li>标签，符号<code>\tag&#123;数字&#125;</code>，如：$\tag{11}$</li>
+<li>上大括号，符号：<code>\overbrace&#123;算式&#125;</code>，如：$\overbrace{a+b+c+d}^{2.0}$</li>
+<li>下大括号，符号：<code>\underbrace&#123;算式&#125;</code>，如：$a+\underbrace{b+c}_{1.0}+d$</li>
+<li>上位符号，符号：<code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code>，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</li>
+</ol>
+<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
+<li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
+<li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
+<li>大空格，符号<code>\</code>，如：$x \  y$ </li>
+<li>中空格，符号<code>\:</code>，如：$x \: y$</li>
+<li>小空格，符号<code>\,</code>，如：$x \, y$</li>
+<li>没有空格，符号``，如：$xy$</li>
+<li>紧贴，符号<code>\!</code>，如：$x ! y$</li>
+</ol>
+<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><ol>
+<li>括号，符号：<code>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</code>，如：$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</li>
+<li>中括号，符号：<code>[]</code>，如：$[x+y]$</li>
+<li>大括号，符号：<code>\&#123; \&#125;</code>，如: $\{\}$</li>
+<li>自适应括号，符号：<code>\left \right</code>，如：$\left(x\right)$，$\left(x{yz}\right)$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \choose 下位公式&#125;</code>，如：${n+1 \choose k}={n \choose k}+{n \choose k-1}$</li>
+<li>组合公式，符号：<code>&#123;上位公式 \atop 下位公式&#125;</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</li>
+</ol>
+<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><ol>
+<li>加法运算，符号：<code>+</code>，如：$x+y=z$</li>
+<li>减法运算，符号：<code>-</code>，如：$x-y=z$</li>
+<li>加减运算，符号：<code>\pm</code>，如：$x \pm y=z$</li>
+<li>减加运算，符号：<code>\mp</code>，如：$x \mp y=z$</li>
+<li>乘法运算，符号：<code>\times</code>，如：$x \times y=z$</li>
+<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y=z$</li>
+<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y=z$</li>
+<li>除法运算，符号：<code>\div</code>，如：$x \div y=z$</li>
+<li>斜法运算，符号：<code>/</code>，如：$x/y=z$</li>
+<li>分式表示，符号：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，如：$\frac{x+y}{y+z}$</li>
+<li>分式表示，符号：<code>&#123;分子&#125; \voer &#123;分母&#125;</code>，如：${x+y} \over {y+z}$</li>
+<li>绝对值表示，符号：<code>||</code>，如：$|x+y|$</li>
+</ol>
+<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><ol>
+<li>平均数运算，符号：<code>\overline&#123;算式&#125;</code>，如：$\overline{xyz}$</li>
+<li>开二次方运算，符号：<code>\sqrt</code>，如：$\sqrt x$</li>
+<li>开方运算，符号：<code>\sqrt[开方数]&#123;被开方数&#125;</code>，如：$\sqrt[3]{x+y}$</li>
+<li>对数运算，符号：<code>\log</code>，如：$\log(x)$</li>
+<li>极限运算，符号：<code>\lim</code>，如：$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>极限运算，符号：<code>\displaystyle \lim</code>，如：$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\sum</code>，如：$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>求和运算，符号：<code>\displaystyle \sum</code>，如：$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
+<li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
+<li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
+<li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
+<li>矩阵表示，符号：<code>\begin&#123;matrix&#125; \end&#123;matrix&#125;</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;5 &amp;6 &amp;\cdots &amp;8\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots&amp; \vdots&amp;\cdots &amp;16\end{matrix} \right]$</li>
+</ol>
+<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
+<li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
+<li>大于运算，符号：<code>&gt;</code>，如：$x+y&gt;z$</li>
+<li>小于运算，符号：<code>&lt;</code>，如：$x+y&lt;z$</li>
+<li>大于等于运算，符号：<code>\geq</code>，如：$x+y \geq z$</li>
+<li>小于等于运算，符号：<code>\leq</code>，如：$x+y \leq z$</li>
+<li>不等于运算，符号：<code>\neq</code>，如：$x+y \neq z$</li>
+<li>不大于等于运算，符号：<code>\ngeq</code>，如：$x+y \ngeq z$</li>
+<li>不大于等于运算，符号：<code>\not\geq</code>，如：$x+y \not\geq z$</li>
+<li>不小于等于运算，符号：<code>\nleq</code>，如：$x+y \nleq z$</li>
+<li>不小于等于运算，符号：<code>\not\leq</code>，如：$x+y \not\leq z$</li>
+<li>约等于运算，符号：<code>\approx</code>，如：$x+y \approx z$</li>
+<li>恒定等于运算，符号：<code>\equiv</code>，如：$x+y \equiv z$</li>
+</ol>
+<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><ol>
+<li>属于运算，符号：<code>\in</code>，如：$x \in y$</li>
+<li>不属于运算，符号：<code>\notin</code>，如：$x \notin y$</li>
+<li>不属于运算，符号：<code>\not\in</code>，如：$x \not\in y$</li>
+<li>子集运算，符号：<code>\subset</code>，如：$x \subset y$</li>
+<li>子集运算，符号：<code>\supset</code>，如：$x \supset y$</li>
+<li>真子集运算，符号：<code>\subseteq</code>，如：$x \subseteq y$</li>
+<li>非真子集运算，符号：<code>\subsetneq</code>，如：$x \subsetneq y$</li>
+<li>真子集运算，符号：<code>\supseteq</code>，如：$x \supseteq y$</li>
+<li>非真子集运算，符号：<code>\supsetneq</code>，如：$x \supsetneq y$</li>
+<li>非子集运算，符号：<code>\not\subset</code>，如：$x \not\subset y$</li>
+<li>非子集运算，符号：<code>\not\supset</code>，如：$x \not\supset y$</li>
+<li>并集运算，符号：<code>\cup</code>，如：$x \cup y$</li>
+<li>交集运算，符号：<code>\cap</code>，如：$x \cap y$</li>
+<li>差集运算，符号：<code>\setminus</code>，如：$x \setminus y$</li>
+<li>同或运算，符号：<code>\bigodot</code>，如：$x \bigodot y$</li>
+<li>同与运算，符号：<code>\bigotimes</code>，如：$x \bigotimes y$</li>
+<li>实数集合，符号：<code>\mathbb&#123;R&#125;</code>，如：<code>\mathbb&#123;R&#125;</code></li>
+<li>自然数集合，符号：<code>\mathbb&#123;Z&#125;</code>，如：<code>\mathbb&#123;Z&#125;</code></li>
+<li>空集，符号：<code>\emptyset</code>，如：$\emptyset$</li>
+</ol>
+<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><ol>
+<li>无穷，符号：<code>\infty</code>，如：$\infty$</li>
+<li>虚数，符号：<code>\imath</code>，如：$\imath$</li>
+<li>虚数，符号：<code>\jmath</code>，如：$\jmath$</li>
+<li>数学符号，符号<code>\hat&#123;a&#125;</code>，如：$\hat{a}$</li>
+<li>数学符号，符号<code>\check&#123;a&#125;</code>，如：$\check{a}$</li>
+<li>数学符号，符号<code>\breve&#123;a&#125;</code>，如：$\breve{a}$</li>
+<li>数学符号，符号<code>\tilde&#123;a&#125;</code>，如：$\tilde{a}$</li>
+<li>数学符号，符号<code>\bar&#123;a&#125;</code>，如：$\bar{a}$</li>
+<li>矢量符号，符号<code>\vec&#123;a&#125;</code>，如：$\vec{a}$</li>
+<li>数学符号，符号<code>\acute&#123;a&#125;</code>，如：$\acute{a}$</li>
+<li>数学符号，符号<code>\grave&#123;a&#125;</code>，如：$\grave{a}$</li>
+<li>数学符号，符号<code>\mathring&#123;a&#125;</code>，如：$\mathring{a}$</li>
+<li>一阶导数符号，符号<code>\dot&#123;a&#125;</code>，如：$\dot{a}$</li>
+<li>二阶导数符号，符号<code>\ddot&#123;a&#125;</code>，如：$\ddot{a}$</li>
+<li>上箭头，符号：<code>\uparrow</code>，如：$\uparrow$</li>
+<li>上箭头，符号：<code>\Uparrow</code>，如：$\Uparrow$</li>
+<li>下箭头，符号：<code>\downarrow</code>，如：$\downarrow$</li>
+<li>下箭头，符号：<code>\Downarrow</code>，如：$\Downarrow$</li>
+<li>左箭头，符号：<code>\leftarrow</code>，如：$\leftarrow$</li>
+<li>左箭头，符号：<code>\Leftarrow</code>，如：$\Leftarrow$</li>
+<li>右箭头，符号：<code>\rightarrow</code>，如：$\rightarrow$</li>
+<li>右箭头，符号：<code>\Rightarrow</code>，如：$\Rightarrow$</li>
+<li>底端对齐的省略号，符号：<code>\ldots</code>，如：$1,2,\ldots,n$</li>
+<li>中线对齐的省略号，符号：<code>\cdots</code>，如：$x_1^2 + x_2^2 + \cdots + x_n^2$</li>
+<li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
+<li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
+</ol>
+<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a><span id="希腊字母">希腊字母</span></h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字母</th>
+<th>实现</th>
+<th>字母</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><code>A</code></td>
+<td>α</td>
+<td><code>\alhpa</code></td>
+</tr>
+<tr>
+<td>B</td>
+<td><code>B</code></td>
+<td>β</td>
+<td><code>\beta</code></td>
+</tr>
+<tr>
+<td>Γ</td>
+<td><code>\Gamma</code></td>
+<td>γ</td>
+<td><code>\gamma</code></td>
+</tr>
+<tr>
+<td>Δ</td>
+<td><code>\Delta</code></td>
+<td>δ</td>
+<td><code>\delta</code></td>
+</tr>
+<tr>
+<td>E</td>
+<td><code>E</code></td>
+<td>ϵ</td>
+<td><code>\epsilon</code></td>
+</tr>
+<tr>
+<td>Z</td>
+<td><code>Z</code></td>
+<td>ζ</td>
+<td><code>\zeta</code></td>
+</tr>
+<tr>
+<td>H</td>
+<td><code>H</code></td>
+<td>η</td>
+<td><code>\eta</code></td>
+</tr>
+<tr>
+<td>Θ</td>
+<td><code>\Theta</code></td>
+<td>θ</td>
+<td><code>\theta</code></td>
+</tr>
+<tr>
+<td>I</td>
+<td><code>I</code></td>
+<td>ι</td>
+<td><code>\iota</code></td>
+</tr>
+<tr>
+<td>K</td>
+<td><code>K</code></td>
+<td>κ</td>
+<td><code>\kappa</code></td>
+</tr>
+<tr>
+<td>Λ</td>
+<td><code>\Lambda</code></td>
+<td>λ</td>
+<td><code>\lambda</code></td>
+</tr>
+<tr>
+<td>M</td>
+<td><code>M</code></td>
+<td>μ</td>
+<td><code>\mu</code></td>
+</tr>
+<tr>
+<td>N</td>
+<td><code>N</code></td>
+<td>ν</td>
+<td><code>\nu</code></td>
+</tr>
+<tr>
+<td>Ξ</td>
+<td><code>\Xi</code></td>
+<td>ξ</td>
+<td><code>\xi</code></td>
+</tr>
+<tr>
+<td>O</td>
+<td><code>O</code></td>
+<td>ο</td>
+<td><code>\omicron</code></td>
+</tr>
+<tr>
+<td>Π</td>
+<td><code>\Pi</code></td>
+<td>π</td>
+<td><code>\pi</code></td>
+</tr>
+<tr>
+<td>P</td>
+<td><code>P</code></td>
+<td>ρ</td>
+<td><code>\rho</code></td>
+</tr>
+<tr>
+<td>Σ</td>
+<td><code>\Sigma</code></td>
+<td>σ</td>
+<td><code>\sigma</code></td>
+</tr>
+<tr>
+<td>T</td>
+<td><code>T</code></td>
+<td>τ</td>
+<td><code>\tau</code></td>
+</tr>
+<tr>
+<td>Υ</td>
+<td><code>\Upsilon</code></td>
+<td>υ</td>
+<td><code>\upsilon</code></td>
+</tr>
+<tr>
+<td>Φ</td>
+<td><code>\Phi</code></td>
+<td>ϕ</td>
+<td><code>\phi</code></td>
+</tr>
+<tr>
+<td>X</td>
+<td><code>X</code></td>
+<td>χ</td>
+<td><code>\chi</code></td>
+</tr>
+<tr>
+<td>Ψ</td>
+<td><code>\Psi</code></td>
+<td>ψ</td>
+<td><code>\psi</code></td>
+</tr>
+<tr>
+<td>Ω</td>
+<td><code>\v</code></td>
+<td>ω</td>
+<td><code>\omega</code></td>
+</tr>
+</tbody>
+</table>
+</div>
 ]]></content>
       <categories>
         <category>动手实践</category>
       </categories>
       <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ROS中命名和重命名</title>
-    <url>/2021/10/22/ROS%E4%B8%AD%E5%91%BD%E5%90%8D%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D/</url>
-    <content><![CDATA[<p>本文介绍ROS中命名和重命名的相关知识。</p>
-<span id="more"></span>
-<p>其实命名和重命名是一回事，只不过我们自己写的节点或者参数等，可以在编程的时候自己直接命名，别人写的包我们不能在其源码上进行命名，所以就需要其他方式进行重命名。</p>
-<p>ROS中关于命名和重命名的情况主要为：</p>
-<ul>
-<li>ROS工作空间覆盖</li>
-<li>ROS节点重命名</li>
-<li>ROS话题名称设置</li>
-<li>ROS参数名称设置</li>
-</ul>
-<p>ROS中命名的策略有两个，一个是重新起名字(重映射)，另一个是在现有的命名前加上命名空间。</p>
-<h1 id="一、ROS工作空间覆盖"><a href="#一、ROS工作空间覆盖" class="headerlink" title="一、ROS工作空间覆盖"></a>一、ROS工作空间覆盖</h1><p>工作空间覆盖是指，在不同的工作空间下，有重名的功能包。</p>
-<p>因为要运行某个包，需要在<code>.bashrc</code>文件中设置环境变量路径。ROS 解析 <code>.bashrc 文件</code>，并生成 <code>ROS_PACKAGE_PATH</code>包路径，该变量中按照 <code>.bashrc</code>中配置设置工作空间优先级，如果先设置工作空间A，再设置工作空间B，那么在调用重名包时，B空间中的重名包被调用，因为它的搜索路径是先搜索B，再搜索A，既然在B中找到了该包，就不会再到A中找了。</p>
-<p>应该避免该种情况发生。</p>
-<h1 id="二、ROS节点重命名"><a href="#二、ROS节点重命名" class="headerlink" title="二、ROS节点重命名"></a>二、ROS节点重命名</h1><p>ROS中不允许同时运行两个名字相同的节点。当如果出现节点名相同时，需要进行重映射或添加命名空间。实现的方式主要有三种</p>
-<h2 id="1-rosrun命令"><a href="#1-rosrun命令" class="headerlink" title="1.rosrun命令"></a>1.rosrun命令</h2><p><strong>(1)添加命名空间</strong></p>
-<p>命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name  __ns:=/namespace</span><br></pre></td></tr></table></figure>
-<p>查看节点名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/node_name</span><br></pre></td></tr></table></figure>
-<p><strong>(2)重映射</strong></p>
-<p>命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name __name:=/new_name</span><br></pre></td></tr></table></figure>
-<p>查看节点名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/new_name</span><br></pre></td></tr></table></figure>
-<h2 id="2-launch文件"><a href="#2-launch文件" class="headerlink" title="2.launch文件"></a>2.launch文件</h2><p>在编写launch文件时，完成操作。</p>
-<p><strong>(1)添加命名空间</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span> <span class="attr">ns</span>=<span class="string">&quot;namespace&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>节点名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/new_name</span><br></pre></td></tr></table></figure>
-<p><strong>(2)重映射</strong></p>
-<p>node标签下的name可以完成重映射。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span>  /&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-编码实现"><a href="#3-编码实现" class="headerlink" title="3.编码实现"></a>3.编码实现</h2><p><strong>(1)重映射</strong></p>
-<p>在我们创建节点的时候，需要进行节点初始化，代码如下；</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>,ros::init_option::AnonymousName);</span><br></pre></td></tr></table></figure>
-<p>在参数列表中，<code>ros::init_option::AnoymousName</code>是一个随机的数，可以在原节点名上加上一个随机数。</p>
-<p><strong>(2)添加命名空间</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::map&lt;std::string, std::string&gt; map;</span><br><span class="line">map[<span class="string">&quot;__ns&quot;</span>] = <span class="string">&quot;namespace&quot;</span>;</span><br><span class="line">ros::<span class="built_in">init</span>(map,<span class="string">&quot;node_name&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h1 id="三、话题名称设置"><a href="#三、话题名称设置" class="headerlink" title="三、话题名称设置"></a>三、话题名称设置</h1><p>在 ROS 中节点终端，不同的节点之间通信都依赖于话题，话题名称也可能出现重复的情况，这种情况下，系统虽然不会抛出异常，但是可能导致订阅的消息非预期的，从而导致节点运行异常。这种情况下需要将两个节点的话题名称由相同修改为不同。又或者，两个节点是可以通信的，两个节点之间使用了相同的消息类型，但是由于，话题名称不同，导致通信失败。这种情况下需要将两个节点的话题名称由不同修改为相同。</p>
-<h2 id="0-话题分类"><a href="#0-话题分类" class="headerlink" title="0.话题分类"></a>0.话题分类</h2><p>根据话题前面添加的前缀的不同，又可以将话题分为：</p>
-<ul>
-<li>全局话题</li>
-<li>相对话题</li>
-<li>私有话题</li>
-</ul>
-<p>全局话题的前缀为<code>/</code>     <strong>E.g.</strong> <code>/topic_name</code> </p>
-<p>相对话题的前缀为节点的命名空间        <strong>E.g.</strong> <code>/namespace/topic_name</code></p>
-<p>私有话题的前缀为节点名        <strong>E.g.</strong>  <code>/namespace/node_name/topic_name</code></p>
-<h2 id="1-rosrun设置话题重映射"><a href="#1-rosrun设置话题重映射" class="headerlink" title="1.rosrun设置话题重映射"></a>1.rosrun设置话题重映射</h2><p>需要先知道节点中话题的名字。</p>
-<p>然后通过：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name /origin_topic_name:=/new_topic_name</span><br></pre></td></tr></table></figure>
-<h2 id="2-launch文件设置话题重映射"><a href="#2-launch文件设置话题重映射" class="headerlink" title="2.launch文件设置话题重映射"></a>2.launch文件设置话题重映射</h2><p>在launch文件中完成话题名重映射。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;node_name&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">remap</span> <span class="attr">from</span>=<span class="string">&quot;origin_topic_name&quot;</span> <span class="attr">to</span>=<span class="string">&quot;new_topic_name&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-编码设置话题名称"><a href="#3-编码设置话题名称" class="headerlink" title="3.编码设置话题名称"></a>3.编码设置话题名称</h2><p><strong>(1)全局话题名</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;<span class="comment">//创建节点句柄，它可以实现一些功能，设置话题时就需要它</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;/topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里的/就表示全局话题</span></span><br></pre></td></tr></table></figure>
-<p>生成的话题名为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/topic_name</span><br></pre></td></tr></table></figure>
-<p><strong>(2)相对话题</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;</span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里没有/就表示相对话题</span></span><br></pre></td></tr></table></figure>
-<p>生成的话题名为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/topic_name</span><br></pre></td></tr></table></figure>
-<p><strong>(3)私有话题</strong></p>
-<p>私有话题与前面的有一点不同，是在生成节点句柄的时候。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span>;<span class="comment">//注意这里加上了~</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-<p>生成的话题名为：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/topic_name</span><br></pre></td></tr></table></figure>
-<h1 id="四、ROS参数名设置"><a href="#四、ROS参数名设置" class="headerlink" title="四、ROS参数名设置"></a>四、ROS参数名设置</h1><p>在参数名设置中，没有重映射机制，就是直接给参数命名。命名的时候为了避免重名，通过添加前缀的方式，实现全局参数，相对参数，私有参数三种。</p>
-<h2 id="1-rosrun设置参数"><a href="#1-rosrun设置参数" class="headerlink" title="1.rosrun设置参数"></a>1.rosrun设置参数</h2><p>rosrun命令设置的是私有参数。参数名前面要加上<code>_</code></p>
-<p>命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name _param_name:=10</span><br></pre></td></tr></table></figure>
-<p>参数列表显示：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/param_name</span><br></pre></td></tr></table></figure>
-<h2 id="2-launch文件设置"><a href="#2-launch文件设置" class="headerlink" title="2.launch文件设置"></a>2.launch文件设置</h2><p>通过 launch 文件设置参数的方式前面已经介绍过了，可以在 node 标签外，或 node 标签中通过 param 或 rosparam  来设置参数。在 node 标签外设置的参数是全局性质的，参考的是 / ，在 node 标签中设置的参数是私有性质的，参考的是  /命名空间/节点名称。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--全局参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p1&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!--私有参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;turtlesim&quot;</span> <span class="attr">type</span>=<span class="string">&quot;turtlesim_node&quot;</span> <span class="attr">name</span>=<span class="string">&quot;t1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p2&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-编码设置参数"><a href="#3-编码设置参数" class="headerlink" title="3.编码设置参数"></a>3.编码设置参数</h2><p>在C++源码中，可以通过两种放式来设置参数：</p>
-<p><strong>(1)通过<code>ros::param</code>设置参数</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;/set_A&quot;</span>,<span class="number">100</span>); <span class="comment">//全局参数,和命名空间以及节点名称无关</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;set_B&quot;</span>,<span class="number">100</span>); <span class="comment">//相对参数,参考命名空间</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;~set_C&quot;</span>,<span class="number">100</span>); <span class="comment">//私有参数,参考命名空间与节点名称</span></span><br></pre></td></tr></table></figure>
-<p><strong>(2)<code>ros::NodeHandle</code>设置参数</strong></p>
-<p>首先要创建<code>ros::NodeHandle</code>对象。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::NodeHandle n1</span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;/param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置全局参数</span></span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置相对参数</span></span><br><span class="line"></span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n2</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">n2.<span class="title">setParam</span><span class="params">(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>)</span><span class="comment">//设置私有参数</span></span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>ROS</tag>
+        <tag>Markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -715,6 +924,97 @@
       </tags>
   </entry>
   <entry>
+    <title>ROS中命名和重命名</title>
+    <url>/2021/10/22/ROS%E4%B8%AD%E5%91%BD%E5%90%8D%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D/</url>
+    <content><![CDATA[<p>本文介绍ROS中命名和重命名的相关知识。</p>
+<span id="more"></span>
+<p>其实命名和重命名是一回事，只不过我们自己写的节点或者参数等，可以在编程的时候自己直接命名，别人写的包我们不能在其源码上进行命名，所以就需要其他方式进行重命名。</p>
+<p>ROS中关于命名和重命名的情况主要为：</p>
+<ul>
+<li>ROS工作空间覆盖</li>
+<li>ROS节点重命名</li>
+<li>ROS话题名称设置</li>
+<li>ROS参数名称设置</li>
+</ul>
+<p>ROS中命名的策略有两个，一个是重新起名字(重映射)，另一个是在现有的命名前加上命名空间。</p>
+<h1 id="一、ROS工作空间覆盖"><a href="#一、ROS工作空间覆盖" class="headerlink" title="一、ROS工作空间覆盖"></a>一、ROS工作空间覆盖</h1><p>工作空间覆盖是指，在不同的工作空间下，有重名的功能包。</p>
+<p>因为要运行某个包，需要在<code>.bashrc</code>文件中设置环境变量路径。ROS 解析 <code>.bashrc 文件</code>，并生成 <code>ROS_PACKAGE_PATH</code>包路径，该变量中按照 <code>.bashrc</code>中配置设置工作空间优先级，如果先设置工作空间A，再设置工作空间B，那么在调用重名包时，B空间中的重名包被调用，因为它的搜索路径是先搜索B，再搜索A，既然在B中找到了该包，就不会再到A中找了。</p>
+<p>应该避免该种情况发生。</p>
+<h1 id="二、ROS节点重命名"><a href="#二、ROS节点重命名" class="headerlink" title="二、ROS节点重命名"></a>二、ROS节点重命名</h1><p>ROS中不允许同时运行两个名字相同的节点。当如果出现节点名相同时，需要进行重映射或添加命名空间。实现的方式主要有三种</p>
+<h2 id="1-rosrun命令"><a href="#1-rosrun命令" class="headerlink" title="1.rosrun命令"></a>1.rosrun命令</h2><p><strong>(1)添加命名空间</strong></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name  __ns:=/namespace</span><br></pre></td></tr></table></figure>
+<p>查看节点名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/node_name</span><br></pre></td></tr></table></figure>
+<p><strong>(2)重映射</strong></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name __name:=/new_name</span><br></pre></td></tr></table></figure>
+<p>查看节点名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/new_name</span><br></pre></td></tr></table></figure>
+<h2 id="2-launch文件"><a href="#2-launch文件" class="headerlink" title="2.launch文件"></a>2.launch文件</h2><p>在编写launch文件时，完成操作。</p>
+<p><strong>(1)添加命名空间</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span> <span class="attr">ns</span>=<span class="string">&quot;namespace&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>节点名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/new_name</span><br></pre></td></tr></table></figure>
+<p><strong>(2)重映射</strong></p>
+<p>node标签下的name可以完成重映射。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span>  /&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-编码实现"><a href="#3-编码实现" class="headerlink" title="3.编码实现"></a>3.编码实现</h2><p><strong>(1)重映射</strong></p>
+<p>在我们创建节点的时候，需要进行节点初始化，代码如下；</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>,ros::init_option::AnonymousName);</span><br></pre></td></tr></table></figure>
+<p>在参数列表中，<code>ros::init_option::AnoymousName</code>是一个随机的数，可以在原节点名上加上一个随机数。</p>
+<p><strong>(2)添加命名空间</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::map&lt;std::string, std::string&gt; map;</span><br><span class="line">map[<span class="string">&quot;__ns&quot;</span>] = <span class="string">&quot;namespace&quot;</span>;</span><br><span class="line">ros::<span class="built_in">init</span>(map,<span class="string">&quot;node_name&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="三、话题名称设置"><a href="#三、话题名称设置" class="headerlink" title="三、话题名称设置"></a>三、话题名称设置</h1><p>在 ROS 中节点终端，不同的节点之间通信都依赖于话题，话题名称也可能出现重复的情况，这种情况下，系统虽然不会抛出异常，但是可能导致订阅的消息非预期的，从而导致节点运行异常。这种情况下需要将两个节点的话题名称由相同修改为不同。又或者，两个节点是可以通信的，两个节点之间使用了相同的消息类型，但是由于，话题名称不同，导致通信失败。这种情况下需要将两个节点的话题名称由不同修改为相同。</p>
+<h2 id="0-话题分类"><a href="#0-话题分类" class="headerlink" title="0.话题分类"></a>0.话题分类</h2><p>根据话题前面添加的前缀的不同，又可以将话题分为：</p>
+<ul>
+<li>全局话题</li>
+<li>相对话题</li>
+<li>私有话题</li>
+</ul>
+<p>全局话题的前缀为<code>/</code>     <strong>E.g.</strong> <code>/topic_name</code> </p>
+<p>相对话题的前缀为节点的命名空间        <strong>E.g.</strong> <code>/namespace/topic_name</code></p>
+<p>私有话题的前缀为节点名        <strong>E.g.</strong>  <code>/namespace/node_name/topic_name</code></p>
+<h2 id="1-rosrun设置话题重映射"><a href="#1-rosrun设置话题重映射" class="headerlink" title="1.rosrun设置话题重映射"></a>1.rosrun设置话题重映射</h2><p>需要先知道节点中话题的名字。</p>
+<p>然后通过：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name /origin_topic_name:=/new_topic_name</span><br></pre></td></tr></table></figure>
+<h2 id="2-launch文件设置话题重映射"><a href="#2-launch文件设置话题重映射" class="headerlink" title="2.launch文件设置话题重映射"></a>2.launch文件设置话题重映射</h2><p>在launch文件中完成话题名重映射。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;node_name&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">remap</span> <span class="attr">from</span>=<span class="string">&quot;origin_topic_name&quot;</span> <span class="attr">to</span>=<span class="string">&quot;new_topic_name&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-编码设置话题名称"><a href="#3-编码设置话题名称" class="headerlink" title="3.编码设置话题名称"></a>3.编码设置话题名称</h2><p><strong>(1)全局话题名</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;<span class="comment">//创建节点句柄，它可以实现一些功能，设置话题时就需要它</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;/topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里的/就表示全局话题</span></span><br></pre></td></tr></table></figure>
+<p>生成的话题名为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/topic_name</span><br></pre></td></tr></table></figure>
+<p><strong>(2)相对话题</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;</span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里没有/就表示相对话题</span></span><br></pre></td></tr></table></figure>
+<p>生成的话题名为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/topic_name</span><br></pre></td></tr></table></figure>
+<p><strong>(3)私有话题</strong></p>
+<p>私有话题与前面的有一点不同，是在生成节点句柄的时候。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span>;<span class="comment">//注意这里加上了~</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>生成的话题名为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/topic_name</span><br></pre></td></tr></table></figure>
+<h1 id="四、ROS参数名设置"><a href="#四、ROS参数名设置" class="headerlink" title="四、ROS参数名设置"></a>四、ROS参数名设置</h1><p>在参数名设置中，没有重映射机制，就是直接给参数命名。命名的时候为了避免重名，通过添加前缀的方式，实现全局参数，相对参数，私有参数三种。</p>
+<h2 id="1-rosrun设置参数"><a href="#1-rosrun设置参数" class="headerlink" title="1.rosrun设置参数"></a>1.rosrun设置参数</h2><p>rosrun命令设置的是私有参数。参数名前面要加上<code>_</code></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name _param_name:=10</span><br></pre></td></tr></table></figure>
+<p>参数列表显示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/param_name</span><br></pre></td></tr></table></figure>
+<h2 id="2-launch文件设置"><a href="#2-launch文件设置" class="headerlink" title="2.launch文件设置"></a>2.launch文件设置</h2><p>通过 launch 文件设置参数的方式前面已经介绍过了，可以在 node 标签外，或 node 标签中通过 param 或 rosparam  来设置参数。在 node 标签外设置的参数是全局性质的，参考的是 / ，在 node 标签中设置的参数是私有性质的，参考的是  /命名空间/节点名称。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--全局参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p1&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!--私有参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;turtlesim&quot;</span> <span class="attr">type</span>=<span class="string">&quot;turtlesim_node&quot;</span> <span class="attr">name</span>=<span class="string">&quot;t1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p2&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-编码设置参数"><a href="#3-编码设置参数" class="headerlink" title="3.编码设置参数"></a>3.编码设置参数</h2><p>在C++源码中，可以通过两种放式来设置参数：</p>
+<p><strong>(1)通过<code>ros::param</code>设置参数</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;/set_A&quot;</span>,<span class="number">100</span>); <span class="comment">//全局参数,和命名空间以及节点名称无关</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;set_B&quot;</span>,<span class="number">100</span>); <span class="comment">//相对参数,参考命名空间</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;~set_C&quot;</span>,<span class="number">100</span>); <span class="comment">//私有参数,参考命名空间与节点名称</span></span><br></pre></td></tr></table></figure>
+<p><strong>(2)<code>ros::NodeHandle</code>设置参数</strong></p>
+<p>首先要创建<code>ros::NodeHandle</code>对象。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::NodeHandle n1</span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;/param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置全局参数</span></span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置相对参数</span></span><br><span class="line"></span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n2</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">n2.<span class="title">setParam</span><span class="params">(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>)</span><span class="comment">//设置私有参数</span></span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ROS开发环境搭建</title>
     <url>/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
@@ -858,25 +1158,6 @@ r_{j} \\
       </categories>
       <tags>
         <tag>SLAM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VScode编译环境配置</title>
-    <url>/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>在linux或mac中编译C++,首先要配置好编译环境。<br><span id="more"></span></p>
-<h1 id="1-首先编写CMakeLists-txt文件"><a href="#1-首先编写CMakeLists-txt文件" class="headerlink" title="1.首先编写CMakeLists.txt文件"></a>1.首先编写CMakeLists.txt文件</h1><p>注意：在<code>c_cpp_properties.json</code>中设置了头文件路径，在编译的过程中就会有头文件内容的提示，但仍需要在<code>CMakeLists.txt</code>中写好包含的头文件路径，否则编译器只会在<code>usr/include文件夹下</code>和<code>CMakeLists.txt</code>所在文件夹下寻找头文件</p>
-<p>如果不在<code>c_cpp_properties.json</code>中设置头文件路径，在写代码的时候可能会没有提示，而且头文件名字下会有红波浪线，但可以正常编译</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(文件名)</span><br><span class="line"></span><br><span class="line"><span class="keyword">aux_source_directory</span>(./ VAR) <span class="comment">#把当前路径下的所有源文件打包程VAR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(添加头文件路径)<span class="comment">#如果在vscode中已经添加了头文件路径了，就不需要再添加了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(搜索库)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;添加库的头文件&#125;</span>）</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_TYPE Debug)<span class="comment">#如果想调试，加上这一句，生成可调试文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS<span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -Wall&quot;</span>)<span class="comment">#生成错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(可执行文件名 <span class="variable">$&#123;VAR&#125;</span>)<span class="comment">#生成可执行文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(可执行文件 库名) <span class="comment">#链接库</span></span><br></pre></td></tr></table></figure>
-<h1 id="2-文件根目录中建立一个build文件夹"><a href="#2-文件根目录中建立一个build文件夹" class="headerlink" title="2.文件根目录中建立一个build文件夹"></a>2.文件根目录中建立一个build文件夹</h1><p>编译过程中生成的中间文件和可执行文件全在该文件夹下，可执行文件的位置可在CMakeLists.txt中改变路径</p>
-<h1 id="3-建立-json文件夹，编写launch-json文件"><a href="#3-建立-json文件夹，编写launch-json文件" class="headerlink" title="3.建立.json文件夹，编写launch.json文件"></a>3.建立.json文件夹，编写launch.json文件</h1><p>新建launch.json文件，该文件是在VSCODE中按F5后所执行的命令</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;g++ - 生成和调试活动文件&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build/可执行文件名&quot;</span>,**<span class="comment">//执行文件的路径加上可执行文件，$&#123;workspaceFolder&#125;为根目录**</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,<span class="comment">//打开外部终端</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;为 gdb 启用整齐打印&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="attr">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;Build&quot;</span>,<span class="comment">//该命令表示执行launch.json的命令之前的预执行任务，要在tasks.json中设置</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>VScode</tag>
       </tags>
   </entry>
   <entry>
@@ -1047,303 +1328,27 @@ r_{j} \\
       </tags>
   </entry>
   <entry>
-    <title>Markdown常用语法</title>
-    <url>/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<p>Markdown常用语法，方便使用时查阅。<br><span id="more"></span></p>
-<h2 id="锚点和目录"><a href="#锚点和目录" class="headerlink" title="锚点和目录"></a>锚点和目录</h2><p>目录在前面用 <code>[toc]</code> 即可。</p>
-<p>锚点: <code>[说明文字](#jump)</code>，然后在要跳跃的位置处写 <code>&lt;span id=&quot;jump&quot;&gt;跳转位置的名字&lt;/span&gt;</code></p>
-<p>例如：<a href="#希腊字母">希腊字母</a> </p>
-<p>超链接：<code>[网页名字](地址)</code>，如<a href="https://github.com/">github</a></p>
-<h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><ol>
-<li>行内公式：将公式插入到本行内，符号：<script type="math/tex">公式内容</script>，如：$xyz$</li>
-<li>独行公式：将公式插入到新的一行内，并且居中，符号：<script type="math/tex">$公式内容$$$，如：</script>xyz$$</li>
+    <title>Word中使用Endnote插件</title>
+    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
+<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
+<li>关闭word，打开endnote</li>
+<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
+<li>等待完成</li>
+<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
+<li>重启word</li>
 </ol>
-<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><ol>
-<li>上标符号，符号：<code>^</code>，如：$x^4$</li>
-<li>下标符号，符号：<code>_</code>，如：$x_1$</li>
-<li>组合符号，符号：<code>&#123;&#125;</code>，如：${16}_{8}O{2+}_{2}$</li>
-</ol>
-<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><ol>
-<li>汉字形式，符号：<code>\mbox&#123;&#125;</code>，如：$V_{\mbox{初始}}$</li>
-<li>字体控制，符号：<code>\displaystyle</code>，如：$\displaystyle \frac{x+y}{y+z}$</li>
-<li>下划线符号，符号：<code>\underline</code>，如：$\underline{x+y}$</li>
-<li>标签，符号<code>\tag&#123;数字&#125;</code>，如：$\tag{11}$</li>
-<li>上大括号，符号：<code>\overbrace&#123;算式&#125;</code>，如：$\overbrace{a+b+c+d}^{2.0}$</li>
-<li>下大括号，符号：<code>\underbrace&#123;算式&#125;</code>，如：$a+\underbrace{b+c}_{1.0}+d$</li>
-<li>上位符号，符号：<code>\stacrel&#123;上位符号&#125;&#123;基位符号&#125;</code>，如：$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</li>
-</ol>
-<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><ol>
-<li>两个quad空格，符号：<code>\qquad</code>，如：$x \qquad y$</li>
-<li>quad空格，符号：<code>\quad</code>，如：$x \quad y$</li>
-<li>大空格，符号<code>\</code>，如：$x \  y$ </li>
-<li>中空格，符号<code>\:</code>，如：$x \: y$</li>
-<li>小空格，符号<code>\,</code>，如：$x \, y$</li>
-<li>没有空格，符号``，如：$xy$</li>
-<li>紧贴，符号<code>\!</code>，如：$x ! y$</li>
-</ol>
-<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><ol>
-<li>括号，符号：<code>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</code>，如：$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</li>
-<li>中括号，符号：<code>[]</code>，如：$[x+y]$</li>
-<li>大括号，符号：<code>\&#123; \&#125;</code>，如: $\{\}$</li>
-<li>自适应括号，符号：<code>\left \right</code>，如：$\left(x\right)$，$\left(x{yz}\right)$</li>
-<li>组合公式，符号：<code>&#123;上位公式 \choose 下位公式&#125;</code>，如：${n+1 \choose k}={n \choose k}+{n \choose k-1}$</li>
-<li>组合公式，符号：<code>&#123;上位公式 \atop 下位公式&#125;</code>，如：$\sum_{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A_{k_0}A_{k_1}\cdots$</li>
-</ol>
-<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><ol>
-<li>加法运算，符号：<code>+</code>，如：$x+y=z$</li>
-<li>减法运算，符号：<code>-</code>，如：$x-y=z$</li>
-<li>加减运算，符号：<code>\pm</code>，如：$x \pm y=z$</li>
-<li>减加运算，符号：<code>\mp</code>，如：$x \mp y=z$</li>
-<li>乘法运算，符号：<code>\times</code>，如：$x \times y=z$</li>
-<li>点乘运算，符号：<code>\cdot</code>，如：$x \cdot y=z$</li>
-<li>星乘运算，符号：<code>\ast</code>，如：$x \ast y=z$</li>
-<li>除法运算，符号：<code>\div</code>，如：$x \div y=z$</li>
-<li>斜法运算，符号：<code>/</code>，如：$x/y=z$</li>
-<li>分式表示，符号：<code>\frac&#123;分子&#125;&#123;分母&#125;</code>，如：$\frac{x+y}{y+z}$</li>
-<li>分式表示，符号：<code>&#123;分子&#125; \voer &#123;分母&#125;</code>，如：${x+y} \over {y+z}$</li>
-<li>绝对值表示，符号：<code>||</code>，如：$|x+y|$</li>
-</ol>
-<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><ol>
-<li>平均数运算，符号：<code>\overline&#123;算式&#125;</code>，如：$\overline{xyz}$</li>
-<li>开二次方运算，符号：<code>\sqrt</code>，如：$\sqrt x$</li>
-<li>开方运算，符号：<code>\sqrt[开方数]&#123;被开方数&#125;</code>，如：$\sqrt[3]{x+y}$</li>
-<li>对数运算，符号：<code>\log</code>，如：$\log(x)$</li>
-<li>极限运算，符号：<code>\lim</code>，如：$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>极限运算，符号：<code>\displaystyle \lim</code>，如：$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>求和运算，符号：<code>\sum</code>，如：$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>求和运算，符号：<code>\displaystyle \sum</code>，如：$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</li>
-<li>积分运算，符号：<code>\int</code>，如：$\int^{\infty}_{0}{xdx}$</li>
-<li>积分运算，符号：<code>\displaystyle \int</code>，如：$\displaystyle \int^{\infty}_{0}{xdx}$</li>
-<li>微分运算，符号：<code>\partial</code>，如：$\frac{\partial x}{\partial y}$</li>
-<li>矩阵表示，符号：<code>\begin&#123;matrix&#125; \end&#123;matrix&#125;</code>，如：$\left[ \begin{matrix} 1 &amp;2 &amp;\cdots &amp;5 &amp;6 &amp;\cdots &amp;8\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots&amp; \vdots&amp;\cdots &amp;16\end{matrix} \right]$</li>
-</ol>
-<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><ol>
-<li>等于运算，符号：<code>=</code>，如：$x+y=z$</li>
-<li>大于运算，符号：<code>&gt;</code>，如：$x+y&gt;z$</li>
-<li>小于运算，符号：<code>&lt;</code>，如：$x+y&lt;z$</li>
-<li>大于等于运算，符号：<code>\geq</code>，如：$x+y \geq z$</li>
-<li>小于等于运算，符号：<code>\leq</code>，如：$x+y \leq z$</li>
-<li>不等于运算，符号：<code>\neq</code>，如：$x+y \neq z$</li>
-<li>不大于等于运算，符号：<code>\ngeq</code>，如：$x+y \ngeq z$</li>
-<li>不大于等于运算，符号：<code>\not\geq</code>，如：$x+y \not\geq z$</li>
-<li>不小于等于运算，符号：<code>\nleq</code>，如：$x+y \nleq z$</li>
-<li>不小于等于运算，符号：<code>\not\leq</code>，如：$x+y \not\leq z$</li>
-<li>约等于运算，符号：<code>\approx</code>，如：$x+y \approx z$</li>
-<li>恒定等于运算，符号：<code>\equiv</code>，如：$x+y \equiv z$</li>
-</ol>
-<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><ol>
-<li>属于运算，符号：<code>\in</code>，如：$x \in y$</li>
-<li>不属于运算，符号：<code>\notin</code>，如：$x \notin y$</li>
-<li>不属于运算，符号：<code>\not\in</code>，如：$x \not\in y$</li>
-<li>子集运算，符号：<code>\subset</code>，如：$x \subset y$</li>
-<li>子集运算，符号：<code>\supset</code>，如：$x \supset y$</li>
-<li>真子集运算，符号：<code>\subseteq</code>，如：$x \subseteq y$</li>
-<li>非真子集运算，符号：<code>\subsetneq</code>，如：$x \subsetneq y$</li>
-<li>真子集运算，符号：<code>\supseteq</code>，如：$x \supseteq y$</li>
-<li>非真子集运算，符号：<code>\supsetneq</code>，如：$x \supsetneq y$</li>
-<li>非子集运算，符号：<code>\not\subset</code>，如：$x \not\subset y$</li>
-<li>非子集运算，符号：<code>\not\supset</code>，如：$x \not\supset y$</li>
-<li>并集运算，符号：<code>\cup</code>，如：$x \cup y$</li>
-<li>交集运算，符号：<code>\cap</code>，如：$x \cap y$</li>
-<li>差集运算，符号：<code>\setminus</code>，如：$x \setminus y$</li>
-<li>同或运算，符号：<code>\bigodot</code>，如：$x \bigodot y$</li>
-<li>同与运算，符号：<code>\bigotimes</code>，如：$x \bigotimes y$</li>
-<li>实数集合，符号：<code>\mathbb&#123;R&#125;</code>，如：<code>\mathbb&#123;R&#125;</code></li>
-<li>自然数集合，符号：<code>\mathbb&#123;Z&#125;</code>，如：<code>\mathbb&#123;Z&#125;</code></li>
-<li>空集，符号：<code>\emptyset</code>，如：$\emptyset$</li>
-</ol>
-<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><ol>
-<li>无穷，符号：<code>\infty</code>，如：$\infty$</li>
-<li>虚数，符号：<code>\imath</code>，如：$\imath$</li>
-<li>虚数，符号：<code>\jmath</code>，如：$\jmath$</li>
-<li>数学符号，符号<code>\hat&#123;a&#125;</code>，如：$\hat{a}$</li>
-<li>数学符号，符号<code>\check&#123;a&#125;</code>，如：$\check{a}$</li>
-<li>数学符号，符号<code>\breve&#123;a&#125;</code>，如：$\breve{a}$</li>
-<li>数学符号，符号<code>\tilde&#123;a&#125;</code>，如：$\tilde{a}$</li>
-<li>数学符号，符号<code>\bar&#123;a&#125;</code>，如：$\bar{a}$</li>
-<li>矢量符号，符号<code>\vec&#123;a&#125;</code>，如：$\vec{a}$</li>
-<li>数学符号，符号<code>\acute&#123;a&#125;</code>，如：$\acute{a}$</li>
-<li>数学符号，符号<code>\grave&#123;a&#125;</code>，如：$\grave{a}$</li>
-<li>数学符号，符号<code>\mathring&#123;a&#125;</code>，如：$\mathring{a}$</li>
-<li>一阶导数符号，符号<code>\dot&#123;a&#125;</code>，如：$\dot{a}$</li>
-<li>二阶导数符号，符号<code>\ddot&#123;a&#125;</code>，如：$\ddot{a}$</li>
-<li>上箭头，符号：<code>\uparrow</code>，如：$\uparrow$</li>
-<li>上箭头，符号：<code>\Uparrow</code>，如：$\Uparrow$</li>
-<li>下箭头，符号：<code>\downarrow</code>，如：$\downarrow$</li>
-<li>下箭头，符号：<code>\Downarrow</code>，如：$\Downarrow$</li>
-<li>左箭头，符号：<code>\leftarrow</code>，如：$\leftarrow$</li>
-<li>左箭头，符号：<code>\Leftarrow</code>，如：$\Leftarrow$</li>
-<li>右箭头，符号：<code>\rightarrow</code>，如：$\rightarrow$</li>
-<li>右箭头，符号：<code>\Rightarrow</code>，如：$\Rightarrow$</li>
-<li>底端对齐的省略号，符号：<code>\ldots</code>，如：$1,2,\ldots,n$</li>
-<li>中线对齐的省略号，符号：<code>\cdots</code>，如：$x_1^2 + x_2^2 + \cdots + x_n^2$</li>
-<li>竖直对齐的省略号，符号：<code>\vdots</code>，如：$\vdots$</li>
-<li>斜对齐的省略号，符号：<code>\ddots</code>，如：$\ddots$</li>
-</ol>
-<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a><span id="希腊字母">希腊字母</span></h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>字母</th>
-<th>实现</th>
-<th>字母</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td><code>A</code></td>
-<td>α</td>
-<td><code>\alhpa</code></td>
-</tr>
-<tr>
-<td>B</td>
-<td><code>B</code></td>
-<td>β</td>
-<td><code>\beta</code></td>
-</tr>
-<tr>
-<td>Γ</td>
-<td><code>\Gamma</code></td>
-<td>γ</td>
-<td><code>\gamma</code></td>
-</tr>
-<tr>
-<td>Δ</td>
-<td><code>\Delta</code></td>
-<td>δ</td>
-<td><code>\delta</code></td>
-</tr>
-<tr>
-<td>E</td>
-<td><code>E</code></td>
-<td>ϵ</td>
-<td><code>\epsilon</code></td>
-</tr>
-<tr>
-<td>Z</td>
-<td><code>Z</code></td>
-<td>ζ</td>
-<td><code>\zeta</code></td>
-</tr>
-<tr>
-<td>H</td>
-<td><code>H</code></td>
-<td>η</td>
-<td><code>\eta</code></td>
-</tr>
-<tr>
-<td>Θ</td>
-<td><code>\Theta</code></td>
-<td>θ</td>
-<td><code>\theta</code></td>
-</tr>
-<tr>
-<td>I</td>
-<td><code>I</code></td>
-<td>ι</td>
-<td><code>\iota</code></td>
-</tr>
-<tr>
-<td>K</td>
-<td><code>K</code></td>
-<td>κ</td>
-<td><code>\kappa</code></td>
-</tr>
-<tr>
-<td>Λ</td>
-<td><code>\Lambda</code></td>
-<td>λ</td>
-<td><code>\lambda</code></td>
-</tr>
-<tr>
-<td>M</td>
-<td><code>M</code></td>
-<td>μ</td>
-<td><code>\mu</code></td>
-</tr>
-<tr>
-<td>N</td>
-<td><code>N</code></td>
-<td>ν</td>
-<td><code>\nu</code></td>
-</tr>
-<tr>
-<td>Ξ</td>
-<td><code>\Xi</code></td>
-<td>ξ</td>
-<td><code>\xi</code></td>
-</tr>
-<tr>
-<td>O</td>
-<td><code>O</code></td>
-<td>ο</td>
-<td><code>\omicron</code></td>
-</tr>
-<tr>
-<td>Π</td>
-<td><code>\Pi</code></td>
-<td>π</td>
-<td><code>\pi</code></td>
-</tr>
-<tr>
-<td>P</td>
-<td><code>P</code></td>
-<td>ρ</td>
-<td><code>\rho</code></td>
-</tr>
-<tr>
-<td>Σ</td>
-<td><code>\Sigma</code></td>
-<td>σ</td>
-<td><code>\sigma</code></td>
-</tr>
-<tr>
-<td>T</td>
-<td><code>T</code></td>
-<td>τ</td>
-<td><code>\tau</code></td>
-</tr>
-<tr>
-<td>Υ</td>
-<td><code>\Upsilon</code></td>
-<td>υ</td>
-<td><code>\upsilon</code></td>
-</tr>
-<tr>
-<td>Φ</td>
-<td><code>\Phi</code></td>
-<td>ϕ</td>
-<td><code>\phi</code></td>
-</tr>
-<tr>
-<td>X</td>
-<td><code>X</code></td>
-<td>χ</td>
-<td><code>\chi</code></td>
-</tr>
-<tr>
-<td>Ψ</td>
-<td><code>\Psi</code></td>
-<td>ψ</td>
-<td><code>\psi</code></td>
-</tr>
-<tr>
-<td>Ω</td>
-<td><code>\v</code></td>
-<td>ω</td>
-<td><code>\omega</code></td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
+<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
+<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
+<p>引用文献的格式可以在Word中设置。</p>
 ]]></content>
       <categories>
-        <category>动手实践</category>
+        <category>问题解决</category>
       </categories>
       <tags>
-        <tag>Markdown</tag>
+        <tag>Mac</tag>
       </tags>
   </entry>
   <entry>
@@ -1375,6 +1380,25 @@ r_{j} \\
       <tags>
         <tag>ROS</tag>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VScode编译环境配置</title>
+    <url>/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>在linux或mac中编译C++,首先要配置好编译环境。<br><span id="more"></span></p>
+<h1 id="1-首先编写CMakeLists-txt文件"><a href="#1-首先编写CMakeLists-txt文件" class="headerlink" title="1.首先编写CMakeLists.txt文件"></a>1.首先编写CMakeLists.txt文件</h1><p>注意：在<code>c_cpp_properties.json</code>中设置了头文件路径，在编译的过程中就会有头文件内容的提示，但仍需要在<code>CMakeLists.txt</code>中写好包含的头文件路径，否则编译器只会在<code>usr/include文件夹下</code>和<code>CMakeLists.txt</code>所在文件夹下寻找头文件</p>
+<p>如果不在<code>c_cpp_properties.json</code>中设置头文件路径，在写代码的时候可能会没有提示，而且头文件名字下会有红波浪线，但可以正常编译</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(文件名)</span><br><span class="line"></span><br><span class="line"><span class="keyword">aux_source_directory</span>(./ VAR) <span class="comment">#把当前路径下的所有源文件打包程VAR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(添加头文件路径)<span class="comment">#如果在vscode中已经添加了头文件路径了，就不需要再添加了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(搜索库)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;添加库的头文件&#125;</span>）</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_TYPE Debug)<span class="comment">#如果想调试，加上这一句，生成可调试文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS<span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -Wall&quot;</span>)<span class="comment">#生成错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(可执行文件名 <span class="variable">$&#123;VAR&#125;</span>)<span class="comment">#生成可执行文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(可执行文件 库名) <span class="comment">#链接库</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-文件根目录中建立一个build文件夹"><a href="#2-文件根目录中建立一个build文件夹" class="headerlink" title="2.文件根目录中建立一个build文件夹"></a>2.文件根目录中建立一个build文件夹</h1><p>编译过程中生成的中间文件和可执行文件全在该文件夹下，可执行文件的位置可在CMakeLists.txt中改变路径</p>
+<h1 id="3-建立-json文件夹，编写launch-json文件"><a href="#3-建立-json文件夹，编写launch-json文件" class="headerlink" title="3.建立.json文件夹，编写launch.json文件"></a>3.建立.json文件夹，编写launch.json文件</h1><p>新建launch.json文件，该文件是在VSCODE中按F5后所执行的命令</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;g++ - 生成和调试活动文件&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build/可执行文件名&quot;</span>,**<span class="comment">//执行文件的路径加上可执行文件，$&#123;workspaceFolder&#125;为根目录**</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,<span class="comment">//打开外部终端</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;为 gdb 启用整齐打印&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="attr">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;Build&quot;</span>,<span class="comment">//该命令表示执行launch.json的命令之前的预执行任务，要在tasks.json中设置</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>VScode</tag>
       </tags>
   </entry>
   <entry>
@@ -2730,234 +2754,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>Word中使用Endnote插件</title>
-    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
-<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
-<li>关闭word，打开endnote</li>
-<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
-<li>等待完成</li>
-<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
-<li>重启word</li>
-</ol>
-<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
-<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
-<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
-<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
-<p>引用文献的格式可以在Word中设置。</p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>单应矩阵</title>
-    <url>/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>单应矩阵学习。<br><span id="more"></span></p>
-]]></content>
-      <categories>
-        <category>理论基础</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>侯捷老师C++学习笔记——大气编程(下)</title>
-    <url>/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88C++-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8B)/</url>
-    <content><![CDATA[<p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充。</p>
-<span id="more"></span>
-<h1 id="Lesson1-介绍"><a href="#Lesson1-介绍" class="headerlink" title="Lesson1 介绍"></a>Lesson1 介绍</h1><p>本课程会讲的内容：</p>
-<ul>
-<li>泛型编程</li>
-<li>深入探索面向对象继承关系所形成的的对象模型，包括隐藏在底层的this指针，虚指针，虚表等。</li>
-</ul>
-<h1 id="Lesson2-转换函数-conversion-function"><a href="#Lesson2-转换函数-conversion-function" class="headerlink" title="Lesson2 转换函数 conversion function"></a>Lesson2 转换函数 conversion function</h1><p>转换有两个方向，一个是我这个类型转换成那个，也可以是那个转换成这个。</p>
-<p>现在有一个分数class：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110201213.png" alt="image-20211110201213702" style="zoom:33%;" /></p>
-<p>黄色的部分就是转换函数。转换肯定不会改变数据的值，所以要加上const。</p>
-<p>不需要返回值类型，因为很明确，函数名就表示了要转换的那个类型。</p>
-<p>调用的时候：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=<span class="number">3</span>+f;<span class="comment">//调用operator double()将f转为0.6</span></span><br></pre></td></tr></table></figure>
-<p>在这里，编译器会首先找一个全局函数，看是不是有<code>+</code>运算符重载函数，如果没有，就去找转换函数，此时再调用转换函数。</p>
-<p>只要你认为合理，可以有很多个转换函数。</p>
-<h3 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h3><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
-<p>首先构造函数有两个形参，其中一个给了初值。其实调用的时候，只要给一个实参即可。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110202233.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=f+<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
-<p>这时在执行上述代码时，类中的运算符重载函数并没有分数加整型数这种情况，只有分数加分数。当看到没有这种重载<code>+</code> 这种函数，所以就想着可不可以把整型数3变为Fraction，那就看其构造函数，如果满足构造函数的参数，那么就会调用构造函数来进行类型的转换。这是让其他类型的数据转化成本类型。</p>
-<p>但是当有下面这种情况时，既可以用构造函数，又可以用类型转换函数。此时编译器会报错，因为它不知道调用哪个函数。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110203235.png" alt="image-20211110203235669" style="zoom:33%;" /></p>
-<h2 id="explicit-one-argument-ctor"><a href="#explicit-one-argument-ctor" class="headerlink" title="explicit-one-argument ctor"></a>explicit-one-argument ctor</h2><p>当在构造函数加上关键字<code>explicit</code>后，就可以避免上述问题发生。expilcit意思为明白的，明确的。在该关键字的限制下，构造函数就是创建新对象的时候调用，告诉编译器，不要在隐形转换的时候调用。</p>
-<p>看下面的例子：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111065659.png" alt="image-20211111065659372" style="zoom: 25%;" /></p>
-<p>这里出错显示：<code>[Error]conversion from &#39;double&#39; to &#39;Fraction&#39; request</code> ，在一开始看到<code>f+4</code>时，编译器会先找重载运算符函数，发现只有分数加分数，所以要把4转化成分数，但是该构造函数前加上了explict，所以不能走这条路。于是又找到类型转换函数，这条路可以走通，最终得到结果4.6，但是要把4.6赋值给d2，没有这种类型转换函数。</p>
-<h1 id="Lesson3-pointer-like-classes"><a href="#Lesson3-pointer-like-classes" class="headerlink" title="Lesson3 pointer-like classes"></a>Lesson3 pointer-like classes</h1><p>设计一个class，让它像指针。为什么这么做呢，就是想设计一个比指针功能更强大的东西。</p>
-<h2 id="关于智能指针"><a href="#关于智能指针" class="headerlink" title="关于智能指针"></a>关于智能指针</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111072414.png" alt="image-20211111072414463"></p>
-<p>shared_ptr是一个智能指针的模板类。我们写了一个Foo类，然后创建一个智能指针sp，这个过程中<code>shared_ptr&lt;Foo&gt; sp(new Foo)</code> 会调用构造函数，向智能指针中传入指针的值。</p>
-<p><code>*sp</code>调用了重载运算符*函数。返回值为该对象。</p>
-<p>这里要注意<code>sp-&gt;method()</code>，这句话会调用重载运算符函数，返回值是一个指针，虽然<code>-&gt;</code>在调用函数后就已经“消耗了”，返回的是一个指针，相当于已经没有了<code>-&gt;</code> ，但是为了保证符号的一致性，总不能写成<code>sp-&gt;-&gt;method()</code>，所以它就相当于<code>px-&gt;method()</code> ，就不用再写一遍了。</p>
-<h2 id="关于迭代器"><a href="#关于迭代器" class="headerlink" title="关于迭代器"></a>关于迭代器</h2><p>迭代器也是一种智能指针，指向容器中的一个元素。但是和上面说的智能指针略有不同。</p>
-<p>它不但要处理<code>* -&gt;</code> ，还要处理 <code>++ -- == !=</code> 等。</p>
-<h1 id="Lesson4-function-like-classes"><a href="#Lesson4-function-like-classes" class="headerlink" title="Lesson4 function-like classes"></a>Lesson4 function-like classes</h1><p>写一个class，让它像一个函数。即仿函数。</p>
-<p>形式为<code>typername()()</code>，前面的括号是创建一个临时对象，然后再加一个括号，是调用运算符重载函数。</p>
-<h1 id="Lesson5-member-template-成员模板"><a href="#Lesson5-member-template-成员模板" class="headerlink" title="Lesson5 member template 成员模板"></a>Lesson5 member template 成员模板</h1><p>模板主要分三大类：</p>
-<ul>
-<li>class template</li>
-<li>function template</li>
-<li>member template</li>
-</ul>
-<p>下面是member template的代码：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111080705.png" alt="image-20211111080704918" style="zoom:33%;" /></p>
-<p>在类中，构造函数为一个模板函数，这样在初始化的时候，会有更大的弹性。 因为模板函数不需要特别指定具体的类型，会自动推导。所以只在外面写好要创建的类，待传入初始化值时，类中的模板函数会自动推导出初始化值得类型。</p>
-<h1 id="Lesson6-模板特化-specialization"><a href="#Lesson6-模板特化-specialization" class="headerlink" title="Lesson6 模板特化(specialization)"></a>Lesson6 模板特化(specialization)</h1><p>在使用模板的时候，我们可以随机指定任何的类型，然后把该类型放到模板中。这就是泛化的概念。</p>
-<p>但是有时候，我们想在一些特定的类型时，不使用泛化的模板，而是有一些特别之处。这就是模板特化。</p>
-<p><strong>语法：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111082640.png" alt="image-20211111082640173" style="zoom:33%;" /></p>
-<p>在使用的时候，例如上面的例子，编译器会找，泛化也可以，特化也可以，正如代码所写，特别指定的类型是long，所以就找到对应的模板。</p>
-<h1 id="Lesson7-偏特化-partial-specialization"><a href="#Lesson7-偏特化-partial-specialization" class="headerlink" title="Lesson7 偏特化(partial specialization)"></a>Lesson7 偏特化(partial specialization)</h1><h2 id="个数上的偏"><a href="#个数上的偏" class="headerlink" title="个数上的偏"></a>个数上的偏</h2><p><strong>语法：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083230.png" alt="image-20211111083230419" style="zoom:33%;" /></p>
-<p>在这里，我们只想让模板中的某几个类型特化，如上，我们想让T特化，而且Alloc有默认类型。</p>
-<p>那么语法就是，在下面写上不特化的类型（特化的类型那块还是空着，对比全特化，尖括号里全是空）。</p>
-<h2 id="范围上的偏"><a href="#范围上的偏" class="headerlink" title="范围上的偏"></a>范围上的偏</h2><p>泛化的模板输入的类型可以是任意的，当我们想缩小一下范围，指定具体的某几个类型，例如，是指针类型，但是没有说明是什么的指针。</p>
-<p><strong>语法：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083910.png" alt="image-20211111083910643" style="zoom:33%;" /></p>
-<p>这是后，obj1用的就是泛化的模板。obj2用的是特化的模板。</p>
-<h1 id="Lesson8-template-template-parameter-模板模板参数"><a href="#Lesson8-template-template-parameter-模板模板参数" class="headerlink" title="Lesson8 template template parameter 模板模板参数"></a>Lesson8 template template parameter 模板模板参数</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111084146.png" alt="image-20211111084146414" style="zoom: 25%;" /></p>
-<p>Container可以是任意的字。模板模板参数就是，尖括号内第一项的模板参数，告诉有T这个模板类型存在。然后第二项模板参数是一个模板类，该模板类还需要模板参数，这样就形成了模板模板参数。</p>
-<p>模板类的名字我们可以指定（因为类就可以当做是一个数据类型）</p>
-<p>就是很绕，但其实不难的。</p>
-<p>然后我们使用的时候，是这样的：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">XCLs&lt;string,list&gt; mylst1;</span><br></pre></td></tr></table></figure>
-<p>这句话虽然是报错的，但是我们写的模板模板参数啥的都没有问题，报错的主要原因是<code>list</code>这个容器的模板参数有好几个，虽然模板参数是有默认值的，但是在模板中使用必须要指出。所以得加上中间那两句话。</p>
-<blockquote>
-<p>模板中参数前面的关键字，有时候是typename，有时也可以是class，有什么区别呢。注意这里只有在 <code>&lt;&gt;</code>中，定义模板参数的时候，是共通的。如<code>template&lt;typename T,class U&gt;</code> ，这是共通的。但是当像上面写模板模板参数的时候，用到的class，这是不能共通的，这里的class表示是一个类，而不是一个模板参数。</p>
-</blockquote>
-<h1 id="Lesson9-关于标准库"><a href="#Lesson9-关于标准库" class="headerlink" title="Lesson9 关于标准库"></a>Lesson9 关于标准库</h1><p>任何语言的标准库都十分重要，应该能熟练的使用。</p>
-<p>C++的标准库主要有以下几个部分：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111093957.png" alt="image-20211111093957659" style="zoom:33%;" /></p>
-<ul>
-<li>容器：就是数据结构。</li>
-<li>算法：实现一些功能的方法。</li>
-</ul>
-<blockquote>
-<p>程序就是靠算法和数据搭建起来的，algorithms+data=program。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>头文件 库文件 命名空间</title>
-    <url>/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
-    <content><![CDATA[<p>介绍了头文件，库文件，命名空间之间的关系</p>
-<span id="more"></span>
-<p>头文件是一个文本文件。里面包括了变量声明，数据结构定义，库文件中函数的使用方法和接口(函数具体的实现都在库文件中)。<br>库文件是二进制文件。<br>命名空间是为了避免不同库中有命名相同的函数，相当于给这些函数加上了姓氏。</p>
-<p>以C为例，最早的时候，只有一个C文件，然后需要编译为可执行的二进制文件。但是后来发现，实现复杂功能的时候，代码行数太多了，于是便把这个文件分割一下，分别来看。</p>
-<p>于是，就把方法(函数)和声明单独放在同一个文件中，然后把这个文件加进来，放在头部，这样就可以在C文件中随意的摆放函数了，整理起来比较方便。久而久之，这个文件都是通常放在C文件的头部，因此就有了头文件的名字。头文件就是把一些常量的定义、数据结构的定义、函数的功能实现啥的放在里面，本质上就是一个文本文件，和写在C文件里是一样的，并没有什么特别的。<code>#include</code>进来的头文件都是原封不动的在编译阶段直接插入到C源文件中。</p>
-<p>而库文件是已经编译好的二进制文件，因为没有<code>main()</code>这个入口函数，所以没有办法直接启动，但是里面是实实在在的二进制代码。那么它有什么用呢？</p>
-<p>以前编译一个程序，就是输入C源文件，然后输出一个可执行的二进制文件。但是当C源文件的代码越写越多，越来越复杂，编译的时间特别长。这样一来，只要是修改了代码，就需要整体的重新编译一遍，消耗很多不必要的时间。于是人们为了避免反复的编译未改动的代码，就产生了库文件。</p>
-<p>把一个完整的C文件分开，分成不同功能的文件，然后只要把这些文件编译成一个二进制的软件包，最后把它们拼在一起，就是库文件。这样一来基本不会被改动的代码就不需要再一次编译了，只需要编译改动的文件就可以啦。</p>
-<p>库文件出现了，有的人灵光一闪，我可以只发布库文件啊，源代码还是在我这里，这样不就可以卖钱了吗？真是一个伟大的想法！但是光卖库文件不行啊，都被编译成二进制文件了，里面有哪些方法，有哪些常量别人没法知道啊！没关系我可以写文档啊。但是编译器不知道，而且也不懂读文档怎么办？好办，不是有头文件么，反正头文件只有声明，没有实现代码，就用头文件当编译器的文档好了。就这样人类读文档，编译器读头文件，然后有人卖库文件，一条产业链就此形成。</p>
-<p>后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，在自己写的库中，所有的函数名、常量名、解构名都带上自己的姓名做前缀名，这样就算方法名是一样的，但是有不同的前缀名，这样就能区分到底该链接哪个方法了。后来又来一个聪明人，觉得你们这样在每个方法、常量、结构体中都写上你们的姓名累不累啊，这样，我给你们设计一套规则，只要在库的最前面写上你们的姓名不就行了么，用的时候编译器先去找找你们的姓名，然后再你们的姓名下面找方法，这不就多快好省了么。那这样吧我们就给这个姓名取名字<code>namespace</code>吧。</p>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>极大似然估计和后验估计</title>
-    <url>/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/</url>
-    <content><![CDATA[<p>极大似然估计和后验估计。<br><span id="more"></span></p>
-<h1 id="一、概率和统计的区别"><a href="#一、概率和统计的区别" class="headerlink" title="一、概率和统计的区别"></a>一、概率和统计的区别</h1><h2 id="1-概率研究"><a href="#1-概率研究" class="headerlink" title="1.概率研究"></a>1.概率研究</h2><p>已知一个模型和模型的参数，研究根据这个模型产生结果的概率和结果的一些特性（例如均值，方差等）</p>
-<p>例子：以某地人口的身高统计研究为例，假设已经知道某地的人口的身高呈正态分布，因此根据该模型，可以知道该地人口身高的均值，方差等特点，也可以知道某人身高为1.9的概率</p>
-<h2 id="2-统计研究"><a href="#2-统计研究" class="headerlink" title="2.统计研究"></a>2.统计研究</h2><p>统计研究与概率研究相反，是已知一组数据，但并不知道该模型和模型的具体参数</p>
-<p>例子：已知某地一个小区的人口身高的数据，想要推测出该地整个人口身高分布的数学模型，假设已经知道该模型为正态分布，但不知道正态分布中具体的参数等信息，所以需要统计研究来得出</p>
-<p>总结：概率研究是已知模型和参数，推数据。统计是已知数据，推模型和参数</p>
-<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061947.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
-<p>独立事件A和B，发生的概率为 $p(AB)=p(A)p(B)$</p>
-<p>当A和B有某种关系的时候，也就是说不独立的时候，$p(AB)=p(A|B)p(B)$，可以根据此来判断AB是否独立</p>
-<h1 id="三、极大似然估计和后验估计"><a href="#三、极大似然估计和后验估计" class="headerlink" title="三、极大似然估计和后验估计"></a>三、极大似然估计和后验估计</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><a href="https://zhuanlan.zhihu.com/p/32480810">参考</a></p>
-<p>这两者都属于统计类别下的。对于统计估计出的模型参数$\theta$，有两个学派：</p>
-<p><strong>频率学派</strong>：在进行参数估计时，所估计的参数$\theta$存在唯一的真值，也就是说$p(\theta)=1$。</p>
-<p><strong>贝叶斯学派</strong>：认为$\theta$是一个随机变量，符合一定的概率分布，$p(\theta)$是有概率分布的。</p>
-<p>抽象一点来讲，频率学派和贝叶斯学派对世界的认知有本质不同：频率学派认为世界是确定的，有一个本体，这个本体的真值是不变的，我们的目标就是要找到这个真值或真值所在的范围；而贝叶斯学派认为世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判做调整，我们的目标是要找到最优的描述这个世界的概率分布。</p>
-<p>贝叶斯概率公式：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P(A \mid B)&=\frac{P(A,B)}{P(B)}=\frac{P(B\mid A)P(A)}{P(A,B)+P(\tilde A,B)}\\
-&=\frac{P(B\mid A)P(A)}{P(B\mid  A)P(A)+P(B\mid \tilde A)P(\tilde A)}
-\end{aligned}\tag{1}</script><p><strong>E.g.</strong> 有一辆汽车，它被砸记作事件A，警报器响，记作事件B，现在想求得警报器响时，是车被砸的概率。那么，有以下几种表示：</p>
-<ul>
-<li>$P(A\mid B)$：在B发生时，A发生的概率。即警报器响了，是车被砸了的概率。</li>
-<li>$P(A,B)$ ：A，B同时发生的概率。即警报器响和车被砸同时发生的概率。</li>
-<li>$P(B\mid A)$ ：车被砸了，警报器响的概率。</li>
-<li>$P(B\mid \tilde A)$ ：车没被砸，警报器响的概率。</li>
-</ul>
-<p>现在(1)式中，在警报响时，车被砸的概率=警报响与车被砸同时发生的概率 $\div$ 警报响的概率。</p>
-<p>继续拆分：</p>
-<p>警报响与车被砸同时发生的概率=车被砸的概率 $\times$ 车被砸时，警报响的概率。</p>
-<p>警报响的概率=车被砸警报响的概率+车没被砸警报响的概率。</p>
-<p><strong>在生活中为什么警报响了，通常是车没有被砸呢？</strong></p>
-<p><strong>角度一：</strong></p>
-<p>为了提高警报响时，就是车被砸了的说服力。我们希望警报响时，是车被砸的概率变为1。那么我们再看(1)，当 $P(B\mid \tilde A)P(\tilde A)=0$ 时，也就是车没被砸，警报响的概率为0。这样，我们就避免了干扰情况的影响，提高了说服力。但是，$P(B\mid \tilde A)P(\tilde A)=0$ 会等于0么。虽然车没被砸时，警报响的概率很小，但是车没有被砸的概率很大，接近于1，所以它们的乘积也不会太小。</p>
-<p><strong>角度二：</strong></p>
-<p>我们再来看式(1)，现在我们刨除其他的影响不说（例如，放炮导致的警报响），让其他影响的概率保持不变。来看分子，前面是车被砸时，警报响的概率。这个概率很大，我们可以认为其等于1，但是它还要乘以车被砸的概率，车被砸的概率很小很小，因此它们的乘积也很小。所以，即使是警报响了，车被砸的概率也会很小。在这里，车被砸的概率是<strong>先验</strong>。</p>
-<p>从上面两个角度来看，其实就是$P(B\mid \tilde A)P(\tilde A)和P(B\mid  A)P(A)$ 间的比较，$P(B\mid A)$ 虽然很大，但是 $P(A)$ 很小；$P(B\mid \tilde A)$ 虽然很小，但是 $P(\tilde A)$ 很大。在这个例子中，就是 $P(B\mid \tilde A)比P(A)$ 胜了一筹，也就是车没被砸时警报响的概率比车被砸的大，才导致的即使警报响了，车被砸的概率也很小。</p>
-<p>从以上两个角度，我们可以知道贝叶斯公式考虑事情发生的因素：一件本来就难以发生的事情，就算出现某个证据和它强烈相关，也要谨慎考虑（就是考虑这件事情本身的先验概率）。而一个不是那么相关，但是极其容易发生的事情，也需要考虑。</p>
-<h2 id="2-似然函数"><a href="#2-似然函数" class="headerlink" title="2.似然函数"></a>2.似然函数</h2><p>对于 $P(X\mid \theta)$ 这个函数，它的输入有两个，分别是 $X和\theta$ 。</p>
-<p>当 $\theta$ 已经确定，$X$ 是变量时，这个函数叫做概率函数，它描述对于不同的样本点$x$，其出现的概率为多少。</p>
-<p>当 $X=x$ 时，$\theta$ 是变量时，这个函数就叫做似然函数，它描述对于不同的模型参数，出现$x$这个样本点的概率是多少。 </p>
-<h2 id="3-最大似然估计——MLE"><a href="#3-最大似然估计——MLE" class="headerlink" title="3.最大似然估计——MLE"></a>3.最大似然估计——MLE</h2><p>最大似然估计是<strong>频率学派</strong>的方法，即认为参数 $\theta$ 是一个固定的常数。</p>
-<p>假设数据 $x_1,x_2\cdots x_n$ 是独立同分布的一组样本，那么令 $X=\{x_1,\cdots x_n\}$ 。我们可以计算出出现这样样本的概率：</p>
-<script type="math/tex; mode=display">
-P(X,\theta)=P(X\mid\theta)P(\theta)\tag{2}</script><p>在(2)中，因为 $P(\theta)=1$ ，所以：</p>
-<script type="math/tex; mode=display">
-P(X,\theta)=P(X\mid\theta)\tag{3}</script><p>我们就可以假设我们已经知道了 $\theta$ ，然后求出在该概率模型参数下，出现此时样本的概率，这个概率是 $\theta$ 的函数。因为既然能出现此时的</p>
-<p>样本情况，那么概率函数应该是最大值，所以 $\theta$ 是极大值点。</p>
-<script type="math/tex; mode=display">
-\hat \theta=\max _\theta P(X\mid\theta)\tag{4}</script><p> <strong>E.g.</strong> 我们现在有一个硬币，这个硬币服从二项分布，我们设正面朝上的概率为 $\theta$ 。现在想通过试验来求出硬币的正面朝上的概率为多少。假设我们做了一组试验，扔了10次，其中正面朝上的次数为7。</p>
-<script type="math/tex; mode=display">
-P(X=\{7次正，3次反\},\theta)=P(X\mid\theta)=\theta^7(1-\theta)^3=f(\theta)\tag{5}</script><p>现在既然出现了7次正面向上，3次反面向上的数据样本，我们就可以认为此时的概率一定是所有情况中最大的。我们可以把似然函数$f(\theta)$ 的图像画出来：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061952.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
-<p>可以看出 $\theta=0.7$ 时，似然函数取极大值。但是我们知道，一般的硬币都是均匀分布的，为什么正面朝上的概率会是0.7呢。这就包含了贝叶斯学派的思想，即引入先验估计。</p>
-<h2 id="4-最大后验估计——MAP"><a href="#4-最大后验估计——MAP" class="headerlink" title="4.最大后验估计——MAP"></a>4.最大后验估计——MAP</h2><p>最大后验估计是贝叶斯学派的方法，他们认为参数 $\theta$ 是不确定的，也是一个随机变量。需要求出在该样本情况下，参数的概率分布，然后选取概率最大的样本点。</p>
-<script type="math/tex; mode=display">
-P(\theta\mid X)=\frac{P(X,\theta)}{P(X)}=\frac{P(X\mid\theta)P(\theta)}{P(X)}\tag{6}</script><p>式（6）中，$P(\theta\mid X)$ 是后验估计，实际上我们的目标就是找到 $\theta$ ，让它最大。$P(\theta)$ 是先验估计。$P(X)$ 是试验得到的概率，仅与试验结果有关，当我们已经获取试验结果后，可以认为它是一个常数。</p>
-<script type="math/tex; mode=display">
-\hat\theta=\max_\theta P(\theta \mid X)=\max_\theta P(X\mid\theta)P(\theta)\tag{7}</script><p>最大后验的思想是不仅仅需要似然函数最大，也需要先验的概率很大。</p>
-<p>同样是抛硬币的例子：</p>
-<p>我们先验的知道正面朝上的概率为0.5，因此认为 $\theta$ 服从均值为0.5，方差为1的正态分布。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-P(X,\theta)&=P(X\mid\theta)P(\theta)\\
-&=f(\theta)P(\theta)
-\end{aligned}\tag{8}</script><p>图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061954.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
-<p>此时 $\theta$ 已经向左偏移，为0.558。即用最大后验估计，得到的结果。</p>
-<p>当试验次数为1000次，其中正面朝上的次数为700次时，$f(\theta)P(\theta)$ 的图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061956.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
-<p>此时 $\theta=0.696$ 。</p>
-<p>从这个例子可以知道：当数据量增大时，估计的参数分布会越来越向数据靠拢，先验的影响力会越来越小。</p>
-]]></content>
-      <categories>
-        <category>理论基础</category>
-      </categories>
-      <tags>
-        <tag>概率论与数理统计</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>侯捷老师C++学习笔记——大气编程(上)</title>
     <url>/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88c++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8A)/</url>
     <content><![CDATA[<p>本课程要有一点点C或C++的基础，学习效果会更好哦。<br>侯捷老师讲的特别通透，听完收获很大。<br><span id="more"></span></p>
@@ -3255,6 +3051,39 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
 <h1 id="Lesson13-委托相关设计"><a href="#Lesson13-委托相关设计" class="headerlink" title="Lesson13 委托相关设计"></a>Lesson13 委托相关设计</h1><p>本节课介绍了一些设计模式。</p>
 <p>就用到composition, delegation,inheritance这三种模式，进行组合，来解决现实的问题。</p>
 <p>其中delegation+inheritance的功能最强大。</p>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单应矩阵</title>
+    <url>/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>单应矩阵学习。<br><span id="more"></span></p>
+]]></content>
+      <categories>
+        <category>理论基础</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>头文件 库文件 命名空间</title>
+    <url>/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/</url>
+    <content><![CDATA[<p>介绍了头文件，库文件，命名空间之间的关系</p>
+<span id="more"></span>
+<p>头文件是一个文本文件。里面包括了变量声明，数据结构定义，库文件中函数的使用方法和接口(函数具体的实现都在库文件中)。<br>库文件是二进制文件。<br>命名空间是为了避免不同库中有命名相同的函数，相当于给这些函数加上了姓氏。</p>
+<p>以C为例，最早的时候，只有一个C文件，然后需要编译为可执行的二进制文件。但是后来发现，实现复杂功能的时候，代码行数太多了，于是便把这个文件分割一下，分别来看。</p>
+<p>于是，就把方法(函数)和声明单独放在同一个文件中，然后把这个文件加进来，放在头部，这样就可以在C文件中随意的摆放函数了，整理起来比较方便。久而久之，这个文件都是通常放在C文件的头部，因此就有了头文件的名字。头文件就是把一些常量的定义、数据结构的定义、函数的功能实现啥的放在里面，本质上就是一个文本文件，和写在C文件里是一样的，并没有什么特别的。<code>#include</code>进来的头文件都是原封不动的在编译阶段直接插入到C源文件中。</p>
+<p>而库文件是已经编译好的二进制文件，因为没有<code>main()</code>这个入口函数，所以没有办法直接启动，但是里面是实实在在的二进制代码。那么它有什么用呢？</p>
+<p>以前编译一个程序，就是输入C源文件，然后输出一个可执行的二进制文件。但是当C源文件的代码越写越多，越来越复杂，编译的时间特别长。这样一来，只要是修改了代码，就需要整体的重新编译一遍，消耗很多不必要的时间。于是人们为了避免反复的编译未改动的代码，就产生了库文件。</p>
+<p>把一个完整的C文件分开，分成不同功能的文件，然后只要把这些文件编译成一个二进制的软件包，最后把它们拼在一起，就是库文件。这样一来基本不会被改动的代码就不需要再一次编译了，只需要编译改动的文件就可以啦。</p>
+<p>库文件出现了，有的人灵光一闪，我可以只发布库文件啊，源代码还是在我这里，这样不就可以卖钱了吗？真是一个伟大的想法！但是光卖库文件不行啊，都被编译成二进制文件了，里面有哪些方法，有哪些常量别人没法知道啊！没关系我可以写文档啊。但是编译器不知道，而且也不懂读文档怎么办？好办，不是有头文件么，反正头文件只有声明，没有实现代码，就用头文件当编译器的文档好了。就这样人类读文档，编译器读头文件，然后有人卖库文件，一条产业链就此形成。</p>
+<p>后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，在自己写的库中，所有的函数名、常量名、解构名都带上自己的姓名做前缀名，这样就算方法名是一样的，但是有不同的前缀名，这样就能区分到底该链接哪个方法了。后来又来一个聪明人，觉得你们这样在每个方法、常量、结构体中都写上你们的姓名累不累啊，这样，我给你们设计一套规则，只要在库的最前面写上你们的姓名不就行了么，用的时候编译器先去找找你们的姓名，然后再你们的姓名下面找方法，这不就多快好省了么。那这样吧我们就给这个姓名取名字<code>namespace</code>吧。</p>
 ]]></content>
       <categories>
         <category>动手实践</category>
@@ -3617,6 +3446,88 @@ y^{\prime}
       </categories>
       <tags>
         <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>极大似然估计和后验估计</title>
+    <url>/2021/10/18/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1%E5%92%8C%E5%90%8E%E9%AA%8C%E4%BC%B0%E8%AE%A1/</url>
+    <content><![CDATA[<p>极大似然估计和后验估计。<br><span id="more"></span></p>
+<h1 id="一、概率和统计的区别"><a href="#一、概率和统计的区别" class="headerlink" title="一、概率和统计的区别"></a>一、概率和统计的区别</h1><h2 id="1-概率研究"><a href="#1-概率研究" class="headerlink" title="1.概率研究"></a>1.概率研究</h2><p>已知一个模型和模型的参数，研究根据这个模型产生结果的概率和结果的一些特性（例如均值，方差等）</p>
+<p>例子：以某地人口的身高统计研究为例，假设已经知道某地的人口的身高呈正态分布，因此根据该模型，可以知道该地人口身高的均值，方差等特点，也可以知道某人身高为1.9的概率</p>
+<h2 id="2-统计研究"><a href="#2-统计研究" class="headerlink" title="2.统计研究"></a>2.统计研究</h2><p>统计研究与概率研究相反，是已知一组数据，但并不知道该模型和模型的具体参数</p>
+<p>例子：已知某地一个小区的人口身高的数据，想要推测出该地整个人口身高分布的数学模型，假设已经知道该模型为正态分布，但不知道正态分布中具体的参数等信息，所以需要统计研究来得出</p>
+<p>总结：概率研究是已知模型和参数，推数据。统计是已知数据，推模型和参数</p>
+<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061947.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
+<p>独立事件A和B，发生的概率为 $p(AB)=p(A)p(B)$</p>
+<p>当A和B有某种关系的时候，也就是说不独立的时候，$p(AB)=p(A|B)p(B)$，可以根据此来判断AB是否独立</p>
+<h1 id="三、极大似然估计和后验估计"><a href="#三、极大似然估计和后验估计" class="headerlink" title="三、极大似然估计和后验估计"></a>三、极大似然估计和后验估计</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><a href="https://zhuanlan.zhihu.com/p/32480810">参考</a></p>
+<p>这两者都属于统计类别下的。对于统计估计出的模型参数$\theta$，有两个学派：</p>
+<p><strong>频率学派</strong>：在进行参数估计时，所估计的参数$\theta$存在唯一的真值，也就是说$p(\theta)=1$。</p>
+<p><strong>贝叶斯学派</strong>：认为$\theta$是一个随机变量，符合一定的概率分布，$p(\theta)$是有概率分布的。</p>
+<p>抽象一点来讲，频率学派和贝叶斯学派对世界的认知有本质不同：频率学派认为世界是确定的，有一个本体，这个本体的真值是不变的，我们的目标就是要找到这个真值或真值所在的范围；而贝叶斯学派认为世界是不确定的，人们对世界先有一个预判，而后通过观测数据对这个预判做调整，我们的目标是要找到最优的描述这个世界的概率分布。</p>
+<p>贝叶斯概率公式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(A \mid B)&=\frac{P(A,B)}{P(B)}=\frac{P(B\mid A)P(A)}{P(A,B)+P(\tilde A,B)}\\
+&=\frac{P(B\mid A)P(A)}{P(B\mid  A)P(A)+P(B\mid \tilde A)P(\tilde A)}
+\end{aligned}\tag{1}</script><p><strong>E.g.</strong> 有一辆汽车，它被砸记作事件A，警报器响，记作事件B，现在想求得警报器响时，是车被砸的概率。那么，有以下几种表示：</p>
+<ul>
+<li>$P(A\mid B)$：在B发生时，A发生的概率。即警报器响了，是车被砸了的概率。</li>
+<li>$P(A,B)$ ：A，B同时发生的概率。即警报器响和车被砸同时发生的概率。</li>
+<li>$P(B\mid A)$ ：车被砸了，警报器响的概率。</li>
+<li>$P(B\mid \tilde A)$ ：车没被砸，警报器响的概率。</li>
+</ul>
+<p>现在(1)式中，在警报响时，车被砸的概率=警报响与车被砸同时发生的概率 $\div$ 警报响的概率。</p>
+<p>继续拆分：</p>
+<p>警报响与车被砸同时发生的概率=车被砸的概率 $\times$ 车被砸时，警报响的概率。</p>
+<p>警报响的概率=车被砸警报响的概率+车没被砸警报响的概率。</p>
+<p><strong>在生活中为什么警报响了，通常是车没有被砸呢？</strong></p>
+<p><strong>角度一：</strong></p>
+<p>为了提高警报响时，就是车被砸了的说服力。我们希望警报响时，是车被砸的概率变为1。那么我们再看(1)，当 $P(B\mid \tilde A)P(\tilde A)=0$ 时，也就是车没被砸，警报响的概率为0。这样，我们就避免了干扰情况的影响，提高了说服力。但是，$P(B\mid \tilde A)P(\tilde A)=0$ 会等于0么。虽然车没被砸时，警报响的概率很小，但是车没有被砸的概率很大，接近于1，所以它们的乘积也不会太小。</p>
+<p><strong>角度二：</strong></p>
+<p>我们再来看式(1)，现在我们刨除其他的影响不说（例如，放炮导致的警报响），让其他影响的概率保持不变。来看分子，前面是车被砸时，警报响的概率。这个概率很大，我们可以认为其等于1，但是它还要乘以车被砸的概率，车被砸的概率很小很小，因此它们的乘积也很小。所以，即使是警报响了，车被砸的概率也会很小。在这里，车被砸的概率是<strong>先验</strong>。</p>
+<p>从上面两个角度来看，其实就是$P(B\mid \tilde A)P(\tilde A)和P(B\mid  A)P(A)$ 间的比较，$P(B\mid A)$ 虽然很大，但是 $P(A)$ 很小；$P(B\mid \tilde A)$ 虽然很小，但是 $P(\tilde A)$ 很大。在这个例子中，就是 $P(B\mid \tilde A)比P(A)$ 胜了一筹，也就是车没被砸时警报响的概率比车被砸的大，才导致的即使警报响了，车被砸的概率也很小。</p>
+<p>从以上两个角度，我们可以知道贝叶斯公式考虑事情发生的因素：一件本来就难以发生的事情，就算出现某个证据和它强烈相关，也要谨慎考虑（就是考虑这件事情本身的先验概率）。而一个不是那么相关，但是极其容易发生的事情，也需要考虑。</p>
+<h2 id="2-似然函数"><a href="#2-似然函数" class="headerlink" title="2.似然函数"></a>2.似然函数</h2><p>对于 $P(X\mid \theta)$ 这个函数，它的输入有两个，分别是 $X和\theta$ 。</p>
+<p>当 $\theta$ 已经确定，$X$ 是变量时，这个函数叫做概率函数，它描述对于不同的样本点$x$，其出现的概率为多少。</p>
+<p>当 $X=x$ 时，$\theta$ 是变量时，这个函数就叫做似然函数，它描述对于不同的模型参数，出现$x$这个样本点的概率是多少。 </p>
+<h2 id="3-最大似然估计——MLE"><a href="#3-最大似然估计——MLE" class="headerlink" title="3.最大似然估计——MLE"></a>3.最大似然估计——MLE</h2><p>最大似然估计是<strong>频率学派</strong>的方法，即认为参数 $\theta$ 是一个固定的常数。</p>
+<p>假设数据 $x_1,x_2\cdots x_n$ 是独立同分布的一组样本，那么令 $X=\{x_1,\cdots x_n\}$ 。我们可以计算出出现这样样本的概率：</p>
+<script type="math/tex; mode=display">
+P(X,\theta)=P(X\mid\theta)P(\theta)\tag{2}</script><p>在(2)中，因为 $P(\theta)=1$ ，所以：</p>
+<script type="math/tex; mode=display">
+P(X,\theta)=P(X\mid\theta)\tag{3}</script><p>我们就可以假设我们已经知道了 $\theta$ ，然后求出在该概率模型参数下，出现此时样本的概率，这个概率是 $\theta$ 的函数。因为既然能出现此时的</p>
+<p>样本情况，那么概率函数应该是最大值，所以 $\theta$ 是极大值点。</p>
+<script type="math/tex; mode=display">
+\hat \theta=\max _\theta P(X\mid\theta)\tag{4}</script><p> <strong>E.g.</strong> 我们现在有一个硬币，这个硬币服从二项分布，我们设正面朝上的概率为 $\theta$ 。现在想通过试验来求出硬币的正面朝上的概率为多少。假设我们做了一组试验，扔了10次，其中正面朝上的次数为7。</p>
+<script type="math/tex; mode=display">
+P(X=\{7次正，3次反\},\theta)=P(X\mid\theta)=\theta^7(1-\theta)^3=f(\theta)\tag{5}</script><p>现在既然出现了7次正面向上，3次反面向上的数据样本，我们就可以认为此时的概率一定是所有情况中最大的。我们可以把似然函数$f(\theta)$ 的图像画出来：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061952.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
+<p>可以看出 $\theta=0.7$ 时，似然函数取极大值。但是我们知道，一般的硬币都是均匀分布的，为什么正面朝上的概率会是0.7呢。这就包含了贝叶斯学派的思想，即引入先验估计。</p>
+<h2 id="4-最大后验估计——MAP"><a href="#4-最大后验估计——MAP" class="headerlink" title="4.最大后验估计——MAP"></a>4.最大后验估计——MAP</h2><p>最大后验估计是贝叶斯学派的方法，他们认为参数 $\theta$ 是不确定的，也是一个随机变量。需要求出在该样本情况下，参数的概率分布，然后选取概率最大的样本点。</p>
+<script type="math/tex; mode=display">
+P(\theta\mid X)=\frac{P(X,\theta)}{P(X)}=\frac{P(X\mid\theta)P(\theta)}{P(X)}\tag{6}</script><p>式（6）中，$P(\theta\mid X)$ 是后验估计，实际上我们的目标就是找到 $\theta$ ，让它最大。$P(\theta)$ 是先验估计。$P(X)$ 是试验得到的概率，仅与试验结果有关，当我们已经获取试验结果后，可以认为它是一个常数。</p>
+<script type="math/tex; mode=display">
+\hat\theta=\max_\theta P(\theta \mid X)=\max_\theta P(X\mid\theta)P(\theta)\tag{7}</script><p>最大后验的思想是不仅仅需要似然函数最大，也需要先验的概率很大。</p>
+<p>同样是抛硬币的例子：</p>
+<p>我们先验的知道正面朝上的概率为0.5，因此认为 $\theta$ 服从均值为0.5，方差为1的正态分布。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(X,\theta)&=P(X\mid\theta)P(\theta)\\
+&=f(\theta)P(\theta)
+\end{aligned}\tag{8}</script><p>图像为：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061954.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
+<p>此时 $\theta$ 已经向左偏移，为0.558。即用最大后验估计，得到的结果。</p>
+<p>当试验次数为1000次，其中正面朝上的次数为700次时，$f(\theta)P(\theta)$ 的图像为：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061956.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
+<p>此时 $\theta=0.696$ 。</p>
+<p>从这个例子可以知道：当数据量增大时，估计的参数分布会越来越向数据靠拢，先验的影响力会越来越小。</p>
+]]></content>
+      <categories>
+        <category>理论基础</category>
+      </categories>
+      <tags>
+        <tag>概率论与数理统计</tag>
       </tags>
   </entry>
   <entry>
@@ -4781,6 +4692,95 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </categories>
       <tags>
         <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>侯捷老师C++学习笔记——大气编程(下)</title>
+    <url>/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8B)/</url>
+    <content><![CDATA[<p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充。</p>
+<span id="more"></span>
+<h1 id="Lesson1-介绍"><a href="#Lesson1-介绍" class="headerlink" title="Lesson1 介绍"></a>Lesson1 介绍</h1><p>本课程会讲的内容：</p>
+<ul>
+<li>泛型编程</li>
+<li>深入探索面向对象继承关系所形成的的对象模型，包括隐藏在底层的this指针，虚指针，虚表等。</li>
+</ul>
+<h1 id="Lesson2-转换函数-conversion-function"><a href="#Lesson2-转换函数-conversion-function" class="headerlink" title="Lesson2 转换函数 conversion function"></a>Lesson2 转换函数 conversion function</h1><p>转换有两个方向，一个是我这个类型转换成那个，也可以是那个转换成这个。</p>
+<p>现在有一个分数class：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110201213.png" alt="image-20211110201213702" style="zoom:33%;" /></p>
+<p>黄色的部分就是转换函数。转换肯定不会改变数据的值，所以要加上const。</p>
+<p>不需要返回值类型，因为很明确，函数名就表示了要转换的那个类型。</p>
+<p>调用的时候：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=<span class="number">3</span>+f;<span class="comment">//调用operator double()将f转为0.6</span></span><br></pre></td></tr></table></figure>
+<p>在这里，编译器会首先找一个全局函数，看是不是有<code>+</code>运算符重载函数，如果没有，就去找转换函数，此时再调用转换函数。</p>
+<p>只要你认为合理，可以有很多个转换函数。</p>
+<h3 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h3><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
+<p>首先构造函数有两个形参，其中一个给了初值。其实调用的时候，只要给一个实参即可。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110202233.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=f+<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>这时在执行上述代码时，类中的运算符重载函数并没有分数加整型数这种情况，只有分数加分数。当看到没有这种重载<code>+</code> 这种函数，所以就想着可不可以把整型数3变为Fraction，那就看其构造函数，如果满足构造函数的参数，那么就会调用构造函数来进行类型的转换。这是让其他类型的数据转化成本类型。</p>
+<p>但是当有下面这种情况时，既可以用构造函数，又可以用类型转换函数。此时编译器会报错，因为它不知道调用哪个函数。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110203235.png" alt="image-20211110203235669" style="zoom:33%;" /></p>
+<h2 id="explicit-one-argument-ctor"><a href="#explicit-one-argument-ctor" class="headerlink" title="explicit-one-argument ctor"></a>explicit-one-argument ctor</h2><p>当在构造函数加上关键字<code>explicit</code>后，就可以避免上述问题发生。expilcit意思为明白的，明确的。在该关键字的限制下，构造函数就是创建新对象的时候调用，告诉编译器，不要在隐形转换的时候调用。</p>
+<p>看下面的例子：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111065659.png" alt="image-20211111065659372" style="zoom: 25%;" /></p>
+<p>这里出错显示：<code>[Error]conversion from &#39;double&#39; to &#39;Fraction&#39; request</code> ，在一开始看到<code>f+4</code>时，编译器会先找重载运算符函数，发现只有分数加分数，所以要把4转化成分数，但是该构造函数前加上了explict，所以不能走这条路。于是又找到类型转换函数，这条路可以走通，最终得到结果4.6，但是要把4.6赋值给d2，没有这种类型转换函数。</p>
+<h1 id="Lesson3-pointer-like-classes"><a href="#Lesson3-pointer-like-classes" class="headerlink" title="Lesson3 pointer-like classes"></a>Lesson3 pointer-like classes</h1><p>设计一个class，让它像指针。为什么这么做呢，就是想设计一个比指针功能更强大的东西。</p>
+<h2 id="关于智能指针"><a href="#关于智能指针" class="headerlink" title="关于智能指针"></a>关于智能指针</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111072414.png" alt="image-20211111072414463"></p>
+<p>shared_ptr是一个智能指针的模板类。我们写了一个Foo类，然后创建一个智能指针sp，这个过程中<code>shared_ptr&lt;Foo&gt; sp(new Foo)</code> 会调用构造函数，向智能指针中传入指针的值。</p>
+<p><code>*sp</code>调用了重载运算符*函数。返回值为该对象。</p>
+<p>这里要注意<code>sp-&gt;method()</code>，这句话会调用重载运算符函数，返回值是一个指针，虽然<code>-&gt;</code>在调用函数后就已经“消耗了”，返回的是一个指针，相当于已经没有了<code>-&gt;</code> ，但是为了保证符号的一致性，总不能写成<code>sp-&gt;-&gt;method()</code>，所以它就相当于<code>px-&gt;method()</code> ，就不用再写一遍了。</p>
+<h2 id="关于迭代器"><a href="#关于迭代器" class="headerlink" title="关于迭代器"></a>关于迭代器</h2><p>迭代器也是一种智能指针，指向容器中的一个元素。但是和上面说的智能指针略有不同。</p>
+<p>它不但要处理<code>* -&gt;</code> ，还要处理 <code>++ -- == !=</code> 等。</p>
+<h1 id="Lesson4-function-like-classes"><a href="#Lesson4-function-like-classes" class="headerlink" title="Lesson4 function-like classes"></a>Lesson4 function-like classes</h1><p>写一个class，让它像一个函数。即仿函数。</p>
+<p>形式为<code>typername()()</code>，前面的括号是创建一个临时对象，然后再加一个括号，是调用运算符重载函数。</p>
+<h1 id="Lesson5-member-template-成员模板"><a href="#Lesson5-member-template-成员模板" class="headerlink" title="Lesson5 member template 成员模板"></a>Lesson5 member template 成员模板</h1><p>模板主要分三大类：</p>
+<ul>
+<li>class template</li>
+<li>function template</li>
+<li>member template</li>
+</ul>
+<p>下面是member template的代码：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111080705.png" alt="image-20211111080704918" style="zoom:33%;" /></p>
+<p>在类中，构造函数为一个模板函数，这样在初始化的时候，会有更大的弹性。 因为模板函数不需要特别指定具体的类型，会自动推导。所以只在外面写好要创建的类，待传入初始化值时，类中的模板函数会自动推导出初始化值得类型。</p>
+<h1 id="Lesson6-模板特化-specialization"><a href="#Lesson6-模板特化-specialization" class="headerlink" title="Lesson6 模板特化(specialization)"></a>Lesson6 模板特化(specialization)</h1><p>在使用模板的时候，我们可以随机指定任何的类型，然后把该类型放到模板中。这就是泛化的概念。</p>
+<p>但是有时候，我们想在一些特定的类型时，不使用泛化的模板，而是有一些特别之处。这就是模板特化。</p>
+<p><strong>语法：</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111082640.png" alt="image-20211111082640173" style="zoom:33%;" /></p>
+<p>在使用的时候，例如上面的例子，编译器会找，泛化也可以，特化也可以，正如代码所写，特别指定的类型是long，所以就找到对应的模板。</p>
+<h1 id="Lesson7-偏特化-partial-specialization"><a href="#Lesson7-偏特化-partial-specialization" class="headerlink" title="Lesson7 偏特化(partial specialization)"></a>Lesson7 偏特化(partial specialization)</h1><h2 id="个数上的偏"><a href="#个数上的偏" class="headerlink" title="个数上的偏"></a>个数上的偏</h2><p><strong>语法：</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083230.png" alt="image-20211111083230419" style="zoom:33%;" /></p>
+<p>在这里，我们只想让模板中的某几个类型特化，如上，我们想让T特化，而且Alloc有默认类型。</p>
+<p>那么语法就是，在下面写上不特化的类型（特化的类型那块还是空着，对比全特化，尖括号里全是空）。</p>
+<h2 id="范围上的偏"><a href="#范围上的偏" class="headerlink" title="范围上的偏"></a>范围上的偏</h2><p>泛化的模板输入的类型可以是任意的，当我们想缩小一下范围，指定具体的某几个类型，例如，是指针类型，但是没有说明是什么的指针。</p>
+<p><strong>语法：</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083910.png" alt="image-20211111083910643" style="zoom:33%;" /></p>
+<p>这是后，obj1用的就是泛化的模板。obj2用的是特化的模板。</p>
+<h1 id="Lesson8-template-template-parameter-模板模板参数"><a href="#Lesson8-template-template-parameter-模板模板参数" class="headerlink" title="Lesson8 template template parameter 模板模板参数"></a>Lesson8 template template parameter 模板模板参数</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111084146.png" alt="image-20211111084146414" style="zoom: 25%;" /></p>
+<p>Container可以是任意的字。模板模板参数就是，尖括号内第一项的模板参数，告诉有T这个模板类型存在。然后第二项模板参数是一个模板类，该模板类还需要模板参数，这样就形成了模板模板参数。</p>
+<p>模板类的名字我们可以指定（因为类就可以当做是一个数据类型）</p>
+<p>就是很绕，但其实不难的。</p>
+<p>然后我们使用的时候，是这样的：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">XCLs&lt;string,list&gt; mylst1;</span><br></pre></td></tr></table></figure>
+<p>这句话虽然是报错的，但是我们写的模板模板参数啥的都没有问题，报错的主要原因是<code>list</code>这个容器的模板参数有好几个，虽然模板参数是有默认值的，但是在模板中使用必须要指出。所以得加上中间那两句话。</p>
+<blockquote>
+<p>模板中参数前面的关键字，有时候是typename，有时也可以是class，有什么区别呢。注意这里只有在 <code>&lt;&gt;</code>中，定义模板参数的时候，是共通的。如<code>template&lt;typename T,class U&gt;</code> ，这是共通的。但是当像上面写模板模板参数的时候，用到的class，这是不能共通的，这里的class表示是一个类，而不是一个模板参数。</p>
+</blockquote>
+<h1 id="Lesson9-关于标准库"><a href="#Lesson9-关于标准库" class="headerlink" title="Lesson9 关于标准库"></a>Lesson9 关于标准库</h1><p>任何语言的标准库都十分重要，应该能熟练的使用。</p>
+<p>C++的标准库主要有以下几个部分：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111093957.png" alt="image-20211111093957659" style="zoom:33%;" /></p>
+<ul>
+<li>容器：就是数据结构。</li>
+<li>算法：实现一些功能的方法。</li>
+</ul>
+<blockquote>
+<p>程序就是靠算法和数据搭建起来的，algorithms+data=program。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
       </tags>
   </entry>
 </search>
