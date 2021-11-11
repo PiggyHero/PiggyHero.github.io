@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充。">
+  <meta name="description" content="侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充，以及C++11新特性的一些讲解。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="侯捷老师C++学习笔记——大气编程(下)">
 <meta property="og:url" content="http://example.com/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8B)/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充。">
+<meta property="og:description" content="侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充，以及C++11新特性的一些讲解。">
 <meta property="og:locale">
 <meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110201213.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110202233.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111084146.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111093957.png">
 <meta property="article:published_time" content="2021-11-10T11:58:39.000Z">
-<meta property="article:modified_time" content="2021-11-11T01:44:16.973Z">
+<meta property="article:modified_time" content="2021-11-11T02:01:00.282Z">
 <meta property="article:author" content="PiggyHero">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -237,7 +237,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-11 09:44:16" itemprop="dateModified" datetime="2021-11-11T09:44:16+08:00">2021-11-11</time>
+                <time title="修改时间：2021-11-11 10:01:00" itemprop="dateModified" datetime="2021-11-11T10:01:00+08:00">2021-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,7 +267,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充。</p>
+        <p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充，以及C++11新特性的一些讲解。</p>
 <span id="more"></span>
 <h1 id="Lesson1-介绍"><a href="#Lesson1-介绍" class="headerlink" title="Lesson1 介绍"></a>Lesson1 介绍</h1><p>本课程会讲的内容：</p>
 <ul>
@@ -283,7 +283,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=<span class="number">3</span>+f;<span class="comment">//调用operator double()将f转为0.6</span></span><br></pre></td></tr></table></figure>
 <p>在这里，编译器会首先找一个全局函数，看是不是有<code>+</code>运算符重载函数，如果没有，就去找转换函数，此时再调用转换函数。</p>
 <p>只要你认为合理，可以有很多个转换函数。</p>
-<h3 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h3><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
+<h2 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h2><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
 <p>首先构造函数有两个形参，其中一个给了初值。其实调用的时候，只要给一个实参即可。</p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110202233.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=f+<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
@@ -425,7 +425,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">Lesson1 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson2-%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0-conversion-function"><span class="nav-text">Lesson2 转换函数 conversion function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#non-explicit-one-argument-ctor"><span class="nav-text">non-explicit-one-argument ctor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit-one-argument-ctor"><span class="nav-text">explicit-one-argument ctor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson3-pointer-like-classes"><span class="nav-text">Lesson3 pointer-like classes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-text">关于智能指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">关于迭代器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson4-function-like-classes"><span class="nav-text">Lesson4 function-like classes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson5-member-template-%E6%88%90%E5%91%98%E6%A8%A1%E6%9D%BF"><span class="nav-text">Lesson5 member template 成员模板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson6-%E6%A8%A1%E6%9D%BF%E7%89%B9%E5%8C%96-specialization"><span class="nav-text">Lesson6 模板特化(specialization)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson7-%E5%81%8F%E7%89%B9%E5%8C%96-partial-specialization"><span class="nav-text">Lesson7 偏特化(partial specialization)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E6%95%B0%E4%B8%8A%E7%9A%84%E5%81%8F"><span class="nav-text">个数上的偏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%E4%B8%8A%E7%9A%84%E5%81%8F"><span class="nav-text">范围上的偏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson8-template-template-parameter-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0"><span class="nav-text">Lesson8 template template parameter 模板模板参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson9-%E5%85%B3%E4%BA%8E%E6%A0%87%E5%87%86%E5%BA%93"><span class="nav-text">Lesson9 关于标准库</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">Lesson1 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson2-%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0-conversion-function"><span class="nav-text">Lesson2 转换函数 conversion function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#non-explicit-one-argument-ctor"><span class="nav-text">non-explicit-one-argument ctor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit-one-argument-ctor"><span class="nav-text">explicit-one-argument ctor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson3-pointer-like-classes"><span class="nav-text">Lesson3 pointer-like classes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88"><span class="nav-text">关于智能指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="nav-text">关于迭代器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson4-function-like-classes"><span class="nav-text">Lesson4 function-like classes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson5-member-template-%E6%88%90%E5%91%98%E6%A8%A1%E6%9D%BF"><span class="nav-text">Lesson5 member template 成员模板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson6-%E6%A8%A1%E6%9D%BF%E7%89%B9%E5%8C%96-specialization"><span class="nav-text">Lesson6 模板特化(specialization)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson7-%E5%81%8F%E7%89%B9%E5%8C%96-partial-specialization"><span class="nav-text">Lesson7 偏特化(partial specialization)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E6%95%B0%E4%B8%8A%E7%9A%84%E5%81%8F"><span class="nav-text">个数上的偏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4%E4%B8%8A%E7%9A%84%E5%81%8F"><span class="nav-text">范围上的偏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson8-template-template-parameter-%E6%A8%A1%E6%9D%BF%E6%A8%A1%E6%9D%BF%E5%8F%82%E6%95%B0"><span class="nav-text">Lesson8 template template parameter 模板模板参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lesson9-%E5%85%B3%E4%BA%8E%E6%A0%87%E5%87%86%E5%BA%93"><span class="nav-text">Lesson9 关于标准库</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

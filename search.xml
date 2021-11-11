@@ -4697,7 +4697,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
   <entry>
     <title>侯捷老师C++学习笔记——大气编程(下)</title>
     <url>/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8B)/</url>
-    <content><![CDATA[<p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充。</p>
+    <content><![CDATA[<p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充，以及C++11新特性的一些讲解。</p>
 <span id="more"></span>
 <h1 id="Lesson1-介绍"><a href="#Lesson1-介绍" class="headerlink" title="Lesson1 介绍"></a>Lesson1 介绍</h1><p>本课程会讲的内容：</p>
 <ul>
@@ -4713,7 +4713,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=<span class="number">3</span>+f;<span class="comment">//调用operator double()将f转为0.6</span></span><br></pre></td></tr></table></figure>
 <p>在这里，编译器会首先找一个全局函数，看是不是有<code>+</code>运算符重载函数，如果没有，就去找转换函数，此时再调用转换函数。</p>
 <p>只要你认为合理，可以有很多个转换函数。</p>
-<h3 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h3><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
+<h2 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h2><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
 <p>首先构造函数有两个形参，其中一个给了初值。其实调用的时候，只要给一个实参即可。</p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110202233.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=f+<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
