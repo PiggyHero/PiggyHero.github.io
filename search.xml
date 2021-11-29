@@ -1,6 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git的使用手册</title>
+    <url>/2021/10/18/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<p>Git的使用手册，方便使用查阅。<br><span id="more"></span></p>
+<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
+<h2 id="一、最基本的使用"><a href="#一、最基本的使用" class="headerlink" title="一、最基本的使用"></a>一、最基本的使用</h2><p>首先需要知道几个关系         <a href="##三、细细介绍git背后原理">细细介绍git背后的原理</a></p>
+<p>git本地分为工作区、暂存区、本地库三个地方</p>
+<p>工作区(workspace)：即为写代码，写文件的地方</p>
+<p>暂存区(staging area)：保存着待提交的文件</p>
+<p>本地库(local repository)：提交后文件所在的地方</p>
+<p>远程仓库(remote repository)：云端的仓库</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062215.png" alt="image-20210711044151491"></p>
+<p>最主要的是要会使用 <code>git add</code>和<code>git commit</code>两条命令，便可以完成完成最基本的使用</p>
+<ol>
+<li><p>首先当写完一个文件后，用<code>git add .</code>添加所有更改的文件到暂存区，或者指定特定的文件到暂存区</p>
+</li>
+<li><p>然后使用 <code>git commit -m &#39;描述信息&#39;</code> 提交 这次更改，此时本地仓库便完成了这次的变更</p>
+</li>
+<li><p>如果想建立远程仓库，需要在github上建立一个仓库，然后复制下SSH的地址（注意这里需要在github上绑定本地电脑的SSH公共钥匙）</p>
+</li>
+<li><p>然后在终端中到本地仓库所在的文件夹，使用以下代码建立关联</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果再有更改的文件，还是先 <code>git add 文件名</code> 然后 <code>git commit -m &#39;描述信息&#39;</code> 或者用 <code>git commit -am &#39;变更描述&#39;</code>来进行提交，然后再用 <code>git push</code> 完成远程库的变更</p>
+</li>
+</ol>
+<h2 id="二、git-基本命令介绍"><a href="#二、git-基本命令介绍" class="headerlink" title="二、git 基本命令介绍"></a>二、git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
+<p>按F向下翻页，按B向上翻页</p>
+<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
+<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
+<p>（2）全局：只在用户范围内使用该配置</p>
+<p>（3）项目：在该项目范围内，使用该配置</p>
+<p>一般设置用户的配置文件，用global</p>
+<p><code>git config --global 想要配置的东西</code></p>
+<p><code>git config --unset --global</code>   恢复原来的配置</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
+<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
+<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
+<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
+<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
+<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
+<p><code>git status</code></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062228.png" alt="image-20210708115817078"></p>
+<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
+<p>添加要提交的文件</p>
+<p><code>git add 要添加的文件</code></p>
+<p><code>git add .</code>添加所有的文件</p>
+<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
+<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
+<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062230.png" alt="image-20210708120726347"></p>
+<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
+<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
+<p>这里如果没添加文件，会对比所有修改的文件</p>
+<p>红色是修改前的，绿色是修改后的</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062232.png" alt="image-20210708121041581"></p>
+<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
+<blockquote>
+<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
+</blockquote>
+<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
+<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
+<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
+<hr>
+<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
+<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
+<p>git mv也可以移动文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
+<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
+<p>共有三种模式</p>
+<p>(1)—mixed</p>
+<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
+<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
+<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
+<p><code>git reset HEAD^</code> 变更到上一个版本</p>
+<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
+<p><code>git reset 版本号</code>回退到指定的版本</p>
+<p>(2)—soft</p>
+<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
+<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062239.png" alt="img"></p>
+<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
+<p>(3)—hard</p>
+<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062241.gif" alt="img"></p>
+<blockquote>
+<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
+<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
+</blockquote>
+<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
+<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062244.gif" alt="img"></p>
+<h2 id="三、细细介绍git背后原理"><a href="#三、细细介绍git背后原理" class="headerlink" title="三、细细介绍git背后原理"></a>三、细细介绍git背后原理</h2><ul>
+<li>工作区：就是在电脑里能看到的目录</li>
+<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
+<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062250.png" alt="image-20210711045622504"></p>
+<ul>
+<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
+<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
+<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
+<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
+<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
+<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
+</ul>
+<p>如果还不明白，看下图：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062256.png" alt="image-20210711063540634"></p>
+<h2 id="四、建立与远程库的连接"><a href="#四、建立与远程库的连接" class="headerlink" title="四、建立与远程库的连接"></a>四、建立与远程库的连接</h2><p><a href="https://www.jianshu.com/p/7edb6b838a2e">与远程库建立连接</a></p>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MacOS无法抹掉硬盘问题解决</title>
+    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Mac电脑操作</title>
     <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
@@ -343,127 +476,6 @@
       </categories>
       <tags>
         <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git的使用手册</title>
-    <url>/2021/10/18/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>Git的使用手册，方便使用查阅。<br><span id="more"></span></p>
-<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
-<h2 id="一、最基本的使用"><a href="#一、最基本的使用" class="headerlink" title="一、最基本的使用"></a>一、最基本的使用</h2><p>首先需要知道几个关系         <a href="##三、细细介绍git背后原理">细细介绍git背后的原理</a></p>
-<p>git本地分为工作区、暂存区、本地库三个地方</p>
-<p>工作区(workspace)：即为写代码，写文件的地方</p>
-<p>暂存区(staging area)：保存着待提交的文件</p>
-<p>本地库(local repository)：提交后文件所在的地方</p>
-<p>远程仓库(remote repository)：云端的仓库</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062215.png" alt="image-20210711044151491"></p>
-<p>最主要的是要会使用 <code>git add</code>和<code>git commit</code>两条命令，便可以完成完成最基本的使用</p>
-<ol>
-<li><p>首先当写完一个文件后，用<code>git add .</code>添加所有更改的文件到暂存区，或者指定特定的文件到暂存区</p>
-</li>
-<li><p>然后使用 <code>git commit -m &#39;描述信息&#39;</code> 提交 这次更改，此时本地仓库便完成了这次的变更</p>
-</li>
-<li><p>如果想建立远程仓库，需要在github上建立一个仓库，然后复制下SSH的地址（注意这里需要在github上绑定本地电脑的SSH公共钥匙）</p>
-</li>
-<li><p>然后在终端中到本地仓库所在的文件夹，使用以下代码建立关联</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果再有更改的文件，还是先 <code>git add 文件名</code> 然后 <code>git commit -m &#39;描述信息&#39;</code> 或者用 <code>git commit -am &#39;变更描述&#39;</code>来进行提交，然后再用 <code>git push</code> 完成远程库的变更</p>
-</li>
-</ol>
-<h2 id="二、git-基本命令介绍"><a href="#二、git-基本命令介绍" class="headerlink" title="二、git 基本命令介绍"></a>二、git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
-<p>按F向下翻页，按B向上翻页</p>
-<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
-<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
-<p>（2）全局：只在用户范围内使用该配置</p>
-<p>（3）项目：在该项目范围内，使用该配置</p>
-<p>一般设置用户的配置文件，用global</p>
-<p><code>git config --global 想要配置的东西</code></p>
-<p><code>git config --unset --global</code>   恢复原来的配置</p>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
-<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
-<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
-<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
-<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
-<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
-<p><code>git status</code></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062228.png" alt="image-20210708115817078"></p>
-<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
-<p>添加要提交的文件</p>
-<p><code>git add 要添加的文件</code></p>
-<p><code>git add .</code>添加所有的文件</p>
-<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
-<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
-<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062230.png" alt="image-20210708120726347"></p>
-<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
-<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
-<p>这里如果没添加文件，会对比所有修改的文件</p>
-<p>红色是修改前的，绿色是修改后的</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062232.png" alt="image-20210708121041581"></p>
-<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
-<blockquote>
-<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
-</blockquote>
-<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
-<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
-<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
-<hr>
-<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
-<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
-<p>git mv也可以移动文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
-<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
-<p>共有三种模式</p>
-<p>(1)—mixed</p>
-<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
-<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
-<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
-<p><code>git reset HEAD^</code> 变更到上一个版本</p>
-<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
-<p><code>git reset 版本号</code>回退到指定的版本</p>
-<p>(2)—soft</p>
-<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
-<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062239.png" alt="img"></p>
-<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
-<p>(3)—hard</p>
-<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062241.gif" alt="img"></p>
-<blockquote>
-<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
-<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
-</blockquote>
-<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
-<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062244.gif" alt="img"></p>
-<h2 id="三、细细介绍git背后原理"><a href="#三、细细介绍git背后原理" class="headerlink" title="三、细细介绍git背后原理"></a>三、细细介绍git背后原理</h2><ul>
-<li>工作区：就是在电脑里能看到的目录</li>
-<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
-<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062250.png" alt="image-20210711045622504"></p>
-<ul>
-<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
-<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
-<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
-<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
-<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
-<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
-</ul>
-<p>如果还不明白，看下图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062256.png" alt="image-20210711063540634"></p>
-<h2 id="四、建立与远程库的连接"><a href="#四、建立与远程库的连接" class="headerlink" title="四、建立与远程库的连接"></a>四、建立与远程库的连接</h2><p><a href="https://www.jianshu.com/p/7edb6b838a2e">与远程库建立连接</a></p>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -913,117 +925,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MacOS无法抹掉硬盘问题解决</title>
-    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ROS开发环境搭建</title>
-    <url>/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
-<h1 id="一、文件系统介绍"><a href="#一、文件系统介绍" class="headerlink" title="一、文件系统介绍"></a>一、文件系统介绍</h1><p>首先介绍一下ROS中的文件系统。<br>ROS文件系统指的是在硬盘上，ROS源码的组织形式。大致结构如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png" alt="image-20211021164223501"></p>
-<p>Workspace：为自定义的工作空间。</p>
-<ul>
-<li>build：编译空间，放置编译过程中产生的文件。（我们可以不用管）</li>
-<li>devel：开发空间，用于存放编译后生成的目标文件，包括头文件、动态或静态链接库、可执行文件。</li>
-<li>src：存放源码。各个功能包的源码文件就在该目录下。<ul>
-<li>CMakeLists.txt：存储编译的基本配置。</li>
-<li>Package：功能包，包含多个节点、库与配置文件源码。<ul>
-<li>CMakeLists.txt：配置编译规则(与上层CMakeLists不同的是，此处仅配置该功能包下的编译规则)。</li>
-<li>package.xml：包信息，比如：包名、版本、作者、依赖项等。</li>
-<li>scripts：存储python源文件。</li>
-<li>src：存储C++源文件。</li>
-<li>include：头文件</li>
-<li>msg：存储话题消息通信格式文件。</li>
-<li>srv：存储服务通信格式文件。</li>
-<li>launch：存储launch文件。</li>
-<li>config：存储配置文件。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>关于文件系统的相关命令</strong></p>
-<h2 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h2><p><code>catkin_create_pkg 自定义包名 依赖包</code>     创建新的ROS功能包</p>
-<p><code>sudo apt install xxx</code>       安装 ROS功能包</p>
-<h2 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h2><p><code>sudo apt purge xxx</code>       删除某个功能包</p>
-<h2 id="3-查"><a href="#3-查" class="headerlink" title="3.查"></a>3.查</h2><p><code>rospack list</code>     列出所有功能包</p>
-<p><code>rospack find 包名</code>      查找某个功能包是否存在，如果存在返回安装路径</p>
-<p><code>roscd 包名</code>      进入某个功能包</p>
-<p><code>rosls 包名</code>        列出某个包下的文件</p>
-<p><code>apt search xxx</code>    搜索某个功能包</p>
-<h2 id="4-改"><a href="#4-改" class="headerlink" title="4.改"></a>4.改</h2><p><code>rosed 包名 文件名</code>        修改功能包文件</p>
-<p>需要安装 vim</p>
-<p><strong>比如:</strong><code>rosed turtlesim Color.msg</code></p>
-<h1 id="二、ROS开发环境搭建"><a href="#二、ROS开发环境搭建" class="headerlink" title="二、ROS开发环境搭建"></a>二、ROS开发环境搭建</h1><p>在介绍完了文件系统后，我们就可以搭建开发环境了。开发环境就是我们写代码然后又能运行所需要的环境。如果想运行我们写的代码，大致分为三个阶段。分别为准备阶段，编写阶段，编译阶段。</p>
-<p>在前期的准备阶段，我们要创建一个写代码的地方。</p>
-<h2 id="1-创建工作空间"><a href="#1-创建工作空间" class="headerlink" title="1.创建工作空间"></a>1.创建工作空间</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p 自定义工作空间名/src</span><br><span class="line"><span class="built_in">cd</span> 自定义工作空间名</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
-<p>上述命令，首先会创建一个工作空间以及一个<code>src</code>子目录，然后再进入工作空间调用 catkin_make命令编译。</p>
-<p>==注意：如果想要<code>catkin_make</code>，就必须要有<code>src</code>目录。==</p>
-<h2 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h2><p>环境变量就是让系统知道当前工作空间下的功能包和launch文件的名字，这方便我们在终端可以直接运行这些命令。</p>
-<p>首先在创建完工作空间后，工作空间目录下的<code>devel</code>中，有一个<code>setup.bash</code>的文件。</p>
-<p>然后我们来到linux的用户文件夹下，使用快捷键<code>Ctrl+H</code>显示出隐藏文件。</p>
-<p>找到<code>.bashrc</code>文件，打开。</p>
-<p>在后面添上一句：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span>	setup.bash的路径</span><br></pre></td></tr></table></figure>
-<p>这样就配置好了环境变量，如果不配置，那么每次想要在终端运行该空间中的功能包节点时，就需要source 该文件路径。</p>
-<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3.创建功能包"></a>3.创建功能包</h2><p>==进入工作空间中的<code>src</code>目录==。输入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg 自定义的功能包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
-<p>这样就创建了功能包，产生了功能包目录，后面的<code>roscpp</code>等是该功能包的依赖。</p>
-<h2 id="4-编写源文件"><a href="#4-编写源文件" class="headerlink" title="4.编写源文件"></a>4.编写源文件</h2><p>在功能包目录下建立<code>src</code>目录，在这里我们就可以创建要编写的C++源文件了。</p>
-<p>在源文件中，要包括以下几个部分：</p>
-<p>(1)头文件</p>
-<p>(2)节点初始化</p>
-<p>​    在<code>main</code>函数中，使用<code>ros::init(argc,argv,&quot;节点名&quot;)</code>函数初始化节点。这里初始化节点的名字就是运行节点后节点    的名字，但是名字也可在 launch文件中重映射。</p>
-<p>(3)输出信息</p>
-<p>​    可以用<code>ROS_INFO(&quot;输出信息&quot;)</code>函数输出节点运行后的信息，来验证节点是否启动成功。</p>
-<p>C++源文件代码事例：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="5-编写配置文件"><a href="#5-编写配置文件" class="headerlink" title="5.编写配置文件"></a>5.编写配置文件</h2><p>我们写完代码后，如果想要运行该程序，还要进行编译，编译就要按照一定的规则，所以我们要编写编译的规则文件，也就是配置文件<code>CMakeLists.txt</code></p>
-<p>主要改的地方有两个：</p>
-<p>(1)添加生成可执行文件。</p>
-<p>(2)链接库文件。</p>
-<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6.编译"></a>6.编译</h2><p>配置好<code>CMakeLists.txt</code>文件后，我们便可以进行编译了。</p>
-<p>回到工作空间目录，运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
-<p>生成了可执行文件，可执行文件存放在工作空间下的<code>devel</code>目录。</p>
-<p>接下来要运行某个功能包的节点，就直接可以使用<code>rosrun</code>命令了。</p>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>ROS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VScode编译环境配置</title>
-    <url>/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>在linux或mac中编译C++,首先要配置好编译环境。<br><span id="more"></span></p>
-<h1 id="1-首先编写CMakeLists-txt文件"><a href="#1-首先编写CMakeLists-txt文件" class="headerlink" title="1.首先编写CMakeLists.txt文件"></a>1.首先编写CMakeLists.txt文件</h1><p>注意：在<code>c_cpp_properties.json</code>中设置了头文件路径，在编译的过程中就会有头文件内容的提示，但仍需要在<code>CMakeLists.txt</code>中写好包含的头文件路径，否则编译器只会在<code>usr/include文件夹下</code>和<code>CMakeLists.txt</code>所在文件夹下寻找头文件</p>
-<p>如果不在<code>c_cpp_properties.json</code>中设置头文件路径，在写代码的时候可能会没有提示，而且头文件名字下会有红波浪线，但可以正常编译</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(文件名)</span><br><span class="line"></span><br><span class="line"><span class="keyword">aux_source_directory</span>(./ VAR) <span class="comment">#把当前路径下的所有源文件打包程VAR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(添加头文件路径)<span class="comment">#如果在vscode中已经添加了头文件路径了，就不需要再添加了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(搜索库)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;添加库的头文件&#125;</span>）</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_TYPE Debug)<span class="comment">#如果想调试，加上这一句，生成可调试文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS<span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -Wall&quot;</span>)<span class="comment">#生成错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(可执行文件名 <span class="variable">$&#123;VAR&#125;</span>)<span class="comment">#生成可执行文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(可执行文件 库名) <span class="comment">#链接库</span></span><br></pre></td></tr></table></figure>
-<h1 id="2-文件根目录中建立一个build文件夹"><a href="#2-文件根目录中建立一个build文件夹" class="headerlink" title="2.文件根目录中建立一个build文件夹"></a>2.文件根目录中建立一个build文件夹</h1><p>编译过程中生成的中间文件和可执行文件全在该文件夹下，可执行文件的位置可在CMakeLists.txt中改变路径</p>
-<h1 id="3-建立-json文件夹，编写launch-json文件"><a href="#3-建立-json文件夹，编写launch-json文件" class="headerlink" title="3.建立.json文件夹，编写launch.json文件"></a>3.建立.json文件夹，编写launch.json文件</h1><p>新建launch.json文件，该文件是在VSCODE中按F5后所执行的命令</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;g++ - 生成和调试活动文件&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build/可执行文件名&quot;</span>,**<span class="comment">//执行文件的路径加上可执行文件，$&#123;workspaceFolder&#125;为根目录**</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,<span class="comment">//打开外部终端</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;为 gdb 启用整齐打印&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="attr">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;Build&quot;</span>,<span class="comment">//该命令表示执行launch.json的命令之前的预执行任务，要在tasks.json中设置</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>VScode</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用URDF创建机器人模型</title>
     <url>/2021/10/18/ROS%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<p>编写urdf文件，创建机器人模型，可以在rviz中可视化或导入到gazebo中仿真。<br><span id="more"></span></p>
@@ -1132,6 +1033,86 @@
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;camera&quot;</span>&gt;</span></span><br><span class="line">   </span><br><span class="line">    <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;camera&quot;</span> <span class="attr">name</span>=<span class="string">&quot;camera_node&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>30.0<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">      <span class="tag">&lt;<span class="name">camera</span> <span class="attr">name</span>=<span class="string">&quot;head&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">horizontal_fov</span>&gt;</span>1.3962634<span class="tag">&lt;/<span class="name">horizontal_fov</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">width</span>&gt;</span>1280<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">height</span>&gt;</span>720<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">format</span>&gt;</span>R8G8B8<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">clip</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">near</span>&gt;</span>0.02<span class="tag">&lt;/<span class="name">near</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">far</span>&gt;</span>300<span class="tag">&lt;/<span class="name">far</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">noise</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>gaussian<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">mean</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">mean</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">stddev</span>&gt;</span>0.007<span class="tag">&lt;/<span class="name">stddev</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">noise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">camera</span>&gt;</span></span><br><span class="line">      </span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;gazebo_camera&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_camera.so&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cameraName</span>&gt;</span>/camera<span class="tag">&lt;/<span class="name">cameraName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">imageTopicName</span>&gt;</span>image_raw<span class="tag">&lt;/<span class="name">imageTopicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cameraInfoTopicName</span>&gt;</span>camera_info<span class="tag">&lt;/<span class="name">cameraInfoTopicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>camera<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">hackBaseline</span>&gt;</span>0.07<span class="tag">&lt;/<span class="name">hackBaseline</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionK3</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionK3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionT1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionT1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">distortionT2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortionT2</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="3-雷达"><a href="#3-雷达" class="headerlink" title="(3)雷达"></a>(3)雷达</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;laser&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;ray&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rplidar&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">pose</span>&gt;</span>0 0 0 0 0 0<span class="tag">&lt;/<span class="name">pose</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">visualize</span>&gt;</span>true<span class="tag">&lt;/<span class="name">visualize</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>5.5<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ray</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scan</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">horizontal</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">samples</span>&gt;</span>360<span class="tag">&lt;/<span class="name">samples</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">resolution</span>&gt;</span>1<span class="tag">&lt;/<span class="name">resolution</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">min_angle</span>&gt;</span>-3<span class="tag">&lt;/<span class="name">min_angle</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">max_angle</span>&gt;</span>3<span class="tag">&lt;/<span class="name">max_angle</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">horizontal</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">scan</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">range</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">min</span>&gt;</span>0.10<span class="tag">&lt;/<span class="name">min</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">max</span>&gt;</span>30.0<span class="tag">&lt;/<span class="name">max</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">resolution</span>&gt;</span>0.01<span class="tag">&lt;/<span class="name">resolution</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">range</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">noise</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">type</span>&gt;</span>gaussian<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">mean</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">mean</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">stddev</span>&gt;</span>0.01<span class="tag">&lt;/<span class="name">stddev</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">noise</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ray</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;gazebo_rplidar&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_laser.so&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">topicName</span>&gt;</span>/scan<span class="tag">&lt;/<span class="name">topicName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>laser<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="4-深度相机"><a href="#4-深度相机" class="headerlink" title="(4)深度相机"></a>(4)深度相机</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;support&quot;</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;depth&quot;</span> <span class="attr">name</span>=<span class="string">&quot;camera&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">always_on</span>&gt;</span>true<span class="tag">&lt;/<span class="name">always_on</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>20.0<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">camera</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">horizontal_fov</span>&gt;</span>$&#123;60.0*PI/180.0&#125;<span class="tag">&lt;/<span class="name">horizontal_fov</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">format</span>&gt;</span>R8G8B8<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">width</span>&gt;</span>640<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">height</span>&gt;</span>480<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">clip</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">near</span>&gt;</span>0.05<span class="tag">&lt;/<span class="name">near</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">far</span>&gt;</span>8.0<span class="tag">&lt;/<span class="name">far</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">camera</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;kinect_camera_controller&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_openni_kinect.so&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraName</span>&gt;</span>camera<span class="tag">&lt;/<span class="name">cameraName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>10<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">imageTopicName</span>&gt;</span>rgb/image_raw<span class="tag">&lt;/<span class="name">imageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageTopicName</span>&gt;</span>depth/image_raw<span class="tag">&lt;/<span class="name">depthImageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudTopicName</span>&gt;</span>depth/points<span class="tag">&lt;/<span class="name">pointCloudTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraInfoTopicName</span>&gt;</span>rgb/camera_info<span class="tag">&lt;/<span class="name">cameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageCameraInfoTopicName</span>&gt;</span>depth/camera_info<span class="tag">&lt;/<span class="name">depthImageCameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>body<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">baseline</span>&gt;</span>0.1<span class="tag">&lt;/<span class="name">baseline</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k3</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k3</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudCutoff</span>&gt;</span>0.4<span class="tag">&lt;/<span class="name">pointCloudCutoff</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ROS开发环境搭建</title>
+    <url>/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
+<h1 id="一、文件系统介绍"><a href="#一、文件系统介绍" class="headerlink" title="一、文件系统介绍"></a>一、文件系统介绍</h1><p>首先介绍一下ROS中的文件系统。<br>ROS文件系统指的是在硬盘上，ROS源码的组织形式。大致结构如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png" alt="image-20211021164223501"></p>
+<p>Workspace：为自定义的工作空间。</p>
+<ul>
+<li>build：编译空间，放置编译过程中产生的文件。（我们可以不用管）</li>
+<li>devel：开发空间，用于存放编译后生成的目标文件，包括头文件、动态或静态链接库、可执行文件。</li>
+<li>src：存放源码。各个功能包的源码文件就在该目录下。<ul>
+<li>CMakeLists.txt：存储编译的基本配置。</li>
+<li>Package：功能包，包含多个节点、库与配置文件源码。<ul>
+<li>CMakeLists.txt：配置编译规则(与上层CMakeLists不同的是，此处仅配置该功能包下的编译规则)。</li>
+<li>package.xml：包信息，比如：包名、版本、作者、依赖项等。</li>
+<li>scripts：存储python源文件。</li>
+<li>src：存储C++源文件。</li>
+<li>include：头文件</li>
+<li>msg：存储话题消息通信格式文件。</li>
+<li>srv：存储服务通信格式文件。</li>
+<li>launch：存储launch文件。</li>
+<li>config：存储配置文件。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>关于文件系统的相关命令</strong></p>
+<h2 id="1-增"><a href="#1-增" class="headerlink" title="1.增"></a>1.增</h2><p><code>catkin_create_pkg 自定义包名 依赖包</code>     创建新的ROS功能包</p>
+<p><code>sudo apt install xxx</code>       安装 ROS功能包</p>
+<h2 id="2-删"><a href="#2-删" class="headerlink" title="2.删"></a>2.删</h2><p><code>sudo apt purge xxx</code>       删除某个功能包</p>
+<h2 id="3-查"><a href="#3-查" class="headerlink" title="3.查"></a>3.查</h2><p><code>rospack list</code>     列出所有功能包</p>
+<p><code>rospack find 包名</code>      查找某个功能包是否存在，如果存在返回安装路径</p>
+<p><code>roscd 包名</code>      进入某个功能包</p>
+<p><code>rosls 包名</code>        列出某个包下的文件</p>
+<p><code>apt search xxx</code>    搜索某个功能包</p>
+<h2 id="4-改"><a href="#4-改" class="headerlink" title="4.改"></a>4.改</h2><p><code>rosed 包名 文件名</code>        修改功能包文件</p>
+<p>需要安装 vim</p>
+<p><strong>比如:</strong><code>rosed turtlesim Color.msg</code></p>
+<h1 id="二、ROS开发环境搭建"><a href="#二、ROS开发环境搭建" class="headerlink" title="二、ROS开发环境搭建"></a>二、ROS开发环境搭建</h1><p>在介绍完了文件系统后，我们就可以搭建开发环境了。开发环境就是我们写代码然后又能运行所需要的环境。如果想运行我们写的代码，大致分为三个阶段。分别为准备阶段，编写阶段，编译阶段。</p>
+<p>在前期的准备阶段，我们要创建一个写代码的地方。</p>
+<h2 id="1-创建工作空间"><a href="#1-创建工作空间" class="headerlink" title="1.创建工作空间"></a>1.创建工作空间</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p 自定义工作空间名/src</span><br><span class="line"><span class="built_in">cd</span> 自定义工作空间名</span><br><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>上述命令，首先会创建一个工作空间以及一个<code>src</code>子目录，然后再进入工作空间调用 catkin_make命令编译。</p>
+<p>==注意：如果想要<code>catkin_make</code>，就必须要有<code>src</code>目录。==</p>
+<h2 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h2><p>环境变量就是让系统知道当前工作空间下的功能包和launch文件的名字，这方便我们在终端可以直接运行这些命令。</p>
+<p>首先在创建完工作空间后，工作空间目录下的<code>devel</code>中，有一个<code>setup.bash</code>的文件。</p>
+<p>然后我们来到linux的用户文件夹下，使用快捷键<code>Ctrl+H</code>显示出隐藏文件。</p>
+<p>找到<code>.bashrc</code>文件，打开。</p>
+<p>在后面添上一句：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span>	setup.bash的路径</span><br></pre></td></tr></table></figure>
+<p>这样就配置好了环境变量，如果不配置，那么每次想要在终端运行该空间中的功能包节点时，就需要source 该文件路径。</p>
+<h2 id="3-创建功能包"><a href="#3-创建功能包" class="headerlink" title="3.创建功能包"></a>3.创建功能包</h2><p>==进入工作空间中的<code>src</code>目录==。输入以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_create_pkg 自定义的功能包名 roscpp rospy std_msgs</span><br></pre></td></tr></table></figure>
+<p>这样就创建了功能包，产生了功能包目录，后面的<code>roscpp</code>等是该功能包的依赖。</p>
+<h2 id="4-编写源文件"><a href="#4-编写源文件" class="headerlink" title="4.编写源文件"></a>4.编写源文件</h2><p>在功能包目录下建立<code>src</code>目录，在这里我们就可以创建要编写的C++源文件了。</p>
+<p>在源文件中，要包括以下几个部分：</p>
+<p>(1)头文件</p>
+<p>(2)节点初始化</p>
+<p>​    在<code>main</code>函数中，使用<code>ros::init(argc,argv,&quot;节点名&quot;)</code>函数初始化节点。这里初始化节点的名字就是运行节点后节点    的名字，但是名字也可在 launch文件中重映射。</p>
+<p>(3)输出信息</p>
+<p>​    可以用<code>ROS_INFO(&quot;输出信息&quot;)</code>函数输出节点运行后的信息，来验证节点是否启动成功。</p>
+<p>C++源文件代码事例：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;ros/ros.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//执行 ros 节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建 ros 节点句柄(非必须)</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//控制台输出 hello world</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;hello world!&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5-编写配置文件"><a href="#5-编写配置文件" class="headerlink" title="5.编写配置文件"></a>5.编写配置文件</h2><p>我们写完代码后，如果想要运行该程序，还要进行编译，编译就要按照一定的规则，所以我们要编写编译的规则文件，也就是配置文件<code>CMakeLists.txt</code></p>
+<p>主要改的地方有两个：</p>
+<p>(1)添加生成可执行文件。</p>
+<p>(2)链接库文件。</p>
+<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6.编译"></a>6.编译</h2><p>配置好<code>CMakeLists.txt</code>文件后，我们便可以进行编译了。</p>
+<p>回到工作空间目录，运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>生成了可执行文件，可执行文件存放在工作空间下的<code>devel</code>目录。</p>
+<p>接下来要运行某个功能包的节点，就直接可以使用<code>rosrun</code>命令了。</p>
 ]]></content>
       <categories>
         <category>动手实践</category>
@@ -1370,6 +1351,80 @@ r_{j} \\
         <category>动手实践</category>
       </categories>
       <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>VScode编译环境配置</title>
+    <url>/2021/10/18/VScode%E7%BC%96%E8%AF%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>在linux或mac中编译C++,首先要配置好编译环境。<br><span id="more"></span></p>
+<h1 id="1-首先编写CMakeLists-txt文件"><a href="#1-首先编写CMakeLists-txt文件" class="headerlink" title="1.首先编写CMakeLists.txt文件"></a>1.首先编写CMakeLists.txt文件</h1><p>注意：在<code>c_cpp_properties.json</code>中设置了头文件路径，在编译的过程中就会有头文件内容的提示，但仍需要在<code>CMakeLists.txt</code>中写好包含的头文件路径，否则编译器只会在<code>usr/include文件夹下</code>和<code>CMakeLists.txt</code>所在文件夹下寻找头文件</p>
+<p>如果不在<code>c_cpp_properties.json</code>中设置头文件路径，在写代码的时候可能会没有提示，而且头文件名字下会有红波浪线，但可以正常编译</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(文件名)</span><br><span class="line"></span><br><span class="line"><span class="keyword">aux_source_directory</span>(./ VAR) <span class="comment">#把当前路径下的所有源文件打包程VAR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(添加头文件路径)<span class="comment">#如果在vscode中已经添加了头文件路径了，就不需要再添加了</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(搜索库)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;添加库的头文件&#125;</span>）</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_BUILD_TYPE Debug)<span class="comment">#如果想调试，加上这一句，生成可调试文件</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS<span class="string">&quot;$&#123;CMAKE_CXX_FLAGS&#125; -Wall&quot;</span>)<span class="comment">#生成错误信息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(可执行文件名 <span class="variable">$&#123;VAR&#125;</span>)<span class="comment">#生成可执行文件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(可执行文件 库名) <span class="comment">#链接库</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-文件根目录中建立一个build文件夹"><a href="#2-文件根目录中建立一个build文件夹" class="headerlink" title="2.文件根目录中建立一个build文件夹"></a>2.文件根目录中建立一个build文件夹</h1><p>编译过程中生成的中间文件和可执行文件全在该文件夹下，可执行文件的位置可在CMakeLists.txt中改变路径</p>
+<h1 id="3-建立-json文件夹，编写launch-json文件"><a href="#3-建立-json文件夹，编写launch-json文件" class="headerlink" title="3.建立.json文件夹，编写launch.json文件"></a>3.建立.json文件夹，编写launch.json文件</h1><p>新建launch.json文件，该文件是在VSCODE中按F5后所执行的命令</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;g++ - 生成和调试活动文件&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;cppdbg&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build/可执行文件名&quot;</span>,**<span class="comment">//执行文件的路径加上可执行文件，$&#123;workspaceFolder&#125;为根目录**</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;environment&quot;</span>: [],</span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span>: <span class="literal">true</span>,<span class="comment">//打开外部终端</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span>: <span class="string">&quot;gdb&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;setupCommands&quot;</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">&quot;description&quot;</span>: <span class="string">&quot;为 gdb 启用整齐打印&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;text&quot;</span>: <span class="string">&quot;-enable-pretty-printing&quot;</span>,</span><br><span class="line">                    <span class="attr">&quot;ignoreFailures&quot;</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">             <span class="attr">&quot;preLaunchTask&quot;</span>: <span class="string">&quot;Build&quot;</span>,<span class="comment">//该命令表示执行launch.json的命令之前的预执行任务，要在tasks.json中设置</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span>: <span class="string">&quot;/usr/bin/gdb&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>VScode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Word中使用Endnote插件</title>
+    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
+<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
+<li>关闭word，打开endnote</li>
+<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
+<li>等待完成</li>
+<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
+<li>重启word</li>
+</ol>
+<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
+<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
+<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
+<p>引用文献的格式可以在Word中设置。</p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>依赖包是什么</title>
+    <url>/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
+<span id="more"></span>
+<p>依赖包就是某个软件用到的库文件。</p>
+<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
+<p>不同体系用不同的方法解决依赖问题。</p>
+<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
+<ul>
+<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
+<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
+<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
+<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
+</ul>
+<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
+<ul>
+<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
+<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
+<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
+<li>系统中安装的软件越多，越容易出问题。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
         <tag>Linux</tag>
       </tags>
   </entry>
@@ -2726,37 +2781,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>依赖包是什么</title>
-    <url>/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
-<span id="more"></span>
-<p>依赖包就是某个软件用到的库文件。</p>
-<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
-<p>不同体系用不同的方法解决依赖问题。</p>
-<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
-<ul>
-<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
-<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
-<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
-<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
-</ul>
-<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
-<ul>
-<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
-<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
-<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
-<li>系统中安装的软件越多，越容易出问题。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>ROS</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>侯捷老师C++学习笔记——大气编程(下)</title>
     <url>/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8B)/</url>
     <content><![CDATA[<p>侯捷老师C++课程下半部分。本课程是对之前课程中所提的一些东西的补充，以及C++11新特性的一些讲解。</p>
@@ -3149,30 +3173,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </categories>
       <tags>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Word中使用Endnote插件</title>
-    <url>/2021/10/18/Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/</url>
-    <content><![CDATA[<p>在mac中使用Endnote的Word插件。<br><span id="more"></span></p>
-<h2 id="一、安装插件"><a href="#一、安装插件" class="headerlink" title="一、安装插件"></a>一、安装插件</h2><ol>
-<li>关闭word，打开endnote</li>
-<li>EndNote —&gt;Customizer —&gt;勾选Cite While You Write</li>
-<li>等待完成</li>
-<li>打开word 工具—&gt; 模版与加载项 —&gt; 勾选CWYW</li>
-<li>重启word</li>
-</ol>
-<p>因为新的Macbook air 和Macbook pro使用的是苹果自身的M1芯片，endnote x9和20版本的软件并不兼容这样的芯片，虽然可以用rosetta打开，但是它的word插件确不能被word打开，表现为word运行不了endnote加载项目提示<strong>“Word 无法加载加载项。加载项与此版本的 Word 不兼容。</strong>请向加载项提供者索取更新。(EndNote CWYW Word 16.bundle)”。</p>
-<p><a href="https://zhuanlan.zhihu.com/p/359185025">解决方案</a></p>
-<h2 id="二、插入与删除参考文献"><a href="#二、插入与删除参考文献" class="headerlink" title="二、插入与删除参考文献"></a>二、插入与删除参考文献</h2><p>插入文献：直接在Word的菜单栏中找到Endnote，点击。然后点击工具栏中insert citation，选择要插入的文献。也可直接在Endnote中复制文献或直接拖拽文献到Word中。</p>
-<p>删除文献：在引用处将被引文献的标号删除，然后点击update citation。</p>
-<p>引用文献的格式可以在Word中设置。</p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
       </tags>
   </entry>
   <entry>
@@ -3630,6 +3630,20 @@ y^{\prime}
       </categories>
       <tags>
         <tag>矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>视觉SLAM框架</title>
+    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
+<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
+]]></content>
+      <categories>
+        <category>理论基础</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
       </tags>
   </entry>
   <entry>
@@ -4793,20 +4807,6 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </categories>
       <tags>
         <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>视觉SLAM框架</title>
-    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
-<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
-]]></content>
-      <categories>
-        <category>理论基础</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
       </tags>
   </entry>
 </search>
