@@ -20,21 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="我们在Ubuntu中常说的依赖是什么呢？">
+  <meta name="description" content="在使用 Git 时发现在使用 git clone 或 git pull 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="依赖包是什么">
-<meta property="og:url" content="http://example.com/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/index.html">
+<meta property="og:title" content="Git连不上远端库问题解决">
+<meta property="og:url" content="http://example.com/2021/11/28/Git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="我们在Ubuntu中常说的依赖是什么呢？">
+<meta property="og:description" content="在使用 Git 时发现在使用 git clone 或 git pull 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-10-21T06:32:36.000Z">
-<meta property="article:modified_time" content="2021-11-09T03:20:33.728Z">
+<meta property="article:published_time" content="2021-11-28T15:03:51.000Z">
+<meta property="article:modified_time" content="2021-12-01T16:14:29.645Z">
 <meta property="article:author" content="PiggyHero">
-<meta property="article:tag" content="ROS">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/">
+<link rel="canonical" href="http://example.com/2021/11/28/Git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 
 
 <script id="page-configurations">
@@ -47,7 +46,7 @@
   };
 </script>
 
-  <title>依赖包是什么 | PiggyHero Wiki</title>
+  <title>Git连不上远端库问题解决 | PiggyHero Wiki</title>
   
 
 
@@ -196,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/28/Git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cutexiaoxin.gif">
@@ -209,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          依赖包是什么
+          Git连不上远端库问题解决
         </h1>
 
         <div class="post-meta">
@@ -219,14 +218,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-10-21 14:32:36" itemprop="dateCreated datePublished" datetime="2021-10-21T14:32:36+08:00">2021-10-21</time>
+              <time title="创建时间：2021-11-28 23:03:51" itemprop="dateCreated datePublished" datetime="2021-11-28T23:03:51+08:00">2021-11-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-09 11:20:33" itemprop="dateModified" datetime="2021-11-09T11:20:33+08:00">2021-11-09</time>
+                <time title="修改时间：2021-12-02 00:14:29" itemprop="dateModified" datetime="2021-12-02T00:14:29+08:00">2021-12-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -234,7 +233,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8A%A8%E6%89%8B%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">动手实践</span></a>
+                  <a href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" itemprop="url" rel="index"><span itemprop="name">问题解决</span></a>
                 </span>
             </span>
 
@@ -256,25 +255,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>我们在Ubuntu中常说的依赖是什么呢？</p>
+        <p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
 <span id="more"></span>
-<p>依赖包就是某个软件用到的库文件。</p>
-<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
-<p>不同体系用不同的方法解决依赖问题。</p>
-<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
-<ul>
-<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
-<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
-<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
-<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
-</ul>
-<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
-<ul>
-<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
-<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
-<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
-<li>系统中安装的软件越多，越容易出问题。</li>
-</ul>
+<p>报错信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/xxx/xxx.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/xxx/xxx.git/&#x27;: LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</span><br></pre></td></tr></table></figure>
+<p>解决：</p>
+<p>在 clone GitHub 仓库时可以使用 HTTPS 或者 SSH 进行 clone，而 SSH 却没有 HTTPS 的网络连接问题，所以可以将 push/pull 的连接方式由 HTTPS 改为 SSH。</p>
+<blockquote>
+<p>要求：你需要提前生成 SSH 公私钥对，并将公钥添加到你的 GitHub 账户中。关于这一部分的详细信息，请参阅 <a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a>。</p>
+</blockquote>
+<p>进入仓库对应目录，执行如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote set-url origin git@github.com:xxx/xxx.git</span><br></pre></td></tr></table></figure>
+<p>更改完成后，可以使用如下命令查看当前的 origin 地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -284,8 +277,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ROS/" rel="tag"># ROS</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
           </div>
 
         
@@ -294,12 +286,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/18/ROS%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8B/" rel="prev" title="使用URDF创建机器人模型">
-      <i class="fa fa-chevron-left"></i> 使用URDF创建机器人模型
+    <a href="/2021/11/10/%E4%BE%AF%E6%8D%B7%E8%80%81%E5%B8%88C++%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E5%A4%A7%E6%B0%94%E7%BC%96%E7%A8%8B(%E4%B8%8B)/" rel="prev" title="侯捷老师C++学习笔记——大气编程(下)">
+      <i class="fa fa-chevron-left"></i> 侯捷老师C++学习笔记——大气编程(下)
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/" rel="next" title="头文件 库文件 命名空间">
-      头文件 库文件 命名空间 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/11/28/Mac%E8%A7%A3%E5%86%B3%E5%9B%A0%E4%B8%BA%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%97%AE%E9%A2%98%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6/" rel="next" title="Mac解决因为安全策略问题无法打开软件">
+      Mac解决因为安全策略问题无法打开软件 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
