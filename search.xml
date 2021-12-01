@@ -504,7 +504,7 @@
   </entry>
   <entry>
     <title>Git连不上远端库问题解决</title>
-    <url>/2021/11/28/Git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <url>/2021/12/02/Git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
 <span id="more"></span>
 <p>报错信息：</p>
