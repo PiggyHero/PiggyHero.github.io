@@ -509,7 +509,7 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenCV的数据类型</title>
+    <title>OpenCV学习(1)OpenCV的数据类型</title>
     <url>/2021/12/02/OpenCV%E5%AD%A6%E4%B9%A0(1)%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<p>OpenCV的数据类型分为三类：</p>
 <ol>
