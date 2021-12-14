@@ -184,6 +184,7 @@
     <url>/2021/10/18/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
     <content><![CDATA[<p>Git的使用手册，方便使用查阅。<br><span id="more"></span></p>
 <p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
+<p><a href="https://docs.github.com/cn">git官方文档</a></p>
 <h2 id="一、用法"><a href="#一、用法" class="headerlink" title="一、用法"></a>一、用法</h2><p>首先需要知道几个关系         <a href="##三、细细介绍git背后原理">细细介绍git背后的原理</a></p>
 <p>git本地分为工作区、暂存区、本地库三个地方</p>
 <p>工作区(workspace)：即为写代码，写文件的地方</p>
@@ -209,8 +210,8 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &#x27;描述信息&#x27;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>在第一次git commit 时候，需要配置好提交人的姓名和邮箱。</p>
-<p>git config —global usr.name=”Piggy”</p>
-<p>git config —global usr.email=”a363158526@gmail.com”</p>
+<p>git config —global user.name=”Piggy”</p>
+<p>git config —global user.email=”a363158526@gmail.com”</p>
 </blockquote>
 </li>
 <li><p>如果要发送到github上，用<code>git push</code>。</p>
