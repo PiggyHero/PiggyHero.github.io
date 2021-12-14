@@ -298,18 +298,6 @@
       </tags>
   </entry>
   <entry>
-    <title>MacOS无法抹掉硬盘问题解决</title>
-    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac电脑操作</title>
     <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
@@ -322,6 +310,18 @@
 ]]></content>
       <categories>
         <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MacOS无法抹掉硬盘问题解决</title>
+    <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
       </categories>
       <tags>
         <tag>Mac</tag>
@@ -652,6 +652,97 @@
       </categories>
       <tags>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ROS中命名和重命名</title>
+    <url>/2021/10/22/ROS%E4%B8%AD%E5%91%BD%E5%90%8D%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D/</url>
+    <content><![CDATA[<p>本文介绍ROS中命名和重命名的相关知识。</p>
+<span id="more"></span>
+<p>其实命名和重命名是一回事，只不过我们自己写的节点或者参数等，可以在编程的时候自己直接命名，别人写的包我们不能在其源码上进行命名，所以就需要其他方式进行重命名。</p>
+<p>ROS中关于命名和重命名的情况主要为：</p>
+<ul>
+<li>ROS工作空间覆盖</li>
+<li>ROS节点重命名</li>
+<li>ROS话题名称设置</li>
+<li>ROS参数名称设置</li>
+</ul>
+<p>ROS中命名的策略有两个，一个是重新起名字(重映射)，另一个是在现有的命名前加上命名空间。</p>
+<h1 id="一、ROS工作空间覆盖"><a href="#一、ROS工作空间覆盖" class="headerlink" title="一、ROS工作空间覆盖"></a>一、ROS工作空间覆盖</h1><p>工作空间覆盖是指，在不同的工作空间下，有重名的功能包。</p>
+<p>因为要运行某个包，需要在<code>.bashrc</code>文件中设置环境变量路径。ROS 解析 <code>.bashrc 文件</code>，并生成 <code>ROS_PACKAGE_PATH</code>包路径，该变量中按照 <code>.bashrc</code>中配置设置工作空间优先级，如果先设置工作空间A，再设置工作空间B，那么在调用重名包时，B空间中的重名包被调用，因为它的搜索路径是先搜索B，再搜索A，既然在B中找到了该包，就不会再到A中找了。</p>
+<p>应该避免该种情况发生。</p>
+<h1 id="二、ROS节点重命名"><a href="#二、ROS节点重命名" class="headerlink" title="二、ROS节点重命名"></a>二、ROS节点重命名</h1><p>ROS中不允许同时运行两个名字相同的节点。当如果出现节点名相同时，需要进行重映射或添加命名空间。实现的方式主要有三种</p>
+<h2 id="1-rosrun命令"><a href="#1-rosrun命令" class="headerlink" title="1.rosrun命令"></a>1.rosrun命令</h2><p><strong>(1)添加命名空间</strong></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name  __ns:=/namespace</span><br></pre></td></tr></table></figure>
+<p>查看节点名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/node_name</span><br></pre></td></tr></table></figure>
+<p><strong>(2)重映射</strong></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name __name:=/new_name</span><br></pre></td></tr></table></figure>
+<p>查看节点名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/new_name</span><br></pre></td></tr></table></figure>
+<h2 id="2-launch文件"><a href="#2-launch文件" class="headerlink" title="2.launch文件"></a>2.launch文件</h2><p>在编写launch文件时，完成操作。</p>
+<p><strong>(1)添加命名空间</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span> <span class="attr">ns</span>=<span class="string">&quot;namespace&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>节点名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/new_name</span><br></pre></td></tr></table></figure>
+<p><strong>(2)重映射</strong></p>
+<p>node标签下的name可以完成重映射。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span>  /&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-编码实现"><a href="#3-编码实现" class="headerlink" title="3.编码实现"></a>3.编码实现</h2><p><strong>(1)重映射</strong></p>
+<p>在我们创建节点的时候，需要进行节点初始化，代码如下；</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>,ros::init_option::AnonymousName);</span><br></pre></td></tr></table></figure>
+<p>在参数列表中，<code>ros::init_option::AnoymousName</code>是一个随机的数，可以在原节点名上加上一个随机数。</p>
+<p><strong>(2)添加命名空间</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::map&lt;std::string, std::string&gt; map;</span><br><span class="line">map[<span class="string">&quot;__ns&quot;</span>] = <span class="string">&quot;namespace&quot;</span>;</span><br><span class="line">ros::<span class="built_in">init</span>(map,<span class="string">&quot;node_name&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="三、话题名称设置"><a href="#三、话题名称设置" class="headerlink" title="三、话题名称设置"></a>三、话题名称设置</h1><p>在 ROS 中节点终端，不同的节点之间通信都依赖于话题，话题名称也可能出现重复的情况，这种情况下，系统虽然不会抛出异常，但是可能导致订阅的消息非预期的，从而导致节点运行异常。这种情况下需要将两个节点的话题名称由相同修改为不同。又或者，两个节点是可以通信的，两个节点之间使用了相同的消息类型，但是由于，话题名称不同，导致通信失败。这种情况下需要将两个节点的话题名称由不同修改为相同。</p>
+<h2 id="0-话题分类"><a href="#0-话题分类" class="headerlink" title="0.话题分类"></a>0.话题分类</h2><p>根据话题前面添加的前缀的不同，又可以将话题分为：</p>
+<ul>
+<li>全局话题</li>
+<li>相对话题</li>
+<li>私有话题</li>
+</ul>
+<p>全局话题的前缀为<code>/</code>     <strong>E.g.</strong> <code>/topic_name</code> </p>
+<p>相对话题的前缀为节点的命名空间        <strong>E.g.</strong> <code>/namespace/topic_name</code></p>
+<p>私有话题的前缀为节点名        <strong>E.g.</strong>  <code>/namespace/node_name/topic_name</code></p>
+<h2 id="1-rosrun设置话题重映射"><a href="#1-rosrun设置话题重映射" class="headerlink" title="1.rosrun设置话题重映射"></a>1.rosrun设置话题重映射</h2><p>需要先知道节点中话题的名字。</p>
+<p>然后通过：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name /origin_topic_name:=/new_topic_name</span><br></pre></td></tr></table></figure>
+<h2 id="2-launch文件设置话题重映射"><a href="#2-launch文件设置话题重映射" class="headerlink" title="2.launch文件设置话题重映射"></a>2.launch文件设置话题重映射</h2><p>在launch文件中完成话题名重映射。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;node_name&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">remap</span> <span class="attr">from</span>=<span class="string">&quot;origin_topic_name&quot;</span> <span class="attr">to</span>=<span class="string">&quot;new_topic_name&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-编码设置话题名称"><a href="#3-编码设置话题名称" class="headerlink" title="3.编码设置话题名称"></a>3.编码设置话题名称</h2><p><strong>(1)全局话题名</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;<span class="comment">//创建节点句柄，它可以实现一些功能，设置话题时就需要它</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;/topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里的/就表示全局话题</span></span><br></pre></td></tr></table></figure>
+<p>生成的话题名为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/topic_name</span><br></pre></td></tr></table></figure>
+<p><strong>(2)相对话题</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;</span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里没有/就表示相对话题</span></span><br></pre></td></tr></table></figure>
+<p>生成的话题名为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/topic_name</span><br></pre></td></tr></table></figure>
+<p><strong>(3)私有话题</strong></p>
+<p>私有话题与前面的有一点不同，是在生成节点句柄的时候。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span>;<span class="comment">//注意这里加上了~</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>生成的话题名为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/topic_name</span><br></pre></td></tr></table></figure>
+<h1 id="四、ROS参数名设置"><a href="#四、ROS参数名设置" class="headerlink" title="四、ROS参数名设置"></a>四、ROS参数名设置</h1><p>在参数名设置中，没有重映射机制，就是直接给参数命名。命名的时候为了避免重名，通过添加前缀的方式，实现全局参数，相对参数，私有参数三种。</p>
+<h2 id="1-rosrun设置参数"><a href="#1-rosrun设置参数" class="headerlink" title="1.rosrun设置参数"></a>1.rosrun设置参数</h2><p>rosrun命令设置的是私有参数。参数名前面要加上<code>_</code></p>
+<p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name _param_name:=10</span><br></pre></td></tr></table></figure>
+<p>参数列表显示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/param_name</span><br></pre></td></tr></table></figure>
+<h2 id="2-launch文件设置"><a href="#2-launch文件设置" class="headerlink" title="2.launch文件设置"></a>2.launch文件设置</h2><p>通过 launch 文件设置参数的方式前面已经介绍过了，可以在 node 标签外，或 node 标签中通过 param 或 rosparam  来设置参数。在 node 标签外设置的参数是全局性质的，参考的是 / ，在 node 标签中设置的参数是私有性质的，参考的是  /命名空间/节点名称。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--全局参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p1&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!--私有参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;turtlesim&quot;</span> <span class="attr">type</span>=<span class="string">&quot;turtlesim_node&quot;</span> <span class="attr">name</span>=<span class="string">&quot;t1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p2&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="3-编码设置参数"><a href="#3-编码设置参数" class="headerlink" title="3.编码设置参数"></a>3.编码设置参数</h2><p>在C++源码中，可以通过两种放式来设置参数：</p>
+<p><strong>(1)通过<code>ros::param</code>设置参数</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;/set_A&quot;</span>,<span class="number">100</span>); <span class="comment">//全局参数,和命名空间以及节点名称无关</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;set_B&quot;</span>,<span class="number">100</span>); <span class="comment">//相对参数,参考命名空间</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;~set_C&quot;</span>,<span class="number">100</span>); <span class="comment">//私有参数,参考命名空间与节点名称</span></span><br></pre></td></tr></table></figure>
+<p><strong>(2)<code>ros::NodeHandle</code>设置参数</strong></p>
+<p>首先要创建<code>ros::NodeHandle</code>对象。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::NodeHandle n1</span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;/param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置全局参数</span></span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置相对参数</span></span><br><span class="line"></span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n2</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">n2.<span class="title">setParam</span><span class="params">(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>)</span><span class="comment">//设置私有参数</span></span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
       </tags>
   </entry>
   <entry>
@@ -1002,97 +1093,6 @@
 <h2 id="5-Gazebo"><a href="#5-Gazebo" class="headerlink" title="5.Gazebo"></a>5.Gazebo</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055810.png" alt="image-20211007012012849"></p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055801.png" alt="image-20211007012025774"></p>
 ]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>ROS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ROS中命名和重命名</title>
-    <url>/2021/10/22/ROS%E4%B8%AD%E5%91%BD%E5%90%8D%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D/</url>
-    <content><![CDATA[<p>本文介绍ROS中命名和重命名的相关知识。</p>
-<span id="more"></span>
-<p>其实命名和重命名是一回事，只不过我们自己写的节点或者参数等，可以在编程的时候自己直接命名，别人写的包我们不能在其源码上进行命名，所以就需要其他方式进行重命名。</p>
-<p>ROS中关于命名和重命名的情况主要为：</p>
-<ul>
-<li>ROS工作空间覆盖</li>
-<li>ROS节点重命名</li>
-<li>ROS话题名称设置</li>
-<li>ROS参数名称设置</li>
-</ul>
-<p>ROS中命名的策略有两个，一个是重新起名字(重映射)，另一个是在现有的命名前加上命名空间。</p>
-<h1 id="一、ROS工作空间覆盖"><a href="#一、ROS工作空间覆盖" class="headerlink" title="一、ROS工作空间覆盖"></a>一、ROS工作空间覆盖</h1><p>工作空间覆盖是指，在不同的工作空间下，有重名的功能包。</p>
-<p>因为要运行某个包，需要在<code>.bashrc</code>文件中设置环境变量路径。ROS 解析 <code>.bashrc 文件</code>，并生成 <code>ROS_PACKAGE_PATH</code>包路径，该变量中按照 <code>.bashrc</code>中配置设置工作空间优先级，如果先设置工作空间A，再设置工作空间B，那么在调用重名包时，B空间中的重名包被调用，因为它的搜索路径是先搜索B，再搜索A，既然在B中找到了该包，就不会再到A中找了。</p>
-<p>应该避免该种情况发生。</p>
-<h1 id="二、ROS节点重命名"><a href="#二、ROS节点重命名" class="headerlink" title="二、ROS节点重命名"></a>二、ROS节点重命名</h1><p>ROS中不允许同时运行两个名字相同的节点。当如果出现节点名相同时，需要进行重映射或添加命名空间。实现的方式主要有三种</p>
-<h2 id="1-rosrun命令"><a href="#1-rosrun命令" class="headerlink" title="1.rosrun命令"></a>1.rosrun命令</h2><p><strong>(1)添加命名空间</strong></p>
-<p>命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name  __ns:=/namespace</span><br></pre></td></tr></table></figure>
-<p>查看节点名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/node_name</span><br></pre></td></tr></table></figure>
-<p><strong>(2)重映射</strong></p>
-<p>命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name __name:=/new_name</span><br></pre></td></tr></table></figure>
-<p>查看节点名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/new_name</span><br></pre></td></tr></table></figure>
-<h2 id="2-launch文件"><a href="#2-launch文件" class="headerlink" title="2.launch文件"></a>2.launch文件</h2><p>在编写launch文件时，完成操作。</p>
-<p><strong>(1)添加命名空间</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span> <span class="attr">ns</span>=<span class="string">&quot;namespace&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>节点名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/new_name</span><br></pre></td></tr></table></figure>
-<p><strong>(2)重映射</strong></p>
-<p>node标签下的name可以完成重映射。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;new_name&quot;</span>  /&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-编码实现"><a href="#3-编码实现" class="headerlink" title="3.编码实现"></a>3.编码实现</h2><p><strong>(1)重映射</strong></p>
-<p>在我们创建节点的时候，需要进行节点初始化，代码如下；</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>,ros::init_option::AnonymousName);</span><br></pre></td></tr></table></figure>
-<p>在参数列表中，<code>ros::init_option::AnoymousName</code>是一个随机的数，可以在原节点名上加上一个随机数。</p>
-<p><strong>(2)添加命名空间</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">std::map&lt;std::string, std::string&gt; map;</span><br><span class="line">map[<span class="string">&quot;__ns&quot;</span>] = <span class="string">&quot;namespace&quot;</span>;</span><br><span class="line">ros::<span class="built_in">init</span>(map,<span class="string">&quot;node_name&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h1 id="三、话题名称设置"><a href="#三、话题名称设置" class="headerlink" title="三、话题名称设置"></a>三、话题名称设置</h1><p>在 ROS 中节点终端，不同的节点之间通信都依赖于话题，话题名称也可能出现重复的情况，这种情况下，系统虽然不会抛出异常，但是可能导致订阅的消息非预期的，从而导致节点运行异常。这种情况下需要将两个节点的话题名称由相同修改为不同。又或者，两个节点是可以通信的，两个节点之间使用了相同的消息类型，但是由于，话题名称不同，导致通信失败。这种情况下需要将两个节点的话题名称由不同修改为相同。</p>
-<h2 id="0-话题分类"><a href="#0-话题分类" class="headerlink" title="0.话题分类"></a>0.话题分类</h2><p>根据话题前面添加的前缀的不同，又可以将话题分为：</p>
-<ul>
-<li>全局话题</li>
-<li>相对话题</li>
-<li>私有话题</li>
-</ul>
-<p>全局话题的前缀为<code>/</code>     <strong>E.g.</strong> <code>/topic_name</code> </p>
-<p>相对话题的前缀为节点的命名空间        <strong>E.g.</strong> <code>/namespace/topic_name</code></p>
-<p>私有话题的前缀为节点名        <strong>E.g.</strong>  <code>/namespace/node_name/topic_name</code></p>
-<h2 id="1-rosrun设置话题重映射"><a href="#1-rosrun设置话题重映射" class="headerlink" title="1.rosrun设置话题重映射"></a>1.rosrun设置话题重映射</h2><p>需要先知道节点中话题的名字。</p>
-<p>然后通过：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name /origin_topic_name:=/new_topic_name</span><br></pre></td></tr></table></figure>
-<h2 id="2-launch文件设置话题重映射"><a href="#2-launch文件设置话题重映射" class="headerlink" title="2.launch文件设置话题重映射"></a>2.launch文件设置话题重映射</h2><p>在launch文件中完成话题名重映射。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;pkg_name&quot;</span> <span class="attr">type</span>=<span class="string">&quot;node_name&quot;</span> <span class="attr">name</span>=<span class="string">&quot;node_name&quot;</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">remap</span> <span class="attr">from</span>=<span class="string">&quot;origin_topic_name&quot;</span> <span class="attr">to</span>=<span class="string">&quot;new_topic_name&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-编码设置话题名称"><a href="#3-编码设置话题名称" class="headerlink" title="3.编码设置话题名称"></a>3.编码设置话题名称</h2><p><strong>(1)全局话题名</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;<span class="comment">//创建节点句柄，它可以实现一些功能，设置话题时就需要它</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;/topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里的/就表示全局话题</span></span><br></pre></td></tr></table></figure>
-<p>生成的话题名为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/topic_name</span><br></pre></td></tr></table></figure>
-<p><strong>(2)相对话题</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line">ros::NodeHandle n;</span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);<span class="comment">//这里没有/就表示相对话题</span></span><br></pre></td></tr></table></figure>
-<p>生成的话题名为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/namespace/topic_name</span><br></pre></td></tr></table></figure>
-<p><strong>(3)私有话题</strong></p>
-<p>私有话题与前面的有一点不同，是在生成节点句柄的时候。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::<span class="built_in">init</span>(argc,argv,<span class="string">&quot;node_name&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span>;<span class="comment">//注意这里加上了~</span></span><br><span class="line"></span><br><span class="line">ros::Publisher pub=n.advertise&lt;std::msgs::string&gt;(<span class="string">&quot;topic_name&quot;</span>,<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-<p>生成的话题名为：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/topic_name</span><br></pre></td></tr></table></figure>
-<h1 id="四、ROS参数名设置"><a href="#四、ROS参数名设置" class="headerlink" title="四、ROS参数名设置"></a>四、ROS参数名设置</h1><p>在参数名设置中，没有重映射机制，就是直接给参数命名。命名的时候为了避免重名，通过添加前缀的方式，实现全局参数，相对参数，私有参数三种。</p>
-<h2 id="1-rosrun设置参数"><a href="#1-rosrun设置参数" class="headerlink" title="1.rosrun设置参数"></a>1.rosrun设置参数</h2><p>rosrun命令设置的是私有参数。参数名前面要加上<code>_</code></p>
-<p>命令：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosrun pkg_name node_name _param_name:=10</span><br></pre></td></tr></table></figure>
-<p>参数列表显示：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/namespace/node_name/param_name</span><br></pre></td></tr></table></figure>
-<h2 id="2-launch文件设置"><a href="#2-launch文件设置" class="headerlink" title="2.launch文件设置"></a>2.launch文件设置</h2><p>通过 launch 文件设置参数的方式前面已经介绍过了，可以在 node 标签外，或 node 标签中通过 param 或 rosparam  来设置参数。在 node 标签外设置的参数是全局性质的，参考的是 / ，在 node 标签中设置的参数是私有性质的，参考的是  /命名空间/节点名称。</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--全局参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p1&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">&lt;!--私有参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;turtlesim&quot;</span> <span class="attr">type</span>=<span class="string">&quot;turtlesim_node&quot;</span> <span class="attr">name</span>=<span class="string">&quot;t1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;p2&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">node</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-编码设置参数"><a href="#3-编码设置参数" class="headerlink" title="3.编码设置参数"></a>3.编码设置参数</h2><p>在C++源码中，可以通过两种放式来设置参数：</p>
-<p><strong>(1)通过<code>ros::param</code>设置参数</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;/set_A&quot;</span>,<span class="number">100</span>); <span class="comment">//全局参数,和命名空间以及节点名称无关</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;set_B&quot;</span>,<span class="number">100</span>); <span class="comment">//相对参数,参考命名空间</span></span><br><span class="line">ros::param::<span class="built_in">set</span>(<span class="string">&quot;~set_C&quot;</span>,<span class="number">100</span>); <span class="comment">//私有参数,参考命名空间与节点名称</span></span><br></pre></td></tr></table></figure>
-<p><strong>(2)<code>ros::NodeHandle</code>设置参数</strong></p>
-<p>首先要创建<code>ros::NodeHandle</code>对象。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::NodeHandle n1</span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;/param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置全局参数</span></span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置相对参数</span></span><br><span class="line"></span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n2</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">n2.<span class="title">setParam</span><span class="params">(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>)</span><span class="comment">//设置私有参数</span></span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>动手实践</category>
       </categories>
@@ -1571,37 +1571,6 @@ r_{j} \\
       </categories>
       <tags>
         <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>依赖包是什么</title>
-    <url>/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
-<span id="more"></span>
-<p>依赖包就是某个软件用到的库文件。</p>
-<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
-<p>不同体系用不同的方法解决依赖问题。</p>
-<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
-<ul>
-<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
-<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
-<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
-<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
-</ul>
-<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
-<ul>
-<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
-<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
-<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
-<li>系统中安装的软件越多，越容易出问题。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>ROS</tag>
-        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -2954,6 +2923,37 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </categories>
       <tags>
         <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>依赖包是什么</title>
+    <url>/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
+<span id="more"></span>
+<p>依赖包就是某个软件用到的库文件。</p>
+<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
+<p>不同体系用不同的方法解决依赖问题。</p>
+<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
+<ul>
+<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
+<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
+<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
+<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
+</ul>
+<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
+<ul>
+<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
+<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
+<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
+<li>系统中安装的软件越多，越容易出问题。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>ROS</tag>
+        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -4521,18 +4521,6 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <h2 id="6-3PixelRNN与PixelCNN"><a href="#6-3PixelRNN与PixelCNN" class="headerlink" title="6.3PixelRNN与PixelCNN"></a>6.3PixelRNN与PixelCNN</h2><h2 id="6-4变分自编码器"><a href="#6-4变分自编码器" class="headerlink" title="6.4变分自编码器"></a>6.4变分自编码器</h2><h2 id="6-5GAN"><a href="#6-5GAN" class="headerlink" title="6.5GAN"></a>6.5GAN</h2>]]></content>
       <categories>
         <category>理论基础</category>
-      </categories>
-      <tags>
-        <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>双目匹配算法</title>
-    <url>/2021/12/06/%E5%8F%8C%E7%9B%AE%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<span id="more"></span>
-]]></content>
-      <categories>
-        <category>动手实践</category>
       </categories>
       <tags>
         <tag>计算机视觉</tag>
