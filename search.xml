@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Git连不上远端库问题解决</title>
-    <url>/2021/12/02/Git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
-<span id="more"></span>
-<p>报错信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git clone https://github.com/xxx/xxx.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/xxx/xxx.git/&#x27;: LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</span><br></pre></td></tr></table></figure>
-<p>解决：</p>
-<p>在 clone GitHub 仓库时可以使用 HTTPS 或者 SSH 进行 clone，而 SSH 却没有 HTTPS 的网络连接问题，所以可以将 push/pull 的连接方式由 HTTPS 改为 SSH。</p>
-<blockquote>
-<p>要求：你需要提前生成 SSH 公私钥对，并将公钥添加到你的 GitHub 账户中。关于这一部分的详细信息，请参阅 <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a>。</p>
-</blockquote>
-<p>进入仓库对应目录，执行如下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote set-url origin git@github.com:xxx/xxx.git</span><br></pre></td></tr></table></figure>
-<p>更改完成后，可以使用如下命令查看当前的 origin 地址：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac解决因为安全策略问题无法打开软件</title>
     <url>/2021/11/28/Mac%E8%A7%A3%E5%86%B3%E5%9B%A0%E4%B8%BA%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5%E9%97%AE%E9%A2%98%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E8%BD%AF%E4%BB%B6/</url>
     <content><![CDATA[<p><strong>M1报错问题</strong></p>
@@ -52,164 +28,18 @@
       </tags>
   </entry>
   <entry>
-    <title>Git的使用手册</title>
-    <url>/2021/10/18/Git%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>Git的使用手册，方便使用查阅。<br><span id="more"></span></p>
-<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
-<p><a href="https://docs.github.com/cn">git官方文档</a></p>
-<h2 id="一、用法"><a href="#一、用法" class="headerlink" title="一、用法"></a>一、用法</h2><p>首先需要知道几个关系         <a href="##三、细细介绍git背后原理">细细介绍git背后的原理</a></p>
-<p>git本地分为工作区、暂存区、本地库三个地方</p>
-<p>工作区(workspace)：即为写代码，写文件的地方</p>
-<p>暂存区(staging area)：保存着待提交的文件</p>
-<p>本地库(local repository)：提交后文件所在的地方</p>
-<p>远程仓库(remote repository)：云端的仓库</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032438.png" alt="image-20210711044151491"></p>
-<h3 id="用法一"><a href="#用法一" class="headerlink" title="用法一"></a>用法一</h3><p>github要想访问使用的电脑，需要先告诉github通往电脑的钥匙，在（<a href="https://www.jianshu.com/p/7edb6b838a2e">与远程库建立连接</a>）中介绍了怎么获取电脑的钥匙。</p>
-<p>一般我会在远程建立一个仓库，在本地建立一个仓库，然后在本地仓库中写，再传到远程仓库。</p>
-<p>具体过程：</p>
-<ol>
-<li><p>先在github上建立一个仓库。</p>
-</li>
-<li><p>然后把这个仓库<code>git clone</code>到本地。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 地址(在github上有)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在得到的文件夹中就可以进行写代码了。</p>
-</li>
-<li><p>想要添加到缓存区，就用<code>git add</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果想要提交，就用下面的命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &#x27;描述信息&#x27;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在第一次git commit 时候，需要配置好提交人的姓名和邮箱。</p>
-<p>git config —global user.name=”Piggy”</p>
-<p>git config —global user.email=”a363158526@gmail.com”</p>
-</blockquote>
-</li>
-<li><p>如果要发送到github上，用<code>git push</code>。</p>
-<blockquote>
-<p>注意，如果这里是第一次git push，要登录用户名和密码。这里的用户名是github上的用户名，我的叫做PiggyHero，密码不是登录的密码，而是github的token，token的获取是在github的设置中，找到Developer settings-&gt;Personal access tokens，然后点击Generate new token，根据需求自己设置token的权限。</p>
-<p>token是一串字符，需要保存下来，因为我们只能看见一次，然后就被隐藏起来了。</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="用法二"><a href="#用法二" class="headerlink" title="用法二"></a>用法二</h3><p>也可以不像一中那样，现在github上建立仓库，而是先在本地建立仓库。</p>
-<ol>
-<li><p>先建立一个文件夹，作为仓库所在的文件夹，然后<code>git init</code>。</p>
-</li>
-<li><p>在远程建立一个仓库，记下来SSH地址。</p>
-</li>
-<li><p>在终端中到本地仓库所在文件夹，使用以下代码建立关联</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="二、git-基本命令介绍"><a href="#二、git-基本命令介绍" class="headerlink" title="二、git 基本命令介绍"></a>二、git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
-<p>按F向下翻页，按B向上翻页</p>
-<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
-<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
-<p>（2）全局：只在用户范围内使用该配置</p>
-<p>（3）项目：在该项目范围内，使用该配置</p>
-<p>一般设置用户的配置文件，用global</p>
-<p><code>git config --global 想要配置的东西</code></p>
-<p><code>git config --unset --global</code>   恢复原来的配置</p>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
-<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
-<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
-<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
-<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
-<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
-<p><code>git status</code></p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032549.png" alt="image-20210708115817078"></p>
-<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
-<p>添加要提交的文件</p>
-<p><code>git add 要添加的文件</code></p>
-<p><code>git add .</code>添加所有的文件</p>
-<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
-<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
-<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032601.png" alt="image-20210708120726347"></p>
-<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
-<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
-<p>这里如果没添加文件，会对比所有修改的文件</p>
-<p>红色是修改前的，绿色是修改后的</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032607.png" alt="image-20210708121041581"></p>
-<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
-<blockquote>
-<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
-</blockquote>
-<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
-<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
-<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
-<hr>
-<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
-<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
-<p>git mv也可以移动文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
-<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
-<p>共有三种模式</p>
-<p>(1)—mixed</p>
-<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
-<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
-<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
-<p><code>git reset HEAD^</code> 变更到上一个版本</p>
-<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
-<p><code>git reset 版本号</code>回退到指定的版本</p>
-<p>(2)—soft</p>
-<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
-<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032615.png" alt="img"></p>
-<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
-<p>(3)—hard</p>
-<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032622.gif" alt="img"></p>
-<blockquote>
-<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
-<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
-</blockquote>
-<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
-<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032630.gif" alt="img"></p>
-<h2 id="三、细细介绍git背后原理"><a href="#三、细细介绍git背后原理" class="headerlink" title="三、细细介绍git背后原理"></a>三、细细介绍git背后原理</h2><ul>
-<li>工作区：就是在电脑里能看到的目录</li>
-<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
-<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
-</ul>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032636.png" alt="image-20210711045622504"></p>
-<ul>
-<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
-<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
-<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
-<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
-<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
-<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
-</ul>
-<p>如果还不明白，看下图：</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032656.png" alt="image-20210711063540634"></p>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Mac电脑操作</title>
+    <title>Mac强制退出软件和打开未验证的软件</title>
     <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
-    <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
-<h2 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h2><h3 id="1-强制退出"><a href="#1-强制退出" class="headerlink" title="1.强制退出"></a>1.强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
-<h2 id="二、常见问题"><a href="#二、常见问题" class="headerlink" title="二、常见问题"></a>二、常见问题</h2><h3 id="1-无法打开“-”，因为无法验证开发者"><a href="#1-无法打开“-”，因为无法验证开发者" class="headerlink" title="1.无法打开“*”，因为无法验证开发者"></a>1.无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="强制退出"><a href="#强制退出" class="headerlink" title="强制退出"></a>强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
+<h3 id="无法打开“-”，因为无法验证开发者"><a href="#无法打开“-”，因为无法验证开发者" class="headerlink" title="无法打开“*”，因为无法验证开发者"></a>无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
 <li>打开方达，在右侧菜单栏选择应用程序</li>
 <li>找到提示无法验证的应用，右键点击打开</li>
 <li>第一次会出现以下提示，继续点击打开即可</li>
 </ol>
 ]]></content>
       <categories>
-        <category>动手实践</category>
+        <category>问题解决</category>
       </categories>
       <tags>
         <tag>Mac</tag>
@@ -1275,7 +1105,7 @@ r_{j} \\
       </tags>
   </entry>
   <entry>
-    <title>MacOS无法抹掉硬盘问题解决</title>
+    <title>Mac无法抹掉硬盘问题解决</title>
     <url>/2021/10/18/MacOS%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
 ]]></content>
@@ -4858,7 +4688,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </tags>
   </entry>
   <entry>
-    <title>解决Github无法访问</title>
+    <title>解决github无法访问</title>
     <url>/2021/12/14/%E8%A7%A3%E5%86%B3Github%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</url>
     <content><![CDATA[<p><a href="https://juejin.cn/post/6844904193170341896">原文链接</a></p>
 <span id="more"></span>
@@ -4900,7 +4730,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
         <category>问题解决</category>
       </categories>
       <tags>
-        <tag>Git</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -5029,6 +4859,190 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </categories>
       <tags>
         <tag>opencv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git的用法</title>
+    <url>/2021/10/18/git%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<p>git的一些用法<br><span id="more"></span></p>
+<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
+<p><a href="https://docs.github.com/cn">git官方文档</a></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>首先需要知道几个关系    </p>
+<p>git本地分为工作区、暂存区、本地库三个地方</p>
+<p>工作区(workspace)：即为写代码，写文件的地方</p>
+<p>暂存区(staging area)：保存着待提交的文件</p>
+<p>本地库(local repository)：提交后文件所在的地方</p>
+<p>远程仓库(remote repository)：云端的仓库</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032438.png" alt="image-20210711044151491"></p>
+<h3 id="用法一"><a href="#用法一" class="headerlink" title="用法一"></a>用法一</h3><p>github要想访问使用的电脑，需要先告诉github通往电脑的钥匙，在（<a href="https://www.jianshu.com/p/7edb6b838a2e">与远程库建立连接</a>）中介绍了怎么获取电脑的钥匙。</p>
+<p>一般我会在远程建立一个仓库，在本地建立一个仓库，然后在本地仓库中写，再传到远程仓库。</p>
+<p>具体过程：</p>
+<ol>
+<li><p>先在github上建立一个仓库。</p>
+</li>
+<li><p>然后把这个仓库<code>git clone</code>到本地。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 地址(在github上有)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在得到的文件夹中就可以进行写代码了。</p>
+</li>
+<li><p>想要添加到缓存区，就用<code>git add</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果想要提交，就用下面的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &#x27;描述信息&#x27;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在第一次git commit 时候，需要配置好提交人的姓名和邮箱。</p>
+<p>git config —global user.name=”Piggy”</p>
+<p>git config —global user.email=”a363158526@gmail.com”</p>
+</blockquote>
+</li>
+<li><p>如果要发送到github上，用<code>git push</code>。</p>
+<blockquote>
+<p>注意，如果这里是第一次git push，要登录用户名和密码。这里的用户名是github上的用户名，我的叫做PiggyHero，密码不是登录的密码，而是github的token，token的获取是在github的设置中，找到Developer settings-&gt;Personal access tokens，然后点击Generate new token，根据需求自己设置token的权限。</p>
+<p>token是一串字符，需要保存下来，因为我们只能看见一次，然后就被隐藏起来了。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="用法二"><a href="#用法二" class="headerlink" title="用法二"></a>用法二</h3><p>也可以不像一中那样，现在github上建立仓库，而是先在本地建立仓库。</p>
+<ol>
+<li><p>先建立一个文件夹，作为仓库所在的文件夹，然后<code>git init</code>。</p>
+</li>
+<li><p>在远程建立一个仓库，记下来SSH地址。</p>
+</li>
+<li><p>在终端中到本地仓库所在文件夹，使用以下代码建立关联</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="git-基本命令介绍"><a href="#git-基本命令介绍" class="headerlink" title="git 基本命令介绍"></a>git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
+<p>按F向下翻页，按B向上翻页</p>
+<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
+<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
+<p>（2）全局：只在用户范围内使用该配置</p>
+<p>（3）项目：在该项目范围内，使用该配置</p>
+<p>一般设置用户的配置文件，用global</p>
+<p><code>git config --global 想要配置的东西</code></p>
+<p><code>git config --unset --global</code>   恢复原来的配置</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
+<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
+<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
+<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
+<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
+<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
+<p><code>git status</code></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032549.png" alt="image-20210708115817078"></p>
+<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
+<p>添加要提交的文件</p>
+<p><code>git add 要添加的文件</code></p>
+<p><code>git add .</code>添加所有的文件</p>
+<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
+<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
+<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032601.png" alt="image-20210708120726347"></p>
+<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
+<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
+<p>这里如果没添加文件，会对比所有修改的文件</p>
+<p>红色是修改前的，绿色是修改后的</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032607.png" alt="image-20210708121041581"></p>
+<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
+<blockquote>
+<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
+</blockquote>
+<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
+<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
+<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
+<hr>
+<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
+<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
+<p>git mv也可以移动文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
+<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
+<p>共有三种模式</p>
+<p>(1)—mixed</p>
+<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
+<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
+<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
+<p><code>git reset HEAD^</code> 变更到上一个版本</p>
+<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
+<p><code>git reset 版本号</code>回退到指定的版本</p>
+<p>(2)—soft</p>
+<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
+<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032615.png" alt="img"></p>
+<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
+<p>(3)—hard</p>
+<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032622.gif" alt="img"></p>
+<blockquote>
+<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
+<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
+</blockquote>
+<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
+<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032630.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git背后的原理</title>
+    <url>/2021/12/15/git%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p>细细介绍git背后原理</p>
+<span id="more"></span>
+<p>在git跟踪一个项目时，有以下三个部分：</p>
+<ul>
+<li>工作区：就是在电脑里能看到的目录</li>
+<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
+<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
+</ul>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032636.png" alt="image-20210711045622504"></p>
+<ul>
+<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
+<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
+<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
+<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
+<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
+<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
+</ul>
+<p>如果还不明白，看下图：</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032656.png" alt="image-20210711063540634"></p>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git连不上远端库问题解决</title>
+    <url>/2021/12/02/git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
+<span id="more"></span>
+<p>报错信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git clone https://github.com/xxx/xxx.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/xxx/xxx.git/&#x27;: LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</span><br></pre></td></tr></table></figure>
+<p>解决：</p>
+<p>在 clone GitHub 仓库时可以使用 HTTPS 或者 SSH 进行 clone，而 SSH 却没有 HTTPS 的网络连接问题，所以可以将 push/pull 的连接方式由 HTTPS 改为 SSH。</p>
+<blockquote>
+<p>要求：你需要提前生成 SSH 公私钥对，并将公钥添加到你的 GitHub 账户中。关于这一部分的详细信息，请参阅 <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a>。</p>
+</blockquote>
+<p>进入仓库对应目录，执行如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote set-url origin git@github.com:xxx/xxx.git</span><br></pre></td></tr></table></figure>
+<p>更改完成后，可以使用如下命令查看当前的 origin 地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
 </search>
