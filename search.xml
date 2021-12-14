@@ -63,7 +63,7 @@
 <p>暂存区(staging area)：保存着待提交的文件</p>
 <p>本地库(local repository)：提交后文件所在的地方</p>
 <p>远程仓库(remote repository)：云端的仓库</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062215.png" alt="image-20210711044151491"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032438.png" alt="image-20210711044151491"></p>
 <h3 id="用法一"><a href="#用法一" class="headerlink" title="用法一"></a>用法一</h3><p>github要想访问使用的电脑，需要先告诉github通往电脑的钥匙，在（<a href="https://www.jianshu.com/p/7edb6b838a2e">与远程库建立连接</a>）中介绍了怎么获取电脑的钥匙。</p>
 <p>一般我会在远程建立一个仓库，在本地建立一个仓库，然后在本地仓库中写，再传到远程仓库。</p>
 <p>具体过程：</p>
@@ -122,7 +122,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
 <h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
 <p><code>git status</code></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062228.png" alt="image-20210708115817078"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032549.png" alt="image-20210708115817078"></p>
 <h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
 <p>添加要提交的文件</p>
 <p><code>git add 要添加的文件</code></p>
@@ -130,12 +130,12 @@
 <h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
 <p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
 <h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062230.png" alt="image-20210708120726347"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032601.png" alt="image-20210708120726347"></p>
 <h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
 <p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
 <p>这里如果没添加文件，会对比所有修改的文件</p>
 <p>红色是修改前的，绿色是修改后的</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062232.png" alt="image-20210708121041581"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032607.png" alt="image-20210708121041581"></p>
 <h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
 <blockquote>
 <p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
@@ -161,24 +161,24 @@
 <p>(2)—soft</p>
 <p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
 <p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062239.png" alt="img"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032615.png" alt="img"></p>
 <p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
 <p>(3)—hard</p>
 <p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062241.gif" alt="img"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032622.gif" alt="img"></p>
 <blockquote>
 <p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
 <p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
 </blockquote>
 <h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
 <p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062244.gif" alt="img"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032630.gif" alt="img"></p>
 <h2 id="三、细细介绍git背后原理"><a href="#三、细细介绍git背后原理" class="headerlink" title="三、细细介绍git背后原理"></a>三、细细介绍git背后原理</h2><ul>
 <li>工作区：就是在电脑里能看到的目录</li>
 <li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
 <li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062250.png" alt="image-20210711045622504"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032636.png" alt="image-20210711045622504"></p>
 <ul>
 <li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
 <li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
@@ -188,7 +188,7 @@
 <li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
 </ul>
 <p>如果还不明白，看下图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018062256.png" alt="image-20210711063540634"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032656.png" alt="image-20210711063540634"></p>
 ]]></content>
       <categories>
         <category>动手实践</category>
@@ -519,14 +519,14 @@
     <title>古月ROS21讲学习笔记</title>
     <url>/2021/10/18/ROS21%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>学习《古月ROS入门21讲》的学习笔记<br><span id="more"></span><br>课程总览：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055135.png" alt="image-20211007012207647"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032824.png" alt="image-20211007012207647"></p>
 <h1 id="一、ROS是什么"><a href="#一、ROS是什么" class="headerlink" title="一、ROS是什么"></a>一、ROS是什么</h1><p>ROS1.0发布于2010年，其发布的根本目的就是在机器人开发过程中，提高代码的复用率。就是在开发一个机器人时，可以通过ROS提供的各种功能，驱动机器人移动，感知外部环境，做出决策等。这就极大的节省了机器人开发的时间。</p>
 <p>ROS(Robot operation system)全名为机器人操作系统，具体的它包括四大部分，分别为<strong>通信机制，开发工具，应用功能和生态系统</strong>。</p>
 <h2 id="1-通信机制"><a href="#1-通信机制" class="headerlink" title="1.通信机制"></a>1.通信机制</h2><p>ROS提供了一种松耦合分布式通信机制，机器人的内部各个模块可以依靠这种通信机制完成信息的传递。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055137.png" alt="image-20211005000749206" style="zoom:67%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032831.png" alt="image-20211005000749206" style="zoom:67%;" /></p>
 <h2 id="2-开发工具"><a href="#2-开发工具" class="headerlink" title="2.开发工具"></a>2.开发工具</h2><p>ROS提供了一系列的开发工具，可以为机器人开发提供很大的帮助。</p>
 <p>常用的开发工具有TF坐标变换，QT工具箱，Rviz，Gazebo。会在后面进行具体的使用介绍。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055141.png" alt="image-20211005000718567"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032836.png" alt="image-20211005000718567"></p>
 <h2 id="3-应用功能"><a href="#3-应用功能" class="headerlink" title="3.应用功能"></a>3.应用功能</h2><p>ROS中包含各种功能包，可供机器人开发中使用。例如有可以驱动相机的功能包，有进行图像处理的功能包，有控制机器人运动的功能包，还有SLAM功能包。这些功能包的存在可以大大简化机器人的开发过程。</p>
 <h2 id="4-生态环境"><a href="#4-生态环境" class="headerlink" title="4.生态环境"></a>4.生态环境</h2><p>ROS的生态环境具体指的是依据ROS系统，建立起来的一个ROS社区，在这个社区中，包含着我们需要的各种东西。主要有以下几部分组成：</p>
 <ul>
@@ -563,61 +563,61 @@
 <li>具有一定的数据类型和数据结构，包括ROS提供的标准类型和用户自定义类型。</li>
 <li>使用与编程语言无关的.msg文件定义，编译过程中生成对应的代码文件。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055153.png" alt="image-20211005005705788"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032845.png" alt="image-20211005005705788"></p>
 <p>好了，说完这么抽象的概念，我们还是用一个生活的例子来类比一下。在我们生活中，异步通信机制一个很明显的例子就是Youtube视频。例如有一个篮球话题（Topic），有一群订阅者（subsciber）和一群发布者（publisher）。当某一个发布者发布了一条视频（message）时，订阅者并不会马上知道，而是等他想看的时候，才会查看该话题下的内容，这就是异步通信机制。对于发布的视频的内容结构，可以是先热身，后打球，也可以是先打球，后洗澡，虽然结构可以变，但是有一定结构的。另外，无论视频内容如何，都必须是.avi格式的（.msg）。</p>
 <p>所以说话题（Topic）是一个传输数据的总线，也可以理解成一个频道，一个管道，我们订阅了这个频道后，其内容会保持一定的结构，但是会变化。</p>
 <p>在ROS中，话题的一个例子如下：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055200.png" alt="image-20211005010719866"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032852.png" alt="image-20211005010719866"></p>
 <h3 id="2-同步通信机制"><a href="#2-同步通信机制" class="headerlink" title="(2)同步通信机制"></a>(2)同步通信机制</h3><p>同步通信机制，也叫做服务。它可以保证数据的传递是实时的。它有如下特点：</p>
 <ul>
 <li>使用客户端/服务器模型，客户端发送请求，服务器完成处理后返回应答数据。</li>
 <li>使用与编程语言无关的.srv文件定义请求和应答数据结构，编译过程中生成对应的代码文件。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055205.png" alt="image-20211005011052269" style="zoom: 67%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032859.png" alt="image-20211005011052269" style="zoom: 67%;" /></p>
 <p>这就好比一个服务员和一个顾客，顾客首先需要说出一个需求，然后服务员要做出回应。比如，顾客说帮我订一张机票（request），服务员立即定了一张机票然后回复订完了（reponse）。</p>
 <p>ROS中服务的一个例子：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055209.png" alt="image-20211005011405078"></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055214.png" alt="image-20211005011450237" style="zoom:67%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032904.png" alt="image-20211005011405078"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032910.png" alt="image-20211005011450237" style="zoom:67%;" /></p>
 <h2 id="3-参数—全局共享字典"><a href="#3-参数—全局共享字典" class="headerlink" title="3.参数—全局共享字典"></a>3.参数—全局共享字典</h2><p>前面讲了工人和管理员的关系，管理员要记录一些所有工人都要用的信息，例如水泥的灰号。ROS中的参数的功能也是这样。参数由节点管理器提供服务器存储。特点如下：</p>
 <ul>
 <li>可通过网络访问的共享、多变量字典。</li>
 <li>节点可以使用此服务器（也就是字典）来存储和检索运行时的参数。</li>
 <li>适合存储静态、非二进制的配置参数，不适合存储动态配置的数据。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055219.png" alt="image-20211005012244569"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032916.png" alt="image-20211005012244569"></p>
 <h2 id="4-文件系统"><a href="#4-文件系统" class="headerlink" title="4.文件系统"></a>4.文件系统</h2><p>前面所讲的节点等所有的东西都需要存储在文件中，也就是真实存在的形式。ROS的文件系统由三部分组成。</p>
 <h3 id="1-功能包-Package"><a href="#1-功能包-Package" class="headerlink" title="(1)功能包(Package)"></a>(1)功能包(Package)</h3><p>ROS软件中的基本单元，包含节点源码、配置文件、数据定义等。</p>
 <h3 id="2-功能包清单-Package-Manifest"><a href="#2-功能包清单-Package-Manifest" class="headerlink" title="(2)功能包清单(Package Manifest)"></a>(2)功能包清单(Package Manifest)</h3><p>记录功能包的基本信息，包含作者信息、许可信息、依赖选项、编译标志等。</p>
 <h3 id="3-元功能包-Meta-Package"><a href="#3-元功能包-Meta-Package" class="headerlink" title="(3)元功能包(Meta Package)"></a>(3)元功能包(Meta Package)</h3><p>多个用于同一目的的功能包构成一个元功能包。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055223.png" alt="image-20211005012811067"></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055230.png" alt="image-20211005012906244"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032921.png" alt="image-20211005012811067"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032926.png" alt="image-20211005012906244"></p>
 <h1 id="三、ROS命令行工具"><a href="#三、ROS命令行工具" class="headerlink" title="三、ROS命令行工具"></a>三、ROS命令行工具</h1><p>ROS中提供了命令行工具帮助我们实现各种功能。</p>
 <h2 id="1-基本命令"><a href="#1-基本命令" class="headerlink" title="1.基本命令"></a>1.基本命令</h2><p><code>roscore</code>     启动Ros Master（必须启动）。</p>
 <p><code>rosrun    功能包名    节点</code>     运行节点，要加功能包名，然后要运行的节点名。</p>
 <h2 id="2-节点命令"><a href="#2-节点命令" class="headerlink" title="2.节点命令"></a>2.节点命令</h2><p>以<code>rosnode</code> 开头的命令，是处理节点的命令。</p>
 <h3 id="1-rosnode-list"><a href="#1-rosnode-list" class="headerlink" title="(1)rosnode list"></a>(1)<code>rosnode list</code></h3><p>列出当前系统的所有节点。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055236.png" alt="image-20211005015249575"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032933.png" alt="image-20211005015249575"></p>
 <p>在这里有一个rosout节点，是默认打开的，该节点主要是接受各个节点的信息形成一个日志信息。</p>
 <h3 id="2-rosnode-info-节点名"><a href="#2-rosnode-info-节点名" class="headerlink" title="(2)rosnode info 节点名"></a>(2)<code>rosnode info 节点名</code></h3><p>查看某个节点信息。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055240.png" alt="image-20211005015739389"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032939.png" alt="image-20211005015739389"></p>
 <p>在这里显示出的发布或订阅的内容中，前面部分为话题名，后面的是消息名。</p>
 <h2 id="3-话题命令"><a href="#3-话题命令" class="headerlink" title="3.话题命令"></a>3.话题命令</h2><p>以<code>rostopic</code> 开头的命令，是处理话题的命令。</p>
 <h3 id="1-rostopic-list"><a href="#1-rostopic-list" class="headerlink" title="(1)rostopic list"></a>(1)<code>rostopic list</code></h3><p>查看当前系统的所有话题。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055247.png" alt="image-20211005020128092"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032951.png" alt="image-20211005020128092"></p>
 <h3 id="2-rostopic-pub"><a href="#2-rostopic-pub" class="headerlink" title="(2)rostopic pub"></a>(2)<code>rostopic pub</code></h3><p>向话题发布消息。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rostopic	 pub 	话题名 	消息名 	内容</span><br><span class="line"></span><br><span class="line">eg：</span><br><span class="line">rostopic 	pub 	/turtle1/cmd_vel 	geometry_msgs/Twist 	<span class="string">&quot;消息内容(在这里ROS定义的结构)&quot;</span></span><br></pre></td></tr></table></figure>
 <p>在这里，/turtle1/cmd_vel是话题名，geometry_msgs/Twist 是消息内容，后面双引号内是具体的消息内容，消息内容会有特定的结构。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055316.png" alt="image-20211005020805272"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032959.png" alt="image-20211005020805272"></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rostopic 	pub 	-r 		10 		话题名		消息名		内容</span><br></pre></td></tr></table></figure>
 <p>-r表示发布循环发布，这里表示发布频率为10Hz。</p>
 <p>按<code>Ctrl+C</code>可以停止发布。</p>
 <h2 id="4-话题消息命令"><a href="#4-话题消息命令" class="headerlink" title="4.话题消息命令"></a>4.话题消息命令</h2><p>以<code>rosmsg</code> 开头的命令，是处理话题消息的命令。</p>
 <h3 id="1-rosmsg-show"><a href="#1-rosmsg-show" class="headerlink" title="(1)rosmsg show"></a>(1)<code>rosmsg show</code></h3><p>查看某个消息的数据结构。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosmsg 		show	消息名</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055335.png" alt="image-20211005022203709"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033006.png" alt="image-20211005022203709"></p>
 <h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><h2 id="5-服务命令"><a href="#5-服务命令" class="headerlink" title="5.服务命令"></a>5.服务命令</h2><p>以<code>rosservice</code> 开头的命令，是处理服务的命令。</p>
 <h3 id="1-rosservice-list"><a href="#1-rosservice-list" class="headerlink" title="(1)rosservice list"></a>(1)<code>rosservice list</code></h3><p>查看服务端的服务。也就是查看可提供的服务。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055339.png" alt="image-20211005022505249"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033012.png" alt="image-20211005022505249"></p>
 <h3 id="2-rosservice-call"><a href="#2-rosservice-call" class="headerlink" title="(2)rosservice call"></a>(2)<code>rosservice call</code></h3><p>对某个服务发送请求。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosservice		call		可提供服务名		<span class="string">&quot;请求内容&quot;</span></span><br><span class="line"></span><br><span class="line">eg:</span><br><span class="line">rosservice 		call 		/spawn 		<span class="string">&quot;x: 0.0</span></span><br><span class="line"><span class="string">y: 0.0</span></span><br><span class="line"><span class="string">theta: 0.0</span></span><br><span class="line"><span class="string">name:&#x27;	 &#x27; &quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>在这里，服务名为/spawn，双引号内为请求的内容，具有系统定义的数据结构。</p>
@@ -625,8 +625,8 @@
 <h3 id="1-rossrv-show"><a href="#1-rossrv-show" class="headerlink" title="(1)rossrv show"></a>(1)<code>rossrv show</code></h3><p>查看服务消息数据的内容结构。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rossrv 		show		服务消息名</span><br></pre></td></tr></table></figure>
 <p>在标准的服务消息数据中，有—-分隔，在其上面的是request的内容，下面是response的内容。request可以是空的，如果是空的，直接call服务就可以。response能不能是空的还不知道。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055352.png" alt="image-20211006001820657"></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055356.png" alt="image-20211006001952198"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033019.png" alt="image-20211006001820657"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033023.png" alt="image-20211006001952198"></p>
 <h2 id="7-话题记录和复现"><a href="#7-话题记录和复现" class="headerlink" title="7.话题记录和复现"></a>7.话题记录和复现</h2><p>记录当前系统中所有话题的数据并保存下来，然后可以再用的时候复现出来。</p>
 <h3 id="1-rosbag-record"><a href="#1-rosbag-record" class="headerlink" title="(1)rosbag record"></a>(1)<code>rosbag record</code></h3><p>记录想要保存的话题。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosbag		record		-a		-O		储存的文件名</span><br><span class="line"></span><br><span class="line">eg：</span><br><span class="line">rosbag 		record 		-a		-O		cmd_record</span><br></pre></td></tr></table></figure>
@@ -636,7 +636,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosbag 		play		储存的文件名</span><br><span class="line"></span><br><span class="line">eg：</span><br><span class="line">rosbag 		play		cmd_record</span><br></pre></td></tr></table></figure>
 <h2 id="8-参数命令"><a href="#8-参数命令" class="headerlink" title="8.参数命令"></a>8.参数命令</h2><p>以<code>rosparam</code> 开头的命令，都是处理参数的命令。</p>
 <h3 id="1-rosparam-list"><a href="#1-rosparam-list" class="headerlink" title="(1)rosparam list"></a>(1)<code>rosparam list</code></h3><p>查看当前的全局参数。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055411.png" alt="image-20211006013652641"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033032.png" alt="image-20211006013652641"></p>
 <h3 id="2-rosparam-get"><a href="#2-rosparam-get" class="headerlink" title="(2)rosparam get"></a>(2)<code>rosparam get</code></h3><p>获取某个参数的具体值。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosparam 	get 	参数名</span><br><span class="line">rosparam 	get 	/run_id</span><br></pre></td></tr></table></figure>
 <h3 id="3-rosparam-set"><a href="#3-rosparam-set" class="headerlink" title="(3)rosparam set"></a>(3)<code>rosparam set</code></h3><p>修改某个参数的值。</p>
@@ -655,7 +655,7 @@
 <li>devel：开发空间，放置一些生成的可执行文件，库或脚本。</li>
 <li>install：安装空间，安装位置。</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055437.png" alt="image-20211005030701463"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033041.png" alt="image-20211005030701463"></p>
 <h2 id="1-创建工作空间"><a href="#1-创建工作空间" class="headerlink" title="1.创建工作空间"></a>1.创建工作空间</h2><p>(1)建立工作空间的文件夹</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir	-p	~/catkin_Name/src</span><br><span class="line"><span class="built_in">cd</span>		~/catkin_Name/src</span><br><span class="line">catkin_init_workspace</span><br></pre></td></tr></table></figure>
 <p>(2)编译工作空间</p>
@@ -672,9 +672,9 @@
 <p>注意：同一个工作空间下，不允许存在同名的功能包。</p>
 <h1 id="五、话题中各部分的编程实现"><a href="#五、话题中各部分的编程实现" class="headerlink" title="五、话题中各部分的编程实现"></a>五、话题中各部分的编程实现</h1><h2 id="1-发布者编程实现"><a href="#1-发布者编程实现" class="headerlink" title="1.发布者编程实现"></a>1.发布者编程实现</h2><p>之前我们控制的海龟是用键盘控制或者命令行控制，现在我们想通过编写一个程序来控制海龟的运动。这就需要写一个发布者的程序。</p>
 <p>我们要清楚的是，发布者应该由节点充当。但是一个节点还可以对很多话题发布数据，所以我们在节点中，定义publisher来代表向一个话题的发布。它们之间的关系如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055505.png" alt="image-20211005164112040"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033056.png" alt="image-20211005164112040"></p>
 <p>但容易混淆的是，发布消息的节点本身也可以叫做publisher。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055509.png" alt="image-20211005140716108"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033102.png" alt="image-20211005140716108"></p>
 <h3 id="1-编写程序之前"><a href="#1-编写程序之前" class="headerlink" title="(1)编写程序之前"></a>(1)编写程序之前</h3><p>写具体的代码之前，我们要创建好工作空间，这里就不多说了。</p>
 <p>然后要创建一个功能包。因为ROS的可执行文件都放在功能包中存储。如第四章第2节所述。功能包在工作空间的src文件夹下。</p>
 <p>然后进入功能包，在功能包下的src文件夹中编写代码。</p>
@@ -720,11 +720,11 @@
 <h3 id="2-编辑配置文件"><a href="#2-编辑配置文件" class="headerlink" title="(2)编辑配置文件"></a>(2)编辑配置文件</h3><p><strong>首先要在package.xml中添加功能包依赖</strong></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>message_generation<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>message_runtime<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>如下图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055909.png" alt="image-20211005185240266"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033115.png" alt="image-20211005185240266"></p>
 <p><strong>然后在CMakeLists添加相关配置</strong></p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  rospy</span><br><span class="line">  std_msgs</span><br><span class="line">  message_generation <span class="comment">#这个是后加的</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>如下图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055903.png" alt="image-20211005185707368"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033128.png" alt="image-20211005185707368"></p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">add_message_files(FILES 	Person.msg)<span class="comment">#配置msg源文件</span></span><br><span class="line">generate_messages(DEPENDENCIES		std_msgs)<span class="comment">#生成消息时依赖于std_msgs</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment">#执行时依赖</span></span><br><span class="line">catkin_package(</span><br><span class="line"><span class="comment">#  INCLUDE_DIRS include</span></span><br><span class="line"><span class="comment">#  LIBRARIES learning_topic</span></span><br><span class="line">  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs turtlesim message_runtime</span><br><span class="line"><span class="comment">#  DEPENDS system_lib</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h3 id="3-使用"><a href="#3-使用" class="headerlink" title="(3)使用"></a>(3)使用</h3><p>最后就是编译了，在工作空间目录下使用<code>catkin_make</code> 命令完成。生成的文件在devel/include中。</p>
@@ -735,10 +735,10 @@
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 该例程将订阅/person_info话题，自定义消息类型learning_topic::Person</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ros/ros.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;learning_topic/Person.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接收到订阅的消息后，会进入消息回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">personInfoCallback</span><span class="params">(<span class="keyword">const</span> learning_topic::Person::ConstPtr&amp; msg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 将接收到的消息打印出来</span></span><br><span class="line">    <span class="built_in">ROS_INFO</span>(<span class="string">&quot;Subcribe Person Info: name:%s  age:%d  sex:%d&quot;</span>, </span><br><span class="line">			 msg-&gt;name.<span class="built_in">c_str</span>(), msg-&gt;age, msg-&gt;sex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 初始化ROS节点</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc, argv, <span class="string">&quot;person_subscriber&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建节点句柄</span></span><br><span class="line">    ros::NodeHandle n;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建一个Subscriber，订阅名为/person_info的topic，注册回调函数personInfoCallback</span></span><br><span class="line">    ros::Subscriber person_info_sub = n.<span class="built_in">subscribe</span>(<span class="string">&quot;/person_info&quot;</span>, <span class="number">10</span>, personInfoCallback);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 循环等待回调函数</span></span><br><span class="line">    ros::<span class="built_in">spin</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>编译，在CMakeLists中加入：</p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(person_publisher src/person_publisher.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(person_publisher <span class="variable">$&#123;catkin_LIBRARIES&#125;</span>)</span><br><span class="line"><span class="keyword">add_dependencies</span>(person_publisher <span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_messages_cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(person_subscriber src/person_subscriber.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(person_subscriber <span class="variable">$&#123;catkin_LIBRARIES&#125;</span>)</span><br><span class="line"><span class="keyword">add_dependencies</span>(person_subscriber <span class="variable">$&#123;PROJECT_NAME&#125;</span>_generate_messages_cpp)</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055601.png" alt="image-20211005193520292"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033149.png" alt="image-20211005193520292"></p>
 <p>注意：在话题通信中，话题的建立是通过建立发布者或订阅者的。比如说上面的Person_publisher.cpp程序中，在建立publisher时，要注明发送的话题，此时便建立了话题。</p>
 <h1 id="六、服务中各部分的编程实现"><a href="#六、服务中各部分的编程实现" class="headerlink" title="六、服务中各部分的编程实现"></a>六、服务中各部分的编程实现</h1><h2 id="1-客户端编程实现"><a href="#1-客户端编程实现" class="headerlink" title="1.客户端编程实现"></a>1.客户端编程实现</h2><p>前面我们使用命令行对海龟仿真节点发送了一个请求，又生成了一只海龟，现在我们通过程序来发送请求。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055606.png" alt="image-20211005230349178"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033200.png" alt="image-20211005230349178"></p>
 <p>和编写发布者的过程类似，先创建一个新的功能包。在代码实现过程，也是在创建节点的基础上编写请求数据。具体的程序内容主要包括以下部分：</p>
 <ul>
 <li>初始化ROS节点。</li>
@@ -748,7 +748,7 @@
 </ul>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ros/ros.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;turtlesim/Spawn.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 初始化ROS节点</span></span><br><span class="line">	ros::<span class="built_in">init</span>(argc, argv, <span class="string">&quot;turtle_spawn&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建节点句柄</span></span><br><span class="line">	ros::NodeHandle node;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发现/spawn服务后，创建一个服务客户端，连接名为/spawn的service</span></span><br><span class="line">	ros::service::<span class="built_in">waitForService</span>(<span class="string">&quot;/spawn&quot;</span>);<span class="comment">//查询当前系统中是否有spanw服务，如果没有一直等待</span></span><br><span class="line">	ros::ServiceClient add_turtle = node.serviceClient&lt;turtlesim::Spawn&gt;(<span class="string">&quot;/spawn&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化turtlesim::Spawn的请求数据</span></span><br><span class="line">	turtlesim::Spawn srv;</span><br><span class="line">	srv.request.x = <span class="number">2.0</span>;</span><br><span class="line">	srv.request.y = <span class="number">2.0</span>;</span><br><span class="line">	srv.request.name = <span class="string">&quot;turtle2&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 请求服务调用</span></span><br><span class="line">	<span class="built_in">ROS_INFO</span>(<span class="string">&quot;Call service to spwan turtle[x:%0.6f, y:%0.6f, name:%s]&quot;</span>, </span><br><span class="line">			 srv.request.x, srv.request.y, srv.request.name.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">	add_turtle.<span class="built_in">call</span>(srv);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 显示服务调用结果</span></span><br><span class="line">	<span class="built_in">ROS_INFO</span>(<span class="string">&quot;Spwan turtle successfully [name:%s]&quot;</span>, srv.response.name.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h2 id="2-服务端编程实现"><a href="#2-服务端编程实现" class="headerlink" title="2.服务端编程实现"></a>2.服务端编程实现</h2><p>在这一节，我们实现这样一个功能，就是客户端向服务端发送一个请求，让服务端来控制海龟。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055617.png" alt="image-20211005235128008"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033212.png" alt="image-20211005235128008"></p>
 <p>这里面，这个服务叫做/turtle_command，发送的request数据类型为std_srvs::Trigger。</p>
 <p>服务端的程序主要有以下几部分组成：</p>
 <ul>
@@ -762,20 +762,20 @@
 <p>呼叫服务：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rosservice 		call 		/turtle_command </span><br></pre></td></tr></table></figure>
 <h2 id="3-服务数据的定义与使用"><a href="#3-服务数据的定义与使用" class="headerlink" title="3.服务数据的定义与使用"></a>3.服务数据的定义与使用</h2><p>上一节我们用的服务数据为Trigger，这是ROS定义好的，我们现在来自己定义一个服务的数据。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055634.png" alt="image-20211006003654128"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033222.png" alt="image-20211006003654128"></p>
 <p>我们要实现的功能如上所示，我们自己定义一个服务消息数据为Person，客户端可以发送请求，获得show_person服务，服务端发出一个回应。</p>
 <h3 id="1-定义数据"><a href="#1-定义数据" class="headerlink" title="(1)定义数据"></a>(1)定义数据</h3><p>请求数据和回应数据中间用<code>---</code>来隔开，和话题消息数据定义一样，我们用写在一个纯文本文件中，文件格式为.srv。</p>
 <p>先在功能包目录下建立一个文件夹srv。然后创建.srv文件。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055638.png" alt="image-20211006004641504"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033227.png" alt="image-20211006004641504"></p>
 <h3 id="2-编辑配置文件-1"><a href="#2-编辑配置文件-1" class="headerlink" title="(2)编辑配置文件"></a>(2)编辑配置文件</h3><p>与话题消息几乎一样，只不过在CMakeLists中，话题消息的配置使用的是add_message_files(FILES Person.msg)，而在服务数据的配置使用的是add_service_files(FILES Person.srv)。</p>
 <p><strong>首先要在package.xml中添加功能包依赖</strong></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build_depend</span>&gt;</span>message_generation<span class="tag">&lt;/<span class="name">build_depend</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">exec_depend</span>&gt;</span>message_runtime<span class="tag">&lt;/<span class="name">exec_depend</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>如下图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055644.png" alt="image-20211005185240266"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033236.png" alt="image-20211005185240266"></p>
 <p><strong>然后在CMakeLists添加相关配置</strong></p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">find_package</span>(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  rospy</span><br><span class="line">  std_msgs</span><br><span class="line">  message_generation <span class="comment">#这个是后加的</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>如下图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055649.png" alt="image-20211005185707368"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033245.png" alt="image-20211005185707368"></p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">add_service_files(FILES 	Person.srv)<span class="comment">#配置msg源文件</span></span><br><span class="line">generate_messages(DEPENDENCIES		std_msgs)<span class="comment">#生成消息时依赖于std_msgs</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment">#执行时依赖</span></span><br><span class="line">catkin_package(</span><br><span class="line"><span class="comment">#  INCLUDE_DIRS include</span></span><br><span class="line"><span class="comment">#  LIBRARIES learning_topic</span></span><br><span class="line">  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs turtlesim message_runtime</span><br><span class="line"><span class="comment">#  DEPENDS system_lib</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h3 id="3-使用-1"><a href="#3-使用-1" class="headerlink" title="(3)使用"></a>(3)使用</h3><p>最后就是编译了，在工作空间目录下使用<code>catkin_make</code> 命令完成。生成的文件在devel/include中。</p>
@@ -786,7 +786,7 @@
 <p>编译，在CMakeLists中加入：</p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(person_client src/person_client.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(person_client <span class="variable">$&#123;catkin_LIBRARIES&#125;</span>)</span><br><span class="line"><span class="keyword">add_dependencies</span>(person_client <span class="variable">$&#123;PROJECT_NAME&#125;</span>_gencpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(person_server src/person_server.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(person_server <span class="variable">$&#123;catkin_LIBRARIES&#125;</span>)</span><br><span class="line"><span class="keyword">add_dependencies</span>(person_server <span class="variable">$&#123;PROJECT_NAME&#125;</span>_gencpp)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h1 id="七、参数的使用与编程方法"><a href="#七、参数的使用与编程方法" class="headerlink" title="七、参数的使用与编程方法"></a>七、参数的使用与编程方法</h1><p>ROS Master中有一个参数服务器，它可以存储全局参数，各个节点都可以访问（不同的主机也可访问）。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055707.png" alt="image-20211006011750764"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033258.png" alt="image-20211006011750764"></p>
 <p>还是创建一个节点来实现用程序使用全局参数。</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 该例程设置/读取海龟例程中的参数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ros/ros.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;std_srvs/Empty.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> red, green, blue;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ROS节点初始化</span></span><br><span class="line">    ros::<span class="built_in">init</span>(argc, argv, <span class="string">&quot;parameter_config&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建节点句柄</span></span><br><span class="line">    ros::NodeHandle node;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取背景颜色参数</span></span><br><span class="line">	ros::param::<span class="built_in">get</span>(<span class="string">&quot;/turtlesim/background_r&quot;</span>, red);</span><br><span class="line">	ros::param::<span class="built_in">get</span>(<span class="string">&quot;/turtlesim/background_g&quot;</span>, green);</span><br><span class="line">	ros::param::<span class="built_in">get</span>(<span class="string">&quot;/turtlesim/background_b&quot;</span>, blue);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">ROS_INFO</span>(<span class="string">&quot;Get Backgroud Color[%d, %d, %d]&quot;</span>, red, green, blue);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 设置背景颜色参数</span></span><br><span class="line">	ros::param::<span class="built_in">set</span>(<span class="string">&quot;/turtlesim/background_r&quot;</span>, <span class="number">255</span>);</span><br><span class="line">	ros::param::<span class="built_in">set</span>(<span class="string">&quot;/turtlesim/background_g&quot;</span>, <span class="number">255</span>);</span><br><span class="line">	ros::param::<span class="built_in">set</span>(<span class="string">&quot;/turtlesim/background_b&quot;</span>, <span class="number">255</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">ROS_INFO</span>(<span class="string">&quot;Set Backgroud Color[255, 255, 255]&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 读取背景颜色参数</span></span><br><span class="line">	ros::param::<span class="built_in">get</span>(<span class="string">&quot;/turtlesim/background_r&quot;</span>, red);</span><br><span class="line">	ros::param::<span class="built_in">get</span>(<span class="string">&quot;/turtlesim/background_g&quot;</span>, green);</span><br><span class="line">	ros::param::<span class="built_in">get</span>(<span class="string">&quot;/turtlesim/background_b&quot;</span>, blue);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">ROS_INFO</span>(<span class="string">&quot;Re-get Backgroud Color[%d, %d, %d]&quot;</span>, red, green, blue);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 调用服务，刷新背景颜色</span></span><br><span class="line">	ros::service::<span class="built_in">waitForService</span>(<span class="string">&quot;/clear&quot;</span>);</span><br><span class="line">	ros::ServiceClient clear_background = node.serviceClient&lt;std_srvs::Empty&gt;(<span class="string">&quot;/clear&quot;</span>);</span><br><span class="line">	std_srvs::Empty srv;</span><br><span class="line">	clear_background.<span class="built_in">call</span>(srv);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">sleep</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="八、ROS中的常用组件"><a href="#八、ROS中的常用组件" class="headerlink" title="八、ROS中的常用组件"></a>八、ROS中的常用组件</h1><h2 id="1-坐标变换管理系统-TF功能包"><a href="#1-坐标变换管理系统-TF功能包" class="headerlink" title="1.坐标变换管理系统-TF功能包"></a>1.坐标变换管理系统-TF功能包</h2><p>TF功能包能管理机器人中的各个坐标系之间的变换关系。</p>
@@ -798,16 +798,16 @@
 </ul>
 <p>在ROS中，使用树结构来进行管理。</p>
 <p>例如一个小车，小车的中心点为base_link坐标系原点，上面有一个激光雷达，激光雷达中心为base_laser坐标系原点。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055714.png" alt="image-20211006021136321"></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055717.png" alt="image-20211006021150776"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033322.png" alt="image-20211006021136321"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033318.png" alt="image-20211006021150776"></p>
 <h3 id="1-一个例程"><a href="#1-一个例程" class="headerlink" title="(1)一个例程"></a>(1)一个例程</h3><p>在ROS中有一个例程，海龟跟踪，这个就是通过TF坐标来实现的。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo 	apt-get		install		ros-melodic-turtle-tf  //下载例程文件</span><br><span class="line">roslaunch  	turtle_tf	turtle_tf_demo.launch //roslaunch命令是启动.launch文件，这个文件中包括了很多个节点</span><br><span class="line">rosrun 		turtlesim		turtle_teleop_key //启动键盘控制</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rosrun 		tf		view_frames  //运行tf的一个可视化工具，会在当前路径下生成pdf文件，来表示当前坐标系关系</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055724.png" alt="image-20211006023541876"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033329.png" alt="image-20211006023541876"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tf		tf_echo		turtle1		turtle2  //显示两个坐标系间的关系</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055729.png" alt="image-20211006023636826"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033335.png" alt="image-20211006023636826"></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rosrun 	rviz	 rviz 	-d 		&#x27;rospack find turtle_tf&#x27;/rviz/turtle_rviz.rviz		//运行rviz可视化工具，可以查看坐标关系</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055732.png" alt="image-20211006023829401" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033340.png" alt="image-20211006023829401" style="zoom:50%;" /></p>
 <h3 id="2-创建TF广播器"><a href="#2-创建TF广播器" class="headerlink" title="(2)创建TF广播器"></a>(2)创建TF广播器</h3><p>首先，我们需要创建一个发布乌龟坐标系和世界坐标系之间TF变换的节点。然后这个节点可以把坐标变换关系发送到TF树中。</p>
 <ul>
 <li>定义TF广播器</li>
@@ -859,9 +859,9 @@
 <p><code>rqt</code>    所有工具的集合窗口，在界面中选择工具。</p>
 <h2 id="4-rviz三维可视化平台"><a href="#4-rviz三维可视化平台" class="headerlink" title="4.rviz三维可视化平台"></a>4.rviz三维可视化平台</h2><p>启动：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rosrun	rviz	rviz</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055751.png" alt="image-20211007011943519"></p>
-<h2 id="5-Gazebo"><a href="#5-Gazebo" class="headerlink" title="5.Gazebo"></a>5.Gazebo</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055810.png" alt="image-20211007012012849"></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018055801.png" alt="image-20211007012025774"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033355.png" alt="image-20211007011943519"></p>
+<h2 id="5-Gazebo"><a href="#5-Gazebo" class="headerlink" title="5.Gazebo"></a>5.Gazebo</h2><p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033402.png" alt="image-20211007012012849"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033410.png" alt="image-20211007012025774"></p>
 ]]></content>
       <categories>
         <category>动手实践</category>
@@ -875,7 +875,7 @@
     <url>/2021/10/21/ROS%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<p>本文介绍如何创建ROS的工作空间，编程的开发环境。<br><span id="more"></span></p>
 <h1 id="一、文件系统介绍"><a href="#一、文件系统介绍" class="headerlink" title="一、文件系统介绍"></a>一、文件系统介绍</h1><p>首先介绍一下ROS中的文件系统。<br>ROS文件系统指的是在硬盘上，ROS源码的组织形式。大致结构如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021233717.png" alt="image-20211021164223501"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033529.png" alt="image-20211021164223501"></p>
 <p>Workspace：为自定义的工作空间。</p>
 <ul>
 <li>build：编译空间，放置编译过程中产生的文件。（我们可以不用管）</li>
@@ -1062,7 +1062,7 @@
 <li>PPA 软件源</li>
 </ul>
 <p><strong>Ubuntu 官方软件源:</strong><br> Ubuntu 官方软件源中包含了 Ubuntu 系统中所用到的绝大部分的软件，它对应的源列表<br> 是<code>/etc/apt/sources.list</code>。在这个文件中，记录了 Ubuntu 官方源的地址，基本格式内容如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021142953.webp" alt="pic"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033808.webp" alt="pic"></p>
 <p>如果想要更换软件源，可以到<a href="https://link.jianshu.com?t=https://segmentfault.com/a/1190000000375848">国内开源镜像站点汇总</a>去找，更换后需要运行<code>sudo apt-get update</code>来更新软件源列表。</p>
 <p><strong>PPA 软件源:</strong></p>
 <p>PPA 源出现的背景是因为系统自带的源是很有限的，我们肯定需要一些其他的软件包然而如果是直接下载deb格式的文件的话，又不能获取到更新和维护，所以这就用到了十分重要的 PPA 源了。</p>
@@ -1070,9 +1070,9 @@
 <p>添加和删除PPA软件源</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:user/ppa-name</span><br><span class="line">sudo add-apt-repository --remove ppa:user/ppa-name    </span><br></pre></td></tr></table></figure>
 <p>例如，我们想要添加一个 Wireshark 软件的 PPA 源，我们可以根据它官网上提供的命令来进行添加，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021142945.webp" alt="img"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033826.webp" alt="img"></p>
 <p>当我们添加完 PPA 源之后，系统就会在 <code>/etc/apt/sources.list.d/</code>文件夹里创建了两个文件：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211021142940.webp" alt="img"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033835.webp" alt="img"></p>
 <p>我们再来打开一下 <code>wireshark-dev-stable-trusty.list</code><br> 文件看看里面的内容是什么：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br><span class="line"># deb-src http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br></pre></td></tr></table></figure>
 <p>哈哈～原来文件里就是添加了一个跟软件源一模一样的东西，他们的作用殊途同归啊。我想这其实是 Ubuntu  为了分辨官方的源和第三方的源才设计成在<code>sources.list</code>和  <code>sources.list.d/</code>这两个地方中存储软件源信息。因为第三方的源毕竟不太可信，如果随便更新的话可是会出事情的。</p>
@@ -1101,7 +1101,7 @@
 <li>chmod (change mode) ： 修改用户的权限。</li>
 </ul>
 <p>下图中通过 chown 来授权用户，通过 chmod 为用户设置可以开门的权限。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054806.png" alt="img"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033851.png" alt="img"></p>
 <p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www /]<span class="comment"># ls -l</span></span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
 <p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
@@ -1114,9 +1114,9 @@
 <li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
 </ul>
 <p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054821.jpg" alt="img"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033905.jpg" alt="img"></p>
 <p>每个文件的属性由左边第一部分的 10 个字符来确定（如下图）。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018054825.png" alt="363003_1227493859FdXT"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033910.png" alt="363003_1227493859FdXT"></p>
 <p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
 <p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
 <p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
@@ -1228,7 +1228,7 @@
 <hr>
 <p>以二维运动为例：</p>
 <p>如图所示</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023849.png" style="zoom:60%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033742.png" style="zoom:60%;" /></p>
 <p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
@@ -1249,7 +1249,7 @@ x_{2} \\
 \Delta x_{2} \\
 \Delta \theta
 \end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018023854.png" alt="img" style="zoom:60%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033747.png" alt="img" style="zoom:60%;" /></p>
 <p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
 <script type="math/tex; mode=display">
 \left[\begin{array}{l}
@@ -1386,7 +1386,7 @@ r_{j} \\
 <p>我们需要启动rviz，并把urdf文件导入。rviz启动后可以自动载入解析urdf文件。</p>
 <p>在ros中，我们要把urdf文件的路径设置到参数服务器中，使用参数名为 <code>robot_description</code> ,==注意参数名必须是这个==。</p>
 <p>代码如下：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--set parameters--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;robot_description&quot;</span>  <span class="attr">textfile</span>=<span class="string">&quot;$(find package)/urdf/xxx.urdf&quot;</span>/&gt;</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="comment">&lt;!--run rviz node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">type</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rviz&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">	    <span class="comment">&lt;!--run robot and joint state publish node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;robot_state_publisher&quot;</span> /&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;joint_state_publisher&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">launch</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--set parameters--&gt;</span></span><br><span class="line">		  <span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">&quot;robot_description&quot;</span>  <span class="attr">textfile</span>=<span class="string">&quot;$(find package)/urdf/xxx.urdf&quot;</span>/&gt;</span></span><br><span class="line">    	</span><br><span class="line">    	<span class="comment">&lt;!--run rviz node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">type</span>=<span class="string">&quot;rviz&quot;</span> <span class="attr">name</span>=<span class="string">&quot;rviz&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">	    <span class="comment">&lt;!--run robot and joint state publish node--&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;robot_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;robot_state_publisher&quot;</span> /&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">node</span> <span class="attr">pkg</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">type</span>=<span class="string">&quot;joint_state_publisher&quot;</span> <span class="attr">name</span>=<span class="string">&quot;joint_state_publisher&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">launch</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>上面还有两句话，是要启动机器人状态和关节状态发布节点。这样才能在rviz中正常显示出机器人。</p>
 <h2 id="4-其他补充"><a href="#4-其他补充" class="headerlink" title="4.其他补充"></a>4.其他补充</h2><h3 id="1-保存和调用rviz配置文件"><a href="#1-保存和调用rviz配置文件" class="headerlink" title="(1)保存和调用rviz配置文件"></a>(1)保存和调用rviz配置文件</h3><p>我们在rviz中，设置的一些配置选项，可以保存成.rviz文件，并保存在功能包下的<code>config</code>文件夹。</p>
 <p>在rviz中的工具栏<code>file</code>中，有<code>save config as</code> ，便可以保存配置信息。</p>
@@ -1813,7 +1813,7 @@ r_{j} \\
 <h2 id="2-统计研究"><a href="#2-统计研究" class="headerlink" title="2.统计研究"></a>2.统计研究</h2><p>统计研究与概率研究相反，是已知一组数据，但并不知道该模型和模型的具体参数</p>
 <p>例子：已知某地一个小区的人口身高的数据，想要推测出该地整个人口身高分布的数学模型，假设已经知道该模型为正态分布，但不知道正态分布中具体的参数等信息，所以需要统计研究来得出</p>
 <p>总结：概率研究是已知模型和参数，推数据。统计是已知数据，推模型和参数</p>
-<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061947.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
+<h1 id="二、独立事件"><a href="#二、独立事件" class="headerlink" title="二、独立事件"></a>二、独立事件</h1><p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032140.png" alt="image-20211008173107621" style="zoom:50%;" /></p>
 <p>独立事件A和B，发生的概率为 $p(AB)=p(A)p(B)$</p>
 <p>当A和B有某种关系的时候，也就是说不独立的时候，$p(AB)=p(A|B)p(B)$，可以根据此来判断AB是否独立</p>
 <h1 id="三、极大似然估计和后验估计"><a href="#三、极大似然估计和后验估计" class="headerlink" title="三、极大似然估计和后验估计"></a>三、极大似然估计和后验估计</h1><h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1.介绍"></a>1.介绍</h2><p><a href="https://zhuanlan.zhihu.com/p/32480810">参考</a></p>
@@ -1858,7 +1858,7 @@ P(X,\theta)=P(X\mid\theta)\tag{3}</script><p>我们就可以假设我们已经�
 \hat \theta=\max _\theta P(X\mid\theta)\tag{4}</script><p> <strong>E.g.</strong> 我们现在有一个硬币，这个硬币服从二项分布，我们设正面朝上的概率为 $\theta$ 。现在想通过试验来求出硬币的正面朝上的概率为多少。假设我们做了一组试验，扔了10次，其中正面朝上的次数为7。</p>
 <script type="math/tex; mode=display">
 P(X=\{7次正，3次反\},\theta)=P(X\mid\theta)=\theta^7(1-\theta)^3=f(\theta)\tag{5}</script><p>现在既然出现了7次正面向上，3次反面向上的数据样本，我们就可以认为此时的概率一定是所有情况中最大的。我们可以把似然函数$f(\theta)$ 的图像画出来：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061952.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032227.png" alt="image-20211009211806463" style="zoom:50%;" /></p>
 <p>可以看出 $\theta=0.7$ 时，似然函数取极大值。但是我们知道，一般的硬币都是均匀分布的，为什么正面朝上的概率会是0.7呢。这就包含了贝叶斯学派的思想，即引入先验估计。</p>
 <h2 id="4-最大后验估计——MAP"><a href="#4-最大后验估计——MAP" class="headerlink" title="4.最大后验估计——MAP"></a>4.最大后验估计——MAP</h2><p>最大后验估计是贝叶斯学派的方法，他们认为参数 $\theta$ 是不确定的，也是一个随机变量。需要求出在该样本情况下，参数的概率分布，然后选取概率最大的样本点。</p>
 <script type="math/tex; mode=display">
@@ -1872,10 +1872,10 @@ P(\theta\mid X)=\frac{P(X,\theta)}{P(X)}=\frac{P(X\mid\theta)P(\theta)}{P(X)}\ta
 P(X,\theta)&=P(X\mid\theta)P(\theta)\\
 &=f(\theta)P(\theta)
 \end{aligned}\tag{8}</script><p>图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061954.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032233.png" alt="image-20211009220826964" style="zoom:50%;" /></p>
 <p>此时 $\theta$ 已经向左偏移，为0.558。即用最大后验估计，得到的结果。</p>
 <p>当试验次数为1000次，其中正面朝上的次数为700次时，$f(\theta)P(\theta)$ 的图像为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061956.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032237.png" alt="image-20211009221159457" style="zoom:50%;" /></p>
 <p>此时 $\theta=0.696$ 。</p>
 <p>从这个例子可以知道：当数据量增大时，估计的参数分布会越来越向数据靠拢，先验的影响力会越来越小。</p>
 ]]></content>
@@ -1898,7 +1898,7 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
 </ul>
 <h1 id="Lesson2-转换函数-conversion-function"><a href="#Lesson2-转换函数-conversion-function" class="headerlink" title="Lesson2 转换函数 conversion function"></a>Lesson2 转换函数 conversion function</h1><p>转换有两个方向，一个是我这个类型转换成那个，也可以是那个转换成这个。</p>
 <p>现在有一个分数class：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110201213.png" alt="image-20211110201213702" style="zoom:33%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215034337.png" alt="image-20211110201213702" style="zoom:33%;" /></p>
 <p>黄色的部分就是转换函数。转换肯定不会改变数据的值，所以要加上const。</p>
 <p>不需要返回值类型，因为很明确，函数名就表示了要转换的那个类型。</p>
 <p>调用的时候：</p>
@@ -1907,7 +1907,7 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
 <p>只要你认为合理，可以有很多个转换函数。</p>
 <h2 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h2><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
 <p>首先构造函数有两个形参，其中一个给了初值。其实调用的时候，只要给一个实参即可。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110202233.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215034348.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=f+<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
 <p>这时在执行上述代码时，类中的运算符重载函数并没有分数加整型数这种情况，只有分数加分数。当看到没有这种重载<code>+</code> 这种函数，所以就想着可不可以把整型数3变为Fraction，那就看其构造函数，如果满足构造函数的参数，那么就会调用构造函数来进行类型的转换。这是让其他类型的数据转化成本类型。</p>
 <p>但是当有下面这种情况时，既可以用构造函数，又可以用类型转换函数。此时编译器会报错，因为它不知道调用哪个函数。</p>
@@ -1979,7 +1979,7 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
     <title>视觉SLAM框架</title>
     <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032349.png" alt="视觉SLAM框架"></p>
 <p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
 ]]></content>
       <categories>
@@ -4872,18 +4872,18 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 </blockquote>
 <p>如果你也遇到这些情况，那你很幸运，这篇文章可以帮你解决90%的问题。</p>
 <h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p><strong>1.打开<a href="https://github.com.ipaddress.com/">https://github.com.ipaddress.com/</a>  如下图：</strong></p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde579dbb3de8~tplv-t2oaga2asx-watermark.awebp" alt="140.jpeg" style="zoom: 33%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032306.awebp" alt="140.jpeg" style="zoom: 33%;" /></p>
 <p>把IP Address 记录下来！ 把IP Address 记录下来！ 把IP Address 记录下来！</p>
 <p><strong>2.打开<a href="https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo">https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo</a> 如下图：</strong></p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a05985dd~tplv-t2oaga2asx-watermark.awebp" alt="fas.png" style="zoom: 33%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032314.awebp" alt="fas.png" style="zoom: 33%;" /></p>
 <p>把IP Address 记录下来！ 把IP Address 记录下来！ 把IP Address 记录下来！</p>
 <p><strong>3.打开<a href="https://github.com.ipaddress.com/assets-cdn.github.com">https://github.com.ipaddress.com/assets-cdn.github.com</a> 如下图：</strong></p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a0a40370~tplv-t2oaga2asx-watermark.awebp" alt="153.png" style="zoom: 33%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032318.awebp" alt="153.png" style="zoom: 33%;" /></p>
 <p>把IP Address 记录下来！ 把IP Address 记录下来！ 把IP Address 记录下来！</p>
 <p><strong>4.打开电脑的hosts文件，把下列的东东写在最后，然后保存即可</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">140.82.113.4(图1的IP Address) github.com </span><br><span class="line">199.232.69.194(图2的IP Address) github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.109.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.110.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.111.153(图3的IP Address)  assets-cdn.github.com</span><br></pre></td></tr></table></figure>
 <p>效果如图：</p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a14d42bf~tplv-t2oaga2asx-watermark.awebp" alt="WX20200616-233432.png" style="zoom: 50%;" /></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032323.awebp" alt="WX20200616-233432.png" style="zoom: 50%;" /></p>
 <p><strong>5.在终端在输以下指令刷新DNS（需要权限）</strong></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo killall -HUP mDNSResponder;say DNS cache has been flushed</span><br></pre></td></tr></table></figure>
 <p><strong>然后就见证神奇的时刻！！！！！</strong></p>
