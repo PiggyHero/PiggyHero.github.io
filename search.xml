@@ -509,134 +509,6 @@
       </tags>
   </entry>
   <entry>
-    <title>OpenCV学习(1)OpenCV的数据类型</title>
-    <url>/2021/12/02/OpenCV%E5%AD%A6%E4%B9%A0(1)%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>OpenCV的数据类型分为三类：</p>
-<ol>
-<li>直接从C++的标准库继承来的，例如int和float等。还包括一些简单的矩阵和数组，代表了一些几何意思，比如点，矩形等。我的理解是就是用标准库提供的容器，然后换了一个名字。</li>
-<li>辅助对象，这些对象代表较为抽象的概念。比如，垃圾收集指针类，范围类等。</li>
-<li>大型数组类型。例如Mat，这一类我的理解是使用标准库提供的容器进行整合，形成新的类。</li>
-</ol>
-<span id="more"></span>
-<h2 id="1-基础类型"><a href="#1-基础类型" class="headerlink" title="1.基础类型"></a>1.基础类型</h2><p>在opencv中，基础类型有以下几个：</p>
-<ul>
-<li><code>cv::Vec&lt;&gt;</code> 向量类</li>
-<li><code>cv::Matx&lt;&gt;</code> 矩阵类</li>
-<li><code>cv::Point</code> 点类</li>
-<li><code>cv::Scalar</code> 四维向量，用于描述颜色，四元数</li>
-<li><code>cv::Size</code> 二维向量，用于描述图像大小</li>
-<li><code>cv::Rect</code> 四维向量，用于描述矩形</li>
-<li><code>cv::RotatedRect</code> 包含一个Point，一个Size和一个浮点数角度，表示非轴对称矩形</li>
-<li><code>cv::Complex</code> 复数类</li>
-</ul>
-<p>上面这几个类型是基础类型。在opencv中通常用 typedef来定义别名。</p>
-<p>例如：</p>
-<p><code>cv::Point2d</code>，<code>cv::Vec2i</code>，<code>cv::Matx33f</code> </p>
-<p>在这里数字表示维度，后面的字母表示数据类型。有{b,w,s,i,f,d}，分别对应{unsigned char,unsigned short,short,int,float,double}。</p>
-<p>==下面写对各个类型的介绍：用到时后再写==</p>
-<h2 id="2-辅助对象"><a href="#2-辅助对象" class="headerlink" title="2.辅助对象"></a>2.辅助对象</h2><p>辅助对象被用来对控制各种各样的算法和各种在容器上的操作。</p>
-<p>==等学到这的时候再写==</p>
-<h2 id="3-图像和大型数组"><a href="#3-图像和大型数组" class="headerlink" title="3.图像和大型数组"></a>3.图像和大型数组</h2><p><code>cv::Mat</code>是该类型中的代表，它用来表示一个图像。</p>
-<blockquote>
-<p>它可以表示任意维度的稠密数组，这个稠密表示数组中的所有元素都有一个存储值。</p>
-<p>而稀疏数组是非0的地方才会被存储，这样回更节约内存。但是当数组比较稠密的时候，用稀疏数组来存反而会浪费内存。一个比较常用的使用稀疏数组的例子是用其来存储直方图。</p>
-</blockquote>
-<p>本节就主要介绍<code>cv::Mat</code></p>
-<h3 id="1-基本介绍"><a href="#1-基本介绍" class="headerlink" title="1)基本介绍"></a>1)基本介绍</h3><h4 id="Mat的结构是什么样子的？"><a href="#Mat的结构是什么样子的？" class="headerlink" title="Mat的结构是什么样子的？"></a>Mat的结构是什么样子的？</h4><p>Mat是一个类，由两部分组成：</p>
-<ul>
-<li>矩阵的头（包含矩阵的尺寸、存储方法、存储地址等）</li>
-<li>图像数据矩阵</li>
-</ul>
-<h4 id="Mat存储机制是什么样子的？"><a href="#Mat存储机制是什么样子的？" class="headerlink" title="Mat存储机制是什么样子的？"></a>Mat存储机制是什么样子的？</h4><p><strong>矩阵那么大，经常复制太占用资源了！</strong></p>
-<p>opencv引用计数机制来管理图像的存储，让给个Mat对象都有自己的信息头，但各个对象共享同一个矩阵，通过矩阵指针来进行访问矩阵。拷贝构造函数只复制信息头和矩阵指针。这样就可以避免频繁的复制整个矩阵了。</p>
-<p>如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Mat A,C;</span><br><span class="line">A=<span class="built_in">imread</span>(<span class="string">&quot;image.png&quot;</span>);</span><br><span class="line"><span class="function">Mat <span class="title">B</span><span class="params">(A)</span></span>;</span><br><span class="line">C=A;</span><br></pre></td></tr></table></figure>
-<p>上面的代码中，A B C三个对象都指向同一个数据矩阵，当通过其中一个对象修改数据矩阵后，通过显示这三个对象的图像，就都发生了变化。</p>
-<blockquote>
-<p>当建立新对象，并用已有的对象为其复制，实质上就是改变了访问原图像数据矩阵的途径而已。</p>
-</blockquote>
-<p>另外，也可以创建新的对象，使其仅指向感兴趣的区域。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">D</span><span class="params">(A,Rect(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>))</span></span>;<span class="comment">//框出一个矩形区域</span></span><br></pre></td></tr></table></figure>
-<h4 id="数据矩阵由谁来清理？"><a href="#数据矩阵由谁来清理？" class="headerlink" title="数据矩阵由谁来清理？"></a>数据矩阵由谁来清理？</h4><p>在这个数据矩阵多一个指向者的时候，它的引用就会加一，当一个指向它的对象被释放后，它的引用就会减一，当引用数为0时，那么数据矩阵就会被释放。</p>
-<h4 id="如何才能复制一份数据矩阵？"><a href="#如何才能复制一份数据矩阵？" class="headerlink" title="如何才能复制一份数据矩阵？"></a>如何才能复制一份数据矩阵？</h4><p>可以使用对象的clone()函数或copyTo()函数。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Mat F=A.<span class="built_in">clone</span>();</span><br><span class="line">Mat G;</span><br><span class="line">A.<span class="built_in">copyTo</span>(G);</span><br></pre></td></tr></table></figure>
-<h3 id="2-像素值的存储方式"><a href="#2-像素值的存储方式" class="headerlink" title="2)像素值的存储方式"></a>2)像素值的存储方式</h3><p>我们知道了图像是以什么样的一种方式存在计算机中，那么每个像素或者说矩阵中的每一个元素的值是怎么确定的呢？</p>
-<h4 id="什么是颜色空间？"><a href="#什么是颜色空间？" class="headerlink" title="什么是颜色空间？"></a>什么是颜色空间？</h4><p>首先我们要知道颜色空间的概念。</p>
-<p>颜色空间就是给定了你一定的颜色，如何通过组合这几个颜色来表示我们想要的颜色。这就是根据颜色空间对图像进行编码。</p>
-<p>例如：给定了一个颜色空间，红黄蓝。当我们想要表示一个贼红的东西，我们就可以用向量(1,0,0)来表示。</p>
-<p>无论哪种颜色空间，都把颜色分成三个或四个基元素。</p>
-<p><strong>图像的颜色空间主要有以下几种：</strong></p>
-<ul>
-<li>RGB：基色为红绿蓝</li>
-<li>RGBA：在RGB的基础上，加上一个透明度通道</li>
-<li>HSV和HLS：把颜色分解成色调、饱和度和亮度/明度。</li>
-<li>YCrCb ==我不知道是啥==</li>
-<li>CIE L*a*b* ==我也不知道是啥==</li>
-</ul>
-<h4 id="什么是像素值定义域？"><a href="#什么是像素值定义域？" class="headerlink" title="什么是像素值定义域？"></a>什么是像素值定义域？</h4><p>还是上面的例子，在红黄蓝空间上，我们用(1,0,0)来表示贼红。但是这样表示的颜色数量太少，因为最红的值是1，这就说明我们只用了一bit来表示 一个颜色占的分量。那么如果用1byte，就是8个bit来表示最红，浅红，淡红都可以表示出来了。所以就用8bit来表示一个颜色通道。二进制8位最大值对应的10进制的值为255，所以我们就可以用(255,0,0)来表示贼红。这样就可以表示出很多种颜色了。</p>
-<p>这就是像素值的定义域，它取决于存储它的元素的数据类型。最小的数据类型为char，占1个byte，可以是有符号(-127—127)，也可以是无符号(0—255)。还可以使用float(4个byte)和double(8个byte)来表示。可以让颜色粒度更低。</p>
-<h4 id="什么是图像深度？"><a href="#什么是图像深度？" class="headerlink" title="什么是图像深度？"></a><strong>什么是图像深度？</strong></h4><p>另外，在opencv中，经常会说到图像的深度，这个和像素的定义域的意思差不多，图像的深度是指描述一个像素值所占的位数。例如：int型的深度是32。</p>
-<h4 id="opencv中封装了图像数据类型！"><a href="#opencv中封装了图像数据类型！" class="headerlink" title="opencv中封装了图像数据类型！"></a>opencv中封装了图像数据类型！</h4><p>在opencv中，图像的数据类型和通道数已经被封装好了，命名规则如下：</p>
-<p>类型的命名为：<code>CV_&#123;8U,16S,16U,32S,32F,64F&#125;C&#123;1,2,3&#125;</code></p>
-<p>例如：<code>CV_8UC1</code>表示8位unsigned char型1通道的图像。</p>
-<h3 id="3-显式创建Mat对象"><a href="#3-显式创建Mat对象" class="headerlink" title="3)显式创建Mat对象"></a>3)显式创建Mat对象</h3><p>==Mat的构造函数 ，用时候再学==</p>
-<h3 id="4-操作Mat对象中的数据元素"><a href="#4-操作Mat对象中的数据元素" class="headerlink" title="4)操作Mat对象中的数据元素"></a>4)操作Mat对象中的数据元素</h3><p>有三种方法可以获得图像数据的每一个元素，完成对其进行操作。</p>
-<p>我们画一个图来说明图像数据矩阵的样子。图像数据矩阵是一个二维的数组。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002456.png" alt="Snipaste_2021-11-15_09-54-57"></p>
-<p>如果是三通道的，那么每一个元素存的是一个三维的数组，那么图像数组真实的列数=图像矩阵列数 * 图像的通道数。</p>
-<h4 id="（1）使用at成员函数"><a href="#（1）使用at成员函数" class="headerlink" title="（1）使用at成员函数"></a>（1）使用at成员函数</h4><p><code>at&lt;&gt;()</code>可以直接返回某一个元素的值，模板参数需要指定好元素中的数据类型。例如图像是CV_8UC3，那么调用该函数的时候就要写</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Vec3b element = img.at&lt;Vec3b&gt;(<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p> 这表示第1行的第1个元素，是一个3维向量。</p>
-<p>下面是<code>at&lt;&gt;()</code>支持的用法</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002848.png" alt="image-20211115101040117"></p>
-<p>如果想要遍历所有的元素，那么就需要通过多级嵌套循环来实现。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">800</span>,<span class="number">600</span>,CV_8UC3)</span></span>;</span><br><span class="line"><span class="keyword">int</span> n_r=img.rows;</span><br><span class="line"><span class="keyword">int</span> n_c=img.cols;</span><br><span class="line"><span class="comment">//输出该图像的每一个元素</span></span><br><span class="line">Vec3b element;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n_r;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> ii=<span class="number">0</span>;ii&lt;n_c;ii++)</span><br><span class="line">    &#123;</span><br><span class="line">        element[<span class="number">0</span>]=img.at&lt;Vec3b&gt;(i,ii)[<span class="number">0</span>];</span><br><span class="line">        element[<span class="number">1</span>]=img.at&lt;Vec3b&gt;(i,ii)[<span class="number">1</span>];</span><br><span class="line">        element[<span class="number">2</span>]=img.at&lt;Vec3b&gt;(i,ii)[<span class="number">2</span>];</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;第&quot;</span>&lt;&lt;i&lt;&lt;<span class="string">&quot;行第&quot;</span>&lt;&lt;ii&lt;&lt;<span class="string">&quot;列的元素为&quot;</span>&lt;&lt;element[<span class="number">0</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>element[<span class="number">1</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;element[<span class="number">2</span>]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以通过该种方式操作像素值</span></span><br><span class="line">img.at&lt;uchar&gt;(<span class="number">100</span>,<span class="number">100</span>)[<span class="number">0</span>]=<span class="number">50</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="（2）使用C语言风格的指针"><a href="#（2）使用C语言风格的指针" class="headerlink" title="（2）使用C语言风格的指针"></a>（2）使用C语言风格的指针</h4><p>还有另外的一个模板成员函数<code>ptr&lt;&gt;()</code> ，该函数返回的是某一行的指针。通过这种方法获取数组的元素是最快的。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Vec3b * pointer1 = img.ptr&lt;Vec3b&gt;(<span class="number">0</span>);<span class="comment">//返回的是第1行的指针(第一行数组的指针)</span></span><br><span class="line"></span><br><span class="line">Vec3b a =pointer1[<span class="number">0</span>];<span class="comment">//指第1行的第1个元素</span></span><br><span class="line">Vec3b b=img.ptr&lt;Vec3b&gt;(<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//返回的是第1行第2个元素</span></span><br><span class="line">Vec3b c=img.ptr&lt;Vec3b&gt;(<span class="number">0</span>)[<span class="number">2</span>];<span class="comment">//返回的是第1行第3个元素</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*********还有另一种情况************/</span></span><br><span class="line">uchar * pointer3=img.ptr&lt;uchar&gt;(<span class="number">0</span>);<span class="comment">//返回第1行的指针</span></span><br><span class="line">uchar d=pointer3[<span class="number">0</span>];<span class="comment">//表示第1行第1个元素的第一个通道</span></span><br><span class="line">uchar e=pointer3[<span class="number">1</span>];<span class="comment">//表示第1行第1个元素的第二个通道</span></span><br><span class="line">uchar f=pointer3[<span class="number">3</span>];<span class="comment">//表示第1行第2个元素的第一个通道</span></span><br></pre></td></tr></table></figure>
-<p>上面模板参数Vec3b和uchar的区别，就是指针的区别，Vec3b的指针[1]，一次跳过3个字节地址。uchar的指针[1]，一次跳过1个字节地址。</p>
-<blockquote>
-<p>图像的同一行的所有元素的内存地址是连续的，但是不同行之间的内存地址不一定是连续的，可以使用<code>isContinuous()</code>来判断。</p>
-</blockquote>
-<h4 id="（3）使用iterator"><a href="#（3）使用iterator" class="headerlink" title="（3）使用iterator"></a>（3）使用iterator</h4><p>Mat的iterator有两种：</p>
-<ul>
-<li><code>cv::MatIterator&lt;&gt;</code> non-const array iterator</li>
-<li><code>cv::MatConstIterator&lt;&gt;</code> const array iterator</li>
-</ul>
-<p>iterator是一个更智能的指针，它不用我们来考虑各个数据的内存地址是否连续。它的指向是数组中的每一个元素。</p>
-<blockquote>
-<p>non-const array iterator 和 const array iterator 应该就是该iterator可不可以操作图像，如果是const array iterator，就不可以操作图像。(？？？)</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">800</span>,<span class="number">600</span>,CV_32FC3)</span></span>;</span><br><span class="line">MatConstIterator&lt;Vec3f&gt; it=img.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">while</span>(it!=img.<span class="built_in">end</span>())</span><br><span class="line">&#123;</span><br><span class="line">	cout&lt;&lt;(*it)[<span class="number">0</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;(*it)[<span class="number">1</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;(*it)[<span class="number">2</span>]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="5-成块操作数据元素"><a href="#5-成块操作数据元素" class="headerlink" title="5)成块操作数据元素"></a>5)成块操作数据元素</h3><p>通过Mat的成员函数可以获得其子区域的数据。还有两个运算符重载函数。</p>
-<blockquote>
-<p>在做这些操作的时候，不是把数据矩阵复制到mat对象中，而是为mat对象建立一个新的header来指向所选的区域，如果修改这个对象所指的数据，那么原来的数据也会变动。</p>
-</blockquote>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002516.png" alt="image-20211115115344641"></p>
-<p><code>diag()</code> 提取对角线上的元素</p>
-<ul>
-<li>参数0，提取对角线上的元素</li>
-<li>参数为正，提取上三角元素</li>
-<li>参数为负，提取下三角元素</li>
-</ul>
-<h3 id="6-矩阵元素运算表达式"><a href="#6-矩阵元素运算表达式" class="headerlink" title="6)矩阵元素运算表达式"></a>6)矩阵元素运算表达式</h3><p>可以直接通过运算符对矩阵进行操作。</p>
-<p>这里要注意，=赋值操作，例如m2=m1，这表示对m1所指的数据增加了一个引用m1和m2共享同一份数据，而m2=m1+m0表示m2指向一份新的数据，这个数据的值由m1和m0相加得到。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002523.png" alt="image-20211115123615830"></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002833.png" alt="image-20211115123635416"></p>
-<h3 id="7-Saturation-casting"><a href="#7-Saturation-casting" class="headerlink" title="7)Saturation casting"></a>7)Saturation casting</h3><p>当我们的图像在处理时，有可能会发生内存溢出现象。比如说我的图像原来是uchar型的，当我们操作的时候出现了负数，这就不允许了。所以我们需要加上一个饱和过滤的函数，来把这些不符合的给滤掉。</p>
-<p>一个例子：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">uchar&amp; Vxy = m0.at&lt;uchar&gt;( y, x );</span><br><span class="line">Vxy = cv::saturate_cast&lt;uchar&gt;((Vxy<span class="number">-128</span>)*<span class="number">2</span> + <span class="number">128</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="8-Mat的成员函数们"><a href="#8-Mat的成员函数们" class="headerlink" title="8)Mat的成员函数们"></a>8)Mat的成员函数们</h3><p>Mat中还有很多的成员函数可供使用。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002529.png" alt="image-20211115125610273"></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002552.png" alt="image-20211115125627092"></p>
-]]></content>
-      <categories>
-        <category>动手实践</category>
-      </categories>
-      <tags>
-        <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Mac电脑操作</title>
     <url>/2021/10/18/Mac%E7%94%B5%E8%84%91%E6%93%8D%E4%BD%9C/</url>
     <content><![CDATA[<p>Mac使用时的常用操作。<br><span id="more"></span></p>
@@ -3809,8 +3681,162 @@ y^{\prime}
       </tags>
   </entry>
   <entry>
-    <title>计算机视觉学习笔记</title>
-    <url>/2021/10/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <title>视觉SLAM框架</title>
+    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
+<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
+]]></content>
+      <categories>
+        <category>理论基础</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>(1)OpenCV的数据类型</title>
+    <url>/2021/12/02/(1)OpenCV%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>OpenCV的数据类型分为三类：</p>
+<ol>
+<li>直接从C++的标准库继承来的，例如int和float等。还包括一些简单的矩阵和数组，代表了一些几何意思，比如点，矩形等。我的理解是就是用标准库提供的容器，然后换了一个名字。</li>
+<li>辅助对象，这些对象代表较为抽象的概念。比如，垃圾收集指针类，范围类等。</li>
+<li>大型数组类型。例如Mat，这一类我的理解是使用标准库提供的容器进行整合，形成新的类。</li>
+</ol>
+<span id="more"></span>
+<h2 id="1-基础类型"><a href="#1-基础类型" class="headerlink" title="1.基础类型"></a>1.基础类型</h2><p>在opencv中，基础类型有以下几个：</p>
+<ul>
+<li><code>cv::Vec&lt;&gt;</code> 向量类</li>
+<li><code>cv::Matx&lt;&gt;</code> 矩阵类</li>
+<li><code>cv::Point</code> 点类</li>
+<li><code>cv::Scalar</code> 四维向量，用于描述颜色，四元数</li>
+<li><code>cv::Size</code> 二维向量，用于描述图像大小</li>
+<li><code>cv::Rect</code> 四维向量，用于描述矩形</li>
+<li><code>cv::RotatedRect</code> 包含一个Point，一个Size和一个浮点数角度，表示非轴对称矩形</li>
+<li><code>cv::Complex</code> 复数类</li>
+</ul>
+<p>上面这几个类型是基础类型。在opencv中通常用 typedef来定义别名。</p>
+<p>例如：</p>
+<p><code>cv::Point2d</code>，<code>cv::Vec2i</code>，<code>cv::Matx33f</code> </p>
+<p>在这里数字表示维度，后面的字母表示数据类型。有{b,w,s,i,f,d}，分别对应{unsigned char,unsigned short,short,int,float,double}。</p>
+<p>==下面写对各个类型的介绍：用到时后再写==</p>
+<h2 id="2-辅助对象"><a href="#2-辅助对象" class="headerlink" title="2.辅助对象"></a>2.辅助对象</h2><p>辅助对象被用来对控制各种各样的算法和各种在容器上的操作。</p>
+<p>==等学到这的时候再写==</p>
+<h2 id="3-图像和大型数组"><a href="#3-图像和大型数组" class="headerlink" title="3.图像和大型数组"></a>3.图像和大型数组</h2><p><code>cv::Mat</code>是该类型中的代表，它用来表示一个图像。</p>
+<blockquote>
+<p>它可以表示任意维度的稠密数组，这个稠密表示数组中的所有元素都有一个存储值。</p>
+<p>而稀疏数组是非0的地方才会被存储，这样回更节约内存。但是当数组比较稠密的时候，用稀疏数组来存反而会浪费内存。一个比较常用的使用稀疏数组的例子是用其来存储直方图。</p>
+</blockquote>
+<p>本节就主要介绍<code>cv::Mat</code></p>
+<h3 id="1-基本介绍"><a href="#1-基本介绍" class="headerlink" title="1)基本介绍"></a>1)基本介绍</h3><h4 id="Mat的结构是什么样子的？"><a href="#Mat的结构是什么样子的？" class="headerlink" title="Mat的结构是什么样子的？"></a>Mat的结构是什么样子的？</h4><p>Mat是一个类，由两部分组成：</p>
+<ul>
+<li>矩阵的头（包含矩阵的尺寸、存储方法、存储地址等）</li>
+<li>图像数据矩阵</li>
+</ul>
+<h4 id="Mat存储机制是什么样子的？"><a href="#Mat存储机制是什么样子的？" class="headerlink" title="Mat存储机制是什么样子的？"></a>Mat存储机制是什么样子的？</h4><p><strong>矩阵那么大，经常复制太占用资源了！</strong></p>
+<p>opencv引用计数机制来管理图像的存储，让给个Mat对象都有自己的信息头，但各个对象共享同一个矩阵，通过矩阵指针来进行访问矩阵。拷贝构造函数只复制信息头和矩阵指针。这样就可以避免频繁的复制整个矩阵了。</p>
+<p>如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Mat A,C;</span><br><span class="line">A=<span class="built_in">imread</span>(<span class="string">&quot;image.png&quot;</span>);</span><br><span class="line"><span class="function">Mat <span class="title">B</span><span class="params">(A)</span></span>;</span><br><span class="line">C=A;</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，A B C三个对象都指向同一个数据矩阵，当通过其中一个对象修改数据矩阵后，通过显示这三个对象的图像，就都发生了变化。</p>
+<blockquote>
+<p>当建立新对象，并用已有的对象为其复制，实质上就是改变了访问原图像数据矩阵的途径而已。</p>
+</blockquote>
+<p>另外，也可以创建新的对象，使其仅指向感兴趣的区域。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">D</span><span class="params">(A,Rect(<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>,<span class="number">100</span>))</span></span>;<span class="comment">//框出一个矩形区域</span></span><br></pre></td></tr></table></figure>
+<h4 id="数据矩阵由谁来清理？"><a href="#数据矩阵由谁来清理？" class="headerlink" title="数据矩阵由谁来清理？"></a>数据矩阵由谁来清理？</h4><p>在这个数据矩阵多一个指向者的时候，它的引用就会加一，当一个指向它的对象被释放后，它的引用就会减一，当引用数为0时，那么数据矩阵就会被释放。</p>
+<h4 id="如何才能复制一份数据矩阵？"><a href="#如何才能复制一份数据矩阵？" class="headerlink" title="如何才能复制一份数据矩阵？"></a>如何才能复制一份数据矩阵？</h4><p>可以使用对象的clone()函数或copyTo()函数。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Mat F=A.<span class="built_in">clone</span>();</span><br><span class="line">Mat G;</span><br><span class="line">A.<span class="built_in">copyTo</span>(G);</span><br></pre></td></tr></table></figure>
+<h3 id="2-像素值的存储方式"><a href="#2-像素值的存储方式" class="headerlink" title="2)像素值的存储方式"></a>2)像素值的存储方式</h3><p>我们知道了图像是以什么样的一种方式存在计算机中，那么每个像素或者说矩阵中的每一个元素的值是怎么确定的呢？</p>
+<h4 id="什么是颜色空间？"><a href="#什么是颜色空间？" class="headerlink" title="什么是颜色空间？"></a>什么是颜色空间？</h4><p>首先我们要知道颜色空间的概念。</p>
+<p>颜色空间就是给定了你一定的颜色，如何通过组合这几个颜色来表示我们想要的颜色。这就是根据颜色空间对图像进行编码。</p>
+<p>例如：给定了一个颜色空间，红黄蓝。当我们想要表示一个贼红的东西，我们就可以用向量(1,0,0)来表示。</p>
+<p>无论哪种颜色空间，都把颜色分成三个或四个基元素。</p>
+<p><strong>图像的颜色空间主要有以下几种：</strong></p>
+<ul>
+<li>RGB：基色为红绿蓝</li>
+<li>RGBA：在RGB的基础上，加上一个透明度通道</li>
+<li>HSV和HLS：把颜色分解成色调、饱和度和亮度/明度。</li>
+<li>YCrCb ==我不知道是啥==</li>
+<li>CIE L*a*b* ==我也不知道是啥==</li>
+</ul>
+<h4 id="什么是像素值定义域？"><a href="#什么是像素值定义域？" class="headerlink" title="什么是像素值定义域？"></a>什么是像素值定义域？</h4><p>还是上面的例子，在红黄蓝空间上，我们用(1,0,0)来表示贼红。但是这样表示的颜色数量太少，因为最红的值是1，这就说明我们只用了一bit来表示 一个颜色占的分量。那么如果用1byte，就是8个bit来表示最红，浅红，淡红都可以表示出来了。所以就用8bit来表示一个颜色通道。二进制8位最大值对应的10进制的值为255，所以我们就可以用(255,0,0)来表示贼红。这样就可以表示出很多种颜色了。</p>
+<p>这就是像素值的定义域，它取决于存储它的元素的数据类型。最小的数据类型为char，占1个byte，可以是有符号(-127—127)，也可以是无符号(0—255)。还可以使用float(4个byte)和double(8个byte)来表示。可以让颜色粒度更低。</p>
+<h4 id="什么是图像深度？"><a href="#什么是图像深度？" class="headerlink" title="什么是图像深度？"></a><strong>什么是图像深度？</strong></h4><p>另外，在opencv中，经常会说到图像的深度，这个和像素的定义域的意思差不多，图像的深度是指描述一个像素值所占的位数。例如：int型的深度是32。</p>
+<h4 id="opencv中封装了图像数据类型！"><a href="#opencv中封装了图像数据类型！" class="headerlink" title="opencv中封装了图像数据类型！"></a>opencv中封装了图像数据类型！</h4><p>在opencv中，图像的数据类型和通道数已经被封装好了，命名规则如下：</p>
+<p>类型的命名为：<code>CV_&#123;8U,16S,16U,32S,32F,64F&#125;C&#123;1,2,3&#125;</code></p>
+<p>例如：<code>CV_8UC1</code>表示8位unsigned char型1通道的图像。</p>
+<h3 id="3-显式创建Mat对象"><a href="#3-显式创建Mat对象" class="headerlink" title="3)显式创建Mat对象"></a>3)显式创建Mat对象</h3><p>==Mat的构造函数 ，用时候再学==</p>
+<h3 id="4-操作Mat对象中的数据元素"><a href="#4-操作Mat对象中的数据元素" class="headerlink" title="4)操作Mat对象中的数据元素"></a>4)操作Mat对象中的数据元素</h3><p>有三种方法可以获得图像数据的每一个元素，完成对其进行操作。</p>
+<p>我们画一个图来说明图像数据矩阵的样子。图像数据矩阵是一个二维的数组。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002456.png" alt="Snipaste_2021-11-15_09-54-57"></p>
+<p>如果是三通道的，那么每一个元素存的是一个三维的数组，那么图像数组真实的列数=图像矩阵列数 * 图像的通道数。</p>
+<h4 id="（1）使用at成员函数"><a href="#（1）使用at成员函数" class="headerlink" title="（1）使用at成员函数"></a>（1）使用at成员函数</h4><p><code>at&lt;&gt;()</code>可以直接返回某一个元素的值，模板参数需要指定好元素中的数据类型。例如图像是CV_8UC3，那么调用该函数的时候就要写</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Vec3b element = img.at&lt;Vec3b&gt;(<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p> 这表示第1行的第1个元素，是一个3维向量。</p>
+<p>下面是<code>at&lt;&gt;()</code>支持的用法</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002848.png" alt="image-20211115101040117"></p>
+<p>如果想要遍历所有的元素，那么就需要通过多级嵌套循环来实现。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">800</span>,<span class="number">600</span>,CV_8UC3)</span></span>;</span><br><span class="line"><span class="keyword">int</span> n_r=img.rows;</span><br><span class="line"><span class="keyword">int</span> n_c=img.cols;</span><br><span class="line"><span class="comment">//输出该图像的每一个元素</span></span><br><span class="line">Vec3b element;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n_r;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> ii=<span class="number">0</span>;ii&lt;n_c;ii++)</span><br><span class="line">    &#123;</span><br><span class="line">        element[<span class="number">0</span>]=img.at&lt;Vec3b&gt;(i,ii)[<span class="number">0</span>];</span><br><span class="line">        element[<span class="number">1</span>]=img.at&lt;Vec3b&gt;(i,ii)[<span class="number">1</span>];</span><br><span class="line">        element[<span class="number">2</span>]=img.at&lt;Vec3b&gt;(i,ii)[<span class="number">2</span>];</span><br><span class="line">        cout&lt;&lt;<span class="string">&quot;第&quot;</span>&lt;&lt;i&lt;&lt;<span class="string">&quot;行第&quot;</span>&lt;&lt;ii&lt;&lt;<span class="string">&quot;列的元素为&quot;</span>&lt;&lt;element[<span class="number">0</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>element[<span class="number">1</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;element[<span class="number">2</span>]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以通过该种方式操作像素值</span></span><br><span class="line">img.at&lt;uchar&gt;(<span class="number">100</span>,<span class="number">100</span>)[<span class="number">0</span>]=<span class="number">50</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="（2）使用C语言风格的指针"><a href="#（2）使用C语言风格的指针" class="headerlink" title="（2）使用C语言风格的指针"></a>（2）使用C语言风格的指针</h4><p>还有另外的一个模板成员函数<code>ptr&lt;&gt;()</code> ，该函数返回的是某一行的指针。通过这种方法获取数组的元素是最快的。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">Vec3b * pointer1 = img.ptr&lt;Vec3b&gt;(<span class="number">0</span>);<span class="comment">//返回的是第1行的指针(第一行数组的指针)</span></span><br><span class="line"></span><br><span class="line">Vec3b a =pointer1[<span class="number">0</span>];<span class="comment">//指第1行的第1个元素</span></span><br><span class="line">Vec3b b=img.ptr&lt;Vec3b&gt;(<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//返回的是第1行第2个元素</span></span><br><span class="line">Vec3b c=img.ptr&lt;Vec3b&gt;(<span class="number">0</span>)[<span class="number">2</span>];<span class="comment">//返回的是第1行第3个元素</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*********还有另一种情况************/</span></span><br><span class="line">uchar * pointer3=img.ptr&lt;uchar&gt;(<span class="number">0</span>);<span class="comment">//返回第1行的指针</span></span><br><span class="line">uchar d=pointer3[<span class="number">0</span>];<span class="comment">//表示第1行第1个元素的第一个通道</span></span><br><span class="line">uchar e=pointer3[<span class="number">1</span>];<span class="comment">//表示第1行第1个元素的第二个通道</span></span><br><span class="line">uchar f=pointer3[<span class="number">3</span>];<span class="comment">//表示第1行第2个元素的第一个通道</span></span><br></pre></td></tr></table></figure>
+<p>上面模板参数Vec3b和uchar的区别，就是指针的区别，Vec3b的指针[1]，一次跳过3个字节地址。uchar的指针[1]，一次跳过1个字节地址。</p>
+<blockquote>
+<p>图像的同一行的所有元素的内存地址是连续的，但是不同行之间的内存地址不一定是连续的，可以使用<code>isContinuous()</code>来判断。</p>
+</blockquote>
+<h4 id="（3）使用iterator"><a href="#（3）使用iterator" class="headerlink" title="（3）使用iterator"></a>（3）使用iterator</h4><p>Mat的iterator有两种：</p>
+<ul>
+<li><code>cv::MatIterator&lt;&gt;</code> non-const array iterator</li>
+<li><code>cv::MatConstIterator&lt;&gt;</code> const array iterator</li>
+</ul>
+<p>iterator是一个更智能的指针，它不用我们来考虑各个数据的内存地址是否连续。它的指向是数组中的每一个元素。</p>
+<blockquote>
+<p>non-const array iterator 和 const array iterator 应该就是该iterator可不可以操作图像，如果是const array iterator，就不可以操作图像。(？？？)</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Mat <span class="title">img</span><span class="params">(<span class="number">800</span>,<span class="number">600</span>,CV_32FC3)</span></span>;</span><br><span class="line">MatConstIterator&lt;Vec3f&gt; it=img.<span class="built_in">begin</span>();</span><br><span class="line"><span class="keyword">while</span>(it!=img.<span class="built_in">end</span>())</span><br><span class="line">&#123;</span><br><span class="line">	cout&lt;&lt;(*it)[<span class="number">0</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;(*it)[<span class="number">1</span>]&lt;&lt;<span class="string">&quot;,&quot;</span>&lt;&lt;(*it)[<span class="number">2</span>]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-成块操作数据元素"><a href="#5-成块操作数据元素" class="headerlink" title="5)成块操作数据元素"></a>5)成块操作数据元素</h3><p>通过Mat的成员函数可以获得其子区域的数据。还有两个运算符重载函数。</p>
+<blockquote>
+<p>在做这些操作的时候，不是把数据矩阵复制到mat对象中，而是为mat对象建立一个新的header来指向所选的区域，如果修改这个对象所指的数据，那么原来的数据也会变动。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002516.png" alt="image-20211115115344641"></p>
+<p><code>diag()</code> 提取对角线上的元素</p>
+<ul>
+<li>参数0，提取对角线上的元素</li>
+<li>参数为正，提取上三角元素</li>
+<li>参数为负，提取下三角元素</li>
+</ul>
+<h3 id="6-矩阵元素运算表达式"><a href="#6-矩阵元素运算表达式" class="headerlink" title="6)矩阵元素运算表达式"></a>6)矩阵元素运算表达式</h3><p>可以直接通过运算符对矩阵进行操作。</p>
+<p>这里要注意，=赋值操作，例如m2=m1，这表示对m1所指的数据增加了一个引用m1和m2共享同一份数据，而m2=m1+m0表示m2指向一份新的数据，这个数据的值由m1和m0相加得到。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002523.png" alt="image-20211115123615830"></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002833.png" alt="image-20211115123635416"></p>
+<h3 id="7-Saturation-casting"><a href="#7-Saturation-casting" class="headerlink" title="7)Saturation casting"></a>7)Saturation casting</h3><p>当我们的图像在处理时，有可能会发生内存溢出现象。比如说我的图像原来是uchar型的，当我们操作的时候出现了负数，这就不允许了。所以我们需要加上一个饱和过滤的函数，来把这些不符合的给滤掉。</p>
+<p>一个例子：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">uchar&amp; Vxy = m0.at&lt;uchar&gt;( y, x );</span><br><span class="line">Vxy = cv::saturate_cast&lt;uchar&gt;((Vxy<span class="number">-128</span>)*<span class="number">2</span> + <span class="number">128</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="8-Mat的成员函数们"><a href="#8-Mat的成员函数们" class="headerlink" title="8)Mat的成员函数们"></a>8)Mat的成员函数们</h3><p>Mat中还有很多的成员函数可供使用。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002529.png" alt="image-20211115125610273"></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211202002552.png" alt="image-20211115125627092"></p>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>双目匹配算法</title>
+    <url>/2021/12/06/%E5%8F%8C%E7%9B%AE%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<span id="more"></span>
+]]></content>
+      <categories>
+        <category>动手实践</category>
+      </categories>
+      <tags>
+        <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>北邮机器视觉学习笔记</title>
+    <url>/2021/10/18/%E5%8C%97%E9%82%AE%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>学习北邮鲁鹏老师《机器视觉》课程笔记。<br><span id="more"></span></p>
 <h1 id="0-绪论"><a href="#0-绪论" class="headerlink" title="0.绪论"></a>0.绪论</h1><h2 id="0-1课程介绍"><a href="#0-1课程介绍" class="headerlink" title="0.1课程介绍"></a>0.1课程介绍</h2><p>本课程是斯坦福大学的课程，鲁鹏老师搬运发扬光大。北邮的计算机视觉有研究生和本科两版，本笔记是研究生版。</p>
 <p><strong>CS131:Computer Vision:Foundations and Applications</strong></p>
@@ -4969,20 +4995,6 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </categories>
       <tags>
         <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>视觉SLAM框架</title>
-    <url>/2021/10/18/%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018071925.png" alt="视觉SLAM框架"></p>
-<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
-]]></content>
-      <categories>
-        <category>理论基础</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
       </tags>
   </entry>
 </search>
