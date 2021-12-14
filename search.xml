@@ -4904,8 +4904,8 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </tags>
   </entry>
   <entry>
-    <title>1.OpenCV的数据类型</title>
-    <url>/2021/12/02/1.OpenCV%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <title>opencv学习(1)opencv的数据类型</title>
+    <url>/2021/12/02/opencv%E5%AD%A6%E4%B9%A0(1)opencv%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<p>OpenCV的数据类型分为三类：</p>
 <ol>
 <li>直接从C++的标准库继承来的，例如int和float等。还包括一些简单的矩阵和数组，代表了一些几何意思，比如点，矩形等。我的理解是就是用标准库提供的容器，然后换了一个名字。</li>
@@ -5028,7 +5028,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
         <category>动手实践</category>
       </categories>
       <tags>
-        <tag>OpenCV</tag>
+        <tag>opencv</tag>
       </tags>
   </entry>
 </search>
