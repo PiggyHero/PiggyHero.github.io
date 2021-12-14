@@ -4866,25 +4866,36 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <blockquote>
 <p>你是不是在访问全球最大的【交友网站】（GitHub）也遇到过以下情况:<br> 1.突然电脑无法访问github了.无论你重启电脑，重置网络，重置你的大脑都无法正常访问了。<br> 2.使用昂贵的【绿色上网】却可以神奇的访问到GitHub。<br> 3.当你使用昂贵的【绿色上网】，开心的在命令行上敲上你熟悉的git 、pull、push等命令进行访问远程库的时候，却给命令行甩你一行【Failed to connect to github.com port 443: Operation timed out】</p>
 </blockquote>
-<h4 id="身为一个专业的开发人员，这些错误是难不到你的！然后你疯狂的百度、Google搜索，然后得到的是为git的设置代理"><a href="#身为一个专业的开发人员，这些错误是难不到你的！然后你疯狂的百度、Google搜索，然后得到的是为git的设置代理" class="headerlink" title="身为一个专业的开发人员，这些错误是难不到你的！然后你疯狂的百度、Google搜索，然后得到的是为git的设置代理"></a>身为一个专业的开发人员，这些错误是难不到你的！然后你疯狂的百度、Google搜索，然后得到的是为git的设置代理</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+<p>身为一个专业的开发人员，这些错误是难不到你的！然后你疯狂的百度、Google搜索，然后得到的是为git的设置代理</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>当你以为你很快速的解决的时候！！！现实却是打脸的！！！ 你得到的命令行再一次甩你一行【connect to 127.0.0.01 port 1080: Connection refused】</p>
 </blockquote>
-<h4 id="如果你也遇到这些情况，那你很幸运，这篇文章可以帮你解决90-的问题。"><a href="#如果你也遇到这些情况，那你很幸运，这篇文章可以帮你解决90-的问题。" class="headerlink" title="如果你也遇到这些情况，那你很幸运，这篇文章可以帮你解决90%的问题。"></a>如果你也遇到这些情况，那你很幸运，这篇文章可以帮你解决90%的问题。</h4><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><h5 id="1-打开https-github-com-ipaddress-com-如下图："><a href="#1-打开https-github-com-ipaddress-com-如下图：" class="headerlink" title="1. 打开https://github.com.ipaddress.com/  如下图："></a>1. 打开<a href="https://github.com.ipaddress.com/">https://github.com.ipaddress.com/</a>  如下图：</h5><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde579dbb3de8~tplv-t2oaga2asx-watermark.awebp" alt="140.jpeg"></p>
+<p>如果你也遇到这些情况，那你很幸运，这篇文章可以帮你解决90%的问题。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p><strong>1.打开<a href="https://github.com.ipaddress.com/">https://github.com.ipaddress.com/</a>  如下图：</strong></p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde579dbb3de8~tplv-t2oaga2asx-watermark.awebp" alt="140.jpeg" style="zoom: 33%;" /></p>
 <p>把IP Address 记录下来！ 把IP Address 记录下来！ 把IP Address 记录下来！</p>
-<h5 id="2-打开https-fastly-net-ipaddress-com-github-global-ssl-fastly-net-ipinfo-如下图："><a href="#2-打开https-fastly-net-ipaddress-com-github-global-ssl-fastly-net-ipinfo-如下图：" class="headerlink" title="2.打开https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo 如下图："></a>2.打开<a href="https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo">https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo</a> 如下图：</h5><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a05985dd~tplv-t2oaga2asx-watermark.awebp" alt="fas.png"></p>
+<p><strong>2.打开<a href="https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo">https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo</a> 如下图：</strong></p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a05985dd~tplv-t2oaga2asx-watermark.awebp" alt="fas.png" style="zoom: 33%;" /></p>
 <p>把IP Address 记录下来！ 把IP Address 记录下来！ 把IP Address 记录下来！</p>
-<h5 id="3-打开https-github-com-ipaddress-com-assets-cdn-github-com-如下图："><a href="#3-打开https-github-com-ipaddress-com-assets-cdn-github-com-如下图：" class="headerlink" title="3.打开https://github.com.ipaddress.com/assets-cdn.github.com 如下图："></a>3.打开<a href="https://github.com.ipaddress.com/assets-cdn.github.com">https://github.com.ipaddress.com/assets-cdn.github.com</a> 如下图：</h5><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a0a40370~tplv-t2oaga2asx-watermark.awebp" alt="153.png"></p>
+<p><strong>3.打开<a href="https://github.com.ipaddress.com/assets-cdn.github.com">https://github.com.ipaddress.com/assets-cdn.github.com</a> 如下图：</strong></p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a0a40370~tplv-t2oaga2asx-watermark.awebp" alt="153.png" style="zoom: 33%;" /></p>
 <p>把IP Address 记录下来！ 把IP Address 记录下来！ 把IP Address 记录下来！</p>
-<h5 id="4-打开电脑的hosts文件，把下列的东东写在最后，然后保存即可"><a href="#4-打开电脑的hosts文件，把下列的东东写在最后，然后保存即可" class="headerlink" title="4.打开电脑的hosts文件，把下列的东东写在最后，然后保存即可"></a>4.打开电脑的hosts文件，把下列的东东写在最后，然后保存即可</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">140.82.113.4(图1的IP Address) github.com </span><br><span class="line">199.232.69.194(图2的IP Address) github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.109.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.110.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.111.153(图3的IP Address)  assets-cdn.github.com</span><br></pre></td></tr></table></figure>
+<p><strong>4.打开电脑的hosts文件，把下列的东东写在最后，然后保存即可</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">140.82.113.4(图1的IP Address) github.com </span><br><span class="line">199.232.69.194(图2的IP Address) github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.109.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.110.153(图3的IP Address)  assets-cdn.github.com</span><br><span class="line">185.199.111.153(图3的IP Address)  assets-cdn.github.com</span><br></pre></td></tr></table></figure>
 <p>效果如图：</p>
-<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a14d42bf~tplv-t2oaga2asx-watermark.awebp" alt="WX20200616-233432.png"></p>
-<h5 id="5-在终端在输以下指令刷新DNS（需要权限）"><a href="#5-在终端在输以下指令刷新DNS（需要权限）" class="headerlink" title="5.在终端在输以下指令刷新DNS（需要权限）"></a>5.在终端在输以下指令刷新DNS（需要权限）</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo killall -HUP mDNSResponder;say DNS cache has been flushed</span><br></pre></td></tr></table></figure>
-<h1 id="然后就见证神奇的时刻！！！！！"><a href="#然后就见证神奇的时刻！！！！！" class="headerlink" title="然后就见证神奇的时刻！！！！！"></a>然后就见证神奇的时刻！！！！！</h1><h5 id="小提示"><a href="#小提示" class="headerlink" title="小提示"></a>小提示</h5><blockquote>
-<p>提示1:<br> 我是用Mac电脑,Mac的Hosts文件可以通过以下路径进行找打： 1.Finder-&gt;Go-&gt;Go to Folder 2.然后输入/etc/hosts即可找到. 3.Windows请自行解决</p>
-<p>提示2:<br> 这个Hosts文件一般的编辑器还真打不开，可以使用NotePad++、SubLineText等编辑器进行编辑 Ou</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/6/17/172bde57a14d42bf~tplv-t2oaga2asx-watermark.awebp" alt="WX20200616-233432.png" style="zoom: 50%;" /></p>
+<p><strong>5.在终端在输以下指令刷新DNS（需要权限）</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo killall -HUP mDNSResponder;say DNS cache has been flushed</span><br></pre></td></tr></table></figure>
+<p><strong>然后就见证神奇的时刻！！！！！</strong></p>
+<p><strong>小提示</strong></p>
+<blockquote>
+<p>提示1:<br> 我是用Mac电脑,Mac的Hosts文件可以通过以下路径进行找打： </p>
+<p>1.Finder-&gt;Go-&gt;Go to Folder</p>
+<p>2.然后输入/etc/hosts即可找到.</p>
+<p>3.Windows请自行解决</p>
+<p>提示2:<br>这个Hosts文件一般的编辑器还真打不开，可以使用NotePad++、SubLineText等编辑器进行编辑 Ou</p>
 </blockquote>
-<p>作者：发烂渣Dev<br>链接：<a href="https://juejin.cn/post/6844904193170341896">https://juejin.cn/post/6844904193170341896</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 ]]></content>
       <categories>
         <category>问题解决</category>
