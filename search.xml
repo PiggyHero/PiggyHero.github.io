@@ -1809,7 +1809,7 @@ r_{j} \\
 </ul>
 <h1 id="Lesson2-转换函数-conversion-function"><a href="#Lesson2-转换函数-conversion-function" class="headerlink" title="Lesson2 转换函数 conversion function"></a>Lesson2 转换函数 conversion function</h1><p>转换有两个方向，一个是我这个类型转换成那个，也可以是那个转换成这个。</p>
 <p>现在有一个分数class：</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215034337.png" alt="image-20211110201213702" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014552.png" alt="image-20211110201213702" style="zoom:33%;" /></p>
 <p>黄色的部分就是转换函数。转换肯定不会改变数据的值，所以要加上const。</p>
 <p>不需要返回值类型，因为很明确，函数名就表示了要转换的那个类型。</p>
 <p>调用的时候：</p>
@@ -1818,17 +1818,17 @@ r_{j} \\
 <p>只要你认为合理，可以有很多个转换函数。</p>
 <h2 id="non-explicit-one-argument-ctor"><a href="#non-explicit-one-argument-ctor" class="headerlink" title="non-explicit-one-argument ctor"></a>non-explicit-one-argument ctor</h2><p>再来看下面这种情况，构造函数前可以加 <code>explicit</code> 关键字。现在是不加这个关键字的情况。</p>
 <p>首先构造函数有两个形参，其中一个给了初值。其实调用的时候，只要给一个实参即可。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215034348.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014604.png" alt="image-20211110202233538" style="zoom:33%;" /></p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">Fraction <span class="title">f</span><span class="params">(<span class="number">3</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> d=f+<span class="number">3</span>;</span><br></pre></td></tr></table></figure>
 <p>这时在执行上述代码时，类中的运算符重载函数并没有分数加整型数这种情况，只有分数加分数。当看到没有这种重载<code>+</code> 这种函数，所以就想着可不可以把整型数3变为Fraction，那就看其构造函数，如果满足构造函数的参数，那么就会调用构造函数来进行类型的转换。这是让其他类型的数据转化成本类型。</p>
 <p>但是当有下面这种情况时，既可以用构造函数，又可以用类型转换函数。此时编译器会报错，因为它不知道调用哪个函数。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211110203235.png" alt="image-20211110203235669" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014615.png" alt="image-20211110203235669" style="zoom:33%;" /></p>
 <h2 id="explicit-one-argument-ctor"><a href="#explicit-one-argument-ctor" class="headerlink" title="explicit-one-argument ctor"></a>explicit-one-argument ctor</h2><p>当在构造函数加上关键字<code>explicit</code>后，就可以避免上述问题发生。expilcit意思为明白的，明确的。在该关键字的限制下，构造函数就是创建新对象的时候调用，告诉编译器，不要在隐形转换的时候调用。</p>
 <p>看下面的例子：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111065659.png" alt="image-20211111065659372" style="zoom: 25%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014637.png" alt="image-20211111065659372" style="zoom: 25%;" /></p>
 <p>这里出错显示：<code>[Error]conversion from &#39;double&#39; to &#39;Fraction&#39; request</code> ，在一开始看到<code>f+4</code>时，编译器会先找重载运算符函数，发现只有分数加分数，所以要把4转化成分数，但是该构造函数前加上了explict，所以不能走这条路。于是又找到类型转换函数，这条路可以走通，最终得到结果4.6，但是要把4.6赋值给d2，没有这种类型转换函数。</p>
 <h1 id="Lesson3-pointer-like-classes"><a href="#Lesson3-pointer-like-classes" class="headerlink" title="Lesson3 pointer-like classes"></a>Lesson3 pointer-like classes</h1><p>设计一个class，让它像指针。为什么这么做呢，就是想设计一个比指针功能更强大的东西。</p>
-<h2 id="关于智能指针"><a href="#关于智能指针" class="headerlink" title="关于智能指针"></a>关于智能指针</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111072414.png" alt="image-20211111072414463"></p>
+<h2 id="关于智能指针"><a href="#关于智能指针" class="headerlink" title="关于智能指针"></a>关于智能指针</h2><p><img src="https://piggyhero.gitee.io/pic/img/20211216014631.png" alt="image-20211111072414463" style="zoom: 25%;" /></p>
 <p>shared_ptr是一个智能指针的模板类。我们写了一个Foo类，然后创建一个智能指针sp，这个过程中<code>shared_ptr&lt;Foo&gt; sp(new Foo)</code> 会调用构造函数，向智能指针中传入指针的值。</p>
 <p><code>*sp</code>调用了重载运算符*函数。返回值为该对象。</p>
 <p>这里要注意<code>sp-&gt;method()</code>，这句话会调用重载运算符函数，返回值是一个指针，虽然<code>-&gt;</code>在调用函数后就已经“消耗了”，返回的是一个指针，相当于已经没有了<code>-&gt;</code> ，但是为了保证符号的一致性，总不能写成<code>sp-&gt;-&gt;method()</code>，所以它就相当于<code>px-&gt;method()</code> ，就不用再写一遍了。</p>
@@ -1843,22 +1843,22 @@ r_{j} \\
 <li>member template</li>
 </ul>
 <p>下面是member template的代码：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111080705.png" alt="image-20211111080704918" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014652.png" alt="image-20211111080704918" style="zoom:33%;" /></p>
 <p>在类中，构造函数为一个模板函数，这样在初始化的时候，会有更大的弹性。 因为模板函数不需要特别指定具体的类型，会自动推导。所以只在外面写好要创建的类，待传入初始化值时，类中的模板函数会自动推导出初始化值得类型。</p>
 <h1 id="Lesson6-模板特化-specialization"><a href="#Lesson6-模板特化-specialization" class="headerlink" title="Lesson6 模板特化(specialization)"></a>Lesson6 模板特化(specialization)</h1><p>在使用模板的时候，我们可以随机指定任何的类型，然后把该类型放到模板中。这就是泛化的概念。</p>
 <p>但是有时候，我们想在一些特定的类型时，不使用泛化的模板，而是有一些特别之处。这就是模板特化。</p>
 <p><strong>语法：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111082640.png" alt="image-20211111082640173" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014659.png" alt="image-20211111082640173" style="zoom:33%;" /></p>
 <p>在使用的时候，例如上面的例子，编译器会找，泛化也可以，特化也可以，正如代码所写，特别指定的类型是long，所以就找到对应的模板。</p>
 <h1 id="Lesson7-偏特化-partial-specialization"><a href="#Lesson7-偏特化-partial-specialization" class="headerlink" title="Lesson7 偏特化(partial specialization)"></a>Lesson7 偏特化(partial specialization)</h1><h2 id="个数上的偏"><a href="#个数上的偏" class="headerlink" title="个数上的偏"></a>个数上的偏</h2><p><strong>语法：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083230.png" alt="image-20211111083230419" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014718.png" alt="image-20211111083230419" style="zoom:33%;" /></p>
 <p>在这里，我们只想让模板中的某几个类型特化，如上，我们想让T特化，而且Alloc有默认类型。</p>
 <p>那么语法就是，在下面写上不特化的类型（特化的类型那块还是空着，对比全特化，尖括号里全是空）。</p>
 <h2 id="范围上的偏"><a href="#范围上的偏" class="headerlink" title="范围上的偏"></a>范围上的偏</h2><p>泛化的模板输入的类型可以是任意的，当我们想缩小一下范围，指定具体的某几个类型，例如，是指针类型，但是没有说明是什么的指针。</p>
 <p><strong>语法：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111083910.png" alt="image-20211111083910643" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014725.png" alt="image-20211111083910643" style="zoom:33%;" /></p>
 <p>这是后，obj1用的就是泛化的模板。obj2用的是特化的模板。</p>
-<h1 id="Lesson8-template-template-parameter-模板模板参数"><a href="#Lesson8-template-template-parameter-模板模板参数" class="headerlink" title="Lesson8 template template parameter 模板模板参数"></a>Lesson8 template template parameter 模板模板参数</h1><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111084146.png" alt="image-20211111084146414" style="zoom: 25%;" /></p>
+<h1 id="Lesson8-template-template-parameter-模板模板参数"><a href="#Lesson8-template-template-parameter-模板模板参数" class="headerlink" title="Lesson8 template template parameter 模板模板参数"></a>Lesson8 template template parameter 模板模板参数</h1><p><img src="https://piggyhero.gitee.io/pic/img/20211216014731.png" alt="image-20211111084146414" style="zoom: 25%;" /></p>
 <p>Container可以是任意的字。模板模板参数就是，尖括号内第一项的模板参数，告诉有T这个模板类型存在。然后第二项模板参数是一个模板类，该模板类还需要模板参数，这样就形成了模板模板参数。</p>
 <p>模板类的名字我们可以指定（因为类就可以当做是一个数据类型）</p>
 <p>就是很绕，但其实不难的。</p>
@@ -1870,7 +1870,7 @@ r_{j} \\
 </blockquote>
 <h1 id="Lesson9-关于标准库"><a href="#Lesson9-关于标准库" class="headerlink" title="Lesson9 关于标准库"></a>Lesson9 关于标准库</h1><p>任何语言的标准库都十分重要，应该能熟练的使用。</p>
 <p>C++的标准库主要有以下几个部分：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211111093957.png" alt="image-20211111093957659" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014737.png" alt="image-20211111093957659" style="zoom:33%;" /></p>
 <ul>
 <li>容器：就是数据结构。</li>
 <li>算法：实现一些功能的方法。</li>
@@ -1904,13 +1904,13 @@ r_{j} \\
     <content><![CDATA[<p>学习北邮鲁鹏老师《机器视觉》笔记。<br>三维重建的目标就是从单张或多张场景图片中重构出三维场景的结构信息。<br><span id="more"></span></p>
 <h2 id="一、摄像机几何"><a href="#一、摄像机几何" class="headerlink" title="一、摄像机几何"></a>一、摄像机几何</h2><h3 id="A-针孔摄像机模型"><a href="#A-针孔摄像机模型" class="headerlink" title="A.针孔摄像机模型"></a>A.针孔摄像机模型</h3><p>首先，我们要知道三维世界中的点是如何映射到像素平面的，完成这个映射过程就是摄像机。</p>
 <p>如果直接让胶片放置在物体的前方，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040014.png" alt="image-20210818224820393"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014942.png" alt="image-20210818224820393"></p>
 <p>那么此时胶片上的一个点会记录真实世界多个点的信息。这样是不行的，于是我们采用针孔模型：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040016.png" alt="image-20210818224930850"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014947.png" alt="image-20210818224930850"></p>
 <p>通过一个带有小孔的屏障，我们便可以使像素平面上的点与真实世界上的点形成一一对应的关系，这就是针孔相机模型。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040022.png" alt="image-20210818225105759"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216014955.png" alt="image-20210818225105759"></p>
 <p>下面具体描述一下<strong>针孔摄像机模型：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040034.png" alt="image-20210818230044519"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015003.png" alt="image-20210818230044519"></p>
 <blockquote>
 <p>要注意三个坐标系：</p>
 <p>1.相机坐标系：以针孔为原点，建立的三维坐标系，其坐标轴单位是米</p>
@@ -1931,16 +1931,16 @@ y^{\prime}
 x^{\prime}=f \frac{x}{z} \\
 y^{\prime}=f \frac{y}{z}
 \end{array}\right.\tag{1.2}</script><h3 id="B-摄像机和透镜"><a href="#B-摄像机和透镜" class="headerlink" title="B.摄像机和透镜"></a>B.摄像机和透镜</h3><p>光圈就是针孔模型中的小孔，小孔的大小决定了像的清晰程度和亮度</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040040.png" alt="image-20210818231502207"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015010.png" alt="image-20210818231502207"></p>
 <p>如果光圈太大，像中的一个点会对应真实世界中的多个点，此时图像会模糊，但是光圈太小，又会使透过的光变少，像变暗。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040044.png" alt="image-20210818231844139"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015013.png" alt="image-20210818231844139"></p>
 <p>那么如何才能使像既清晰又明亮呢？</p>
 <p>增加透镜！！！</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040047.png" alt="image-20210818232135974"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015018.png" alt="image-20210818232135974"></p>
 <p>透镜的特点：</p>
 <p>1.所有平行于光轴的光线都会会聚到焦点，焦点到透镜中心的距离称为焦距</p>
 <p>2.穿过中心的光线的方向不发生改变</p>
-<h4 id="1-加上透镜后的针孔模型"><a href="#1-加上透镜后的针孔模型" class="headerlink" title="1.加上透镜后的针孔模型"></a>1.加上透镜后的针孔模型</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040053.png" alt="image-20210818232418455"></p>
+<h4 id="1-加上透镜后的针孔模型"><a href="#1-加上透镜后的针孔模型" class="headerlink" title="1.加上透镜后的针孔模型"></a>1.加上透镜后的针孔模型</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015021.png" alt="image-20210818232418455"></p>
 <p>该模型与之前的针孔模型区别不大，只是针孔模型中的 $f$ 变为 $z’$ </p>
 <script type="math/tex; mode=display">
 z^{\prime}=f+z_{0} \quad\left\{\begin{array}{l}
@@ -1948,15 +1948,15 @@ x^{\prime}=z^{\prime} \frac{x}{z} \\
 y^{\prime}=z^{\prime} \frac{y}{z}
 \end{array}\right.\tag{1.3}</script><p>此处的 $f$ 是透镜的焦距，其与透镜的自身性质有关。</p>
 <h4 id="2-透镜引起的问题"><a href="#2-透镜引起的问题" class="headerlink" title="2.透镜引起的问题"></a>2.透镜引起的问题</h4><h5 id="a-失焦"><a href="#a-失焦" class="headerlink" title="a.失焦"></a>a.失焦</h5><p>可以看到加上了透镜好处多多，但是也会引起一个问题，在一定的范围内，光线会会聚到像平面上，但是当超过了这个范围，光线就不会会聚到像平面上，此时便发生失焦。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040100.png" alt="image-20210818233432270"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015027.png" alt="image-20210818233432270"></p>
 <h5 id="b-径向畸变"><a href="#b-径向畸变" class="headerlink" title="b.径向畸变"></a>b.径向畸变</h5><p>图像像素点以畸变中心为中心点，沿着径向产生位置偏差，从而导致图像中所成的像发生形变</p>
 <p>枕形畸变：畸变像点相对于理想像点沿径向向外偏移，远离中心</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040104.png" alt="image-20210818233754147"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015032.png" alt="image-20210818233754147"></p>
 <p>桶形畸变：畸变像点相对于理想像点沿径向向内偏移，向中心靠拢</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040106.png" alt="image-20210818233846093"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015038.png" alt="image-20210818233846093"></p>
 <h3 id="C-摄像机几何"><a href="#C-摄像机几何" class="headerlink" title="C.摄像机几何"></a>C.摄像机几何</h3><p>在我们分析图像时，是在像素坐标系下分析的，像素坐标系和像平面坐标系的区别是，像素坐标系</p>
 <p>是二维的，其坐标轴单位是像素，且其坐标原点一般不是在最中心，这就会发生一个坐标的偏移。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040108.png" alt="image-20210818234715959" style="zoom: 67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015042.png" alt="image-20210818234715959" style="zoom: 67%;" /></p>
 <p>因此，需要根据像平面坐标系中点的坐标，求出该点在像素坐标系下的坐标：</p>
 <script type="math/tex; mode=display">
 P=(x, y, z) \rightarrow P^{\prime}=\left(u,v\right)\\
@@ -1965,7 +1965,7 @@ u=\alpha \frac{x}{z}+c_{x}\\
 v=\beta \frac{y}{z}+c_{y}
 \end{array}\right.\tag{1.4}</script><p>可是此时，空间点 $P$ 到 像素点 $P’$ 的坐标变换并不是一个线性变换，如果想变成一个线性变换，需要引入齐次坐标来表达。</p>
 <h4 id="1-齐次坐标"><a href="#1-齐次坐标" class="headerlink" title="1.齐次坐标"></a>1.齐次坐标</h4><p>我们之前所使用的都是欧式坐标，例如三维空间中的一点，可以用 $(x,y,z)$ 来表示，此时在原有维数的基础上再添一维，就变成了齐次坐标。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040113.png" alt="image-20211004222903357" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015050.png" alt="image-20211004222903357" style="zoom:50%;" /></p>
 <p>对于齐次坐标 $(1,1,1)$ 和 $(2,2,2)$ ，其所对应的欧式坐标都是 $(1,1)$ ，所以，对于齐次坐标 P 和 Q，如果P=kQ，那么 P 和 Q 对应同一个欧式坐标。</p>
 <h4 id="2-齐次坐标的投影变换"><a href="#2-齐次坐标的投影变换" class="headerlink" title="2.齐次坐标的投影变换"></a>2.齐次坐标的投影变换</h4><p>引入齐次坐标后，空间点的齐次坐标与所对应的像素点的齐次坐标可以用一个线性变换来表达：</p>
 <script type="math/tex; mode=display">
@@ -1985,7 +1985,7 @@ z \\
 \end{array}\right]=MP_h\tag{1.5}</script><script type="math/tex; mode=display">
 \overbrace{P_{h}^{\prime}}^{\text {齐次坐标 }} \rightarrow \overbrace{P^{\prime}=\left(\alpha \frac{x}{z}+c_{x}, \beta \frac{y}{z}+c_{y}\right)}^{\text {欧式坐标}}\tag{1.6}</script><p>M矩阵是摄像机的投影矩阵。</p>
 <h4 id="3-摄像机偏斜"><a href="#3-摄像机偏斜" class="headerlink" title="3.摄像机偏斜"></a>3.摄像机偏斜</h4><p>有的时候，像素坐标系的两个坐标轴不是垂直的</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040121.png" alt="image-20210819004057419"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015057.png" alt="image-20210819004057419"></p>
 <p>此时投影矩阵M为：</p>
 <script type="math/tex; mode=display">
 M=\left[\begin{array}{cccc}
@@ -2027,7 +2027,7 @@ R & T \\
 \overbrace{[R \quad T]}^{外部参数}
 P_{w}=M P_{w}\tag{1.10}</script><p>此时的投影矩阵M，既包含相机的内参信息，又包含了相机的运动信息（外部参数），M共有11个自由度。</p>
 <h4 id="6-透视投影相机"><a href="#6-透视投影相机" class="headerlink" title="6.透视投影相机"></a>6.透视投影相机</h4><p>之前所得到的M矩阵叫做投影矩阵，它代表着透视投影模型，也就是三维真实空间到图像上的投影过程。符合该模型的相机称为透视投影相机，我们生活中的大多数相机都是透视投影相机，人类的眼睛也符合该模型。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040127.jpg" alt="img"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015104.jpg" alt="img"></p>
 <p>透视投影有以下几个特点：</p>
 <ol>
 <li>点投影为点</li>
@@ -2037,9 +2037,9 @@ P_{w}=M P_{w}\tag{1.10}</script><p>此时的投影矩阵M，既包含相机的�
 <li>平行线相交</li>
 </ol>
 <h4 id="7-Faugeras定理"><a href="#7-Faugeras定理" class="headerlink" title="7.Faugeras定理"></a>7.Faugeras定理</h4><p>我们知道投影矩阵M是3 <em> 4的矩阵，当已知任意3 </em> 4的矩阵时，是否是投影矩阵呢？可以用Faugeras定理来进行判断。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040132.png" alt="image-20210819012316783"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015109.png" alt="image-20210819012316783"></p>
 <h3 id="D-其他摄像机模型"><a href="#D-其他摄像机模型" class="headerlink" title="D.其他摄像机模型"></a>D.其他摄像机模型</h3><h4 id="1-弱透视投影摄像机"><a href="#1-弱透视投影摄像机" class="headerlink" title="1.弱透视投影摄像机"></a>1.弱透视投影摄像机</h4><p>当空间点的深度相差不多时，即相对场景深度小于其与相机的距离。可以简化为在同一深度。此时便是弱透视投影相机模型。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040138.png" alt="image-20210819101236994" style="zoom: 67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015117.png" alt="image-20210819101236994" style="zoom: 67%;" /></p>
 <p>这里与透视投影相机的不同是其各点的深度是一个定值，且相同</p>
 <script type="math/tex; mode=display">
 \left\{\begin{array} { l } 
@@ -2049,17 +2049,17 @@ P_{w}=M P_{w}\tag{1.10}</script><p>此时的投影矩阵M，既包含相机的�
 x^{\prime}=\frac{f^{\prime}}{z_{0}} x \\
 y^{\prime}=\frac{f^{\prime}}{z_{0}} y
 \end{array}\right.\right.\tag{1.11}</script><p>通过这个简化后，投影矩阵的第三行变成了 $[0,0,0,1]$ </p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040144.png" alt="image-20210819103539119" style="zoom:67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015123.png" alt="image-20210819103539119" style="zoom:67%;" /></p>
 <p>当物体较小且较远时准确，常用于图像识别任务。</p>
 <h4 id="2-正交投影摄像机"><a href="#2-正交投影摄像机" class="headerlink" title="2.正交投影摄像机"></a>2.正交投影摄像机</h4><p>摄像机中心到像平面的距离无限远时</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040149.png" alt="image-20210819104040178" style="zoom: 50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015130.png" alt="image-20210819104040178" style="zoom: 50%;" /></p>
 <p>此时像平面上投影点的x，y方向的坐标等于实际空间点的坐标。</p>
 <p>该模型常用于CAD制图时使用。</p>
 <h2 id="二、摄像机标定"><a href="#二、摄像机标定" class="headerlink" title="二、摄像机标定"></a>二、摄像机标定</h2><p>摄像机标定就是求解摄像机的内外参数，更为准确的说，一般的相机内参数是不变的，而外参代表着相机的运动，是时刻改变的，所以一般的相机标定是对相机的内参的计算。</p>
 <h3 id="A-标定方法-PnP的直接线性变换解法"><a href="#A-标定方法-PnP的直接线性变换解法" class="headerlink" title="A.标定方法(PnP的直接线性变换解法)"></a>A.标定方法(PnP的直接线性变换解法)</h3><h4 id="1-标定设备"><a href="#1-标定设备" class="headerlink" title="1.标定设备"></a>1.标定设备</h4><p> 如下图所示，有一个标定板，上面的每个点的坐标都已知。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040155.png" alt="image-20210820145956320"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015135.png" alt="image-20210820145956320"></p>
 <p>然后对该标定板拍照，得到图像，可以得到空间点的坐标 $P_i$ 和其对应点的像素坐标 $p_i$ 。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040200.png" alt="image-20210820150231966"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015141.png" alt="image-20210820150231966"></p>
 <h4 id="2-建立线性方程组"><a href="#2-建立线性方程组" class="headerlink" title="2.建立线性方程组"></a>2.建立线性方程组</h4><p>由上文提到，投影矩阵M是一个3*4的矩阵，可以表示为：</p>
 <script type="math/tex; mode=display">
 M=\left[\begin{array}{l}
@@ -2275,7 +2275,7 @@ n=\left[\begin{array}{c}
 m_{1}{ }^{T} \\
 m_{2}{ }^{T}
 \end{array}\right]</script><p>和(2.6)的方法类似，可以通过奇异值分解求出 $m_1$和 $m_2$ 。然后再通过非线性优化的方法求出 $k_p$ 和 $m_3$。</p>
-<h2 id="三、单视图几何"><a href="#三、单视图几何" class="headerlink" title="三、单视图几何"></a>三、单视图几何</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040215.png" alt="image-20210820213946776"></p>
+<h2 id="三、单视图几何"><a href="#三、单视图几何" class="headerlink" title="三、单视图几何"></a>三、单视图几何</h2><p><img src="https://piggyhero.gitee.io/pic/img/20211216015151.png" alt="image-20210820213946776"></p>
 <p>已知摄像机的内参和外部参数，是否可以根据单个图片的测量值p去估计空间点P呢？</p>
 <p>ans：是不能的，只能确定P点位于c和p的连线上的任意位置。原因是单目相机无法获得深度信息，在这条线上的任意点的投影都位于该像素点上，当对空间有一些先验的信息时，是可以获得空间点P的位置信息的。</p>
 <h3 id="A-2D变换"><a href="#A-2D变换" class="headerlink" title="A.2D变换"></a>A.2D变换</h3><h4 id="1-等距变换"><a href="#1-等距变换" class="headerlink" title="1.等距变换"></a>1.等距变换</h4><p>等距变换也叫做欧式变换，是将平面上的点经过旋转平移，不改变图形的形状，面积。仅仅改变图形的位置和朝向。</p>
@@ -2294,7 +2294,7 @@ y \\
 x \\
 y \\
 1\end{array}\right]\tag{3.1}</script><p>有3个自由度(1个旋转角度+2个平移量)</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040219.png" alt="image-20210823171132345"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015156.png" alt="image-20210823171132345"></p>
 <h4 id="2-相似变换"><a href="#2-相似变换" class="headerlink" title="2.相似变换"></a>2.相似变换</h4><p>在等距变换的基础上，如式(3.1)所示，增加了一个S矩阵(对角阵)，对原图形进行缩放。</p>
 <p>它不改变图形长度的比值，还有线段间的角度。</p>
 <p>数学表达：</p>
@@ -2318,7 +2318,7 @@ y \\
 s & 0 \\
 0 & s
 \end{array}\right]\tag{3.2}</script><p>有4个自由度(1个缩放系数+1个旋转角度+2个平移量)</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040226.png" alt="image-20210823171619104"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015200.png" alt="image-20210823171619104"></p>
 <h4 id="3-仿射变换"><a href="#3-仿射变换" class="headerlink" title="3.仿射变换"></a>3.仿射变换</h4><p>（直观意义后续再学习，现在先搞懂数学表达）</p>
 <p>数学表达：</p>
 <script type="math/tex; mode=display">
@@ -2356,12 +2356,12 @@ y \\
 \mathrm{x} \\
 y \\
 1
-\end{array}\right]\tag{3.4}</script><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040232.png" alt="image-20210823233103207"></p>
+\end{array}\right]\tag{3.4}</script><p><img src="https://piggyhero.gitee.io/pic/img/20211216015207.png" alt="image-20210823233103207"></p>
 <p><strong>特点</strong>：</p>
 <p>共线性，原来在一条直线上的点变换后还在一条直线上。</p>
 <p>四共线点的交比</p>
 <p>交比的定义为：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018041052.png" alt="image-20210823225125021" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015213.png" alt="image-20210823225125021" style="zoom:50%;" /></p>
 <script type="math/tex; mode=display">
 \frac{|| P_{3}-P_{1}||\left\|P_{4}-P_{2}\right\|}{|| P_{3}-P_{2}||\left\|P_{4}-P_{1}\right\|} \quad P_{i}=\left[\begin{array}{c}
 X_{i} \\
@@ -2386,7 +2386,7 @@ l=\left[\begin{array}{l}
 a\\
 b\\
 c
-\end{array}\right]\tag{3.7}</script><h4 id="2-两条直线的交点"><a href="#2-两条直线的交点" class="headerlink" title="2.两条直线的交点"></a>2.两条直线的交点</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018041032.png" alt="image-20210823231412876"></p>
+\end{array}\right]\tag{3.7}</script><h4 id="2-两条直线的交点"><a href="#2-两条直线的交点" class="headerlink" title="2.两条直线的交点"></a>2.两条直线的交点</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015219.png" alt="image-20210823231412876"></p>
 <p>两条直线的交点可以用式(3.7)的叉积来表示：</p>
 <script type="math/tex; mode=display">
 x=l\times l'\tag{3.8}</script><p>证明：</p>
@@ -2410,7 +2410,7 @@ l_\infty =\left[\begin{array}{}
 0\\
 0\\
 1
-\end{array}\right]\tag{3.11}</script><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040245.png" alt="image-20210823233249621" style="zoom: 67%;" /></p>
+\end{array}\right]\tag{3.11}</script><p><img src="https://piggyhero.gitee.io/pic/img/20211216015224.png" alt="image-20210823233249621" style="zoom: 67%;" /></p>
 <h4 id="5-无穷远点的透视变换"><a href="#5-无穷远点的透视变换" class="headerlink" title="5.无穷远点的透视变换"></a>5.无穷远点的透视变换</h4><p>透视变换矩阵：</p>
 <script type="math/tex; mode=display">
 H=\left[ \begin{array}{l}
@@ -2512,7 +2512,7 @@ b\\
 c
 \end{array}\right]\tag{3.23}</script><h4 id="3-影消点"><a href="#3-影消点" class="headerlink" title="3.影消点"></a>3.影消点</h4><p>影消点是三维空间中的无穷远点在二维平面上的投影点。</p>
 <p>前面的二维空间中的无穷远点，经过投影变换后，变为一个有限点。那么三维空间中的无穷远点，经过投影变换后，在二维平面上，也为有限点。 </p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040306.png" alt="image-20210824001710255" style="zoom:67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015232.png" alt="image-20210824001710255" style="zoom:67%;" /></p>
 <h4 id="4-影消点和直线方向的关系"><a href="#4-影消点和直线方向的关系" class="headerlink" title="4.影消点和直线方向的关系"></a>4.影消点和直线方向的关系</h4><p>影消点的齐次坐标为v，影消点和直线方向有如下关系</p>
 <script type="math/tex; mode=display">
 v=Kd\tag{3.24}</script><p>该式成立的条件是，相机坐标系和世界坐标系重合，否则和直线方向向量相差一个旋转平移的关系。</p>
@@ -2538,8 +2538,8 @@ c\\
 
 \end{array}\right]\tag{3.26}</script><p>所以知道直线的方向就可以知道影消点，反过来知道影消点也可以知道直线的方向。</p>
 <h4 id="5-影消线（视平线）"><a href="#5-影消线（视平线）" class="headerlink" title="5.影消线（视平线）"></a>5.影消线（视平线）</h4><p>三维空间中的无穷远线在二维空间中的投影。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040312.png" alt="image-20210824003405552"></p>
-<h4 id="6-影消线和平面法向量"><a href="#6-影消线和平面法向量" class="headerlink" title="6.影消线和平面法向量"></a>6.影消线和平面法向量</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040317.png" alt="image-20210824003743383"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015238.png" alt="image-20210824003405552"></p>
+<h4 id="6-影消线和平面法向量"><a href="#6-影消线和平面法向量" class="headerlink" title="6.影消线和平面法向量"></a>6.影消线和平面法向量</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015242.png" alt="image-20210824003743383"></p>
 <p>这个平面是指影消线所对应的平行线所在的平面。</p>
 <p>平面法向量为n，影消线和平面法向量的关系为：</p>
 <script type="math/tex; mode=display">
@@ -2581,7 +2581,7 @@ co s\theta=\frac{d_1d_2}{|d_1||d_2|}=\frac{(K^{-1}v_1)^T(K^{-1}v_2)}{\sqrt{(K^{-
 <p>$\omega_2=0,\omega_1=\omega_3$ ，方形像素</p>
 <h3 id="D-单视图重构"><a href="#D-单视图重构" class="headerlink" title="D.单视图重构"></a>D.单视图重构</h3><h4 id="1-标定内参数"><a href="#1-标定内参数" class="headerlink" title="1.标定内参数"></a>1.标定内参数</h4><p>首先根据图像上的信息，可以标定出相机的内参数矩阵</p>
 <p>如图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040956.png" alt="image-20210824015723059"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015254.png" alt="image-20210824015723059"></p>
 <p>找到图像上两组垂直的平行线，可以找到两个影消点，根据影消点的坐标，以及式(3.34)可以得到一组方程。因为 $\omega $ 有5个自由度，所以还需要增加限制方程来求解。</p>
 <p>我们找到三组平行线，可以得到三个方程：</p>
 <script type="math/tex; mode=display">
@@ -2595,19 +2595,19 @@ v_{2}^{T} \omega v_{3}=0
 \omega _{2}=0 \\
  \omega_1=\omega_3
 \end{array}\right.\tag{3.37}</script><p>便可以求解出 $\omega$ 矩阵。</p>
-<h4 id="2-恢复面的信息"><a href="#2-恢复面的信息" class="headerlink" title="2.恢复面的信息"></a>2.恢复面的信息</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040950.png" alt="image-20210824020434618"></p>
+<h4 id="2-恢复面的信息"><a href="#2-恢复面的信息" class="headerlink" title="2.恢复面的信息"></a>2.恢复面的信息</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015300.png" alt="image-20210824020434618"></p>
 <p>然后连接两个影消点，可以得到影消线，从而得到影消线的方程。然后由式(3.27)可知，该平面的空间方程。这样就可以求得三个平面的方程。</p>
 <blockquote>
 <p>单视图恢复的场景，是无法知道场景尺寸的。而且必须要有场景的先验信息。</p>
 </blockquote>
-<h2 id="四、三维重建基础和极几何"><a href="#四、三维重建基础和极几何" class="headerlink" title="四、三维重建基础和极几何"></a>四、三维重建基础和极几何</h2><h3 id="A-三维重建基础"><a href="#A-三维重建基础" class="headerlink" title="A.三维重建基础"></a>A.三维重建基础</h3><h4 id="1-三角化"><a href="#1-三角化" class="headerlink" title="1.三角化"></a>1.三角化</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040326.png" alt="image-20210824021622264"></p>
+<h2 id="四、三维重建基础和极几何"><a href="#四、三维重建基础和极几何" class="headerlink" title="四、三维重建基础和极几何"></a>四、三维重建基础和极几何</h2><h3 id="A-三维重建基础"><a href="#A-三维重建基础" class="headerlink" title="A.三维重建基础"></a>A.三维重建基础</h3><h4 id="1-三角化"><a href="#1-三角化" class="headerlink" title="1.三角化"></a>1.三角化</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015305.png" alt="image-20210824021622264"></p>
 <p>三角化的适用条件：用两个摄像机来感受外部空间。</p>
 <p>如图所示，现在有两个摄像机，分别在 $O_1和O_2$ 点，空间点p在两个相机的成像平面上投影分别为 $p和p’$ 。</p>
 <p>通常情况下，P点的坐标通过l和l’的叉乘来求得。</p>
 <p>但是由于噪声的存在，$l和l’$ 一般是不相交的。现在想求P点的三维坐标。</p>
 <p>ques：已知 $p和p’$ ，$K和K’$ ，以及R，T，求解P点的三维坐标。</p>
 <p>非线性解法：建模成最小化问题。我们要找到一个点 $P^*$ ，使其投影到两个成像平面上的点和观测点的距离最小。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040344.png" alt="image-20210824022452348"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015308.png" alt="image-20210824022452348"></p>
 <p>解法：寻找 $P^{\star}$ ，最小化 $d\left(p, M P^{\star}\right)+d\left(p^{\prime}, M^{\prime} P^{\star}\right)$ 。</p>
 <h4 id="2-多视图几何的关键问题"><a href="#2-多视图几何的关键问题" class="headerlink" title="2.多视图几何的关键问题"></a>2.多视图几何的关键问题</h4><ol>
 <li>摄像机几何：从一张或者多张图片中求解摄像机的内外参数</li>
@@ -2615,7 +2615,7 @@ v_{2}^{T} \omega v_{3}=0
 <li>对应关系：已知一个图像的p点，如何在另一张图中找到p‘点</li>
 </ol>
 <h3 id="B-极几何—解决对应关系问题"><a href="#B-极几何—解决对应关系问题" class="headerlink" title="B.极几何—解决对应关系问题"></a>B.极几何—解决对应关系问题</h3><h4 id="1-极几何"><a href="#1-极几何" class="headerlink" title="1.极几何"></a>1.极几何</h4><p>极几何描述了同一场景或者物体在两个视点的几何关系。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040350.png" alt="image-20210824024244259"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015313.png" alt="image-20210824024244259"></p>
 <p>极线：极平面与成像平面的交线</p>
 <p>极点：极线与成像平面的交点</p>
 <h5 id="a-极几何的特点："><a href="#a-极几何的特点：" class="headerlink" title="a.极几何的特点："></a>a.极几何的特点：</h5><ol>
@@ -2624,20 +2624,20 @@ v_{2}^{T} \omega v_{3}=0
 <li>$p$ 的对应点在极线 $l’$ 上</li>
 <li>$p’$ 的对应点在极线 $l$ 上</li>
 </ol>
-<h5 id="b-极几何的两个特例："><a href="#b-极几何的两个特例：" class="headerlink" title="b.极几何的两个特例："></a>b.极几何的两个特例：</h5><h6 id="1-平行视图"><a href="#1-平行视图" class="headerlink" title="(1)平行视图"></a><strong>(1)平行视图</strong></h6><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040353.png" alt="image-20210824024726436"></p>
+<h5 id="b-极几何的两个特例："><a href="#b-极几何的两个特例：" class="headerlink" title="b.极几何的两个特例："></a>b.极几何的两个特例：</h5><h6 id="1-平行视图"><a href="#1-平行视图" class="headerlink" title="(1)平行视图"></a><strong>(1)平行视图</strong></h6><p><img src="https://piggyhero.gitee.io/pic/img/20211216015318.png" alt="image-20210824024726436"></p>
 <p>特点：</p>
 <ol>
 <li>两个图像平面平行；</li>
 <li>基线平行于成像平面，极点在无穷远处；</li>
 <li>基线平行于像素坐标系u轴</li>
 </ol>
-<h6 id="2-前向平移（无旋转）"><a href="#2-前向平移（无旋转）" class="headerlink" title="(2)前向平移（无旋转）"></a><strong>(2)前向平移（无旋转）</strong></h6><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040356.png" alt="image-20210824024950629"></p>
+<h6 id="2-前向平移（无旋转）"><a href="#2-前向平移（无旋转）" class="headerlink" title="(2)前向平移（无旋转）"></a><strong>(2)前向平移（无旋转）</strong></h6><p><img src="https://piggyhero.gitee.io/pic/img/20211216015322.png" alt="image-20210824024950629"></p>
 <p>两个图像的极点有着相同的像素坐标</p>
 <h4 id="2-本质矩阵"><a href="#2-本质矩阵" class="headerlink" title="2.本质矩阵"></a>2.本质矩阵</h4><p>本质矩阵：对规范化摄像机拍摄的两个视点图像间的极几何关系进行代数描述。</p>
 <h5 id="a-规范化摄像机"><a href="#a-规范化摄像机" class="headerlink" title="a.规范化摄像机"></a>a.规范化摄像机</h5><p>摄像机的内参数K是单位矩阵</p>
 <script type="math/tex; mode=display">
 P^{\prime}=\left[\begin{array}{l}x \\ y \\ z\end{array}\right]=\left[\begin{array}{llll}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0\end{array}\right]\left[\begin{array}{l}x \\ y \\ z \\ 1\end{array}\right]\tag{4.1}</script><p>三维点的欧式坐标=像素点的齐次坐标</p>
-<h5 id="b-极几何关系推导—对应点关系推导"><a href="#b-极几何关系推导—对应点关系推导" class="headerlink" title="b.极几何关系推导—对应点关系推导"></a>b.极几何关系推导—对应点关系推导</h5><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040401.png" alt="image-20210824025523590"></p>
+<h5 id="b-极几何关系推导—对应点关系推导"><a href="#b-极几何关系推导—对应点关系推导" class="headerlink" title="b.极几何关系推导—对应点关系推导"></a>b.极几何关系推导—对应点关系推导</h5><p><img src="https://piggyhero.gitee.io/pic/img/20211216015329.png" alt="image-20210824025523590"></p>
 <p>我们现在已经知道，K=K‘，且为规范化相机，p和p’的像素坐标。</p>
 <p>由规范化相机还可以知道，空间点 $p$ 在 $O_1$ 坐标系下的欧式坐标为 $(u,v,1)$ ，以及 $p’$ 在 $O_2$ 坐标系下的欧式坐标 $(u’,v’,1)$</p>
 <blockquote>
@@ -2651,7 +2651,7 @@ p'=Rp'_{o_1}+T\tag{4.2}</script><p>所以</p>
 <script type="math/tex; mode=display">
 p'_{o_1}=R^T(p'-T)\tag{4.3}</script><p>同理可得 $O_2$ 在 $O_1$ 坐标系下的坐标为：</p>
 <script type="math/tex; mode=display">
-O_2'=-R^TT\tag{4.4}</script><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040405.png" alt="image-20210824031818767"></p>
+O_2'=-R^TT\tag{4.4}</script><p><img src="https://piggyhero.gitee.io/pic/img/20211216015336.png" alt="image-20210824031818767"></p>
 <p>现在如上图找到几何关系： $O_1p’ 和 O_1O_2$向量的叉积与 $O_1p$ 向量垂直，则有如下方程：</p>
 <script type="math/tex; mode=display">
 [R^T(p'-T)\times R^TT]\cdot p=0\tag{4.5}</script><p>最终可得到两个对应点的约束关系：</p>
@@ -2796,7 +2796,7 @@ s_{1} & 0 & 0 \\
 <li>新原点=图像上点的重心</li>
 <li>每个像点到坐标原点的均方根距离为 $\sqrt {2}$</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040412.png" alt="image-20210825010953797"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015347.png" alt="image-20210825010953797"></p>
 <p>归一化八点算法的步骤：</p>
 <ol>
 <li>先计算左图和右图的T和T‘</li>
@@ -2806,7 +2806,7 @@ s_{1} & 0 & 0 \\
 </ol>
 <h2 id="五、双目立体视觉系统"><a href="#五、双目立体视觉系统" class="headerlink" title="五、双目立体视觉系统"></a>五、双目立体视觉系统</h2><h3 id="A-平行视图下的极几何"><a href="#A-平行视图下的极几何" class="headerlink" title="A.平行视图下的极几何"></a>A.平行视图下的极几何</h3><p>利用两个视点来观察物体，和人的眼睛一样。</p>
 <p>可以让对应点搜索和深度求解更加简单。</p>
-<h4 id="0-补充："><a href="#0-补充：" class="headerlink" title="0.补充："></a>0.补充：</h4><h5 id="a-极点坐标"><a href="#a-极点坐标" class="headerlink" title="a.极点坐标"></a>a.极点坐标</h5><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040415.png" alt="image-20210825160039966" style="zoom:50%;" /></p>
+<h4 id="0-补充："><a href="#0-补充：" class="headerlink" title="0.补充："></a>0.补充：</h4><h5 id="a-极点坐标"><a href="#a-极点坐标" class="headerlink" title="a.极点坐标"></a>a.极点坐标</h5><p><img src="https://piggyhero.gitee.io/pic/img/20211216015354.png" alt="image-20210825160039966" style="zoom:50%;" /></p>
 <p>我们前面说过，极点是基线和成像平面的交点。从另外一个角度来看，极点还可以是相机中心在成像平面上的投影点。那么如上图所示，极点 $e$ 是点 $O_2$ 在成像平面的投影。极点 $e’$ 是 $O_1$ 在成像平面的投影。</p>
 <p>那么点 $O_1$ 在坐标系 $O_1$ 中的齐次坐标为 $[0\ 0\ 0\ 1]^T$ ，其在坐标系 $O_2$ 中的欧式坐标为：</p>
 <script type="math/tex; mode=display">
@@ -2828,7 +2828,7 @@ F&=K^{\prime-T}\left[T_{x}\right] R K^{-1}\\
 &=K^{\prime-T} K^{\prime T}\left[\left(K^{\prime} T\right)_{\times}\right] K^{\prime} R K^{-1}\\
 &=\left[\left(K^{\prime} T\right)_{\times}\right] K^{\prime} R K^{-1}\\
 &=\left[e_{x}^{\prime}\right] K^{\prime} R K^{-1}
-\end{aligned}\tag{5.6}</script><h4 id="1-平行视图的基础矩阵"><a href="#1-平行视图的基础矩阵" class="headerlink" title="1.平行视图的基础矩阵"></a>1.平行视图的基础矩阵</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040420.png" alt="image-20210825164325338" style="zoom:50%;" /></p>
+\end{aligned}\tag{5.6}</script><h4 id="1-平行视图的基础矩阵"><a href="#1-平行视图的基础矩阵" class="headerlink" title="1.平行视图的基础矩阵"></a>1.平行视图的基础矩阵</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015401.png" alt="image-20210825164325338" style="zoom:50%;" /></p>
 <p>两个成像平面平行</p>
 <p>基线平行于成像平面，极点 $e$ 和 $e’$ 位于无穷远处</p>
 <p>我们假定两个摄像机的内参是一样的，$K=K’$。旋转矩阵 $R=I$ 。平移向量$T=[T\ 0\ 0]^T$ 和极点坐标 $e’=[1\ 0\ 0]^T$ 。</p>
@@ -2872,11 +2872,11 @@ p_v \\
 <script type="math/tex; mode=display">
 p_v=p_v'\tag{5.11}</script><p>这说明对应点的v坐标是一样的。寻找对应点时，直接在扫描线上找即可。</p>
 <h4 id="4-平行视图的三角测量"><a href="#4-平行视图的三角测量" class="headerlink" title="4.平行视图的三角测量"></a>4.平行视图的三角测量</h4><p>因为对应点的v坐标相同，所以可以很方便的测量P点的深度值。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040425.png" alt="image-20210825171253726" style="zoom: 33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015408.png" alt="image-20210825171253726" style="zoom: 33%;" /></p>
 <script type="math/tex; mode=display">
 p_{u}-p_{u}^{\prime}=\frac{B \cdot f}{z}\tag{5.12}</script><p>知道视差和基线长度后，便可以计算出深度。</p>
 <h3 id="B-图像校正"><a href="#B-图像校正" class="headerlink" title="B.图像校正"></a>B.图像校正</h3><p>平行视图让我们寻找对应点和三角化更加简单，但通常情况下我们构建的双目立体视觉系统是很难得到平行视图的。我们可以将非平行视图转化到平行视图，这就是图像校正。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040427.png" alt="image-20210825175411272" style="zoom: 33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015415.png" alt="image-20210825175411272" style="zoom: 33%;" /></p>
 <p>完成校正这一目标需要构建两个矩阵H和H‘，我们可以通过以下5个步骤来求得这两个矩阵。</p>
 <ol>
 <li><p>找8个以上的匹配点对。</p>
@@ -2884,7 +2884,7 @@ p_{u}-p_{u}^{\prime}=\frac{B \cdot f}{z}\tag{5.12}</script><p>知道视差和基
 <li><p>计算基础矩阵F，然后来求解两幅图像中的极点。具体可以通过上一步的匹配点通过八点算法求出基础矩阵F，然后可以通过基础矩阵的性质求得极线方程。再根据所有极线都经过极点这一性质，求得极点的齐次坐标。</p>
 </li>
 <li><p>选择透视变换 $H’$ 将 $e’$ 映射到无穷远点 $(f,0,0)$。其中 $H’=T^{-1}GRT$ 。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040431.png" alt="image-20210825180734367" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015418.png" alt="image-20210825180734367" style="zoom:50%;" /></p>
 </li>
 <li><p>寻找透视变换矩阵H，使得 $\sum_{i} d\left(H p_{i}, H^{\prime} p_{i}^{\prime}\right)$ 最小。</p>
 </li>
@@ -2892,38 +2892,38 @@ p_{u}-p_{u}^{\prime}=\frac{B \cdot f}{z}\tag{5.12}</script><p>知道视差和基
 </li>
 </ol>
 <p><strong>图像校正例子：</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040434.png" alt="image-20210825181026118" style="zoom: 33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015450.png" alt="image-20210825181026118" style="zoom: 33%;" /></p>
 <h3 id="C-对应点搜索"><a href="#C-对应点搜索" class="headerlink" title="C.对应点搜索"></a>C.对应点搜索</h3><p>给定一个空间点P，在左右图像中找到相应的观测值，也称为双目融合问题。 </p>
 <p>图像经过校正后，对应点在扫描线上搜索即可。</p>
-<h4 id="1-相关法"><a href="#1-相关法" class="headerlink" title="1.相关法"></a>1.相关法</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018051704.png" style="zoom:50%;" /></p>
+<h4 id="1-相关法"><a href="#1-相关法" class="headerlink" title="1.相关法"></a>1.相关法</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015434.png" style="zoom:50%;" /></p>
 <p>首先建立一个窗口</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018052138.png" alt="image-20210825193829734" style="zoom:50%;" /></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018052251.png" alt="image-20211009194933364" style="zoom: 33%;" /></p>
-<h4 id="2-归一化相关法"><a href="#2-归一化相关法" class="headerlink" title="2.归一化相关法"></a>2.归一化相关法</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040443.png" alt="image-20210825194834081" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015430.png" alt="image-20210825193829734" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015502.png" alt="image-20211009194933364" style="zoom: 33%;" /></p>
+<h4 id="2-归一化相关法"><a href="#2-归一化相关法" class="headerlink" title="2.归一化相关法"></a>2.归一化相关法</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015506.png" alt="image-20210825194834081" style="zoom:50%;" /></p>
 <p>当两幅图在光照不同的情况下，会使其像素点的灰度值发生剧烈变化。</p>
 <p>此时只需要将窗口内的像素点的灰度值进行去均值即可。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040449.png" alt="image-20210825195133785" style="zoom:150%;" /></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040454.png" alt="image-20210825195236089"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015513.png" alt="image-20210825195133785" style="zoom:150%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015518.png" alt="image-20210825195236089"></p>
 <p>窗口大小的影响：上面我们选取的是 $3\times 3$ 窗口，当选取其他大小窗口的时候会有什么样的变化呢？</p>
 <p>ans：较小的窗口，细节丰富，但噪声较大。较大的窗口，视差图更为平滑，但是细节丢失。</p>
 <p>例如下图所示，右边两幅图为视差图：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040500.png" alt="image-20210825195947480"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015528.png" alt="image-20210825195947480"></p>
 <h4 id="3-相关法存在的问题"><a href="#3-相关法存在的问题" class="headerlink" title="3.相关法存在的问题"></a>3.相关法存在的问题</h4><h5 id="a-透视缩短"><a href="#a-透视缩短" class="headerlink" title="a.透视缩短"></a>a.透视缩短</h5><p>一个物体的长度在一个成像平面上是正常的，但可能在另一成像平面上非常的短。此时在相同范围邻域的内容有很大的不同。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040506.png" alt="image-20210825235305290" style="zoom:50%;" /></p>
-<h5 id="b-遮挡"><a href="#b-遮挡" class="headerlink" title="b.遮挡"></a>b.遮挡</h5><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040511.png" alt="image-20210825235332461" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015537.png" alt="image-20210825235305290" style="zoom:50%;" /></p>
+<h5 id="b-遮挡"><a href="#b-遮挡" class="headerlink" title="b.遮挡"></a>b.遮挡</h5><p><img src="https://piggyhero.gitee.io/pic/img/20211216015541.png" alt="image-20210825235332461" style="zoom:50%;" /></p>
 <p>以上两种问题的解决办法：</p>
 <p>合理的选择基线与深度的比值。</p>
 <script type="math/tex; mode=display">
 \frac{B}{z}\tag{5.13}</script><p>减小B/z时，可以有效的避免透视缩短和遮挡的问题。用我们最直观的感受就是离物体远点，就看的更全了。</p>
 <p>但缩小B/z，也会造成一个问题，就是当匹配点有很小的误差时，就会造成深度估算的大误差。</p>
 <p>如下面两幅图所示，红色的点就是根据对应点估算空间点的位置。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040517.png" alt="image-20210825235821706" style="zoom: 25%;" /></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040522.png" alt="image-20210825235841876" style="zoom: 50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015548.png" alt="image-20210825235821706" style="zoom: 25%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015556.png" alt="image-20210825235841876" style="zoom: 50%;" /></p>
 <p>可以看到，当B/z较小时，所估算的深度误差和真实的相差很大。</p>
 <h5 id="c-同质区域"><a href="#c-同质区域" class="headerlink" title="c.同质区域"></a>c.同质区域</h5><p>有多个地方与要匹配的点相似。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040527.png" alt="image-20210826000100677" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015603.png" alt="image-20210826000100677" style="zoom:50%;" /></p>
 <h5 id="d-重复模式"><a href="#d-重复模式" class="headerlink" title="d.重复模式"></a>d.重复模式</h5><p>和上面的问题类似。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040533.png" alt="image-20210826000215422" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015613.png" alt="image-20210826000215422" style="zoom:50%;" /></p>
 <p>容易产生误匹配。所以对应点匹配问题是一个很难的问题。</p>
 <p>要解决这些问题，我们需要增加约束来解决对应点匹配问题。</p>
 <h4 id="4-其他约束"><a href="#4-其他约束" class="headerlink" title="4.其他约束"></a>4.其他约束</h4><ol>
@@ -2949,7 +2949,7 @@ p_{u}-p_{u}^{\prime}=\frac{B \cdot f}{z}\tag{5.12}</script><p>知道视差和基
 <p>有$x_{ij}=M_iX_j=K_i[R_i\ T_i]X_j$ </p>
 <p>目标：求解空间点的坐标 $X_j$ 和摄像机的外参数 $R_i$ 和 $T_i$ 。</p>
 <p>先来看两视图情况，令 $O_1$ 坐标系与世界坐标系固定。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040543.png" alt="image-20210826014140627" style="zoom: 33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015622.png" alt="image-20210826014140627" style="zoom: 33%;" /></p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 &x_{1j}=M_{1} X_{j}=K_{1}\left[\begin{array}{ll}
@@ -3053,14 +3053,14 @@ R=U W^{T} V^{T} &T=u_{3} \\
 R=U W^{T} V^{T} &T=-u_{3}
 \end{array}\right.
 \end{aligned}\tag{6.15}</script><p>分别对应着下面的四种情况：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040555.png" alt="image-20210828023242724" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015630.png" alt="image-20210828023242724" style="zoom:50%;" /></p>
 <p>选择一个或多个点，分别用不同的R和T进行三角化计算，只有深度值都为正的R和T才为最终所求。</p>
 <h4 id="3-欧式结构恢复存在的问题"><a href="#3-欧式结构恢复存在的问题" class="headerlink" title="3.欧式结构恢复存在的问题"></a>3.欧式结构恢复存在的问题</h4><p>正如我们在2.a中的推导，是忽略了尺度上差异和正负号差异的基础上建立的，通过求目标点的深度我们可以去除掉正负号的影响，但是尺度上的差异是去除不掉的。对于单目相机来说，凭借序列图是无法重构出正确尺度下的三维场景。</p>
 <p>例如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040600.png" alt="image-20210828030716063"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015638.png" alt="image-20210828030716063"></p>
 <p>从上图可以看出，两个空间点在两成像平面的像素坐标都是相同的，但两个空间点的深度不同，两个视点间的变换也不同，右边的平移矩阵T与左边的T相差一个系数k。另外，在真实空间中P1和P2的朝向也是不同的，这通过欧式重构也是求解不出来的。</p>
 <p>我们可以这样认为，恢复出来的欧式结构和真实场景相差一个相似变换(旋转+平移+缩放)。这个相似变换的重构被称为度量重构。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040604.png" alt="image-20210828031302492" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015645.png" alt="image-20210828031302492" style="zoom:50%;" /></p>
 <p>所以在没有先验知识的情况下，仅凭单目相机是不能恢复出三维空间结构的。</p>
 <h3 id="C-仿射结构恢复"><a href="#C-仿射结构恢复" class="headerlink" title="C.仿射结构恢复"></a>C.仿射结构恢复</h3><p>由(3.3)知道，仿射变换矩阵为：</p>
 <script type="math/tex; mode=display">
@@ -3085,18 +3085,18 @@ z\\
 1\end{array}\right]=AX^E+b\quad(X^E为空间点的欧式坐标)\tag{6.17}</script><h4 id="0-问题描述-1"><a href="#0-问题描述-1" class="headerlink" title="0.问题描述"></a>0.问题描述</h4><p>已知 $n$ 个三维点 $X_j$ 在 $m$ 张图像中的对应点像素坐标 $x_{ij}(i=1,…m;j=1,…,n)$</p>
 <p>有$x_{ij}=A_iX_j+b_i$ </p>
 <p>目标：求解空间点的坐标 $X_j$ 和摄像机的投影矩阵 $A_i\ and\ b_i$ 。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040608.png" alt="image-20210829191114401"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015652.png" alt="image-20210829191114401"></p>
 <h4 id="1-因式分解法"><a href="#1-因式分解法" class="headerlink" title="1.因式分解法"></a>1.因式分解法</h4><h5 id="a-数据中心化"><a href="#a-数据中心化" class="headerlink" title="a.数据中心化"></a>a.数据中心化</h5><p>中心化就是减去图像点的质心。</p>
 <script type="math/tex; mode=display">
 \hat{x}_{i j}=x_{i j}-\bar{x}_{i} \\ 其中：\begin{aligned}\bar{x}_{i}=\frac{1}{n} \sum_{k=1}^{n} x_{i k} \\ 
-x_{\mathrm{ij}}=A_{i} X_{j}+b_{i}\end{aligned}\tag{6.18}</script><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040613.png" alt="image-20210829191737903"></p>
+x_{\mathrm{ij}}=A_{i} X_{j}+b_{i}\end{aligned}\tag{6.18}</script><p><img src="https://piggyhero.gitee.io/pic/img/20211216015657.png" alt="image-20210829191737903"></p>
 <p>然后可以得到：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 \hat{x}_{i j}=x_{i j}-\frac{1}{n} \sum_{k=1}^{n} x_{i k} &=A_{i} X_{j}+b_{i}-\frac{1}{n} \sum_{k=1}^{n} A_{i} X_{k}-\frac{1}{n} \sum_{k=1}^{n} b_{i} \\
 &=A_{i}\left(X_{j}-\frac{1}{n} \sum_{k=1}^{n} X_{k}\right)\\&=A_{i}\left(X_{j}-\bar{X}\right)\\&=A_{i} \hat{X}_{j}
 \end{aligned}\tag{6.19}</script><p>如果令三维空间点的质心=世界坐标系的远点。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040618.png" alt="image-20210829191948530"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015705.png" alt="image-20210829191948530"></p>
 <p>那么：</p>
 <script type="math/tex; mode=display">
 \hat{x}_{i j}=A_{i} \hat{X}_{j}=A_{i} X_{j}\tag{6.20}</script><h5 id="b-因式分解"><a href="#b-因式分解" class="headerlink" title="b.因式分解"></a>b.因式分解</h5><p>现在我们把去均值以后的 $m\times n$ 个测量值写成矩阵的形式：</p>
@@ -3125,35 +3125,35 @@ A_{m}
 <script type="math/tex; mode=display">
 D=UWV^T\tag{6.23}</script><p>(6.22)中，M矩阵的最大秩为3，S矩阵的最大秩也为3。所以D的最大秩为3</p>
 <p>那么我们就可以选择前三个最大的奇异值来进行分解，如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040622.png" style="zoom: 67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015711.png" style="zoom: 67%;" /></p>
 <p>所以：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040625.png" alt="image-20210829193956389" style="zoom:67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015717.png" alt="image-20210829193956389" style="zoom:67%;" /></p>
 <script type="math/tex; mode=display">
 D=U_3W_3V_3^T=U_3(W_3V_3^T)=M^\star S^\star \tag{6.24}</script><p>(6.24)中，我们用后面 $W_3V_3^T$ 来重构S矩阵，当然也可以用 $V_3^T$ 来重构S。</p>
 <p>这就引出了一个问题，对于同一结构，为什么可以有不同种恢复机构呢？</p>
 <p>这个问题就是仿射结构的恢复歧义。</p>
 <h5 id="c-因式分解法的问题"><a href="#c-因式分解法的问题" class="headerlink" title="c.因式分解法的问题"></a>c.因式分解法的问题</h5><p>当我们构建D矩阵时，是假设所有的三维点在图像上都能找得到，但当三维点被遮挡后，图像上找不到它的投影点，此时D矩阵中的元素就会空缺。这就会造成求解失败。</p>
 <h4 id="2-仿射结构恢复歧义"><a href="#2-仿射结构恢复歧义" class="headerlink" title="2.仿射结构恢复歧义"></a>2.仿射结构恢复歧义</h4><p>先来看看D矩阵的推导过程，可用下图来表示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040717.png" alt="image-20210829194730339"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015723.png" alt="image-20210829194730339"></p>
 <p>当我们在M矩阵和S矩阵间乘上一个可逆矩阵H和它的逆后：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040635.png" alt="image-20210829194843158"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015728.png" alt="image-20210829194843158"></p>
 <p>最后的结果还是D矩阵，但是M和S矩阵却不相同了。其中H矩阵可以是任意的可逆的 $3\times3$ 的矩阵</p>
 <p>所以必须利用其他的约束条件来解决歧义的问题。</p>
 <p>仿射歧义的可视化如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040638.png" alt="image-20210829195044317"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015734.png" alt="image-20210829195044317"></p>
 <p>真实的三维结构和恢复的三维结构之间相差了一个任意的 $3\times 3$ 的可逆矩阵H。</p>
 <h3 id="D-透视结构恢复"><a href="#D-透视结构恢复" class="headerlink" title="D.透视结构恢复"></a>D.透视结构恢复</h3><h4 id="0-问题描述-2"><a href="#0-问题描述-2" class="headerlink" title="0.问题描述"></a>0.问题描述</h4><p>已知 $n$ 个三维点 $X_j$ 在 $m$ 张图像中的对应点像素坐标 $x_{ij}(i=1,…m;j=1,…,n)$</p>
 <p>有$x_{ij}=M_iX_j$ </p>
 <p>$M_i$ 是第i张图片对应的摄像机投影矩阵</p>
 <p>目标：求解空间点的坐标 $X_j$ 和摄像机的投影矩阵 $M_i$ 。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040643.png" alt="image-20210829195526866"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015739.png" alt="image-20210829195526866"></p>
 <h4 id="1-透视结构恢复歧义"><a href="#1-透视结构恢复歧义" class="headerlink" title="1.透视结构恢复歧义"></a>1.透视结构恢复歧义</h4><p>根据透视相机投影规律，当不知道相机的内参和外参时，可用M矩阵来表示透视投影关系，M是一个 $3\times4$ 矩阵，透视关系如下：</p>
 <script type="math/tex; mode=display">
 x_{ij}=M_iX_j\tag{6.25}</script><p>当 $M_i$ 和 $X_j$ 之间，可以加上任意一个 $4\times 4$ 的可逆矩阵H和其逆矩阵的乘积。</p>
 <script type="math/tex; mode=display">
 x_{ij}=M_iHH^{-1}X_j\tag{6.26}</script><p>这样，在恢复结构的时候，所恢复出的 $M_i$ 和真实的 $M_i$ 可能会相差一个H投影变换矩阵。这就是透视结构恢复歧义。</p>
 <p>所以我们恢复透视结构时，是在相差一个 $4\times4$ 的可逆变换的情况下，恢复摄像机运动和场景结构的。</p>
-<h4 id="2-代数方法（通过基础矩阵）"><a href="#2-代数方法（通过基础矩阵）" class="headerlink" title="2.代数方法（通过基础矩阵）"></a>2.代数方法（通过基础矩阵）</h4><p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040648.png" alt="image-20210829202031145"></p>
+<h4 id="2-代数方法（通过基础矩阵）"><a href="#2-代数方法（通过基础矩阵）" class="headerlink" title="2.代数方法（通过基础矩阵）"></a>2.代数方法（通过基础矩阵）</h4><p><img src="https://piggyhero.gitee.io/pic/img/20211216015748.png" alt="image-20210829202031145"></p>
 <p>代数方法主要用于两视图情况，尽管我们要使用的是一个图像序列，但是我们可以将其分成多个两视图情况来进行求解。</p>
 <p>具体求解有三个步骤：</p>
 <p>(1) 八点算法来求得基础矩阵F</p>
@@ -3235,7 +3235,7 @@ I & 0
 <h5 id="d-代数法的问题"><a href="#d-代数法的问题" class="headerlink" title="d.代数法的问题"></a>d.代数法的问题</h5><p>在实际的应用中，我们拥有的是一个图像序列，我们需要在两两视图间进行求解，然后再将得到的结果累加，例如求得了 $M_1$ 和 $M_2$ ，然后再求 $M_2 \ and \ M_3$ 之间的关系，最后再进行累加得到 $M_1\ and \ M_3$ 的关系，这样一点一点累积，但凡每步都有一点点小误差，但当不断积累后，就会变成一个较大的误差。</p>
 <h4 id="3-捆绑调整"><a href="#3-捆绑调整" class="headerlink" title="3.捆绑调整"></a>3.捆绑调整</h4><p>考虑到因式分解法和代数法的缺点，我们又提出了一种新的方法，捆绑法。</p>
 <p>捆绑法主要采用非线性优化方法，通过最小化重投影误差，来优化得到 $X_j\ and\ M_i$ </p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018040657.png" alt="image-20210829232507094"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015800.png" alt="image-20210829232507094"></p>
 <p>最小化重投影误差：</p>
 <script type="math/tex; mode=display">
 E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag{6.39}</script><p>我们可以使用牛顿法或列文伯格-马夸尔特方法来进行非线性优化。</p>
@@ -4538,23 +4538,23 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 </li>
 </ul>
 <h2 id="2-线性组合、基与张成空间"><a href="#2-线性组合、基与张成空间" class="headerlink" title="2.线性组合、基与张成空间"></a>2.线性组合、基与张成空间</h2><p>在标准的坐标系中，有两个特殊的向量，单位向量 $\hat i$ 和 $\hat j$ ，对于多维空间也同样。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060806.png" alt="image-20210715005154764" style="zoom:67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015953.png" alt="image-20210715005154764" style="zoom:67%;" /></p>
 <p>它们合起来称作坐标系的基，当把坐标中的每一个元素看作是标量时，每一个基向量就是这些标量所缩放的向量</p>
 <h3 id="·-什么是线性组合"><a href="#·-什么是线性组合" class="headerlink" title="· 什么是线性组合"></a>· 什么是线性组合</h3><p>多个向量的数乘之和称为这些向量的线性组合</p>
 <h3 id="·-向量张成的空间"><a href="#·-向量张成的空间" class="headerlink" title="· 向量张成的空间"></a>· 向量张成的空间</h3><p>给定一组向量，通过该组向量的线性组合生成的<strong>向量的集合</strong>，称为该组向量==张成的空间==</p>
 <p>以二维空间为例，给定向量 $\vec w$ 和 $\vec v$ ，有以下三种情况：</p>
 <ol>
 <li><p>当$\vec w$ 和 $\vec v$ 不共线时，所张成的空间为二维平面，也就是二维空间中的任意向量都可以由这两个向量的线性组合得到</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060809.png" alt="image-20210715035555651" style="zoom: 33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015958.png" alt="image-20210715035555651" style="zoom: 33%;" /></p>
 </li>
 <li><p>当$\vec w$ 和 $\vec v$ 共线时，所张成的空间为一条直线，仅能表示终点在该直线上的向量</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060812.png" alt="image-20210715040223112" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020002.png" alt="image-20210715040223112" style="zoom:50%;" /></p>
 </li>
 <li><p>当$\vec w$ 和 $\vec v$ 都为0向量时，所张成的空间为一点，仅能表示0向量</p>
 </li>
 </ol>
 <p><strong>同样对于我们常用的三维空间，当仅有两个不共面的向量时，这两个向量所张成的空间为一个平面</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060822.png" alt="image-20210715040537951" style="zoom: 20%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020007.png" alt="image-20210715040537951" style="zoom: 20%;" /></p>
 <h3 id="·-线性相关与线性无关"><a href="#·-线性相关与线性无关" class="headerlink" title="· 线性相关与线性无关"></a>· 线性相关与线性无关</h3><p>从上面的表述中，便可以得到<strong>线性相关</strong>的定义：当一组向量中，其中一个向量处在其他向量所张成的空间中（这个向量可以由其他的向量线性组合表示出来），那么这一组向量就是线性相关的</p>
 <p>而<strong>线性无关</strong>的定义与它正好相反：一组向量中，任何一个向量都不处在其他向量所张成的空间中（任何一个向量不可以由其他向量线性组合表示出来）</p>
 <h3 id="·-空间中的一组基"><a href="#·-空间中的一组基" class="headerlink" title="· 空间中的一组基"></a>· 空间中的一组基</h3><p>某向量空间的一组基是张成该空间的一个线性无关的向量集合</p>
@@ -4573,7 +4573,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <script type="math/tex; mode=display">
 \vec v = -1\vec i + 2\vec j\\
 Transformed \ \vec v=-1(Transformed \ \vec i)+2(Transformed\ \vec j)</script><p>当经过一次线性变换后，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060826.png" alt="image-20210715034732752" style="zoom:67%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020013.png" alt="image-20210715034732752" style="zoom:67%;" /></p>
 <script type="math/tex; mode=display">
 [Transformed\ \vec i ,Transformed\ \vec j]=\left[\begin{array}{ll}
 3 & 1 \\
@@ -4607,19 +4607,19 @@ Transformed\ \vec v=
 <p>前面所说的线性变换理解成是一个处理向量的函数，现在从另一个角度来总结一下，线性变换用矩阵来描述，而矩阵的列向量表示线性变换后基向量的坐标，对一个向量进行线性变换，就是先对基向量进行线性变换，然后用这个向量的坐标对变换后的基向量进行线性组合，最终得到变换后的向量。因为基向量可以描述一个空间，因此基向量变了，其所对应的空间也发生了变化</p>
 </blockquote>
 <h2 id="4-行列式"><a href="#4-行列式" class="headerlink" title="4.行列式"></a>4.行列式</h2><p>上节说过，线性变换是操纵空间的一种手段，那么如何刻画空间变化了多少呢，这就需要请出行列式了，行列式就是用来描述空间变化的多少</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060835.png" alt="image-20210715053137633" style="zoom:53%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020020.png" alt="image-20210715053137633" style="zoom:53%;" /></p>
 <p>下面以二维空间为例：</p>
 <p>我们在坐标系中用网格线来描述这个空间的形态，在标准坐标系中，绿色箭头代表i向量，红色箭头代表j向量，此时向量i和j所围成的区域是一个正方形，其面积为1</p>
 <p>当进行线性变换后，基向量的方向和长度都发生了变化，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060839.png" alt="image-20210715053620420" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020024.png" alt="image-20210715053620420" style="zoom:50%;" /></p>
 <p>那么此时由基向量i和j所围成的区域也发生了变化，变成了一个平行四边形，而该区域的面积等于矩阵的行列式</p>
 <blockquote>
 <p>矩阵的行列式是描述其线性变换所对空间变化的量度</p>
 </blockquote>
 <p>当行列式为0时，表示这个平面被压缩成了一条线，<strong>而0矩阵表示把平面压缩成一个点</strong></p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060842.png" alt="image-20210715054036323" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020028.png" alt="image-20210715054036323" style="zoom:50%;" /></p>
 <p>当行列式为负时，表示这个平面发生了反转</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060845.png" alt="image-20210715054301501" style="zoom:50%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020030.png" alt="image-20210715054301501" style="zoom:50%;" /></p>
 <p>注意：原来绿色的基向量在红色基向量的右边，此时发生了平面翻转</p>
 <p>三维空间中，矩阵的行列式表示变换后基向量所围成空间区域的体积，当行列式为0时，表示该变换将三维空间压缩成一个平面或一条直线又或是一个点（这在后面会引出秩的用法）。更多维空间的道理是一样的，这里就不过多赘述</p>
 <h2 id="5-逆矩阵、列空间、秩和零空间"><a href="#5-逆矩阵、列空间、秩和零空间" class="headerlink" title="5.逆矩阵、列空间、秩和零空间"></a>5.逆矩阵、列空间、秩和零空间</h2><p>线性代数的用处很多，其中的一个用处是解线性方程组</p>
@@ -4658,7 +4658,7 @@ A^{-1}A=AA^{-1}=I</script><p><strong>但是当矩阵的行列式为0时</strong>
 <li>一种是当 $\vec v$ 向量在A所压缩的空间上时，解存在</li>
 <li>另一种是 $\vec v$ 向量在A所压缩的空间外时，无解</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060850.png" alt="image-20210715085801043" style="zoom: 33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020036.png" alt="image-20210715085801043" style="zoom: 33%;" /></p>
 <h3 id="·矩阵的秩"><a href="#·矩阵的秩" class="headerlink" title="·矩阵的秩"></a>·矩阵的秩</h3><p>可以发现，虽然原空间通过变换后，变成一个低维的空间，此时都会有无解的情况发生，但无解情况的出现的难易程度是不一样的。例如当三维空间变换成二维空间时，是一个平面，只要 $\vec v$ 在这个平面上，解存在。但是当变换成一维空间也就是一条线时，只有 $\vec v$ 在这条线上时，解存在。虽然上面两种情况的A矩阵的行列式都为0，但是它们出现无解的情况是不同的，这时就要引出秩的概念</p>
 <p><strong>秩</strong>表示变换后空间的维数，例如三维矩阵的秩最大为3，它表示基向量可以张成整个三维空间，但是当矩阵的秩为2时，空间被压缩了，此时表示基向量只能张成二维空间，但是它没有秩为1的压缩情况严重</p>
 <h3 id="·列空间"><a href="#·列空间" class="headerlink" title="·列空间"></a>·列空间</h3><p>矩阵的列向量所张成的空间即为列空间，当 $ \vec x$ 表示任意的向量时，$A\vec x$ 就是矩阵A的列空间</p>
@@ -4676,20 +4676,20 @@ A^{-1}A=AA^{-1}=I</script><p><strong>但是当矩阵的行列式为0时</strong>
 </blockquote>
 <h2 id="6-向量的点积"><a href="#6-向量的点积" class="headerlink" title="6.向量的点积"></a>6.向量的点积</h2><h3 id="·向量点积的几何意义"><a href="#·向量点积的几何意义" class="headerlink" title="·向量点积的几何意义"></a>·向量点积的几何意义</h3><p>有两个向量 $\vec v$ 和 $\vec w$ ，点积的几何意义表示 $\vec v$ 在 $\vec w$ 方向上的投影的长度和 $\vec w$长度的乘积</p>
 <p>点积的结果和向量的顺序无关，即$\vec v ·\vec w=\vec w·\vec v$ </p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060858.png" alt="image-20210716055411474" style="zoom:33%;" /></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020043.png" alt="image-20210716055411474" style="zoom:33%;" /></p>
 <p>利用对称性，可以直观证明上述结论，令 $\vec v$ 和 $\vec w$ 的长度相同，根据对称性可以知道， $\vec v$ 在 $\vec w$ 上的投影长度与 $\vec w $  在 $\vec v$ 上的投影长度相同。当 $ \vec v$ 放大两倍后，这种对称性就不再存在了，但此时 $\vec w$ 在 $2\vec v$ 上的投影不变，也可以说  $2\vec v$ 在 $\vec w$ 上的投影长度变为原来的2倍，所以 $(2\vec v)·\vec w=\vec w·(2\vec v)$ </p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060904.png" alt="image-20210716055903784"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020049.png" alt="image-20210716055903784"></p>
 <h3 id="·向量点积的矩阵表示"><a href="#·向量点积的矩阵表示" class="headerlink" title="·向量点积的矩阵表示"></a>·向量点积的矩阵表示</h3><p>如果把一个向量当成一个 $n\times1$ 的矩阵来看时，那么对向量的转置就得到了一个 $1\times n$的矩阵，向量的点积可以用向量的转置乘以向量来计算</p>
 <p><strong>那么为什么可以这样计算呢？</strong>首先可以想到，既然转置是一个矩阵，就可以表示一个线性变换了，这个线性变换的几何意义就是把多维空间中的向量映射到一个一维空间上。经过映射得到的一维向量是一个数，它表示在多维空间中的一个向量在某一方向上的投影长度。</p>
 <p>现在以二维空间为例：</p>
 <p>在二维空间中有一单位向量 $\vec u$ ，在该向量的方向上布置一个数轴，这个数轴也就是一个一维空间。如果想把 $\vec u$ ==映射==到这个一维空间中，则需要找到二维空间的基向量在这个一维空间上的位置，我们用投影位置来表示基向量在一维空间上的位置，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060910.png" alt="image-20210716092117757"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020055.png" alt="image-20210716092117757"></p>
 <p>根据投影关系和对称关系，可以得到二维空间中的基向量 $\vec i 和 \vec j$ 在一维空间的位置</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060919.png" alt="image-20210716092532170"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020101.png" alt="image-20210716092532170"></p>
 <p>则$\vec i 和 \vec j$在一维空间的坐标为：</p>
 <script type="math/tex; mode=display">
 [u_x \ u_y]</script><p>对于二维空间中任意的向量在这个轴上的投影，可以用这个矩阵乘以向量的坐标来得到</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060925.png" alt="image-20210716092801428"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020106.png" alt="image-20210716092801428"></p>
 <p>最终得到的结果为：</p>
 <script type="math/tex; mode=display">
 \left[\begin{array}{ll}
@@ -4707,9 +4707,9 @@ k\left[\begin{array}{ll}u_{x} & u_{y}\end{array}\right]\left[\begin{array}{l}x \
 y\end{array}\right]=\left[\begin{array}{ll}ku_{x} & ku_{y}\end{array}\right]\left[\begin{array}{l}x \\
 y\end{array}\right]=ku_{x} \cdot x+ku_{y} \cdot y</script><p>两个任意向量的点积表示先将一个向量投影到另一向量所在的方向上，然后将投影长度和另一向量的长度相乘</p>
 <h2 id="7-向量的叉积"><a href="#7-向量的叉积" class="headerlink" title="7.向量的叉积"></a>7.向量的叉积</h2><h3 id="·什么是叉积"><a href="#·什么是叉积" class="headerlink" title="·什么是叉积"></a>·什么是叉积</h3><p>两个向量的叉积会产生一个与这两个向量都垂直的新向量，并且其长度等于这两个向量所围成的四边形的面积，而且它们的方向满足右手定则。</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060932.png" alt="image-20210716095942997"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020113.png" alt="image-20210716095942997"></p>
 <p>既然是表示面积，这就与之前说过的行列式有关系，但这只对二维向量成立（因为只有两个向量，只有二维向量才能满足方阵，才有行列式）</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060936.png" alt="image-20210716095517110"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020117.png" alt="image-20210716095517110"></p>
 <p>两个向量所组成的矩阵对应着一个线性变换，线性变换的度量就是矩阵的行列式，也就是基向量所围成的四边形面积</p>
 <h3 id="·关于三维空间中的叉积的计算"><a href="#·关于三维空间中的叉积的计算" class="headerlink" title="·关于三维空间中的叉积的计算"></a>·关于三维空间中的叉积的计算</h3><p>对于三维空间中的叉积，可以用下面的计算公式：</p>
 <script type="math/tex; mode=display">
@@ -4756,14 +4756,14 @@ z\left(v_{1} \cdot w_{2}-v_{2} \cdot w_{1}\right)
 &p_{3}=v_{1} \cdot w_{2}-v_{2} \cdot w_{1}
 \end{aligned}</script><p>现在用 $\vec p=[p_1\ p_2\ p_3]^T$，然后来谈几何意义</p>
 <p>行列式表示三个列向量所张成的平行六面体的体积，而 $\vec p$ 和 $\vec a$ 的点积就等于这个体积，那么 $\vec p$ 是一个什么向量才能满足它们两个的点积等于体积呢。对于$\vec a$来说，它是任意一个向量，而 $\vec v$ 和 $\vec w$ 向量是固定的，平行六面体的体积等于面积乘以高，也就是说，当面积确定后，只需要知道高就可以了</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060949.png" alt="image-20210716111418718"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020123.png" alt="image-20210716111418718"></p>
 <p>这个高就是 $\vec a$ 在垂直于 $\vec v$ 和 $\vec w$ 的方向上的投影，于是现在就可以知道 $\vec p$ 的意义了，$\vec p$ 的方向垂直于$\vec v$ 和 $\vec w$ ，它的长度是$\vec v$ 和 $\vec w$ 所张成平行四边形的面积</p>
 <h2 id="8-基变换"><a href="#8-基变换" class="headerlink" title="8.基变换"></a>8.基变换</h2><p>现在有两个二维世界中的人，猪猪侠和包包侠，在猪猪侠的世界中，基向量是这样的：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060953.png" alt="image-20210716112957364"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020127.png" alt="image-20210716112957364"></p>
 <p>在包包侠的世界中，基向量是这样的：</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018060957.png" alt="image-20210716114150696"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020130.png" alt="image-20210716114150696"></p>
 <p>当有同一个向量时，在两个人的眼中，描述是不同的</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061002.png" alt="image-20210716114326652"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020134.png" alt="image-20210716114326652"></p>
 <script type="math/tex; mode=display">
 \left[\begin{array}{ll}
 \vec{e}_{i} & \vec{e}_{j}
@@ -4833,19 +4833,19 @@ x^{\prime} \\
 y^{\prime}
 \end{array}\right]=A^{-1}MA\vec v^{\prime}</script><h2 id="9-特征值和特征向量"><a href="#9-特征值和特征向量" class="headerlink" title="9.特征值和特征向量"></a>9.特征值和特征向量</h2><h3 id="·特征向量"><a href="#·特征向量" class="headerlink" title="·特征向量"></a>·特征向量</h3><p>矩阵乘以一个向量表示对这个向量的线性变换，以二维空间为例：</p>
 <p>一个向量所张成的空间，就是这个向量所在的直线，当这个向量被变换后，很可能会离开这个空间，如下图所示</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061009.png" alt="image-20210716121344977"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020142.png" alt="image-20210716121344977"></p>
 <p>但是也会有一些向量，没有离开它本身的张成空间，线性变换只是对它进行了拉伸或压缩，此时矩阵的作用如同一个标量</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061014.png" alt="image-20210716121501072"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020148.png" alt="image-20210716121501072"></p>
 <p>这两个方向空间中的向量都不会偏离其原来所在的直线，而其他向量都会发生偏转</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061020.png" alt="image-20210716121716491"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020153.png" alt="image-20210716121716491"></p>
 <p>这些不发生偏转的向量就叫作特征向量</p>
 <h3 id="·特征值"><a href="#·特征值" class="headerlink" title="·特征值"></a>·特征值</h3><p>每一个特征向量都有一个与其对应的特征值，特征值表征这个向量空间上的向量被拉伸和压缩多少</p>
 <p>那么特征向量有啥用呢？</p>
 <p>考虑一个三维旋转的线性变换，当找到了它的特征向量，就找到了它的旋转轴</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061028.png" alt="image-20210716122229199"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020159.png" alt="image-20210716122229199"></p>
 <p>当特征值为0时，表示没有特征向量 </p>
 <h2 id="10-抽象向量空间"><a href="#10-抽象向量空间" class="headerlink" title="10.抽象向量空间"></a>10.抽象向量空间</h2><p>无论是什么东西，只要符合以下八条公理，那么这个东西就可以称作向量，它遵循着之前讲过的所用性质</p>
-<p><img src="https://raw.githubusercontent.com/PiggyHero/Blog_Picture/master/20211018061033.png" alt="image-20210716125152513"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020203.png" alt="image-20210716125152513"></p>
 <blockquote>
 <p>任意向量都能表达为基向量以某种方式进行线性组合，所以求一个向量变换后的结果，就是求变换后基向量以相同方式进行线性组合的结果</p>
 </blockquote>
