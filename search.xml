@@ -1098,8 +1098,9 @@ r_{j} \\
   <entry>
     <title>Ubuntu更改文件权限</title>
     <url>/2021/12/16/Ubuntu%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="三、更改文件权限"><a href="#三、更改文件权限" class="headerlink" title="三、更改文件权限"></a>三、更改文件权限</h1><h2 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h2><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
+    <content><![CDATA[<p>Ubuntu中，文件属性介绍。</p>
+<span id="more"></span>
+<h2 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h2><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
 <p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
 <p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
 <p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
@@ -1590,7 +1591,7 @@ r_{j} \\
       </tags>
   </entry>
   <entry>
-    <title>【git问题解决2】git连不上远端库问题解决</title>
+    <title>【git问题解决1】git连不上远端库问题解决</title>
     <url>/2021/12/02/%E3%80%90git%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B31%E3%80%91git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
 <span id="more"></span>
