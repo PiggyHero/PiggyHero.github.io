@@ -4450,9 +4450,9 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <p>第一层卷积核可视化：</p>
 <p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215003059.png" alt="image-20210923052225841" style="zoom: 50%;" /></p>
 <h2 id="5-2最后一层"><a href="#5-2最后一层" class="headerlink" title="5.2最后一层"></a>5.2最后一层</h2><p>对于网络的最后一层的特征往往就是一副图像整体的特征，如果我们对于一副测试的图片，寻找在特征空间最相近的图，那么我们一般能得到同一类的物体。假设卷积网络最后一层输出的是一个4096维的向量，然后我们在数据集中，把和一张图片向量相近的图片放在一起，如下图所示</p>
-<p><a href="https://gitee.com/piggyhero/pic/raw/master/img/20211215003107.png">Picture</a></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216012501.png" alt="img"></p>
 <p>可以看到都是同一类东西。然后再通过降维的方法，把这个4096向量降为2维，在平面上用坐标轴表示出来</p>
-<p><a href="https://gitee.com/piggyhero/pic/raw/master/img/20211215003122.png">Picture</a></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216012527.png" alt="img"></p>
 <p>我们可以看出色调偏绿的图像都集中在了左下角，偏蓝的图像都集中在了右上角，这也意味着网络确实学习到了图像中的某些特征，并能利用特征进行分类。</p>
 <h2 id="5-3-探究中间层的卷积"><a href="#5-3-探究中间层的卷积" class="headerlink" title="5.3 探究中间层的卷积"></a>5.3 探究中间层的卷积</h2><p>如果我们取网络中某一层某一个特征图的某一个特定神经元比较大的值，那么它会对应一个作用域，如果我们将这个作用域对应在原图的部分取出来，我们会发现这些部分是类似的，原因就是这个神经元是在图像中寻找某些特定的特征</p>
 <p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215003134.png" alt="image-20210923163638688" style="zoom:67%;" /></p>
