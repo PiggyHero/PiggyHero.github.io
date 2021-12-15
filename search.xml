@@ -4918,8 +4918,8 @@ y^{\prime}
       </tags>
   </entry>
   <entry>
-    <title>【opencv学习1】opencv的数据类型</title>
-    <url>/2021/12/02/%E3%80%90opencv%E5%AD%A6%E4%B9%A01%E3%80%91opencv%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <title>opencv的数据类型</title>
+    <url>/2021/12/02/opencv%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<p>OpenCV的数据类型分为三类：</p>
 <ol>
 <li>直接从C++的标准库继承来的，例如int和float等。还包括一些简单的矩阵和数组，代表了一些几何意思，比如点，矩形等。我的理解是就是用标准库提供的容器，然后换了一个名字。</li>
