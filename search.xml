@@ -3847,7 +3847,7 @@ E[a]=w_{1} x+w_{2} y
 <p>每一个像素点都经过该操作后，就得到了一张新的去噪后的图片。这里的操作就叫作卷积操作。</p>
 <p>而卷积操作中的加权的权值，我们将其存储在一个模版中，我们称其为卷积核。</p>
 <p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215001422.png" alt="image-20210918183530686"></p>
-<p>卷积操作的示意图：<a href="https://gitee.com/piggyhero/pic/raw/master/img/20211215001528.gif">Picture</a></p>
+<p>卷积操作的示意图：</p>
 <p><img src="https://piggyhero.gitee.io/pic/img/20211216011650.gif" alt="20211215001528"></p>
 <p>其中，下面蓝色的为输入图片，绿色的为卷积后的图片，下面灰色阴影部分即为卷积核。</p>
 <h4 id="a-卷积的定义"><a href="#a-卷积的定义" class="headerlink" title="a.卷积的定义"></a>a.卷积的定义</h4><p>H为卷积核，F为输入图像，R为卷积操作后的图像，输出图像每一个像素点的灰度值为：</p>
