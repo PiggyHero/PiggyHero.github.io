@@ -1210,7 +1210,7 @@ r_{j} \\
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  chmod  a-x test1</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>软件实践</category>
+        <category>动手实践</category>
       </categories>
       <tags>
         <tag>Ubuntu</tag>
