@@ -20,23 +20,17 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="主要介绍如何使用数学语言来描述SLAM问题。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【视觉SLAM学习2】SLAM的数学描述">
-<meta property="og:url" content="http://example.com/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A02%E3%80%91SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/index.html">
+  <meta name="description" content="不学习咋整啊！">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PiggyHero Wiki">
+<meta property="og:url" content="http://example.com/categories/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E8%B7%B5/page/2/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="主要介绍如何使用数学语言来描述SLAM问题。">
+<meta property="og:description" content="不学习咋整啊！">
 <meta property="og:locale">
-<meta property="og:image" content="https://gitee.com/piggyhero/pic/raw/master/img/20211215033742.png">
-<meta property="og:image" content="https://gitee.com/piggyhero/pic/raw/master/img/20211215033747.png">
-<meta property="article:published_time" content="2021-10-17T18:39:31.000Z">
-<meta property="article:modified_time" content="2022-01-14T18:51:08.072Z">
 <meta property="article:author" content="PiggyHero">
-<meta property="article:tag" content="SLAM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/piggyhero/pic/raw/master/img/20211215033742.png">
 
-<link rel="canonical" href="http://example.com/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A02%E3%80%91SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/">
+<link rel="canonical" href="http://example.com/categories/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E8%B7%B5/page/2/">
 
 
 <script id="page-configurations">
@@ -44,12 +38,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-Hans'
   };
 </script>
 
-  <title>【视觉SLAM学习2】SLAM的数学描述 | PiggyHero Wiki</title>
+  <title>分类: 工程原理和实践 | PiggyHero Wiki</title>
   
 
 
@@ -191,157 +185,235 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content category">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A02%E3%80%91SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cutexiaoxin.gif">
-      <meta itemprop="name" content="PiggyHero">
-      <meta itemprop="description" content="不学习咋整啊！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="PiggyHero Wiki">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          【视觉SLAM学习2】SLAM的数学描述
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-10-18 02:39:31" itemprop="dateCreated datePublished" datetime="2021-10-18T02:39:31+08:00">2021-10-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-15 02:51:08" itemprop="dateModified" datetime="2022-01-15T02:51:08+08:00">2022-01-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E8%B7%B5/" itemprop="url" rel="index"><span itemprop="name">工程原理和实践</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">工程原理和实践
+          <small>分类</small>
+        </h2>
+      </div>
 
       
-        <p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
-<hr>
-<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
-<ol>
-<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
-<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
-</ol>
-<hr>
-<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
-<script type="math/tex; mode=display">
-\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
-<p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
-<script type="math/tex; mode=display">
-\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
-<hr>
-<p>以二维运动为例：</p>
-<p>如图所示</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033742.png" style="zoom:60%;" /></p>
-<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\vec{x}_{k}=\left[x_{1}, x_{2}, \theta\right]_{k}^{\top} \\
-&\vec{u}_{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]_{k}^{\top}
-\end{aligned}</script><p>运动方程为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k}=\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k-1}+\left[\begin{array}{c}
-\Delta x_{1} \\
-\Delta x_{2} \\
-\Delta \theta
-\end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033747.png" alt="img" style="zoom:60%;" /></p>
-<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-r_{j} \\
-\varphi_{j}
-\end{array}\right]_k=\left[\begin{array}{c}
-\sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
-\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
-\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
-<blockquote>
-<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
-</blockquote>
-<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
-<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
-<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
-<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
-
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-21T14:42:49+08:00"
+              content="2021-10-21">
+          10-21
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/21/%E5%A4%B4%E6%96%87%E4%BB%B6-%E5%BA%93%E6%96%87%E4%BB%B6-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB/" itemprop="url">
+            <span itemprop="name">头文件 库文件 命名空间</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item"></div>
-      <div class="post-nav-item">
-    <a href="/2021/10/18/%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" rel="next" title="三维重建课程笔记">
-      三维重建课程笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-21T14:32:36+08:00"
+              content="2021-10-21">
+          10-21
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/21/%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/" itemprop="url">
+            <span itemprop="name">依赖包是什么</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T23:59:17+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/ROS%E5%88%9B%E5%BB%BA%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8B/" itemprop="url">
+            <span itemprop="name">使用URDF创建机器人模型</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T07:22:48+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5/" itemprop="url">
+            <span itemprop="name">单应矩阵</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T07:19:19+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A01%E3%80%91%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6/" itemprop="url">
+            <span itemprop="name">【视觉SLAM学习1】视觉SLAM框架</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T06:56:45+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/%E5%8C%97%E9%82%AE%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">
+            <span itemprop="name">北邮机器视觉学习笔记</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T06:23:27+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/git%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/" itemprop="url">
+            <span itemprop="name">git最基本的用法</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T06:05:12+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/" itemprop="url">
+            <span itemprop="name">Markdown常用语法</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T06:00:58+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/ROS21%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url">
+            <span itemprop="name">古月ROS21讲学习笔记</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-18T05:45:03+08:00"
+              content="2021-10-18">
+          10-18
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/18/Ubuntu%E7%9A%84%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" itemprop="url">
+            <span itemprop="name">Ubuntu软件安装</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+    </div>
+  </div>
   
   
   
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/categories/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E8%B7%B5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/categories/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E8%B7%B5/">1</a><span class="page-number current">2</span><a class="page-number" href="/categories/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E8%B7%B5/page/3/">3</a><a class="extend next" rel="next" href="/categories/%E5%B7%A5%E7%A8%8B%E5%8E%9F%E7%90%86%E5%92%8C%E5%AE%9E%E8%B7%B5/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -544,59 +616,6 @@ r_{j} \\
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
