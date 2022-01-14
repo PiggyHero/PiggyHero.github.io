@@ -5156,7 +5156,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 
 <h3 id="2-嵌入-gist"><a href="#2-嵌入-gist" class="headerlink" title="2.嵌入 gist"></a>2.嵌入 gist</h3><p><a href="https://link.zhihu.com/?target=https%3A//gist.github.com/">Create a new Gist (github.com)gist.github.com/</a></p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://gist.github.com/Theigrams/98f6323969aa763cd1e343540e5420b4.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://pic3.zhimg.com/80/v2-acb2c329ba7f6df87d3e2c85c4469d5a_1440w.jpg" alt="img"></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20220115034053.jpg" alt="img"></p>
 <h3 id="3-网页片段"><a href="#3-网页片段" class="headerlink" title="3.网页片段"></a>3.网页片段</h3><p>通过嵌入codepen，你甚至可以在typora里玩贪吃蛇！！！</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;codepen&quot;</span> <span class="attr">data-height</span>=<span class="string">&quot;265&quot;</span> <span class="attr">data-theme-id</span>=<span class="string">&quot;light&quot;</span> <span class="attr">data-default-tab</span>=<span class="string">&quot;js,result&quot;</span> <span class="attr">data-user</span>=<span class="string">&quot;moPsych&quot;</span> <span class="attr">data-slug-hash</span>=<span class="string">&quot;KKgQxWb&quot;</span> <span class="attr">style</span>=<span class="string">&quot;height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;&quot;</span> <span class="attr">data-pen-title</span>=<span class="string">&quot;Snake Game&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>See the Pen <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io/moPsych/pen/KKgQxWb&quot;</span>&gt;</span></span><br><span class="line">  Snake Game<span class="tag">&lt;/<span class="name">a</span>&gt;</span> by moPsych (<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io/moPsych&quot;</span>&gt;</span>@moPsych<span class="tag">&lt;/<span class="name">a</span>&gt;</span>)</span><br><span class="line">  on <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io&quot;</span>&gt;</span>CodePen<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;https://static.codepen.io/assets/embed/ei.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="moPsych" data-slug-hash="KKgQxWb" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Snake Game">
@@ -5182,5 +5182,18 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       <tags>
         <tag>Markdown</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>【文献阅读】</title>
+    <url>/2022/01/15/%E3%80%90%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E3%80%91/</url>
+    <content><![CDATA[<p>Title:</p>
+<p>Year:</p>
+<p>Author:</p>
+<p>School:</p>
+<span id="more"></span>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2>]]></content>
+      <categories>
+        <category>文献阅读</category>
+      </categories>
   </entry>
 </search>
