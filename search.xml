@@ -5196,4 +5196,302 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
         <category>文献阅读</category>
       </categories>
   </entry>
+  <entry>
+    <title>【linux学习1】linux是什么</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A01%E3%80%91linux%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>参考：《Linux命令行与shell脚本编程大全》《Linux命令行大全》</p>
+<span id="more"></span>
+<p>操作系统就是提供用户和计算机底层硬件交互的一个媒介，例如想算1+1等于几，不可能直接动手在芯片上算，需要通过键盘输入，然后看到显示器上的输出结果，这就是通过操作系统来完成的。而linux系统就是主流的一个操作系统，它可以划分为四个部分：</p>
+<ul>
+<li>linux内核</li>
+<li>GNU工具</li>
+<li>图形化桌面环境</li>
+<li>应用软件</li>
+</ul>
+<p>基本的结构框图如图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117210801737.png" alt="image-20220117210801737"></p>
+<h2 id="I-linux内核"><a href="#I-linux内核" class="headerlink" title="I. linux内核"></a>I. linux内核</h2><p>内核可以理解为软件和硬件间的一个中间层，连接着软件和硬件。例如我们使用word写了一个文件，写完后这个文件不是直接存储在磁盘上的，而是通过内核这个媒介将其写到磁盘上，软件是不能直接操纵硬件的。内核中留了许多API，可以供各个软件使用，然后在驱动底层硬件。</p>
+<p>内核主要负责以下四种功能：</p>
+<ul>
+<li>系统内存管理</li>
+<li>软件程序管理</li>
+<li>硬件设备管理</li>
+<li>文件系统管理</li>
+</ul>
+<h2 id="II-GNU工具"><a href="#II-GNU工具" class="headerlink" title="II. GNU工具"></a>II. GNU工具</h2><p>GNU工具在内核的上一层，</p>
+<h3 id="1-GNU简介"><a href="#1-GNU简介" class="headerlink" title="1. GNU简介"></a>1. GNU简介</h3><p>当有了内核之后，就建立了软件和硬件连接的桥梁。但通常我们并不会直接和内核打交道，而是通过更为上层的工具进行操作。假如你要开发一个linux系统下的软件，那么你有可能要了解内核的API，然后进行开发，但用户使用时只需要打开软件就可以了而不用考虑内核，这时该程序实现了一些<strong>具体功能</strong>（例如通过网易云听音乐，word写作业等）。此外，用户有时还需要控制文件和程序（如将文件进行复制粘贴，开启程序，结束程序等），此时就需要系统工具来执行一些<strong>标准功能</strong>，这些系统工具处在内核的上一层，可以与用户直接交互。</p>
+<p>Linus在创建linux内核时，并没有可用的系统工具。但与此同时，另一伙人即GNU组织开发了一套完整的系统工具，却没有可以运行它们的内核。于是这两伙人就结合在一起，发布了完整的linux操作系统。这些系统工具称为GNU工具。</p>
+<blockquote>
+<p>GNU工具也可以理解为一种软件，只不过是linux操作系统自带的，与linux内核绑定在一起的。linux系统的更准确的名字应该叫做GNU/linux系统。</p>
+</blockquote>
+<h3 id="2-shell"><a href="#2-shell" class="headerlink" title="2. shell"></a>2. shell</h3><p><strong>shell就是比较重要的GNU工具之一，它是一个程序，将你输入的文本命令解释成命令，然后在内核中执行。</strong></p>
+<p>shell包含了一组内部命令，用这些命令可以完成诸如复制文件、移动文件、重命名文件、显示和终止系统中正运行的程序等操作。shell也允许你在命令行提示符中输入程序的名称，它会将程序名传递给内核以启动它。</p>
+<p>也可以将多个shell命令放入文本文件中作为程序执行，这称为 <strong>shell脚本</strong>，你在命令行提示符中输入的任何命令都可以放进一个shell脚本中一起执行，这提供了极大的便利。</p>
+<p>有许多种shell程序可用，通常我们使用的是由GNU项目开发的 <strong>bash shell</strong> ，我们平时使用的终端仿真器（简称终端）就是与shell程序进行交互的命令行提示符，我们在终端中输入文本命令，终端将其发给shell程序，shell程序将其转化成命令发给内核来执行。</p>
+<h2 id="III-linux桌面环境"><a href="#III-linux桌面环境" class="headerlink" title="III. linux桌面环境"></a>III. linux桌面环境</h2><p>早期的linux只有一个简单的操作系统文本界面，这个文本界面可以让人们来运行程序，控制计算机。但随着windows的普及，传统的文本界面已经不再满足用户需求，因此linux图形化桌面环境应运而生。</p>
+<blockquote>
+<p>图形化桌面环境是一个底层程序，直接与显卡和显示器交互。</p>
+</blockquote>
+<p>linux有许多可以选择的图形化桌面，常用的有：</p>
+<ul>
+<li>X window</li>
+<li>KDE</li>
+<li>GNOME（现已成为许多linux发行版的默认桌面环境）</li>
+<li>Unity（ubuntu使用的环境）</li>
+</ul>
+<h2 id="IV-应用软件"><a href="#IV-应用软件" class="headerlink" title="IV. 应用软件"></a>IV. 应用软件</h2><p>这里就很简单了，就是我们可以直接使用的程序，可以通过鼠标点击打开或通过命令行使用。</p>
+<p>将以上四个部分集合在一起，就是linux的发行版，不同发行版有不同的用途，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117232802132.png" alt="image-20220117232802132"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117232815603.png" alt="image-20220117232815603"></p>
+<h2 id="V-总结"><a href="#V-总结" class="headerlink" title="V. 总结"></a>V. 总结</h2><p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117210801737.png" alt="image-20220117210801737"></p>
+<p>如上图所示，linux操作系统包括了四大部分，其中核心是linux的内核，处在最底层，建立了软硬件间的桥梁。向上一层是图形化桌面程序和GUN系统工具程序，我们可以通过这一层来直接操作内核来实现一些标准的功能。最上层就是应用程序了，我们可以使用这些应用程序来实现具体的一些功能。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习2】操作文件和目录</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A02%E3%80%91%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/</url>
+    <content><![CDATA[<p>本文涉及到的命令：</p>
+<ul>
+<li>cp</li>
+<li>mv</li>
+<li>mkdir</li>
+<li>rm</li>
+<li>file</li>
+<li>cat</li>
+<li>more</li>
+<li>less</li>
+<li>tail</li>
+<li>head</li>
+</ul>
+<span id="more"></span>
+<p>使用图形界面时，我们可以很简单地进行文件复制粘贴等操作，那么为什么要用命令行呢？</p>
+<p>答：命令行程序具有强大的功能和灵活的操作。</p>
+<p>举一个例子，如果想从一个目录仅复制那些目标目录中不存在的文件或是旧的版本，使用图形操作就比较困难了，你需要一个一个去对比。而是用命令行仅需要一条命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -u *.html destination</span></span><br></pre></td></tr></table></figure>
+<h2 id="I-通配符"><a href="#I-通配符" class="headerlink" title="I. 通配符"></a>I. 通配符</h2><p>通配符直白一点说就是用 <code>*</code> 等符号来代替文字，就像东北打麻将的hui儿，你缺啥用它都可以替。 当你想操作<code>a.cpp</code> 和 <code>b.cpp</code> 时，就可以用 <code>*.cpp</code> 来代替。</p>
+<p>通配符的具体规则如下：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118010908098.png" alt="image-20220118010908098"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">通配符</th>
+<th style="text-align:center">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">匹配任意多个字符（包括0和1个）</td>
+</tr>
+<tr>
+<td style="text-align:center">？</td>
+<td style="text-align:center">匹配任一单个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[characters]</td>
+<td style="text-align:center">匹配任意一个属于字符集中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[!characters]</td>
+<td style="text-align:center">匹配任意一个不属于字符集中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[[:class:]]</td>
+<td style="text-align:center">匹配任意一个属于指定字符类中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[:alnum:]</td>
+<td style="text-align:center">匹配任意一个字母或数字</td>
+</tr>
+<tr>
+<td style="text-align:center">[:alpha:]</td>
+<td style="text-align:center">匹配任意一个字母</td>
+</tr>
+<tr>
+<td style="text-align:center">[:digit:]</td>
+<td style="text-align:center">匹配任意一个数字</td>
+</tr>
+<tr>
+<td style="text-align:center">[:lower:]</td>
+<td style="text-align:center">匹配任意一个小写字母</td>
+</tr>
+<tr>
+<td style="text-align:center">[:upper:]</td>
+<td style="text-align:center">匹配任意一个大写字母</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注：表示范围用<code>-</code>号表示。例<code>[0-9]</code> <code>[a-z]</code> 。</p>
+<p>示例：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118014216733.png" alt="image-20220118014216733"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118014233903.png" alt="image-20220118014233903"></p>
+<h2 id="II-mkdir——创建目录"><a href="#II-mkdir——创建目录" class="headerlink" title="II. mkdir——创建目录"></a>II. mkdir——创建目录</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir directory</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir dir1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir dir1 dir2 dir3 <span class="comment">#分别创建了三个目录</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="III-cp和mv命令"><a href="#III-cp和mv命令" class="headerlink" title="III. cp和mv命令"></a>III. cp和mv命令</h2><h3 id="1-cp——复制文件和目录"><a href="#1-cp——复制文件和目录" class="headerlink" title="1. cp——复制文件和目录"></a>1. cp——复制文件和目录</h3><p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118012522753.png" alt="image-20220118012522753"></p>
+<p>示例：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118012547119.png" alt="image-20220118012547119"></p>
+<h3 id="2-mv——移动和重命名文件"><a href="#2-mv——移动和重命名文件" class="headerlink" title="2. mv——移动和重命名文件"></a>2. mv——移动和重命名文件</h3><p>移动和cp命令类似，命令选项也和cp一样。</p>
+<p>当在一个文件夹dir下，有文件file1，现在有如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mv file1 file2</span>	</span><br></pre></td></tr></table></figure>
+<p>该命令就是为文件file1重命名为file2。</p>
+<h2 id="IV-rm——删除文件和目录"><a href="#IV-rm——删除文件和目录" class="headerlink" title="IV. rm——删除文件和目录"></a>IV. rm——删除文件和目录</h2><p>在使用rm命令时一定要小心，尤其是与通配符在一起使用时，因为rm执行后，文件将不可恢复。</p>
+<p>有如下例子：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rm *.html</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rm * .html <span class="comment">#在*和.间多了一个空格，但是会导致将当前目录下的全部文件都删除</span></span></span><br></pre></td></tr></table></figure>
+<p>很可怕，所以rm之前可以用ls看看通配符好不好使。</p>
+<p>用法：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118013347767.png" alt="image-20220118013347767"></p>
+<h2 id="V-查看文件"><a href="#V-查看文件" class="headerlink" title="V. 查看文件"></a>V. 查看文件</h2><h3 id="1-查看文件类型"><a href="#1-查看文件类型" class="headerlink" title="1. 查看文件类型"></a>1. 查看文件类型</h3><p>使用<code>file</code> 命令可以查看文件的类型。</p>
+<p>如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> file text_file</span></span><br><span class="line">text_file: ASCII text  #这说明了text_file是一个(text)文本文件，且确定了该文本文件的字符编码。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file Dir</span></span><br><span class="line">Dir: directory  #这说明了Dir是一个目录</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file text_sl</span></span><br><span class="line">text_sl: symbolic link to &#x27;text&#x27;  #告诉了该文件是一个符号链接，并指出了所链接的文件</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file my_script</span></span><br><span class="line">my_script: Bourne-Again shell script, ASCII text executable  #说明了该文件是一个可执行文件，且文件内容是ASCII编码</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file /bin/ls</span></span><br><span class="line">/bin/ls: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV),</span><br><span class="line">dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.24, stripped</span><br><span class="line"><span class="meta">#</span><span class="bash">可以确定该程序编译时所面向的平台以及需要何种类型的库。</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-查看整个文件"><a href="#2-查看整个文件" class="headerlink" title="2. 查看整个文件"></a>2. 查看整个文件</h3><ul>
+<li>cat：查看文本内容全部输到屏幕上</li>
+<li>more：会在每页数据后面停下来，通过空格或回车来向后浏览</li>
+<li>less：more的升级版，可以向前和向后翻页</li>
+</ul>
+<h3 id="3-查看部分文件"><a href="#3-查看部分文件" class="headerlink" title="3. 查看部分文件"></a>3. 查看部分文件</h3><ul>
+<li>tail：默认情况下查看文件的后10行</li>
+<li>head：默认情况下查看文件的前10行</li>
+</ul>
+<p>如需要特定的行数，用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tail -5 file1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> head -20 file2</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习3】软连接和硬链接</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A03%E3%80%91%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[<p>本文介绍linux中的符号链接（软链接）和硬链接。</p>
+<span id="more"></span>
+<p>首先说以下链接有什么用：</p>
+<p><strong>例子1——符号链接的用武之地：</strong></p>
+<p>当有一个程序叫做foo，但是它是一个不断更新的程序，有许多的版本，如foo-0.1，foo-0.2等。当其他程序如piggy在使用foo的过程中，就需要不断改变其引用的名称，一个程序还好，当有许多个程序时是十分麻烦的。这时就需要符号链接来帮助完成。我们可以先建立foo和foo-0.1的符号链接，然后piggy程序引用的程序名是foo，这样当foo-0.1升级到foo-0.2时，只需要让foo重新链接到foo-0.2上就可以了。</p>
+<p><strong>例子2——硬链接的用武之地：</strong></p>
+<p>当有一些重要的文件不可以被删除时，我们就可以使用硬链接。如有一个文件叫file1，我们可以建立一个硬链接file2，当file1不小心被删除时，别担心此时还有file2是这个文件。</p>
+<h2 id="I-符号链接（软链接）"><a href="#I-符号链接（软链接）" class="headerlink" title="I. 符号链接（软链接）"></a>I. 符号链接（软链接）</h2><p>为了与硬链接形成对比，符号链接也叫做软连接（后面就用软连接来代替符号链接了）。软连接可以理解为是一个<strong>超链接</strong> ，我们可以用下图来表示与原文件间的关系。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118152532971.png" alt="image-20220118152532971"></p>
+<blockquote>
+<p>文件和目录的inode编号是一个用于标识的唯一数字，这个数字是由内核分配给文件系统中的每一个对象。</p>
+<p>而文件名相当于你进入该文件的一条路。</p>
+</blockquote>
+<p>在上图中可以看到，当创建一个软连接时，又创建了一个真实存在的新文件，在这个新文件中，存放的是其所指向的<strong>原文件的路径</strong>。当原文件被删除时，软链接自动失效，因为软链接的存在就是为了指向某个文件或目录的，当原文件没有了，那么软链接也自然没用了。==另外，不只是删除失效，移动原文件到不同的路径软链接也会失效。==</p>
+<p>软链接的命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ln -s file file-sl <span class="comment">#软链接名放在第二个参数中</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="II-硬链接"><a href="#II-硬链接" class="headerlink" title="II. 硬链接"></a>II. 硬链接</h2><p>硬链接是给原文件加上另一个文件名，也就是多了一条进入原文件的路径。当原文件的一条路被堵死了，还有另一条路可以进入。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118160134214.png" alt="image-20220118160134214"></p>
+<p>每一个文件都有一个文件名，所以默认情况下每一个文件都有一个硬链接。硬链接有一些局限性：</p>
+<ul>
+<li>硬链接不能引用自身文件系统之外的文件，也就是说，链接不能引用与该链接不在同一磁盘分区的文件。</li>
+<li>硬链接无法引用目录。</li>
+</ul>
+<h2 id="III-查看文件的链接"><a href="#III-查看文件的链接" class="headerlink" title="III. 查看文件的链接"></a>III. 查看文件的链接</h2><p>那么如何查看文件的链接情况呢？可以使用长列表来查看。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163203352.png" alt="image-20220118163203352"></p>
+<p>对于显示出的结果，从前到后有以下信息：</p>
+<ul>
+<li>文件类型，d表示目录，-表示文件，c表示字符型文件，b表示块设备，l表示软链接</li>
+<li>文件的权限</li>
+<li><strong>文件的硬链接数量</strong></li>
+<li>文件属主用户名</li>
+<li>文件属组组名</li>
+<li>文件的大小（以字节为单位）</li>
+<li>文件上次修改时间</li>
+<li>文件名和目录名</li>
+</ul>
+<p>如果是软链接，在文件名后面还会有表示指向的文件。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163635175.png" alt="image-20220118163635175"></p>
+<p>硬链接是一个普通的文件，其前面是<code>-</code> 。如果想要知道两个硬链接是否是同一个文件，则可以看它们的inode编号。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -li</span>	</span><br></pre></td></tr></table></figure>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163833129.png" alt="image-20220118163833129"></p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习4】关于命令</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A04%E3%80%91%E5%85%B3%E4%BA%8E%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>我们常用的linux的命令行语法结构如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command -options arguments</span><br></pre></td></tr></table></figure>
+<p>通常命令后面跟有一个或多个选项（options），不同选项功能也不一样。</p>
+<span id="more"></span>
+<p>然后接着是参数（arguments），这些参数是命令作用的对象。</p>
+<h2 id="I-什么是命令"><a href="#I-什么是命令" class="headerlink" title="I. 什么是命令"></a>I. 什么是命令</h2><p>现在我们说的命令就是前面语法结构中的command。一条命令可以是以下四种类型：</p>
+<ul>
+<li>外部命令</li>
+<li>内建命令</li>
+<li>shell函数：是合并到环境变量上的小型shell脚本。</li>
+<li>alias命令：在其他命令基础上自定义的命令。</li>
+</ul>
+<h3 id="判断命令属于哪种类型"><a href="#判断命令属于哪种类型" class="headerlink" title="判断命令属于哪种类型"></a>判断命令属于哪种类型</h3><p>如果想要知道所使用的命令属于这四种类型的哪一种，可以使用——<code>type</code> 命令来判断。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> <span class="built_in">command</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">例如：</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> ls</span></span><br><span class="line"><span class="meta">#</span><span class="bash">返回结果：</span></span><br><span class="line"><span class="meta">$</span><span class="bash">ls is aliased to <span class="string">&#x27;ls --color=tty&#x27;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="II-外部命令"><a href="#II-外部命令" class="headerlink" title="II. 外部命令"></a>II. 外部命令</h2><p>这类命令也叫做<strong>文件系统命令</strong>，是存在shell程序之外的。它可以是编译好的可执行二进制文件（之前我们说过可执行二进制文件的名字可以直接通过shell发送给内核来运行）和用shell、Python等脚本编写的程序。通常可以在<code>/bin</code> 、<code>/usr/bin</code> 等目录中找到。</p>
+<h3 id="1-查找命令文件的位置"><a href="#1-查找命令文件的位置" class="headerlink" title="1. 查找命令文件的位置"></a>1. 查找命令文件的位置</h3><p>如果知道一条外部命令后，可以通过<code>which</code> 找到其所在的位置。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">which</span> ps</span></span><br><span class="line">/bin/ps</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：只有外部命令才可以使用which来查找位置，对于内建命令，用which来查找，其结果要么没有响应，要么得到一条错误的信息。</p>
+</blockquote>
+<h3 id="2-外部命令的执行过程"><a href="#2-外部命令的执行过程" class="headerlink" title="2. 外部命令的执行过程"></a>2. 外部命令的执行过程</h3><p>在shell程序中输入外部命令时，会衍生出一个子进程。</p>
+<p>例如：</p>
+<p>ps作为外部命令执行时，会创建一个子进程，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119002931466.png" alt="image-20220119002931466"></p>
+<p>可以看出ps命令的PID时2801，父进程的PID是2743，而bash的PID就是2743。这个例子就说明了，我们在shell程序中输入命令ps后，此时内核会收到该名字然后运行对应的可执行文件，从而生成一个新的进程。</p>
+<p>如果命令是内建命令，则不会有新的进程生成。</p>
+<h2 id="III-内建命令"><a href="#III-内建命令" class="headerlink" title="III. 内建命令"></a>III. 内建命令</h2><p>这类命令称为shell builtin 。它们已经和shell程序编译成一体，作为shell工具的组成部分存在，不需要借助外部程序文件来运行。因此内建命令的执行速度要更快，效率也更高。</p>
+<p>当然也有比较特殊的命令，可以有多种实现。比如<code>echo</code> 和 <code>pwd</code> ，既有内建命令和外部命令。可以使用<code>type -a</code> 来查看全部的情况。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> -a <span class="built_in">echo</span></span> </span><br><span class="line">echo is a shell builtin</span><br><span class="line">echo is /bin/echo</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">which</span> <span class="built_in">echo</span></span></span><br><span class="line">/bin/echo</span><br></pre></td></tr></table></figure>
+<h2 id="IV-获得命令文档"><a href="#IV-获得命令文档" class="headerlink" title="IV. 获得命令文档"></a>IV. 获得命令文档</h2><h3 id="1-help"><a href="#1-help" class="headerlink" title="1. help"></a>1. help</h3><p>一些内建命令可以使用<code>help</code> 命令来查看其命令文档，如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">help</span> <span class="built_in">cd</span></span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119014334472.png" alt="image-20220119014334472"></p>
+<p>输出的语法描述中，方括号表示一个可选的选项，竖线表示两个互斥的选项。</p>
+<p>有时不管是内建命令还是外部命令，也都可以在命令后加<code>--help</code> 来查看帮助文档。</p>
+<h3 id="2-man"><a href="#2-man" class="headerlink" title="2. man"></a>2. man</h3><p>可以使用<code>man</code> 命令来查看命令的使用手册。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> man program	<span class="comment">#program是具体的手册名，但一般命令名就是手册名</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> man passwd	<span class="comment">#默认情况下可能显示的是第一部分，要看具体命令有几部分</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> man 5 passwd	<span class="comment">#显示第5部分</span></span></span><br></pre></td></tr></table></figure>
+<p>手册文档的组织结构：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119010940042.png" alt="image-20220119010940042"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119010952599.png" alt="image-20220119010952599"></p>
+<h3 id="3-apropos"><a href="#3-apropos" class="headerlink" title="3. apropos"></a>3. apropos</h3><p><strong>apropos的作用是你知道想要实现什么功能，但不知道用什么命令。</strong>此时就可以配合想要实现的作用或者描述信息来进行搜索。其本质是根据你提供的信息在手册中查找。</p>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apropos <span class="string">&quot;list directory&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>显示的结果：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/v2-ba4ad8abf9543cbfb1fd307605b13502_b.jpg" alt="img"></p>
+<p>在这里，第一个字段是手册页的名称，第二个字段表示显示的部分，最后一个字段包含了所描述的信息。</p>
+<p>如果想要多搜几个关键条目，可以用<code>-a</code> 标志，灵活的添加多个条目。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apropos <span class="string">&quot;match&quot;</span> -a <span class="string">&quot;pattern&quot;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="4-whatis"><a href="#4-whatis" class="headerlink" title="4. whatis"></a>4. whatis</h3><p>显示命令的简要描述，包括手册页的名字及各部分和关于该部分的一行描述。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> whatis ls</span></span><br><span class="line">ls (1) 		- list directory contents</span><br><span class="line"><span class="meta">$</span><span class="bash"> whatis passwd</span></span><br><span class="line">passwd (5)		- the password file</span><br><span class="line">passwd (1)		- change user password</span><br><span class="line">passwd (1ssl)	- compute password hashes</span><br></pre></td></tr></table></figure>
+<p>如果想要看具体的，可以使用man来查看手册。</p>
+<h3 id="5-info"><a href="#5-info" class="headerlink" title="5. info"></a>5. info</h3><p>基本上，info 与 man的用途差不多，都是用来查询命令或是文件格式。info 与 man 最大的区别是，man page一次性输出全部信息，而 info page 则是将文件数据拆分成一个一个段落，每个段落用自己的页面来编写，并且在各个页面中还有类似网页的超链接来跳转到各个不同的页面中，每个独立页面也被称为一个节点。支持 info 命令的文件默认放置在 /usr/share/info/ 目录中。</p>
+<h2 id="V-使用别名创建命令"><a href="#V-使用别名创建命令" class="headerlink" title="V. 使用别名创建命令"></a>V. 使用别名创建命令</h2><p>在创建之间可以使用<code>type</code> 来查一下想设置的名字是否被用过。</p>
+<p>使用别名创建命令用<code>alias</code> 命令。具体的使用方法为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> new_name=<span class="string">&#x27;command1; command2; ...&#x27;</span></span> </span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> foo=<span class="string">&#x27;cd /usr; ls; cd -&#x27;</span></span></span><br></pre></td></tr></table></figure>
+<p>如果想要删除这个别名，可以用<code>unalias</code>，具体用法为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unalias</span> foo</span></span><br></pre></td></tr></table></figure>
+<p>如果想要看当前环境中定义的别名，可以直接使用alias。</p>
+<blockquote>
+<p>注：在命令行定义别名还有一个小问题。当shell会话结束时，这些别名也随之消失了。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
 </search>
