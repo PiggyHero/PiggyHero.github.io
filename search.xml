@@ -736,6 +736,55 @@
       </tags>
   </entry>
   <entry>
+    <title>【Markdown】嵌入视频和PDF</title>
+    <url>/2022/01/15/%E3%80%90Markdown%E3%80%91%E5%B5%8C%E5%85%A5%E8%A7%86%E9%A2%91%E5%92%8CPDF/</url>
+    <content><![CDATA[<p>在Markdown中嵌入视频、网页</p>
+<span id="more"></span>
+<p>之前一直说 Typora 是一个隐藏的网页浏览器，能解析 HTML 语法，没想到居然还能嵌入视频和PDF。</p>
+<p><a href="https://support.typora.io/Media/">Embed Video, Media or Web Contents (typora.io)support.typora.io/Media/</a></p>
+<h3 id="1-嵌入视频"><a href="#1-嵌入视频" class="headerlink" title="1.嵌入视频"></a>1.嵌入视频</h3><p>以B站为例，复制其嵌入代码</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20220115033313.jpg" alt="img"></p>
+<p>得到：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;//player.bilibili.com/player.html?aid=754115200&amp;bvid=BV1kk4y1m7sT&amp;cid=220773148&amp;page=1&quot;</span> <span class="attr">scrolling</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">framespacing</span>=<span class="string">&quot;0&quot;</span> <span class="attr">allowfullscreen</span>=<span class="string">&quot;true&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>直接嵌入的话，视频窗口太小，我们加入</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">height=&quot;500&quot;</span><br></pre></td></tr></table></figure>
+<p>让窗口变大一些：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;//player.bilibili.com/player.html?aid=754115200&amp;bvid=BV1kk4y1m7sT&amp;cid=220773148&amp;page=1&quot;</span> <span class="attr">scrolling</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">framespacing</span>=<span class="string">&quot;0&quot;</span> <span class="attr">allowfullscreen</span>=<span class="string">&quot;true&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>然后直接复制到 typora 中即可，如果你操作得当的话，应该能看到下面这样的效果：</p>
+<iframe src="//player.bilibili.com/player.html?aid=754115200&bvid=BV1kk4y1m7sT&cid=220773148&page=1" scrolling="no" border="0" height="500" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+
+
+<h3 id="2-嵌入-gist"><a href="#2-嵌入-gist" class="headerlink" title="2.嵌入 gist"></a>2.嵌入 gist</h3><p><a href="https://link.zhihu.com/?target=https%3A//gist.github.com/">Create a new Gist (github.com)gist.github.com/</a></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://gist.github.com/Theigrams/98f6323969aa763cd1e343540e5420b4.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://piggyhero.gitee.io/pic/img/20220115034053.jpg" alt="img"></p>
+<h3 id="3-网页片段"><a href="#3-网页片段" class="headerlink" title="3.网页片段"></a>3.网页片段</h3><p>通过嵌入codepen，你甚至可以在typora里玩贪吃蛇！！！</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;codepen&quot;</span> <span class="attr">data-height</span>=<span class="string">&quot;265&quot;</span> <span class="attr">data-theme-id</span>=<span class="string">&quot;light&quot;</span> <span class="attr">data-default-tab</span>=<span class="string">&quot;js,result&quot;</span> <span class="attr">data-user</span>=<span class="string">&quot;moPsych&quot;</span> <span class="attr">data-slug-hash</span>=<span class="string">&quot;KKgQxWb&quot;</span> <span class="attr">style</span>=<span class="string">&quot;height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;&quot;</span> <span class="attr">data-pen-title</span>=<span class="string">&quot;Snake Game&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>See the Pen <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io/moPsych/pen/KKgQxWb&quot;</span>&gt;</span></span><br><span class="line">  Snake Game<span class="tag">&lt;/<span class="name">a</span>&gt;</span> by moPsych (<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io/moPsych&quot;</span>&gt;</span>@moPsych<span class="tag">&lt;/<span class="name">a</span>&gt;</span>)</span><br><span class="line">  on <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io&quot;</span>&gt;</span>CodePen<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;https://static.codepen.io/assets/embed/ei.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="moPsych" data-slug-hash="KKgQxWb" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Snake Game">
+  <span>See the Pen <a href="https://codepen.io/moPsych/pen/KKgQxWb">
+  Snake Game</a> by moPsych (<a href="https://codepen.io/moPsych">@moPsych</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="4-PDF"><a href="#4-PDF" class="headerlink" title="4.PDF"></a>4.PDF</h3><p>当然，区区PDF也不在话下，如果是本地文件，直接拖入即可。</p>
+<p>如果想导入云端PDF，需要通过 <code>Google Drive Viewer</code> 来显示：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://docs.google.com/gview?embedded=true&amp;url=http://infolab.stanford.edu/pub/papers/google.pdf&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:800px; height:500px;&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>只需把 <code>url=http://infolab.stanford.edu/pub/papers/google.pdf</code> 替换成自己的PDF链接即可，例如 GitHub 上的PDF也可以：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://docs.google.com/gview?embedded=true&amp;url=https://raw.githubusercontent.com/Theigrams/Mathematical-optimization/d304e27f613352b5d8240010cc58ddb4360ac48d/%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A/%E6%9C%80%E4%BC%98%E5%8C%96%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A.pdf&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:800px; height:500px;&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<iframe src="https://docs.google.com/gview?embedded=true&url=https://raw.githubusercontent.com/Theigrams/Mathematical-optimization/d304e27f613352b5d8240010cc58ddb4360ac48d/%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A/%E6%9C%80%E4%BC%98%E5%8C%96%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A.pdf" style="width:800px; height:500px;" frameborder="0"></iframe>
+
+<hr>
+<p>发现了一个新的本地嵌入 PDF 的方法，把下面 <code>src</code> 中的 PDF 路径换成自己的即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;embed id=&quot;pdfPlayer&quot; src=&quot;C:\Users\question.pdf&quot; type=&quot;application/pdf&quot; width=&quot;1</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【ROS】ROS中命名和重命名</title>
     <url>/2021/10/22/%E3%80%90ROS%E3%80%91ROS%E4%B8%AD%E5%91%BD%E5%90%8D%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D/</url>
     <content><![CDATA[<p>本文介绍ROS中命名和重命名的相关知识。</p>
@@ -1021,127 +1070,6 @@
       </categories>
       <tags>
         <tag>ROS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Ubuntu】Ubuntu更改文件权限</title>
-    <url>/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/</url>
-    <content><![CDATA[<p>Ubuntu中，文件属性介绍。</p>
-<span id="more"></span>
-<h2 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h2><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
-<p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
-<p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
-<p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
-<ul>
-<li>chown (change ownerp) ： 修改所属用户与组。</li>
-<li>chmod (change mode) ： 修改用户的权限。</li>
-</ul>
-<p>下图中通过 chown 来授权用户，通过 chmod 为用户设置可以开门的权限。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033851.png" alt="img"></p>
-<p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www /]<span class="comment"># ls -l</span></span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
-<p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
-<p>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
-<ul>
-<li>当为 <strong>d</strong> 则是目录</li>
-<li>当为 <strong>-</strong> 则是文件；</li>
-<li>若是 <strong>l</strong> 则表示为链接文档(link file)；</li>
-<li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
-<li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
-</ul>
-<p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033905.jpg" alt="img"></p>
-<p>每个文件的属性由左边第一部分的 10 个字符来确定（如下图）。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033910.png" alt="363003_1227493859FdXT"></p>
-<p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
-<p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
-<p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
-<p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
-<p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
-<hr>
-<h2 id="2-Linux文件属主和属组"><a href="#2-Linux文件属主和属组" class="headerlink" title="2.Linux文件属主和属组"></a>2.Linux文件属主和属组</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
-<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
-<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
-<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
-<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
-<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
-<p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
-<hr>
-<h2 id="3-更改文件属性"><a href="#3-更改文件属性" class="headerlink" title="3.更改文件属性"></a>3.更改文件属性</h2><h3 id="1-chgrp：更改文件属组"><a href="#1-chgrp：更改文件属组" class="headerlink" title="(1)chgrp：更改文件属组"></a>(1)chgrp：更改文件属组</h3><p>语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
-<p>参数选项</p>
-<ul>
-<li>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
-</ul>
-<h3 id="2-chown：更改文件属主，也可以同时更改文件属组"><a href="#2-chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="(2)chown：更改文件属主，也可以同时更改文件属组"></a>(2)chown：更改文件属主，也可以同时更改文件属组</h3><p>语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
-<p>进入 /root 目录（~）将install.log的拥有者改为bin这个账号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">cd</span> ~</span><br><span class="line">[root@www ~]<span class="comment"># chown bin install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
-<p>将install.log的拥有者与群组改回为root：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># chown root:root install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
-<h3 id="3-chmod：更改文件9个属性"><a href="#3-chmod：更改文件9个属性" class="headerlink" title="(3)chmod：更改文件9个属性"></a>(3)chmod：更改文件9个属性</h3><p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
-<p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
-<p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
-<ul>
-<li>r:4</li>
-<li>w:2</li>
-<li>x:1</li>
-</ul>
-<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为： <strong>-rwxrwx—-</strong> 分数则是：</p>
-<ul>
-<li>owner = rwx = 4+2+1 = 7</li>
-<li>group = rwx = 4+2+1 = 7</li>
-<li>others= —- = 0+0+0 = 0</li>
-</ul>
-<p>所以等一下我们设定权限的变更时，该文件的权限数字就是 <strong>770</strong>。变更权限的指令 chmod 的语法是这样的：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
-<p>选项与参数：</p>
-<ul>
-<li>xyz : 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。</li>
-<li>-R : 进行递归(recursive)的持续变更，亦即连同次目录下的所有文件都会变更</li>
-</ul>
-<p>举例来说，如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]<span class="comment"># chmod 777 .bashrc</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
-<p>那如果要将权限变成 <em>-rwxr-xr—</em> 呢？那么权限的分数就成为 [4+2+1] [4+0+1] [4+0+0]=754。</p>
-<h3 id="4-符号类型改变文件权限"><a href="#4-符号类型改变文件权限" class="headerlink" title="(4)符号类型改变文件权限"></a>(4)符号类型改变文件权限</h3><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
-<ul>
-<li>user：用户</li>
-<li>group：组</li>
-<li>others：其他</li>
-</ul>
-<p>那么我们就可以使用 <strong>u, g, o</strong> 来代表三种身份的权限。</p>
-<p>此外， <strong>a</strong> 则代表 <strong>all</strong>，即全部的身份。读写的权限可以写成 <strong>r, w, x</strong>，也就是可以使用下表的方式来看：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>chmod</th>
-<th>u g o a</th>
-<th>+(加入) -(除去) =(设定)</th>
-<th>r w x</th>
-<th>文件或目录</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr—</strong> ，可以使用 <strong>chmod u=rwx,g=rx,o=r 文件名</strong> 来设定:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  touch test1    // 创建 test1 文件</span></span><br><span class="line"><span class="comment"># ls -al test1    // 查看 test1 默认权限</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br><span class="line"><span class="comment"># chmod u=rwx,g=rx,o=r  test1    // 修改 test1 权限</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rwxr-xr-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
-<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  chmod  a-x test1</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -1500,26 +1428,118 @@
       </tags>
   </entry>
   <entry>
-    <title>【Ubuntu】Ubuntu常用命令</title>
-    <url>/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>常用命令，方便查阅。</p>
+    <title>【Ubuntu】Ubuntu更改文件权限</title>
+    <url>/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/</url>
+    <content><![CDATA[<p>Ubuntu中，文件属性介绍。</p>
 <span id="more"></span>
-<p>Ubuntu操作系统中，通常是通过命令行来操作的，命令行应用的扩展性和灵活性较好，在早期的Windows系统中也是用命令行来操作电脑的。</p>
-<p>命令行在终端中输入，用 <code>Ctrl</code>+<code>Alt</code>+<code>T</code> 快捷键可以打开终端窗口。</p>
-<h2 id="1-pwd"><a href="#1-pwd" class="headerlink" title="1.pwd"></a>1.pwd</h2><p>查看当前的路径。</p>
-<h2 id="2-cd"><a href="#2-cd" class="headerlink" title="2.cd"></a>2.cd</h2><p>切换当前路径。后面可以接相对路径，也可接绝对路径。</p>
-<h2 id="3-mkdir"><a href="#3-mkdir" class="headerlink" title="3.mkdir"></a>3.mkdir</h2><p>创建文件夹。</p>
-<h2 id="4-ls"><a href="#4-ls" class="headerlink" title="4.ls"></a>4.ls</h2><p>查看当前路径下的文件和文件夹。</p>
-<h2 id="5-touch"><a href="#5-touch" class="headerlink" title="5.touch"></a>5.touch</h2><p>创建文件。</p>
-<h2 id="6-mv"><a href="#6-mv" class="headerlink" title="6.mv"></a>6.mv</h2><p>将一个文件或文件夹移动到另外一个路径，相当于剪切的作用。</p>
-<p>具体用法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
-<p>将一个文件或文件夹拷贝到另一个路径，相当于复制粘贴。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
-<h2 id="8-rm"><a href="#8-rm" class="headerlink" title="8.rm"></a>8.rm</h2><p>删除文件或文件夹。</p>
-<p>具体用法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rm file</span><br><span class="line">rm -r folder</span><br></pre></td></tr></table></figure>
-<h2 id="9-sudo"><a href="#9-sudo" class="headerlink" title="9.sudo"></a>9.sudo</h2><p>sudo 的作用是提升当前用户的权限。比如安装软件时，必须要使用sudo命令。</p>
+<h2 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h2><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
+<p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
+<p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
+<p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
+<ul>
+<li>chown (change ownerp) ： 修改所属用户与组。</li>
+<li>chmod (change mode) ： 修改用户的权限。</li>
+</ul>
+<p>下图中通过 chown 来授权用户，通过 chmod 为用户设置可以开门的权限。</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033851.png" alt="img"></p>
+<p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www /]<span class="comment"># ls -l</span></span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
+<p>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+<ul>
+<li>当为 <strong>d</strong> 则是目录</li>
+<li>当为 <strong>-</strong> 则是文件；</li>
+<li>若是 <strong>l</strong> 则表示为链接文档(link file)；</li>
+<li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
+<li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
+</ul>
+<p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033905.jpg" alt="img"></p>
+<p>每个文件的属性由左边第一部分的 10 个字符来确定（如下图）。</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033910.png" alt="363003_1227493859FdXT"></p>
+<p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
+<p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
+<p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
+<p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
+<p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
+<hr>
+<h2 id="2-Linux文件属主和属组"><a href="#2-Linux文件属主和属组" class="headerlink" title="2.Linux文件属主和属组"></a>2.Linux文件属主和属组</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
+<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
+<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
+<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
+<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
+<p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
+<hr>
+<h2 id="3-更改文件属性"><a href="#3-更改文件属性" class="headerlink" title="3.更改文件属性"></a>3.更改文件属性</h2><h3 id="1-chgrp：更改文件属组"><a href="#1-chgrp：更改文件属组" class="headerlink" title="(1)chgrp：更改文件属组"></a>(1)chgrp：更改文件属组</h3><p>语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
+<p>参数选项</p>
+<ul>
+<li>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
+</ul>
+<h3 id="2-chown：更改文件属主，也可以同时更改文件属组"><a href="#2-chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="(2)chown：更改文件属主，也可以同时更改文件属组"></a>(2)chown：更改文件属主，也可以同时更改文件属组</h3><p>语法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
+<p>进入 /root 目录（~）将install.log的拥有者改为bin这个账号：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">cd</span> ~</span><br><span class="line">[root@www ~]<span class="comment"># chown bin install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+<p>将install.log的拥有者与群组改回为root：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># chown root:root install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
+<h3 id="3-chmod：更改文件9个属性"><a href="#3-chmod：更改文件9个属性" class="headerlink" title="(3)chmod：更改文件9个属性"></a>(3)chmod：更改文件9个属性</h3><p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
+<p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
+<p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
+<ul>
+<li>r:4</li>
+<li>w:2</li>
+<li>x:1</li>
+</ul>
+<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为： <strong>-rwxrwx—-</strong> 分数则是：</p>
+<ul>
+<li>owner = rwx = 4+2+1 = 7</li>
+<li>group = rwx = 4+2+1 = 7</li>
+<li>others= —- = 0+0+0 = 0</li>
+</ul>
+<p>所以等一下我们设定权限的变更时，该文件的权限数字就是 <strong>770</strong>。变更权限的指令 chmod 的语法是这样的：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
+<p>选项与参数：</p>
+<ul>
+<li>xyz : 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。</li>
+<li>-R : 进行递归(recursive)的持续变更，亦即连同次目录下的所有文件都会变更</li>
+</ul>
+<p>举例来说，如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]<span class="comment"># chmod 777 .bashrc</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
+<p>那如果要将权限变成 <em>-rwxr-xr—</em> 呢？那么权限的分数就成为 [4+2+1] [4+0+1] [4+0+0]=754。</p>
+<h3 id="4-符号类型改变文件权限"><a href="#4-符号类型改变文件权限" class="headerlink" title="(4)符号类型改变文件权限"></a>(4)符号类型改变文件权限</h3><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
+<ul>
+<li>user：用户</li>
+<li>group：组</li>
+<li>others：其他</li>
+</ul>
+<p>那么我们就可以使用 <strong>u, g, o</strong> 来代表三种身份的权限。</p>
+<p>此外， <strong>a</strong> 则代表 <strong>all</strong>，即全部的身份。读写的权限可以写成 <strong>r, w, x</strong>，也就是可以使用下表的方式来看：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>chmod</th>
+<th>u g o a</th>
+<th>+(加入) -(除去) =(设定)</th>
+<th>r w x</th>
+<th>文件或目录</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr—</strong> ，可以使用 <strong>chmod u=rwx,g=rx,o=r 文件名</strong> 来设定:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  touch test1    // 创建 test1 文件</span></span><br><span class="line"><span class="comment"># ls -al test1    // 查看 test1 默认权限</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br><span class="line"><span class="comment"># chmod u=rwx,g=rx,o=r  test1    // 修改 test1 权限</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rwxr-xr-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
+<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  chmod  a-x test1</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>工程原理和实践</category>
@@ -1563,36 +1583,6 @@
 <p>我们再来打开一下 <code>wireshark-dev-stable-trusty.list</code><br> 文件看看里面的内容是什么：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br><span class="line"># deb-src http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br></pre></td></tr></table></figure>
 <p>哈哈～原来文件里就是添加了一个跟软件源一模一样的东西，他们的作用殊途同归啊。我想这其实是 Ubuntu  为了分辨官方的源和第三方的源才设计成在<code>sources.list</code>和  <code>sources.list.d/</code>这两个地方中存储软件源信息。因为第三方的源毕竟不太可信，如果随便更新的话可是会出事情的。</p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Ubuntu】依赖包是什么</title>
-    <url>/2021/10/21/%E3%80%90Ubuntu%E3%80%91%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
-<span id="more"></span>
-<p>依赖包就是某个软件用到的库文件。</p>
-<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
-<p>不同体系用不同的方法解决依赖问题。</p>
-<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
-<ul>
-<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
-<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
-<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
-<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
-</ul>
-<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
-<ul>
-<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
-<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
-<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
-<li>系统中安装的软件越多，越容易出问题。</li>
-</ul>
 ]]></content>
       <categories>
         <category>工程原理和实践</category>
@@ -1762,6 +1752,36 @@
       </tags>
   </entry>
   <entry>
+    <title>【Ubuntu】依赖包是什么</title>
+    <url>/2021/10/21/%E3%80%90Ubuntu%E3%80%91%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
+<span id="more"></span>
+<p>依赖包就是某个软件用到的库文件。</p>
+<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
+<p>不同体系用不同的方法解决依赖问题。</p>
+<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
+<ul>
+<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
+<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
+<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
+<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
+</ul>
+<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
+<ul>
+<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
+<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
+<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
+<li>系统中安装的软件越多，越容易出问题。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【git问题解决】git连不上远端库问题解决</title>
     <url>/2021/12/02/%E3%80%90git%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
@@ -1783,24 +1803,6 @@
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【mac问题解决】Mac强制退出软件和打开未验证的软件</title>
-    <url>/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%89%93%E5%BC%80%E6%9C%AA%E9%AA%8C%E8%AF%81%E7%9A%84%E8%BD%AF%E4%BB%B6/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="强制退出"><a href="#强制退出" class="headerlink" title="强制退出"></a>强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
-<h3 id="无法打开“-”，因为无法验证开发者"><a href="#无法打开“-”，因为无法验证开发者" class="headerlink" title="无法打开“*”，因为无法验证开发者"></a>无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
-<li>打开方达，在右侧菜单栏选择应用程序</li>
-<li>找到提示无法验证的应用，右键点击打开</li>
-<li>第一次会出现以下提示，继续点击打开即可</li>
-</ol>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
       </tags>
   </entry>
   <entry>
@@ -1850,6 +1852,483 @@
       </tags>
   </entry>
   <entry>
+    <title>【linux学习1】linux是什么</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A01%E3%80%91linux%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>参考：《Linux命令行与shell脚本编程大全》《Linux命令行大全》</p>
+<span id="more"></span>
+<p>操作系统就是提供用户和计算机底层硬件交互的一个媒介，例如想算1+1等于几，不可能直接动手在芯片上算，需要通过键盘输入，然后看到显示器上的输出结果，这就是通过操作系统来完成的。而linux系统就是主流的一个操作系统，它可以划分为四个部分：</p>
+<ul>
+<li>linux内核</li>
+<li>GNU工具</li>
+<li>图形化桌面环境</li>
+<li>应用软件</li>
+</ul>
+<p>基本的结构框图如图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117210801737.png" alt="image-20220117210801737"></p>
+<h2 id="I-linux内核"><a href="#I-linux内核" class="headerlink" title="I. linux内核"></a>I. linux内核</h2><p>内核可以理解为软件和硬件间的一个中间层，连接着软件和硬件。例如我们使用word写了一个文件，写完后这个文件不是直接存储在磁盘上的，而是通过内核这个媒介将其写到磁盘上，软件是不能直接操纵硬件的。内核中留了许多API，可以供各个软件使用，然后在驱动底层硬件。</p>
+<p>内核主要负责以下四种功能：</p>
+<ul>
+<li>系统内存管理</li>
+<li>软件程序管理</li>
+<li>硬件设备管理</li>
+<li>文件系统管理</li>
+</ul>
+<h2 id="II-GNU工具"><a href="#II-GNU工具" class="headerlink" title="II. GNU工具"></a>II. GNU工具</h2><p>GNU工具在内核的上一层，</p>
+<h3 id="1-GNU简介"><a href="#1-GNU简介" class="headerlink" title="1. GNU简介"></a>1. GNU简介</h3><p>当有了内核之后，就建立了软件和硬件连接的桥梁。但通常我们并不会直接和内核打交道，而是通过更为上层的工具进行操作。假如你要开发一个linux系统下的软件，那么你有可能要了解内核的API，然后进行开发，但用户使用时只需要打开软件就可以了而不用考虑内核，这时该程序实现了一些<strong>具体功能</strong>（例如通过网易云听音乐，word写作业等）。此外，用户有时还需要控制文件和程序（如将文件进行复制粘贴，开启程序，结束程序等），此时就需要系统工具来执行一些<strong>标准功能</strong>，这些系统工具处在内核的上一层，可以与用户直接交互。</p>
+<p>Linus在创建linux内核时，并没有可用的系统工具。但与此同时，另一伙人即GNU组织开发了一套完整的系统工具，却没有可以运行它们的内核。于是这两伙人就结合在一起，发布了完整的linux操作系统。这些系统工具称为GNU工具。</p>
+<blockquote>
+<p>GNU工具也可以理解为一种软件，只不过是linux操作系统自带的，与linux内核绑定在一起的。linux系统的更准确的名字应该叫做GNU/linux系统。</p>
+</blockquote>
+<h3 id="2-shell"><a href="#2-shell" class="headerlink" title="2. shell"></a>2. shell</h3><p><strong>shell就是比较重要的GNU工具之一，它是一个程序，将你输入的文本命令解释成命令，然后在内核中执行。</strong></p>
+<p>shell包含了一组内部命令，用这些命令可以完成诸如复制文件、移动文件、重命名文件、显示和终止系统中正运行的程序等操作。shell也允许你在命令行提示符中输入程序的名称，它会将程序名传递给内核以启动它。</p>
+<p>也可以将多个shell命令放入文本文件中作为程序执行，这称为 <strong>shell脚本</strong>，你在命令行提示符中输入的任何命令都可以放进一个shell脚本中一起执行，这提供了极大的便利。</p>
+<p>有许多种shell程序可用，通常我们使用的是由GNU项目开发的 <strong>bash shell</strong> ，我们平时使用的终端仿真器（简称终端）就是与shell程序进行交互的命令行提示符，我们在终端中输入文本命令，终端将其发给shell程序，shell程序将其转化成命令发给内核来执行。</p>
+<h2 id="III-linux桌面环境"><a href="#III-linux桌面环境" class="headerlink" title="III. linux桌面环境"></a>III. linux桌面环境</h2><p>早期的linux只有一个简单的操作系统文本界面，这个文本界面可以让人们来运行程序，控制计算机。但随着windows的普及，传统的文本界面已经不再满足用户需求，因此linux图形化桌面环境应运而生。</p>
+<blockquote>
+<p>图形化桌面环境是一个底层程序，直接与显卡和显示器交互。</p>
+</blockquote>
+<p>linux有许多可以选择的图形化桌面，常用的有：</p>
+<ul>
+<li>X window</li>
+<li>KDE</li>
+<li>GNOME（现已成为许多linux发行版的默认桌面环境）</li>
+<li>Unity（ubuntu使用的环境）</li>
+</ul>
+<h2 id="IV-应用软件"><a href="#IV-应用软件" class="headerlink" title="IV. 应用软件"></a>IV. 应用软件</h2><p>这里就很简单了，就是我们可以直接使用的程序，可以通过鼠标点击打开或通过命令行使用。</p>
+<p>将以上四个部分集合在一起，就是linux的发行版，不同发行版有不同的用途，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117232802132.png" alt="image-20220117232802132"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117232815603.png" alt="image-20220117232815603"></p>
+<h2 id="V-总结"><a href="#V-总结" class="headerlink" title="V. 总结"></a>V. 总结</h2><p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117210801737.png" alt="image-20220117210801737"></p>
+<p>如上图所示，linux操作系统包括了四大部分，其中核心是linux的内核，处在最底层，建立了软硬件间的桥梁。向上一层是图形化桌面程序和GUN系统工具程序，我们可以通过这一层来直接操作内核来实现一些标准的功能。最上层就是应用程序了，我们可以使用这些应用程序来实现具体的一些功能。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习2】操作文件和目录</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A02%E3%80%91%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/</url>
+    <content><![CDATA[<p>使用图形界面时，我们可以很简单地进行文件复制粘贴等操作，那么为什么要用命令行呢？</p>
+<p>答：命令行程序具有强大的功能和灵活的操作。</p>
+<span id="more"></span>
+<p>举一个例子，如果想从一个目录仅复制那些目标目录中不存在的文件或是旧的版本，使用图形操作就比较困难了，你需要一个一个去对比。而是用命令行仅需要一条命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -u *.html destination</span></span><br></pre></td></tr></table></figure>
+<p>本文涉及到的命令：</p>
+<ul>
+<li>cp</li>
+<li>mv</li>
+<li>mkdir</li>
+<li>rm</li>
+<li>file</li>
+<li>cat</li>
+<li>more</li>
+<li>less</li>
+<li>tail</li>
+<li>head</li>
+</ul>
+<h2 id="I-通配符"><a href="#I-通配符" class="headerlink" title="I. 通配符"></a>I. 通配符</h2><p>通配符直白一点说就是用 <code>*</code> 等符号来代替文字，就像东北打麻将的hui儿，你缺啥用它都可以替。 当你想操作<code>a.cpp</code> 和 <code>b.cpp</code> 时，就可以用 <code>*.cpp</code> 来代替。</p>
+<p>通配符的具体规则如下：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118010908098.png" alt="image-20220118010908098"></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">通配符</th>
+<th style="text-align:center">意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">匹配任意多个字符（包括0和1个）</td>
+</tr>
+<tr>
+<td style="text-align:center">？</td>
+<td style="text-align:center">匹配任一单个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[characters]</td>
+<td style="text-align:center">匹配任意一个属于字符集中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[!characters]</td>
+<td style="text-align:center">匹配任意一个不属于字符集中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[[:class:]]</td>
+<td style="text-align:center">匹配任意一个属于指定字符类中的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[:alnum:]</td>
+<td style="text-align:center">匹配任意一个字母或数字</td>
+</tr>
+<tr>
+<td style="text-align:center">[:alpha:]</td>
+<td style="text-align:center">匹配任意一个字母</td>
+</tr>
+<tr>
+<td style="text-align:center">[:digit:]</td>
+<td style="text-align:center">匹配任意一个数字</td>
+</tr>
+<tr>
+<td style="text-align:center">[:lower:]</td>
+<td style="text-align:center">匹配任意一个小写字母</td>
+</tr>
+<tr>
+<td style="text-align:center">[:upper:]</td>
+<td style="text-align:center">匹配任意一个大写字母</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注：表示范围用<code>-</code>号表示。例<code>[0-9]</code> <code>[a-z]</code> 。</p>
+<p>示例：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118014216733.png" alt="image-20220118014216733"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118014233903.png" alt="image-20220118014233903"></p>
+<h2 id="II-mkdir——创建目录"><a href="#II-mkdir——创建目录" class="headerlink" title="II. mkdir——创建目录"></a>II. mkdir——创建目录</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir directory</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir dir1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir dir1 dir2 dir3 <span class="comment">#分别创建了三个目录</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="III-cp和mv命令"><a href="#III-cp和mv命令" class="headerlink" title="III. cp和mv命令"></a>III. cp和mv命令</h2><h3 id="1-cp——复制文件和目录"><a href="#1-cp——复制文件和目录" class="headerlink" title="1. cp——复制文件和目录"></a>1. cp——复制文件和目录</h3><p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118012522753.png" alt="image-20220118012522753"></p>
+<p>示例：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118012547119.png" alt="image-20220118012547119"></p>
+<h3 id="2-mv——移动和重命名文件"><a href="#2-mv——移动和重命名文件" class="headerlink" title="2. mv——移动和重命名文件"></a>2. mv——移动和重命名文件</h3><p>移动和cp命令类似，命令选项也和cp一样。</p>
+<p>当在一个文件夹dir下，有文件file1，现在有如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mv file1 file2</span>	</span><br></pre></td></tr></table></figure>
+<p>该命令就是为文件file1重命名为file2。</p>
+<h2 id="IV-rm——删除文件和目录"><a href="#IV-rm——删除文件和目录" class="headerlink" title="IV. rm——删除文件和目录"></a>IV. rm——删除文件和目录</h2><p>在使用rm命令时一定要小心，尤其是与通配符在一起使用时，因为rm执行后，文件将不可恢复。</p>
+<p>有如下例子：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rm *.html</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rm * .html <span class="comment">#在*和.间多了一个空格，但是会导致将当前目录下的全部文件都删除</span></span></span><br></pre></td></tr></table></figure>
+<p>很可怕，所以rm之前可以用ls看看通配符好不好使。</p>
+<p>用法：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118013347767.png" alt="image-20220118013347767"></p>
+<h2 id="V-查看文件"><a href="#V-查看文件" class="headerlink" title="V. 查看文件"></a>V. 查看文件</h2><h3 id="1-查看文件类型"><a href="#1-查看文件类型" class="headerlink" title="1. 查看文件类型"></a>1. 查看文件类型</h3><p>使用<code>file</code> 命令可以查看文件的类型。</p>
+<p>如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> file text_file</span></span><br><span class="line">text_file: ASCII text  #这说明了text_file是一个(text)文本文件，且确定了该文本文件的字符编码。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file Dir</span></span><br><span class="line">Dir: directory  #这说明了Dir是一个目录</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file text_sl</span></span><br><span class="line">text_sl: symbolic link to &#x27;text&#x27;  #告诉了该文件是一个符号链接，并指出了所链接的文件</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file my_script</span></span><br><span class="line">my_script: Bourne-Again shell script, ASCII text executable  #说明了该文件是一个可执行文件，且文件内容是ASCII编码</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file /bin/ls</span></span><br><span class="line">/bin/ls: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV),</span><br><span class="line">dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.24, stripped</span><br><span class="line"><span class="meta">#</span><span class="bash">可以确定该程序编译时所面向的平台以及需要何种类型的库。</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-查看整个文件"><a href="#2-查看整个文件" class="headerlink" title="2. 查看整个文件"></a>2. 查看整个文件</h3><ul>
+<li>cat：查看文本内容全部输到屏幕上</li>
+<li>more：会在每页数据后面停下来，通过空格或回车来向后浏览</li>
+<li>less：more的升级版，可以向前和向后翻页</li>
+</ul>
+<h3 id="3-查看部分文件"><a href="#3-查看部分文件" class="headerlink" title="3. 查看部分文件"></a>3. 查看部分文件</h3><ul>
+<li>tail：默认情况下查看文件的后10行</li>
+<li>head：默认情况下查看文件的前10行</li>
+</ul>
+<p>如需要特定的行数，用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tail -5 file1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> head -20 file2</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习3】软连接和硬链接</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A03%E3%80%91%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[<p>本文介绍linux中的符号链接（软链接）和硬链接。</p>
+<span id="more"></span>
+<p>首先说以下链接有什么用：</p>
+<p><strong>例子1——符号链接的用武之地：</strong></p>
+<p>当有一个程序叫做foo，但是它是一个不断更新的程序，有许多的版本，如foo-0.1，foo-0.2等。当其他程序如piggy在使用foo的过程中，就需要不断改变其引用的名称，一个程序还好，当有许多个程序时是十分麻烦的。这时就需要符号链接来帮助完成。我们可以先建立foo和foo-0.1的符号链接，然后piggy程序引用的程序名是foo，这样当foo-0.1升级到foo-0.2时，只需要让foo重新链接到foo-0.2上就可以了。</p>
+<p><strong>例子2——硬链接的用武之地：</strong></p>
+<p>当有一些重要的文件不可以被删除时，我们就可以使用硬链接。如有一个文件叫file1，我们可以建立一个硬链接file2，当file1不小心被删除时，别担心此时还有file2是这个文件。</p>
+<h2 id="I-符号链接（软链接）"><a href="#I-符号链接（软链接）" class="headerlink" title="I. 符号链接（软链接）"></a>I. 符号链接（软链接）</h2><p>为了与硬链接形成对比，符号链接也叫做软连接（后面就用软连接来代替符号链接了）。软连接可以理解为是一个<strong>超链接</strong> ，我们可以用下图来表示与原文件间的关系。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118152532971.png" alt="image-20220118152532971"></p>
+<blockquote>
+<p>文件和目录的inode编号是一个用于标识的唯一数字，这个数字是由内核分配给文件系统中的每一个对象。</p>
+<p>而文件名相当于你进入该文件的一条路。</p>
+</blockquote>
+<p>在上图中可以看到，当创建一个软连接时，又创建了一个真实存在的新文件，在这个新文件中，存放的是其所指向的<strong>原文件的路径</strong>。当原文件被删除时，软链接自动失效，因为软链接的存在就是为了指向某个文件或目录的，当原文件没有了，那么软链接也自然没用了。==另外，不只是删除失效，移动原文件到不同的路径软链接也会失效。==</p>
+<p>软链接的命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ln -s file file-sl <span class="comment">#软链接名放在第二个参数中</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="II-硬链接"><a href="#II-硬链接" class="headerlink" title="II. 硬链接"></a>II. 硬链接</h2><p>硬链接是给原文件加上另一个文件名，也就是多了一条进入原文件的路径。当原文件的一条路被堵死了，还有另一条路可以进入。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118160134214.png" alt="image-20220118160134214"></p>
+<p>每一个文件都有一个文件名，所以默认情况下每一个文件都有一个硬链接。硬链接有一些局限性：</p>
+<ul>
+<li>硬链接不能引用自身文件系统之外的文件，也就是说，链接不能引用与该链接不在同一磁盘分区的文件。</li>
+<li>硬链接无法引用目录。</li>
+</ul>
+<h2 id="III-查看文件的链接"><a href="#III-查看文件的链接" class="headerlink" title="III. 查看文件的链接"></a>III. 查看文件的链接</h2><p>那么如何查看文件的链接情况呢？可以使用长列表来查看。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163203352.png" alt="image-20220118163203352"></p>
+<p>对于显示出的结果，从前到后有以下信息：</p>
+<ul>
+<li>文件类型，d表示目录，-表示文件，c表示字符型文件，b表示块设备，l表示软链接</li>
+<li>文件的权限</li>
+<li><strong>文件的硬链接数量</strong></li>
+<li>文件属主用户名</li>
+<li>文件属组组名</li>
+<li>文件的大小（以字节为单位）</li>
+<li>文件上次修改时间</li>
+<li>文件名和目录名</li>
+</ul>
+<p>如果是软链接，在文件名后面还会有表示指向的文件。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163635175.png" alt="image-20220118163635175"></p>
+<p>硬链接是一个普通的文件，其前面是<code>-</code> 。如果想要知道两个硬链接是否是同一个文件，则可以看它们的inode编号。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -li</span>	</span><br></pre></td></tr></table></figure>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163833129.png" alt="image-20220118163833129"></p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习4】关于命令</title>
+    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A04%E3%80%91%E5%85%B3%E4%BA%8E%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>我们常用的linux的命令行语法结构如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command -options arguments</span><br></pre></td></tr></table></figure>
+<p>通常命令后面跟有一个或多个选项（options），不同选项功能也不一样。</p>
+<span id="more"></span>
+<p>然后接着是参数（arguments），这些参数是命令作用的对象。</p>
+<h2 id="I-什么是命令"><a href="#I-什么是命令" class="headerlink" title="I. 什么是命令"></a>I. 什么是命令</h2><p>现在我们说的命令就是前面语法结构中的command。一条命令可以是以下四种类型：</p>
+<ul>
+<li>外部命令</li>
+<li>内建命令</li>
+<li>shell函数：是合并到环境变量上的小型shell脚本。</li>
+<li>alias命令：在其他命令基础上自定义的命令。</li>
+</ul>
+<h3 id="判断命令属于哪种类型"><a href="#判断命令属于哪种类型" class="headerlink" title="判断命令属于哪种类型"></a>判断命令属于哪种类型</h3><p>如果想要知道所使用的命令属于这四种类型的哪一种，可以使用——<code>type</code> 命令来判断。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> <span class="built_in">command</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">例如：</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> ls</span></span><br><span class="line"><span class="meta">#</span><span class="bash">返回结果：</span></span><br><span class="line"><span class="meta">$</span><span class="bash">ls is aliased to <span class="string">&#x27;ls --color=tty&#x27;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="II-外部命令"><a href="#II-外部命令" class="headerlink" title="II. 外部命令"></a>II. 外部命令</h2><p>这类命令也叫做<strong>文件系统命令</strong>，是存在shell程序之外的。它可以是编译好的可执行二进制文件（之前我们说过可执行二进制文件的名字可以直接通过shell发送给内核来运行）和用shell、Python等脚本编写的程序。通常可以在<code>/bin</code> 、<code>/usr/bin</code> 等目录中找到。</p>
+<h3 id="1-查找命令文件的位置"><a href="#1-查找命令文件的位置" class="headerlink" title="1. 查找命令文件的位置"></a>1. 查找命令文件的位置</h3><p>如果知道一条外部命令后，可以通过<code>which</code> 找到其所在的位置。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">which</span> ps</span></span><br><span class="line">/bin/ps</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：只有外部命令才可以使用which来查找位置，对于内建命令，用which来查找，其结果要么没有响应，要么得到一条错误的信息。</p>
+</blockquote>
+<h3 id="2-外部命令的执行过程"><a href="#2-外部命令的执行过程" class="headerlink" title="2. 外部命令的执行过程"></a>2. 外部命令的执行过程</h3><p>在shell程序中输入外部命令时，会衍生出一个子进程。</p>
+<p>例如：</p>
+<p>ps作为外部命令执行时，会创建一个子进程，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119002931466.png" alt="image-20220119002931466"></p>
+<p>可以看出ps命令的PID时2801，父进程的PID是2743，而bash的PID就是2743。这个例子就说明了，我们在shell程序中输入命令ps后，此时内核会收到该名字然后运行对应的可执行文件，从而生成一个新的进程。</p>
+<p>如果命令是内建命令，则不会有新的进程生成。</p>
+<h2 id="III-内建命令"><a href="#III-内建命令" class="headerlink" title="III. 内建命令"></a>III. 内建命令</h2><p>这类命令称为shell builtin 。它们已经和shell程序编译成一体，作为shell工具的组成部分存在，不需要借助外部程序文件来运行。因此内建命令的执行速度要更快，效率也更高。</p>
+<p>当然也有比较特殊的命令，可以有多种实现。比如<code>echo</code> 和 <code>pwd</code> ，既有内建命令和外部命令。可以使用<code>type -a</code> 来查看全部的情况。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> -a <span class="built_in">echo</span></span> </span><br><span class="line">echo is a shell builtin</span><br><span class="line">echo is /bin/echo</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">which</span> <span class="built_in">echo</span></span></span><br><span class="line">/bin/echo</span><br></pre></td></tr></table></figure>
+<h2 id="IV-获得命令文档"><a href="#IV-获得命令文档" class="headerlink" title="IV. 获得命令文档"></a>IV. 获得命令文档</h2><h3 id="1-help"><a href="#1-help" class="headerlink" title="1. help"></a>1. help</h3><p>一些内建命令可以使用<code>help</code> 命令来查看其命令文档，如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">help</span> <span class="built_in">cd</span></span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119014334472.png" alt="image-20220119014334472"></p>
+<p>输出的语法描述中，方括号表示一个可选的选项，竖线表示两个互斥的选项。</p>
+<p>有时不管是内建命令还是外部命令，也都可以在命令后加<code>--help</code> 来查看帮助文档。</p>
+<h3 id="2-man"><a href="#2-man" class="headerlink" title="2. man"></a>2. man</h3><p>可以使用<code>man</code> 命令来查看命令的使用手册。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> man program	<span class="comment">#program是具体的手册名，但一般命令名就是手册名</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> man passwd	<span class="comment">#默认情况下可能显示的是第一部分，要看具体命令有几部分</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> man 5 passwd	<span class="comment">#显示第5部分</span></span></span><br></pre></td></tr></table></figure>
+<p>手册文档的组织结构：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119010940042.png" alt="image-20220119010940042"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119010952599.png" alt="image-20220119010952599"></p>
+<h3 id="3-apropos"><a href="#3-apropos" class="headerlink" title="3. apropos"></a>3. apropos</h3><p><strong>apropos的作用是你知道想要实现什么功能，但不知道用什么命令。</strong>此时就可以配合想要实现的作用或者描述信息来进行搜索。其本质是根据你提供的信息在手册中查找。</p>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apropos <span class="string">&quot;list directory&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>显示的结果：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/v2-ba4ad8abf9543cbfb1fd307605b13502_b.jpg" alt="img"></p>
+<p>在这里，第一个字段是手册页的名称，第二个字段表示显示的部分，最后一个字段包含了所描述的信息。</p>
+<p>如果想要多搜几个关键条目，可以用<code>-a</code> 标志，灵活的添加多个条目。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apropos <span class="string">&quot;match&quot;</span> -a <span class="string">&quot;pattern&quot;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="4-whatis"><a href="#4-whatis" class="headerlink" title="4. whatis"></a>4. whatis</h3><p>显示命令的简要描述，包括手册页的名字及各部分和关于该部分的一行描述。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> whatis ls</span></span><br><span class="line">ls (1) 		- list directory contents</span><br><span class="line"><span class="meta">$</span><span class="bash"> whatis passwd</span></span><br><span class="line">passwd (5)		- the password file</span><br><span class="line">passwd (1)		- change user password</span><br><span class="line">passwd (1ssl)	- compute password hashes</span><br></pre></td></tr></table></figure>
+<p>如果想要看具体的，可以使用man来查看手册。</p>
+<h3 id="5-info"><a href="#5-info" class="headerlink" title="5. info"></a>5. info</h3><p>基本上，info 与 man的用途差不多，都是用来查询命令或是文件格式。info 与 man 最大的区别是，man page一次性输出全部信息，而 info page 则是将文件数据拆分成一个一个段落，每个段落用自己的页面来编写，并且在各个页面中还有类似网页的超链接来跳转到各个不同的页面中，每个独立页面也被称为一个节点。支持 info 命令的文件默认放置在 /usr/share/info/ 目录中。</p>
+<h2 id="V-使用别名创建命令"><a href="#V-使用别名创建命令" class="headerlink" title="V. 使用别名创建命令"></a>V. 使用别名创建命令</h2><p>在创建之间可以使用<code>type</code> 来查一下想设置的名字是否被用过。</p>
+<p>使用别名创建命令用<code>alias</code> 命令。具体的使用方法为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> new_name=<span class="string">&#x27;command1; command2; ...&#x27;</span></span> </span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> foo=<span class="string">&#x27;cd /usr; ls; cd -&#x27;</span></span></span><br></pre></td></tr></table></figure>
+<p>如果想要删除这个别名，可以用<code>unalias</code>，具体用法为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unalias</span> foo</span></span><br></pre></td></tr></table></figure>
+<p>如果想要看当前环境中定义的别名，可以直接使用alias。</p>
+<blockquote>
+<p>注：在命令行定义别名还有一个小问题。当shell会话结束时，这些别名也随之消失了。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习5】虚拟机安装</title>
+    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A05%E3%80%91%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>使用VMWare安装linux系统。</p>
+<span id="more"></span>
+<h2 id="I-安装VMWare"><a href="#I-安装VMWare" class="headerlink" title="I. 安装VMWare"></a>I. 安装VMWare</h2><p>参考：<a href="https://www.bilibili.com/read/cv9694457">https://www.bilibili.com/read/cv9694457</a></p>
+<h2 id="II-安装虚拟机"><a href="#II-安装虚拟机" class="headerlink" title="II. 安装虚拟机"></a>II. 安装虚拟机</h2><ol>
+<li>以管理员身份打开VMWare</li>
+<li>在VMWare中新建虚拟机</li>
+<li>典型/自定义，选择自定义安装</li>
+<li>虚拟机兼容性，默认下一步</li>
+<li>安装来源，选择稍后安装操作系统</li>
+<li>操作系统选择，选择linux centos8 64位</li>
+<li>自定义虚拟机名称和文件夹位置</li>
+<li>虚拟机CPU，可以默认下一步</li>
+<li>内存选择，可以选1024M</li>
+<li>网络链接，选择NAT</li>
+<li>IO类型，默认下一步</li>
+<li>虚拟磁盘类型，默认下一步</li>
+<li>创建新磁盘，默认下一步</li>
+<li>磁盘大小，默认下一步，20G</li>
+<li>磁盘文件名，默认下一步</li>
+<li>完成</li>
+</ol>
+<h2 id="III-安装系统"><a href="#III-安装系统" class="headerlink" title="III. 安装系统"></a>III. 安装系统</h2><ol>
+<li>下载好要装的系统镜像文件ISO</li>
+<li><strong>在新虚拟机中，选择DVD，选择使用ISO镜像，选择镜像ISO文件</strong></li>
+<li>开启虚拟机</li>
+<li>安装操作系统</li>
+</ol>
+<blockquote>
+<p>在上面第3步时，可能会报错显示虚拟VT-X没有打开，则需要重新打开计算机，进入BIOS启动页面，找到configuration选项中，找到虚拟化开关，打开。</p>
+</blockquote>
+<p>例：</p>
+<p>如果安装CentOS系统，在软件选择中，选择带GUI的服务器，并选择附加软件开发工具和兼容性程序库。然后设置安装位置，/boot , /swap, / 。然后设置root密码。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习6】重定向和管道</title>
+    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A06%E3%80%91%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E7%AE%A1%E9%81%93/</url>
+    <content><![CDATA[<p>在执行命令的时候，我们可以在终端上看到命令输出的结果，这些结果被内核发送到屏幕上，我们也可以让这些结果输出文件里，这就叫做重定向。同理，我们也可以让文件作为输入，因此重定向的全称为I/O重定向。</p>
+<span id="more"></span>
+<p>本文涉及的命令：</p>
+<ul>
+<li>cat</li>
+<li>sort</li>
+<li>uniq</li>
+<li>wc</li>
+<li>grep</li>
+<li>head</li>
+<li>tail</li>
+<li>tee</li>
+</ul>
+<h2 id="I-简短的介绍"><a href="#I-简短的介绍" class="headerlink" title="I. 简短的介绍"></a>I. 简短的介绍</h2><p>我们在使用程序的时候往往会有输出，这些输出通常分为两种：</p>
+<ul>
+<li>程序运行结果，即程序执行输出的数据</li>
+<li>程序的状态或错误信息，描述程序当前的执行状态</li>
+</ul>
+<p>根据linux中一切皆文件的思想。实际上程序是把它们的运行结果发送到一个叫做 <strong>标准输出</strong> 的文件中，而把状态和错误信息发送到一个叫做 <strong>标准错误</strong> 的文件中。 而这个标准输出文件和标准错误文件都与屏幕相连。</p>
+<p>另外，许多程序都是从一个叫做 <strong>标准输入</strong> 的文件中获得输入。这个文件与我们的键盘相连。</p>
+<p>而我们所做的重定向就是改变这些输出的方向和输入的来源。</p>
+<h2 id="II-I-O重定向"><a href="#II-I-O重定向" class="headerlink" title="II. I/O重定向"></a>II. I/O重定向</h2><h3 id="1-标准输出重定向"><a href="#1-标准输出重定向" class="headerlink" title="1. 标准输出重定向"></a>1. 标准输出重定向</h3><p>输出重定向就是指将输出发送到哪。我们使用 <code>&gt;</code> 后接文件名来表示发送的目的地。例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /usr/bin &gt; ls_output.txt</span></span><br></pre></td></tr></table></figure>
+<p>这时原来在屏幕上看到的结果被发送到文件中了。</p>
+<blockquote>
+<p><code>&gt;</code> 符号后面的文件接收结果的时候是从头接收到，也就是再从头接收一次数据就会被覆盖。<code>&gt;&gt;</code> 符号表示从文件后面接收，不会覆盖文件。</p>
+</blockquote>
+<h3 id="2-标准错误重定向"><a href="#2-标准错误重定向" class="headerlink" title="2. 标准错误重定向"></a>2. 标准错误重定向</h3><p>前面的符号只能做标准输出的重定向。如果想要做标准错误重定向，使用 <code>2&gt;</code> 。这里的2表示输出的是标准错误（0表示标准输入，1表示标准输出，2表示标准错误）。就是标准输出和标准错误走的不是一条路，所以要标注明白。</p>
+<p>如果想要同时将标准输出和标准错误重定向到同一文件中，可以使用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /bin/usr &gt; ls_output.txt 2&gt;&amp;1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l /bin/usr &amp;&gt; ls_output.txt</span></span><br></pre></td></tr></table></figure>
+<p>在第一种方法中，是执行两次重定向。先是将标准输出重定向到文件上，然后再把标准错误重定向的标准输出上。这个顺序不能反。</p>
+<p>如果不想有输出，可以将其重定向到一个垃圾桶文件中 <code>/dev/null</code> 。</p>
+<h3 id="3-标准输入重定向"><a href="#3-标准输入重定向" class="headerlink" title="3. 标准输入重定向"></a>3. 标准输入重定向</h3><p>使用 <code>&lt;</code> 符号完成标准输入重定向。</p>
+<p>例：</p>
+<p>有一个命令 <code>cat</code> ，其作用是将后面跟着的参数文件发送到标准输出中。当后面不接参数的时候，cat等待着标准输入，然后发送到标准输出中。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat &lt; file.txt</span></span><br><span class="line">结果显示到屏幕上</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>有许多命令都是从标准输入获得输入，然后结果发送到标准输出上。</p>
+</blockquote>
+<h2 id="III-管道"><a href="#III-管道" class="headerlink" title="III. 管道"></a>III. 管道</h2><p>前面我们说许多命令等待着标准输入的输入，然后发送到标准输出文件上，那么我们还可以把一个命令的标准输出发送到另一个命令的标准输入中，这就是 <strong>管道</strong>。</p>
+<p>管道 <code>|</code> 可以把一个命令的标准输出传送到另一个命令的标准输入中，就像一节一节的管子一样。</p>
+<p>例：</p>
+<p><code>less</code> 与cat类似，把数据发送到标准输出中。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /usr/bin | less</span></span><br></pre></td></tr></table></figure>
+<p>因此，还可以加上一些对数据操作的命令，来处理这些数据，就是对这些输入的数据做出一些改变。如：</p>
+<ul>
+<li>sort：按字母顺序排列</li>
+<li>uniq：报告或忽略文件中重复的行</li>
+<li>wc：打印行数，字数和字节数</li>
+<li>grep：打印匹配的行</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep hello</span></span><br></pre></td></tr></table></figure>
+<p>grep就是从输入的数据中，找到包含hello的行。</p>
+<p>另外还有<code>head</code> 和 <code>tail</code> 显示头几行和后几行。</p>
+<p>还有一个比较有用的命令 <code>tee</code> ，它好像是一个三通一样。就是给管道分一个叉。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls /usr/bin | tee ls.txt | grep zip</span></span><br></pre></td></tr></table></figure>
+<p>上条命令将 <code>ls /usr/bin</code> 的输出重定向到 <code>ls.txt</code> 中，同时也重定向到 <code>grep</code> 的标准输入中。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习7】扩展和引用</title>
+    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A07%E3%80%91%E6%89%A9%E5%B1%95%E5%92%8C%E5%BC%95%E7%94%A8/</url>
+    <content><![CDATA[<p>当我们每次在终端中输入命令后，shell程序都会在执行命令之前进行多重处理——可以理解为进行一些简单的翻译。这个处理过程称为扩展，在这些命令执行之前，shell就已经将其扩展成其他内容了。</p>
+<span id="more"></span>
+<p>例如：</p>
+<p>使用 <code>echo</code> 命令来验证，它的作用是将文本参数打印到屏幕上。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> this is a <span class="built_in">test</span></span></span><br><span class="line">this is a test</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> *</span></span><br><span class="line">Desktop Documents Music Pictures Public Templates Video</span><br></pre></td></tr></table></figure>
+<p>为什么 <code>echo *</code> 的结果不是 <code>*</code> 呢，这时因为在执行<code>echo</code> 之前，shell程序已经提前把 <code>*</code> 翻译好了，变成了当前路径下的全部文件，并将其作为<code>echo</code> 命令的参数。</p>
+<p><strong>而引用就是来控制扩展的，就是让shell什么时候不翻译或是翻译一部分，选择性地避免不想要的扩展。</strong></p>
+<h2 id="I-扩展的规则"><a href="#I-扩展的规则" class="headerlink" title="I. 扩展的规则"></a>I. 扩展的规则</h2><h3 id="1-路径名扩展"><a href="#1-路径名扩展" class="headerlink" title="1. 路径名扩展"></a>1. 路径名扩展</h3><p>通过使用通配符来实现扩展机制称为 <strong>路径名扩展</strong> 。</p>
+<blockquote>
+<p>注：类似<code>echo *</code> 的扩展，不包括隐藏文件。</p>
+</blockquote>
+<p>如果想要使用通配符来扩展隐藏文件，可以使用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> .*</span></span><br><span class="line">. .. .file # 这包括了父目录和当前目录</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> .[!.]?*</span> </span><br><span class="line">.file # 这种情况下，用？来表示这里必有一个字符</span><br></pre></td></tr></table></figure>
+<h3 id="2-波浪线扩展"><a href="#2-波浪线扩展" class="headerlink" title="2. 波浪线扩展"></a>2. 波浪线扩展</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> ~</span></span><br><span class="line">/home/piggy</span><br></pre></td></tr></table></figure>
+<h3 id="3-算数扩展"><a href="#3-算数扩展" class="headerlink" title="3. 算数扩展"></a>3. 算数扩展</h3><p>shell支持通过扩展来运行<strong>算数表达式</strong>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $((<span class="number">1</span>+<span class="number">2</span>))</span></span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p>算数扩展使用为 <code>$((expression))</code> ，这里表达式外面必须套两层括号，里面可以嵌套更多的表达式。</p>
+<h3 id="4-花括号扩展"><a href="#4-花括号扩展" class="headerlink" title="4. 花括号扩展"></a>4. 花括号扩展</h3><p>花括号扩展就是一种并列的关系，可以理解为炸开花。</p>
+<p>花括号内部可以是一系列逗号连接的字符串，也可以是一系列整数或单个字符。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> File&#123;A,B,C&#125;</span></span><br><span class="line">FileA FileB FileC</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> Number&#123;1..3&#125;</span></span><br><span class="line">Number1 Number2 Number3</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> A&#123;a&#123;1,2&#125;,B&#123;1,2&#125;&#125;b</span></span><br><span class="line">Aa1b Aa2b AB1b Ab2b</span><br></pre></td></tr></table></figure>
+<p>花括号扩展一般用在生成一群文件的时候，且命名有一些顺序规则。</p>
+<h3 id="5-参数扩展"><a href="#5-参数扩展" class="headerlink" title="5. 参数扩展"></a>5. 参数扩展</h3><p>参数是指系统在某个区域存储的一小块数据，并且给这一小块数据命名了。</p>
+<p>它的使用是<code>$parameter</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$USER</span></span></span><br><span class="line">piggy</span><br></pre></td></tr></table></figure>
+<h3 id="6-命令替换"><a href="#6-命令替换" class="headerlink" title="6. 命令替换"></a>6. 命令替换</h3><p>该规则的使用表达为 <code>$(command)</code> ，是翻译成命令的输出结果。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $(ls)</span></span><br><span class="line">Desktop Documents Music Pictures Public Templates Video</span><br></pre></td></tr></table></figure>
+<h2 id="II-引用"><a href="#II-引用" class="headerlink" title="II. 引用"></a>II. 引用</h2><p>先看两个例子：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> this is a      <span class="built_in">test</span></span></span><br><span class="line">this is a test</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$100</span>.0</span></span><br><span class="line">00.0</span><br></pre></td></tr></table></figure>
+<p>这两个例子都发生了扩展，shell私自的翻译了一下子，第一个例子是当有一堆空格连续在一起的时候，shell会将它翻译为一个空格，且每一个连着的字符串被识别为一个参数，这叫做单词分割。第二个例子中，<code>$1</code> 是一个未定义的变量，所以shell将其翻译为一个空字符。</p>
+<p>那么怎么可以避免这种不想要的扩展呢？有以下的几种方式。</p>
+<h3 id="1-双引号"><a href="#1-双引号" class="headerlink" title="1. 双引号"></a>1. 双引号</h3><p>除了<code>$</code> <code>\</code> 还是有其特殊的意思外，所有的字符都是去它们的特殊含义，被看成是普通的字符。</p>
+<p>这意味着以下扩展失效：</p>
+<ul>
+<li>单词分割</li>
+<li>路径名扩展</li>
+<li>波浪线扩展</li>
+<li>花括号扩展</li>
+</ul>
+<p>但还有以下扩展保留：</p>
+<ul>
+<li>参数扩展</li>
+<li>算数扩展</li>
+<li>命令替换</li>
+</ul>
+<p>单词分割扩展失效，就可以处理文件名中包含空格的文件了。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch <span class="string">&quot;piggy hero.txt&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l piggy hero.txt</span></span><br><span class="line">ls: cannot access piggy: No such file or directory</span><br><span class="line">ls: cannot access hero.txt: No such file or directory</span><br><span class="line"><span class="meta">$</span><span class="bash"> mv <span class="string">&quot;piggy hero&quot;</span> piggy_hero</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在单词分割中，shell会先查找是否存在空格、制表符以及换行（换行字符）等界定符（delimiter）。这就意味着没有用引号包含起来的空格、制表符和换行字符都不会被当成文本的一部分，而只是被当成分割符。</p>
+</blockquote>
+<p>有一个比较有趣的例子：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cal</span></span><br><span class="line">February 2012</span><br><span class="line">Su Mo Tu We Th Fr Sa</span><br><span class="line">		 1  2  3  4</span><br><span class="line">5   6  7  8  9 10 11</span><br><span class="line">12 13 14 15 16 17 18</span><br><span class="line">19 20 21 22 23 24 25</span><br><span class="line">26 27 28 29</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $(cal)	<span class="comment">#这是因为cal的输出结果中包含换行符，但是在作为echo的参数之前，先被shell翻译为空格</span></span></span><br><span class="line">February 2012 Su Mo Tu We Th Fr Sa 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17</span><br><span class="line">18 19 20 21 22 23 24 25 26 27 28 29</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(cal)</span>&quot;</span>	<span class="comment">#加了双引号之后，限制了shell的翻译</span></span></span><br><span class="line">February 2012</span><br><span class="line">Su Mo Tu We Th Fr Sa</span><br><span class="line">		 1  2  3  4</span><br><span class="line">5   6  7  8  9 10 11</span><br><span class="line">12 13 14 15 16 17 18</span><br><span class="line">19 20 21 22 23 24 25</span><br><span class="line">26 27 28 29</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="2-单引号"><a href="#2-单引号" class="headerlink" title="2. 单引号"></a>2. 单引号</h3><p>如果想要抑制全部的翻译（扩展），那么就是用单引号 <code>&#39;&#39;</code> 。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&#x27;text ~/ * .txt &#123;a,b&#125; $(echo foo) $((2+2)) $USER&#x27;</span></span></span><br><span class="line">text ~/ * .txt &#123;a,b&#125; $(echo foo) $((2+2)) $USER</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;text ~/ * .txt &#123;a,b&#125; <span class="subst">$(echo foo)</span> <span class="subst">$((2+2)</span>) <span class="variable">$USER</span>&quot;</span></span></span><br><span class="line">text ~/ * .txt &#123;a,b&#125; foo 4 piggy</span><br></pre></td></tr></table></figure>
+<h3 id="3-转义字符"><a href="#3-转义字符" class="headerlink" title="3. 转义字符"></a>3. 转义字符</h3><p>有时候我们仅想选择性抑制单个扩展，这时就可以使用转义字符<code>\</code> ，转义字符经常在双引号中用来有选择性地阻止扩展。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;The balance for user <span class="variable">$USER</span> is: \$5.00&quot;</span></span></span><br><span class="line">The balance for user $USER is: \$5.00</span><br></pre></td></tr></table></figure>
+<p>转义字符也常用来消除文件名中某个字符的特殊含义，这些字符包括<code>$</code>、<code>！</code>、<code>&amp;</code>、空格等。</p>
+<p>如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch a\<span class="variable">$b</span> a\!b a\&amp;b a\ b</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line"><span class="meta">a$</span><span class="bash">b a!b a&amp;b a b</span></span><br></pre></td></tr></table></figure>
+<p>一些反斜杠转义字符序列：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121010916486.png" alt="image-20220121010916486"></p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+  </entry>
+  <entry>
     <title>【mac问题解决】Mac无法抹掉硬盘问题解决</title>
     <url>/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
@@ -1880,6 +2359,24 @@
 <p>选择“允许远程管理内核扩展和软件自动更新”复选框以授权使用移动设备管理 (MDM) 解决方案远程管理旧版内核扩展和软件更新。</p>
 <p><strong>7.</strong>点按“好”。</p>
 <p><strong>8.</strong>重新启动 Mac 以使更改生效。</p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【mac问题解决】Mac强制退出软件和打开未验证的软件</title>
+    <url>/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%89%93%E5%BC%80%E6%9C%AA%E9%AA%8C%E8%AF%81%E7%9A%84%E8%BD%AF%E4%BB%B6/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="强制退出"><a href="#强制退出" class="headerlink" title="强制退出"></a>强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
+<h3 id="无法打开“-”，因为无法验证开发者"><a href="#无法打开“-”，因为无法验证开发者" class="headerlink" title="无法打开“*”，因为无法验证开发者"></a>无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
+<li>打开方达，在右侧菜单栏选择应用程序</li>
+<li>找到提示无法验证的应用，右键点击打开</li>
+<li>第一次会出现以下提示，继续点击打开即可</li>
+</ol>
 ]]></content>
       <categories>
         <category>问题解决</category>
@@ -2041,6 +2538,31 @@
       </tags>
   </entry>
   <entry>
+    <title>【数字图像处理1】什么是数字图像处理</title>
+    <url>/2021/12/19/%E3%80%90%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%861%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>主要参考：冈萨雷斯《数字图像处理》</p>
+<p>计算机视觉是现在最火的研究领域，一开始我以为数字图像处理是计算机视觉的一部分，然而事实并非如此。接下来会通过比较数字图像处理，图像分析，计算机视觉的关系来介绍什么是数字图像处理。</p>
+<span id="more"></span>
+<h3 id="1-什么是数字图像处理"><a href="#1-什么是数字图像处理" class="headerlink" title="1.什么是数字图像处理"></a>1.什么是数字图像处理</h3><p>图像我们大家都十分熟悉，平常在手机和电脑上看到的都是数字图像。与之对应的可以叫作非数字图像，例如我们小时候用胶卷相机拍出来的照片，或者是在医院拍的CT，得到的图片在胶片上呈现，是非数字化的。因为计算机能看懂的只有0和1，也就是二进制数，所以用数字来描述一幅图像，得到的就是数字图像。数字图像处理最早的起源可以追溯到上世纪二十年代，那时候人们为了实现远距离传输图像，先将一张图像编码成信号的形式（例如白色就用高电位表示，黑色用低电位表示），然后接收端再解码进行打印。显然，那时候并没有对图像进行什么实质意义上的处理，但是此时已经涉及到了数字图像的概念。</p>
+<p>数字图像处理，图像分析，计算机视觉三者并没有十分明确的分界。但是一般认为，数字图像处理的输入和输出都是一张图片，例如我们平常用到的P图软件。而计算机视觉的目标是模拟人类的视觉系统，是人工智能的一个分支，其输入是图像，输出就不一定是啥了，这要根据任务的需要，如果理解一张图片，那么输出可能就是一段描述图像内容的话。图像分析介于二者之间，是中间的过程，与这两个领域都有交集，其输入是图片，输出是图像中的一些特征信息，但这些信息并没有上升到语义的级别。</p>
+<blockquote>
+<p>我的理解是，图像分析没有用到数据驱动的方法，而是单纯的通过数学的方法对图像进行处理，从而得到图像中的一些信息。</p>
+</blockquote>
+<p>以文本识别为例，从图像中提取出文本并将其描述成计算机可以处理的形式便属于图像分析。而要理解全文的意思，就属于计算机视觉的领域了。在《数字图像处理》这本书中，会涉及到图像处理和分析这两部分内容。</p>
+<h3 id="2-数字图像处理的步骤"><a href="#2-数字图像处理的步骤" class="headerlink" title="2.数字图像处理的步骤"></a>2.数字图像处理的步骤</h3><p><img src="https://piggyhero.gitee.io/pic/img/20211222004857.png" alt="image-20211222004850371"></p>
+<p>在本书中，其章节安排是按照图像处理的顺序进行的。</p>
+<blockquote>
+<p>注意：在一个图像处理系统里，上述过程不一定全都有。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>数字图像处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【数字图像处理2】人类视觉系统</title>
     <url>/2021/12/19/%E3%80%90%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%862%E3%80%91%E4%BA%BA%E7%B1%BB%E8%A7%86%E8%A7%89%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>在学习数字图像处理之前，先了解一下人类的视觉系统。</p>
@@ -2092,29 +2614,17 @@
       </tags>
   </entry>
   <entry>
-    <title>【数字图像处理1】什么是数字图像处理</title>
-    <url>/2021/12/19/%E3%80%90%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%861%E3%80%91%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<p>主要参考：冈萨雷斯《数字图像处理》</p>
-<p>计算机视觉是现在最火的研究领域，一开始我以为数字图像处理是计算机视觉的一部分，然而事实并非如此。接下来会通过比较数字图像处理，图像分析，计算机视觉的关系来介绍什么是数字图像处理。</p>
+    <title>【文献阅读】</title>
+    <url>/2022/01/15/%E3%80%90%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E3%80%91/</url>
+    <content><![CDATA[<p>Title:</p>
+<p>Year:</p>
+<p>Author:</p>
+<p>School:</p>
 <span id="more"></span>
-<h3 id="1-什么是数字图像处理"><a href="#1-什么是数字图像处理" class="headerlink" title="1.什么是数字图像处理"></a>1.什么是数字图像处理</h3><p>图像我们大家都十分熟悉，平常在手机和电脑上看到的都是数字图像。与之对应的可以叫作非数字图像，例如我们小时候用胶卷相机拍出来的照片，或者是在医院拍的CT，得到的图片在胶片上呈现，是非数字化的。因为计算机能看懂的只有0和1，也就是二进制数，所以用数字来描述一幅图像，得到的就是数字图像。数字图像处理最早的起源可以追溯到上世纪二十年代，那时候人们为了实现远距离传输图像，先将一张图像编码成信号的形式（例如白色就用高电位表示，黑色用低电位表示），然后接收端再解码进行打印。显然，那时候并没有对图像进行什么实质意义上的处理，但是此时已经涉及到了数字图像的概念。</p>
-<p>数字图像处理，图像分析，计算机视觉三者并没有十分明确的分界。但是一般认为，数字图像处理的输入和输出都是一张图片，例如我们平常用到的P图软件。而计算机视觉的目标是模拟人类的视觉系统，是人工智能的一个分支，其输入是图像，输出就不一定是啥了，这要根据任务的需要，如果理解一张图片，那么输出可能就是一段描述图像内容的话。图像分析介于二者之间，是中间的过程，与这两个领域都有交集，其输入是图片，输出是图像中的一些特征信息，但这些信息并没有上升到语义的级别。</p>
-<blockquote>
-<p>我的理解是，图像分析没有用到数据驱动的方法，而是单纯的通过数学的方法对图像进行处理，从而得到图像中的一些信息。</p>
-</blockquote>
-<p>以文本识别为例，从图像中提取出文本并将其描述成计算机可以处理的形式便属于图像分析。而要理解全文的意思，就属于计算机视觉的领域了。在《数字图像处理》这本书中，会涉及到图像处理和分析这两部分内容。</p>
-<h3 id="2-数字图像处理的步骤"><a href="#2-数字图像处理的步骤" class="headerlink" title="2.数字图像处理的步骤"></a>2.数字图像处理的步骤</h3><p><img src="https://piggyhero.gitee.io/pic/img/20211222004857.png" alt="image-20211222004850371"></p>
-<p>在本书中，其章节安排是按照图像处理的顺序进行的。</p>
-<blockquote>
-<p>注意：在一个图像处理系统里，上述过程不一定全都有。</p>
-</blockquote>
-]]></content>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2>]]></content>
       <categories>
-        <category>工程原理和实践</category>
+        <category>文献阅读</category>
       </categories>
-      <tags>
-        <tag>数字图像处理</tag>
-      </tags>
   </entry>
   <entry>
     <title>【概率论与数理统计】极大似然估计和后验估计</title>
@@ -2196,428 +2706,6 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
       </categories>
       <tags>
         <tag>概率论与数理统计</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【矩阵】线性代数可视化学习笔记</title>
-    <url>/2021/10/18/%E3%80%90%E7%9F%A9%E9%98%B5%E3%80%91%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>3Blue1Brown 线代课程学习笔记，受益匪浅。<br><span id="more"></span></p>
-<h1 id="线性代数可视化"><a href="#线性代数可视化" class="headerlink" title="线性代数可视化"></a>线性代数可视化</h1><p><a href="https://www.bilibili.com/video/BV1ib411t7YR?p=1">参考</a></p>
-<h2 id="1-向量是什么"><a href="#1-向量是什么" class="headerlink" title="1.向量是什么"></a>1.向量是什么</h2><p>对于向量的理解，可以分为三个层面：</p>
-<ul>
-<li><p><strong>物理学家眼中</strong>：向量是一个空间中箭头，它只包括长度和方向两个信息，而与其所在的空间位置无关</p>
-</li>
-<li><p><strong>计算机专业眼中</strong>：向量是一个有序数组，这个有序数组可以表示物理学家眼中的向量在空间中的坐标，而且这个向量通常是以坐标系原点为起点的。为了区分于点的坐标，向量通常竖着写</p>
-</li>
-<li><p><strong>数学家眼中</strong>：向量可以是任何东西，只要能保证两个向量相加和数与向量相乘满足一定的条件即可</p>
-</li>
-</ul>
-<p>通过建立坐标系，可以使一个向量与有序的数组相联系，每一个数组对应一个向量，每一个向量也可以用数组来表示，这就为物理学家在描述向量时提供了一种数学语言</p>
-<p><strong>向量两个最基本的运算：</strong></p>
-<ul>
-<li><p>向量加法：遵循三角形法则 $\longrightarrow$ 用数组描述的向量通过对应元素相加可以很好的描述该法则</p>
-</li>
-<li><p>向量的数乘：表示对向量的伸长与缩短 </p>
-</li>
-</ul>
-<h2 id="2-线性组合、基与张成空间"><a href="#2-线性组合、基与张成空间" class="headerlink" title="2.线性组合、基与张成空间"></a>2.线性组合、基与张成空间</h2><p>在标准的坐标系中，有两个特殊的向量，单位向量 $\hat i$ 和 $\hat j$ ，对于多维空间也同样。</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216015953.png" alt="image-20210715005154764" style="zoom:67%;" /></p>
-<p>它们合起来称作坐标系的基，当把坐标中的每一个元素看作是标量时，每一个基向量就是这些标量所缩放的向量</p>
-<h3 id="·-什么是线性组合"><a href="#·-什么是线性组合" class="headerlink" title="· 什么是线性组合"></a>· 什么是线性组合</h3><p>多个向量的数乘之和称为这些向量的线性组合</p>
-<h3 id="·-向量张成的空间"><a href="#·-向量张成的空间" class="headerlink" title="· 向量张成的空间"></a>· 向量张成的空间</h3><p>给定一组向量，通过该组向量的线性组合生成的<strong>向量的集合</strong>，称为该组向量==张成的空间==</p>
-<p>以二维空间为例，给定向量 $\vec w$ 和 $\vec v$ ，有以下三种情况：</p>
-<ol>
-<li><p>当$\vec w$ 和 $\vec v$ 不共线时，所张成的空间为二维平面，也就是二维空间中的任意向量都可以由这两个向量的线性组合得到</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216015958.png" alt="image-20210715035555651" style="zoom: 33%;" /></p>
-</li>
-<li><p>当$\vec w$ 和 $\vec v$ 共线时，所张成的空间为一条直线，仅能表示终点在该直线上的向量</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020002.png" alt="image-20210715040223112" style="zoom:50%;" /></p>
-</li>
-<li><p>当$\vec w$ 和 $\vec v$ 都为0向量时，所张成的空间为一点，仅能表示0向量</p>
-</li>
-</ol>
-<p><strong>同样对于我们常用的三维空间，当仅有两个不共面的向量时，这两个向量所张成的空间为一个平面</strong></p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020007.png" alt="image-20210715040537951" style="zoom: 20%;" /></p>
-<h3 id="·-线性相关与线性无关"><a href="#·-线性相关与线性无关" class="headerlink" title="· 线性相关与线性无关"></a>· 线性相关与线性无关</h3><p>从上面的表述中，便可以得到<strong>线性相关</strong>的定义：当一组向量中，其中一个向量处在其他向量所张成的空间中（这个向量可以由其他的向量线性组合表示出来），那么这一组向量就是线性相关的</p>
-<p>而<strong>线性无关</strong>的定义与它正好相反：一组向量中，任何一个向量都不处在其他向量所张成的空间中（任何一个向量不可以由其他向量线性组合表示出来）</p>
-<h3 id="·-空间中的一组基"><a href="#·-空间中的一组基" class="headerlink" title="· 空间中的一组基"></a>· 空间中的一组基</h3><p>某向量空间的一组基是张成该空间的一个线性无关的向量集合</p>
-<h2 id="3-矩阵与线性变换"><a href="#3-矩阵与线性变换" class="headerlink" title="3.矩阵与线性变换"></a>3.矩阵与线性变换</h2><h3 id="·-首先需要知道的"><a href="#·-首先需要知道的" class="headerlink" title="· 首先需要知道的"></a>· 首先需要知道的</h3><p>我们之前所说向量的时候，当有基向量存在时，可以用一个数组也就是坐标来表示一个向量，现在我们定义一个永远不变的坐标系和基向量，这个坐标系的x轴和y轴垂直，且基向量是与x轴和y轴正方向相同的单位向量，暂且我们就称坐标系和基向量为<strong>永不变坐标系和永不变基向量</strong>，之后的所有向量或坐标系的基的描述都是在这个永不变基的基础上进行的</p>
-<h3 id="·-线性变换"><a href="#·-线性变换" class="headerlink" title="· 线性变换"></a>· 线性变换</h3><p>变换实际上是函数的另一种说法，函数的作用是输入一个数，输出一个数；在线性代数中，变换的输入是一个向量，输出也是一个向量</p>
-<p><strong>线性变换</strong>是变换的一种特殊形式，它有两个特点：</p>
-<ul>
-<li><p>直线在线性变换后，仍是直线</p>
-</li>
-<li><p>原点必须保持不变</p>
-</li>
-</ul>
-<p>那么如何用数学语言来描述线性变换呢？答案就是用矩阵来描述</p>
-<h3 id="·-矩阵"><a href="#·-矩阵" class="headerlink" title="· 矩阵"></a>· 矩阵</h3><p>矩阵就是一种数学语言，来描述线性变换，矩阵的每一列记录基向量在线性变换后的坐标</p>
-<p>以二维空间为例：</p>
-<script type="math/tex; mode=display">
-\vec v = -1\vec i + 2\vec j\\
-Transformed \ \vec v=-1(Transformed \ \vec i)+2(Transformed\ \vec j)</script><p>当经过一次线性变换后，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020013.png" alt="image-20210715034732752" style="zoom:67%;" /></p>
-<script type="math/tex; mode=display">
-[Transformed\ \vec i ,Transformed\ \vec j]=\left[\begin{array}{ll}
-3 & 1 \\
-0 & 2
-\end{array}\right]</script><script type="math/tex; mode=display">
-Transformed\ \vec v=
--1\left[\begin{array}{l}
-3 \\
-0
-\end{array}\right]+2\left[\begin{array}{l}
-1 \\
-2
-\end{array}\right]=\left[\begin{array}{ll}
-3&1\\
-0&2
-\end{array}\right]\left[\begin{array}{l}
-\ -1\\
-\  \ 2\end{array}\right]
-=\left[\begin{array}{l}
--1  \\
-\ \ 4 
-\end{array}\right]</script><p><strong>这也就定义了矩阵和向量的乘法</strong>，矩阵乘以向量，就是对该向量的一个线性变换</p>
-<p>当变换后的两个基向量线性相关时，由这两个向量所张成的空间就变成了一条线，而原来的向量就被变换到这个空间上，也就是变换后的向量的终点在一条直线上</p>
-<blockquote>
-<p>总之，线性变换就是对向量的变换，对向量的变换的方法是对描述该向量的基进行变换，因此线性变换也是操纵空间的一种手段</p>
-</blockquote>
-<p>那么当有许多个矩阵乘以一个向量的时候，它的几何意义又是什么呢？</p>
-<h3 id="·-复合变换与矩阵乘法"><a href="#·-复合变换与矩阵乘法" class="headerlink" title="· 复合变换与矩阵乘法"></a>· 复合变换与矩阵乘法</h3><p>矩阵A、B分别代表着线性变换1和2，AB代表着先进行线性变换2，然后再进行线性变换1（注意这里是先2后1），令AB=C，那么C就代表着先进行2再进行1的一个复合变换，也可以把C当作是一次独立的变换，它的效果和先2再1的效果相同</p>
-<p>另外，AB $\neq$ BA，也就是说先进行2再进行1和先进行1再进行2的效果是不同的</p>
-<blockquote>
-<p>前面所说的线性变换理解成是一个处理向量的函数，现在从另一个角度来总结一下，线性变换用矩阵来描述，而矩阵的列向量表示线性变换后基向量的坐标，对一个向量进行线性变换，就是先对基向量进行线性变换，然后用这个向量的坐标对变换后的基向量进行线性组合，最终得到变换后的向量。因为基向量可以描述一个空间，因此基向量变了，其所对应的空间也发生了变化</p>
-</blockquote>
-<h2 id="4-行列式"><a href="#4-行列式" class="headerlink" title="4.行列式"></a>4.行列式</h2><p>上节说过，线性变换是操纵空间的一种手段，那么如何刻画空间变化了多少呢，这就需要请出行列式了，行列式就是用来描述空间变化的多少</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020020.png" alt="image-20210715053137633" style="zoom:53%;" /></p>
-<p>下面以二维空间为例：</p>
-<p>我们在坐标系中用网格线来描述这个空间的形态，在标准坐标系中，绿色箭头代表i向量，红色箭头代表j向量，此时向量i和j所围成的区域是一个正方形，其面积为1</p>
-<p>当进行线性变换后，基向量的方向和长度都发生了变化，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020024.png" alt="image-20210715053620420" style="zoom:50%;" /></p>
-<p>那么此时由基向量i和j所围成的区域也发生了变化，变成了一个平行四边形，而该区域的面积等于矩阵的行列式</p>
-<blockquote>
-<p>矩阵的行列式是描述其线性变换所对空间变化的量度</p>
-</blockquote>
-<p>当行列式为0时，表示这个平面被压缩成了一条线，<strong>而0矩阵表示把平面压缩成一个点</strong></p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020028.png" alt="image-20210715054036323" style="zoom:50%;" /></p>
-<p>当行列式为负时，表示这个平面发生了反转</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020030.png" alt="image-20210715054301501" style="zoom:50%;" /></p>
-<p>注意：原来绿色的基向量在红色基向量的右边，此时发生了平面翻转</p>
-<p>三维空间中，矩阵的行列式表示变换后基向量所围成空间区域的体积，当行列式为0时，表示该变换将三维空间压缩成一个平面或一条直线又或是一个点（这在后面会引出秩的用法）。更多维空间的道理是一样的，这里就不过多赘述</p>
-<h2 id="5-逆矩阵、列空间、秩和零空间"><a href="#5-逆矩阵、列空间、秩和零空间" class="headerlink" title="5.逆矩阵、列空间、秩和零空间"></a>5.逆矩阵、列空间、秩和零空间</h2><p>线性代数的用处很多，其中的一个用处是解线性方程组</p>
-<p>方程组的求解和之前所讲的行列式和矩阵以及线性变换密切相关</p>
-<p>例如我们现在有一个方程组：</p>
-<script type="math/tex; mode=display">
-\begin{cases}
-1x+2y+3z=5\\
-3x+8y+7z=6\\
-0x+3y+6z=0
-\end{cases}</script><p>这是一个三阶线性方程组，因为它与矩阵和向量的乘法很像，所以可以写成矩阵的形式：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-1&2&3\\
-3&8&7\\
-0&3&6
-\end{array}\right]
-\left[\begin{array}{l}
-x\\
-y\\
-z
-\end{array}\right]=\left[\begin{array}{l}
-5\\
-6\\
-0
-\end{array}\right]</script><p>即：</p>
-<script type="math/tex; mode=display">
-A\vec x=\vec v</script><p>上述式子已知 $\vec v$ ，A矩阵表示一个线性变换，如若求 $\vec x$ ,则只需将A矩阵所表示的线性变换的逆变换作用到 $\vec v$ 上，那么是不是什么时候都可以用这种方法呢？</p>
-<h3 id="·矩阵的逆"><a href="#·矩阵的逆" class="headerlink" title="·矩阵的逆"></a>·矩阵的逆</h3><p>矩阵的逆表示矩阵线性变换所对应的逆变换，如果矩阵A的行列式不等于0，那么矩阵A是可逆的</p>
-<p>之前的方程组的解为： $\vec x = A^{-1}\vec v$</p>
-<p>上面说到矩阵的逆表示逆变换，所以当进行一次变换再进行一次逆变换等同于没有变化</p>
-<script type="math/tex; mode=display">
-A^{-1}A=AA^{-1}=I</script><p><strong>但是当矩阵的行列式为0时</strong>，矩阵的逆不存在。背后的几何意义是线性变换将多维空间变换为低维空间，如果想找到<strong>一个</strong>低维空间还原成高维空间的逆变换，是得不到一个确定的变换的，因为有一维或多维的缺失，所以这个变换可以有任意多种形式</p>
-<p>再回到我们的方程组，当矩阵的行列式为0时，解是可能存在的，这分为两种情况：</p>
-<ul>
-<li>一种是当 $\vec v$ 向量在A所压缩的空间上时，解存在</li>
-<li>另一种是 $\vec v$ 向量在A所压缩的空间外时，无解</li>
-</ul>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020036.png" alt="image-20210715085801043" style="zoom: 33%;" /></p>
-<h3 id="·矩阵的秩"><a href="#·矩阵的秩" class="headerlink" title="·矩阵的秩"></a>·矩阵的秩</h3><p>可以发现，虽然原空间通过变换后，变成一个低维的空间，此时都会有无解的情况发生，但无解情况的出现的难易程度是不一样的。例如当三维空间变换成二维空间时，是一个平面，只要 $\vec v$ 在这个平面上，解存在。但是当变换成一维空间也就是一条线时，只有 $\vec v$ 在这条线上时，解存在。虽然上面两种情况的A矩阵的行列式都为0，但是它们出现无解的情况是不同的，这时就要引出秩的概念</p>
-<p><strong>秩</strong>表示变换后空间的维数，例如三维矩阵的秩最大为3，它表示基向量可以张成整个三维空间，但是当矩阵的秩为2时，空间被压缩了，此时表示基向量只能张成二维空间，但是它没有秩为1的压缩情况严重</p>
-<h3 id="·列空间"><a href="#·列空间" class="headerlink" title="·列空间"></a>·列空间</h3><p>矩阵的列向量所张成的空间即为列空间，当 $ \vec x$ 表示任意的向量时，$A\vec x$ 就是矩阵A的列空间</p>
-<p>关于秩更准确的定义：矩阵秩表示矩阵列空间的维数</p>
-<p><strong>当秩等于矩阵的列时，意味着它达到了它所能达到的最大值，此时叫作满秩</strong></p>
-<p>0向量一定包含在列空间中，因为线性变换不改变原点的位置，也就是 $A\vec0=\vec 0$ </p>
-<p>对于一个满秩变换来说，唯一能在变换后落在原点的向量就是0向量本身。但是对于一个非满秩的矩阵，它将空间压缩到一个低维的空间，也就是说有一系列向量在变换后被压缩到原点。例如对于原二维的空间，当进行压缩到一维空间的变换时，会使原二维空间中某一方向直线上的所有的向量都压缩到原点。再如原三维空间，压缩到一个二维空间时，也会使原三维空间中某一方向直线上所有的向量压缩到原点，当压缩到一个一维空间时，会使原三维空间中过原点的某一平面上的所有向量压缩到原点。</p>
-<h3 id="·零空间-核空间"><a href="#·零空间-核空间" class="headerlink" title="·零空间/核空间"></a>·零空间/核空间</h3><p>变换后被压缩到原点的向量的集合，叫作矩阵的零空间或者核空间</p>
-<p>==被压缩空间的维数==就是零空间的维数。例如三维空间中的一个向量经过一个方阵的线性变换后，被限制在二维平面上，那么该方阵的零空间维数为1，如果是将该向量变换成一个点，那么该方阵的零空间维数为2。零空间的维数就是表示方阵可以将几维的空间压缩到原点。也可以看作是方程 $A\vec x =0$​​​的解的情况，首先A得为方阵，当A的零空间为0时，也就是A满秩，那么只有零向量是该方程的解。如果A的零空间为2时，那么解向量的维数为2。</p>
-<h3 id="·非方阵"><a href="#·非方阵" class="headerlink" title="·非方阵"></a>·非方阵</h3><p>非方阵的几何意义和之前的方阵稍稍有些不同，先来说之前的方阵，方阵表示将一个向量进行变换，这些变换有旋转这个向量，拉伸压缩这个向量，无论怎么变换这个向量，这个向量都处于原空间中，即变换前是一个n维的向量，变换后还是n维的向量。举一个例子，对于三维空间中的一个向量，当矩阵A的秩为2时，表示将这个向量压缩到一个二维的平面中，尽管是压缩到二维平面中，只是把这个向量限制在二维平面上，但这个向量仍是三维空间中的向量。</p>
-<p>而非方阵就得用另一种方式来描述，和之前所提及的函数一样，非方阵可以看作是一个映射，输入一个m维的向量，映射出一个n维的向量，这两个向量分别处于不同的空间中。</p>
-<p>例如一个矩阵为 $m\times n$ 维，那么它表示将一个n维空间中的向量映射到m维空间中，矩阵的列向量同样是原空间中的基向量在新空间中的映射</p>
-<blockquote>
-<p>小结：方阵表示线性变换，指在原有空间中对向量进行变换；非方阵表示线性映射，把原空间中的向量映射到一个新的空间中</p>
-</blockquote>
-<h2 id="6-向量的点积"><a href="#6-向量的点积" class="headerlink" title="6.向量的点积"></a>6.向量的点积</h2><h3 id="·向量点积的几何意义"><a href="#·向量点积的几何意义" class="headerlink" title="·向量点积的几何意义"></a>·向量点积的几何意义</h3><p>有两个向量 $\vec v$ 和 $\vec w$ ，点积的几何意义表示 $\vec v$ 在 $\vec w$ 方向上的投影的长度和 $\vec w$长度的乘积</p>
-<p>点积的结果和向量的顺序无关，即$\vec v ·\vec w=\vec w·\vec v$ </p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020043.png" alt="image-20210716055411474" style="zoom:33%;" /></p>
-<p>利用对称性，可以直观证明上述结论，令 $\vec v$ 和 $\vec w$ 的长度相同，根据对称性可以知道， $\vec v$ 在 $\vec w$ 上的投影长度与 $\vec w $  在 $\vec v$ 上的投影长度相同。当 $ \vec v$ 放大两倍后，这种对称性就不再存在了，但此时 $\vec w$ 在 $2\vec v$ 上的投影不变，也可以说  $2\vec v$ 在 $\vec w$ 上的投影长度变为原来的2倍，所以 $(2\vec v)·\vec w=\vec w·(2\vec v)$ </p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020049.png" alt="image-20210716055903784"></p>
-<h3 id="·向量点积的矩阵表示"><a href="#·向量点积的矩阵表示" class="headerlink" title="·向量点积的矩阵表示"></a>·向量点积的矩阵表示</h3><p>如果把一个向量当成一个 $n\times1$ 的矩阵来看时，那么对向量的转置就得到了一个 $1\times n$的矩阵，向量的点积可以用向量的转置乘以向量来计算</p>
-<p><strong>那么为什么可以这样计算呢？</strong>首先可以想到，既然转置是一个矩阵，就可以表示一个线性变换了，这个线性变换的几何意义就是把多维空间中的向量映射到一个一维空间上。经过映射得到的一维向量是一个数，它表示在多维空间中的一个向量在某一方向上的投影长度。</p>
-<p>现在以二维空间为例：</p>
-<p>在二维空间中有一单位向量 $\vec u$ ，在该向量的方向上布置一个数轴，这个数轴也就是一个一维空间。如果想把 $\vec u$ ==映射==到这个一维空间中，则需要找到二维空间的基向量在这个一维空间上的位置，我们用投影位置来表示基向量在一维空间上的位置，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020055.png" alt="image-20210716092117757"></p>
-<p>根据投影关系和对称关系，可以得到二维空间中的基向量 $\vec i 和 \vec j$ 在一维空间的位置</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020101.png" alt="image-20210716092532170"></p>
-<p>则$\vec i 和 \vec j$在一维空间的坐标为：</p>
-<script type="math/tex; mode=display">
-[u_x \ u_y]</script><p>对于二维空间中任意的向量在这个轴上的投影，可以用这个矩阵乘以向量的坐标来得到</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020106.png" alt="image-20210716092801428"></p>
-<p>最终得到的结果为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{ll}
-u_{x} & u_{y}
-\end{array}\right]\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=u_{x} \cdot x+u_{y} \cdot y</script><p>这与这个任意向量和 $\vec u$ 的点积完全相同</p>
-<blockquote>
-<p>总结：为什么点积可以用向量的转置乘以向量？向量的转置表示一个矩阵，这个矩阵又代表着一个线性变换，这个线性变换就表示把一个多维空间的向量==投影==到一个一维空间中。</p>
-</blockquote>
-<p>当 $\vec v=k\vec u$ 是任意的向量时</p>
-<script type="math/tex; mode=display">
-k\left[\begin{array}{ll}u_{x} & u_{y}\end{array}\right]\left[\begin{array}{l}x \\
-y\end{array}\right]=\left[\begin{array}{ll}ku_{x} & ku_{y}\end{array}\right]\left[\begin{array}{l}x \\
-y\end{array}\right]=ku_{x} \cdot x+ku_{y} \cdot y</script><p>两个任意向量的点积表示先将一个向量投影到另一向量所在的方向上，然后将投影长度和另一向量的长度相乘</p>
-<h2 id="7-向量的叉积"><a href="#7-向量的叉积" class="headerlink" title="7.向量的叉积"></a>7.向量的叉积</h2><h3 id="·什么是叉积"><a href="#·什么是叉积" class="headerlink" title="·什么是叉积"></a>·什么是叉积</h3><p>两个向量的叉积会产生一个与这两个向量都垂直的新向量，并且其长度等于这两个向量所围成的四边形的面积，而且它们的方向满足右手定则。</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020113.png" alt="image-20210716095942997"></p>
-<p>既然是表示面积，这就与之前说过的行列式有关系，但这只对二维向量成立（因为只有两个向量，只有二维向量才能满足方阵，才有行列式）</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020117.png" alt="image-20210716095517110"></p>
-<p>两个向量所组成的矩阵对应着一个线性变换，线性变换的度量就是矩阵的行列式，也就是基向量所围成的四边形面积</p>
-<h3 id="·关于三维空间中的叉积的计算"><a href="#·关于三维空间中的叉积的计算" class="headerlink" title="·关于三维空间中的叉积的计算"></a>·关于三维空间中的叉积的计算</h3><p>对于三维空间中的叉积，可以用下面的计算公式：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-v_{1} \\
-v_{2} \\
-v_{3}
-\end{array}\right] \times\left[\begin{array}{l}
-w_{1} \\
-w_{2} \\
-w_{3}
-\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
-\vec{\imath} & v_{1} & w_{1} \\
-\vec{\jmath} & v_{2} & w_{2} \\
-\vec{k} & v_{3} & w_{3}
-\end{array}\right]\right)</script><p>现在就来说明一下为什么可以用这个公式来计算叉积</p>
-<p>由第4节可知，矩阵的行列式表示列向量所张成的平行六面体的体积，而上面行列式的第一列不是一个向量，而是三个基向量，下面先来定义一个线性映射 $L(\vec a)$</p>
-<script type="math/tex; mode=display">
-L(\vec a)=\operatorname{\det}\left(\left[\begin{array}{c}
-{x} & v_{1} & w_{1} \\
-{y} & v_{2} & w_{2} \\
-{z} & v_{3} & w_{3}
-\end{array}\right]\right)\quad(\vec a=\left[\begin{array}{l}\ x\\
-y\\
-z\end{array}\right])</script><p>这个线性映射将一个三维向量映射到一维空间中，表示一个数，于是可以写成这种形式：</p>
-<script type="math/tex; mode=display">
-L(\vec a)=[\begin{array}{}p_1&p_2&p_3\end{array}]\cdot\left[\begin{array}{}x\\
-y\\
-z\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
-{x} & v_{1} & w_{1} \\
-{y} & v_{2} & w_{2} \\
-{z} & v_{3} & w_{3}
-\end{array}\right]\right)</script><p>于是展开有：</p>
-<script type="math/tex; mode=display">
-\begin{array}{r}
-\quad x\left(v_{2} \cdot w_{3}-v_{3} \cdot w_{2}\right)+ \\
-p_{1} \cdot x+p_{2} \cdot y+p_{3} \cdot z=y\left(v_{3} \cdot w_{1}-v_{1} \cdot w_{3}\right)+ \\
-z\left(v_{1} \cdot w_{2}-v_{2} \cdot w_{1}\right)
-\end{array}</script><p>即：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&p_{1}=v_{2} \cdot w_{3}-v_{3} \cdot w_{2} \\
-&p_{2}=v_{3} \cdot w_{1}-v_{1} \cdot w_{3} \\
-&p_{3}=v_{1} \cdot w_{2}-v_{2} \cdot w_{1}
-\end{aligned}</script><p>现在用 $\vec p=[p_1\ p_2\ p_3]^T$，然后来谈几何意义</p>
-<p>行列式表示三个列向量所张成的平行六面体的体积，而 $\vec p$ 和 $\vec a$ 的点积就等于这个体积，那么 $\vec p$ 是一个什么向量才能满足它们两个的点积等于体积呢。对于$\vec a$来说，它是任意一个向量，而 $\vec v$ 和 $\vec w$ 向量是固定的，平行六面体的体积等于面积乘以高，也就是说，当面积确定后，只需要知道高就可以了</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020123.png" alt="image-20210716111418718"></p>
-<p>这个高就是 $\vec a$ 在垂直于 $\vec v$ 和 $\vec w$ 的方向上的投影，于是现在就可以知道 $\vec p$ 的意义了，$\vec p$ 的方向垂直于$\vec v$ 和 $\vec w$ ，它的长度是$\vec v$ 和 $\vec w$ 所张成平行四边形的面积</p>
-<h2 id="8-基变换"><a href="#8-基变换" class="headerlink" title="8.基变换"></a>8.基变换</h2><p>现在有两个二维世界中的人，猪猪侠和包包侠，在猪猪侠的世界中，基向量是这样的：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020127.png" alt="image-20210716112957364"></p>
-<p>在包包侠的世界中，基向量是这样的：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020130.png" alt="image-20210716114150696"></p>
-<p>当有同一个向量时，在两个人的眼中，描述是不同的</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020134.png" alt="image-20210716114326652"></p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{ll}
-\vec{e}_{i} & \vec{e}_{j}
-\end{array}\right]\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=\left[\vec{e}_{i}^{\prime}\ \ \ \  \ \vec{e}_{j}^{\prime}\right]\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]</script><p>现在包包侠把她所看到的向量的坐标告诉猪猪侠，那么猪猪侠必须要先知道包包侠的基向量在猪猪侠的基向量下的坐标，然后才能知道</p>
-<p>于是包包侠的两个基向量在猪猪侠的基向量下的坐标为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{}a&b\\
-c&d\end{array}\right]</script><p>所以猪猪侠就知道了这个向量在他的基下的坐标：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=\left[\begin{array}{}a&b\\
-c&d\end{array}\right]\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]=A\vec v^{\prime}</script><p>同理猪猪侠把这个他看到的向量的坐标告诉包包侠，包包侠也得转化到自己的基下来，即：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]
-=\left[\begin{array}{}a&b\\
-c&d\end{array}\right]^{-1}\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=A^{-1}\vec v</script><p>现在猪猪侠想把这个向量变一变，比如旋转个90度，于是他用自己世界的基来描述变化后空间的位置，也就是新的坐标轴上单位向量的坐标为：</p>
-<script type="math/tex; mode=display">
-M=\left[\begin{array}{}
-m_1&m_2\\
-m_3&m_4
-\end{array}\right]</script><p>于是变化后向量的坐标为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{new} \\
-y_{new}
-\end{array}\right]=\left[\begin{array}{}
-m_1&m_2\\
-m_3&m_4
-\end{array}\right]\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]</script><p>现在包包侠也同样想把这个向量变一下，变得和猪猪侠一样，此时她直接乘以猪猪侠的M矩阵是不可以的，因为M是在猪猪侠的基上得到的，她想了一个好办法：</p>
-<ul>
-<li>她先把想变化的向量告诉猪猪侠，猪猪侠在自己的基下把这个向量表示出来</li>
-<li>然后猪猪侠去变，乘以M矩阵</li>
-<li>然后她再将猪猪侠变化后的向量换到自己的基下表示</li>
-</ul>
-<p>上述的过程就用下面的公式来表示：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{new}^{\prime} \\
-y_{new}^{\prime}
-\end{array}\right]=\left[\begin{array}{}a&b\\
-c&d\end{array}\right]^{-1}\left[\begin{array}{}
-m_1&m_2\\
-m_3&m_4
-\end{array}\right]\left[\begin{array}{}a&b\\
-c&d\end{array}\right]\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]=A^{-1}MA\vec v^{\prime}</script><h2 id="9-特征值和特征向量"><a href="#9-特征值和特征向量" class="headerlink" title="9.特征值和特征向量"></a>9.特征值和特征向量</h2><h3 id="·特征向量"><a href="#·特征向量" class="headerlink" title="·特征向量"></a>·特征向量</h3><p>矩阵乘以一个向量表示对这个向量的线性变换，以二维空间为例：</p>
-<p>一个向量所张成的空间，就是这个向量所在的直线，当这个向量被变换后，很可能会离开这个空间，如下图所示</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020142.png" alt="image-20210716121344977"></p>
-<p>但是也会有一些向量，没有离开它本身的张成空间，线性变换只是对它进行了拉伸或压缩，此时矩阵的作用如同一个标量</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020148.png" alt="image-20210716121501072"></p>
-<p>这两个方向空间中的向量都不会偏离其原来所在的直线，而其他向量都会发生偏转</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020153.png" alt="image-20210716121716491"></p>
-<p>这些不发生偏转的向量就叫作特征向量</p>
-<h3 id="·特征值"><a href="#·特征值" class="headerlink" title="·特征值"></a>·特征值</h3><p>每一个特征向量都有一个与其对应的特征值，特征值表征这个向量空间上的向量被拉伸和压缩多少</p>
-<p>那么特征向量有啥用呢？</p>
-<p>考虑一个三维旋转的线性变换，当找到了它的特征向量，就找到了它的旋转轴</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020159.png" alt="image-20210716122229199"></p>
-<p>当特征值为0时，表示没有特征向量 </p>
-<h2 id="10-抽象向量空间"><a href="#10-抽象向量空间" class="headerlink" title="10.抽象向量空间"></a>10.抽象向量空间</h2><p>无论是什么东西，只要符合以下八条公理，那么这个东西就可以称作向量，它遵循着之前讲过的所用性质</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020203.png" alt="image-20210716125152513"></p>
-<blockquote>
-<p>任意向量都能表达为基向量以某种方式进行线性组合，所以求一个向量变换后的结果，就是求变换后基向量以相同方式进行线性组合的结果</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>数理基础</category>
-      </categories>
-      <tags>
-        <tag>矩阵</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【视觉SLAM学习1】视觉SLAM基本框架</title>
-    <url>/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A01%E3%80%91%E8%A7%86%E8%A7%89SLAM%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6/</url>
-    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032349.png" alt="视觉SLAM框架"></p>
-<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【视觉SLAM学习2】SLAM的数学描述</title>
-    <url>/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A02%E3%80%91SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
-    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
-<hr>
-<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
-<ol>
-<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
-<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
-</ol>
-<hr>
-<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
-<script type="math/tex; mode=display">
-\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
-<p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
-<script type="math/tex; mode=display">
-\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
-<hr>
-<p>以二维运动为例：</p>
-<p>如图所示</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033742.png" style="zoom:60%;" /></p>
-<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&\vec{x}_{k}=\left[x_{1}, x_{2}, \theta\right]_{k}^{\top} \\
-&\vec{u}_{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]_{k}^{\top}
-\end{aligned}</script><p>运动方程为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k}=\left[\begin{array}{l}
-x_{1} \\
-x_{2} \\
-\theta
-\end{array}\right]_{k-1}+\left[\begin{array}{c}
-\Delta x_{1} \\
-\Delta x_{2} \\
-\Delta \theta
-\end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033747.png" alt="img" style="zoom:60%;" /></p>
-<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-r_{j} \\
-\varphi_{j}
-\end{array}\right]_k=\left[\begin{array}{c}
-\sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
-\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
-\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
-<blockquote>
-<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
-</blockquote>
-<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
-<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
-<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
-<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
       </tags>
   </entry>
   <entry>
@@ -3973,6 +4061,428 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
+    <title>【矩阵】线性代数可视化学习笔记</title>
+    <url>/2021/10/18/%E3%80%90%E7%9F%A9%E9%98%B5%E3%80%91%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>3Blue1Brown 线代课程学习笔记，受益匪浅。<br><span id="more"></span></p>
+<h1 id="线性代数可视化"><a href="#线性代数可视化" class="headerlink" title="线性代数可视化"></a>线性代数可视化</h1><p><a href="https://www.bilibili.com/video/BV1ib411t7YR?p=1">参考</a></p>
+<h2 id="1-向量是什么"><a href="#1-向量是什么" class="headerlink" title="1.向量是什么"></a>1.向量是什么</h2><p>对于向量的理解，可以分为三个层面：</p>
+<ul>
+<li><p><strong>物理学家眼中</strong>：向量是一个空间中箭头，它只包括长度和方向两个信息，而与其所在的空间位置无关</p>
+</li>
+<li><p><strong>计算机专业眼中</strong>：向量是一个有序数组，这个有序数组可以表示物理学家眼中的向量在空间中的坐标，而且这个向量通常是以坐标系原点为起点的。为了区分于点的坐标，向量通常竖着写</p>
+</li>
+<li><p><strong>数学家眼中</strong>：向量可以是任何东西，只要能保证两个向量相加和数与向量相乘满足一定的条件即可</p>
+</li>
+</ul>
+<p>通过建立坐标系，可以使一个向量与有序的数组相联系，每一个数组对应一个向量，每一个向量也可以用数组来表示，这就为物理学家在描述向量时提供了一种数学语言</p>
+<p><strong>向量两个最基本的运算：</strong></p>
+<ul>
+<li><p>向量加法：遵循三角形法则 $\longrightarrow$ 用数组描述的向量通过对应元素相加可以很好的描述该法则</p>
+</li>
+<li><p>向量的数乘：表示对向量的伸长与缩短 </p>
+</li>
+</ul>
+<h2 id="2-线性组合、基与张成空间"><a href="#2-线性组合、基与张成空间" class="headerlink" title="2.线性组合、基与张成空间"></a>2.线性组合、基与张成空间</h2><p>在标准的坐标系中，有两个特殊的向量，单位向量 $\hat i$ 和 $\hat j$ ，对于多维空间也同样。</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015953.png" alt="image-20210715005154764" style="zoom:67%;" /></p>
+<p>它们合起来称作坐标系的基，当把坐标中的每一个元素看作是标量时，每一个基向量就是这些标量所缩放的向量</p>
+<h3 id="·-什么是线性组合"><a href="#·-什么是线性组合" class="headerlink" title="· 什么是线性组合"></a>· 什么是线性组合</h3><p>多个向量的数乘之和称为这些向量的线性组合</p>
+<h3 id="·-向量张成的空间"><a href="#·-向量张成的空间" class="headerlink" title="· 向量张成的空间"></a>· 向量张成的空间</h3><p>给定一组向量，通过该组向量的线性组合生成的<strong>向量的集合</strong>，称为该组向量==张成的空间==</p>
+<p>以二维空间为例，给定向量 $\vec w$ 和 $\vec v$ ，有以下三种情况：</p>
+<ol>
+<li><p>当$\vec w$ 和 $\vec v$ 不共线时，所张成的空间为二维平面，也就是二维空间中的任意向量都可以由这两个向量的线性组合得到</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015958.png" alt="image-20210715035555651" style="zoom: 33%;" /></p>
+</li>
+<li><p>当$\vec w$ 和 $\vec v$ 共线时，所张成的空间为一条直线，仅能表示终点在该直线上的向量</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020002.png" alt="image-20210715040223112" style="zoom:50%;" /></p>
+</li>
+<li><p>当$\vec w$ 和 $\vec v$ 都为0向量时，所张成的空间为一点，仅能表示0向量</p>
+</li>
+</ol>
+<p><strong>同样对于我们常用的三维空间，当仅有两个不共面的向量时，这两个向量所张成的空间为一个平面</strong></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020007.png" alt="image-20210715040537951" style="zoom: 20%;" /></p>
+<h3 id="·-线性相关与线性无关"><a href="#·-线性相关与线性无关" class="headerlink" title="· 线性相关与线性无关"></a>· 线性相关与线性无关</h3><p>从上面的表述中，便可以得到<strong>线性相关</strong>的定义：当一组向量中，其中一个向量处在其他向量所张成的空间中（这个向量可以由其他的向量线性组合表示出来），那么这一组向量就是线性相关的</p>
+<p>而<strong>线性无关</strong>的定义与它正好相反：一组向量中，任何一个向量都不处在其他向量所张成的空间中（任何一个向量不可以由其他向量线性组合表示出来）</p>
+<h3 id="·-空间中的一组基"><a href="#·-空间中的一组基" class="headerlink" title="· 空间中的一组基"></a>· 空间中的一组基</h3><p>某向量空间的一组基是张成该空间的一个线性无关的向量集合</p>
+<h2 id="3-矩阵与线性变换"><a href="#3-矩阵与线性变换" class="headerlink" title="3.矩阵与线性变换"></a>3.矩阵与线性变换</h2><h3 id="·-首先需要知道的"><a href="#·-首先需要知道的" class="headerlink" title="· 首先需要知道的"></a>· 首先需要知道的</h3><p>我们之前所说向量的时候，当有基向量存在时，可以用一个数组也就是坐标来表示一个向量，现在我们定义一个永远不变的坐标系和基向量，这个坐标系的x轴和y轴垂直，且基向量是与x轴和y轴正方向相同的单位向量，暂且我们就称坐标系和基向量为<strong>永不变坐标系和永不变基向量</strong>，之后的所有向量或坐标系的基的描述都是在这个永不变基的基础上进行的</p>
+<h3 id="·-线性变换"><a href="#·-线性变换" class="headerlink" title="· 线性变换"></a>· 线性变换</h3><p>变换实际上是函数的另一种说法，函数的作用是输入一个数，输出一个数；在线性代数中，变换的输入是一个向量，输出也是一个向量</p>
+<p><strong>线性变换</strong>是变换的一种特殊形式，它有两个特点：</p>
+<ul>
+<li><p>直线在线性变换后，仍是直线</p>
+</li>
+<li><p>原点必须保持不变</p>
+</li>
+</ul>
+<p>那么如何用数学语言来描述线性变换呢？答案就是用矩阵来描述</p>
+<h3 id="·-矩阵"><a href="#·-矩阵" class="headerlink" title="· 矩阵"></a>· 矩阵</h3><p>矩阵就是一种数学语言，来描述线性变换，矩阵的每一列记录基向量在线性变换后的坐标</p>
+<p>以二维空间为例：</p>
+<script type="math/tex; mode=display">
+\vec v = -1\vec i + 2\vec j\\
+Transformed \ \vec v=-1(Transformed \ \vec i)+2(Transformed\ \vec j)</script><p>当经过一次线性变换后，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020013.png" alt="image-20210715034732752" style="zoom:67%;" /></p>
+<script type="math/tex; mode=display">
+[Transformed\ \vec i ,Transformed\ \vec j]=\left[\begin{array}{ll}
+3 & 1 \\
+0 & 2
+\end{array}\right]</script><script type="math/tex; mode=display">
+Transformed\ \vec v=
+-1\left[\begin{array}{l}
+3 \\
+0
+\end{array}\right]+2\left[\begin{array}{l}
+1 \\
+2
+\end{array}\right]=\left[\begin{array}{ll}
+3&1\\
+0&2
+\end{array}\right]\left[\begin{array}{l}
+\ -1\\
+\  \ 2\end{array}\right]
+=\left[\begin{array}{l}
+-1  \\
+\ \ 4 
+\end{array}\right]</script><p><strong>这也就定义了矩阵和向量的乘法</strong>，矩阵乘以向量，就是对该向量的一个线性变换</p>
+<p>当变换后的两个基向量线性相关时，由这两个向量所张成的空间就变成了一条线，而原来的向量就被变换到这个空间上，也就是变换后的向量的终点在一条直线上</p>
+<blockquote>
+<p>总之，线性变换就是对向量的变换，对向量的变换的方法是对描述该向量的基进行变换，因此线性变换也是操纵空间的一种手段</p>
+</blockquote>
+<p>那么当有许多个矩阵乘以一个向量的时候，它的几何意义又是什么呢？</p>
+<h3 id="·-复合变换与矩阵乘法"><a href="#·-复合变换与矩阵乘法" class="headerlink" title="· 复合变换与矩阵乘法"></a>· 复合变换与矩阵乘法</h3><p>矩阵A、B分别代表着线性变换1和2，AB代表着先进行线性变换2，然后再进行线性变换1（注意这里是先2后1），令AB=C，那么C就代表着先进行2再进行1的一个复合变换，也可以把C当作是一次独立的变换，它的效果和先2再1的效果相同</p>
+<p>另外，AB $\neq$ BA，也就是说先进行2再进行1和先进行1再进行2的效果是不同的</p>
+<blockquote>
+<p>前面所说的线性变换理解成是一个处理向量的函数，现在从另一个角度来总结一下，线性变换用矩阵来描述，而矩阵的列向量表示线性变换后基向量的坐标，对一个向量进行线性变换，就是先对基向量进行线性变换，然后用这个向量的坐标对变换后的基向量进行线性组合，最终得到变换后的向量。因为基向量可以描述一个空间，因此基向量变了，其所对应的空间也发生了变化</p>
+</blockquote>
+<h2 id="4-行列式"><a href="#4-行列式" class="headerlink" title="4.行列式"></a>4.行列式</h2><p>上节说过，线性变换是操纵空间的一种手段，那么如何刻画空间变化了多少呢，这就需要请出行列式了，行列式就是用来描述空间变化的多少</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020020.png" alt="image-20210715053137633" style="zoom:53%;" /></p>
+<p>下面以二维空间为例：</p>
+<p>我们在坐标系中用网格线来描述这个空间的形态，在标准坐标系中，绿色箭头代表i向量，红色箭头代表j向量，此时向量i和j所围成的区域是一个正方形，其面积为1</p>
+<p>当进行线性变换后，基向量的方向和长度都发生了变化，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020024.png" alt="image-20210715053620420" style="zoom:50%;" /></p>
+<p>那么此时由基向量i和j所围成的区域也发生了变化，变成了一个平行四边形，而该区域的面积等于矩阵的行列式</p>
+<blockquote>
+<p>矩阵的行列式是描述其线性变换所对空间变化的量度</p>
+</blockquote>
+<p>当行列式为0时，表示这个平面被压缩成了一条线，<strong>而0矩阵表示把平面压缩成一个点</strong></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020028.png" alt="image-20210715054036323" style="zoom:50%;" /></p>
+<p>当行列式为负时，表示这个平面发生了反转</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020030.png" alt="image-20210715054301501" style="zoom:50%;" /></p>
+<p>注意：原来绿色的基向量在红色基向量的右边，此时发生了平面翻转</p>
+<p>三维空间中，矩阵的行列式表示变换后基向量所围成空间区域的体积，当行列式为0时，表示该变换将三维空间压缩成一个平面或一条直线又或是一个点（这在后面会引出秩的用法）。更多维空间的道理是一样的，这里就不过多赘述</p>
+<h2 id="5-逆矩阵、列空间、秩和零空间"><a href="#5-逆矩阵、列空间、秩和零空间" class="headerlink" title="5.逆矩阵、列空间、秩和零空间"></a>5.逆矩阵、列空间、秩和零空间</h2><p>线性代数的用处很多，其中的一个用处是解线性方程组</p>
+<p>方程组的求解和之前所讲的行列式和矩阵以及线性变换密切相关</p>
+<p>例如我们现在有一个方程组：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+1x+2y+3z=5\\
+3x+8y+7z=6\\
+0x+3y+6z=0
+\end{cases}</script><p>这是一个三阶线性方程组，因为它与矩阵和向量的乘法很像，所以可以写成矩阵的形式：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+1&2&3\\
+3&8&7\\
+0&3&6
+\end{array}\right]
+\left[\begin{array}{l}
+x\\
+y\\
+z
+\end{array}\right]=\left[\begin{array}{l}
+5\\
+6\\
+0
+\end{array}\right]</script><p>即：</p>
+<script type="math/tex; mode=display">
+A\vec x=\vec v</script><p>上述式子已知 $\vec v$ ，A矩阵表示一个线性变换，如若求 $\vec x$ ,则只需将A矩阵所表示的线性变换的逆变换作用到 $\vec v$ 上，那么是不是什么时候都可以用这种方法呢？</p>
+<h3 id="·矩阵的逆"><a href="#·矩阵的逆" class="headerlink" title="·矩阵的逆"></a>·矩阵的逆</h3><p>矩阵的逆表示矩阵线性变换所对应的逆变换，如果矩阵A的行列式不等于0，那么矩阵A是可逆的</p>
+<p>之前的方程组的解为： $\vec x = A^{-1}\vec v$</p>
+<p>上面说到矩阵的逆表示逆变换，所以当进行一次变换再进行一次逆变换等同于没有变化</p>
+<script type="math/tex; mode=display">
+A^{-1}A=AA^{-1}=I</script><p><strong>但是当矩阵的行列式为0时</strong>，矩阵的逆不存在。背后的几何意义是线性变换将多维空间变换为低维空间，如果想找到<strong>一个</strong>低维空间还原成高维空间的逆变换，是得不到一个确定的变换的，因为有一维或多维的缺失，所以这个变换可以有任意多种形式</p>
+<p>再回到我们的方程组，当矩阵的行列式为0时，解是可能存在的，这分为两种情况：</p>
+<ul>
+<li>一种是当 $\vec v$ 向量在A所压缩的空间上时，解存在</li>
+<li>另一种是 $\vec v$ 向量在A所压缩的空间外时，无解</li>
+</ul>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020036.png" alt="image-20210715085801043" style="zoom: 33%;" /></p>
+<h3 id="·矩阵的秩"><a href="#·矩阵的秩" class="headerlink" title="·矩阵的秩"></a>·矩阵的秩</h3><p>可以发现，虽然原空间通过变换后，变成一个低维的空间，此时都会有无解的情况发生，但无解情况的出现的难易程度是不一样的。例如当三维空间变换成二维空间时，是一个平面，只要 $\vec v$ 在这个平面上，解存在。但是当变换成一维空间也就是一条线时，只有 $\vec v$ 在这条线上时，解存在。虽然上面两种情况的A矩阵的行列式都为0，但是它们出现无解的情况是不同的，这时就要引出秩的概念</p>
+<p><strong>秩</strong>表示变换后空间的维数，例如三维矩阵的秩最大为3，它表示基向量可以张成整个三维空间，但是当矩阵的秩为2时，空间被压缩了，此时表示基向量只能张成二维空间，但是它没有秩为1的压缩情况严重</p>
+<h3 id="·列空间"><a href="#·列空间" class="headerlink" title="·列空间"></a>·列空间</h3><p>矩阵的列向量所张成的空间即为列空间，当 $ \vec x$ 表示任意的向量时，$A\vec x$ 就是矩阵A的列空间</p>
+<p>关于秩更准确的定义：矩阵秩表示矩阵列空间的维数</p>
+<p><strong>当秩等于矩阵的列时，意味着它达到了它所能达到的最大值，此时叫作满秩</strong></p>
+<p>0向量一定包含在列空间中，因为线性变换不改变原点的位置，也就是 $A\vec0=\vec 0$ </p>
+<p>对于一个满秩变换来说，唯一能在变换后落在原点的向量就是0向量本身。但是对于一个非满秩的矩阵，它将空间压缩到一个低维的空间，也就是说有一系列向量在变换后被压缩到原点。例如对于原二维的空间，当进行压缩到一维空间的变换时，会使原二维空间中某一方向直线上的所有的向量都压缩到原点。再如原三维空间，压缩到一个二维空间时，也会使原三维空间中某一方向直线上所有的向量压缩到原点，当压缩到一个一维空间时，会使原三维空间中过原点的某一平面上的所有向量压缩到原点。</p>
+<h3 id="·零空间-核空间"><a href="#·零空间-核空间" class="headerlink" title="·零空间/核空间"></a>·零空间/核空间</h3><p>变换后被压缩到原点的向量的集合，叫作矩阵的零空间或者核空间</p>
+<p>==被压缩空间的维数==就是零空间的维数。例如三维空间中的一个向量经过一个方阵的线性变换后，被限制在二维平面上，那么该方阵的零空间维数为1，如果是将该向量变换成一个点，那么该方阵的零空间维数为2。零空间的维数就是表示方阵可以将几维的空间压缩到原点。也可以看作是方程 $A\vec x =0$​​​的解的情况，首先A得为方阵，当A的零空间为0时，也就是A满秩，那么只有零向量是该方程的解。如果A的零空间为2时，那么解向量的维数为2。</p>
+<h3 id="·非方阵"><a href="#·非方阵" class="headerlink" title="·非方阵"></a>·非方阵</h3><p>非方阵的几何意义和之前的方阵稍稍有些不同，先来说之前的方阵，方阵表示将一个向量进行变换，这些变换有旋转这个向量，拉伸压缩这个向量，无论怎么变换这个向量，这个向量都处于原空间中，即变换前是一个n维的向量，变换后还是n维的向量。举一个例子，对于三维空间中的一个向量，当矩阵A的秩为2时，表示将这个向量压缩到一个二维的平面中，尽管是压缩到二维平面中，只是把这个向量限制在二维平面上，但这个向量仍是三维空间中的向量。</p>
+<p>而非方阵就得用另一种方式来描述，和之前所提及的函数一样，非方阵可以看作是一个映射，输入一个m维的向量，映射出一个n维的向量，这两个向量分别处于不同的空间中。</p>
+<p>例如一个矩阵为 $m\times n$ 维，那么它表示将一个n维空间中的向量映射到m维空间中，矩阵的列向量同样是原空间中的基向量在新空间中的映射</p>
+<blockquote>
+<p>小结：方阵表示线性变换，指在原有空间中对向量进行变换；非方阵表示线性映射，把原空间中的向量映射到一个新的空间中</p>
+</blockquote>
+<h2 id="6-向量的点积"><a href="#6-向量的点积" class="headerlink" title="6.向量的点积"></a>6.向量的点积</h2><h3 id="·向量点积的几何意义"><a href="#·向量点积的几何意义" class="headerlink" title="·向量点积的几何意义"></a>·向量点积的几何意义</h3><p>有两个向量 $\vec v$ 和 $\vec w$ ，点积的几何意义表示 $\vec v$ 在 $\vec w$ 方向上的投影的长度和 $\vec w$长度的乘积</p>
+<p>点积的结果和向量的顺序无关，即$\vec v ·\vec w=\vec w·\vec v$ </p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020043.png" alt="image-20210716055411474" style="zoom:33%;" /></p>
+<p>利用对称性，可以直观证明上述结论，令 $\vec v$ 和 $\vec w$ 的长度相同，根据对称性可以知道， $\vec v$ 在 $\vec w$ 上的投影长度与 $\vec w $  在 $\vec v$ 上的投影长度相同。当 $ \vec v$ 放大两倍后，这种对称性就不再存在了，但此时 $\vec w$ 在 $2\vec v$ 上的投影不变，也可以说  $2\vec v$ 在 $\vec w$ 上的投影长度变为原来的2倍，所以 $(2\vec v)·\vec w=\vec w·(2\vec v)$ </p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020049.png" alt="image-20210716055903784"></p>
+<h3 id="·向量点积的矩阵表示"><a href="#·向量点积的矩阵表示" class="headerlink" title="·向量点积的矩阵表示"></a>·向量点积的矩阵表示</h3><p>如果把一个向量当成一个 $n\times1$ 的矩阵来看时，那么对向量的转置就得到了一个 $1\times n$的矩阵，向量的点积可以用向量的转置乘以向量来计算</p>
+<p><strong>那么为什么可以这样计算呢？</strong>首先可以想到，既然转置是一个矩阵，就可以表示一个线性变换了，这个线性变换的几何意义就是把多维空间中的向量映射到一个一维空间上。经过映射得到的一维向量是一个数，它表示在多维空间中的一个向量在某一方向上的投影长度。</p>
+<p>现在以二维空间为例：</p>
+<p>在二维空间中有一单位向量 $\vec u$ ，在该向量的方向上布置一个数轴，这个数轴也就是一个一维空间。如果想把 $\vec u$ ==映射==到这个一维空间中，则需要找到二维空间的基向量在这个一维空间上的位置，我们用投影位置来表示基向量在一维空间上的位置，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020055.png" alt="image-20210716092117757"></p>
+<p>根据投影关系和对称关系，可以得到二维空间中的基向量 $\vec i 和 \vec j$ 在一维空间的位置</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020101.png" alt="image-20210716092532170"></p>
+<p>则$\vec i 和 \vec j$在一维空间的坐标为：</p>
+<script type="math/tex; mode=display">
+[u_x \ u_y]</script><p>对于二维空间中任意的向量在这个轴上的投影，可以用这个矩阵乘以向量的坐标来得到</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020106.png" alt="image-20210716092801428"></p>
+<p>最终得到的结果为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+u_{x} & u_{y}
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=u_{x} \cdot x+u_{y} \cdot y</script><p>这与这个任意向量和 $\vec u$ 的点积完全相同</p>
+<blockquote>
+<p>总结：为什么点积可以用向量的转置乘以向量？向量的转置表示一个矩阵，这个矩阵又代表着一个线性变换，这个线性变换就表示把一个多维空间的向量==投影==到一个一维空间中。</p>
+</blockquote>
+<p>当 $\vec v=k\vec u$ 是任意的向量时</p>
+<script type="math/tex; mode=display">
+k\left[\begin{array}{ll}u_{x} & u_{y}\end{array}\right]\left[\begin{array}{l}x \\
+y\end{array}\right]=\left[\begin{array}{ll}ku_{x} & ku_{y}\end{array}\right]\left[\begin{array}{l}x \\
+y\end{array}\right]=ku_{x} \cdot x+ku_{y} \cdot y</script><p>两个任意向量的点积表示先将一个向量投影到另一向量所在的方向上，然后将投影长度和另一向量的长度相乘</p>
+<h2 id="7-向量的叉积"><a href="#7-向量的叉积" class="headerlink" title="7.向量的叉积"></a>7.向量的叉积</h2><h3 id="·什么是叉积"><a href="#·什么是叉积" class="headerlink" title="·什么是叉积"></a>·什么是叉积</h3><p>两个向量的叉积会产生一个与这两个向量都垂直的新向量，并且其长度等于这两个向量所围成的四边形的面积，而且它们的方向满足右手定则。</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020113.png" alt="image-20210716095942997"></p>
+<p>既然是表示面积，这就与之前说过的行列式有关系，但这只对二维向量成立（因为只有两个向量，只有二维向量才能满足方阵，才有行列式）</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020117.png" alt="image-20210716095517110"></p>
+<p>两个向量所组成的矩阵对应着一个线性变换，线性变换的度量就是矩阵的行列式，也就是基向量所围成的四边形面积</p>
+<h3 id="·关于三维空间中的叉积的计算"><a href="#·关于三维空间中的叉积的计算" class="headerlink" title="·关于三维空间中的叉积的计算"></a>·关于三维空间中的叉积的计算</h3><p>对于三维空间中的叉积，可以用下面的计算公式：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+v_{1} \\
+v_{2} \\
+v_{3}
+\end{array}\right] \times\left[\begin{array}{l}
+w_{1} \\
+w_{2} \\
+w_{3}
+\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
+\vec{\imath} & v_{1} & w_{1} \\
+\vec{\jmath} & v_{2} & w_{2} \\
+\vec{k} & v_{3} & w_{3}
+\end{array}\right]\right)</script><p>现在就来说明一下为什么可以用这个公式来计算叉积</p>
+<p>由第4节可知，矩阵的行列式表示列向量所张成的平行六面体的体积，而上面行列式的第一列不是一个向量，而是三个基向量，下面先来定义一个线性映射 $L(\vec a)$</p>
+<script type="math/tex; mode=display">
+L(\vec a)=\operatorname{\det}\left(\left[\begin{array}{c}
+{x} & v_{1} & w_{1} \\
+{y} & v_{2} & w_{2} \\
+{z} & v_{3} & w_{3}
+\end{array}\right]\right)\quad(\vec a=\left[\begin{array}{l}\ x\\
+y\\
+z\end{array}\right])</script><p>这个线性映射将一个三维向量映射到一维空间中，表示一个数，于是可以写成这种形式：</p>
+<script type="math/tex; mode=display">
+L(\vec a)=[\begin{array}{}p_1&p_2&p_3\end{array}]\cdot\left[\begin{array}{}x\\
+y\\
+z\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
+{x} & v_{1} & w_{1} \\
+{y} & v_{2} & w_{2} \\
+{z} & v_{3} & w_{3}
+\end{array}\right]\right)</script><p>于是展开有：</p>
+<script type="math/tex; mode=display">
+\begin{array}{r}
+\quad x\left(v_{2} \cdot w_{3}-v_{3} \cdot w_{2}\right)+ \\
+p_{1} \cdot x+p_{2} \cdot y+p_{3} \cdot z=y\left(v_{3} \cdot w_{1}-v_{1} \cdot w_{3}\right)+ \\
+z\left(v_{1} \cdot w_{2}-v_{2} \cdot w_{1}\right)
+\end{array}</script><p>即：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&p_{1}=v_{2} \cdot w_{3}-v_{3} \cdot w_{2} \\
+&p_{2}=v_{3} \cdot w_{1}-v_{1} \cdot w_{3} \\
+&p_{3}=v_{1} \cdot w_{2}-v_{2} \cdot w_{1}
+\end{aligned}</script><p>现在用 $\vec p=[p_1\ p_2\ p_3]^T$，然后来谈几何意义</p>
+<p>行列式表示三个列向量所张成的平行六面体的体积，而 $\vec p$ 和 $\vec a$ 的点积就等于这个体积，那么 $\vec p$ 是一个什么向量才能满足它们两个的点积等于体积呢。对于$\vec a$来说，它是任意一个向量，而 $\vec v$ 和 $\vec w$ 向量是固定的，平行六面体的体积等于面积乘以高，也就是说，当面积确定后，只需要知道高就可以了</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020123.png" alt="image-20210716111418718"></p>
+<p>这个高就是 $\vec a$ 在垂直于 $\vec v$ 和 $\vec w$ 的方向上的投影，于是现在就可以知道 $\vec p$ 的意义了，$\vec p$ 的方向垂直于$\vec v$ 和 $\vec w$ ，它的长度是$\vec v$ 和 $\vec w$ 所张成平行四边形的面积</p>
+<h2 id="8-基变换"><a href="#8-基变换" class="headerlink" title="8.基变换"></a>8.基变换</h2><p>现在有两个二维世界中的人，猪猪侠和包包侠，在猪猪侠的世界中，基向量是这样的：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020127.png" alt="image-20210716112957364"></p>
+<p>在包包侠的世界中，基向量是这样的：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020130.png" alt="image-20210716114150696"></p>
+<p>当有同一个向量时，在两个人的眼中，描述是不同的</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020134.png" alt="image-20210716114326652"></p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+\vec{e}_{i} & \vec{e}_{j}
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=\left[\vec{e}_{i}^{\prime}\ \ \ \  \ \vec{e}_{j}^{\prime}\right]\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]</script><p>现在包包侠把她所看到的向量的坐标告诉猪猪侠，那么猪猪侠必须要先知道包包侠的基向量在猪猪侠的基向量下的坐标，然后才能知道</p>
+<p>于是包包侠的两个基向量在猪猪侠的基向量下的坐标为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{}a&b\\
+c&d\end{array}\right]</script><p>所以猪猪侠就知道了这个向量在他的基下的坐标：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=\left[\begin{array}{}a&b\\
+c&d\end{array}\right]\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]=A\vec v^{\prime}</script><p>同理猪猪侠把这个他看到的向量的坐标告诉包包侠，包包侠也得转化到自己的基下来，即：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]
+=\left[\begin{array}{}a&b\\
+c&d\end{array}\right]^{-1}\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=A^{-1}\vec v</script><p>现在猪猪侠想把这个向量变一变，比如旋转个90度，于是他用自己世界的基来描述变化后空间的位置，也就是新的坐标轴上单位向量的坐标为：</p>
+<script type="math/tex; mode=display">
+M=\left[\begin{array}{}
+m_1&m_2\\
+m_3&m_4
+\end{array}\right]</script><p>于是变化后向量的坐标为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x_{new} \\
+y_{new}
+\end{array}\right]=\left[\begin{array}{}
+m_1&m_2\\
+m_3&m_4
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]</script><p>现在包包侠也同样想把这个向量变一下，变得和猪猪侠一样，此时她直接乘以猪猪侠的M矩阵是不可以的，因为M是在猪猪侠的基上得到的，她想了一个好办法：</p>
+<ul>
+<li>她先把想变化的向量告诉猪猪侠，猪猪侠在自己的基下把这个向量表示出来</li>
+<li>然后猪猪侠去变，乘以M矩阵</li>
+<li>然后她再将猪猪侠变化后的向量换到自己的基下表示</li>
+</ul>
+<p>上述的过程就用下面的公式来表示：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x_{new}^{\prime} \\
+y_{new}^{\prime}
+\end{array}\right]=\left[\begin{array}{}a&b\\
+c&d\end{array}\right]^{-1}\left[\begin{array}{}
+m_1&m_2\\
+m_3&m_4
+\end{array}\right]\left[\begin{array}{}a&b\\
+c&d\end{array}\right]\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]=A^{-1}MA\vec v^{\prime}</script><h2 id="9-特征值和特征向量"><a href="#9-特征值和特征向量" class="headerlink" title="9.特征值和特征向量"></a>9.特征值和特征向量</h2><h3 id="·特征向量"><a href="#·特征向量" class="headerlink" title="·特征向量"></a>·特征向量</h3><p>矩阵乘以一个向量表示对这个向量的线性变换，以二维空间为例：</p>
+<p>一个向量所张成的空间，就是这个向量所在的直线，当这个向量被变换后，很可能会离开这个空间，如下图所示</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020142.png" alt="image-20210716121344977"></p>
+<p>但是也会有一些向量，没有离开它本身的张成空间，线性变换只是对它进行了拉伸或压缩，此时矩阵的作用如同一个标量</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020148.png" alt="image-20210716121501072"></p>
+<p>这两个方向空间中的向量都不会偏离其原来所在的直线，而其他向量都会发生偏转</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020153.png" alt="image-20210716121716491"></p>
+<p>这些不发生偏转的向量就叫作特征向量</p>
+<h3 id="·特征值"><a href="#·特征值" class="headerlink" title="·特征值"></a>·特征值</h3><p>每一个特征向量都有一个与其对应的特征值，特征值表征这个向量空间上的向量被拉伸和压缩多少</p>
+<p>那么特征向量有啥用呢？</p>
+<p>考虑一个三维旋转的线性变换，当找到了它的特征向量，就找到了它的旋转轴</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020159.png" alt="image-20210716122229199"></p>
+<p>当特征值为0时，表示没有特征向量 </p>
+<h2 id="10-抽象向量空间"><a href="#10-抽象向量空间" class="headerlink" title="10.抽象向量空间"></a>10.抽象向量空间</h2><p>无论是什么东西，只要符合以下八条公理，那么这个东西就可以称作向量，它遵循着之前讲过的所用性质</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020203.png" alt="image-20210716125152513"></p>
+<blockquote>
+<p>任意向量都能表达为基向量以某种方式进行线性组合，所以求一个向量变换后的结果，就是求变换后基向量以相同方式进行线性组合的结果</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数理基础</category>
+      </categories>
+      <tags>
+        <tag>矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【视觉SLAM学习1】视觉SLAM基本框架</title>
+    <url>/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A01%E3%80%91%E8%A7%86%E8%A7%89SLAM%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032349.png" alt="视觉SLAM框架"></p>
+<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【视觉SLAM学习2】SLAM的数学描述</title>
+    <url>/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A02%E3%80%91SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
+    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
+<hr>
+<p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
+<ol>
+<li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
+<li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
+</ol>
+<hr>
+<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
+<script type="math/tex; mode=display">
+\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
+<p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
+<script type="math/tex; mode=display">
+\vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
+<hr>
+<p>以二维运动为例：</p>
+<p>如图所示</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033742.png" style="zoom:60%;" /></p>
+<p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\vec{x}_{k}=\left[x_{1}, x_{2}, \theta\right]_{k}^{\top} \\
+&\vec{u}_{k}=\left[\Delta x_{1}, \Delta x_{2}, \Delta \theta\right]_{k}^{\top}
+\end{aligned}</script><p>运动方程为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x_{1} \\
+x_{2} \\
+\theta
+\end{array}\right]_{k}=\left[\begin{array}{l}
+x_{1} \\
+x_{2} \\
+\theta
+\end{array}\right]_{k-1}+\left[\begin{array}{c}
+\Delta x_{1} \\
+\Delta x_{2} \\
+\Delta \theta
+\end{array}\right]_{k}+\vec{w}_{k}</script><p>对于观测方程，以二维激光传感器为例，如图所示：</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033747.png" alt="img" style="zoom:60%;" /></p>
+<p>路标点j与相机位置关系由距离r和夹角 $\varphi$表示，即观测数据 $z_{k,j}=[r_{j},\varphi_{j}]^T_k$（这是由传感器测出的值），这里的k表示k时刻下的观测数据</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+r_{j} \\
+\varphi_{j}
+\end{array}\right]_k=\left[\begin{array}{c}
+\sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
+\arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
+\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
+<blockquote>
+<p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
+</blockquote>
+<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
+<p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
+<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
+<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【计算机视觉】北邮机器视觉学习笔记</title>
     <url>/2021/10/18/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E3%80%91%E5%8C%97%E9%82%AE%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>学习北邮鲁鹏老师《机器视觉》课程笔记。<br><span id="more"></span></p>
@@ -5133,544 +5643,5 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       <tags>
         <tag>计算机视觉</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>【Markdown】嵌入视频和PDF</title>
-    <url>/2022/01/15/%E3%80%90Markdown%E3%80%91%E5%B5%8C%E5%85%A5%E8%A7%86%E9%A2%91%E5%92%8CPDF/</url>
-    <content><![CDATA[<p>在Markdown中嵌入视频、网页</p>
-<span id="more"></span>
-<p>之前一直说 Typora 是一个隐藏的网页浏览器，能解析 HTML 语法，没想到居然还能嵌入视频和PDF。</p>
-<p><a href="https://support.typora.io/Media/">Embed Video, Media or Web Contents (typora.io)support.typora.io/Media/</a></p>
-<h3 id="1-嵌入视频"><a href="#1-嵌入视频" class="headerlink" title="1.嵌入视频"></a>1.嵌入视频</h3><p>以B站为例，复制其嵌入代码</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20220115033313.jpg" alt="img"></p>
-<p>得到：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;//player.bilibili.com/player.html?aid=754115200&amp;bvid=BV1kk4y1m7sT&amp;cid=220773148&amp;page=1&quot;</span> <span class="attr">scrolling</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">framespacing</span>=<span class="string">&quot;0&quot;</span> <span class="attr">allowfullscreen</span>=<span class="string">&quot;true&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>直接嵌入的话，视频窗口太小，我们加入</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">height=&quot;500&quot;</span><br></pre></td></tr></table></figure>
-<p>让窗口变大一些：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;//player.bilibili.com/player.html?aid=754115200&amp;bvid=BV1kk4y1m7sT&amp;cid=220773148&amp;page=1&quot;</span> <span class="attr">scrolling</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">height</span>=<span class="string">&quot;500&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">framespacing</span>=<span class="string">&quot;0&quot;</span> <span class="attr">allowfullscreen</span>=<span class="string">&quot;true&quot;</span>&gt;</span> <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后直接复制到 typora 中即可，如果你操作得当的话，应该能看到下面这样的效果：</p>
-<iframe src="//player.bilibili.com/player.html?aid=754115200&bvid=BV1kk4y1m7sT&cid=220773148&page=1" scrolling="no" border="0" height="500" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-
-
-<h3 id="2-嵌入-gist"><a href="#2-嵌入-gist" class="headerlink" title="2.嵌入 gist"></a>2.嵌入 gist</h3><p><a href="https://link.zhihu.com/?target=https%3A//gist.github.com/">Create a new Gist (github.com)gist.github.com/</a></p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://gist.github.com/Theigrams/98f6323969aa763cd1e343540e5420b4.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://piggyhero.gitee.io/pic/img/20220115034053.jpg" alt="img"></p>
-<h3 id="3-网页片段"><a href="#3-网页片段" class="headerlink" title="3.网页片段"></a>3.网页片段</h3><p>通过嵌入codepen，你甚至可以在typora里玩贪吃蛇！！！</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;codepen&quot;</span> <span class="attr">data-height</span>=<span class="string">&quot;265&quot;</span> <span class="attr">data-theme-id</span>=<span class="string">&quot;light&quot;</span> <span class="attr">data-default-tab</span>=<span class="string">&quot;js,result&quot;</span> <span class="attr">data-user</span>=<span class="string">&quot;moPsych&quot;</span> <span class="attr">data-slug-hash</span>=<span class="string">&quot;KKgQxWb&quot;</span> <span class="attr">style</span>=<span class="string">&quot;height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;&quot;</span> <span class="attr">data-pen-title</span>=<span class="string">&quot;Snake Game&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>See the Pen <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io/moPsych/pen/KKgQxWb&quot;</span>&gt;</span></span><br><span class="line">  Snake Game<span class="tag">&lt;/<span class="name">a</span>&gt;</span> by moPsych (<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io/moPsych&quot;</span>&gt;</span>@moPsych<span class="tag">&lt;/<span class="name">a</span>&gt;</span>)</span><br><span class="line">  on <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://codepen.io&quot;</span>&gt;</span>CodePen<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;https://static.codepen.io/assets/embed/ei.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><p class="codepen" data-height="265" data-theme-id="light" data-default-tab="js,result" data-user="moPsych" data-slug-hash="KKgQxWb" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Snake Game">
-  <span>See the Pen <a href="https://codepen.io/moPsych/pen/KKgQxWb">
-  Snake Game</a> by moPsych (<a href="https://codepen.io/moPsych">@moPsych</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p></p>
-<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-
-<h3 id="4-PDF"><a href="#4-PDF" class="headerlink" title="4.PDF"></a>4.PDF</h3><p>当然，区区PDF也不在话下，如果是本地文件，直接拖入即可。</p>
-<p>如果想导入云端PDF，需要通过 <code>Google Drive Viewer</code> 来显示：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://docs.google.com/gview?embedded=true&amp;url=http://infolab.stanford.edu/pub/papers/google.pdf&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:800px; height:500px;&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>只需把 <code>url=http://infolab.stanford.edu/pub/papers/google.pdf</code> 替换成自己的PDF链接即可，例如 GitHub 上的PDF也可以：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://docs.google.com/gview?embedded=true&amp;url=https://raw.githubusercontent.com/Theigrams/Mathematical-optimization/d304e27f613352b5d8240010cc58ddb4360ac48d/%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A/%E6%9C%80%E4%BC%98%E5%8C%96%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A.pdf&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:800px; height:500px;&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<iframe src="https://docs.google.com/gview?embedded=true&url=https://raw.githubusercontent.com/Theigrams/Mathematical-optimization/d304e27f613352b5d8240010cc58ddb4360ac48d/%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A/%E6%9C%80%E4%BC%98%E5%8C%96%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%BD%9C%E4%B8%9A.pdf" style="width:800px; height:500px;" frameborder="0"></iframe>
-
-<hr>
-<p>发现了一个新的本地嵌入 PDF 的方法，把下面 <code>src</code> 中的 PDF 路径换成自己的即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;embed id=&quot;pdfPlayer&quot; src=&quot;C:\Users\question.pdf&quot; type=&quot;application/pdf&quot; width=&quot;1</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【文献阅读】</title>
-    <url>/2022/01/15/%E3%80%90%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E3%80%91/</url>
-    <content><![CDATA[<p>Title:</p>
-<p>Year:</p>
-<p>Author:</p>
-<p>School:</p>
-<span id="more"></span>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2>]]></content>
-      <categories>
-        <category>文献阅读</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>【linux学习1】linux是什么</title>
-    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A01%E3%80%91linux%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<p>参考：《Linux命令行与shell脚本编程大全》《Linux命令行大全》</p>
-<span id="more"></span>
-<p>操作系统就是提供用户和计算机底层硬件交互的一个媒介，例如想算1+1等于几，不可能直接动手在芯片上算，需要通过键盘输入，然后看到显示器上的输出结果，这就是通过操作系统来完成的。而linux系统就是主流的一个操作系统，它可以划分为四个部分：</p>
-<ul>
-<li>linux内核</li>
-<li>GNU工具</li>
-<li>图形化桌面环境</li>
-<li>应用软件</li>
-</ul>
-<p>基本的结构框图如图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117210801737.png" alt="image-20220117210801737"></p>
-<h2 id="I-linux内核"><a href="#I-linux内核" class="headerlink" title="I. linux内核"></a>I. linux内核</h2><p>内核可以理解为软件和硬件间的一个中间层，连接着软件和硬件。例如我们使用word写了一个文件，写完后这个文件不是直接存储在磁盘上的，而是通过内核这个媒介将其写到磁盘上，软件是不能直接操纵硬件的。内核中留了许多API，可以供各个软件使用，然后在驱动底层硬件。</p>
-<p>内核主要负责以下四种功能：</p>
-<ul>
-<li>系统内存管理</li>
-<li>软件程序管理</li>
-<li>硬件设备管理</li>
-<li>文件系统管理</li>
-</ul>
-<h2 id="II-GNU工具"><a href="#II-GNU工具" class="headerlink" title="II. GNU工具"></a>II. GNU工具</h2><p>GNU工具在内核的上一层，</p>
-<h3 id="1-GNU简介"><a href="#1-GNU简介" class="headerlink" title="1. GNU简介"></a>1. GNU简介</h3><p>当有了内核之后，就建立了软件和硬件连接的桥梁。但通常我们并不会直接和内核打交道，而是通过更为上层的工具进行操作。假如你要开发一个linux系统下的软件，那么你有可能要了解内核的API，然后进行开发，但用户使用时只需要打开软件就可以了而不用考虑内核，这时该程序实现了一些<strong>具体功能</strong>（例如通过网易云听音乐，word写作业等）。此外，用户有时还需要控制文件和程序（如将文件进行复制粘贴，开启程序，结束程序等），此时就需要系统工具来执行一些<strong>标准功能</strong>，这些系统工具处在内核的上一层，可以与用户直接交互。</p>
-<p>Linus在创建linux内核时，并没有可用的系统工具。但与此同时，另一伙人即GNU组织开发了一套完整的系统工具，却没有可以运行它们的内核。于是这两伙人就结合在一起，发布了完整的linux操作系统。这些系统工具称为GNU工具。</p>
-<blockquote>
-<p>GNU工具也可以理解为一种软件，只不过是linux操作系统自带的，与linux内核绑定在一起的。linux系统的更准确的名字应该叫做GNU/linux系统。</p>
-</blockquote>
-<h3 id="2-shell"><a href="#2-shell" class="headerlink" title="2. shell"></a>2. shell</h3><p><strong>shell就是比较重要的GNU工具之一，它是一个程序，将你输入的文本命令解释成命令，然后在内核中执行。</strong></p>
-<p>shell包含了一组内部命令，用这些命令可以完成诸如复制文件、移动文件、重命名文件、显示和终止系统中正运行的程序等操作。shell也允许你在命令行提示符中输入程序的名称，它会将程序名传递给内核以启动它。</p>
-<p>也可以将多个shell命令放入文本文件中作为程序执行，这称为 <strong>shell脚本</strong>，你在命令行提示符中输入的任何命令都可以放进一个shell脚本中一起执行，这提供了极大的便利。</p>
-<p>有许多种shell程序可用，通常我们使用的是由GNU项目开发的 <strong>bash shell</strong> ，我们平时使用的终端仿真器（简称终端）就是与shell程序进行交互的命令行提示符，我们在终端中输入文本命令，终端将其发给shell程序，shell程序将其转化成命令发给内核来执行。</p>
-<h2 id="III-linux桌面环境"><a href="#III-linux桌面环境" class="headerlink" title="III. linux桌面环境"></a>III. linux桌面环境</h2><p>早期的linux只有一个简单的操作系统文本界面，这个文本界面可以让人们来运行程序，控制计算机。但随着windows的普及，传统的文本界面已经不再满足用户需求，因此linux图形化桌面环境应运而生。</p>
-<blockquote>
-<p>图形化桌面环境是一个底层程序，直接与显卡和显示器交互。</p>
-</blockquote>
-<p>linux有许多可以选择的图形化桌面，常用的有：</p>
-<ul>
-<li>X window</li>
-<li>KDE</li>
-<li>GNOME（现已成为许多linux发行版的默认桌面环境）</li>
-<li>Unity（ubuntu使用的环境）</li>
-</ul>
-<h2 id="IV-应用软件"><a href="#IV-应用软件" class="headerlink" title="IV. 应用软件"></a>IV. 应用软件</h2><p>这里就很简单了，就是我们可以直接使用的程序，可以通过鼠标点击打开或通过命令行使用。</p>
-<p>将以上四个部分集合在一起，就是linux的发行版，不同发行版有不同的用途，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117232802132.png" alt="image-20220117232802132"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117232815603.png" alt="image-20220117232815603"></p>
-<h2 id="V-总结"><a href="#V-总结" class="headerlink" title="V. 总结"></a>V. 总结</h2><p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220117210801737.png" alt="image-20220117210801737"></p>
-<p>如上图所示，linux操作系统包括了四大部分，其中核心是linux的内核，处在最底层，建立了软硬件间的桥梁。向上一层是图形化桌面程序和GUN系统工具程序，我们可以通过这一层来直接操作内核来实现一些标准的功能。最上层就是应用程序了，我们可以使用这些应用程序来实现具体的一些功能。</p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习2】操作文件和目录</title>
-    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A02%E3%80%91%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/</url>
-    <content><![CDATA[<p>使用图形界面时，我们可以很简单地进行文件复制粘贴等操作，那么为什么要用命令行呢？</p>
-<p>答：命令行程序具有强大的功能和灵活的操作。</p>
-<span id="more"></span>
-<p>举一个例子，如果想从一个目录仅复制那些目标目录中不存在的文件或是旧的版本，使用图形操作就比较困难了，你需要一个一个去对比。而是用命令行仅需要一条命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -u *.html destination</span></span><br></pre></td></tr></table></figure>
-<p>本文涉及到的命令：</p>
-<ul>
-<li>cp</li>
-<li>mv</li>
-<li>mkdir</li>
-<li>rm</li>
-<li>file</li>
-<li>cat</li>
-<li>more</li>
-<li>less</li>
-<li>tail</li>
-<li>head</li>
-</ul>
-<h2 id="I-通配符"><a href="#I-通配符" class="headerlink" title="I. 通配符"></a>I. 通配符</h2><p>通配符直白一点说就是用 <code>*</code> 等符号来代替文字，就像东北打麻将的hui儿，你缺啥用它都可以替。 当你想操作<code>a.cpp</code> 和 <code>b.cpp</code> 时，就可以用 <code>*.cpp</code> 来代替。</p>
-<p>通配符的具体规则如下：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118010908098.png" alt="image-20220118010908098"></p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">通配符</th>
-<th style="text-align:center">意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">匹配任意多个字符（包括0和1个）</td>
-</tr>
-<tr>
-<td style="text-align:center">？</td>
-<td style="text-align:center">匹配任一单个字符</td>
-</tr>
-<tr>
-<td style="text-align:center">[characters]</td>
-<td style="text-align:center">匹配任意一个属于字符集中的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">[!characters]</td>
-<td style="text-align:center">匹配任意一个不属于字符集中的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">[[:class:]]</td>
-<td style="text-align:center">匹配任意一个属于指定字符类中的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">[:alnum:]</td>
-<td style="text-align:center">匹配任意一个字母或数字</td>
-</tr>
-<tr>
-<td style="text-align:center">[:alpha:]</td>
-<td style="text-align:center">匹配任意一个字母</td>
-</tr>
-<tr>
-<td style="text-align:center">[:digit:]</td>
-<td style="text-align:center">匹配任意一个数字</td>
-</tr>
-<tr>
-<td style="text-align:center">[:lower:]</td>
-<td style="text-align:center">匹配任意一个小写字母</td>
-</tr>
-<tr>
-<td style="text-align:center">[:upper:]</td>
-<td style="text-align:center">匹配任意一个大写字母</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>注：表示范围用<code>-</code>号表示。例<code>[0-9]</code> <code>[a-z]</code> 。</p>
-<p>示例：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118014216733.png" alt="image-20220118014216733"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118014233903.png" alt="image-20220118014233903"></p>
-<h2 id="II-mkdir——创建目录"><a href="#II-mkdir——创建目录" class="headerlink" title="II. mkdir——创建目录"></a>II. mkdir——创建目录</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir directory</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir dir1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir dir1 dir2 dir3 <span class="comment">#分别创建了三个目录</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="III-cp和mv命令"><a href="#III-cp和mv命令" class="headerlink" title="III. cp和mv命令"></a>III. cp和mv命令</h2><h3 id="1-cp——复制文件和目录"><a href="#1-cp——复制文件和目录" class="headerlink" title="1. cp——复制文件和目录"></a>1. cp——复制文件和目录</h3><p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118012522753.png" alt="image-20220118012522753"></p>
-<p>示例：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118012547119.png" alt="image-20220118012547119"></p>
-<h3 id="2-mv——移动和重命名文件"><a href="#2-mv——移动和重命名文件" class="headerlink" title="2. mv——移动和重命名文件"></a>2. mv——移动和重命名文件</h3><p>移动和cp命令类似，命令选项也和cp一样。</p>
-<p>当在一个文件夹dir下，有文件file1，现在有如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mv file1 file2</span>	</span><br></pre></td></tr></table></figure>
-<p>该命令就是为文件file1重命名为file2。</p>
-<h2 id="IV-rm——删除文件和目录"><a href="#IV-rm——删除文件和目录" class="headerlink" title="IV. rm——删除文件和目录"></a>IV. rm——删除文件和目录</h2><p>在使用rm命令时一定要小心，尤其是与通配符在一起使用时，因为rm执行后，文件将不可恢复。</p>
-<p>有如下例子：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rm *.html</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rm * .html <span class="comment">#在*和.间多了一个空格，但是会导致将当前目录下的全部文件都删除</span></span></span><br></pre></td></tr></table></figure>
-<p>很可怕，所以rm之前可以用ls看看通配符好不好使。</p>
-<p>用法：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118013347767.png" alt="image-20220118013347767"></p>
-<h2 id="V-查看文件"><a href="#V-查看文件" class="headerlink" title="V. 查看文件"></a>V. 查看文件</h2><h3 id="1-查看文件类型"><a href="#1-查看文件类型" class="headerlink" title="1. 查看文件类型"></a>1. 查看文件类型</h3><p>使用<code>file</code> 命令可以查看文件的类型。</p>
-<p>如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> file text_file</span></span><br><span class="line">text_file: ASCII text  #这说明了text_file是一个(text)文本文件，且确定了该文本文件的字符编码。</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file Dir</span></span><br><span class="line">Dir: directory  #这说明了Dir是一个目录</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file text_sl</span></span><br><span class="line">text_sl: symbolic link to &#x27;text&#x27;  #告诉了该文件是一个符号链接，并指出了所链接的文件</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file my_script</span></span><br><span class="line">my_script: Bourne-Again shell script, ASCII text executable  #说明了该文件是一个可执行文件，且文件内容是ASCII编码</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> file /bin/ls</span></span><br><span class="line">/bin/ls: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV),</span><br><span class="line">dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.24, stripped</span><br><span class="line"><span class="meta">#</span><span class="bash">可以确定该程序编译时所面向的平台以及需要何种类型的库。</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-查看整个文件"><a href="#2-查看整个文件" class="headerlink" title="2. 查看整个文件"></a>2. 查看整个文件</h3><ul>
-<li>cat：查看文本内容全部输到屏幕上</li>
-<li>more：会在每页数据后面停下来，通过空格或回车来向后浏览</li>
-<li>less：more的升级版，可以向前和向后翻页</li>
-</ul>
-<h3 id="3-查看部分文件"><a href="#3-查看部分文件" class="headerlink" title="3. 查看部分文件"></a>3. 查看部分文件</h3><ul>
-<li>tail：默认情况下查看文件的后10行</li>
-<li>head：默认情况下查看文件的前10行</li>
-</ul>
-<p>如需要特定的行数，用：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tail -5 file1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> head -20 file2</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习3】软连接和硬链接</title>
-    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A03%E3%80%91%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/</url>
-    <content><![CDATA[<p>本文介绍linux中的符号链接（软链接）和硬链接。</p>
-<span id="more"></span>
-<p>首先说以下链接有什么用：</p>
-<p><strong>例子1——符号链接的用武之地：</strong></p>
-<p>当有一个程序叫做foo，但是它是一个不断更新的程序，有许多的版本，如foo-0.1，foo-0.2等。当其他程序如piggy在使用foo的过程中，就需要不断改变其引用的名称，一个程序还好，当有许多个程序时是十分麻烦的。这时就需要符号链接来帮助完成。我们可以先建立foo和foo-0.1的符号链接，然后piggy程序引用的程序名是foo，这样当foo-0.1升级到foo-0.2时，只需要让foo重新链接到foo-0.2上就可以了。</p>
-<p><strong>例子2——硬链接的用武之地：</strong></p>
-<p>当有一些重要的文件不可以被删除时，我们就可以使用硬链接。如有一个文件叫file1，我们可以建立一个硬链接file2，当file1不小心被删除时，别担心此时还有file2是这个文件。</p>
-<h2 id="I-符号链接（软链接）"><a href="#I-符号链接（软链接）" class="headerlink" title="I. 符号链接（软链接）"></a>I. 符号链接（软链接）</h2><p>为了与硬链接形成对比，符号链接也叫做软连接（后面就用软连接来代替符号链接了）。软连接可以理解为是一个<strong>超链接</strong> ，我们可以用下图来表示与原文件间的关系。</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118152532971.png" alt="image-20220118152532971"></p>
-<blockquote>
-<p>文件和目录的inode编号是一个用于标识的唯一数字，这个数字是由内核分配给文件系统中的每一个对象。</p>
-<p>而文件名相当于你进入该文件的一条路。</p>
-</blockquote>
-<p>在上图中可以看到，当创建一个软连接时，又创建了一个真实存在的新文件，在这个新文件中，存放的是其所指向的<strong>原文件的路径</strong>。当原文件被删除时，软链接自动失效，因为软链接的存在就是为了指向某个文件或目录的，当原文件没有了，那么软链接也自然没用了。==另外，不只是删除失效，移动原文件到不同的路径软链接也会失效。==</p>
-<p>软链接的命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ln -s file file-sl <span class="comment">#软链接名放在第二个参数中</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="II-硬链接"><a href="#II-硬链接" class="headerlink" title="II. 硬链接"></a>II. 硬链接</h2><p>硬链接是给原文件加上另一个文件名，也就是多了一条进入原文件的路径。当原文件的一条路被堵死了，还有另一条路可以进入。</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118160134214.png" alt="image-20220118160134214"></p>
-<p>每一个文件都有一个文件名，所以默认情况下每一个文件都有一个硬链接。硬链接有一些局限性：</p>
-<ul>
-<li>硬链接不能引用自身文件系统之外的文件，也就是说，链接不能引用与该链接不在同一磁盘分区的文件。</li>
-<li>硬链接无法引用目录。</li>
-</ul>
-<h2 id="III-查看文件的链接"><a href="#III-查看文件的链接" class="headerlink" title="III. 查看文件的链接"></a>III. 查看文件的链接</h2><p>那么如何查看文件的链接情况呢？可以使用长列表来查看。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163203352.png" alt="image-20220118163203352"></p>
-<p>对于显示出的结果，从前到后有以下信息：</p>
-<ul>
-<li>文件类型，d表示目录，-表示文件，c表示字符型文件，b表示块设备，l表示软链接</li>
-<li>文件的权限</li>
-<li><strong>文件的硬链接数量</strong></li>
-<li>文件属主用户名</li>
-<li>文件属组组名</li>
-<li>文件的大小（以字节为单位）</li>
-<li>文件上次修改时间</li>
-<li>文件名和目录名</li>
-</ul>
-<p>如果是软链接，在文件名后面还会有表示指向的文件。</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163635175.png" alt="image-20220118163635175"></p>
-<p>硬链接是一个普通的文件，其前面是<code>-</code> 。如果想要知道两个硬链接是否是同一个文件，则可以看它们的inode编号。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">ls -li</span>	</span><br></pre></td></tr></table></figure>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118163833129.png" alt="image-20220118163833129"></p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习4】关于命令</title>
-    <url>/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A04%E3%80%91%E5%85%B3%E4%BA%8E%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<p>我们常用的linux的命令行语法结构如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">command -options arguments</span><br></pre></td></tr></table></figure>
-<p>通常命令后面跟有一个或多个选项（options），不同选项功能也不一样。</p>
-<span id="more"></span>
-<p>然后接着是参数（arguments），这些参数是命令作用的对象。</p>
-<h2 id="I-什么是命令"><a href="#I-什么是命令" class="headerlink" title="I. 什么是命令"></a>I. 什么是命令</h2><p>现在我们说的命令就是前面语法结构中的command。一条命令可以是以下四种类型：</p>
-<ul>
-<li>外部命令</li>
-<li>内建命令</li>
-<li>shell函数：是合并到环境变量上的小型shell脚本。</li>
-<li>alias命令：在其他命令基础上自定义的命令。</li>
-</ul>
-<h3 id="判断命令属于哪种类型"><a href="#判断命令属于哪种类型" class="headerlink" title="判断命令属于哪种类型"></a>判断命令属于哪种类型</h3><p>如果想要知道所使用的命令属于这四种类型的哪一种，可以使用——<code>type</code> 命令来判断。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> <span class="built_in">command</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">例如：</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> ls</span></span><br><span class="line"><span class="meta">#</span><span class="bash">返回结果：</span></span><br><span class="line"><span class="meta">$</span><span class="bash">ls is aliased to <span class="string">&#x27;ls --color=tty&#x27;</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="II-外部命令"><a href="#II-外部命令" class="headerlink" title="II. 外部命令"></a>II. 外部命令</h2><p>这类命令也叫做<strong>文件系统命令</strong>，是存在shell程序之外的。它可以是编译好的可执行二进制文件（之前我们说过可执行二进制文件的名字可以直接通过shell发送给内核来运行）和用shell、Python等脚本编写的程序。通常可以在<code>/bin</code> 、<code>/usr/bin</code> 等目录中找到。</p>
-<h3 id="1-查找命令文件的位置"><a href="#1-查找命令文件的位置" class="headerlink" title="1. 查找命令文件的位置"></a>1. 查找命令文件的位置</h3><p>如果知道一条外部命令后，可以通过<code>which</code> 找到其所在的位置。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">which</span> ps</span></span><br><span class="line">/bin/ps</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注：只有外部命令才可以使用which来查找位置，对于内建命令，用which来查找，其结果要么没有响应，要么得到一条错误的信息。</p>
-</blockquote>
-<h3 id="2-外部命令的执行过程"><a href="#2-外部命令的执行过程" class="headerlink" title="2. 外部命令的执行过程"></a>2. 外部命令的执行过程</h3><p>在shell程序中输入外部命令时，会衍生出一个子进程。</p>
-<p>例如：</p>
-<p>ps作为外部命令执行时，会创建一个子进程，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119002931466.png" alt="image-20220119002931466"></p>
-<p>可以看出ps命令的PID时2801，父进程的PID是2743，而bash的PID就是2743。这个例子就说明了，我们在shell程序中输入命令ps后，此时内核会收到该名字然后运行对应的可执行文件，从而生成一个新的进程。</p>
-<p>如果命令是内建命令，则不会有新的进程生成。</p>
-<h2 id="III-内建命令"><a href="#III-内建命令" class="headerlink" title="III. 内建命令"></a>III. 内建命令</h2><p>这类命令称为shell builtin 。它们已经和shell程序编译成一体，作为shell工具的组成部分存在，不需要借助外部程序文件来运行。因此内建命令的执行速度要更快，效率也更高。</p>
-<p>当然也有比较特殊的命令，可以有多种实现。比如<code>echo</code> 和 <code>pwd</code> ，既有内建命令和外部命令。可以使用<code>type -a</code> 来查看全部的情况。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">type</span> -a <span class="built_in">echo</span></span> </span><br><span class="line">echo is a shell builtin</span><br><span class="line">echo is /bin/echo</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">which</span> <span class="built_in">echo</span></span></span><br><span class="line">/bin/echo</span><br></pre></td></tr></table></figure>
-<h2 id="IV-获得命令文档"><a href="#IV-获得命令文档" class="headerlink" title="IV. 获得命令文档"></a>IV. 获得命令文档</h2><h3 id="1-help"><a href="#1-help" class="headerlink" title="1. help"></a>1. help</h3><p>一些内建命令可以使用<code>help</code> 命令来查看其命令文档，如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">help</span> <span class="built_in">cd</span></span></span><br></pre></td></tr></table></figure>
-<p>结果：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119014334472.png" alt="image-20220119014334472"></p>
-<p>输出的语法描述中，方括号表示一个可选的选项，竖线表示两个互斥的选项。</p>
-<p>有时不管是内建命令还是外部命令，也都可以在命令后加<code>--help</code> 来查看帮助文档。</p>
-<h3 id="2-man"><a href="#2-man" class="headerlink" title="2. man"></a>2. man</h3><p>可以使用<code>man</code> 命令来查看命令的使用手册。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> man program	<span class="comment">#program是具体的手册名，但一般命令名就是手册名</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> man passwd	<span class="comment">#默认情况下可能显示的是第一部分，要看具体命令有几部分</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> man 5 passwd	<span class="comment">#显示第5部分</span></span></span><br></pre></td></tr></table></figure>
-<p>手册文档的组织结构：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119010940042.png" alt="image-20220119010940042"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220119010952599.png" alt="image-20220119010952599"></p>
-<h3 id="3-apropos"><a href="#3-apropos" class="headerlink" title="3. apropos"></a>3. apropos</h3><p><strong>apropos的作用是你知道想要实现什么功能，但不知道用什么命令。</strong>此时就可以配合想要实现的作用或者描述信息来进行搜索。其本质是根据你提供的信息在手册中查找。</p>
-<p>例如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apropos <span class="string">&quot;list directory&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>显示的结果：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/v2-ba4ad8abf9543cbfb1fd307605b13502_b.jpg" alt="img"></p>
-<p>在这里，第一个字段是手册页的名称，第二个字段表示显示的部分，最后一个字段包含了所描述的信息。</p>
-<p>如果想要多搜几个关键条目，可以用<code>-a</code> 标志，灵活的添加多个条目。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apropos <span class="string">&quot;match&quot;</span> -a <span class="string">&quot;pattern&quot;</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="4-whatis"><a href="#4-whatis" class="headerlink" title="4. whatis"></a>4. whatis</h3><p>显示命令的简要描述，包括手册页的名字及各部分和关于该部分的一行描述。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> whatis ls</span></span><br><span class="line">ls (1) 		- list directory contents</span><br><span class="line"><span class="meta">$</span><span class="bash"> whatis passwd</span></span><br><span class="line">passwd (5)		- the password file</span><br><span class="line">passwd (1)		- change user password</span><br><span class="line">passwd (1ssl)	- compute password hashes</span><br></pre></td></tr></table></figure>
-<p>如果想要看具体的，可以使用man来查看手册。</p>
-<h3 id="5-info"><a href="#5-info" class="headerlink" title="5. info"></a>5. info</h3><p>基本上，info 与 man的用途差不多，都是用来查询命令或是文件格式。info 与 man 最大的区别是，man page一次性输出全部信息，而 info page 则是将文件数据拆分成一个一个段落，每个段落用自己的页面来编写，并且在各个页面中还有类似网页的超链接来跳转到各个不同的页面中，每个独立页面也被称为一个节点。支持 info 命令的文件默认放置在 /usr/share/info/ 目录中。</p>
-<h2 id="V-使用别名创建命令"><a href="#V-使用别名创建命令" class="headerlink" title="V. 使用别名创建命令"></a>V. 使用别名创建命令</h2><p>在创建之间可以使用<code>type</code> 来查一下想设置的名字是否被用过。</p>
-<p>使用别名创建命令用<code>alias</code> 命令。具体的使用方法为：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> new_name=<span class="string">&#x27;command1; command2; ...&#x27;</span></span> </span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">alias</span> foo=<span class="string">&#x27;cd /usr; ls; cd -&#x27;</span></span></span><br></pre></td></tr></table></figure>
-<p>如果想要删除这个别名，可以用<code>unalias</code>，具体用法为：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unalias</span> foo</span></span><br></pre></td></tr></table></figure>
-<p>如果想要看当前环境中定义的别名，可以直接使用alias。</p>
-<blockquote>
-<p>注：在命令行定义别名还有一个小问题。当shell会话结束时，这些别名也随之消失了。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习5】虚拟机安装</title>
-    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A05%E3%80%91%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>使用VMWare安装linux系统。</p>
-<span id="more"></span>
-<h2 id="I-安装VMWare"><a href="#I-安装VMWare" class="headerlink" title="I. 安装VMWare"></a>I. 安装VMWare</h2><p>参考：<a href="https://www.bilibili.com/read/cv9694457">https://www.bilibili.com/read/cv9694457</a></p>
-<h2 id="II-安装虚拟机"><a href="#II-安装虚拟机" class="headerlink" title="II. 安装虚拟机"></a>II. 安装虚拟机</h2><ol>
-<li>以管理员身份打开VMWare</li>
-<li>在VMWare中新建虚拟机</li>
-<li>典型/自定义，选择自定义安装</li>
-<li>虚拟机兼容性，默认下一步</li>
-<li>安装来源，选择稍后安装操作系统</li>
-<li>操作系统选择，选择linux centos8 64位</li>
-<li>自定义虚拟机名称和文件夹位置</li>
-<li>虚拟机CPU，可以默认下一步</li>
-<li>内存选择，可以选1024M</li>
-<li>网络链接，选择NAT</li>
-<li>IO类型，默认下一步</li>
-<li>虚拟磁盘类型，默认下一步</li>
-<li>创建新磁盘，默认下一步</li>
-<li>磁盘大小，默认下一步，20G</li>
-<li>磁盘文件名，默认下一步</li>
-<li>完成</li>
-</ol>
-<h2 id="III-安装系统"><a href="#III-安装系统" class="headerlink" title="III. 安装系统"></a>III. 安装系统</h2><ol>
-<li>下载好要装的系统镜像文件ISO</li>
-<li><strong>在新虚拟机中，选择DVD，选择使用ISO镜像，选择镜像ISO文件</strong></li>
-<li>开启虚拟机</li>
-<li>安装操作系统</li>
-</ol>
-<blockquote>
-<p>在上面第3步时，可能会报错显示虚拟VT-X没有打开，则需要重新打开计算机，进入BIOS启动页面，找到configuration选项中，找到虚拟化开关，打开。</p>
-</blockquote>
-<p>例：</p>
-<p>如果安装CentOS系统，在软件选择中，选择带GUI的服务器，并选择附加软件开发工具和兼容性程序库。然后设置安装位置，/boot , /swap, / 。然后设置root密码。</p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习7】重定向和管道</title>
-    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A07%E3%80%91%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E7%AE%A1%E9%81%93/</url>
-    <content><![CDATA[<p>在执行命令的时候，我们可以在终端上看到命令输出的结果，这些结果被内核发送到屏幕上，我们也可以让这些结果输出文件里，这就叫做重定向。同理，我们也可以让文件作为输入，因此重定向的全称为I/O重定向。</p>
-<span id="more"></span>
-<p>本文涉及的命令：</p>
-<ul>
-<li>cat</li>
-<li>sort</li>
-<li>uniq</li>
-<li>wc</li>
-<li>grep</li>
-<li>head</li>
-<li>tail</li>
-<li>tee</li>
-</ul>
-<h2 id="I-简短的介绍"><a href="#I-简短的介绍" class="headerlink" title="I. 简短的介绍"></a>I. 简短的介绍</h2><p>我们在使用程序的时候往往会有输出，这些输出通常分为两种：</p>
-<ul>
-<li>程序运行结果，即程序执行输出的数据</li>
-<li>程序的状态或错误信息，描述程序当前的执行状态</li>
-</ul>
-<p>根据linux中一切皆文件的思想。实际上程序是把它们的运行结果发送到一个叫做 <strong>标准输出</strong> 的文件中，而把状态和错误信息发送到一个叫做 <strong>标准错误</strong> 的文件中。 而这个标准输出文件和标准错误文件都与屏幕相连。</p>
-<p>另外，许多程序都是从一个叫做 <strong>标准输入</strong> 的文件中获得输入。这个文件与我们的键盘相连。</p>
-<p>而我们所做的重定向就是改变这些输出的方向和输入的来源。</p>
-<h2 id="II-I-O重定向"><a href="#II-I-O重定向" class="headerlink" title="II. I/O重定向"></a>II. I/O重定向</h2><h3 id="1-标准输出重定向"><a href="#1-标准输出重定向" class="headerlink" title="1. 标准输出重定向"></a>1. 标准输出重定向</h3><p>输出重定向就是指将输出发送到哪。我们使用 <code>&gt;</code> 后接文件名来表示发送的目的地。例如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /usr/bin &gt; ls_output.txt</span></span><br></pre></td></tr></table></figure>
-<p>这时原来在屏幕上看到的结果被发送到文件中了。</p>
-<blockquote>
-<p><code>&gt;</code> 符号后面的文件接收结果的时候是从头接收到，也就是再从头接收一次数据就会被覆盖。<code>&gt;&gt;</code> 符号表示从文件后面接收，不会覆盖文件。</p>
-</blockquote>
-<h3 id="2-标准错误重定向"><a href="#2-标准错误重定向" class="headerlink" title="2. 标准错误重定向"></a>2. 标准错误重定向</h3><p>前面的符号只能做标准输出的重定向。如果想要做标准错误重定向，使用 <code>2&gt;</code> 。这里的2表示输出的是标准错误（0表示标准输入，1表示标准输出，2表示标准错误）。就是标准输出和标准错误走的不是一条路，所以要标注明白。</p>
-<p>如果想要同时将标准输出和标准错误重定向到同一文件中，可以使用：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /bin/usr &gt; ls_output.txt 2&gt;&amp;1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l /bin/usr &amp;&gt; ls_output.txt</span></span><br></pre></td></tr></table></figure>
-<p>在第一种方法中，是执行两次重定向。先是将标准输出重定向到文件上，然后再把标准错误重定向的标准输出上。这个顺序不能反。</p>
-<p>如果不想有输出，可以将其重定向到一个垃圾桶文件中 <code>/dev/null</code> 。</p>
-<h3 id="3-标准输入重定向"><a href="#3-标准输入重定向" class="headerlink" title="3. 标准输入重定向"></a>3. 标准输入重定向</h3><p>使用 <code>&lt;</code> 符号完成标准输入重定向。</p>
-<p>例：</p>
-<p>有一个命令 <code>cat</code> ，其作用是将后面跟着的参数文件发送到标准输出中。当后面不接参数的时候，cat等待着标准输入，然后发送到标准输出中。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat &lt; file.txt</span></span><br><span class="line">结果显示到屏幕上</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>有许多命令都是从标准输入获得输入，然后结果发送到标准输出上。</p>
-</blockquote>
-<h2 id="III-管道"><a href="#III-管道" class="headerlink" title="III. 管道"></a>III. 管道</h2><p>前面我们说许多命令等待着标准输入的输入，然后发送到标准输出文件上，那么我们还可以把一个命令的标准输出发送到另一个命令的标准输入中，这就是 <strong>管道</strong>。</p>
-<p>管道 <code>|</code> 可以把一个命令的标准输出传送到另一个命令的标准输入中，就像一节一节的管子一样。</p>
-<p>例：</p>
-<p><code>less</code> 与cat类似，把数据发送到标准输出中。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /usr/bin | less</span></span><br></pre></td></tr></table></figure>
-<p>因此，还可以加上一些对数据操作的命令，来处理这些数据，就是对这些输入的数据做出一些改变。如：</p>
-<ul>
-<li>sort：按字母顺序排列</li>
-<li>uniq：报告或忽略文件中重复的行</li>
-<li>wc：打印行数，字数和字节数</li>
-<li>grep：打印匹配的行</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep hello</span></span><br></pre></td></tr></table></figure>
-<p>grep就是从输入的数据中，找到包含hello的行。</p>
-<p>另外还有<code>head</code> 和 <code>tail</code> 显示头几行和后几行。</p>
-<p>还有一个比较有用的命令 <code>tee</code> ，它好像是一个三通一样。就是给管道分一个叉。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls /usr/bin | tee ls.txt | grep zip</span></span><br></pre></td></tr></table></figure>
-<p>上条命令将 <code>ls /usr/bin</code> 的输出重定向到 <code>ls.txt</code> 中，同时也重定向到 <code>grep</code> 的标准输入中。</p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习8】扩展和引用</title>
-    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A08%E3%80%91%E6%89%A9%E5%B1%95%E5%92%8C%E5%BC%95%E7%94%A8/</url>
-    <content><![CDATA[<p>当我们每次在终端中输入命令后，shell程序都会在执行命令之前进行多重处理——可以理解为进行一些简单的翻译。这个处理过程称为扩展，在这些命令执行之前，shell就已经将其扩展成其他内容了。</p>
-<span id="more"></span>
-<p>例如：</p>
-<p>使用 <code>echo</code> 命令来验证，它的作用是将文本参数打印到屏幕上。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> this is a <span class="built_in">test</span></span></span><br><span class="line">this is a test</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> *</span></span><br><span class="line">Desktop Documents Music Pictures Public Templates Video</span><br></pre></td></tr></table></figure>
-<p>为什么 <code>echo *</code> 的结果不是 <code>*</code> 呢，这时因为在执行<code>echo</code> 之前，shell程序已经提前把 <code>*</code> 翻译好了，变成了当前路径下的全部文件，并将其作为<code>echo</code> 命令的参数。</p>
-<p><strong>而引用就是来控制扩展的，就是让shell什么时候不翻译或是翻译一部分，选择性地避免不想要的扩展。</strong></p>
-<h2 id="I-扩展的规则"><a href="#I-扩展的规则" class="headerlink" title="I. 扩展的规则"></a>I. 扩展的规则</h2><h3 id="1-路径名扩展"><a href="#1-路径名扩展" class="headerlink" title="1. 路径名扩展"></a>1. 路径名扩展</h3><p>通过使用通配符来实现扩展机制称为 <strong>路径名扩展</strong> 。</p>
-<blockquote>
-<p>注：类似<code>echo *</code> 的扩展，不包括隐藏文件。</p>
-</blockquote>
-<p>如果想要使用通配符来扩展隐藏文件，可以使用：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> .*</span></span><br><span class="line">. .. .file # 这包括了父目录和当前目录</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> .[!.]?*</span> </span><br><span class="line">.file # 这种情况下，用？来表示这里必有一个字符</span><br></pre></td></tr></table></figure>
-<h3 id="2-波浪线扩展"><a href="#2-波浪线扩展" class="headerlink" title="2. 波浪线扩展"></a>2. 波浪线扩展</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> ~</span></span><br><span class="line">/home/piggy</span><br></pre></td></tr></table></figure>
-<h3 id="3-算数扩展"><a href="#3-算数扩展" class="headerlink" title="3. 算数扩展"></a>3. 算数扩展</h3><p>shell支持通过扩展来运行<strong>算数表达式</strong>。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $((<span class="number">1</span>+<span class="number">2</span>))</span></span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-<p>算数扩展使用为 <code>$((expression))</code> ，这里表达式外面必须套两层括号，里面可以嵌套更多的表达式。</p>
-<h3 id="4-花括号扩展"><a href="#4-花括号扩展" class="headerlink" title="4. 花括号扩展"></a>4. 花括号扩展</h3><p>花括号扩展就是一种并列的关系，可以理解为炸开花。</p>
-<p>花括号内部可以是一系列逗号连接的字符串，也可以是一系列整数或单个字符。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> File&#123;A,B,C&#125;</span></span><br><span class="line">FileA FileB FileC</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> Number&#123;1..3&#125;</span></span><br><span class="line">Number1 Number2 Number3</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> A&#123;a&#123;1,2&#125;,B&#123;1,2&#125;&#125;b</span></span><br><span class="line">Aa1b Aa2b AB1b Ab2b</span><br></pre></td></tr></table></figure>
-<p>花括号扩展一般用在生成一群文件的时候，且命名有一些顺序规则。</p>
-<h3 id="5-参数扩展"><a href="#5-参数扩展" class="headerlink" title="5. 参数扩展"></a>5. 参数扩展</h3><p>参数是指系统在某个区域存储的一小块数据，并且给这一小块数据命名了。</p>
-<p>它的使用是<code>$parameter</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$USER</span></span></span><br><span class="line">piggy</span><br></pre></td></tr></table></figure>
-<h3 id="6-命令替换"><a href="#6-命令替换" class="headerlink" title="6. 命令替换"></a>6. 命令替换</h3><p>该规则的使用表达为 <code>$(command)</code> ，是翻译成命令的输出结果。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $(ls)</span></span><br><span class="line">Desktop Documents Music Pictures Public Templates Video</span><br></pre></td></tr></table></figure>
-<h2 id="II-引用"><a href="#II-引用" class="headerlink" title="II. 引用"></a>II. 引用</h2><p>先看两个例子：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> this is a      <span class="built_in">test</span></span></span><br><span class="line">this is a test</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$100</span>.0</span></span><br><span class="line">00.0</span><br></pre></td></tr></table></figure>
-<p>这两个例子都发生了扩展，shell私自的翻译了一下子，第一个例子是当有一堆空格连续在一起的时候，shell会将它翻译为一个空格，且每一个连着的字符串被识别为一个参数，这叫做单词分割。第二个例子中，<code>$1</code> 是一个未定义的变量，所以shell将其翻译为一个空字符。</p>
-<p>那么怎么可以避免这种不想要的扩展呢？有以下的几种方式。</p>
-<h3 id="1-双引号"><a href="#1-双引号" class="headerlink" title="1. 双引号"></a>1. 双引号</h3><p>除了<code>$</code> <code>\</code> 还是有其特殊的意思外，所有的字符都是去它们的特殊含义，被看成是普通的字符。</p>
-<p>这意味着以下扩展失效：</p>
-<ul>
-<li>单词分割</li>
-<li>路径名扩展</li>
-<li>波浪线扩展</li>
-<li>花括号扩展</li>
-</ul>
-<p>但还有以下扩展保留：</p>
-<ul>
-<li>参数扩展</li>
-<li>算数扩展</li>
-<li>命令替换</li>
-</ul>
-<p>单词分割扩展失效，就可以处理文件名中包含空格的文件了。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch <span class="string">&quot;piggy hero.txt&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l piggy hero.txt</span></span><br><span class="line">ls: cannot access piggy: No such file or directory</span><br><span class="line">ls: cannot access hero.txt: No such file or directory</span><br><span class="line"><span class="meta">$</span><span class="bash"> mv <span class="string">&quot;piggy hero&quot;</span> piggy_hero</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在单词分割中，shell会先查找是否存在空格、制表符以及换行（换行字符）等界定符（delimiter）。这就意味着没有用引号包含起来的空格、制表符和换行字符都不会被当成文本的一部分，而只是被当成分割符。</p>
-</blockquote>
-<p>有一个比较有趣的例子：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cal</span></span><br><span class="line">February 2012</span><br><span class="line">Su Mo Tu We Th Fr Sa</span><br><span class="line">		 1  2  3  4</span><br><span class="line">5   6  7  8  9 10 11</span><br><span class="line">12 13 14 15 16 17 18</span><br><span class="line">19 20 21 22 23 24 25</span><br><span class="line">26 27 28 29</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> $(cal)	<span class="comment">#这是因为cal的输出结果中包含换行符，但是在作为echo的参数之前，先被shell翻译为空格</span></span></span><br><span class="line">February 2012 Su Mo Tu We Th Fr Sa 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17</span><br><span class="line">18 19 20 21 22 23 24 25 26 27 28 29</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;<span class="subst">$(cal)</span>&quot;</span>	<span class="comment">#加了双引号之后，限制了shell的翻译</span></span></span><br><span class="line">February 2012</span><br><span class="line">Su Mo Tu We Th Fr Sa</span><br><span class="line">		 1  2  3  4</span><br><span class="line">5   6  7  8  9 10 11</span><br><span class="line">12 13 14 15 16 17 18</span><br><span class="line">19 20 21 22 23 24 25</span><br><span class="line">26 27 28 29</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="2-单引号"><a href="#2-单引号" class="headerlink" title="2. 单引号"></a>2. 单引号</h3><p>如果想要抑制全部的翻译（扩展），那么就是用单引号 <code>&#39;&#39;</code> 。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&#x27;text ~/ * .txt &#123;a,b&#125; $(echo foo) $((2+2)) $USER&#x27;</span></span></span><br><span class="line">text ~/ * .txt &#123;a,b&#125; $(echo foo) $((2+2)) $USER</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;text ~/ * .txt &#123;a,b&#125; <span class="subst">$(echo foo)</span> <span class="subst">$((2+2)</span>) <span class="variable">$USER</span>&quot;</span></span></span><br><span class="line">text ~/ * .txt &#123;a,b&#125; foo 4 piggy</span><br></pre></td></tr></table></figure>
-<h3 id="3-转义字符"><a href="#3-转义字符" class="headerlink" title="3. 转义字符"></a>3. 转义字符</h3><p>有时候我们仅想选择性抑制单个扩展，这时就可以使用转义字符<code>\</code> ，转义字符经常在双引号中用来有选择性地阻止扩展。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">&quot;The balance for user <span class="variable">$USER</span> is: \$5.00&quot;</span></span></span><br><span class="line">The balance for user $USER is: \$5.00</span><br></pre></td></tr></table></figure>
-<p>转义字符也常用来消除文件名中某个字符的特殊含义，这些字符包括<code>$</code>、<code>！</code>、<code>&amp;</code>、空格等。</p>
-<p>如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> touch a\<span class="variable">$b</span> a\!b a\&amp;b a\ b</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line"><span class="meta">a$</span><span class="bash">b a!b a&amp;b a b</span></span><br></pre></td></tr></table></figure>
-<p>一些反斜杠转义字符序列：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121010916486.png" alt="image-20220121010916486"></p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
   </entry>
 </search>

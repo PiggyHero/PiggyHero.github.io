@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="常用命令，方便查阅。">
+  <meta name="description" content="在执行命令的时候，我们可以在终端上看到命令输出的结果，这些结果被内核发送到屏幕上，我们也可以让这些结果输出文件里，这就叫做重定向。同理，我们也可以让文件作为输入，因此重定向的全称为I&#x2F;O重定向。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Ubuntu】Ubuntu常用命令">
-<meta property="og:url" content="http://example.com/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="【linux学习6】重定向和管道">
+<meta property="og:url" content="http://example.com/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A06%E3%80%91%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E7%AE%A1%E9%81%93/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="常用命令，方便查阅。">
+<meta property="og:description" content="在执行命令的时候，我们可以在终端上看到命令输出的结果，这些结果被内核发送到屏幕上，我们也可以让这些结果输出文件里，这就叫做重定向。同理，我们也可以让文件作为输入，因此重定向的全称为I&#x2F;O重定向。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-12-15T18:16:44.000Z">
-<meta property="article:modified_time" content="2022-01-14T19:19:56.538Z">
+<meta property="article:published_time" content="2022-01-20T17:26:03.000Z">
+<meta property="article:modified_time" content="2022-01-20T17:37:54.226Z">
 <meta property="article:author" content="PiggyHero">
-<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+<link rel="canonical" href="http://example.com/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A06%E3%80%91%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E7%AE%A1%E9%81%93/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>【Ubuntu】Ubuntu常用命令 | PiggyHero Wiki</title>
+  <title>【linux学习6】重定向和管道 | PiggyHero Wiki</title>
   
 
 
@@ -195,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A06%E3%80%91%E9%87%8D%E5%AE%9A%E5%90%91%E5%92%8C%E7%AE%A1%E9%81%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cutexiaoxin.gif">
@@ -208,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【Ubuntu】Ubuntu常用命令
+          【linux学习6】重定向和管道
         </h1>
 
         <div class="post-meta">
@@ -217,16 +217,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-16 02:16:44" itemprop="dateCreated datePublished" datetime="2021-12-16T02:16:44+08:00">2021-12-16</time>
+              <time title="创建时间：2022-01-21 01:26:03 / 修改时间：01:37:54" itemprop="dateCreated datePublished" datetime="2022-01-21T01:26:03+08:00">2022-01-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-15 03:19:56" itemprop="dateModified" datetime="2022-01-15T03:19:56+08:00">2022-01-15</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -255,24 +249,63 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>常用命令，方便查阅。</p>
+        <p>在执行命令的时候，我们可以在终端上看到命令输出的结果，这些结果被内核发送到屏幕上，我们也可以让这些结果输出文件里，这就叫做重定向。同理，我们也可以让文件作为输入，因此重定向的全称为I/O重定向。</p>
 <span id="more"></span>
-<p>Ubuntu操作系统中，通常是通过命令行来操作的，命令行应用的扩展性和灵活性较好，在早期的Windows系统中也是用命令行来操作电脑的。</p>
-<p>命令行在终端中输入，用 <code>Ctrl</code>+<code>Alt</code>+<code>T</code> 快捷键可以打开终端窗口。</p>
-<h2 id="1-pwd"><a href="#1-pwd" class="headerlink" title="1.pwd"></a>1.pwd</h2><p>查看当前的路径。</p>
-<h2 id="2-cd"><a href="#2-cd" class="headerlink" title="2.cd"></a>2.cd</h2><p>切换当前路径。后面可以接相对路径，也可接绝对路径。</p>
-<h2 id="3-mkdir"><a href="#3-mkdir" class="headerlink" title="3.mkdir"></a>3.mkdir</h2><p>创建文件夹。</p>
-<h2 id="4-ls"><a href="#4-ls" class="headerlink" title="4.ls"></a>4.ls</h2><p>查看当前路径下的文件和文件夹。</p>
-<h2 id="5-touch"><a href="#5-touch" class="headerlink" title="5.touch"></a>5.touch</h2><p>创建文件。</p>
-<h2 id="6-mv"><a href="#6-mv" class="headerlink" title="6.mv"></a>6.mv</h2><p>将一个文件或文件夹移动到另外一个路径，相当于剪切的作用。</p>
-<p>具体用法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
-<p>将一个文件或文件夹拷贝到另一个路径，相当于复制粘贴。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv file new_path</span><br></pre></td></tr></table></figure>
-<h2 id="8-rm"><a href="#8-rm" class="headerlink" title="8.rm"></a>8.rm</h2><p>删除文件或文件夹。</p>
-<p>具体用法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm file</span><br><span class="line">rm -r folder</span><br></pre></td></tr></table></figure>
-<h2 id="9-sudo"><a href="#9-sudo" class="headerlink" title="9.sudo"></a>9.sudo</h2><p>sudo 的作用是提升当前用户的权限。比如安装软件时，必须要使用sudo命令。</p>
+<p>本文涉及的命令：</p>
+<ul>
+<li>cat</li>
+<li>sort</li>
+<li>uniq</li>
+<li>wc</li>
+<li>grep</li>
+<li>head</li>
+<li>tail</li>
+<li>tee</li>
+</ul>
+<h2 id="I-简短的介绍"><a href="#I-简短的介绍" class="headerlink" title="I. 简短的介绍"></a>I. 简短的介绍</h2><p>我们在使用程序的时候往往会有输出，这些输出通常分为两种：</p>
+<ul>
+<li>程序运行结果，即程序执行输出的数据</li>
+<li>程序的状态或错误信息，描述程序当前的执行状态</li>
+</ul>
+<p>根据linux中一切皆文件的思想。实际上程序是把它们的运行结果发送到一个叫做 <strong>标准输出</strong> 的文件中，而把状态和错误信息发送到一个叫做 <strong>标准错误</strong> 的文件中。 而这个标准输出文件和标准错误文件都与屏幕相连。</p>
+<p>另外，许多程序都是从一个叫做 <strong>标准输入</strong> 的文件中获得输入。这个文件与我们的键盘相连。</p>
+<p>而我们所做的重定向就是改变这些输出的方向和输入的来源。</p>
+<h2 id="II-I-O重定向"><a href="#II-I-O重定向" class="headerlink" title="II. I/O重定向"></a>II. I/O重定向</h2><h3 id="1-标准输出重定向"><a href="#1-标准输出重定向" class="headerlink" title="1. 标准输出重定向"></a>1. 标准输出重定向</h3><p>输出重定向就是指将输出发送到哪。我们使用 <code>&gt;</code> 后接文件名来表示发送的目的地。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /usr/bin &gt; ls_output.txt</span></span><br></pre></td></tr></table></figure>
+<p>这时原来在屏幕上看到的结果被发送到文件中了。</p>
+<blockquote>
+<p><code>&gt;</code> 符号后面的文件接收结果的时候是从头接收到，也就是再从头接收一次数据就会被覆盖。<code>&gt;&gt;</code> 符号表示从文件后面接收，不会覆盖文件。</p>
+</blockquote>
+<h3 id="2-标准错误重定向"><a href="#2-标准错误重定向" class="headerlink" title="2. 标准错误重定向"></a>2. 标准错误重定向</h3><p>前面的符号只能做标准输出的重定向。如果想要做标准错误重定向，使用 <code>2&gt;</code> 。这里的2表示输出的是标准错误（0表示标准输入，1表示标准输出，2表示标准错误）。就是标准输出和标准错误走的不是一条路，所以要标注明白。</p>
+<p>如果想要同时将标准输出和标准错误重定向到同一文件中，可以使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /bin/usr &gt; ls_output.txt 2&gt;&amp;1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l /bin/usr &amp;&gt; ls_output.txt</span></span><br></pre></td></tr></table></figure>
+<p>在第一种方法中，是执行两次重定向。先是将标准输出重定向到文件上，然后再把标准错误重定向的标准输出上。这个顺序不能反。</p>
+<p>如果不想有输出，可以将其重定向到一个垃圾桶文件中 <code>/dev/null</code> 。</p>
+<h3 id="3-标准输入重定向"><a href="#3-标准输入重定向" class="headerlink" title="3. 标准输入重定向"></a>3. 标准输入重定向</h3><p>使用 <code>&lt;</code> 符号完成标准输入重定向。</p>
+<p>例：</p>
+<p>有一个命令 <code>cat</code> ，其作用是将后面跟着的参数文件发送到标准输出中。当后面不接参数的时候，cat等待着标准输入，然后发送到标准输出中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat &lt; file.txt</span></span><br><span class="line">结果显示到屏幕上</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>有许多命令都是从标准输入获得输入，然后结果发送到标准输出上。</p>
+</blockquote>
+<h2 id="III-管道"><a href="#III-管道" class="headerlink" title="III. 管道"></a>III. 管道</h2><p>前面我们说许多命令等待着标准输入的输入，然后发送到标准输出文件上，那么我们还可以把一个命令的标准输出发送到另一个命令的标准输入中，这就是 <strong>管道</strong>。</p>
+<p>管道 <code>|</code> 可以把一个命令的标准输出传送到另一个命令的标准输入中，就像一节一节的管子一样。</p>
+<p>例：</p>
+<p><code>less</code> 与cat类似，把数据发送到标准输出中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -l /usr/bin | less</span></span><br></pre></td></tr></table></figure>
+<p>因此，还可以加上一些对数据操作的命令，来处理这些数据，就是对这些输入的数据做出一些改变。如：</p>
+<ul>
+<li>sort：按字母顺序排列</li>
+<li>uniq：报告或忽略文件中重复的行</li>
+<li>wc：打印行数，字数和字节数</li>
+<li>grep：打印匹配的行</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> grep hello</span></span><br></pre></td></tr></table></figure>
+<p>grep就是从输入的数据中，找到包含hello的行。</p>
+<p>另外还有<code>head</code> 和 <code>tail</code> 显示头几行和后几行。</p>
+<p>还有一个比较有用的命令 <code>tee</code> ，它好像是一个三通一样。就是给管道分一个叉。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls /usr/bin | tee ls.txt | grep zip</span></span><br></pre></td></tr></table></figure>
+<p>上条命令将 <code>ls /usr/bin</code> 的输出重定向到 <code>ls.txt</code> 中，同时也重定向到 <code>grep</code> 的标准输入中。</p>
 
     </div>
 
@@ -282,7 +315,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
           </div>
 
         
@@ -291,12 +324,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/15/%E3%80%90git%E3%80%91git%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86/" rel="prev" title="【git】git背后的原理">
-      <i class="fa fa-chevron-left"></i> 【git】git背后的原理
+    <a href="/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A05%E3%80%91%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85/" rel="prev" title="【linux学习5】虚拟机安装">
+      <i class="fa fa-chevron-left"></i> 【linux学习5】虚拟机安装
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/" rel="next" title="【Ubuntu】Ubuntu更改文件权限">
-      【Ubuntu】Ubuntu更改文件权限 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A07%E3%80%91%E6%89%A9%E5%B1%95%E5%92%8C%E5%BC%95%E7%94%A8/" rel="next" title="【linux学习7】扩展和引用">
+      【linux学习7】扩展和引用 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -356,7 +389,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-pwd"><span class="nav-text">1.pwd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-cd"><span class="nav-text">2.cd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-mkdir"><span class="nav-text">3.mkdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-ls"><span class="nav-text">4.ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-touch"><span class="nav-text">5.touch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-mv"><span class="nav-text">6.mv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-rm"><span class="nav-text">8.rm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-sudo"><span class="nav-text">9.sudo</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E7%AE%80%E7%9F%AD%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="nav-text">I. 简短的介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-I-O%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-text">II. I&#x2F;O重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-text">1. 标准输出重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A0%87%E5%87%86%E9%94%99%E8%AF%AF%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-text">2. 标准错误重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-text">3. 标准输入重定向</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-%E7%AE%A1%E9%81%93"><span class="nav-text">III. 管道</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -372,7 +405,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
