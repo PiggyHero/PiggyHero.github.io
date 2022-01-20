@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="本文涉及到的命令：  cp mv mkdir rm file cat more less tail head">
+  <meta name="description" content="使用图形界面时，我们可以很简单地进行文件复制粘贴等操作，那么为什么要用命令行呢？ 答：命令行程序具有强大的功能和灵活的操作。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【linux学习2】操作文件和目录">
 <meta property="og:url" content="http://example.com/2022/01/19/%E3%80%90linux%E5%AD%A6%E4%B9%A02%E3%80%91%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="本文涉及到的命令：  cp mv mkdir rm file cat more less tail head">
+<meta property="og:description" content="使用图形界面时，我们可以很简单地进行文件复制粘贴等操作，那么为什么要用命令行呢？ 答：命令行程序具有强大的功能和灵活的操作。">
 <meta property="og:locale">
 <meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220118010908098.png">
 <meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220118014216733.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220118012547119.png">
 <meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220118013347767.png">
 <meta property="article:published_time" content="2022-01-18T18:38:12.000Z">
-<meta property="article:modified_time" content="2022-01-18T18:42:45.392Z">
+<meta property="article:modified_time" content="2022-01-20T17:25:02.991Z">
 <meta property="article:author" content="PiggyHero">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -224,10 +224,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-19 02:38:12 / 修改时间：02:42:45" itemprop="dateCreated datePublished" datetime="2022-01-19T02:38:12+08:00">2022-01-19</time>
+              <time title="创建时间：2022-01-19 02:38:12" itemprop="dateCreated datePublished" datetime="2022-01-19T02:38:12+08:00">2022-01-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-21 01:25:02" itemprop="dateModified" datetime="2022-01-21T01:25:02+08:00">2022-01-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -256,7 +262,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文涉及到的命令：</p>
+        <p>使用图形界面时，我们可以很简单地进行文件复制粘贴等操作，那么为什么要用命令行呢？</p>
+<p>答：命令行程序具有强大的功能和灵活的操作。</p>
+<span id="more"></span>
+<p>举一个例子，如果想从一个目录仅复制那些目标目录中不存在的文件或是旧的版本，使用图形操作就比较困难了，你需要一个一个去对比。而是用命令行仅需要一条命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -u *.html destination</span></span><br></pre></td></tr></table></figure>
+<p>本文涉及到的命令：</p>
 <ul>
 <li>cp</li>
 <li>mv</li>
@@ -269,11 +280,6 @@
 <li>tail</li>
 <li>head</li>
 </ul>
-<span id="more"></span>
-<p>使用图形界面时，我们可以很简单地进行文件复制粘贴等操作，那么为什么要用命令行呢？</p>
-<p>答：命令行程序具有强大的功能和灵活的操作。</p>
-<p>举一个例子，如果想从一个目录仅复制那些目标目录中不存在的文件或是旧的版本，使用图形操作就比较困难了，你需要一个一个去对比。而是用命令行仅需要一条命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -u *.html destination</span></span><br></pre></td></tr></table></figure>
 <h2 id="I-通配符"><a href="#I-通配符" class="headerlink" title="I. 通配符"></a>I. 通配符</h2><p>通配符直白一点说就是用 <code>*</code> 等符号来代替文字，就像东北打麻将的hui儿，你缺啥用它都可以替。 当你想操作<code>a.cpp</code> 和 <code>b.cpp</code> 时，就可以用 <code>*.cpp</code> 来代替。</p>
 <p>通配符的具体规则如下：</p>
 <p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220118010908098.png" alt="image-20220118010908098"></p>
@@ -460,7 +466,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
