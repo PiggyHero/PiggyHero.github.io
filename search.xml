@@ -1073,6 +1073,136 @@
       </tags>
   </entry>
   <entry>
+    <title>【git】git最基本的用法</title>
+    <url>/2021/10/18/%E3%80%90git%E3%80%91git%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/</url>
+    <content><![CDATA[<p>git的一些用法<br><span id="more"></span></p>
+<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
+<p><a href="https://docs.github.com/cn">git官方文档</a></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>首先需要知道几个关系    </p>
+<p>git本地分为工作区、暂存区、本地库三个地方</p>
+<p>工作区(workspace)：即为写代码，写文件的地方</p>
+<p>暂存区(staging area)：保存着待提交的文件</p>
+<p>本地库(local repository)：提交后文件所在的地方</p>
+<p>远程仓库(remote repository)：云端的仓库</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032438.png" alt="image-20210711044151491"></p>
+<h3 id="用法一"><a href="#用法一" class="headerlink" title="用法一"></a>用法一</h3><p>github要想访问使用的电脑，需要先告诉github通往电脑的钥匙，在（<a href="https://www.jianshu.com/p/7edb6b838a2e">与远程库建立连接</a>）中介绍了怎么获取电脑的钥匙。</p>
+<p>一般我会在远程建立一个仓库，在本地建立一个仓库，然后在本地仓库中写，再传到远程仓库。</p>
+<p>具体过程：</p>
+<ol>
+<li><p>先在github上建立一个仓库。</p>
+</li>
+<li><p>然后把这个仓库<code>git clone</code>到本地。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 地址(在github上有)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在得到的文件夹中就可以进行写代码了。</p>
+</li>
+<li><p>想要添加到缓存区，就用<code>git add</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果想要提交，就用下面的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &#x27;描述信息&#x27;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在第一次git commit 时候，需要配置好提交人的姓名和邮箱。</p>
+<p>git config —global user.name=”Piggy”</p>
+<p>git config —global user.email=”a363158526@gmail.com”</p>
+</blockquote>
+</li>
+<li><p>如果要发送到github上，用<code>git push</code>。</p>
+<blockquote>
+<p>注意，如果这里是第一次git push，要登录用户名和密码。这里的用户名是github上的用户名，我的叫做PiggyHero，密码不是登录的密码，而是github的token，token的获取是在github的设置中，找到Developer settings-&gt;Personal access tokens，然后点击Generate new token，根据需求自己设置token的权限。</p>
+<p>token是一串字符，需要保存下来，因为我们只能看见一次，然后就被隐藏起来了。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="用法二"><a href="#用法二" class="headerlink" title="用法二"></a>用法二</h3><p>也可以不像一中那样，现在github上建立仓库，而是先在本地建立仓库。</p>
+<ol>
+<li><p>先建立一个文件夹，作为仓库所在的文件夹，然后<code>git init</code>。</p>
+</li>
+<li><p>在远程建立一个仓库，记下来SSH地址。</p>
+</li>
+<li><p>在终端中到本地仓库所在文件夹，使用以下代码建立关联</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="git-基本命令介绍"><a href="#git-基本命令介绍" class="headerlink" title="git 基本命令介绍"></a>git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
+<p>按F向下翻页，按B向上翻页</p>
+<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
+<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
+<p>（2）全局：只在用户范围内使用该配置</p>
+<p>（3）项目：在该项目范围内，使用该配置</p>
+<p>一般设置用户的配置文件，用global</p>
+<p><code>git config --global 想要配置的东西</code></p>
+<p><code>git config --unset --global</code>   恢复原来的配置</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
+<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
+<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
+<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
+<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
+<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
+<p><code>git status</code></p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032549.png" alt="image-20210708115817078"></p>
+<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
+<p>添加要提交的文件</p>
+<p><code>git add 要添加的文件</code></p>
+<p><code>git add .</code>添加所有的文件</p>
+<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
+<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
+<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032601.png" alt="image-20210708120726347"></p>
+<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
+<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
+<p>这里如果没添加文件，会对比所有修改的文件</p>
+<p>红色是修改前的，绿色是修改后的</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032607.png" alt="image-20210708121041581"></p>
+<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
+<blockquote>
+<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
+</blockquote>
+<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
+<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
+<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
+<hr>
+<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
+<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
+<p>git mv也可以移动文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
+<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
+<p>共有三种模式</p>
+<p>(1)—mixed</p>
+<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
+<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
+<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
+<p><code>git reset HEAD^</code> 变更到上一个版本</p>
+<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
+<p><code>git reset 版本号</code>回退到指定的版本</p>
+<p>(2)—soft</p>
+<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
+<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032615.png" alt="img"></p>
+<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
+<p>(3)—hard</p>
+<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032622.gif" alt="img"></p>
+<blockquote>
+<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
+<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
+</blockquote>
+<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
+<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032630.gif" alt="img"></p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【ROS】古月21讲学习笔记</title>
     <url>/2021/10/18/%E3%80%90ROS%E3%80%91%E5%8F%A4%E6%9C%8821%E8%AE%B2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>学习《古月ROS入门21讲》的学习笔记<br><span id="more"></span><br>课程总览：</p>
@@ -1428,124 +1558,33 @@
       </tags>
   </entry>
   <entry>
-    <title>【Ubuntu】Ubuntu更改文件权限</title>
-    <url>/2021/12/16/%E3%80%90Ubuntu%E3%80%91Ubuntu%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/</url>
-    <content><![CDATA[<p>Ubuntu中，文件属性介绍。</p>
+    <title>【git】git背后的原理</title>
+    <url>/2021/12/15/%E3%80%90git%E3%80%91git%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<p>细细介绍git背后原理</p>
 <span id="more"></span>
-<h2 id="1-Linux-文件基本属性"><a href="#1-Linux-文件基本属性" class="headerlink" title="1.Linux 文件基本属性"></a>1.Linux 文件基本属性</h2><p><a href="https://www.runoob.com/linux/linux-file-attr-permission.html">参考</a></p>
-<p>Linux 系统是一种典型的多用户系统，不同的用户处于不同的地位，拥有不同的权限。</p>
-<p>为了保护系统的安全性，Linux 系统对不同的用户访问同一文件（包括目录文件）的权限做了不同的规定。</p>
-<p>在 Linux 中我们通常使用以下两个命令来修改文件或目录的所属用户与权限：</p>
+<p>在git跟踪一个项目时，有以下三个部分：</p>
 <ul>
-<li>chown (change ownerp) ： 修改所属用户与组。</li>
-<li>chmod (change mode) ： 修改用户的权限。</li>
+<li>工作区：就是在电脑里能看到的目录</li>
+<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
+<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
 </ul>
-<p>下图中通过 chown 来授权用户，通过 chmod 为用户设置可以开门的权限。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033851.png" alt="img"></p>
-<p>在 Linux 中我们可以使用 <strong>ll</strong> 或者 <strong>ls –l</strong> 命令来显示一个文件的属性以及文件所属的用户和组，如：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www /]<span class="comment"># ls -l</span></span><br><span class="line">total 64</span><br><span class="line">dr-xr-xr-x   2 root root 4096 Dec 14  2012 bin</span><br><span class="line">dr-xr-xr-x   4 root root 4096 Apr 19  2012 boot</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
-<p>实例中，<strong>bin</strong> 文件的第一个属性用 <strong>d</strong> 表示。<strong>d</strong> 在 Linux 中代表该文件是一个目录文件。</p>
-<p>在 Linux 中第一个字符代表这个文件是目录、文件或链接文件等等。</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032636.png" alt="image-20210711045622504"></p>
 <ul>
-<li>当为 <strong>d</strong> 则是目录</li>
-<li>当为 <strong>-</strong> 则是文件；</li>
-<li>若是 <strong>l</strong> 则表示为链接文档(link file)；</li>
-<li>若是 <strong>b</strong> 则表示为装置文件里面的可供储存的接口设备(可随机存取装置)；</li>
-<li>若是 <strong>c</strong> 则表示为装置文件里面的串行端口设备，例如键盘、鼠标(一次性读取装置)。</li>
+<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
+<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
+<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
+<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
+<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
+<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
 </ul>
-<p>接下来的字符中，以三个为一组，且均为 <strong>rwx</strong> 的三个参数的组合。其中， <strong>r</strong> 代表可读(read)、 <strong>w</strong> 代表可写(write)、 <strong>x</strong> 代表可执行(execute)。 要注意的是，这三个权限的位置不会改变，如果没有权限，就会出现减号 <strong>-</strong> 而已。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033905.jpg" alt="img"></p>
-<p>每个文件的属性由左边第一部分的 10 个字符来确定（如下图）。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215033910.png" alt="363003_1227493859FdXT"></p>
-<p>从左至右用 <strong>0-9</strong> 这些数字来表示。</p>
-<p>第 <strong>0</strong> 位确定文件类型，第 <strong>1-3</strong> 位确定属主（该文件的所有者）拥有该文件的权限。</p>
-<p>第4-6位确定属组（所有者的同组用户）拥有该文件的权限，第7-9位确定其他用户拥有该文件的权限。</p>
-<p>其中，第 <strong>1、4、7</strong> 位表示读权限，如果用 <strong>r</strong> 字符表示，则有读权限，如果用 <strong>-</strong> 字符表示，则没有读权限；</p>
-<p>第 <strong>2、5、8</strong> 位表示写权限，如果用 <strong>w</strong> 字符表示，则有写权限，如果用 <strong>-</strong> 字符表示没有写权限；第 <strong>3、6、9</strong> 位表示可执行权限，如果用 <strong>x</strong> 字符表示，则有执行权限，如果用 <strong>-</strong> 字符表示，则没有执行权限。</p>
-<hr>
-<h2 id="2-Linux文件属主和属组"><a href="#2-Linux文件属主和属组" class="headerlink" title="2.Linux文件属主和属组"></a>2.Linux文件属主和属组</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@www /]# ls -l</span><br><span class="line">total 64</span><br><span class="line">drwxr-xr-x 2 root  root  4096 Feb 15 14:46 cron</span><br><span class="line">drwxr-xr-x 3 mysql mysql 4096 Apr 21  2014 mysql</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
-<p>对于文件来说，它都有一个特定的所有者，也就是对该文件具有所有权的用户。</p>
-<p>同时，在Linux系统中，用户是按组分类的，一个用户属于一个或多个组。</p>
-<p>文件所有者以外的用户又可以分为文件所有者的同组用户和其他用户。</p>
-<p>因此，Linux系统按文件所有者、文件所有者同组用户和其他用户来规定了不同的文件访问权限。</p>
-<p>在以上实例中，mysql 文件是一个目录文件，属主和属组都为 mysql，属主有可读、可写、可执行的权限；与属主同组的其他用户有可读和可执行的权限；其他用户也有可读和可执行的权限。</p>
-<p>对于 root 用户来说，一般情况下，文件的权限对其不起作用。</p>
-<hr>
-<h2 id="3-更改文件属性"><a href="#3-更改文件属性" class="headerlink" title="3.更改文件属性"></a>3.更改文件属性</h2><h3 id="1-chgrp：更改文件属组"><a href="#1-chgrp：更改文件属组" class="headerlink" title="(1)chgrp：更改文件属组"></a>(1)chgrp：更改文件属组</h3><p>语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chgrp [-R] 属组名 文件名</span><br></pre></td></tr></table></figure>
-<p>参数选项</p>
-<ul>
-<li>-R：递归更改文件属组，就是在更改某个目录文件的属组时，如果加上-R的参数，那么该目录下的所有文件的属组都会更改。</li>
-</ul>
-<h3 id="2-chown：更改文件属主，也可以同时更改文件属组"><a href="#2-chown：更改文件属主，也可以同时更改文件属组" class="headerlink" title="(2)chown：更改文件属主，也可以同时更改文件属组"></a>(2)chown：更改文件属主，也可以同时更改文件属组</h3><p>语法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chown [–R] 属主名 文件名</span><br><span class="line">chown [-R] 属主名：属组名 文件名</span><br></pre></td></tr></table></figure>
-<p>进入 /root 目录（~）将install.log的拥有者改为bin这个账号：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~] <span class="built_in">cd</span> ~</span><br><span class="line">[root@www ~]<span class="comment"># chown bin install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 bin  users 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
-<p>将install.log的拥有者与群组改回为root：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># chown root:root install.log</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -l</span></span><br><span class="line">-rw-r--r--  1 root root 68495 Jun 25 08:53 install.log</span><br></pre></td></tr></table></figure>
-<h3 id="3-chmod：更改文件9个属性"><a href="#3-chmod：更改文件9个属性" class="headerlink" title="(3)chmod：更改文件9个属性"></a>(3)chmod：更改文件9个属性</h3><p>Linux文件属性有两种设置方法，一种是数字，一种是符号。</p>
-<p>Linux 文件的基本权限就有九个，分别是 <strong>owner/group/others(拥有者/组/其他)</strong> 三种身份各有自己的 <strong>read/write/execute</strong> 权限。</p>
-<p>先复习一下刚刚上面提到的数据：文件的权限字符为： <strong>-rwxrwxrwx</strong> ， 这九个权限是三个三个一组的！其中，我们可以使用数字来代表各个权限，各权限的分数对照表如下：</p>
-<ul>
-<li>r:4</li>
-<li>w:2</li>
-<li>x:1</li>
-</ul>
-<p>每种身份(owner/group/others)各自的三个权限(r/w/x)分数是需要累加的，例如当权限为： <strong>-rwxrwx—-</strong> 分数则是：</p>
-<ul>
-<li>owner = rwx = 4+2+1 = 7</li>
-<li>group = rwx = 4+2+1 = 7</li>
-<li>others= —- = 0+0+0 = 0</li>
-</ul>
-<p>所以等一下我们设定权限的变更时，该文件的权限数字就是 <strong>770</strong>。变更权限的指令 chmod 的语法是这样的：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chmod [-R] xyz 文件或目录</span><br></pre></td></tr></table></figure>
-<p>选项与参数：</p>
-<ul>
-<li>xyz : 就是刚刚提到的数字类型的权限属性，为 rwx 属性数值的相加。</li>
-<li>-R : 进行递归(recursive)的持续变更，亦即连同次目录下的所有文件都会变更</li>
-</ul>
-<p>举例来说，如果要将 .bashrc 这个文件所有的权限都设定启用，那么命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rw-r--r--  1 root root 395 Jul  4 11:45 .bashrc</span><br><span class="line">[root@www ~]<span class="comment"># chmod 777 .bashrc</span></span><br><span class="line">[root@www ~]<span class="comment"># ls -al .bashrc</span></span><br><span class="line">-rwxrwxrwx  1 root root 395 Jul  4 11:45 .bashrc</span><br></pre></td></tr></table></figure>
-<p>那如果要将权限变成 <em>-rwxr-xr—</em> 呢？那么权限的分数就成为 [4+2+1] [4+0+1] [4+0+0]=754。</p>
-<h3 id="4-符号类型改变文件权限"><a href="#4-符号类型改变文件权限" class="headerlink" title="(4)符号类型改变文件权限"></a>(4)符号类型改变文件权限</h3><p>还有一个改变权限的方法，从之前的介绍中我们可以发现，基本上就九个权限分别是：</p>
-<ul>
-<li>user：用户</li>
-<li>group：组</li>
-<li>others：其他</li>
-</ul>
-<p>那么我们就可以使用 <strong>u, g, o</strong> 来代表三种身份的权限。</p>
-<p>此外， <strong>a</strong> 则代表 <strong>all</strong>，即全部的身份。读写的权限可以写成 <strong>r, w, x</strong>，也就是可以使用下表的方式来看：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>chmod</th>
-<th>u g o a</th>
-<th>+(加入) -(除去) =(设定)</th>
-<th>r w x</th>
-<th>文件或目录</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>如果我们需要将文件权限设置为 <strong>-rwxr-xr—</strong> ，可以使用 <strong>chmod u=rwx,g=rx,o=r 文件名</strong> 来设定:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  touch test1    // 创建 test1 文件</span></span><br><span class="line"><span class="comment"># ls -al test1    // 查看 test1 默认权限</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br><span class="line"><span class="comment"># chmod u=rwx,g=rx,o=r  test1    // 修改 test1 权限</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rwxr-xr-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
-<p>而如果是要将权限去掉而不改变其他已存在的权限呢？例如要拿掉全部人的可执行权限，则：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#  chmod  a-x test1</span></span><br><span class="line"><span class="comment"># ls -al test1</span></span><br><span class="line">-rw-r--r-- 1 root root 0 Nov 15 10:32 test1</span><br></pre></td></tr></table></figure>
+<p>如果还不明白，看下图：</p>
+<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032656.png" alt="image-20210711063540634"></p>
 ]]></content>
       <categories>
         <category>工程原理和实践</category>
       </categories>
       <tags>
-        <tag>Ubuntu</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1592,220 +1631,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【git】git最基本的用法</title>
-    <url>/2021/10/18/%E3%80%90git%E3%80%91git%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%94%A8%E6%B3%95/</url>
-    <content><![CDATA[<p>git的一些用法<br><span id="more"></span></p>
-<p><a href="https://www.runoob.com/git/git-tutorial.html">参考</a></p>
-<p><a href="https://docs.github.com/cn">git官方文档</a></p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>首先需要知道几个关系    </p>
-<p>git本地分为工作区、暂存区、本地库三个地方</p>
-<p>工作区(workspace)：即为写代码，写文件的地方</p>
-<p>暂存区(staging area)：保存着待提交的文件</p>
-<p>本地库(local repository)：提交后文件所在的地方</p>
-<p>远程仓库(remote repository)：云端的仓库</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032438.png" alt="image-20210711044151491"></p>
-<h3 id="用法一"><a href="#用法一" class="headerlink" title="用法一"></a>用法一</h3><p>github要想访问使用的电脑，需要先告诉github通往电脑的钥匙，在（<a href="https://www.jianshu.com/p/7edb6b838a2e">与远程库建立连接</a>）中介绍了怎么获取电脑的钥匙。</p>
-<p>一般我会在远程建立一个仓库，在本地建立一个仓库，然后在本地仓库中写，再传到远程仓库。</p>
-<p>具体过程：</p>
-<ol>
-<li><p>先在github上建立一个仓库。</p>
-</li>
-<li><p>然后把这个仓库<code>git clone</code>到本地。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 地址(在github上有)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在得到的文件夹中就可以进行写代码了。</p>
-</li>
-<li><p>想要添加到缓存区，就用<code>git add</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果想要提交，就用下面的命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git commit -m &#x27;描述信息&#x27;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在第一次git commit 时候，需要配置好提交人的姓名和邮箱。</p>
-<p>git config —global user.name=”Piggy”</p>
-<p>git config —global user.email=”a363158526@gmail.com”</p>
-</blockquote>
-</li>
-<li><p>如果要发送到github上，用<code>git push</code>。</p>
-<blockquote>
-<p>注意，如果这里是第一次git push，要登录用户名和密码。这里的用户名是github上的用户名，我的叫做PiggyHero，密码不是登录的密码，而是github的token，token的获取是在github的设置中，找到Developer settings-&gt;Personal access tokens，然后点击Generate new token，根据需求自己设置token的权限。</p>
-<p>token是一串字符，需要保存下来，因为我们只能看见一次，然后就被隐藏起来了。</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="用法二"><a href="#用法二" class="headerlink" title="用法二"></a>用法二</h3><p>也可以不像一中那样，现在github上建立仓库，而是先在本地建立仓库。</p>
-<ol>
-<li><p>先建立一个文件夹，作为仓库所在的文件夹，然后<code>git init</code>。</p>
-</li>
-<li><p>在远程建立一个仓库，记下来SSH地址。</p>
-</li>
-<li><p>在终端中到本地仓库所在文件夹，使用以下代码建立关联</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add origin SSH地址 //建立本地库与远程库的关系</span><br><span class="line">git push -u origin master //把当前的分支master上的内容转移到远程的库上</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="git-基本命令介绍"><a href="#git-基本命令介绍" class="headerlink" title="git 基本命令介绍"></a>git 基本命令介绍</h2><h3 id="1-git-help"><a href="#1-git-help" class="headerlink" title="1.git help"></a>1.git help</h3><p><code>git help -命令名称或手册名称</code></p>
-<p>按F向下翻页，按B向上翻页</p>
-<h3 id="2-git-config"><a href="#2-git-config" class="headerlink" title="2.git config"></a>2.git config</h3><p>配置的范围有三种：</p>
-<p>（1）系统：无论是哪个用户，在整个系统的范围内，都使用同一配置</p>
-<p>（2）全局：只在用户范围内使用该配置</p>
-<p>（3）项目：在该项目范围内，使用该配置</p>
-<p>一般设置用户的配置文件，用global</p>
-<p><code>git config --global 想要配置的东西</code></p>
-<p><code>git config --unset --global</code>   恢复原来的配置</p>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &#x27;labixiaoxin&#x27;</span><br><span class="line">git config --unset --global user.name</span><br><span class="line">git config --global user.email ‘labixiaoxin@email.com’</span><br></pre></td></tr></table></figure>
-<p>配置的文件在当前的主目录下面，用 <code>cat</code>命令来查看</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
-<h3 id="3-git-init"><a href="#3-git-init" class="headerlink" title="3.git init"></a>3.git init</h3><p>初始化文件夹，会生成repository，文件夹里面会生成git需要的各种文件</p>
-<p>如果不想跟踪这个项目，就把 <strong>.git</strong>文件删掉，一般情况下不去改这些文件</p>
-<p><strong>.config</strong>文件是项目级别的配置信息，之前的<strong>~/.config </strong>文件是用户级别的配置信息</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd 文件目录</span><br><span class="line">git init </span><br></pre></td></tr></table></figure>
-<h3 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h3><p>查看当前的状态，显示当前所在的分支和变动的文件</p>
-<p><code>git status</code></p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032549.png" alt="image-20210708115817078"></p>
-<h3 id="5-git-add"><a href="#5-git-add" class="headerlink" title="5.git add"></a>5.git add</h3><p>git添加的流程：先修改文件或增加文件 $\longrightarrow$ 然后告诉git哪些文件想要提交（git add）$\longrightarrow$ 提交（git commit）</p>
-<p>添加要提交的文件</p>
-<p><code>git add 要添加的文件</code></p>
-<p><code>git add .</code>添加所有的文件</p>
-<h3 id="6-git-commit"><a href="#6-git-commit" class="headerlink" title="6.git commit"></a>6.git commit</h3><p>提交，后面可以加上提交的信息</p>
-<p><code>git commit -m &#39;想要说明的信息&#39;</code></p>
-<h3 id="7-git-log"><a href="#7-git-log" class="headerlink" title="7.git log"></a>7.git log</h3><p>使用 <code>git log</code>查看以往的提交信息</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032601.png" alt="image-20210708120726347"></p>
-<h3 id="8-git-diff"><a href="#8-git-diff" class="headerlink" title="8.git diff"></a>8.git diff</h3><p><code>git diff 要查看的文件</code>比较的是工作区和暂存区该文件的不同</p>
-<p><code>git diff --staged</code>比较的是暂存区和仓库中该文件的不同</p>
-<p>这里如果没添加文件，会对比所有修改的文件</p>
-<p>红色是修改前的，绿色是修改后的</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032607.png" alt="image-20210708121041581"></p>
-<h3 id="8-git-rm"><a href="#8-git-rm" class="headerlink" title="8.git rm"></a>8.git rm</h3><p><code>git rm</code> 表示从暂存区和工作区删除文件，并且将修改后的文件加入暂存区。</p>
-<blockquote>
-<p>该命令只能删除已经提交到本地库中的文件。当在工作目录中修改，则不能删除；或者及时在工作目录中修改了， 又<code>git add</code>到暂存区了，也是不能用该命令删除的。</p>
-</blockquote>
-<p>其背后的原理是这样的：例如有一个test.md文件，当你提交后，暂存区里是你最后一次提交后的目录。然后你修改了test.md文件，此时你再删除，git记录的是修改后的test.md被删除了，当你再提交时，git的记录会发生冲突，版本库中的文件是没修改的test.md，你删除的是修改的test.md，两个文件不一样，所以会出错</p>
-<p>如果你想硬要针对这种情况删除修改的test.md，并且git能够识别，要用 <code>git rm -f</code>命令，此时便可以删除修改了的test.md</p>
-<p>如果仅想在暂存区中删除文件，也就是说仅从跟踪清单中删除，使用 <code>git rm --cached</code></p>
-<hr>
-<p><strong>另外还有当重命名一个文件时</strong>，直接在文件夹中重命名，然后 <code>git status</code> 会显示该文件被删除，此时可以 <code>git rm</code>原名文件，然后 <code>git add</code>重命名后的文件，git会自动识别该文件名</p>
-<h3 id="9-git-mv"><a href="#9-git-mv" class="headerlink" title="9.git mv"></a>9.git mv</h3><p>也可以直接用git mv重命名</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 现在名 原来名</span><br></pre></td></tr></table></figure>
-<p>git mv也可以移动文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git mv 文件名 目录 </span><br></pre></td></tr></table></figure>
-<h3 id="10-git-reset"><a href="#10-git-reset" class="headerlink" title="10.git reset"></a>10.git reset</h3><p>回退版本命令，指定退回某一次提交的版本</p>
-<p>共有三种模式</p>
-<p>(1)—mixed</p>
-<p>首先是 <code>--mixed</code>为默认模式，当变更到指定的版本后，工作区的文件保持不变，会重置暂存区，暂存区的目录和指定的版本的目录相同</p>
-<p>例如第一次提交的文件有a.cpp，第二次提交的文件有b.cpp</p>
-<p>如果回退到第一个版本，那么b.cpp变为未跟踪文件，暂存区与第一次提交的版本目录相同</p>
-<p><code>git reset HEAD^</code> 变更到上一个版本</p>
-<p><code>git reset HEAD^ hello.cpp</code>此时最新的版本还在，只是这个最新版本中的hello.cpp回到上一个版本，而工作目录中的文件不变，暂存区中的hello.cpp是上一个版本</p>
-<p><code>git reset 版本号</code>回退到指定的版本</p>
-<p>(2)—soft</p>
-<p>soft只更改HEAD的位置，暂存区和工作目录都不改变，暂存区的文件等待重新提交</p>
-<p>例如：<strong>9e78i</strong> 提交添加了 style.css 文件，<strong>035cc</strong> 提交添加了 index.js 文件。使用软重置，我们可以撤销提交记录，但是保留新建的 style.css 和 index.js 文件。</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032615.png" alt="img"></p>
-<p>如果是mixed模式，需要先 <code>git add</code>才与soft效果相同</p>
-<p>(3)—hard</p>
-<p>hard模式，是把暂存区和工作目录都变更到指定版本，也就是说本地的文件也和目标的版本相同，就是把当前工作目录的文件，已暂存的文件全部清除（如果记下最后一次版本号，也可以复原）</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032622.gif" alt="img"></p>
-<blockquote>
-<p><code>git reset HEAD^^^</code>  几个就表示 <code>^</code>，就表示当前版本的前几个版本</p>
-<p><code>git reset HEAD~3</code> 也可以用 <code>~数字</code>表示</p>
-</blockquote>
-<h3 id="11-git-revert"><a href="#11-git-revert" class="headerlink" title="11.git revert"></a>11.git revert</h3><p><code>git revert</code>也同样有三种模式，和reset相同，不同的是reset是回到指定版本，而它表示在现有版本上继续向下走，也就是把之前的版本添加到现在版本之后</p>
-<p>举个例子，我们在 ec5be 上添加了 index.js 文件。之后发现并不需要这个文件。那么就可以使用 git revert ec5be 指令还原之前的更改。如下图所示：</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032630.gif" alt="img"></p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【git】git背后的原理</title>
-    <url>/2021/12/15/%E3%80%90git%E3%80%91git%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<p>细细介绍git背后原理</p>
-<span id="more"></span>
-<p>在git跟踪一个项目时，有以下三个部分：</p>
-<ul>
-<li>工作区：就是在电脑里能看到的目录</li>
-<li>暂存区：英文叫做stage和index，一般存放在<strong>.git/index</strong>中</li>
-<li>版本库：工作区有一个隐藏的目录，<strong>.git</strong>，这就是版本库</li>
-</ul>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032636.png" alt="image-20210711045622504"></p>
-<ul>
-<li>首先介绍暂存区中的内容，暂存区就是一个目录树，该目录树上的内容是文件的索引，可以理解为是一个指针，它指向一个文件</li>
-<li>这个文件都存在 <strong>objects</strong>中，<strong>objects</strong>表示git的对象库，里面包含了创建的各种对象及内容，它们被存在 <strong>.git/objects</strong>中</li>
-<li>当工作区的文件被修改后，使用 <code>git add</code>命令，暂存区的目录树便会被更新，同时工作区中修改的文件会被复制到objects中生成一个新的对象，而该对象的🆔就被记录在刚刚所说的暂存区的目录树中</li>
-<li>当使用 <code>git commit</code>后，暂存区的目录树也变成了一个对象，该对象的🆔被记录在版本库中的<strong>master</strong>中，master分支同时也作出相应的更新，master所代表的版本树中的每一个叶子都指向不同版本的目录树。<strong>HEAD</strong>是指向master版本树的一个指针，表示当前所在的版本（它总是指向该分支上的最后一次提交。 这表示 HEAD 将是下一次提交的父结点）</li>
-<li>当执行 <code>git reset HEAD</code>命令后，暂存区的目录会被重写，变成了HEAD所指向的版本所对应的目录树，但此时工作区不受影响</li>
-<li>当执行 <code>git rm --cached &lt;file&gt;</code>后，会直接从暂存区删除文件（把索引删掉，objects中的文件也删掉），工作区则不做出改变</li>
-</ul>
-<p>如果还不明白，看下图：</p>
-<p><img src="https://gitee.com/piggyhero/pic/raw/master/img/20211215032656.png" alt="image-20210711063540634"></p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Ubuntu】依赖包是什么</title>
-    <url>/2021/10/21/%E3%80%90Ubuntu%E3%80%91%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
-    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
-<span id="more"></span>
-<p>依赖包就是某个软件用到的库文件。</p>
-<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
-<p>不同体系用不同的方法解决依赖问题。</p>
-<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
-<ul>
-<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
-<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
-<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
-<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
-</ul>
-<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
-<ul>
-<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
-<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
-<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
-<li>系统中安装的软件越多，越容易出问题。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>Ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【git问题解决】git连不上远端库问题解决</title>
-    <url>/2021/12/02/%E3%80%90git%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
-<span id="more"></span>
-<p>报错信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git clone https://github.com/xxx/xxx.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/xxx/xxx.git/&#x27;: LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</span><br></pre></td></tr></table></figure>
-<p>解决：</p>
-<p>在 clone GitHub 仓库时可以使用 HTTPS 或者 SSH 进行 clone，而 SSH 却没有 HTTPS 的网络连接问题，所以可以将 push/pull 的连接方式由 HTTPS 改为 SSH。</p>
-<blockquote>
-<p>要求：你需要提前生成 SSH 公私钥对，并将公钥添加到你的 GitHub 账户中。关于这一部分的详细信息，请参阅 <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a>。</p>
-</blockquote>
-<p>进入仓库对应目录，执行如下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote set-url origin git@github.com:xxx/xxx.git</span><br></pre></td></tr></table></figure>
-<p>更改完成后，可以使用如下命令查看当前的 origin 地址：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【git问题解决】解决github无法访问</title>
     <url>/2021/12/14/%E3%80%90git%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91%E8%A7%A3%E5%86%B3github%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE/</url>
     <content><![CDATA[<p><a href="https://juejin.cn/post/6844904193170341896">原文链接</a></p>
@@ -1849,6 +1674,200 @@
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习10】环境变量</title>
+    <url>/2022/01/22/%E3%80%90linux%E5%AD%A6%E4%B9%A010%E3%80%91%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<p>shell程序用一个叫做环境变量（environment variable）的特性来存储有关shell会话和工作环境的信息。这项特性允许你在内存中存储数据，以便程序或shell中运行的脚本能够轻松访问到它们。</p>
+<span id="more"></span>
+<p>在shell程序中，环境变量可以分为两类：</p>
+<ul>
+<li>全局环境</li>
+<li>局部环境</li>
+</ul>
+<h2 id="I-查看变量"><a href="#I-查看变量" class="headerlink" title="I. 查看变量"></a>I. 查看变量</h2><p>全局环境变量对所有的shell程序会话和其生成的子shell都是可见的。而局部环境变量则只对创建它们的shell程序可见。</p>
+<blockquote>
+<p>系统所设置的环境变量都是以大写字母来命名的，我们自己命名的环境变量可以是小写。</p>
+</blockquote>
+<p>如果想要查看 <strong>全局环境变量</strong> ，可以使用 <code>env</code> 和 <code>printenv</code> 命令，但是显示个别的全局环境变量，则用 <code>printenv  global_variable_name</code> 来查看。</p>
+<p>而linux中没有单独查看<strong>局部环境变量</strong>的命令，使用<code>set</code> 可以查看全部的环境变量，包括全局环境变量、局部环境变量和用户自定义的环境变量。</p>
+<h2 id="II-设置变量"><a href="#II-设置变量" class="headerlink" title="II. 设置变量"></a>II. 设置变量</h2><h3 id="1-设置局部用户自定义变量"><a href="#1-设置局部用户自定义变量" class="headerlink" title="1. 设置局部用户自定义变量"></a>1. 设置局部用户自定义变量</h3><p>可以直接在终端中设置一个局部的环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> my_variable=Hello</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">Hello</span><br></pre></td></tr></table></figure>
+<p>注意：在设置环境变量的时候，等号前后都没空格。</p>
+<h3 id="2-设置全局环境变量"><a href="#2-设置全局环境变量" class="headerlink" title="2. 设置全局环境变量"></a>2. 设置全局环境变量</h3><p>设置全局环境变量的方法是先创建一个局部环境变量，然后使用 <code>export</code> 命令来完成。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> my_variable=<span class="string">&quot;Hello world&quot;</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">export</span> my_variable</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$my_variable</span></span></span><br><span class="line">Hello world</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<p>这样，在该shell程序的子shell程序中，也可以看见该环境变量。但如果再开启其他终端，则看不见该变量了。</p>
+<p>还需要注意的是在子shell中修改全局环境变量，不会影响到父shell中该变量的值。</p>
+<h3 id="3-删除环境变量"><a href="#3-删除环境变量" class="headerlink" title="3. 删除环境变量"></a>3. 删除环境变量</h3><p>如果要删除环境变量，可以使用 <code>unset</code> 命令，同理在子shell中删除全局变量并不会影响父shell。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> my_variable</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在涉及到环境变量名的时候，什么时候加$，什么时候不加很乱，有这样一个小技巧，就是如果用到变量就加，如果是操作变量就不加。</p>
+</blockquote>
+<h2 id="III-设置PATH环境变量"><a href="#III-设置PATH环境变量" class="headerlink" title="III. 设置PATH环境变量"></a>III. 设置PATH环境变量</h2><p>PATH变量是系统内部定义的一个变量，该变量定义了用于查找命令程序的路径。如果我们有了一些新的命令，可以将路径添加到PATH中。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> PATH=<span class="variable">$PATH</span>:/home/tree</span></span><br></pre></td></tr></table></figure>
+<p>但是，要注意的是我们现在对PATH变量的修改只能持续到退出或重启系统，是不能一直持续下去的。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习11】软件包管理</title>
+    <url>/2022/01/22/%E3%80%90linux%E5%AD%A6%E4%B9%A011%E3%80%91%E8%BD%AF%E4%BB%B6%E5%8C%85%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<p>在linux系统中，我们下载软件的方式有两种：</p>
+<ul>
+<li>以软件包的形式通过包管理软件下载安装</li>
+<li>以源码手动编译安装</li>
+</ul>
+<p>本文主要介绍以软件包形式进行软件安装。</p>
+<span id="more"></span>
+<h2 id="I-软件包系统"><a href="#I-软件包系统" class="headerlink" title="I. 软件包系统"></a>I. 软件包系统</h2><p>不同的linux版本使用的是不同类型的软件包系统，原则上适用一种版本的软件包系统和另一种是不兼容的。在linux发行版本中，有两大软件包技术阵营：</p>
+<ul>
+<li>Debian类（.deb）：使用该类的版本有Debian、Ubuntu等</li>
+<li>Red Hat类（.rpm）：使用该类的版本有CentOS、Red Hat等</li>
+</ul>
+<p><strong>包文件</strong>是组成软件包系统的基本软件单元，是由组成软件包文件压缩而成的文件集。这些包文件是由一些维护者创建的，这些维护者不一定是软件的创作者，而是从创作者那获得源码，经过一些小的修改然后编译以获得与linux版本比较兼容的软件包。然后再将这些软件包上传到<strong>软件库</strong>中。软件库可以理解为当前linux版本的软件仓库，里面包含着各种各样的软件包。</p>
+<p>关于<strong>依赖性</strong>：几乎没有一个程序是独立的，程序之间相互依赖完成特定的工作。现代软件包管理系统都提供依赖性解决策略，从而确保用户安装了软件包的同时也安装了其所有的依赖关系。</p>
+<h2 id="II-软件包工具"><a href="#II-软件包工具" class="headerlink" title="II. 软件包工具"></a>II. 软件包工具</h2><p>软件包工具包含两类：</p>
+<ul>
+<li>低级工具：对软件包进行处理，执行如安装、删除软件包文件等任务</li>
+<li>高级工具：进行元数据搜索以及提供依赖性解决的高级工具</li>
+</ul>
+<p>对高级和低级工具的简单理解就是，假如你想下一个软件，如果从linux发行版本的<strong>软件库</strong>中下载，就使用<strong>高级工具</strong>进行下载、安装并解决好了<strong>依赖关系</strong>。如果你从网上下了一个<strong>软件包文件</strong>，则需要自己来安装，这时就使用低级工具，但是不能解决依赖关系。</p>
+<p>不同版本的软件包管理系统如下：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220122223449532.png" alt="image-20220122223449532"></p>
+<h2 id="III-软件包管理"><a href="#III-软件包管理" class="headerlink" title="III. 软件包管理"></a>III. 软件包管理</h2><p>声明：下面使用<code>package_name</code> 来表示软件包的实际名称。<code>package_file</code> 来表示该软件包的文件名。</p>
+<h3 id="1-在软件库里找软件包"><a href="#1-在软件库里找软件包" class="headerlink" title="1. 在软件库里找软件包"></a>1. 在软件库里找软件包</h3><p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apt update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> apt-cache search search_string <span class="comment">#根据关键字在缓存中搜索软件包</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum search package_name</span></span><br></pre></td></tr></table></figure>
+<p>我们知道从库中下载软件就是从所设置的软件源上下载，软件源中会提供一个软件列表，上面罗列了全部的软件。但是软件是不断更新的，所以软件列表也是不断更新的。使用<code>apt update</code> 命令就是更新软件列表，让最新的软件列表缓存到本地。</p>
+<p>而<code>apt-cache search search_string</code> 命令就是从这个缓存下来的列表中搜索跟关键字匹配的软件。</p>
+<blockquote>
+<p>在 Ubuntu 中软件源其实还细分为下面两种：</p>
+<ul>
+<li>Ubuntu 官方软件源</li>
+<li>PPA 软件源</li>
+</ul>
+<p>官方软件源列表在<code>/etc/apt/source.list</code> 中，如果想要更改软件源，可以修改该文件。</p>
+<p>PPA 源出现的背景是因为系统自带的源是很有限的，我们肯定需要一些其他的软件包然而如果是直接下载deb格式的文件的话，又不能获取到更新和维护，所以这就用到了十分重要的 PPA 源了。</p>
+<p>所谓 PPA 源，就是指 “Personal Package Archives” ，也就是<strong>个人软件包集</strong>。这其实是一个网站，即launchpad.net。Launchpad 是 Ubuntu 母公司 Canonical 公司所架设的网站，是一个提供维护、支援或联络 Ubuntu 开发者的平台。由于不是所有的软件都能进入 Ubuntu 的官方的软件库，launchpad.net 提供了 PPA，允许开发者建立自己的软件仓库，自由的上传软件。供用户安装和查看更新。</p>
+<p>添加和删除PPA软件源</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:user/ppa-name</span><br><span class="line">sudo add-apt-repository --remove ppa:user/ppa-name    </span><br></pre></td></tr></table></figure>
+<p>例如，我们想要添加一个 Wireshark 软件的 PPA 源，我们可以根据它官网上提供的命令来进行添加，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/20211215033826.webp" alt="img"></p>
+<p>当我们添加完 PPA 源之后，系统就会在 <code>/etc/apt/sources.list.d/</code>文件夹里创建了两个文件：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/20211215033835.webp" alt="img"></p>
+<p>我们再来打开一下 <code>wireshark-dev-stable-trusty.list</code><br>文件看看里面的内容是什么：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">deb http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br><span class="line"># deb-src http://ppa.launchpad.net/wireshark-dev/stable/ubuntu trusty main</span><br></pre></td></tr></table></figure>
+<p>原来文件里就是添加了一个跟软件源一模一样的东西，他们的作用殊途同归啊。我想这其实是 Ubuntu 为了分辨官方的源和第三方的源才设计成在<code>sources.list</code>和 <code>sources.list.d/</code>这两个地方中存储软件源信息。因为第三方的源毕竟不太可信，如果随便更新的话可是会出事情的。</p>
+</blockquote>
+<h3 id="2-安装软件库中的软件包"><a href="#2-安装软件库中的软件包" class="headerlink" title="2. 安装软件库中的软件包"></a>2. 安装软件库中的软件包</h3><p>因为是软件库中的软件包，我们可以使用高级包管理工具，这样可以下载安装，并解决依赖关系。</p>
+<p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apt install package_name</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install package_name</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-安装软件包文件中的软件包"><a href="#3-安装软件包文件中的软件包" class="headerlink" title="3. 安装软件包文件中的软件包"></a>3. 安装软件包文件中的软件包</h3><p>这里是安装软件包文件中的软件包，也就是我们自己下载了一个<code>.deb</code> 或 <code>.rpm</code> 的文件，这就需要使用低级工具来安装。但是使用低级工具的<strong>缺点是它不能解决依赖关系。</strong></p>
+<p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> dpkg --install package_file</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rpm -i package_file</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于该方法采用低级rpm工具安装，所以并不会解决依赖性关系。一旦rpm在安装过程中发现缺少依赖包，rpm就会跳出错误后退出。</p>
+</blockquote>
+<h3 id="4-删除软件包"><a href="#4-删除软件包" class="headerlink" title="4. 删除软件包"></a>4. 删除软件包</h3><p>删除软件包可以使用高级工具和低级工具。高级工具的方法是：</p>
+<p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apt remove package_name</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum erase package_name</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-更新库中的软件包"><a href="#5-更新库中的软件包" class="headerlink" title="5. 更新库中的软件包"></a>5. 更新库中的软件包</h3><p>当安装好软件后，我们想保证这些软件都是最新版本的，如果从软件库中获取使用：</p>
+<p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apt update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> apt upgrade</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum update</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-更新软件包文件中的软件包"><a href="#6-更新软件包文件中的软件包" class="headerlink" title="6. 更新软件包文件中的软件包"></a>6. 更新软件包文件中的软件包</h3><p>如果软件包的更新版本已从非库源中下载，则使用下列命令：</p>
+<p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> dpkg --install package_file</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rpm -U package_file</span></span><br></pre></td></tr></table></figure>
+<p>这里的<code>dpkg</code> 命令的选项和安装软件的时候一样。</p>
+<h3 id="7-列出已安装的软件包列表"><a href="#7-列出已安装的软件包列表" class="headerlink" title="7. 列出已安装的软件包列表"></a>7. 列出已安装的软件包列表</h3><p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> dpkg --list</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rpm -qa</span></span><br></pre></td></tr></table></figure>
+<h3 id="8-判断软件包是否安装"><a href="#8-判断软件包是否安装" class="headerlink" title="8. 判断软件包是否安装"></a>8. 判断软件包是否安装</h3><p>使用低级工具来查。</p>
+<p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> dpkg --status package_name</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rpm -q package_name</span></span><br></pre></td></tr></table></figure>
+<h3 id="9-显示已安装软件包的相关信息"><a href="#9-显示已安装软件包的相关信息" class="headerlink" title="9. 显示已安装软件包的相关信息"></a>9. 显示已安装软件包的相关信息</h3><p><strong>Debian类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> apt-cache show package_name</span></span><br></pre></td></tr></table></figure>
+<p><strong>Red Hat类：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum info package_name</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【git问题解决】git连不上远端库问题解决</title>
+    <url>/2021/12/02/%E3%80%90git%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91git%E8%BF%9E%E4%B8%8D%E4%B8%8A%E8%BF%9C%E7%AB%AF%E5%BA%93%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>在使用 Git 时发现在使用 <code>git clone</code> 或 <code>git pull</code> 等需要访问远程仓库的操作时，总是无法连接 GitHub 服务器。</p>
+<span id="more"></span>
+<p>报错信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git clone https://github.com/xxx/xxx.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/xxx/xxx.git/&#x27;: LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</span><br></pre></td></tr></table></figure>
+<p>解决：</p>
+<p>在 clone GitHub 仓库时可以使用 HTTPS 或者 SSH 进行 clone，而 SSH 却没有 HTTPS 的网络连接问题，所以可以将 push/pull 的连接方式由 HTTPS 改为 SSH。</p>
+<blockquote>
+<p>要求：你需要提前生成 SSH 公私钥对，并将公钥添加到你的 GitHub 账户中。关于这一部分的详细信息，请参阅 <a href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a>。</p>
+</blockquote>
+<p>进入仓库对应目录，执行如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote set-url origin git@github.com:xxx/xxx.git</span><br></pre></td></tr></table></figure>
+<p>更改完成后，可以使用如下命令查看当前的 origin 地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Ubuntu】依赖包是什么</title>
+    <url>/2021/10/21/%E3%80%90linux%E5%AD%A6%E4%B9%A012%E3%80%91%E4%BE%9D%E8%B5%96%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+    <content><![CDATA[<p>我们在Ubuntu中常说的依赖是什么呢？</p>
+<span id="more"></span>
+<p>依赖包就是某个软件用到的库文件。</p>
+<p>任何程序员写程序都有可能会依赖一些别人已经写成的库，所以几乎一定规模的程序必然有依赖。</p>
+<p>不同体系用不同的方法解决依赖问题。</p>
+<p>GNU/Linux：通常这个系统大多数软件是自由软件，换句话说，他们通常依赖的库也是自由的，所以软件开发者认为你可以自由的获取这些依赖库，自然就不需要自己再提供了。由系统“发行版”负责维护属于这个系统的所有依赖库，并且安装软件时确定依赖。<br>这个体系的特点是：</p>
+<ul>
+<li>系统依赖通常是统一的，如果有多个程序依赖同一个库，在这个系统中通常是同一份。</li>
+<li>具有庞大的资源。例如 Debian 系现成的可依赖软件多达 30G，所以通常不可能预先把所有依赖都安装全，但庞大的依赖库给编程人员提供了很多方便。</li>
+<li>你安装的软件越多，共同依赖所体现出的价值越高，解决依赖问题就越简单（因为当你安装足够多软件时，主流的依赖已经全部在你系统了）。</li>
+<li>由于巨大的共同依赖库存在，软件本身可以很小。</li>
+</ul>
+<p>Windows：通常而言，这个系统的软件是商业软件，因此，他们依赖的库也很有可能是商业软件，所以，不可能要求用户自行获取这些依赖，这些依赖通常在发布软件的时候提供。如果你安装的软件少，这个体系很方便。<br>不过这造成了一些缺点：</p>
+<ul>
+<li>没有一个庞大的公共库，很多功能以及基础库都是每个公司自己实现一套，浪费很多劳动力，编程人员到每个公司得学习一套不同的库，给编程人员带来不便。</li>
+<li>所有应用程序都自己带依赖，因此很可能有许多程序同时附带了相同的依赖，并且这些相同依赖还有可能是不同的版本，这会造成许多混乱。</li>
+<li>由于所有应用程序都自己提供所有依赖，每个软件体积都很庞大。</li>
+<li>系统中安装的软件越多，越容易出问题。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -2329,6 +2348,146 @@
       </categories>
   </entry>
   <entry>
+    <title>【linux学习8】管理进程</title>
+    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A08%E3%80%91%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</url>
+    <content><![CDATA[<p>和UNIX一样，linux是多任务和多用户系统。多用户意味着在同一时间可以有多个用户使用同一台计算机。为了保护多用户功能实际可用，系统特别设计了一种方案来保护当前用户不受其他用户操作的影响。</p>
+<span id="more"></span>
+<h2 id="I-所有者、组成员和其他用户"><a href="#I-所有者、组成员和其他用户" class="headerlink" title="I. 所有者、组成员和其他用户"></a>I. 所有者、组成员和其他用户</h2><p>一个文件能被三种人操作（读，写，执行），这三种人为：</p>
+<ul>
+<li>该文件的所有者</li>
+<li>该文件所有者的同组组员</li>
+<li>其他人</li>
+</ul>
+<p>我们可以使用 <code>id</code> 命令来查看此时的用户信息。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> id</span></span><br><span class="line">uid=1000(piggy) gid=1000(piggy) groups=1000(piggy),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare)</span><br></pre></td></tr></table></figure>
+<p>显示的结果：</p>
+<ul>
+<li>uid(user ID)：当前用户的ID，在创建账户时就已被分配，为了方便ID和用户名一一对应。</li>
+<li>gid(group ID)：当前用户所属组的ID，用户可以归属于多个组。</li>
+</ul>
+<p>这些信息从何而来呢？</p>
+<p>这些信息来源于一系列的文本文件，用户账户定义在文件 <code>/etc/passwd</code> 中，用户组定义在文件 <code>/etc/group</code> 文件中。在文件/etc/passwd中定义了对应用户的用户登录名、uid、gid、账户真实姓名、主目录、以及登录的shell信息。</p>
+<p>许多类UNIX系统会把普通用户分配到一个公共的群组中，然而在linux中则会创建一个独一无二的，只有一个用户的群组，组名和用户名相同。</p>
+<h2 id="II-读取、写入和执行"><a href="#II-读取、写入和执行" class="headerlink" title="II. 读取、写入和执行"></a>II. 读取、写入和执行</h2><p>使用<code>ls</code> 命令可以查看文件或目录的属性信息。在文件属性信息中，234对应的9个字符称为 <strong>文件模式</strong> ，表示文件所有者，同组其他用户和其他所有人对该文件的读、写、执行权限。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170805946.png" alt="image-20220121170805946"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170818935.png" alt="image-20220121170818935"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170830896.png" alt="image-20220121170830896"></p>
+<h3 id="1-更改文件模式"><a href="#1-更改文件模式" class="headerlink" title="1. 更改文件模式"></a>1. 更改文件模式</h3><p>使用 <code>chmod</code> 命令可以更改文件的模式。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod 600 filename</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod u+x filename</span></span><br></pre></td></tr></table></figure>
+<p>在该命令的第二项表示更改对哪类人的权限。可以根据八进制的规则更改，也可以用符号来表示。</p>
+<h4 id="1-八进制规则"><a href="#1-八进制规则" class="headerlink" title="(1)八进制规则"></a>(1)八进制规则</h4><p>八进制规则就是 <code>rwx</code> 对应三位，写1则为激活，0为取消。八进制就可以用一个数来表示一类人的文件模式，那么三个数就可以表示三类人。</p>
+<p>例如：</p>
+<p><code>723</code> 表示 <code>111010011</code> ，进而表示的是 <code>rwx-w--wx</code> 。</p>
+<h4 id="2-符号表示"><a href="#2-符号表示" class="headerlink" title="(2)符号表示"></a>(2)符号表示</h4><p>符号表示就是第二个参数换为字符。用 <code>u</code> 、<code>g</code> 、<code>o</code> 、<code>a</code> 分别表示所有者，同组人，其他人，三类人。然后通过 <code>+-=</code> 来设置文件模式。</p>
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod u+w filename <span class="comment">#给文件的所有者添加可写模式。</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="2-在图形化窗口更改文件模式"><a href="#2-在图形化窗口更改文件模式" class="headerlink" title="2. 在图形化窗口更改文件模式"></a>2. 在图形化窗口更改文件模式</h3><p>另外还可以在图形化界面上更改文件模式。</p>
+<h3 id="3-设置默认权限"><a href="#3-设置默认权限" class="headerlink" title="3. 设置默认权限"></a>3. 设置默认权限</h3><p>还有一个很好玩的命令，就是<code>umask</code> ，它的作用是设置掩码，来更改默认生成文件的文件模式。当umask的值为<code>0000</code> 时，生成的文件的文件模式是 <code>rw-rw-rw-</code> ，当umask设置为 <code>0022</code> 时，转成二进制数为 <code>000010010</code> ，这时默认生成的文件模式是<code>rw-r--r--</code> 。更改umask的命令为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">umask</span> <span class="comment">#查看当前umask的值</span></span></span><br><span class="line">0002</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">umask</span> 0022</span></span><br></pre></td></tr></table></figure>
+<h2 id="III-让不允许变为允许"><a href="#III-让不允许变为允许" class="headerlink" title="III. 让不允许变为允许"></a>III. 让不允许变为允许</h2><h3 id="1-更改使用人的身份"><a href="#1-更改使用人的身份" class="headerlink" title="1. 更改使用人的身份"></a>1. 更改使用人的身份</h3><p>如果我们的身份不符合系统的要求，怎么才可以做想做的事情呢？首先想到的是让自己符合呀，那就要改变自己的身份了。如果我们想更改我们所登录的身份该如何做呢？这个身份大致分为两个等级，一种是平民身份(user)，一种是皇帝身份(root)。平民身份就是可以做一部分的事情，但是得由皇帝允许。而皇帝就是什么都可以做。皇帝只能有一个，平民可以有许多。</p>
+<ul>
+<li>su：换身份，让自己当皇帝。</li>
+<li>sudo：换说的话，告诉他们我是转告皇帝说的话。</li>
+</ul>
+<p>当我们做一些操作时，系统要求只可以root用户来做，所以需要改变我们的身份。可以使用 <code>su</code> 命令。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> su - <span class="comment"># &quot;-&quot;表示加载变更用户的环境变量</span></span></span><br><span class="line">Password:	#输入root密码</span><br><span class="line"><span class="meta">[root@computer]#</span><span class="bash"> <span class="built_in">exit</span>  <span class="comment">#可以退出该账户</span></span></span><br><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> su - test_user <span class="comment">#登录test_user账户</span></span></span><br><span class="line">Password:	#输入test_user的密码</span><br><span class="line"><span class="meta">[test_user@computer]$</span><span class="bash"> <span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
+<p>在上面的示例中，<code>su -</code> 命令中的 <code>-</code> 表示要加载目标用户的环境变量。后面的参数中如果没有指定用户名，则表示要登陆超级用户root。</p>
+<blockquote>
+<p>在运行<code>su -</code>命令时，就相当于又开启了一个shell程序。这个shell程序加载的是目标账户的环境变量。</p>
+</blockquote>
+<p>另一个方便的命令是<code>sudo</code> ，但是与<code>su</code> 的原理是不一样的。<code>sudo</code> 的英文全称为 super user do，以超级用户的方式执行命令。而<code>su</code> 的英文全称是 switch user，是换用户的意思。</p>
+<p>只要在命令前面加上<code>sudo</code> ，就表示这条命令有超级用户的权限。要注意的是还需要输入用户的密码。例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> sudo su - <span class="comment">#可以直接进入root用户</span></span></span><br><span class="line">piggy password:</span><br><span class="line"><span class="meta">[root@computer]#</span></span><br></pre></td></tr></table></figure>
+<p>但你一定会问，进入root用户为什么输入piggy的密码呢？原来<code>sudo</code>命令只会将名字在 <code>/etc/sudoers</code> 中的用户提升命令权限，piggy在这个里面，所以输入piggy的密码表示你是这个用户的人，所以你可以提升权限。</p>
+<blockquote>
+<p><code>sudo su -</code> 和 <code>sudo -i</code> 的命令效果一样，且都是输入piggy的密码。</p>
+</blockquote>
+<p><strong>小结：</strong>我们已经看到：</p>
+<ul>
+<li>使用 <code>su -</code> ，提供 root 账户的密码，可以切换到 root 用户；</li>
+<li>使用 <code>sudo su -</code> ，提供当前用户的密码，也可以切换到 root 用户</li>
+</ul>
+<p>两种方式的差异也显而易见：如果我们的 Linux 系统有很多用户需要使用的话，前者要求所有用户都知道 root 用户的密码，这显然是非常危险的；后者是不需要暴露 root 账户密码的，用户只需要输入自己的账户密码就可以，而且哪些用户可以切换到 root，这完全是受 root 控制的（root 通过设置 <code>/etc/sudoers</code> 实现的），这样系统就安全很多了。</p>
+<h3 id="2-更改文件所有者"><a href="#2-更改文件所有者" class="headerlink" title="2. 更改文件所有者"></a>2. 更改文件所有者</h3><p>当我要拿一个东西的时候人家不让，我让我变成皇帝或者假装是转述皇帝的话。现在从另一个角度来看，人家不让是因为东西是人家的，那么我把它变成我自己的不就完了么。所以我们可以用<code>chown</code> 来更改文件的所有者和所属群组。但是话说回来，既然你拿都不让，怎么还能归你呢。这时还是假传皇帝的圣旨，提升自己说话的分量，也就是在命令前加上 <code>sudo</code> 。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chown [ower][:[group]] file</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor:China file  <span class="comment">#将file的所有者改为emperor，所属组改为China</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor: file  <span class="comment">#将file的所有者改为emperor，所属组改为emperor的所在组</span></span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习9】权限</title>
+    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A09%E3%80%91%E6%9D%83%E9%99%90/</url>
+    <content><![CDATA[<p>进程就是运行着的程序，我们可以管理运行着的程序，让它们终止、挂起等，这就是管理进程。</p>
+<p>在知道咋管理之前，得先知道怎么查看进程。</p>
+<span id="more"></span>
+<h2 id="I-查看进程"><a href="#I-查看进程" class="headerlink" title="I. 查看进程"></a>I. 查看进程</h2><h3 id="1-ps"><a href="#1-ps" class="headerlink" title="1. ps"></a>1. ps</h3><p>使用<code>ps</code> 命令可以查看进程。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps <span class="comment">#显示和当前终端会话相关的进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps x <span class="comment">#显示所有进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps aux <span class="comment">#显示进程更多的信息 即BSD模式显示</span></span></span><br></pre></td></tr></table></figure>
+<p>下面介绍输出的信息有啥：</p>
+<ul>
+<li>PID（process ID）：进程的身份证号</li>
+<li>TTY（teletype）：表示进程的控制终端</li>
+<li>TIME：表示进程消耗CPU时间总和</li>
+<li>STAT（state）：表示进程的状态（状态参数的意思见表一）</li>
+</ul>
+<p>表一</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223428006.png" alt="image-20220121223428006"></p>
+<p>BSD模式下ps命令输出的列标题</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223513393.png" alt="image-20220121223513393"></p>
+<h3 id="2-top"><a href="#2-top" class="headerlink" title="2. top"></a>2. top</h3><p>前面的<code>ps</code> 仅能静态的显示进程，可是程序run的时候是一个动态的过程，这时可以用 <code>top</code> 来动态显示进程信息，默认状态下3秒更新一次。在动态信息显示的过程中，按 <code>h</code> 显示帮助菜单，<code>q</code> 退出top。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223838666.png" alt="image-20220121223838666"></p>
+<p>上面显示的信息说明：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223857601.png" alt="image-20220121223857601"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223910602.png" alt="image-20220121223910602"></p>
+<h2 id="II-控制进程"><a href="#II-控制进程" class="headerlink" title="II. 控制进程"></a>II. 控制进程</h2><p>现在我们以一个小程序<code>xlogo</code>为例说明。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> xlogo</span></span><br><span class="line"><span class="meta">#</span><span class="bash">此时终端正在执行xlogo，可以按Ctrl+C来终止</span></span><br><span class="line"><span class="meta">#</span><span class="bash">如果想要到后台执行</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> xlogo &amp;</span></span><br><span class="line">[1] 18785</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
+<p>从上面的例子可以看到，想要<strong>后台</strong>执行，需要在命令后面添加 <code>&amp;</code> 。这时终端返回一个信息 <code>[1]18785</code> ，者是该进程的PID编号，前面的<code>[1]</code> 称为作业控制(job control)，可以理解为shell程序在做作业，正在后台运行。可以通过<code>jobs</code> 来查看当前shell程序的作业情况。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">jobs</span></span></span><br><span class="line">[1]+ Running 					xlogo $</span><br></pre></td></tr></table></figure>
+<p>前面表示作业编号和状态，后面是当时的命令。如果想要将该作业重新放到<strong>前台</strong>。可以用<code>fg</code> 命令，如果仅有一个作业，后面不用加参数，如果有多个作业，要用<code>fg %job_ID</code> 来选择要到前台的作业。如果该作业挂起状态，想在后台运行，就用<code>bg</code> 命令，用法和<code>fg</code> 相同。</p>
+<p>如果想要暂停一个进程，可以把它先弄到前台来，然后按<code>Ctrl+Z</code> 暂停。当然还有其他的方式来弄，后面说。</p>
+<h2 id="III-杀手非杀手"><a href="#III-杀手非杀手" class="headerlink" title="III. 杀手非杀手"></a>III. 杀手非杀手</h2><p><code>kill</code> 这个命令大家会以为是杀死进程，但是它的作用是发送信号，只不过默认状态下发送的是<code>TERM</code>信号表示终止。进程和操作系统之间是通过信号来通信的。<code>kill</code> 的用法是：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> [-signal] PID</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -HUP 18785</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -1 18785</span></span><br></pre></td></tr></table></figure>
+<p>可以指定信号的<strong>编号或信号名</strong>来完成发送，后面的<strong>PID编号</strong>也可以是<strong>作业编号</strong>。常用的发送信号如下表所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225223717.png" alt="image-20220121225223717"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225446730.png" alt="image-20220121225446730"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225458299.png" alt="image-20220121225458299"></p>
+<p>想要查看更多的信号，可以使用 <code>kill -l</code> 来查看。</p>
+<blockquote>
+<p>和文件管理一样，进程也是有所有者的，只有进程的所有者才能给它们的进程使用kill发送信号。</p>
+</blockquote>
+<p>如果想要一下子给许多的进程发送信号，还可以使用<code>killall</code> 命令，用法为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> killall [-u user] [-signal] name...</span></span><br></pre></td></tr></table></figure>
+<p>同理，<code>killall</code> 和 <code>kill</code> 一样需要注意用户权限。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【mac问题解决】Mac强制退出软件和打开未验证的软件</title>
+    <url>/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%89%93%E5%BC%80%E6%9C%AA%E9%AA%8C%E8%AF%81%E7%9A%84%E8%BD%AF%E4%BB%B6/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="强制退出"><a href="#强制退出" class="headerlink" title="强制退出"></a>强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
+<h3 id="无法打开“-”，因为无法验证开发者"><a href="#无法打开“-”，因为无法验证开发者" class="headerlink" title="无法打开“*”，因为无法验证开发者"></a>无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
+<li>打开方达，在右侧菜单栏选择应用程序</li>
+<li>找到提示无法验证的应用，右键点击打开</li>
+<li>第一次会出现以下提示，继续点击打开即可</li>
+</ol>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>Mac</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【mac问题解决】Mac无法抹掉硬盘问题解决</title>
     <url>/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E6%97%A0%E6%B3%95%E6%8A%B9%E6%8E%89%E7%A1%AC%E7%9B%98%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/31672180">解决方案</a></p>
@@ -2359,24 +2518,6 @@
 <p>选择“允许远程管理内核扩展和软件自动更新”复选框以授权使用移动设备管理 (MDM) 解决方案远程管理旧版内核扩展和软件更新。</p>
 <p><strong>7.</strong>点按“好”。</p>
 <p><strong>8.</strong>重新启动 Mac 以使更改生效。</p>
-]]></content>
-      <categories>
-        <category>问题解决</category>
-      </categories>
-      <tags>
-        <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【mac问题解决】Mac强制退出软件和打开未验证的软件</title>
-    <url>/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%89%93%E5%BC%80%E6%9C%AA%E9%AA%8C%E8%AF%81%E7%9A%84%E8%BD%AF%E4%BB%B6/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="强制退出"><a href="#强制退出" class="headerlink" title="强制退出"></a>强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
-<h3 id="无法打开“-”，因为无法验证开发者"><a href="#无法打开“-”，因为无法验证开发者" class="headerlink" title="无法打开“*”，因为无法验证开发者"></a>无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
-<li>打开方达，在右侧菜单栏选择应用程序</li>
-<li>找到提示无法验证的应用，右键点击打开</li>
-<li>第一次会出现以下提示，继续点击打开即可</li>
-</ol>
 ]]></content>
       <categories>
         <category>问题解决</category>
@@ -2706,6 +2847,348 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
       </categories>
       <tags>
         <tag>概率论与数理统计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【矩阵】线性代数可视化学习笔记</title>
+    <url>/2021/10/18/%E3%80%90%E7%9F%A9%E9%98%B5%E3%80%91%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>3Blue1Brown 线代课程学习笔记，受益匪浅。<br><span id="more"></span></p>
+<h1 id="线性代数可视化"><a href="#线性代数可视化" class="headerlink" title="线性代数可视化"></a>线性代数可视化</h1><p><a href="https://www.bilibili.com/video/BV1ib411t7YR?p=1">参考</a></p>
+<h2 id="1-向量是什么"><a href="#1-向量是什么" class="headerlink" title="1.向量是什么"></a>1.向量是什么</h2><p>对于向量的理解，可以分为三个层面：</p>
+<ul>
+<li><p><strong>物理学家眼中</strong>：向量是一个空间中箭头，它只包括长度和方向两个信息，而与其所在的空间位置无关</p>
+</li>
+<li><p><strong>计算机专业眼中</strong>：向量是一个有序数组，这个有序数组可以表示物理学家眼中的向量在空间中的坐标，而且这个向量通常是以坐标系原点为起点的。为了区分于点的坐标，向量通常竖着写</p>
+</li>
+<li><p><strong>数学家眼中</strong>：向量可以是任何东西，只要能保证两个向量相加和数与向量相乘满足一定的条件即可</p>
+</li>
+</ul>
+<p>通过建立坐标系，可以使一个向量与有序的数组相联系，每一个数组对应一个向量，每一个向量也可以用数组来表示，这就为物理学家在描述向量时提供了一种数学语言</p>
+<p><strong>向量两个最基本的运算：</strong></p>
+<ul>
+<li><p>向量加法：遵循三角形法则 $\longrightarrow$ 用数组描述的向量通过对应元素相加可以很好的描述该法则</p>
+</li>
+<li><p>向量的数乘：表示对向量的伸长与缩短 </p>
+</li>
+</ul>
+<h2 id="2-线性组合、基与张成空间"><a href="#2-线性组合、基与张成空间" class="headerlink" title="2.线性组合、基与张成空间"></a>2.线性组合、基与张成空间</h2><p>在标准的坐标系中，有两个特殊的向量，单位向量 $\hat i$ 和 $\hat j$ ，对于多维空间也同样。</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015953.png" alt="image-20210715005154764" style="zoom:67%;" /></p>
+<p>它们合起来称作坐标系的基，当把坐标中的每一个元素看作是标量时，每一个基向量就是这些标量所缩放的向量</p>
+<h3 id="·-什么是线性组合"><a href="#·-什么是线性组合" class="headerlink" title="· 什么是线性组合"></a>· 什么是线性组合</h3><p>多个向量的数乘之和称为这些向量的线性组合</p>
+<h3 id="·-向量张成的空间"><a href="#·-向量张成的空间" class="headerlink" title="· 向量张成的空间"></a>· 向量张成的空间</h3><p>给定一组向量，通过该组向量的线性组合生成的<strong>向量的集合</strong>，称为该组向量==张成的空间==</p>
+<p>以二维空间为例，给定向量 $\vec w$ 和 $\vec v$ ，有以下三种情况：</p>
+<ol>
+<li><p>当$\vec w$ 和 $\vec v$ 不共线时，所张成的空间为二维平面，也就是二维空间中的任意向量都可以由这两个向量的线性组合得到</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216015958.png" alt="image-20210715035555651" style="zoom: 33%;" /></p>
+</li>
+<li><p>当$\vec w$ 和 $\vec v$ 共线时，所张成的空间为一条直线，仅能表示终点在该直线上的向量</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020002.png" alt="image-20210715040223112" style="zoom:50%;" /></p>
+</li>
+<li><p>当$\vec w$ 和 $\vec v$ 都为0向量时，所张成的空间为一点，仅能表示0向量</p>
+</li>
+</ol>
+<p><strong>同样对于我们常用的三维空间，当仅有两个不共面的向量时，这两个向量所张成的空间为一个平面</strong></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020007.png" alt="image-20210715040537951" style="zoom: 20%;" /></p>
+<h3 id="·-线性相关与线性无关"><a href="#·-线性相关与线性无关" class="headerlink" title="· 线性相关与线性无关"></a>· 线性相关与线性无关</h3><p>从上面的表述中，便可以得到<strong>线性相关</strong>的定义：当一组向量中，其中一个向量处在其他向量所张成的空间中（这个向量可以由其他的向量线性组合表示出来），那么这一组向量就是线性相关的</p>
+<p>而<strong>线性无关</strong>的定义与它正好相反：一组向量中，任何一个向量都不处在其他向量所张成的空间中（任何一个向量不可以由其他向量线性组合表示出来）</p>
+<h3 id="·-空间中的一组基"><a href="#·-空间中的一组基" class="headerlink" title="· 空间中的一组基"></a>· 空间中的一组基</h3><p>某向量空间的一组基是张成该空间的一个线性无关的向量集合</p>
+<h2 id="3-矩阵与线性变换"><a href="#3-矩阵与线性变换" class="headerlink" title="3.矩阵与线性变换"></a>3.矩阵与线性变换</h2><h3 id="·-首先需要知道的"><a href="#·-首先需要知道的" class="headerlink" title="· 首先需要知道的"></a>· 首先需要知道的</h3><p>我们之前所说向量的时候，当有基向量存在时，可以用一个数组也就是坐标来表示一个向量，现在我们定义一个永远不变的坐标系和基向量，这个坐标系的x轴和y轴垂直，且基向量是与x轴和y轴正方向相同的单位向量，暂且我们就称坐标系和基向量为<strong>永不变坐标系和永不变基向量</strong>，之后的所有向量或坐标系的基的描述都是在这个永不变基的基础上进行的</p>
+<h3 id="·-线性变换"><a href="#·-线性变换" class="headerlink" title="· 线性变换"></a>· 线性变换</h3><p>变换实际上是函数的另一种说法，函数的作用是输入一个数，输出一个数；在线性代数中，变换的输入是一个向量，输出也是一个向量</p>
+<p><strong>线性变换</strong>是变换的一种特殊形式，它有两个特点：</p>
+<ul>
+<li><p>直线在线性变换后，仍是直线</p>
+</li>
+<li><p>原点必须保持不变</p>
+</li>
+</ul>
+<p>那么如何用数学语言来描述线性变换呢？答案就是用矩阵来描述</p>
+<h3 id="·-矩阵"><a href="#·-矩阵" class="headerlink" title="· 矩阵"></a>· 矩阵</h3><p>矩阵就是一种数学语言，来描述线性变换，矩阵的每一列记录基向量在线性变换后的坐标</p>
+<p>以二维空间为例：</p>
+<script type="math/tex; mode=display">
+\vec v = -1\vec i + 2\vec j\\
+Transformed \ \vec v=-1(Transformed \ \vec i)+2(Transformed\ \vec j)</script><p>当经过一次线性变换后，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020013.png" alt="image-20210715034732752" style="zoom:67%;" /></p>
+<script type="math/tex; mode=display">
+[Transformed\ \vec i ,Transformed\ \vec j]=\left[\begin{array}{ll}
+3 & 1 \\
+0 & 2
+\end{array}\right]</script><script type="math/tex; mode=display">
+Transformed\ \vec v=
+-1\left[\begin{array}{l}
+3 \\
+0
+\end{array}\right]+2\left[\begin{array}{l}
+1 \\
+2
+\end{array}\right]=\left[\begin{array}{ll}
+3&1\\
+0&2
+\end{array}\right]\left[\begin{array}{l}
+\ -1\\
+\  \ 2\end{array}\right]
+=\left[\begin{array}{l}
+-1  \\
+\ \ 4 
+\end{array}\right]</script><p><strong>这也就定义了矩阵和向量的乘法</strong>，矩阵乘以向量，就是对该向量的一个线性变换</p>
+<p>当变换后的两个基向量线性相关时，由这两个向量所张成的空间就变成了一条线，而原来的向量就被变换到这个空间上，也就是变换后的向量的终点在一条直线上</p>
+<blockquote>
+<p>总之，线性变换就是对向量的变换，对向量的变换的方法是对描述该向量的基进行变换，因此线性变换也是操纵空间的一种手段</p>
+</blockquote>
+<p>那么当有许多个矩阵乘以一个向量的时候，它的几何意义又是什么呢？</p>
+<h3 id="·-复合变换与矩阵乘法"><a href="#·-复合变换与矩阵乘法" class="headerlink" title="· 复合变换与矩阵乘法"></a>· 复合变换与矩阵乘法</h3><p>矩阵A、B分别代表着线性变换1和2，AB代表着先进行线性变换2，然后再进行线性变换1（注意这里是先2后1），令AB=C，那么C就代表着先进行2再进行1的一个复合变换，也可以把C当作是一次独立的变换，它的效果和先2再1的效果相同</p>
+<p>另外，AB $\neq$ BA，也就是说先进行2再进行1和先进行1再进行2的效果是不同的</p>
+<blockquote>
+<p>前面所说的线性变换理解成是一个处理向量的函数，现在从另一个角度来总结一下，线性变换用矩阵来描述，而矩阵的列向量表示线性变换后基向量的坐标，对一个向量进行线性变换，就是先对基向量进行线性变换，然后用这个向量的坐标对变换后的基向量进行线性组合，最终得到变换后的向量。因为基向量可以描述一个空间，因此基向量变了，其所对应的空间也发生了变化</p>
+</blockquote>
+<h2 id="4-行列式"><a href="#4-行列式" class="headerlink" title="4.行列式"></a>4.行列式</h2><p>上节说过，线性变换是操纵空间的一种手段，那么如何刻画空间变化了多少呢，这就需要请出行列式了，行列式就是用来描述空间变化的多少</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020020.png" alt="image-20210715053137633" style="zoom:53%;" /></p>
+<p>下面以二维空间为例：</p>
+<p>我们在坐标系中用网格线来描述这个空间的形态，在标准坐标系中，绿色箭头代表i向量，红色箭头代表j向量，此时向量i和j所围成的区域是一个正方形，其面积为1</p>
+<p>当进行线性变换后，基向量的方向和长度都发生了变化，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020024.png" alt="image-20210715053620420" style="zoom:50%;" /></p>
+<p>那么此时由基向量i和j所围成的区域也发生了变化，变成了一个平行四边形，而该区域的面积等于矩阵的行列式</p>
+<blockquote>
+<p>矩阵的行列式是描述其线性变换所对空间变化的量度</p>
+</blockquote>
+<p>当行列式为0时，表示这个平面被压缩成了一条线，<strong>而0矩阵表示把平面压缩成一个点</strong></p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020028.png" alt="image-20210715054036323" style="zoom:50%;" /></p>
+<p>当行列式为负时，表示这个平面发生了反转</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020030.png" alt="image-20210715054301501" style="zoom:50%;" /></p>
+<p>注意：原来绿色的基向量在红色基向量的右边，此时发生了平面翻转</p>
+<p>三维空间中，矩阵的行列式表示变换后基向量所围成空间区域的体积，当行列式为0时，表示该变换将三维空间压缩成一个平面或一条直线又或是一个点（这在后面会引出秩的用法）。更多维空间的道理是一样的，这里就不过多赘述</p>
+<h2 id="5-逆矩阵、列空间、秩和零空间"><a href="#5-逆矩阵、列空间、秩和零空间" class="headerlink" title="5.逆矩阵、列空间、秩和零空间"></a>5.逆矩阵、列空间、秩和零空间</h2><p>线性代数的用处很多，其中的一个用处是解线性方程组</p>
+<p>方程组的求解和之前所讲的行列式和矩阵以及线性变换密切相关</p>
+<p>例如我们现在有一个方程组：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+1x+2y+3z=5\\
+3x+8y+7z=6\\
+0x+3y+6z=0
+\end{cases}</script><p>这是一个三阶线性方程组，因为它与矩阵和向量的乘法很像，所以可以写成矩阵的形式：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+1&2&3\\
+3&8&7\\
+0&3&6
+\end{array}\right]
+\left[\begin{array}{l}
+x\\
+y\\
+z
+\end{array}\right]=\left[\begin{array}{l}
+5\\
+6\\
+0
+\end{array}\right]</script><p>即：</p>
+<script type="math/tex; mode=display">
+A\vec x=\vec v</script><p>上述式子已知 $\vec v$ ，A矩阵表示一个线性变换，如若求 $\vec x$ ,则只需将A矩阵所表示的线性变换的逆变换作用到 $\vec v$ 上，那么是不是什么时候都可以用这种方法呢？</p>
+<h3 id="·矩阵的逆"><a href="#·矩阵的逆" class="headerlink" title="·矩阵的逆"></a>·矩阵的逆</h3><p>矩阵的逆表示矩阵线性变换所对应的逆变换，如果矩阵A的行列式不等于0，那么矩阵A是可逆的</p>
+<p>之前的方程组的解为： $\vec x = A^{-1}\vec v$</p>
+<p>上面说到矩阵的逆表示逆变换，所以当进行一次变换再进行一次逆变换等同于没有变化</p>
+<script type="math/tex; mode=display">
+A^{-1}A=AA^{-1}=I</script><p><strong>但是当矩阵的行列式为0时</strong>，矩阵的逆不存在。背后的几何意义是线性变换将多维空间变换为低维空间，如果想找到<strong>一个</strong>低维空间还原成高维空间的逆变换，是得不到一个确定的变换的，因为有一维或多维的缺失，所以这个变换可以有任意多种形式</p>
+<p>再回到我们的方程组，当矩阵的行列式为0时，解是可能存在的，这分为两种情况：</p>
+<ul>
+<li>一种是当 $\vec v$ 向量在A所压缩的空间上时，解存在</li>
+<li>另一种是 $\vec v$ 向量在A所压缩的空间外时，无解</li>
+</ul>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020036.png" alt="image-20210715085801043" style="zoom: 33%;" /></p>
+<h3 id="·矩阵的秩"><a href="#·矩阵的秩" class="headerlink" title="·矩阵的秩"></a>·矩阵的秩</h3><p>可以发现，虽然原空间通过变换后，变成一个低维的空间，此时都会有无解的情况发生，但无解情况的出现的难易程度是不一样的。例如当三维空间变换成二维空间时，是一个平面，只要 $\vec v$ 在这个平面上，解存在。但是当变换成一维空间也就是一条线时，只有 $\vec v$ 在这条线上时，解存在。虽然上面两种情况的A矩阵的行列式都为0，但是它们出现无解的情况是不同的，这时就要引出秩的概念</p>
+<p><strong>秩</strong>表示变换后空间的维数，例如三维矩阵的秩最大为3，它表示基向量可以张成整个三维空间，但是当矩阵的秩为2时，空间被压缩了，此时表示基向量只能张成二维空间，但是它没有秩为1的压缩情况严重</p>
+<h3 id="·列空间"><a href="#·列空间" class="headerlink" title="·列空间"></a>·列空间</h3><p>矩阵的列向量所张成的空间即为列空间，当 $ \vec x$ 表示任意的向量时，$A\vec x$ 就是矩阵A的列空间</p>
+<p>关于秩更准确的定义：矩阵秩表示矩阵列空间的维数</p>
+<p><strong>当秩等于矩阵的列时，意味着它达到了它所能达到的最大值，此时叫作满秩</strong></p>
+<p>0向量一定包含在列空间中，因为线性变换不改变原点的位置，也就是 $A\vec0=\vec 0$ </p>
+<p>对于一个满秩变换来说，唯一能在变换后落在原点的向量就是0向量本身。但是对于一个非满秩的矩阵，它将空间压缩到一个低维的空间，也就是说有一系列向量在变换后被压缩到原点。例如对于原二维的空间，当进行压缩到一维空间的变换时，会使原二维空间中某一方向直线上的所有的向量都压缩到原点。再如原三维空间，压缩到一个二维空间时，也会使原三维空间中某一方向直线上所有的向量压缩到原点，当压缩到一个一维空间时，会使原三维空间中过原点的某一平面上的所有向量压缩到原点。</p>
+<h3 id="·零空间-核空间"><a href="#·零空间-核空间" class="headerlink" title="·零空间/核空间"></a>·零空间/核空间</h3><p>变换后被压缩到原点的向量的集合，叫作矩阵的零空间或者核空间</p>
+<p>==被压缩空间的维数==就是零空间的维数。例如三维空间中的一个向量经过一个方阵的线性变换后，被限制在二维平面上，那么该方阵的零空间维数为1，如果是将该向量变换成一个点，那么该方阵的零空间维数为2。零空间的维数就是表示方阵可以将几维的空间压缩到原点。也可以看作是方程 $A\vec x =0$​​​的解的情况，首先A得为方阵，当A的零空间为0时，也就是A满秩，那么只有零向量是该方程的解。如果A的零空间为2时，那么解向量的维数为2。</p>
+<h3 id="·非方阵"><a href="#·非方阵" class="headerlink" title="·非方阵"></a>·非方阵</h3><p>非方阵的几何意义和之前的方阵稍稍有些不同，先来说之前的方阵，方阵表示将一个向量进行变换，这些变换有旋转这个向量，拉伸压缩这个向量，无论怎么变换这个向量，这个向量都处于原空间中，即变换前是一个n维的向量，变换后还是n维的向量。举一个例子，对于三维空间中的一个向量，当矩阵A的秩为2时，表示将这个向量压缩到一个二维的平面中，尽管是压缩到二维平面中，只是把这个向量限制在二维平面上，但这个向量仍是三维空间中的向量。</p>
+<p>而非方阵就得用另一种方式来描述，和之前所提及的函数一样，非方阵可以看作是一个映射，输入一个m维的向量，映射出一个n维的向量，这两个向量分别处于不同的空间中。</p>
+<p>例如一个矩阵为 $m\times n$ 维，那么它表示将一个n维空间中的向量映射到m维空间中，矩阵的列向量同样是原空间中的基向量在新空间中的映射</p>
+<blockquote>
+<p>小结：方阵表示线性变换，指在原有空间中对向量进行变换；非方阵表示线性映射，把原空间中的向量映射到一个新的空间中</p>
+</blockquote>
+<h2 id="6-向量的点积"><a href="#6-向量的点积" class="headerlink" title="6.向量的点积"></a>6.向量的点积</h2><h3 id="·向量点积的几何意义"><a href="#·向量点积的几何意义" class="headerlink" title="·向量点积的几何意义"></a>·向量点积的几何意义</h3><p>有两个向量 $\vec v$ 和 $\vec w$ ，点积的几何意义表示 $\vec v$ 在 $\vec w$ 方向上的投影的长度和 $\vec w$长度的乘积</p>
+<p>点积的结果和向量的顺序无关，即$\vec v ·\vec w=\vec w·\vec v$ </p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020043.png" alt="image-20210716055411474" style="zoom:33%;" /></p>
+<p>利用对称性，可以直观证明上述结论，令 $\vec v$ 和 $\vec w$ 的长度相同，根据对称性可以知道， $\vec v$ 在 $\vec w$ 上的投影长度与 $\vec w $  在 $\vec v$ 上的投影长度相同。当 $ \vec v$ 放大两倍后，这种对称性就不再存在了，但此时 $\vec w$ 在 $2\vec v$ 上的投影不变，也可以说  $2\vec v$ 在 $\vec w$ 上的投影长度变为原来的2倍，所以 $(2\vec v)·\vec w=\vec w·(2\vec v)$ </p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020049.png" alt="image-20210716055903784"></p>
+<h3 id="·向量点积的矩阵表示"><a href="#·向量点积的矩阵表示" class="headerlink" title="·向量点积的矩阵表示"></a>·向量点积的矩阵表示</h3><p>如果把一个向量当成一个 $n\times1$ 的矩阵来看时，那么对向量的转置就得到了一个 $1\times n$的矩阵，向量的点积可以用向量的转置乘以向量来计算</p>
+<p><strong>那么为什么可以这样计算呢？</strong>首先可以想到，既然转置是一个矩阵，就可以表示一个线性变换了，这个线性变换的几何意义就是把多维空间中的向量映射到一个一维空间上。经过映射得到的一维向量是一个数，它表示在多维空间中的一个向量在某一方向上的投影长度。</p>
+<p>现在以二维空间为例：</p>
+<p>在二维空间中有一单位向量 $\vec u$ ，在该向量的方向上布置一个数轴，这个数轴也就是一个一维空间。如果想把 $\vec u$ ==映射==到这个一维空间中，则需要找到二维空间的基向量在这个一维空间上的位置，我们用投影位置来表示基向量在一维空间上的位置，如下图所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020055.png" alt="image-20210716092117757"></p>
+<p>根据投影关系和对称关系，可以得到二维空间中的基向量 $\vec i 和 \vec j$ 在一维空间的位置</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020101.png" alt="image-20210716092532170"></p>
+<p>则$\vec i 和 \vec j$在一维空间的坐标为：</p>
+<script type="math/tex; mode=display">
+[u_x \ u_y]</script><p>对于二维空间中任意的向量在这个轴上的投影，可以用这个矩阵乘以向量的坐标来得到</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020106.png" alt="image-20210716092801428"></p>
+<p>最终得到的结果为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+u_{x} & u_{y}
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=u_{x} \cdot x+u_{y} \cdot y</script><p>这与这个任意向量和 $\vec u$ 的点积完全相同</p>
+<blockquote>
+<p>总结：为什么点积可以用向量的转置乘以向量？向量的转置表示一个矩阵，这个矩阵又代表着一个线性变换，这个线性变换就表示把一个多维空间的向量==投影==到一个一维空间中。</p>
+</blockquote>
+<p>当 $\vec v=k\vec u$ 是任意的向量时</p>
+<script type="math/tex; mode=display">
+k\left[\begin{array}{ll}u_{x} & u_{y}\end{array}\right]\left[\begin{array}{l}x \\
+y\end{array}\right]=\left[\begin{array}{ll}ku_{x} & ku_{y}\end{array}\right]\left[\begin{array}{l}x \\
+y\end{array}\right]=ku_{x} \cdot x+ku_{y} \cdot y</script><p>两个任意向量的点积表示先将一个向量投影到另一向量所在的方向上，然后将投影长度和另一向量的长度相乘</p>
+<h2 id="7-向量的叉积"><a href="#7-向量的叉积" class="headerlink" title="7.向量的叉积"></a>7.向量的叉积</h2><h3 id="·什么是叉积"><a href="#·什么是叉积" class="headerlink" title="·什么是叉积"></a>·什么是叉积</h3><p>两个向量的叉积会产生一个与这两个向量都垂直的新向量，并且其长度等于这两个向量所围成的四边形的面积，而且它们的方向满足右手定则。</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020113.png" alt="image-20210716095942997"></p>
+<p>既然是表示面积，这就与之前说过的行列式有关系，但这只对二维向量成立（因为只有两个向量，只有二维向量才能满足方阵，才有行列式）</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020117.png" alt="image-20210716095517110"></p>
+<p>两个向量所组成的矩阵对应着一个线性变换，线性变换的度量就是矩阵的行列式，也就是基向量所围成的四边形面积</p>
+<h3 id="·关于三维空间中的叉积的计算"><a href="#·关于三维空间中的叉积的计算" class="headerlink" title="·关于三维空间中的叉积的计算"></a>·关于三维空间中的叉积的计算</h3><p>对于三维空间中的叉积，可以用下面的计算公式：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+v_{1} \\
+v_{2} \\
+v_{3}
+\end{array}\right] \times\left[\begin{array}{l}
+w_{1} \\
+w_{2} \\
+w_{3}
+\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
+\vec{\imath} & v_{1} & w_{1} \\
+\vec{\jmath} & v_{2} & w_{2} \\
+\vec{k} & v_{3} & w_{3}
+\end{array}\right]\right)</script><p>现在就来说明一下为什么可以用这个公式来计算叉积</p>
+<p>由第4节可知，矩阵的行列式表示列向量所张成的平行六面体的体积，而上面行列式的第一列不是一个向量，而是三个基向量，下面先来定义一个线性映射 $L(\vec a)$</p>
+<script type="math/tex; mode=display">
+L(\vec a)=\operatorname{\det}\left(\left[\begin{array}{c}
+{x} & v_{1} & w_{1} \\
+{y} & v_{2} & w_{2} \\
+{z} & v_{3} & w_{3}
+\end{array}\right]\right)\quad(\vec a=\left[\begin{array}{l}\ x\\
+y\\
+z\end{array}\right])</script><p>这个线性映射将一个三维向量映射到一维空间中，表示一个数，于是可以写成这种形式：</p>
+<script type="math/tex; mode=display">
+L(\vec a)=[\begin{array}{}p_1&p_2&p_3\end{array}]\cdot\left[\begin{array}{}x\\
+y\\
+z\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
+{x} & v_{1} & w_{1} \\
+{y} & v_{2} & w_{2} \\
+{z} & v_{3} & w_{3}
+\end{array}\right]\right)</script><p>于是展开有：</p>
+<script type="math/tex; mode=display">
+\begin{array}{r}
+\quad x\left(v_{2} \cdot w_{3}-v_{3} \cdot w_{2}\right)+ \\
+p_{1} \cdot x+p_{2} \cdot y+p_{3} \cdot z=y\left(v_{3} \cdot w_{1}-v_{1} \cdot w_{3}\right)+ \\
+z\left(v_{1} \cdot w_{2}-v_{2} \cdot w_{1}\right)
+\end{array}</script><p>即：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&p_{1}=v_{2} \cdot w_{3}-v_{3} \cdot w_{2} \\
+&p_{2}=v_{3} \cdot w_{1}-v_{1} \cdot w_{3} \\
+&p_{3}=v_{1} \cdot w_{2}-v_{2} \cdot w_{1}
+\end{aligned}</script><p>现在用 $\vec p=[p_1\ p_2\ p_3]^T$，然后来谈几何意义</p>
+<p>行列式表示三个列向量所张成的平行六面体的体积，而 $\vec p$ 和 $\vec a$ 的点积就等于这个体积，那么 $\vec p$ 是一个什么向量才能满足它们两个的点积等于体积呢。对于$\vec a$来说，它是任意一个向量，而 $\vec v$ 和 $\vec w$ 向量是固定的，平行六面体的体积等于面积乘以高，也就是说，当面积确定后，只需要知道高就可以了</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020123.png" alt="image-20210716111418718"></p>
+<p>这个高就是 $\vec a$ 在垂直于 $\vec v$ 和 $\vec w$ 的方向上的投影，于是现在就可以知道 $\vec p$ 的意义了，$\vec p$ 的方向垂直于$\vec v$ 和 $\vec w$ ，它的长度是$\vec v$ 和 $\vec w$ 所张成平行四边形的面积</p>
+<h2 id="8-基变换"><a href="#8-基变换" class="headerlink" title="8.基变换"></a>8.基变换</h2><p>现在有两个二维世界中的人，猪猪侠和包包侠，在猪猪侠的世界中，基向量是这样的：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020127.png" alt="image-20210716112957364"></p>
+<p>在包包侠的世界中，基向量是这样的：</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020130.png" alt="image-20210716114150696"></p>
+<p>当有同一个向量时，在两个人的眼中，描述是不同的</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020134.png" alt="image-20210716114326652"></p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+\vec{e}_{i} & \vec{e}_{j}
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=\left[\vec{e}_{i}^{\prime}\ \ \ \  \ \vec{e}_{j}^{\prime}\right]\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]</script><p>现在包包侠把她所看到的向量的坐标告诉猪猪侠，那么猪猪侠必须要先知道包包侠的基向量在猪猪侠的基向量下的坐标，然后才能知道</p>
+<p>于是包包侠的两个基向量在猪猪侠的基向量下的坐标为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{}a&b\\
+c&d\end{array}\right]</script><p>所以猪猪侠就知道了这个向量在他的基下的坐标：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=\left[\begin{array}{}a&b\\
+c&d\end{array}\right]\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]=A\vec v^{\prime}</script><p>同理猪猪侠把这个他看到的向量的坐标告诉包包侠，包包侠也得转化到自己的基下来，即：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]
+=\left[\begin{array}{}a&b\\
+c&d\end{array}\right]^{-1}\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=A^{-1}\vec v</script><p>现在猪猪侠想把这个向量变一变，比如旋转个90度，于是他用自己世界的基来描述变化后空间的位置，也就是新的坐标轴上单位向量的坐标为：</p>
+<script type="math/tex; mode=display">
+M=\left[\begin{array}{}
+m_1&m_2\\
+m_3&m_4
+\end{array}\right]</script><p>于是变化后向量的坐标为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x_{new} \\
+y_{new}
+\end{array}\right]=\left[\begin{array}{}
+m_1&m_2\\
+m_3&m_4
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]</script><p>现在包包侠也同样想把这个向量变一下，变得和猪猪侠一样，此时她直接乘以猪猪侠的M矩阵是不可以的，因为M是在猪猪侠的基上得到的，她想了一个好办法：</p>
+<ul>
+<li>她先把想变化的向量告诉猪猪侠，猪猪侠在自己的基下把这个向量表示出来</li>
+<li>然后猪猪侠去变，乘以M矩阵</li>
+<li>然后她再将猪猪侠变化后的向量换到自己的基下表示</li>
+</ul>
+<p>上述的过程就用下面的公式来表示：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+x_{new}^{\prime} \\
+y_{new}^{\prime}
+\end{array}\right]=\left[\begin{array}{}a&b\\
+c&d\end{array}\right]^{-1}\left[\begin{array}{}
+m_1&m_2\\
+m_3&m_4
+\end{array}\right]\left[\begin{array}{}a&b\\
+c&d\end{array}\right]\left[\begin{array}{l}
+x^{\prime} \\
+y^{\prime}
+\end{array}\right]=A^{-1}MA\vec v^{\prime}</script><h2 id="9-特征值和特征向量"><a href="#9-特征值和特征向量" class="headerlink" title="9.特征值和特征向量"></a>9.特征值和特征向量</h2><h3 id="·特征向量"><a href="#·特征向量" class="headerlink" title="·特征向量"></a>·特征向量</h3><p>矩阵乘以一个向量表示对这个向量的线性变换，以二维空间为例：</p>
+<p>一个向量所张成的空间，就是这个向量所在的直线，当这个向量被变换后，很可能会离开这个空间，如下图所示</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020142.png" alt="image-20210716121344977"></p>
+<p>但是也会有一些向量，没有离开它本身的张成空间，线性变换只是对它进行了拉伸或压缩，此时矩阵的作用如同一个标量</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020148.png" alt="image-20210716121501072"></p>
+<p>这两个方向空间中的向量都不会偏离其原来所在的直线，而其他向量都会发生偏转</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020153.png" alt="image-20210716121716491"></p>
+<p>这些不发生偏转的向量就叫作特征向量</p>
+<h3 id="·特征值"><a href="#·特征值" class="headerlink" title="·特征值"></a>·特征值</h3><p>每一个特征向量都有一个与其对应的特征值，特征值表征这个向量空间上的向量被拉伸和压缩多少</p>
+<p>那么特征向量有啥用呢？</p>
+<p>考虑一个三维旋转的线性变换，当找到了它的特征向量，就找到了它的旋转轴</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020159.png" alt="image-20210716122229199"></p>
+<p>当特征值为0时，表示没有特征向量 </p>
+<h2 id="10-抽象向量空间"><a href="#10-抽象向量空间" class="headerlink" title="10.抽象向量空间"></a>10.抽象向量空间</h2><p>无论是什么东西，只要符合以下八条公理，那么这个东西就可以称作向量，它遵循着之前讲过的所用性质</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20211216020203.png" alt="image-20210716125152513"></p>
+<blockquote>
+<p>任意向量都能表达为基向量以某种方式进行线性组合，所以求一个向量变换后的结果，就是求变换后基向量以相同方式进行线性组合的结果</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数理基础</category>
+      </categories>
+      <tags>
+        <tag>矩阵</tag>
       </tags>
   </entry>
   <entry>
@@ -4061,348 +4544,6 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
       </tags>
   </entry>
   <entry>
-    <title>【矩阵】线性代数可视化学习笔记</title>
-    <url>/2021/10/18/%E3%80%90%E7%9F%A9%E9%98%B5%E3%80%91%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>3Blue1Brown 线代课程学习笔记，受益匪浅。<br><span id="more"></span></p>
-<h1 id="线性代数可视化"><a href="#线性代数可视化" class="headerlink" title="线性代数可视化"></a>线性代数可视化</h1><p><a href="https://www.bilibili.com/video/BV1ib411t7YR?p=1">参考</a></p>
-<h2 id="1-向量是什么"><a href="#1-向量是什么" class="headerlink" title="1.向量是什么"></a>1.向量是什么</h2><p>对于向量的理解，可以分为三个层面：</p>
-<ul>
-<li><p><strong>物理学家眼中</strong>：向量是一个空间中箭头，它只包括长度和方向两个信息，而与其所在的空间位置无关</p>
-</li>
-<li><p><strong>计算机专业眼中</strong>：向量是一个有序数组，这个有序数组可以表示物理学家眼中的向量在空间中的坐标，而且这个向量通常是以坐标系原点为起点的。为了区分于点的坐标，向量通常竖着写</p>
-</li>
-<li><p><strong>数学家眼中</strong>：向量可以是任何东西，只要能保证两个向量相加和数与向量相乘满足一定的条件即可</p>
-</li>
-</ul>
-<p>通过建立坐标系，可以使一个向量与有序的数组相联系，每一个数组对应一个向量，每一个向量也可以用数组来表示，这就为物理学家在描述向量时提供了一种数学语言</p>
-<p><strong>向量两个最基本的运算：</strong></p>
-<ul>
-<li><p>向量加法：遵循三角形法则 $\longrightarrow$ 用数组描述的向量通过对应元素相加可以很好的描述该法则</p>
-</li>
-<li><p>向量的数乘：表示对向量的伸长与缩短 </p>
-</li>
-</ul>
-<h2 id="2-线性组合、基与张成空间"><a href="#2-线性组合、基与张成空间" class="headerlink" title="2.线性组合、基与张成空间"></a>2.线性组合、基与张成空间</h2><p>在标准的坐标系中，有两个特殊的向量，单位向量 $\hat i$ 和 $\hat j$ ，对于多维空间也同样。</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216015953.png" alt="image-20210715005154764" style="zoom:67%;" /></p>
-<p>它们合起来称作坐标系的基，当把坐标中的每一个元素看作是标量时，每一个基向量就是这些标量所缩放的向量</p>
-<h3 id="·-什么是线性组合"><a href="#·-什么是线性组合" class="headerlink" title="· 什么是线性组合"></a>· 什么是线性组合</h3><p>多个向量的数乘之和称为这些向量的线性组合</p>
-<h3 id="·-向量张成的空间"><a href="#·-向量张成的空间" class="headerlink" title="· 向量张成的空间"></a>· 向量张成的空间</h3><p>给定一组向量，通过该组向量的线性组合生成的<strong>向量的集合</strong>，称为该组向量==张成的空间==</p>
-<p>以二维空间为例，给定向量 $\vec w$ 和 $\vec v$ ，有以下三种情况：</p>
-<ol>
-<li><p>当$\vec w$ 和 $\vec v$ 不共线时，所张成的空间为二维平面，也就是二维空间中的任意向量都可以由这两个向量的线性组合得到</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216015958.png" alt="image-20210715035555651" style="zoom: 33%;" /></p>
-</li>
-<li><p>当$\vec w$ 和 $\vec v$ 共线时，所张成的空间为一条直线，仅能表示终点在该直线上的向量</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020002.png" alt="image-20210715040223112" style="zoom:50%;" /></p>
-</li>
-<li><p>当$\vec w$ 和 $\vec v$ 都为0向量时，所张成的空间为一点，仅能表示0向量</p>
-</li>
-</ol>
-<p><strong>同样对于我们常用的三维空间，当仅有两个不共面的向量时，这两个向量所张成的空间为一个平面</strong></p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020007.png" alt="image-20210715040537951" style="zoom: 20%;" /></p>
-<h3 id="·-线性相关与线性无关"><a href="#·-线性相关与线性无关" class="headerlink" title="· 线性相关与线性无关"></a>· 线性相关与线性无关</h3><p>从上面的表述中，便可以得到<strong>线性相关</strong>的定义：当一组向量中，其中一个向量处在其他向量所张成的空间中（这个向量可以由其他的向量线性组合表示出来），那么这一组向量就是线性相关的</p>
-<p>而<strong>线性无关</strong>的定义与它正好相反：一组向量中，任何一个向量都不处在其他向量所张成的空间中（任何一个向量不可以由其他向量线性组合表示出来）</p>
-<h3 id="·-空间中的一组基"><a href="#·-空间中的一组基" class="headerlink" title="· 空间中的一组基"></a>· 空间中的一组基</h3><p>某向量空间的一组基是张成该空间的一个线性无关的向量集合</p>
-<h2 id="3-矩阵与线性变换"><a href="#3-矩阵与线性变换" class="headerlink" title="3.矩阵与线性变换"></a>3.矩阵与线性变换</h2><h3 id="·-首先需要知道的"><a href="#·-首先需要知道的" class="headerlink" title="· 首先需要知道的"></a>· 首先需要知道的</h3><p>我们之前所说向量的时候，当有基向量存在时，可以用一个数组也就是坐标来表示一个向量，现在我们定义一个永远不变的坐标系和基向量，这个坐标系的x轴和y轴垂直，且基向量是与x轴和y轴正方向相同的单位向量，暂且我们就称坐标系和基向量为<strong>永不变坐标系和永不变基向量</strong>，之后的所有向量或坐标系的基的描述都是在这个永不变基的基础上进行的</p>
-<h3 id="·-线性变换"><a href="#·-线性变换" class="headerlink" title="· 线性变换"></a>· 线性变换</h3><p>变换实际上是函数的另一种说法，函数的作用是输入一个数，输出一个数；在线性代数中，变换的输入是一个向量，输出也是一个向量</p>
-<p><strong>线性变换</strong>是变换的一种特殊形式，它有两个特点：</p>
-<ul>
-<li><p>直线在线性变换后，仍是直线</p>
-</li>
-<li><p>原点必须保持不变</p>
-</li>
-</ul>
-<p>那么如何用数学语言来描述线性变换呢？答案就是用矩阵来描述</p>
-<h3 id="·-矩阵"><a href="#·-矩阵" class="headerlink" title="· 矩阵"></a>· 矩阵</h3><p>矩阵就是一种数学语言，来描述线性变换，矩阵的每一列记录基向量在线性变换后的坐标</p>
-<p>以二维空间为例：</p>
-<script type="math/tex; mode=display">
-\vec v = -1\vec i + 2\vec j\\
-Transformed \ \vec v=-1(Transformed \ \vec i)+2(Transformed\ \vec j)</script><p>当经过一次线性变换后，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020013.png" alt="image-20210715034732752" style="zoom:67%;" /></p>
-<script type="math/tex; mode=display">
-[Transformed\ \vec i ,Transformed\ \vec j]=\left[\begin{array}{ll}
-3 & 1 \\
-0 & 2
-\end{array}\right]</script><script type="math/tex; mode=display">
-Transformed\ \vec v=
--1\left[\begin{array}{l}
-3 \\
-0
-\end{array}\right]+2\left[\begin{array}{l}
-1 \\
-2
-\end{array}\right]=\left[\begin{array}{ll}
-3&1\\
-0&2
-\end{array}\right]\left[\begin{array}{l}
-\ -1\\
-\  \ 2\end{array}\right]
-=\left[\begin{array}{l}
--1  \\
-\ \ 4 
-\end{array}\right]</script><p><strong>这也就定义了矩阵和向量的乘法</strong>，矩阵乘以向量，就是对该向量的一个线性变换</p>
-<p>当变换后的两个基向量线性相关时，由这两个向量所张成的空间就变成了一条线，而原来的向量就被变换到这个空间上，也就是变换后的向量的终点在一条直线上</p>
-<blockquote>
-<p>总之，线性变换就是对向量的变换，对向量的变换的方法是对描述该向量的基进行变换，因此线性变换也是操纵空间的一种手段</p>
-</blockquote>
-<p>那么当有许多个矩阵乘以一个向量的时候，它的几何意义又是什么呢？</p>
-<h3 id="·-复合变换与矩阵乘法"><a href="#·-复合变换与矩阵乘法" class="headerlink" title="· 复合变换与矩阵乘法"></a>· 复合变换与矩阵乘法</h3><p>矩阵A、B分别代表着线性变换1和2，AB代表着先进行线性变换2，然后再进行线性变换1（注意这里是先2后1），令AB=C，那么C就代表着先进行2再进行1的一个复合变换，也可以把C当作是一次独立的变换，它的效果和先2再1的效果相同</p>
-<p>另外，AB $\neq$ BA，也就是说先进行2再进行1和先进行1再进行2的效果是不同的</p>
-<blockquote>
-<p>前面所说的线性变换理解成是一个处理向量的函数，现在从另一个角度来总结一下，线性变换用矩阵来描述，而矩阵的列向量表示线性变换后基向量的坐标，对一个向量进行线性变换，就是先对基向量进行线性变换，然后用这个向量的坐标对变换后的基向量进行线性组合，最终得到变换后的向量。因为基向量可以描述一个空间，因此基向量变了，其所对应的空间也发生了变化</p>
-</blockquote>
-<h2 id="4-行列式"><a href="#4-行列式" class="headerlink" title="4.行列式"></a>4.行列式</h2><p>上节说过，线性变换是操纵空间的一种手段，那么如何刻画空间变化了多少呢，这就需要请出行列式了，行列式就是用来描述空间变化的多少</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020020.png" alt="image-20210715053137633" style="zoom:53%;" /></p>
-<p>下面以二维空间为例：</p>
-<p>我们在坐标系中用网格线来描述这个空间的形态，在标准坐标系中，绿色箭头代表i向量，红色箭头代表j向量，此时向量i和j所围成的区域是一个正方形，其面积为1</p>
-<p>当进行线性变换后，基向量的方向和长度都发生了变化，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020024.png" alt="image-20210715053620420" style="zoom:50%;" /></p>
-<p>那么此时由基向量i和j所围成的区域也发生了变化，变成了一个平行四边形，而该区域的面积等于矩阵的行列式</p>
-<blockquote>
-<p>矩阵的行列式是描述其线性变换所对空间变化的量度</p>
-</blockquote>
-<p>当行列式为0时，表示这个平面被压缩成了一条线，<strong>而0矩阵表示把平面压缩成一个点</strong></p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020028.png" alt="image-20210715054036323" style="zoom:50%;" /></p>
-<p>当行列式为负时，表示这个平面发生了反转</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020030.png" alt="image-20210715054301501" style="zoom:50%;" /></p>
-<p>注意：原来绿色的基向量在红色基向量的右边，此时发生了平面翻转</p>
-<p>三维空间中，矩阵的行列式表示变换后基向量所围成空间区域的体积，当行列式为0时，表示该变换将三维空间压缩成一个平面或一条直线又或是一个点（这在后面会引出秩的用法）。更多维空间的道理是一样的，这里就不过多赘述</p>
-<h2 id="5-逆矩阵、列空间、秩和零空间"><a href="#5-逆矩阵、列空间、秩和零空间" class="headerlink" title="5.逆矩阵、列空间、秩和零空间"></a>5.逆矩阵、列空间、秩和零空间</h2><p>线性代数的用处很多，其中的一个用处是解线性方程组</p>
-<p>方程组的求解和之前所讲的行列式和矩阵以及线性变换密切相关</p>
-<p>例如我们现在有一个方程组：</p>
-<script type="math/tex; mode=display">
-\begin{cases}
-1x+2y+3z=5\\
-3x+8y+7z=6\\
-0x+3y+6z=0
-\end{cases}</script><p>这是一个三阶线性方程组，因为它与矩阵和向量的乘法很像，所以可以写成矩阵的形式：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-1&2&3\\
-3&8&7\\
-0&3&6
-\end{array}\right]
-\left[\begin{array}{l}
-x\\
-y\\
-z
-\end{array}\right]=\left[\begin{array}{l}
-5\\
-6\\
-0
-\end{array}\right]</script><p>即：</p>
-<script type="math/tex; mode=display">
-A\vec x=\vec v</script><p>上述式子已知 $\vec v$ ，A矩阵表示一个线性变换，如若求 $\vec x$ ,则只需将A矩阵所表示的线性变换的逆变换作用到 $\vec v$ 上，那么是不是什么时候都可以用这种方法呢？</p>
-<h3 id="·矩阵的逆"><a href="#·矩阵的逆" class="headerlink" title="·矩阵的逆"></a>·矩阵的逆</h3><p>矩阵的逆表示矩阵线性变换所对应的逆变换，如果矩阵A的行列式不等于0，那么矩阵A是可逆的</p>
-<p>之前的方程组的解为： $\vec x = A^{-1}\vec v$</p>
-<p>上面说到矩阵的逆表示逆变换，所以当进行一次变换再进行一次逆变换等同于没有变化</p>
-<script type="math/tex; mode=display">
-A^{-1}A=AA^{-1}=I</script><p><strong>但是当矩阵的行列式为0时</strong>，矩阵的逆不存在。背后的几何意义是线性变换将多维空间变换为低维空间，如果想找到<strong>一个</strong>低维空间还原成高维空间的逆变换，是得不到一个确定的变换的，因为有一维或多维的缺失，所以这个变换可以有任意多种形式</p>
-<p>再回到我们的方程组，当矩阵的行列式为0时，解是可能存在的，这分为两种情况：</p>
-<ul>
-<li>一种是当 $\vec v$ 向量在A所压缩的空间上时，解存在</li>
-<li>另一种是 $\vec v$ 向量在A所压缩的空间外时，无解</li>
-</ul>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020036.png" alt="image-20210715085801043" style="zoom: 33%;" /></p>
-<h3 id="·矩阵的秩"><a href="#·矩阵的秩" class="headerlink" title="·矩阵的秩"></a>·矩阵的秩</h3><p>可以发现，虽然原空间通过变换后，变成一个低维的空间，此时都会有无解的情况发生，但无解情况的出现的难易程度是不一样的。例如当三维空间变换成二维空间时，是一个平面，只要 $\vec v$ 在这个平面上，解存在。但是当变换成一维空间也就是一条线时，只有 $\vec v$ 在这条线上时，解存在。虽然上面两种情况的A矩阵的行列式都为0，但是它们出现无解的情况是不同的，这时就要引出秩的概念</p>
-<p><strong>秩</strong>表示变换后空间的维数，例如三维矩阵的秩最大为3，它表示基向量可以张成整个三维空间，但是当矩阵的秩为2时，空间被压缩了，此时表示基向量只能张成二维空间，但是它没有秩为1的压缩情况严重</p>
-<h3 id="·列空间"><a href="#·列空间" class="headerlink" title="·列空间"></a>·列空间</h3><p>矩阵的列向量所张成的空间即为列空间，当 $ \vec x$ 表示任意的向量时，$A\vec x$ 就是矩阵A的列空间</p>
-<p>关于秩更准确的定义：矩阵秩表示矩阵列空间的维数</p>
-<p><strong>当秩等于矩阵的列时，意味着它达到了它所能达到的最大值，此时叫作满秩</strong></p>
-<p>0向量一定包含在列空间中，因为线性变换不改变原点的位置，也就是 $A\vec0=\vec 0$ </p>
-<p>对于一个满秩变换来说，唯一能在变换后落在原点的向量就是0向量本身。但是对于一个非满秩的矩阵，它将空间压缩到一个低维的空间，也就是说有一系列向量在变换后被压缩到原点。例如对于原二维的空间，当进行压缩到一维空间的变换时，会使原二维空间中某一方向直线上的所有的向量都压缩到原点。再如原三维空间，压缩到一个二维空间时，也会使原三维空间中某一方向直线上所有的向量压缩到原点，当压缩到一个一维空间时，会使原三维空间中过原点的某一平面上的所有向量压缩到原点。</p>
-<h3 id="·零空间-核空间"><a href="#·零空间-核空间" class="headerlink" title="·零空间/核空间"></a>·零空间/核空间</h3><p>变换后被压缩到原点的向量的集合，叫作矩阵的零空间或者核空间</p>
-<p>==被压缩空间的维数==就是零空间的维数。例如三维空间中的一个向量经过一个方阵的线性变换后，被限制在二维平面上，那么该方阵的零空间维数为1，如果是将该向量变换成一个点，那么该方阵的零空间维数为2。零空间的维数就是表示方阵可以将几维的空间压缩到原点。也可以看作是方程 $A\vec x =0$​​​的解的情况，首先A得为方阵，当A的零空间为0时，也就是A满秩，那么只有零向量是该方程的解。如果A的零空间为2时，那么解向量的维数为2。</p>
-<h3 id="·非方阵"><a href="#·非方阵" class="headerlink" title="·非方阵"></a>·非方阵</h3><p>非方阵的几何意义和之前的方阵稍稍有些不同，先来说之前的方阵，方阵表示将一个向量进行变换，这些变换有旋转这个向量，拉伸压缩这个向量，无论怎么变换这个向量，这个向量都处于原空间中，即变换前是一个n维的向量，变换后还是n维的向量。举一个例子，对于三维空间中的一个向量，当矩阵A的秩为2时，表示将这个向量压缩到一个二维的平面中，尽管是压缩到二维平面中，只是把这个向量限制在二维平面上，但这个向量仍是三维空间中的向量。</p>
-<p>而非方阵就得用另一种方式来描述，和之前所提及的函数一样，非方阵可以看作是一个映射，输入一个m维的向量，映射出一个n维的向量，这两个向量分别处于不同的空间中。</p>
-<p>例如一个矩阵为 $m\times n$ 维，那么它表示将一个n维空间中的向量映射到m维空间中，矩阵的列向量同样是原空间中的基向量在新空间中的映射</p>
-<blockquote>
-<p>小结：方阵表示线性变换，指在原有空间中对向量进行变换；非方阵表示线性映射，把原空间中的向量映射到一个新的空间中</p>
-</blockquote>
-<h2 id="6-向量的点积"><a href="#6-向量的点积" class="headerlink" title="6.向量的点积"></a>6.向量的点积</h2><h3 id="·向量点积的几何意义"><a href="#·向量点积的几何意义" class="headerlink" title="·向量点积的几何意义"></a>·向量点积的几何意义</h3><p>有两个向量 $\vec v$ 和 $\vec w$ ，点积的几何意义表示 $\vec v$ 在 $\vec w$ 方向上的投影的长度和 $\vec w$长度的乘积</p>
-<p>点积的结果和向量的顺序无关，即$\vec v ·\vec w=\vec w·\vec v$ </p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020043.png" alt="image-20210716055411474" style="zoom:33%;" /></p>
-<p>利用对称性，可以直观证明上述结论，令 $\vec v$ 和 $\vec w$ 的长度相同，根据对称性可以知道， $\vec v$ 在 $\vec w$ 上的投影长度与 $\vec w $  在 $\vec v$ 上的投影长度相同。当 $ \vec v$ 放大两倍后，这种对称性就不再存在了，但此时 $\vec w$ 在 $2\vec v$ 上的投影不变，也可以说  $2\vec v$ 在 $\vec w$ 上的投影长度变为原来的2倍，所以 $(2\vec v)·\vec w=\vec w·(2\vec v)$ </p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020049.png" alt="image-20210716055903784"></p>
-<h3 id="·向量点积的矩阵表示"><a href="#·向量点积的矩阵表示" class="headerlink" title="·向量点积的矩阵表示"></a>·向量点积的矩阵表示</h3><p>如果把一个向量当成一个 $n\times1$ 的矩阵来看时，那么对向量的转置就得到了一个 $1\times n$的矩阵，向量的点积可以用向量的转置乘以向量来计算</p>
-<p><strong>那么为什么可以这样计算呢？</strong>首先可以想到，既然转置是一个矩阵，就可以表示一个线性变换了，这个线性变换的几何意义就是把多维空间中的向量映射到一个一维空间上。经过映射得到的一维向量是一个数，它表示在多维空间中的一个向量在某一方向上的投影长度。</p>
-<p>现在以二维空间为例：</p>
-<p>在二维空间中有一单位向量 $\vec u$ ，在该向量的方向上布置一个数轴，这个数轴也就是一个一维空间。如果想把 $\vec u$ ==映射==到这个一维空间中，则需要找到二维空间的基向量在这个一维空间上的位置，我们用投影位置来表示基向量在一维空间上的位置，如下图所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020055.png" alt="image-20210716092117757"></p>
-<p>根据投影关系和对称关系，可以得到二维空间中的基向量 $\vec i 和 \vec j$ 在一维空间的位置</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020101.png" alt="image-20210716092532170"></p>
-<p>则$\vec i 和 \vec j$在一维空间的坐标为：</p>
-<script type="math/tex; mode=display">
-[u_x \ u_y]</script><p>对于二维空间中任意的向量在这个轴上的投影，可以用这个矩阵乘以向量的坐标来得到</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020106.png" alt="image-20210716092801428"></p>
-<p>最终得到的结果为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{ll}
-u_{x} & u_{y}
-\end{array}\right]\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=u_{x} \cdot x+u_{y} \cdot y</script><p>这与这个任意向量和 $\vec u$ 的点积完全相同</p>
-<blockquote>
-<p>总结：为什么点积可以用向量的转置乘以向量？向量的转置表示一个矩阵，这个矩阵又代表着一个线性变换，这个线性变换就表示把一个多维空间的向量==投影==到一个一维空间中。</p>
-</blockquote>
-<p>当 $\vec v=k\vec u$ 是任意的向量时</p>
-<script type="math/tex; mode=display">
-k\left[\begin{array}{ll}u_{x} & u_{y}\end{array}\right]\left[\begin{array}{l}x \\
-y\end{array}\right]=\left[\begin{array}{ll}ku_{x} & ku_{y}\end{array}\right]\left[\begin{array}{l}x \\
-y\end{array}\right]=ku_{x} \cdot x+ku_{y} \cdot y</script><p>两个任意向量的点积表示先将一个向量投影到另一向量所在的方向上，然后将投影长度和另一向量的长度相乘</p>
-<h2 id="7-向量的叉积"><a href="#7-向量的叉积" class="headerlink" title="7.向量的叉积"></a>7.向量的叉积</h2><h3 id="·什么是叉积"><a href="#·什么是叉积" class="headerlink" title="·什么是叉积"></a>·什么是叉积</h3><p>两个向量的叉积会产生一个与这两个向量都垂直的新向量，并且其长度等于这两个向量所围成的四边形的面积，而且它们的方向满足右手定则。</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020113.png" alt="image-20210716095942997"></p>
-<p>既然是表示面积，这就与之前说过的行列式有关系，但这只对二维向量成立（因为只有两个向量，只有二维向量才能满足方阵，才有行列式）</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020117.png" alt="image-20210716095517110"></p>
-<p>两个向量所组成的矩阵对应着一个线性变换，线性变换的度量就是矩阵的行列式，也就是基向量所围成的四边形面积</p>
-<h3 id="·关于三维空间中的叉积的计算"><a href="#·关于三维空间中的叉积的计算" class="headerlink" title="·关于三维空间中的叉积的计算"></a>·关于三维空间中的叉积的计算</h3><p>对于三维空间中的叉积，可以用下面的计算公式：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-v_{1} \\
-v_{2} \\
-v_{3}
-\end{array}\right] \times\left[\begin{array}{l}
-w_{1} \\
-w_{2} \\
-w_{3}
-\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
-\vec{\imath} & v_{1} & w_{1} \\
-\vec{\jmath} & v_{2} & w_{2} \\
-\vec{k} & v_{3} & w_{3}
-\end{array}\right]\right)</script><p>现在就来说明一下为什么可以用这个公式来计算叉积</p>
-<p>由第4节可知，矩阵的行列式表示列向量所张成的平行六面体的体积，而上面行列式的第一列不是一个向量，而是三个基向量，下面先来定义一个线性映射 $L(\vec a)$</p>
-<script type="math/tex; mode=display">
-L(\vec a)=\operatorname{\det}\left(\left[\begin{array}{c}
-{x} & v_{1} & w_{1} \\
-{y} & v_{2} & w_{2} \\
-{z} & v_{3} & w_{3}
-\end{array}\right]\right)\quad(\vec a=\left[\begin{array}{l}\ x\\
-y\\
-z\end{array}\right])</script><p>这个线性映射将一个三维向量映射到一维空间中，表示一个数，于是可以写成这种形式：</p>
-<script type="math/tex; mode=display">
-L(\vec a)=[\begin{array}{}p_1&p_2&p_3\end{array}]\cdot\left[\begin{array}{}x\\
-y\\
-z\end{array}\right]=\operatorname{det}\left(\left[\begin{array}{ccc}
-{x} & v_{1} & w_{1} \\
-{y} & v_{2} & w_{2} \\
-{z} & v_{3} & w_{3}
-\end{array}\right]\right)</script><p>于是展开有：</p>
-<script type="math/tex; mode=display">
-\begin{array}{r}
-\quad x\left(v_{2} \cdot w_{3}-v_{3} \cdot w_{2}\right)+ \\
-p_{1} \cdot x+p_{2} \cdot y+p_{3} \cdot z=y\left(v_{3} \cdot w_{1}-v_{1} \cdot w_{3}\right)+ \\
-z\left(v_{1} \cdot w_{2}-v_{2} \cdot w_{1}\right)
-\end{array}</script><p>即：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-&p_{1}=v_{2} \cdot w_{3}-v_{3} \cdot w_{2} \\
-&p_{2}=v_{3} \cdot w_{1}-v_{1} \cdot w_{3} \\
-&p_{3}=v_{1} \cdot w_{2}-v_{2} \cdot w_{1}
-\end{aligned}</script><p>现在用 $\vec p=[p_1\ p_2\ p_3]^T$，然后来谈几何意义</p>
-<p>行列式表示三个列向量所张成的平行六面体的体积，而 $\vec p$ 和 $\vec a$ 的点积就等于这个体积，那么 $\vec p$ 是一个什么向量才能满足它们两个的点积等于体积呢。对于$\vec a$来说，它是任意一个向量，而 $\vec v$ 和 $\vec w$ 向量是固定的，平行六面体的体积等于面积乘以高，也就是说，当面积确定后，只需要知道高就可以了</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020123.png" alt="image-20210716111418718"></p>
-<p>这个高就是 $\vec a$ 在垂直于 $\vec v$ 和 $\vec w$ 的方向上的投影，于是现在就可以知道 $\vec p$ 的意义了，$\vec p$ 的方向垂直于$\vec v$ 和 $\vec w$ ，它的长度是$\vec v$ 和 $\vec w$ 所张成平行四边形的面积</p>
-<h2 id="8-基变换"><a href="#8-基变换" class="headerlink" title="8.基变换"></a>8.基变换</h2><p>现在有两个二维世界中的人，猪猪侠和包包侠，在猪猪侠的世界中，基向量是这样的：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020127.png" alt="image-20210716112957364"></p>
-<p>在包包侠的世界中，基向量是这样的：</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020130.png" alt="image-20210716114150696"></p>
-<p>当有同一个向量时，在两个人的眼中，描述是不同的</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020134.png" alt="image-20210716114326652"></p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{ll}
-\vec{e}_{i} & \vec{e}_{j}
-\end{array}\right]\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=\left[\vec{e}_{i}^{\prime}\ \ \ \  \ \vec{e}_{j}^{\prime}\right]\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]</script><p>现在包包侠把她所看到的向量的坐标告诉猪猪侠，那么猪猪侠必须要先知道包包侠的基向量在猪猪侠的基向量下的坐标，然后才能知道</p>
-<p>于是包包侠的两个基向量在猪猪侠的基向量下的坐标为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{}a&b\\
-c&d\end{array}\right]</script><p>所以猪猪侠就知道了这个向量在他的基下的坐标：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=\left[\begin{array}{}a&b\\
-c&d\end{array}\right]\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]=A\vec v^{\prime}</script><p>同理猪猪侠把这个他看到的向量的坐标告诉包包侠，包包侠也得转化到自己的基下来，即：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]
-=\left[\begin{array}{}a&b\\
-c&d\end{array}\right]^{-1}\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]=A^{-1}\vec v</script><p>现在猪猪侠想把这个向量变一变，比如旋转个90度，于是他用自己世界的基来描述变化后空间的位置，也就是新的坐标轴上单位向量的坐标为：</p>
-<script type="math/tex; mode=display">
-M=\left[\begin{array}{}
-m_1&m_2\\
-m_3&m_4
-\end{array}\right]</script><p>于是变化后向量的坐标为：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{new} \\
-y_{new}
-\end{array}\right]=\left[\begin{array}{}
-m_1&m_2\\
-m_3&m_4
-\end{array}\right]\left[\begin{array}{l}
-x \\
-y
-\end{array}\right]</script><p>现在包包侠也同样想把这个向量变一下，变得和猪猪侠一样，此时她直接乘以猪猪侠的M矩阵是不可以的，因为M是在猪猪侠的基上得到的，她想了一个好办法：</p>
-<ul>
-<li>她先把想变化的向量告诉猪猪侠，猪猪侠在自己的基下把这个向量表示出来</li>
-<li>然后猪猪侠去变，乘以M矩阵</li>
-<li>然后她再将猪猪侠变化后的向量换到自己的基下表示</li>
-</ul>
-<p>上述的过程就用下面的公式来表示：</p>
-<script type="math/tex; mode=display">
-\left[\begin{array}{l}
-x_{new}^{\prime} \\
-y_{new}^{\prime}
-\end{array}\right]=\left[\begin{array}{}a&b\\
-c&d\end{array}\right]^{-1}\left[\begin{array}{}
-m_1&m_2\\
-m_3&m_4
-\end{array}\right]\left[\begin{array}{}a&b\\
-c&d\end{array}\right]\left[\begin{array}{l}
-x^{\prime} \\
-y^{\prime}
-\end{array}\right]=A^{-1}MA\vec v^{\prime}</script><h2 id="9-特征值和特征向量"><a href="#9-特征值和特征向量" class="headerlink" title="9.特征值和特征向量"></a>9.特征值和特征向量</h2><h3 id="·特征向量"><a href="#·特征向量" class="headerlink" title="·特征向量"></a>·特征向量</h3><p>矩阵乘以一个向量表示对这个向量的线性变换，以二维空间为例：</p>
-<p>一个向量所张成的空间，就是这个向量所在的直线，当这个向量被变换后，很可能会离开这个空间，如下图所示</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020142.png" alt="image-20210716121344977"></p>
-<p>但是也会有一些向量，没有离开它本身的张成空间，线性变换只是对它进行了拉伸或压缩，此时矩阵的作用如同一个标量</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020148.png" alt="image-20210716121501072"></p>
-<p>这两个方向空间中的向量都不会偏离其原来所在的直线，而其他向量都会发生偏转</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020153.png" alt="image-20210716121716491"></p>
-<p>这些不发生偏转的向量就叫作特征向量</p>
-<h3 id="·特征值"><a href="#·特征值" class="headerlink" title="·特征值"></a>·特征值</h3><p>每一个特征向量都有一个与其对应的特征值，特征值表征这个向量空间上的向量被拉伸和压缩多少</p>
-<p>那么特征向量有啥用呢？</p>
-<p>考虑一个三维旋转的线性变换，当找到了它的特征向量，就找到了它的旋转轴</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020159.png" alt="image-20210716122229199"></p>
-<p>当特征值为0时，表示没有特征向量 </p>
-<h2 id="10-抽象向量空间"><a href="#10-抽象向量空间" class="headerlink" title="10.抽象向量空间"></a>10.抽象向量空间</h2><p>无论是什么东西，只要符合以下八条公理，那么这个东西就可以称作向量，它遵循着之前讲过的所用性质</p>
-<p><img src="https://piggyhero.gitee.io/pic/img/20211216020203.png" alt="image-20210716125152513"></p>
-<blockquote>
-<p>任意向量都能表达为基向量以某种方式进行线性组合，所以求一个向量变换后的结果，就是求变换后基向量以相同方式进行线性组合的结果</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>数理基础</category>
-      </categories>
-      <tags>
-        <tag>矩阵</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【视觉SLAM学习1】视觉SLAM基本框架</title>
     <url>/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM%E5%AD%A6%E4%B9%A01%E3%80%91%E8%A7%86%E8%A7%89SLAM%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
@@ -5642,128 +5783,6 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </categories>
       <tags>
         <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习8】管理进程</title>
-    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A08%E3%80%91%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</url>
-    <content><![CDATA[<p>和UNIX一样，linux是多任务和多用户系统。多用户意味着在同一时间可以有多个用户使用同一台计算机。为了保护多用户功能实际可用，系统特别设计了一种方案来保护当前用户不受其他用户操作的影响。</p>
-<span id="more"></span>
-<h2 id="I-所有者、组成员和其他用户"><a href="#I-所有者、组成员和其他用户" class="headerlink" title="I. 所有者、组成员和其他用户"></a>I. 所有者、组成员和其他用户</h2><p>一个文件能被三种人操作（读，写，执行），这三种人为：</p>
-<ul>
-<li>该文件的所有者</li>
-<li>该文件所有者的同组组员</li>
-<li>其他人</li>
-</ul>
-<p>我们可以使用 <code>id</code> 命令来查看此时的用户信息。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> id</span></span><br><span class="line">uid=1000(piggy) gid=1000(piggy) groups=1000(piggy),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare)</span><br></pre></td></tr></table></figure>
-<p>显示的结果：</p>
-<ul>
-<li>uid(user ID)：当前用户的ID，在创建账户时就已被分配，为了方便ID和用户名一一对应。</li>
-<li>gid(group ID)：当前用户所属组的ID，用户可以归属于多个组。</li>
-</ul>
-<p>这些信息从何而来呢？</p>
-<p>这些信息来源于一系列的文本文件，用户账户定义在文件 <code>/etc/passwd</code> 中，用户组定义在文件 <code>/etc/group</code> 文件中。在文件/etc/passwd中定义了对应用户的用户登录名、uid、gid、账户真实姓名、主目录、以及登录的shell信息。</p>
-<p>许多类UNIX系统会把普通用户分配到一个公共的群组中，然而在linux中则会创建一个独一无二的，只有一个用户的群组，组名和用户名相同。</p>
-<h2 id="II-读取、写入和执行"><a href="#II-读取、写入和执行" class="headerlink" title="II. 读取、写入和执行"></a>II. 读取、写入和执行</h2><p>使用<code>ls</code> 命令可以查看文件或目录的属性信息。在文件属性信息中，234对应的9个字符称为 <strong>文件模式</strong> ，表示文件所有者，同组其他用户和其他所有人对该文件的读、写、执行权限。</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170805946.png" alt="image-20220121170805946"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170818935.png" alt="image-20220121170818935"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170830896.png" alt="image-20220121170830896"></p>
-<h3 id="1-更改文件模式"><a href="#1-更改文件模式" class="headerlink" title="1. 更改文件模式"></a>1. 更改文件模式</h3><p>使用 <code>chmod</code> 命令可以更改文件的模式。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod 600 filename</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod u+x filename</span></span><br></pre></td></tr></table></figure>
-<p>在该命令的第二项表示更改对哪类人的权限。可以根据八进制的规则更改，也可以用符号来表示。</p>
-<h4 id="1-八进制规则"><a href="#1-八进制规则" class="headerlink" title="(1)八进制规则"></a>(1)八进制规则</h4><p>八进制规则就是 <code>rwx</code> 对应三位，写1则为激活，0为取消。八进制就可以用一个数来表示一类人的文件模式，那么三个数就可以表示三类人。</p>
-<p>例如：</p>
-<p><code>723</code> 表示 <code>111010011</code> ，进而表示的是 <code>rwx-w--wx</code> 。</p>
-<h4 id="2-符号表示"><a href="#2-符号表示" class="headerlink" title="(2)符号表示"></a>(2)符号表示</h4><p>符号表示就是第二个参数换为字符。用 <code>u</code> 、<code>g</code> 、<code>o</code> 、<code>a</code> 分别表示所有者，同组人，其他人，三类人。然后通过 <code>+-=</code> 来设置文件模式。</p>
-<p>例如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod u+w filename <span class="comment">#给文件的所有者添加可写模式。</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="2-在图形化窗口更改文件模式"><a href="#2-在图形化窗口更改文件模式" class="headerlink" title="2. 在图形化窗口更改文件模式"></a>2. 在图形化窗口更改文件模式</h3><p>另外还可以在图形化界面上更改文件模式。</p>
-<h3 id="3-设置默认权限"><a href="#3-设置默认权限" class="headerlink" title="3. 设置默认权限"></a>3. 设置默认权限</h3><p>还有一个很好玩的命令，就是<code>umask</code> ，它的作用是设置掩码，来更改默认生成文件的文件模式。当umask的值为<code>0000</code> 时，生成的文件的文件模式是 <code>rw-rw-rw-</code> ，当umask设置为 <code>0022</code> 时，转成二进制数为 <code>000010010</code> ，这时默认生成的文件模式是<code>rw-r--r--</code> 。更改umask的命令为：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">umask</span> <span class="comment">#查看当前umask的值</span></span></span><br><span class="line">0002</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">umask</span> 0022</span></span><br></pre></td></tr></table></figure>
-<h2 id="III-让不允许变为允许"><a href="#III-让不允许变为允许" class="headerlink" title="III. 让不允许变为允许"></a>III. 让不允许变为允许</h2><h3 id="1-更改使用人的身份"><a href="#1-更改使用人的身份" class="headerlink" title="1. 更改使用人的身份"></a>1. 更改使用人的身份</h3><p>如果我们的身份不符合系统的要求，怎么才可以做想做的事情呢？首先想到的是让自己符合呀，那就要改变自己的身份了。如果我们想更改我们所登录的身份该如何做呢？这个身份大致分为两个等级，一种是平民身份(user)，一种是皇帝身份(root)。平民身份就是可以做一部分的事情，但是得由皇帝允许。而皇帝就是什么都可以做。皇帝只能有一个，平民可以有许多。</p>
-<ul>
-<li>su：换身份，让自己当皇帝。</li>
-<li>sudo：换说的话，告诉他们我是转告皇帝说的话。</li>
-</ul>
-<p>当我们做一些操作时，系统要求只可以root用户来做，所以需要改变我们的身份。可以使用 <code>su</code> 命令。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> su - <span class="comment"># &quot;-&quot;表示加载变更用户的环境变量</span></span></span><br><span class="line">Password:	#输入root密码</span><br><span class="line"><span class="meta">[root@computer]#</span><span class="bash"> <span class="built_in">exit</span>  <span class="comment">#可以退出该账户</span></span></span><br><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> su - test_user <span class="comment">#登录test_user账户</span></span></span><br><span class="line">Password:	#输入test_user的密码</span><br><span class="line"><span class="meta">[test_user@computer]$</span><span class="bash"> <span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
-<p>在上面的示例中，<code>su -</code> 命令中的 <code>-</code> 表示要加载目标用户的环境变量。后面的参数中如果没有指定用户名，则表示要登陆超级用户root。</p>
-<blockquote>
-<p>在运行<code>su -</code>命令时，就相当于又开启了一个shell程序。这个shell程序加载的是目标账户的环境变量。</p>
-</blockquote>
-<p>另一个方便的命令是<code>sudo</code> ，但是与<code>su</code> 的原理是不一样的。<code>sudo</code> 的英文全称为 super user do，以超级用户的方式执行命令。而<code>su</code> 的英文全称是 switch user，是换用户的意思。</p>
-<p>只要在命令前面加上<code>sudo</code> ，就表示这条命令有超级用户的权限。要注意的是还需要输入用户的密码。例如：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> sudo su - <span class="comment">#可以直接进入root用户</span></span></span><br><span class="line">piggy password:</span><br><span class="line"><span class="meta">[root@computer]#</span></span><br></pre></td></tr></table></figure>
-<p>但你一定会问，进入root用户为什么输入piggy的密码呢？原来<code>sudo</code>命令只会将名字在 <code>/etc/sudoers</code> 中的用户提升命令权限，piggy在这个里面，所以输入piggy的密码表示你是这个用户的人，所以你可以提升权限。</p>
-<blockquote>
-<p><code>sudo su -</code> 和 <code>sudo -i</code> 的命令效果一样，且都是输入piggy的密码。</p>
-</blockquote>
-<p><strong>小结：</strong>我们已经看到：</p>
-<ul>
-<li>使用 <code>su -</code> ，提供 root 账户的密码，可以切换到 root 用户；</li>
-<li>使用 <code>sudo su -</code> ，提供当前用户的密码，也可以切换到 root 用户</li>
-</ul>
-<p>两种方式的差异也显而易见：如果我们的 Linux 系统有很多用户需要使用的话，前者要求所有用户都知道 root 用户的密码，这显然是非常危险的；后者是不需要暴露 root 账户密码的，用户只需要输入自己的账户密码就可以，而且哪些用户可以切换到 root，这完全是受 root 控制的（root 通过设置 <code>/etc/sudoers</code> 实现的），这样系统就安全很多了。</p>
-<h3 id="2-更改文件所有者"><a href="#2-更改文件所有者" class="headerlink" title="2. 更改文件所有者"></a>2. 更改文件所有者</h3><p>当我要拿一个东西的时候人家不让，我让我变成皇帝或者假装是转述皇帝的话。现在从另一个角度来看，人家不让是因为东西是人家的，那么我把它变成我自己的不就完了么。所以我们可以用<code>chown</code> 来更改文件的所有者和所属群组。但是话说回来，既然你拿都不让，怎么还能归你呢。这时还是假传皇帝的圣旨，提升自己说话的分量，也就是在命令前加上 <code>sudo</code> 。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chown [ower][:[group]] file</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor:China file  <span class="comment">#将file的所有者改为emperor，所属组改为China</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor: file  <span class="comment">#将file的所有者改为emperor，所属组改为emperor的所在组</span></span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习9】权限</title>
-    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A09%E3%80%91%E6%9D%83%E9%99%90/</url>
-    <content><![CDATA[<p>进程就是运行着的程序，我们可以管理运行着的程序，让它们终止、挂起等，这就是管理进程。</p>
-<p>在知道咋管理之前，得先知道怎么查看进程。</p>
-<span id="more"></span>
-<h2 id="I-查看进程"><a href="#I-查看进程" class="headerlink" title="I. 查看进程"></a>I. 查看进程</h2><h3 id="1-ps"><a href="#1-ps" class="headerlink" title="1. ps"></a>1. ps</h3><p>使用<code>ps</code> 命令可以查看进程。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps <span class="comment">#显示和当前终端会话相关的进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps x <span class="comment">#显示所有进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps aux <span class="comment">#显示进程更多的信息 即BSD模式显示</span></span></span><br></pre></td></tr></table></figure>
-<p>下面介绍输出的信息有啥：</p>
-<ul>
-<li>PID（process ID）：进程的身份证号</li>
-<li>TTY（teletype）：表示进程的控制终端</li>
-<li>TIME：表示进程消耗CPU时间总和</li>
-<li>STAT（state）：表示进程的状态（状态参数的意思见表一）</li>
-</ul>
-<p>表一</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223428006.png" alt="image-20220121223428006"></p>
-<p>BSD模式下ps命令输出的列标题</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223513393.png" alt="image-20220121223513393"></p>
-<h3 id="2-top"><a href="#2-top" class="headerlink" title="2. top"></a>2. top</h3><p>前面的<code>ps</code> 仅能静态的显示进程，可是程序run的时候是一个动态的过程，这时可以用 <code>top</code> 来动态显示进程信息，默认状态下3秒更新一次。在动态信息显示的过程中，按 <code>h</code> 显示帮助菜单，<code>q</code> 退出top。</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223838666.png" alt="image-20220121223838666"></p>
-<p>上面显示的信息说明：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223857601.png" alt="image-20220121223857601"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223910602.png" alt="image-20220121223910602"></p>
-<h2 id="II-控制进程"><a href="#II-控制进程" class="headerlink" title="II. 控制进程"></a>II. 控制进程</h2><p>现在我们以一个小程序<code>xlogo</code>为例说明。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> xlogo</span></span><br><span class="line"><span class="meta">#</span><span class="bash">此时终端正在执行xlogo，可以按Ctrl+C来终止</span></span><br><span class="line"><span class="meta">#</span><span class="bash">如果想要到后台执行</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> xlogo &amp;</span></span><br><span class="line">[1] 18785</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
-<p>从上面的例子可以看到，想要<strong>后台</strong>执行，需要在命令后面添加 <code>&amp;</code> 。这时终端返回一个信息 <code>[1]18785</code> ，者是该进程的PID编号，前面的<code>[1]</code> 称为作业控制(job control)，可以理解为shell程序在做作业，正在后台运行。可以通过<code>jobs</code> 来查看当前shell程序的作业情况。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">jobs</span></span></span><br><span class="line">[1]+ Running 					xlogo $</span><br></pre></td></tr></table></figure>
-<p>前面表示作业编号和状态，后面是当时的命令。如果想要将该作业重新放到<strong>前台</strong>。可以用<code>fg</code> 命令，如果仅有一个作业，后面不用加参数，如果有多个作业，要用<code>fg %job_ID</code> 来选择要到前台的作业。如果该作业挂起状态，想在后台运行，就用<code>bg</code> 命令，用法和<code>fg</code> 相同。</p>
-<p>如果想要暂停一个进程，可以把它先弄到前台来，然后按<code>Ctrl+Z</code> 暂停。当然还有其他的方式来弄，后面说。</p>
-<h2 id="III-杀手非杀手"><a href="#III-杀手非杀手" class="headerlink" title="III. 杀手非杀手"></a>III. 杀手非杀手</h2><p><code>kill</code> 这个命令大家会以为是杀死进程，但是它的作用是发送信号，只不过默认状态下发送的是<code>TERM</code>信号表示终止。进程和操作系统之间是通过信号来通信的。<code>kill</code> 的用法是：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> [-signal] PID</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -HUP 18785</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -1 18785</span></span><br></pre></td></tr></table></figure>
-<p>可以指定信号的<strong>编号或信号名</strong>来完成发送，后面的<strong>PID编号</strong>也可以是<strong>作业编号</strong>。常用的发送信号如下表所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225223717.png" alt="image-20220121225223717"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225446730.png" alt="image-20220121225446730"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225458299.png" alt="image-20220121225458299"></p>
-<p>想要查看更多的信号，可以使用 <code>kill -l</code> 来查看。</p>
-<blockquote>
-<p>和文件管理一样，进程也是有所有者的，只有进程的所有者才能给它们的进程使用kill发送信号。</p>
-</blockquote>
-<p>如果想要一下子给许多的进程发送信号，还可以使用<code>killall</code> 命令，用法为：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> killall [-u user] [-signal] name...</span></span><br></pre></td></tr></table></figure>
-<p>同理，<code>killall</code> 和 <code>kill</code> 一样需要注意用户权限。</p>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
       </tags>
   </entry>
 </search>
