@@ -5742,4 +5742,214 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
         <tag>计算机视觉</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【cmake-2】Hello Include</title>
+    <url>/2022/01/26/%E3%80%90cmake-2%E3%80%91Hello-Include/</url>
+    <content><![CDATA[<p>因为在工程中，头文件会放在一个目录中，源文件会放在另一个目录中，这时候需要我们为要编译的文件添上头文件路径。</p>
+<span id="more"></span>
+<p>我们的工程目录为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tree</span></span><br><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── include</span><br><span class="line">│ └── Hello.h</span><br><span class="line">└── src</span><br><span class="line">├── Hello.cpp</span><br><span class="line">└── main.cpp</span><br></pre></td></tr></table></figure>
+<p>因为源文件都在一个目录下，我们可以用一个变量代替他们：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(SOURCES src/Hello.cpp src/main.cpp)</span><br></pre></td></tr></table></figure>
+<p><code>set()</code> 是函数，里面的参数用空格分开。</p>
+<p>我们也可以使用通配符来设置变量：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">file</span>(GLOB SOURCE <span class="string">&quot;src/*.cpp&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> cmake中的expand和linux命令行是一样的，上面的命令中不加双引号也行。</p>
+</blockquote>
+<p>我们还需要添加头文件路径：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">target_include_directories</span>(<span class="keyword">target</span> PRIVATE <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>)</span><br></pre></td></tr></table></figure>
+<p>这里的参数<code>PRIVATE</code>后面会说。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>cmake</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【cmake-1】Hello CMake</title>
+    <url>/2022/01/26/%E3%80%90cmake-1%E3%80%91Hello-CMake/</url>
+    <content><![CDATA[<p>参考：<a href="https://github.com/ttroy50/cmake-examples">github示例</a>、<a href="https://cliutils.gitlab.io/modern-cmake/">学习文档</a></p>
+<span id="more"></span>
+<p>前几讲主要是介绍cmake的用法，具体的细节会放在后面，因此只看完前面的话应该可以直接上手使用了。</p>
+<p>在我们编译代码的时候需要一定的编译规则，简单的工程文件我们可以直接使用<code>gcc</code>或<code>g++</code>来编译，但是当一个工程项目十分复杂的时候，我们就需要提前制定好编译规则。编译规则的文件由<code>MakeFile</code>定义，但是编写<code>MakeFile</code>也是十分复杂的过程，因此我们可以用<code>CMake</code>语言来制定编译规则得到一个<code>CMakeLists.txt</code> 文件，再使用<code>cmake</code> 命令生成MakeFile。</p>
+<p>我们现在的工程目录为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tree</span></span><br><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">└── main.cpp</span><br></pre></td></tr></table></figure>
+<p>当创建使用cmake创建一个工程的时候，先要指定cmake的版本：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>)</span><br></pre></td></tr></table></figure>
+<p>然后设置工程的名字：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">project</span>(Hello_CMake)</span><br></pre></td></tr></table></figure>
+<p>这里设置好工程名字后，会自动的定义一个变量（变量的概念后面会说），叫做<code>PROJECT_NAME</code> ，在使用的用<code>$&#123;PROJECT_NAME&#125;</code>。</p>
+<p>然后我们可以设置我们要编译的文件：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(Hello_CMake main.cpp)</span><br></pre></td></tr></table></figure>
+<p>接下来我们就可以编译文件了。编译文件的方法有两种，一种叫做<strong>in-place</strong>，另一种叫做<strong>out-of-source</strong>。通常情况下我们会使用第二种：</p>
+<p>在工程的根目录下新建一个<code>build</code>文件夹，在命令行中：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> build</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cmake ..</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make</span></span><br></pre></td></tr></table></figure>
+<p>好了现在就会在<code>build</code> 目录下生成了我们编译生成的可执行文件<code>Hello_CMake</code>。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>cmake</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【cmake-4】Install一下子</title>
+    <url>/2022/01/26/%E3%80%90cmake-4%E3%80%91install%E4%B8%80%E4%B8%8B%E5%AD%90/</url>
+    <content><![CDATA[<p>这个例子展示了如何将你生成的target安装到你的系统中。</p>
+<span id="more"></span>
+<p>工程的目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">├── cmake-examples.conf</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── include</span><br><span class="line">│ └── installing</span><br><span class="line">│ └── Hello.h</span><br><span class="line">├── README.adoc</span><br><span class="line">└── src</span><br><span class="line">├── Hello.cpp</span><br><span class="line">└── main.cpp</span><br></pre></td></tr></table></figure>
+<p>我们可以使用<code>make install</code> 进行安装，安装的位置由<code>CMAKE_INSTALL_PREFIX</code> 来控制，这个变量表示安装目的地的根目录。</p>
+<p>在cmake中，我们可以用<code>install()</code> 函数来设置。</p>
+<h3 id="1-安装可执行文件"><a href="#1-安装可执行文件" class="headerlink" title="1. 安装可执行文件"></a>1. 安装可执行文件</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">install</span>(<span class="keyword">TARGET</span> <span class="keyword">target</span> DESTINATION bin )</span><br></pre></td></tr></table></figure>
+<p>这里<code>TARGET</code> 和<code>DESTINATION</code>是参数，就像我们填表格一样，要安装的文件是啥？后面写上target，要安装的目的地是哪？后面写上bin。</p>
+<p>最终这个文件会被安装到<code>CMAKE_INStALL_PREFIX/bin</code> 路径下。</p>
+<h3 id="2-安装库文件"><a href="#2-安装库文件" class="headerlink" title="2. 安装库文件"></a>2. 安装库文件</h3><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">install</span>(<span class="keyword">TARGET</span> <span class="keyword">target</span> LIBRARY DESTINATION lib)</span><br></pre></td></tr></table></figure>
+<p>注意安装库的参数列表中多了一个<code>LIBRARY</code></p>
+<h3 id="3-安装头文件"><a href="#3-安装头文件" class="headerlink" title="3. 安装头文件"></a>3. 安装头文件</h3><p>头文件在一个目录下，所以我们把整个目录都安过去：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">install</span>(DIRECTORY <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>/ DESTINATION <span class="keyword">include</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="4-安装文档文件"><a href="#4-安装文档文件" class="headerlink" title="4. 安装文档文件"></a>4. 安装文档文件</h3><p>其他的一些配置信息，文档什么的按文件处理：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">install</span>(FILES cmake-examples.conf DESTINATION etc)</span><br></pre></td></tr></table></figure>
+<p>如果我们想要更改那个安装前缀<code>CMAKE_INSTALL_PREFIX</code> ，也就是根目录，可以用：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_INSTALL_PREFIX <span class="string">&quot;$&#123;CMAKE_BINARY_DIR&#125;/install&quot;</span> CACHE <span class="keyword">STRING</span> <span class="string">&quot;The path to use for make install&quot;</span></span><br><span class="line">FORCE)</span><br></pre></td></tr></table></figure>
+<p>为什么这么写，以后会说。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>cmake</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【cmake-3】About Library</title>
+    <url>/2022/01/26/%E3%80%90cmake-3%E3%80%91About-Library/</url>
+    <content><![CDATA[<p>通常编译的工程文件都会链接库，库分为两类：</p>
+<ul>
+<li>静态库：static library</li>
+<li>分享库（动态库）：shared library</li>
+</ul>
+<span id="more"></span>
+<p>这两类库的区别简单介绍一下：</p>
+<p>静态库就是和可执行文件打包在一起（编译好的二进制文件是一个整体），而分享库是可执行文件和库文件不打包在一起，只有链接关系，当程序运行的时候再去调用，这样做可以减少存储空间，反正有许多好处。</p>
+<p>添加静态库：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(Hello_library STATIC hello.cpp)</span><br></pre></td></tr></table></figure>
+<p>生成的文件名是<code>libHello_library.a</code> </p>
+<p>添加分享库：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(Hello_library SHARED hello.cpp)</span><br></pre></td></tr></table></figure>
+<p>生成的文件名是<code>libHello_library.so</code> </p>
+<p>这里生成的库名是我们设置的，但是生成的文件是编译后系统取的。在写cmake的时候，如果觉得库的名字不好记，还可以给它起一个外号：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(hello::library ALIAS Hello_library)</span><br></pre></td></tr></table></figure>
+<p>同理我们也可以为我们的target链接库，这里就不区分静态库还是分享库了：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(<span class="keyword">target</span> PUBLIC hello::library)</span><br></pre></td></tr></table></figure>
+<p>这里链接的库名，其实也就是这个库的路径，我们这里没有说明，但实际中我们得先用<code>find_package()</code>来搜索库。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>cmake</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【cmake-5】细说PRIVATE-INTERFACE-PUBLIC</title>
+    <url>/2022/01/26/%E3%80%90cmake-5%E3%80%91%E7%BB%86%E8%AF%B4PRIVATE-INTERFACE-PUBLIC/</url>
+    <content><![CDATA[<p>具体的解释在后面，先总结一下子。</p>
+<span id="more"></span>
+<h2 id="I-结论"><a href="#I-结论" class="headerlink" title="I. 结论"></a>I. 结论</h2><p>在编译的时候<strong>链接库文件</strong>和说明<strong>头文件路径</strong>是两件大事。</p>
+<p><strong>CMake可以在链接库文件的时候把库<code>文件的头文件路径</code>（说明该库的用法）自动添加到<code>目标文件的头文件路径</code>。</strong></p>
+<p>链接库文件：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(&lt;<span class="keyword">target</span>&gt; &lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt;)</span><br></pre></td></tr></table></figure>
+<p>定义：</p>
+<ul>
+<li><code>target</code> 是要生成的文件，可能是可执行文件或库文件</li>
+<li><code>item</code> 链接的库文件</li>
+<li><code>future target</code> 未来链接<code>target</code> 的文件</li>
+</ul>
+<h3 id="1-target-include-directories"><a href="#1-target-include-directories" class="headerlink" title="1. target_include_directories()"></a>1. target_include_directories()</h3><p>每个<code>target</code> 有两个列表，一个是<code>INCLUDE_DIRECTORIES</code> ，另一个是<code>INTERFACE_INCLUDE_DIRECTORIES</code> 。</p>
+<p><code>INCLUDE_DIRECTORIES</code> 是编译<code>target</code>时，要看的头文件路径。而当<code>future target</code> 链接 <code>target</code>时，CMake会自动的把<code>target</code>的<code>INTERFACE_INCLUDE_DIRECTORIES</code> 添加到<code>future target</code> 的 <code>INCLUDE_DIRECTORIES</code>中。</p>
+<p>当我们使用<code>target_include_directories()</code> 时，根据参数<code>&lt;PRIVATE|PUBLIC|INTERFACE&gt;</code>的不同，可以分别为这两个列表添加路径。</p>
+<p>如：<code>target_include_directories(&lt;target&gt; &lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt;)</code></p>
+<ul>
+<li><code>PRIVATE</code> ：把<code>item</code> 只添加到<code>target</code>的<code>INCLUDE_DIRECTORIES</code></li>
+<li><code>PUBLIC</code>：把<code>item</code> 添加到<code>target</code>的<code>INCLUDE_DIRECTORIES</code> 和 <code>INTERFACE_INCLUDE_DIRECTORIES</code> </li>
+<li><code>INTERFACE</code>：把<code>item</code> 只添加到<code>target</code>的<code>INTERFACE_INCLUDE_DIRECTORIES</code> </li>
+</ul>
+<h3 id="2-target-link-libraries"><a href="#2-target-link-libraries" class="headerlink" title="2. target_link_libraries()"></a>2. target_link_libraries()</h3><p><code>target_link_libraries()</code>是同样的道理，<code>target</code> 同样有两个列表，一个是<code>LIBRARIES</code> ，另一个是<code>INTERFACE_LIBRARIES</code> 。</p>
+<p> <code>LIBRARIES</code> 是编译<code>target</code>时，要链接的库。而当<code>future target</code> 链接 <code>target</code>时，CMake会自动的把 <code>INTERFACE_LIBRARIES</code>添加到<code>future target</code> 的<code>LIBRARIES</code> 中。</p>
+<p>当我们使用<code>target_link_libraries()</code> 时，根据参数<code>&lt;PRIVATE|PUBLIC|INTERFACE&gt;</code>的不同，可以分别为这两个列表添加路径。</p>
+<p>如：<code>target_link_libraries(&lt;target&gt; &lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt;)</code></p>
+<ul>
+<li><code>PRIVATE</code> ：把<code>item</code> 只添加到<code>target</code>的<code>LIBRARIES</code> </li>
+<li><code>PUBLIC</code>：把<code>item</code> 添加到<code>target</code>的<code>LIBRARIES</code> 和 <code>INTERFACE_LIBRARIES</code> </li>
+<li><code>INTERFACE</code>：把<code>item</code> 只添加到<code>target</code>的<code>INTERFACE_LIBRARIES</code> </li>
+</ul>
+<h3 id="3-例子"><a href="#3-例子" class="headerlink" title="3. 例子"></a>3. 例子</h3><p><strong>例子1</strong></p>
+<p><code>fruit</code>库的 <code>INCLUDE_DIRECTORIES</code> 有 <code>fruit_h</code>, <code>tree_h</code>, <code>INTERFACE_INCLUDE_DIRECTORIES</code> 有<code>fruit_h</code>。如果有一个新的库<code>apple</code> 链接到<code>fruit</code> 库, 这时会将<code>fruit</code> 的<code>INTERFACE_INCLUDE_DIRECTORIES</code> 添加到 <code>apple</code> 库的<code>INCLUDE_DIRECTORIES</code>。 所以此时 <code>apple</code> 库的<code>INCLUDE_DIRECTORIES</code> 有<code>fruit_h</code> 。</p>
+<p><strong>例子2</strong></p>
+<p><code>fruit</code> 库有一些函数，例如<code>size</code> 和 <code>color</code> ，然后<code>apple</code> 库有一个函数<code>apple_size</code> ，这个函数调用了<code>size</code> ，并以<code>PRIVATE</code> 的方式链接到了<code>fruit</code> 上。现在创建了一个可执行文件<code>eat_apple</code> 调用了<code>apple_size</code> ，这时便可以通过<code>PRIVATE</code>或<code>PUBLIC</code>的方式链接到<code>apple</code>库。</p>
+<p>但是如果<code>eat_apple</code> 想要调用<code>size</code>和<code>color</code> 函数，此时编译会报错。应该在<code>apple</code>库链接<code>fruit</code>库的时候选择<code>PUBLIC</code>模式来代替<code>PRIVATE</code>。</p>
+<h2 id="II-CMake-Inheritance"><a href="#II-CMake-Inheritance" class="headerlink" title="II. CMake Inheritance"></a>II. CMake Inheritance</h2><p>CMake uses somewhat similar inheritance concepts to C++, especially for the C++ <code>public</code> and <code>private</code> access specifiers and inheritance types. The CMake keywords <code>PUBLIC</code>, <code>PRIVATE</code>, and <code>INTERFACE</code> used in <code>target_include_directories()</code> and <code>target_link_libraries()</code>, in my opinion, are mixtures of access specifier and inheritance type from C++.</p>
+<h3 id="1-Include-Inheritance"><a href="#1-Include-Inheritance" class="headerlink" title="1. Include Inheritance"></a>1. Include Inheritance</h3><p>In CMake, for any <code>target</code>, in the preprocessing stage, it comes with a <code>INCLUDE_DIRECTORIES</code> and a <code>INTERFACE_INCLUDE_DIRECTORIES</code> for searching the header files building. <code>target_include_directories</code> will populate all the directories to <code>INCLUDE_DIRECTORIES</code> and/or <code>INTERFACE_INCLUDE_DIRECTORIES</code> depending on the keyword <code>&lt;PRIVATE|PUBLIC|INTERFACE&gt;</code> we specified. The <code>INCLUDE_DIRECTORIES</code> will be used for the current <code>target</code> only and the <code>INTERFACE_INCLUDE_DIRECTORIES</code> will be appended to the <code>INCLUDE_DIRECTORIES</code> of any other <code>target</code> which has dependencies on the current <code>target</code>. With such settings, the configurations of <code>INCLUDE_DIRECTORIES</code> and <code>INTERFACE_INCLUDE_DIRECTORIES</code> for all building targets are easy to compute and scale up even for multiple hierarchical layers of building dependencies and many building targets.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Include Inheritance</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PUBLIC</code></td>
+<td>All the directories following <code>PUBLIC</code> will be used for the current target and the other targets that have dependencies on the current target, i.e., appending the directories to <code>INCLUDE_DIRECTORIES</code> and <code>INTERFACE_INCLUDE_DIRECTORIES</code>.</td>
+</tr>
+<tr>
+<td><code>PRIVATE</code></td>
+<td>All the include directories following <code>PRIVATE</code> will be used for the current target only, i.e., appending the directories to <code>INCLUDE_DIRECTORIES</code>.</td>
+</tr>
+<tr>
+<td><code>INTERFACE</code></td>
+<td>All the include directories following <code>INTERFACE</code> will NOT be used for the current target but will be accessible for the other targets that have dependencies on the current target, i.e., appending the directories to <code>INTERFACE_INCLUDE_DIRECTORIES</code>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note that when we do <code>target_link_libraries(&lt;target&gt; &lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt;)</code>, the dependent <code>&lt;item&gt;</code>, if built in the same CMake project, would append the <code>INTERFACE_INCLUDE_DIRECTORIES</code> of <code>&lt;item&gt;</code> to the <code>INCLUDE_DIRECTORIES</code> of <code>&lt;target&gt;</code>. By controlling the <code>INTERFACE_INCLUDE_DIRECTORIES</code>, we could eliminate some unwanted or conflicting declarations from <code>&lt;item&gt;</code> to the <code>&lt;target&gt;</code>.</p>
+<p>For example, the <code>fruit</code> library has <code>INCLUDE_DIRECTORIES</code> of <code>fruit_h</code>, <code>tree_h</code>, and <code>INTERFACE_INCLUDE_DIRECTORIES</code> of <code>fruit_h</code>. If there is a <code>apple</code> library that is linked with the <code>fruit</code> library, the <code>apple</code> library would also have the <code>fruit_h</code> in its <code>INCLUDE_DIRECTORIES</code> as well. We could equivalently say, the <code>apple</code> library’s include directory inherited the <code>fruit_h</code> of the <code>fruit</code> library.</p>
+<h3 id="2-Link-Inheritance"><a href="#2-Link-Inheritance" class="headerlink" title="2. Link Inheritance"></a>2. Link Inheritance</h3><p>Similarly, for any <code>target</code>, in the linking stage, we would need to decide, given the <code>item</code> to be linked, whether we have to put the <code>item</code> in the link dependencies, or the link interface, or both, in the compiled <code>target</code>. Here the link dependencies means the <code>item</code> has some implementations that the <code>target</code> would use, and it is linked to the <code>item</code>, so that whenever we call the functions or methods corresponding to those implementations it will always be mapped correctly to the implementations in <code>item</code> via the link, whereas the link interface means the <code>target</code> becomes an interface for linking the <code>item</code> for other targets which have dependencies on the <code>target</code>, and the <code>target</code> does not have to use <code>item</code> at all.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Link Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PUBLIC</code></td>
+<td>All the objects following <code>PUBLIC</code> will be used for linking to the current target and providing the interface to the other targets that have dependencies on the current target.</td>
+</tr>
+<tr>
+<td><code>PRIVATE</code></td>
+<td>All the objects following <code>PRIVATE</code> will only be used for linking to the current target.</td>
+</tr>
+<tr>
+<td><code>INTERFACE</code></td>
+<td>All the objects following <code>INTERFACE</code> will only be used for providing the interface to the other targets that have dependencies on the current target.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For example, if the <code>fruit</code> library has the implementation of functions, such as <code>size</code> and <code>color</code>, and the <code>apple</code> library has a function <code>apple_size</code> which called the <code>size</code> from the <code>fruit</code> library and was <code>PRIVATE</code> linked with the <code>fruit</code> library. We could create an executable <code>eat_apple</code> that calls <code>apple_size</code> by <code>PUBLIC</code> or <code>PRIVATE</code> linking with the <code>apple</code> library. However, if we want to create an executable <code>eat_apple</code> that calls the <code>size</code> and <code>color</code> from the <code>fruit</code> library, only linking with the <code>apple</code> library will cause building error, since the <code>fruit</code> library was not part of the interface in the <code>apple</code> library, and is thus inaccessible to <code>eat_apple</code>. To make the <code>apple</code> library to inherit the <code>size</code> and <code>color</code> from the <code>fruit</code> library, we have to make the linking of the <code>apple</code> library to the the <code>fruit</code> library <code>PUBLIC</code> instead of <code>PRIVATE</code>.</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+  </entry>
 </search>
