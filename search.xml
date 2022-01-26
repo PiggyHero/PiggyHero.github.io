@@ -5847,6 +5847,12 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 <p>同理我们也可以为我们的target链接库，这里就不区分静态库还是分享库了：</p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(<span class="keyword">target</span> PUBLIC hello::library)</span><br></pre></td></tr></table></figure>
 <p>这里链接的库名，其实也就是这个库的路径，我们这里没有说明，但实际中我们得先用<code>find_package()</code>来搜索库。</p>
+<p>使用该命令查找到库后，会自动定义一些变量：</p>
+<ul>
+<li><code>xxx_FOUND</code>：判断找没找到这个库</li>
+<li><code>xxx_INCLUDE_DIRS</code>：库的头文件路径</li>
+<li><code>xxx_LIBRARY</code>：库的路径</li>
+</ul>
 ]]></content>
       <categories>
         <category>工程原理和实践</category>
