@@ -6081,4 +6081,93 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
         <tag>linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【linux问题解决】Ubuntu安装Flash插件</title>
+    <url>/2022/02/04/%E3%80%90linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Ubuntu%E5%AE%89%E8%A3%85Flash%E6%8F%92%E4%BB%B6/</url>
+    <content><![CDATA[<p>Ubuntu安装Adobe Flash Player插件</p>
+<span id="more"></span>
+<ol>
+<li><p>添加有Flash Player的软件库：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb http://archive.canonical.com/ $(lsb_release -sc) partner&quot;</span><br><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装Flash Player</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install adobe-flashplugin</span><br><span class="line">sudo apt install browser-plugin-freshplayer-pepperflash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后重启浏览器</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux问题解决】Ubuntu安装无线网卡</title>
+    <url>/2022/02/04/%E3%80%90linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Ubuntu%E5%AE%89%E8%A3%85%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1/</url>
+    <content><![CDATA[<p><a href="https://blog.csdn.net/chengxuyuan99/article/details/117226445?spm=1001.2014.3001.5506">原文参考连接</a></p>
+<span id="more"></span>
+<ol>
+<li><p>首先使用<code>lsusb</code>查看网卡设备</p>
+<p><img src="https://piggyhero.gitee.io/pic/img/20220204063853.png" alt="image-20220203191327479"></p>
+<p>看到设备号显示<code>0bda:b711</code> ，对应的芯片为<code>RTL8188GU</code>。如果不是该设备号自行上网查找对应芯片。</p>
+</li>
+<li><p>然后根据对应芯片下载驱动</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/McMCCRU/rtl8188gu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载后进行安装(需要提前安装好编译工具<code>make</code>,<code>gcc</code>,<code>linux-header</code>,<code>bc</code>)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd rtl8188gu</span><br><span class="line">sudo make</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe 8188gu</span><br><span class="line">sudo usb_modeswitch -KW -v 0bda -p b711</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux问题解决】Ubuntu安装蓝牙驱动</title>
+    <url>/2022/02/04/%E3%80%90linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Ubuntu%E5%AE%89%E8%A3%85%E8%93%9D%E7%89%99%E9%A9%B1%E5%8A%A8/</url>
+    <content><![CDATA[<p><a href="https://blog.csdn.net/shqpzyd/article/details/113682513">参考点这里</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/415475035">还有这里</a></p>
+<span id="more"></span>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux问题解决】Ubuntu更换软件源</title>
+    <url>/2022/02/04/%E3%80%90linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Ubuntu%E6%9B%B4%E6%8D%A2%E8%BD%AF%E4%BB%B6%E6%BA%90/</url>
+    <content><![CDATA[<p>国内软件源：<strong><a href="http://wiki.ubuntu.org.cn/模板:18.04source">点我查看</a></strong></p>
+<span id="more"></span>
+<ol>
+<li><p>首先备份一下软件源列表</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bcakup</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后更改软件源</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo gedit /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>sources.list</code>文件中，粘贴软件源地址(Ubuntu18.04为例)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 阿里云源</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">##測試版源</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"># 源碼</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">##測試版源</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 清华大学源</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">##測試版源</span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"># 源碼</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">##測試版源</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新源</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>问题解决</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
 </search>
