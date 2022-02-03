@@ -1642,6 +1642,9 @@
       <categories>
         <category>工程原理和实践</category>
       </categories>
+      <tags>
+        <tag>cmake</tag>
+      </tags>
   </entry>
   <entry>
     <title>【git】git最基本的用法</title>
@@ -6051,6 +6054,28 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 ]]></content>
       <categories>
         <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux问题解决】双系统grub界面循环无法启动windows</title>
+    <url>/2022/02/03/%E3%80%90linux%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91%E5%8F%8C%E7%B3%BB%E7%BB%9Fgrub%E7%95%8C%E9%9D%A2%E5%BE%AA%E7%8E%AF%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8windows/</url>
+    <content><![CDATA[<p><strong>问题描述：</strong></p>
+<p>安装双系统，当启动进入grub时，正常显示windows10的选项，但是选择后直接黑屏，然后又返回到grub的界面，如此循环无法进入windows10。<span id="more"></span>此时选择ubuntu选项任然可以进入，进入后直接update-grub还是不起作用。</p>
+<p><strong>解决方式：</strong></p>
+<p>进入ubuntu后编辑</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gedit /boot/grub/grub.cfg</span></span><br></pre></td></tr></table></figure>
+<p>找到windows10的启动项（看看有没有这个启动项）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menuentry &#x27;Windows 10 (loader) (on /dev/sdXX)&#x27;</span><br></pre></td></tr></table></figure>
+<p>然后找到<code>chainloader +1</code>语句，在其后面加上</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ntldr /bootmgr</span><br></pre></td></tr></table></figure>
+<p>保存，然后重启计算机，就可以正常进入windows10了。</p>
+<p><a href="http://www.4k8k.xyz/article/Joyeishappy/81283135">参考原文链接点这里</a></p>
+]]></content>
+      <categories>
+        <category>问题解决</category>
       </categories>
       <tags>
         <tag>linux</tag>
