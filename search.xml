@@ -2523,6 +2523,57 @@
   <entry>
     <title>【linux学习8】管理进程</title>
     <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A08%E3%80%91%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/</url>
+    <content><![CDATA[<p>进程就是运行着的程序，我们可以管理运行着的程序，让它们终止、挂起等，这就是管理进程。</p>
+<p>在知道咋管理之前，得先知道怎么查看进程。</p>
+<span id="more"></span>
+<h2 id="I-查看进程"><a href="#I-查看进程" class="headerlink" title="I. 查看进程"></a>I. 查看进程</h2><h3 id="1-ps"><a href="#1-ps" class="headerlink" title="1. ps"></a>1. ps</h3><p>使用<code>ps</code> 命令可以查看进程。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps <span class="comment">#显示和当前终端会话相关的进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps x <span class="comment">#显示所有进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps aux <span class="comment">#显示进程更多的信息 即BSD模式显示</span></span></span><br></pre></td></tr></table></figure>
+<p>下面介绍输出的信息有啥：</p>
+<ul>
+<li>PID（process ID）：进程的身份证号</li>
+<li>TTY（teletype）：表示进程的控制终端</li>
+<li>TIME：表示进程消耗CPU时间总和</li>
+<li>STAT（state）：表示进程的状态（状态参数的意思见表一）</li>
+</ul>
+<p>表一</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223428006.png" alt="image-20220121223428006"></p>
+<p>BSD模式下ps命令输出的列标题</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223513393.png" alt="image-20220121223513393"></p>
+<h3 id="2-top"><a href="#2-top" class="headerlink" title="2. top"></a>2. top</h3><p>前面的<code>ps</code> 仅能静态的显示进程，可是程序run的时候是一个动态的过程，这时可以用 <code>top</code> 来动态显示进程信息，默认状态下3秒更新一次。在动态信息显示的过程中，按 <code>h</code> 显示帮助菜单，<code>q</code> 退出top。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223838666.png" alt="image-20220121223838666"></p>
+<p>上面显示的信息说明：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223857601.png" alt="image-20220121223857601"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223910602.png" alt="image-20220121223910602"></p>
+<h2 id="II-控制进程"><a href="#II-控制进程" class="headerlink" title="II. 控制进程"></a>II. 控制进程</h2><p>现在我们以一个小程序<code>xlogo</code>为例说明。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> xlogo</span></span><br><span class="line"><span class="meta">#</span><span class="bash">此时终端正在执行xlogo，可以按Ctrl+C来终止</span></span><br><span class="line"><span class="meta">#</span><span class="bash">如果想要到后台执行</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> xlogo &amp;</span></span><br><span class="line">[1] 18785</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
+<p>从上面的例子可以看到，想要<strong>后台</strong>执行，需要在命令后面添加 <code>&amp;</code> 。这时终端返回一个信息 <code>[1]18785</code> ，者是该进程的PID编号，前面的<code>[1]</code> 称为作业控制(job control)，可以理解为shell程序在做作业，正在后台运行。可以通过<code>jobs</code> 来查看当前shell程序的作业情况。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">jobs</span></span></span><br><span class="line">[1]+ Running 					xlogo $</span><br></pre></td></tr></table></figure>
+<p>前面表示作业编号和状态，后面是当时的命令。如果想要将该作业重新放到<strong>前台</strong>。可以用<code>fg</code> 命令，如果仅有一个作业，后面不用加参数，如果有多个作业，要用<code>fg %job_ID</code> 来选择要到前台的作业。如果该作业挂起状态，想在后台运行，就用<code>bg</code> 命令，用法和<code>fg</code> 相同。</p>
+<p>如果想要暂停一个进程，可以把它先弄到前台来，然后按<code>Ctrl+Z</code> 暂停。当然还有其他的方式来弄，后面说。</p>
+<h2 id="III-杀手非杀手"><a href="#III-杀手非杀手" class="headerlink" title="III. 杀手非杀手"></a>III. 杀手非杀手</h2><p><code>kill</code> 这个命令大家会以为是杀死进程，但是它的作用是发送信号，只不过默认状态下发送的是<code>TERM</code>信号表示终止。进程和操作系统之间是通过信号来通信的。<code>kill</code> 的用法是：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> [-signal] PID</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -HUP 18785</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -1 18785</span></span><br></pre></td></tr></table></figure>
+<p>可以指定信号的<strong>编号或信号名</strong>来完成发送，后面的<strong>PID编号</strong>也可以是<strong>作业编号</strong>。常用的发送信号如下表所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225223717.png" alt="image-20220121225223717"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225446730.png" alt="image-20220121225446730"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225458299.png" alt="image-20220121225458299"></p>
+<p>想要查看更多的信号，可以使用 <code>kill -l</code> 来查看。</p>
+<blockquote>
+<p>和文件管理一样，进程也是有所有者的，只有进程的所有者才能给它们的进程使用kill发送信号。</p>
+</blockquote>
+<p>如果想要一下子给许多的进程发送信号，还可以使用<code>killall</code> 命令，用法为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> killall [-u user] [-signal] name...</span></span><br></pre></td></tr></table></figure>
+<p>同理，<code>killall</code> 和 <code>kill</code> 一样需要注意用户权限。</p>
+]]></content>
+      <categories>
+        <category>工程原理和实践</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【linux学习9】权限</title>
+    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A09%E3%80%91%E6%9D%83%E9%99%90/</url>
     <content><![CDATA[<p>和UNIX一样，linux是多任务和多用户系统。多用户意味着在同一时间可以有多个用户使用同一台计算机。为了保护多用户功能实际可用，系统特别设计了一种方案来保护当前用户不受其他用户操作的影响。</p>
 <span id="more"></span>
 <h2 id="I-所有者、组成员和其他用户"><a href="#I-所有者、组成员和其他用户" class="headerlink" title="I. 所有者、组成员和其他用户"></a>I. 所有者、组成员和其他用户</h2><p>一个文件能被三种人操作（读，写，执行），这三种人为：</p>
@@ -2583,57 +2634,6 @@
 <p>两种方式的差异也显而易见：如果我们的 Linux 系统有很多用户需要使用的话，前者要求所有用户都知道 root 用户的密码，这显然是非常危险的；后者是不需要暴露 root 账户密码的，用户只需要输入自己的账户密码就可以，而且哪些用户可以切换到 root，这完全是受 root 控制的（root 通过设置 <code>/etc/sudoers</code> 实现的），这样系统就安全很多了。</p>
 <h3 id="2-更改文件所有者"><a href="#2-更改文件所有者" class="headerlink" title="2. 更改文件所有者"></a>2. 更改文件所有者</h3><p>当我要拿一个东西的时候人家不让，我让我变成皇帝或者假装是转述皇帝的话。现在从另一个角度来看，人家不让是因为东西是人家的，那么我把它变成我自己的不就完了么。所以我们可以用<code>chown</code> 来更改文件的所有者和所属群组。但是话说回来，既然你拿都不让，怎么还能归你呢。这时还是假传皇帝的圣旨，提升自己说话的分量，也就是在命令前加上 <code>sudo</code> 。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chown [ower][:[group]] file</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor:China file  <span class="comment">#将file的所有者改为emperor，所属组改为China</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor: file  <span class="comment">#将file的所有者改为emperor，所属组改为emperor的所在组</span></span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>工程原理和实践</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【linux学习9】权限</title>
-    <url>/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A09%E3%80%91%E6%9D%83%E9%99%90/</url>
-    <content><![CDATA[<p>进程就是运行着的程序，我们可以管理运行着的程序，让它们终止、挂起等，这就是管理进程。</p>
-<p>在知道咋管理之前，得先知道怎么查看进程。</p>
-<span id="more"></span>
-<h2 id="I-查看进程"><a href="#I-查看进程" class="headerlink" title="I. 查看进程"></a>I. 查看进程</h2><h3 id="1-ps"><a href="#1-ps" class="headerlink" title="1. ps"></a>1. ps</h3><p>使用<code>ps</code> 命令可以查看进程。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps <span class="comment">#显示和当前终端会话相关的进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps x <span class="comment">#显示所有进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps aux <span class="comment">#显示进程更多的信息 即BSD模式显示</span></span></span><br></pre></td></tr></table></figure>
-<p>下面介绍输出的信息有啥：</p>
-<ul>
-<li>PID（process ID）：进程的身份证号</li>
-<li>TTY（teletype）：表示进程的控制终端</li>
-<li>TIME：表示进程消耗CPU时间总和</li>
-<li>STAT（state）：表示进程的状态（状态参数的意思见表一）</li>
-</ul>
-<p>表一</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223428006.png" alt="image-20220121223428006"></p>
-<p>BSD模式下ps命令输出的列标题</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223513393.png" alt="image-20220121223513393"></p>
-<h3 id="2-top"><a href="#2-top" class="headerlink" title="2. top"></a>2. top</h3><p>前面的<code>ps</code> 仅能静态的显示进程，可是程序run的时候是一个动态的过程，这时可以用 <code>top</code> 来动态显示进程信息，默认状态下3秒更新一次。在动态信息显示的过程中，按 <code>h</code> 显示帮助菜单，<code>q</code> 退出top。</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223838666.png" alt="image-20220121223838666"></p>
-<p>上面显示的信息说明：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223857601.png" alt="image-20220121223857601"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223910602.png" alt="image-20220121223910602"></p>
-<h2 id="II-控制进程"><a href="#II-控制进程" class="headerlink" title="II. 控制进程"></a>II. 控制进程</h2><p>现在我们以一个小程序<code>xlogo</code>为例说明。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> xlogo</span></span><br><span class="line"><span class="meta">#</span><span class="bash">此时终端正在执行xlogo，可以按Ctrl+C来终止</span></span><br><span class="line"><span class="meta">#</span><span class="bash">如果想要到后台执行</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> xlogo &amp;</span></span><br><span class="line">[1] 18785</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
-<p>从上面的例子可以看到，想要<strong>后台</strong>执行，需要在命令后面添加 <code>&amp;</code> 。这时终端返回一个信息 <code>[1]18785</code> ，者是该进程的PID编号，前面的<code>[1]</code> 称为作业控制(job control)，可以理解为shell程序在做作业，正在后台运行。可以通过<code>jobs</code> 来查看当前shell程序的作业情况。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">jobs</span></span></span><br><span class="line">[1]+ Running 					xlogo $</span><br></pre></td></tr></table></figure>
-<p>前面表示作业编号和状态，后面是当时的命令。如果想要将该作业重新放到<strong>前台</strong>。可以用<code>fg</code> 命令，如果仅有一个作业，后面不用加参数，如果有多个作业，要用<code>fg %job_ID</code> 来选择要到前台的作业。如果该作业挂起状态，想在后台运行，就用<code>bg</code> 命令，用法和<code>fg</code> 相同。</p>
-<p>如果想要暂停一个进程，可以把它先弄到前台来，然后按<code>Ctrl+Z</code> 暂停。当然还有其他的方式来弄，后面说。</p>
-<h2 id="III-杀手非杀手"><a href="#III-杀手非杀手" class="headerlink" title="III. 杀手非杀手"></a>III. 杀手非杀手</h2><p><code>kill</code> 这个命令大家会以为是杀死进程，但是它的作用是发送信号，只不过默认状态下发送的是<code>TERM</code>信号表示终止。进程和操作系统之间是通过信号来通信的。<code>kill</code> 的用法是：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> [-signal] PID</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -HUP 18785</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -1 18785</span></span><br></pre></td></tr></table></figure>
-<p>可以指定信号的<strong>编号或信号名</strong>来完成发送，后面的<strong>PID编号</strong>也可以是<strong>作业编号</strong>。常用的发送信号如下表所示：</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225223717.png" alt="image-20220121225223717"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225446730.png" alt="image-20220121225446730"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225458299.png" alt="image-20220121225458299"></p>
-<p>想要查看更多的信号，可以使用 <code>kill -l</code> 来查看。</p>
-<blockquote>
-<p>和文件管理一样，进程也是有所有者的，只有进程的所有者才能给它们的进程使用kill发送信号。</p>
-</blockquote>
-<p>如果想要一下子给许多的进程发送信号，还可以使用<code>killall</code> 命令，用法为：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> killall [-u user] [-signal] name...</span></span><br></pre></td></tr></table></figure>
-<p>同理，<code>killall</code> 和 <code>kill</code> 一样需要注意用户权限。</p>
 ]]></content>
       <categories>
         <category>工程原理和实践</category>

@@ -20,22 +20,27 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="和UNIX一样，linux是多任务和多用户系统。多用户意味着在同一时间可以有多个用户使用同一台计算机。为了保护多用户功能实际可用，系统特别设计了一种方案来保护当前用户不受其他用户操作的影响。">
+  <meta name="description" content="进程就是运行着的程序，我们可以管理运行着的程序，让它们终止、挂起等，这就是管理进程。 在知道咋管理之前，得先知道怎么查看进程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【linux学习8】管理进程">
 <meta property="og:url" content="http://example.com/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A08%E3%80%91%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="和UNIX一样，linux是多任务和多用户系统。多用户意味着在同一时间可以有多个用户使用同一台计算机。为了保护多用户功能实际可用，系统特别设计了一种方案来保护当前用户不受其他用户操作的影响。">
+<meta property="og:description" content="进程就是运行着的程序，我们可以管理运行着的程序，让它们终止、挂起等，这就是管理进程。 在知道咋管理之前，得先知道怎么查看进程。">
 <meta property="og:locale">
-<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121170805946.png">
-<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121170818935.png">
-<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121170830896.png">
-<meta property="article:published_time" content="2022-01-21T15:17:58.000Z">
-<meta property="article:modified_time" content="2022-01-21T15:19:51.164Z">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121223428006.png">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121223513393.png">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121223838666.png">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121223857601.png">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121223910602.png">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121225223717.png">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121225446730.png">
+<meta property="og:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121225458299.png">
+<meta property="article:published_time" content="2022-01-21T15:18:16.000Z">
+<meta property="article:modified_time" content="2022-02-03T13:17:00.445Z">
 <meta property="article:author" content="PiggyHero">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121170805946.png">
+<meta name="twitter:image" content="https://piggyhero.gitee.io/pic/windows_img/image-20220121223428006.png">
 
 <link rel="canonical" href="http://example.com/2022/01/21/%E3%80%90linux%E5%AD%A6%E4%B9%A08%E3%80%91%E7%AE%A1%E7%90%86%E8%BF%9B%E7%A8%8B/">
 
@@ -221,10 +226,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-21 23:17:58 / 修改时间：23:19:51" itemprop="dateCreated datePublished" datetime="2022-01-21T23:17:58+08:00">2022-01-21</time>
+              <time title="创建时间：2022-01-21 23:18:16" itemprop="dateCreated datePublished" datetime="2022-01-21T23:18:16+08:00">2022-01-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-03 21:17:00" itemprop="dateModified" datetime="2022-02-03T21:17:00+08:00">2022-02-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -253,66 +264,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>和UNIX一样，linux是多任务和多用户系统。多用户意味着在同一时间可以有多个用户使用同一台计算机。为了保护多用户功能实际可用，系统特别设计了一种方案来保护当前用户不受其他用户操作的影响。</p>
+        <p>进程就是运行着的程序，我们可以管理运行着的程序，让它们终止、挂起等，这就是管理进程。</p>
+<p>在知道咋管理之前，得先知道怎么查看进程。</p>
 <span id="more"></span>
-<h2 id="I-所有者、组成员和其他用户"><a href="#I-所有者、组成员和其他用户" class="headerlink" title="I. 所有者、组成员和其他用户"></a>I. 所有者、组成员和其他用户</h2><p>一个文件能被三种人操作（读，写，执行），这三种人为：</p>
+<h2 id="I-查看进程"><a href="#I-查看进程" class="headerlink" title="I. 查看进程"></a>I. 查看进程</h2><h3 id="1-ps"><a href="#1-ps" class="headerlink" title="1. ps"></a>1. ps</h3><p>使用<code>ps</code> 命令可以查看进程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps <span class="comment">#显示和当前终端会话相关的进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps x <span class="comment">#显示所有进程</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps aux <span class="comment">#显示进程更多的信息 即BSD模式显示</span></span></span><br></pre></td></tr></table></figure>
+<p>下面介绍输出的信息有啥：</p>
 <ul>
-<li>该文件的所有者</li>
-<li>该文件所有者的同组组员</li>
-<li>其他人</li>
+<li>PID（process ID）：进程的身份证号</li>
+<li>TTY（teletype）：表示进程的控制终端</li>
+<li>TIME：表示进程消耗CPU时间总和</li>
+<li>STAT（state）：表示进程的状态（状态参数的意思见表一）</li>
 </ul>
-<p>我们可以使用 <code>id</code> 命令来查看此时的用户信息。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> id</span></span><br><span class="line">uid=1000(piggy) gid=1000(piggy) groups=1000(piggy),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),116(lpadmin),126(sambashare)</span><br></pre></td></tr></table></figure>
-<p>显示的结果：</p>
-<ul>
-<li>uid(user ID)：当前用户的ID，在创建账户时就已被分配，为了方便ID和用户名一一对应。</li>
-<li>gid(group ID)：当前用户所属组的ID，用户可以归属于多个组。</li>
-</ul>
-<p>这些信息从何而来呢？</p>
-<p>这些信息来源于一系列的文本文件，用户账户定义在文件 <code>/etc/passwd</code> 中，用户组定义在文件 <code>/etc/group</code> 文件中。在文件/etc/passwd中定义了对应用户的用户登录名、uid、gid、账户真实姓名、主目录、以及登录的shell信息。</p>
-<p>许多类UNIX系统会把普通用户分配到一个公共的群组中，然而在linux中则会创建一个独一无二的，只有一个用户的群组，组名和用户名相同。</p>
-<h2 id="II-读取、写入和执行"><a href="#II-读取、写入和执行" class="headerlink" title="II. 读取、写入和执行"></a>II. 读取、写入和执行</h2><p>使用<code>ls</code> 命令可以查看文件或目录的属性信息。在文件属性信息中，234对应的9个字符称为 <strong>文件模式</strong> ，表示文件所有者，同组其他用户和其他所有人对该文件的读、写、执行权限。</p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170805946.png" alt="image-20220121170805946"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170818935.png" alt="image-20220121170818935"></p>
-<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121170830896.png" alt="image-20220121170830896"></p>
-<h3 id="1-更改文件模式"><a href="#1-更改文件模式" class="headerlink" title="1. 更改文件模式"></a>1. 更改文件模式</h3><p>使用 <code>chmod</code> 命令可以更改文件的模式。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod 600 filename</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod u+x filename</span></span><br></pre></td></tr></table></figure>
-<p>在该命令的第二项表示更改对哪类人的权限。可以根据八进制的规则更改，也可以用符号来表示。</p>
-<h4 id="1-八进制规则"><a href="#1-八进制规则" class="headerlink" title="(1)八进制规则"></a>(1)八进制规则</h4><p>八进制规则就是 <code>rwx</code> 对应三位，写1则为激活，0为取消。八进制就可以用一个数来表示一类人的文件模式，那么三个数就可以表示三类人。</p>
-<p>例如：</p>
-<p><code>723</code> 表示 <code>111010011</code> ，进而表示的是 <code>rwx-w--wx</code> 。</p>
-<h4 id="2-符号表示"><a href="#2-符号表示" class="headerlink" title="(2)符号表示"></a>(2)符号表示</h4><p>符号表示就是第二个参数换为字符。用 <code>u</code> 、<code>g</code> 、<code>o</code> 、<code>a</code> 分别表示所有者，同组人，其他人，三类人。然后通过 <code>+-=</code> 来设置文件模式。</p>
-<p>例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod u+w filename <span class="comment">#给文件的所有者添加可写模式。</span></span></span><br></pre></td></tr></table></figure>
-<h3 id="2-在图形化窗口更改文件模式"><a href="#2-在图形化窗口更改文件模式" class="headerlink" title="2. 在图形化窗口更改文件模式"></a>2. 在图形化窗口更改文件模式</h3><p>另外还可以在图形化界面上更改文件模式。</p>
-<h3 id="3-设置默认权限"><a href="#3-设置默认权限" class="headerlink" title="3. 设置默认权限"></a>3. 设置默认权限</h3><p>还有一个很好玩的命令，就是<code>umask</code> ，它的作用是设置掩码，来更改默认生成文件的文件模式。当umask的值为<code>0000</code> 时，生成的文件的文件模式是 <code>rw-rw-rw-</code> ，当umask设置为 <code>0022</code> 时，转成二进制数为 <code>000010010</code> ，这时默认生成的文件模式是<code>rw-r--r--</code> 。更改umask的命令为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">umask</span> <span class="comment">#查看当前umask的值</span></span></span><br><span class="line">0002</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">umask</span> 0022</span></span><br></pre></td></tr></table></figure>
-<h2 id="III-让不允许变为允许"><a href="#III-让不允许变为允许" class="headerlink" title="III. 让不允许变为允许"></a>III. 让不允许变为允许</h2><h3 id="1-更改使用人的身份"><a href="#1-更改使用人的身份" class="headerlink" title="1. 更改使用人的身份"></a>1. 更改使用人的身份</h3><p>如果我们的身份不符合系统的要求，怎么才可以做想做的事情呢？首先想到的是让自己符合呀，那就要改变自己的身份了。如果我们想更改我们所登录的身份该如何做呢？这个身份大致分为两个等级，一种是平民身份(user)，一种是皇帝身份(root)。平民身份就是可以做一部分的事情，但是得由皇帝允许。而皇帝就是什么都可以做。皇帝只能有一个，平民可以有许多。</p>
-<ul>
-<li>su：换身份，让自己当皇帝。</li>
-<li>sudo：换说的话，告诉他们我是转告皇帝说的话。</li>
-</ul>
-<p>当我们做一些操作时，系统要求只可以root用户来做，所以需要改变我们的身份。可以使用 <code>su</code> 命令。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> su - <span class="comment"># &quot;-&quot;表示加载变更用户的环境变量</span></span></span><br><span class="line">Password:	#输入root密码</span><br><span class="line"><span class="meta">[root@computer]#</span><span class="bash"> <span class="built_in">exit</span>  <span class="comment">#可以退出该账户</span></span></span><br><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> su - test_user <span class="comment">#登录test_user账户</span></span></span><br><span class="line">Password:	#输入test_user的密码</span><br><span class="line"><span class="meta">[test_user@computer]$</span><span class="bash"> <span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
-<p>在上面的示例中，<code>su -</code> 命令中的 <code>-</code> 表示要加载目标用户的环境变量。后面的参数中如果没有指定用户名，则表示要登陆超级用户root。</p>
+<p>表一</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223428006.png" alt="image-20220121223428006"></p>
+<p>BSD模式下ps命令输出的列标题</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223513393.png" alt="image-20220121223513393"></p>
+<h3 id="2-top"><a href="#2-top" class="headerlink" title="2. top"></a>2. top</h3><p>前面的<code>ps</code> 仅能静态的显示进程，可是程序run的时候是一个动态的过程，这时可以用 <code>top</code> 来动态显示进程信息，默认状态下3秒更新一次。在动态信息显示的过程中，按 <code>h</code> 显示帮助菜单，<code>q</code> 退出top。</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223838666.png" alt="image-20220121223838666"></p>
+<p>上面显示的信息说明：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223857601.png" alt="image-20220121223857601"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121223910602.png" alt="image-20220121223910602"></p>
+<h2 id="II-控制进程"><a href="#II-控制进程" class="headerlink" title="II. 控制进程"></a>II. 控制进程</h2><p>现在我们以一个小程序<code>xlogo</code>为例说明。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> xlogo</span></span><br><span class="line"><span class="meta">#</span><span class="bash">此时终端正在执行xlogo，可以按Ctrl+C来终止</span></span><br><span class="line"><span class="meta">#</span><span class="bash">如果想要到后台执行</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> xlogo &amp;</span></span><br><span class="line">[1] 18785</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
+<p>从上面的例子可以看到，想要<strong>后台</strong>执行，需要在命令后面添加 <code>&amp;</code> 。这时终端返回一个信息 <code>[1]18785</code> ，者是该进程的PID编号，前面的<code>[1]</code> 称为作业控制(job control)，可以理解为shell程序在做作业，正在后台运行。可以通过<code>jobs</code> 来查看当前shell程序的作业情况。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">jobs</span></span></span><br><span class="line">[1]+ Running 					xlogo $</span><br></pre></td></tr></table></figure>
+<p>前面表示作业编号和状态，后面是当时的命令。如果想要将该作业重新放到<strong>前台</strong>。可以用<code>fg</code> 命令，如果仅有一个作业，后面不用加参数，如果有多个作业，要用<code>fg %job_ID</code> 来选择要到前台的作业。如果该作业挂起状态，想在后台运行，就用<code>bg</code> 命令，用法和<code>fg</code> 相同。</p>
+<p>如果想要暂停一个进程，可以把它先弄到前台来，然后按<code>Ctrl+Z</code> 暂停。当然还有其他的方式来弄，后面说。</p>
+<h2 id="III-杀手非杀手"><a href="#III-杀手非杀手" class="headerlink" title="III. 杀手非杀手"></a>III. 杀手非杀手</h2><p><code>kill</code> 这个命令大家会以为是杀死进程，但是它的作用是发送信号，只不过默认状态下发送的是<code>TERM</code>信号表示终止。进程和操作系统之间是通过信号来通信的。<code>kill</code> 的用法是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> [-signal] PID</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -HUP 18785</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -1 18785</span></span><br></pre></td></tr></table></figure>
+<p>可以指定信号的<strong>编号或信号名</strong>来完成发送，后面的<strong>PID编号</strong>也可以是<strong>作业编号</strong>。常用的发送信号如下表所示：</p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225223717.png" alt="image-20220121225223717"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225446730.png" alt="image-20220121225446730"></p>
+<p><img src="https://piggyhero.gitee.io/pic/windows_img/image-20220121225458299.png" alt="image-20220121225458299"></p>
+<p>想要查看更多的信号，可以使用 <code>kill -l</code> 来查看。</p>
 <blockquote>
-<p>在运行<code>su -</code>命令时，就相当于又开启了一个shell程序。这个shell程序加载的是目标账户的环境变量。</p>
+<p>和文件管理一样，进程也是有所有者的，只有进程的所有者才能给它们的进程使用kill发送信号。</p>
 </blockquote>
-<p>另一个方便的命令是<code>sudo</code> ，但是与<code>su</code> 的原理是不一样的。<code>sudo</code> 的英文全称为 super user do，以超级用户的方式执行命令。而<code>su</code> 的英文全称是 switch user，是换用户的意思。</p>
-<p>只要在命令前面加上<code>sudo</code> ，就表示这条命令有超级用户的权限。要注意的是还需要输入用户的密码。例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[piggy@computer]$</span><span class="bash"> sudo su - <span class="comment">#可以直接进入root用户</span></span></span><br><span class="line">piggy password:</span><br><span class="line"><span class="meta">[root@computer]#</span></span><br></pre></td></tr></table></figure>
-<p>但你一定会问，进入root用户为什么输入piggy的密码呢？原来<code>sudo</code>命令只会将名字在 <code>/etc/sudoers</code> 中的用户提升命令权限，piggy在这个里面，所以输入piggy的密码表示你是这个用户的人，所以你可以提升权限。</p>
-<blockquote>
-<p><code>sudo su -</code> 和 <code>sudo -i</code> 的命令效果一样，且都是输入piggy的密码。</p>
-</blockquote>
-<p><strong>小结：</strong>我们已经看到：</p>
-<ul>
-<li>使用 <code>su -</code> ，提供 root 账户的密码，可以切换到 root 用户；</li>
-<li>使用 <code>sudo su -</code> ，提供当前用户的密码，也可以切换到 root 用户</li>
-</ul>
-<p>两种方式的差异也显而易见：如果我们的 Linux 系统有很多用户需要使用的话，前者要求所有用户都知道 root 用户的密码，这显然是非常危险的；后者是不需要暴露 root 账户密码的，用户只需要输入自己的账户密码就可以，而且哪些用户可以切换到 root，这完全是受 root 控制的（root 通过设置 <code>/etc/sudoers</code> 实现的），这样系统就安全很多了。</p>
-<h3 id="2-更改文件所有者"><a href="#2-更改文件所有者" class="headerlink" title="2. 更改文件所有者"></a>2. 更改文件所有者</h3><p>当我要拿一个东西的时候人家不让，我让我变成皇帝或者假装是转述皇帝的话。现在从另一个角度来看，人家不让是因为东西是人家的，那么我把它变成我自己的不就完了么。所以我们可以用<code>chown</code> 来更改文件的所有者和所属群组。但是话说回来，既然你拿都不让，怎么还能归你呢。这时还是假传皇帝的圣旨，提升自己说话的分量，也就是在命令前加上 <code>sudo</code> 。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chown [ower][:[group]] file</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor:China file  <span class="comment">#将file的所有者改为emperor，所属组改为China</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor: file  <span class="comment">#将file的所有者改为emperor，所属组改为emperor的所在组</span></span></span><br></pre></td></tr></table></figure>
+<p>如果想要一下子给许多的进程发送信号，还可以使用<code>killall</code> 命令，用法为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> killall [-u user] [-signal] name...</span></span><br></pre></td></tr></table></figure>
+<p>同理，<code>killall</code> 和 <code>kill</code> 一样需要注意用户权限。</p>
 
     </div>
 
@@ -396,7 +387,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E6%89%80%E6%9C%89%E8%80%85%E3%80%81%E7%BB%84%E6%88%90%E5%91%98%E5%92%8C%E5%85%B6%E4%BB%96%E7%94%A8%E6%88%B7"><span class="nav-text">I. 所有者、组成员和其他用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E8%AF%BB%E5%8F%96%E3%80%81%E5%86%99%E5%85%A5%E5%92%8C%E6%89%A7%E8%A1%8C"><span class="nav-text">II. 读取、写入和执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="nav-text">1. 更改文件模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%85%AB%E8%BF%9B%E5%88%B6%E8%A7%84%E5%88%99"><span class="nav-text">(1)八进制规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%AC%A6%E5%8F%B7%E8%A1%A8%E7%A4%BA"><span class="nav-text">(2)符号表示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%9C%A8%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%AA%97%E5%8F%A3%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="nav-text">2. 在图形化窗口更改文件模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%9D%83%E9%99%90"><span class="nav-text">3. 设置默认权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-%E8%AE%A9%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%98%E4%B8%BA%E5%85%81%E8%AE%B8"><span class="nav-text">III. 让不允许变为允许</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%9B%B4%E6%94%B9%E4%BD%BF%E7%94%A8%E4%BA%BA%E7%9A%84%E8%BA%AB%E4%BB%BD"><span class="nav-text">1. 更改使用人的身份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E6%89%80%E6%9C%89%E8%80%85"><span class="nav-text">2. 更改文件所有者</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="nav-text">I. 查看进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ps"><span class="nav-text">1. ps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-top"><span class="nav-text">2. top</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E6%8E%A7%E5%88%B6%E8%BF%9B%E7%A8%8B"><span class="nav-text">II. 控制进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-%E6%9D%80%E6%89%8B%E9%9D%9E%E6%9D%80%E6%89%8B"><span class="nav-text">III. 杀手非杀手</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
