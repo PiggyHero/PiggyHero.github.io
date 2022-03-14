@@ -3360,7 +3360,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
       </tags>
   </entry>
   <entry>
-    <title>【ROS】ROS中命名和重命名</title>
+    <title>【ROS4】ROS中命名和重命名</title>
     <url>/2021/10/22/%E3%80%90ROS4%E3%80%91ROS%E4%B8%AD%E5%91%BD%E5%90%8D%E5%92%8C%E9%87%8D%E5%91%BD%E5%90%8D/</url>
     <content><![CDATA[<p>本文介绍ROS中命名和重命名的相关知识。</p>
 <span id="more"></span>
