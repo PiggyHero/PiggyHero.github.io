@@ -27,13 +27,14 @@
 <meta property="og:site_name" content="PiggyHero Wiki">
 <meta property="og:description" content="视觉SLAM的结构框架。">
 <meta property="og:locale">
-<meta property="og:image" content="https://github.com/piggyhero/pic/raw/master/img/20211215032349.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220712035243.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220712025811.png">
 <meta property="article:published_time" content="2021-10-17T23:19:19.000Z">
-<meta property="article:modified_time" content="2022-06-14T07:29:31.218Z">
+<meta property="article:modified_time" content="2022-07-11T20:12:33.242Z">
 <meta property="article:author" content="PiggyHero">
 <meta property="article:tag" content="SLAM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/piggyhero/pic/raw/master/img/20211215032349.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220712035243.png">
 
 <link rel="canonical" href="http://example.com/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM1%E3%80%91%E8%A7%86%E8%A7%89SLAM%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6/">
 
@@ -227,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-14 15:29:31" itemprop="dateModified" datetime="2022-06-14T15:29:31+08:00">2022-06-14</time>
+                <time title="修改时间：2022-07-12 04:12:33" itemprop="dateModified" datetime="2022-07-12T04:12:33+08:00">2022-07-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,8 +259,53 @@
 
       
         <p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215032349.png" alt="视觉SLAM框架"></p>
-<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
+<h2 id="I-视觉SLAM框架结构"><a href="#I-视觉SLAM框架结构" class="headerlink" title="I. 视觉SLAM框架结构"></a>I. 视觉SLAM框架结构</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220712035243.png" alt="20211215032349"></p>
+<p><strong>SLAM(Simultaneous Localization and Mapping)</strong>是根据传感器数据先计算出自身位置和路标点位置（存在噪声），然后再进行优化从而得到相对准确的自身位置和路标点位置。</p>
+<p><strong>例如：</strong>一架无人机，在真实的世界中移动。那么它的自身位置就是x, y, z, 加上三个姿态角度。而路标的位置是指周围环境中的物体的x, y, z 。</p>
+<h2 id="II-各部分介绍"><a href="#II-各部分介绍" class="headerlink" title="II. 各部分介绍"></a>II. 各部分介绍</h2><h3 id="1-传感器信息读取"><a href="#1-传感器信息读取" class="headerlink" title="1.传感器信息读取"></a>1.传感器信息读取</h3><p>传感器可以分为两类：</p>
+<ul>
+<li>携带在本体上的传感器：如：相机，IMU，激光传感器等</li>
+<li>安装在环境中的传感器：如：墙壁上的二维码</li>
+</ul>
+<p>携带在本体上的传感器不用事先在周围环境中布置，因此可以适用的范围很大。我们通常都是使用这类传感器，只有特殊需求的时候才使用第二种传感器。传感器一般测量的不是直接的物理量，比如你想使用IMU测量无人机的位置，而IMU直接测量的结果是它的加速度和角速度。所以想要求位置和姿态角，就需要进行积分。</p>
+<p>在视觉SLAM中，我们使用的传感器是相机，这里的相机与我们日常生活中使用的单反相机不同，它的结构比较简单，不需要携带昂贵的镜头，常用的相机分为三种：</p>
+<ul>
+<li>单目相机（Monocular）</li>
+<li>双目相机（Stereo）</li>
+<li>深度相机（RGB-D）</li>
+</ul>
+<h4 id="（1）单目相机"><a href="#（1）单目相机" class="headerlink" title="（1）单目相机"></a>（1）单目相机</h4><p>单目相机的特点就是不能探测到物体的深度信息，例如我们闭上一只眼睛看东西，很难分辨清楚哪个在前面。在人类的直觉上，大概可以判断一张照片中，谁在前谁在后，但是这里包含了先验知识，就是我们已经知道一些物体的大小。</p>
+<p>单目相机拍摄的图像是三维空间在二维平面上的投影，所以想要恢复出深度信息，必须要改变相机的视角，这就要移动相机。当用相机拍摄一个静止的物体时，不同的视角会得到该物体在相机平面上的不同位置，这就是<strong>视差</strong>，我们可以通过视差来估计出相机的深度。但是，这种方式得到的深度信息也是一个相对值，如下图所示，比如前方有两个物体A和B（红色是真实位置），我们通过该方法计算时，仅能知道宽度和深度的比值是3:1，并不能知道具体的数值。这表明单目SLAM估计得轨迹和地图与真是的相差了一个比例系数，也就是<strong>尺度</strong>（后面在对极几何中就能深刻理解该问题了）。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220712025811.png" alt="image-20220712025810996" style="zoom:50%;" /></p>
+<h4 id="（2）双目相机"><a href="#（2）双目相机" class="headerlink" title="（2）双目相机"></a>（2）双目相机</h4><p>为了解决单目相机尺度缺失的弊端，又有了双目相机。双目相机和我们的眼睛一样，两个眼睛间的距离是不变的（称之为<strong>基线</strong>），我们可以通过三角形的相似性可以准确的测量出物体的深度。但是它的缺点是计算量大（需要对像素点进行匹配），标定和配置复杂。而且双目相机是有测量距离的，基线越长，范围越远（可以想象当我们睁开双眼看很远处的两个物体时，我们也是无法分辨出谁在前谁在后的）。</p>
+<h4 id="（3）深度相机"><a href="#（3）深度相机" class="headerlink" title="（3）深度相机"></a>（3）深度相机</h4><p>深度相机是相机中存在一个类似激光的传感器，可以进行扫描得到物体的深度。相比于双目相机，可以不用计算就得到深度，但是它的测量范围小，噪声大，特别是在遇到强光干扰和透射材料时，有很大的问题。</p>
+<h3 id="2-视觉里程计"><a href="#2-视觉里程计" class="headerlink" title="2. 视觉里程计"></a>2. 视觉里程计</h3><p>之前介绍传感器时，我们知道传感器通常是不能直接得出我们想要知道的物理量，在视觉SLAM中也一样，我们不可能直接根据图像就能知道相机的位置和环境中物体的位置。因此需要一些方法来进行计算，通过两帧相邻时刻的图像，可以计算出相机的移动和图像中物体的深度。</p>
+<p>视觉里程计和汽车的里程计相同，只能知道当前时刻的运动信息（视觉SLAM中，视觉里程计得到的物理量是相机在该时刻<strong>运动的距离</strong>和<strong>转动的角度</strong>），和过去的信息没有关联。这就导致了一个问题，每一时刻的运动信息中包含了大量的噪声，这样简单的累积起来会导致最终的结果极其不准确。例如，我们闭着眼睛向前走，每一次的步幅为 $70\pm 5$ cm，向前走的角度为 $0°\pm5°$ ，当我们走了10步之后，谁能保证就是向正前方走了7m么？这就是不可避免的<strong>累计漂移</strong>。</p>
+<p>为了解决累计漂移问题，还需要进行后端优化和回环检测，来校正整个轨迹的形状。</p>
+<h3 id="3-后端优化"><a href="#3-后端优化" class="headerlink" title="3. 后端优化"></a>3. 后端优化</h3><p>后端优化就可以和视觉二字脱离了，接触的是前端传给它的纯数据。后端优化就是从包含噪声的原始数据中计算出最优的轨迹和地图，以及确定这个轨迹和地图的不确定性有多大。</p>
+<p>在历史上来说，现在我们称之后端优化的部分，在很长一段时间内直接称为SLAM研究。这也反映出了SLAM问题的本质就是对运动物体自身和周围环境空间不确定性的估计。而前视觉SLAM的端通常和计算机视觉相关。</p>
+<p>后端优化的主要方法有：</p>
+<ul>
+<li>滤波</li>
+<li>非线性优化</li>
+</ul>
+<h3 id="4-回环检测"><a href="#4-回环检测" class="headerlink" title="4. 回环检测"></a>4. 回环检测</h3><p>回环检测主要是解决累计漂移的问题，我们想通过让视觉SLAM系统知道自己来过哪，来更正当前错误的轨迹。为完成这一目标，可以通过图像间的相似性来判断该地点是否来过。在实际的SLAM系统中，回环检测会把A和B是同一点这一信息告诉后端优化算法，然后由后端优化算法来调整符合回环检测的结果。</p>
+<h3 id="5-建图"><a href="#5-建图" class="headerlink" title="5. 建图"></a>5. 建图</h3><p>根据不同的任务需求，所建的地图是不一样的。但大体上来说，可以分为：</p>
+<ul>
+<li>度量地图</li>
+<li>拓扑地图</li>
+</ul>
+<h4 id="（1）度量地图"><a href="#（1）度量地图" class="headerlink" title="（1）度量地图"></a>（1）度量地图</h4><p>主要有：</p>
+<ul>
+<li>稀疏地图（Sparse）</li>
+<li>稠密地图（Dense）<ul>
+<li>二维度量地图，由小格子（Grid）组成。</li>
+<li>三维度量地图，由小方块（Voxel）组成。</li>
+</ul>
+</li>
+</ul>
+<p>稀疏地图主要由用于定位的路标点组成（也就是前端计算相机位姿的特征点），而稠密地图则是重建所有看到的东西，主要用于导航。在稠密地图中，每一单位元素有三种状态，分别为占据、空闲、未知，这样的地图可以用来给各种导航算法使用。但是每一个点都存储状态，会耗费大量的存储空间。</p>
+<h4 id="（2）拓扑地图"><a href="#（2）拓扑地图" class="headerlink" title="（2）拓扑地图"></a>（2）拓扑地图</h4><p>拓扑地图更强调地图元素之间的关系。主要考虑节点间的连通性。</p>
 
     </div>
 
@@ -343,6 +389,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E8%A7%86%E8%A7%89SLAM%E6%A1%86%E6%9E%B6%E7%BB%93%E6%9E%84"><span class="nav-text">I. 视觉SLAM框架结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E5%90%84%E9%83%A8%E5%88%86%E4%BB%8B%E7%BB%8D"><span class="nav-text">II. 各部分介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BC%A0%E6%84%9F%E5%99%A8%E4%BF%A1%E6%81%AF%E8%AF%BB%E5%8F%96"><span class="nav-text">1.传感器信息读取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%8D%95%E7%9B%AE%E7%9B%B8%E6%9C%BA"><span class="nav-text">（1）单目相机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E5%8F%8C%E7%9B%AE%E7%9B%B8%E6%9C%BA"><span class="nav-text">（2）双目相机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%883%EF%BC%89%E6%B7%B1%E5%BA%A6%E7%9B%B8%E6%9C%BA"><span class="nav-text">（3）深度相机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%A7%86%E8%A7%89%E9%87%8C%E7%A8%8B%E8%AE%A1"><span class="nav-text">2. 视觉里程计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%90%8E%E7%AB%AF%E4%BC%98%E5%8C%96"><span class="nav-text">3. 后端优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%9B%9E%E7%8E%AF%E6%A3%80%E6%B5%8B"><span class="nav-text">4. 回环检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%BB%BA%E5%9B%BE"><span class="nav-text">5. 建图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E5%BA%A6%E9%87%8F%E5%9C%B0%E5%9B%BE"><span class="nav-text">（1）度量地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%8B%93%E6%89%91%E5%9C%B0%E5%9B%BE"><span class="nav-text">（2）拓扑地图</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -358,7 +405,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -5646,8 +5646,53 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
     <title>【视觉SLAM1】视觉SLAM基本框架</title>
     <url>/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM1%E3%80%91%E8%A7%86%E8%A7%89SLAM%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6/</url>
     <content><![CDATA[<p>视觉SLAM的结构框架。<br><span id="more"></span></p>
-<p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215032349.png" alt="视觉SLAM框架"></p>
-<p>SLAM就是一个根据传感器数据（如相机测出的位置信息和路标点的位置信息），来进行最优估计的过程。</p>
+<h2 id="I-视觉SLAM框架结构"><a href="#I-视觉SLAM框架结构" class="headerlink" title="I. 视觉SLAM框架结构"></a>I. 视觉SLAM框架结构</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220712035243.png" alt="20211215032349"></p>
+<p><strong>SLAM(Simultaneous Localization and Mapping)</strong>是根据传感器数据先计算出自身位置和路标点位置（存在噪声），然后再进行优化从而得到相对准确的自身位置和路标点位置。</p>
+<p><strong>例如：</strong>一架无人机，在真实的世界中移动。那么它的自身位置就是x, y, z, 加上三个姿态角度。而路标的位置是指周围环境中的物体的x, y, z 。</p>
+<h2 id="II-各部分介绍"><a href="#II-各部分介绍" class="headerlink" title="II. 各部分介绍"></a>II. 各部分介绍</h2><h3 id="1-传感器信息读取"><a href="#1-传感器信息读取" class="headerlink" title="1.传感器信息读取"></a>1.传感器信息读取</h3><p>传感器可以分为两类：</p>
+<ul>
+<li>携带在本体上的传感器：如：相机，IMU，激光传感器等</li>
+<li>安装在环境中的传感器：如：墙壁上的二维码</li>
+</ul>
+<p>携带在本体上的传感器不用事先在周围环境中布置，因此可以适用的范围很大。我们通常都是使用这类传感器，只有特殊需求的时候才使用第二种传感器。传感器一般测量的不是直接的物理量，比如你想使用IMU测量无人机的位置，而IMU直接测量的结果是它的加速度和角速度。所以想要求位置和姿态角，就需要进行积分。</p>
+<p>在视觉SLAM中，我们使用的传感器是相机，这里的相机与我们日常生活中使用的单反相机不同，它的结构比较简单，不需要携带昂贵的镜头，常用的相机分为三种：</p>
+<ul>
+<li>单目相机（Monocular）</li>
+<li>双目相机（Stereo）</li>
+<li>深度相机（RGB-D）</li>
+</ul>
+<h4 id="（1）单目相机"><a href="#（1）单目相机" class="headerlink" title="（1）单目相机"></a>（1）单目相机</h4><p>单目相机的特点就是不能探测到物体的深度信息，例如我们闭上一只眼睛看东西，很难分辨清楚哪个在前面。在人类的直觉上，大概可以判断一张照片中，谁在前谁在后，但是这里包含了先验知识，就是我们已经知道一些物体的大小。</p>
+<p>单目相机拍摄的图像是三维空间在二维平面上的投影，所以想要恢复出深度信息，必须要改变相机的视角，这就要移动相机。当用相机拍摄一个静止的物体时，不同的视角会得到该物体在相机平面上的不同位置，这就是<strong>视差</strong>，我们可以通过视差来估计出相机的深度。但是，这种方式得到的深度信息也是一个相对值，如下图所示，比如前方有两个物体A和B（红色是真实位置），我们通过该方法计算时，仅能知道宽度和深度的比值是3:1，并不能知道具体的数值。这表明单目SLAM估计得轨迹和地图与真是的相差了一个比例系数，也就是<strong>尺度</strong>（后面在对极几何中就能深刻理解该问题了）。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220712025811.png" alt="image-20220712025810996" style="zoom:50%;" /></p>
+<h4 id="（2）双目相机"><a href="#（2）双目相机" class="headerlink" title="（2）双目相机"></a>（2）双目相机</h4><p>为了解决单目相机尺度缺失的弊端，又有了双目相机。双目相机和我们的眼睛一样，两个眼睛间的距离是不变的（称之为<strong>基线</strong>），我们可以通过三角形的相似性可以准确的测量出物体的深度。但是它的缺点是计算量大（需要对像素点进行匹配），标定和配置复杂。而且双目相机是有测量距离的，基线越长，范围越远（可以想象当我们睁开双眼看很远处的两个物体时，我们也是无法分辨出谁在前谁在后的）。</p>
+<h4 id="（3）深度相机"><a href="#（3）深度相机" class="headerlink" title="（3）深度相机"></a>（3）深度相机</h4><p>深度相机是相机中存在一个类似激光的传感器，可以进行扫描得到物体的深度。相比于双目相机，可以不用计算就得到深度，但是它的测量范围小，噪声大，特别是在遇到强光干扰和透射材料时，有很大的问题。</p>
+<h3 id="2-视觉里程计"><a href="#2-视觉里程计" class="headerlink" title="2. 视觉里程计"></a>2. 视觉里程计</h3><p>之前介绍传感器时，我们知道传感器通常是不能直接得出我们想要知道的物理量，在视觉SLAM中也一样，我们不可能直接根据图像就能知道相机的位置和环境中物体的位置。因此需要一些方法来进行计算，通过两帧相邻时刻的图像，可以计算出相机的移动和图像中物体的深度。</p>
+<p>视觉里程计和汽车的里程计相同，只能知道当前时刻的运动信息（视觉SLAM中，视觉里程计得到的物理量是相机在该时刻<strong>运动的距离</strong>和<strong>转动的角度</strong>），和过去的信息没有关联。这就导致了一个问题，每一时刻的运动信息中包含了大量的噪声，这样简单的累积起来会导致最终的结果极其不准确。例如，我们闭着眼睛向前走，每一次的步幅为 $70\pm 5$ cm，向前走的角度为 $0°\pm5°$ ，当我们走了10步之后，谁能保证就是向正前方走了7m么？这就是不可避免的<strong>累计漂移</strong>。</p>
+<p>为了解决累计漂移问题，还需要进行后端优化和回环检测，来校正整个轨迹的形状。</p>
+<h3 id="3-后端优化"><a href="#3-后端优化" class="headerlink" title="3. 后端优化"></a>3. 后端优化</h3><p>后端优化就可以和视觉二字脱离了，接触的是前端传给它的纯数据。后端优化就是从包含噪声的原始数据中计算出最优的轨迹和地图，以及确定这个轨迹和地图的不确定性有多大。</p>
+<p>在历史上来说，现在我们称之后端优化的部分，在很长一段时间内直接称为SLAM研究。这也反映出了SLAM问题的本质就是对运动物体自身和周围环境空间不确定性的估计。而前视觉SLAM的端通常和计算机视觉相关。</p>
+<p>后端优化的主要方法有：</p>
+<ul>
+<li>滤波</li>
+<li>非线性优化</li>
+</ul>
+<h3 id="4-回环检测"><a href="#4-回环检测" class="headerlink" title="4. 回环检测"></a>4. 回环检测</h3><p>回环检测主要是解决累计漂移的问题，我们想通过让视觉SLAM系统知道自己来过哪，来更正当前错误的轨迹。为完成这一目标，可以通过图像间的相似性来判断该地点是否来过。在实际的SLAM系统中，回环检测会把A和B是同一点这一信息告诉后端优化算法，然后由后端优化算法来调整符合回环检测的结果。</p>
+<h3 id="5-建图"><a href="#5-建图" class="headerlink" title="5. 建图"></a>5. 建图</h3><p>根据不同的任务需求，所建的地图是不一样的。但大体上来说，可以分为：</p>
+<ul>
+<li>度量地图</li>
+<li>拓扑地图</li>
+</ul>
+<h4 id="（1）度量地图"><a href="#（1）度量地图" class="headerlink" title="（1）度量地图"></a>（1）度量地图</h4><p>主要有：</p>
+<ul>
+<li>稀疏地图（Sparse）</li>
+<li>稠密地图（Dense）<ul>
+<li>二维度量地图，由小格子（Grid）组成。</li>
+<li>三维度量地图，由小方块（Voxel）组成。</li>
+</ul>
+</li>
+</ul>
+<p>稀疏地图主要由用于定位的路标点组成（也就是前端计算相机位姿的特征点），而稠密地图则是重建所有看到的东西，主要用于导航。在稠密地图中，每一单位元素有三种状态，分别为占据、空闲、未知，这样的地图可以用来给各种导航算法使用。但是每一个点都存储状态，会耗费大量的存储空间。</p>
+<h4 id="（2）拓扑地图"><a href="#（2）拓扑地图" class="headerlink" title="（2）拓扑地图"></a>（2）拓扑地图</h4><p>拓扑地图更强调地图元素之间的关系。主要考虑节点间的连通性。</p>
 ]]></content>
       <categories>
         <category>专业技能</category>
@@ -5659,22 +5704,20 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
   <entry>
     <title>【视觉SLAM2】SLAM的数学描述</title>
     <url>/2021/10/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM2%E3%80%91SLAM%E7%9A%84%E6%95%B0%E5%AD%A6%E6%8F%8F%E8%BF%B0/</url>
-    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span><br>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
-<hr>
+    <content><![CDATA[<p>主要介绍如何使用数学语言来描述SLAM问题。<br><span id="more"></span></p>
+<h2 id="I-数学描述"><a href="#I-数学描述" class="headerlink" title="I. 数学描述"></a>I. 数学描述</h2><p>设 $\vec{x}$ 表示相机的位置，$\vec x_1\ , \ \vec x_2 \ …\ ,\vec x_k$表示不同时刻的位置信息，$\vec y_1 \ , \vec y_2 \ ,\ …\ \vec y_n$表示路标的位置，共有n个路标点</p>
 <p>我们的<strong>目标是：</strong>描述以下两件事情：</p>
 <ol>
 <li>什么是运动 ：k-1时刻到k时刻，$\vec x$是如何变化的</li>
 <li>什么是观测：在k时刻，相机在 $\vec x_k$处探测到某一路标，$\vec y_j$​ </li>
 </ol>
-<hr>
-<p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
+<h3 id="1-运动与观测方程"><a href="#1-运动与观测方程" class="headerlink" title="1. 运动与观测方程"></a>1. 运动与观测方程</h3><p>首先来说关于 <strong><u>运动</u></strong> 的数学描述：</p>
 <script type="math/tex; mode=display">
-\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读出来的速度或者是通过视觉里程计估算出来的速度)，$\vec w_k$表示噪声</p>
+\vec x_k = f(\vec x_{k-1}\ , \vec u_k\ ,\vec w_k)</script><p>$\vec u_k$表示k时刻运动的输入(可以是传感器读数或者我们的命令输入，具体可以是速度，加速度，也可以是位移差)，$\vec w_k$表示噪声</p>
 <p>接下来说关于 <strong><u>观测</u></strong> 的表述：</p>
 <script type="math/tex; mode=display">
 \vec z_{k,j}=h(\vec y_j\ ,\vec x_k \ ,\vec {v_{k,j}})</script><p>该式表示的是相机在位置 $\vec x_k$上看到某个路标点 $\vec y_j$时，产生了一个观测数据 $\vec z_{k,j}$ ，而 $\vec v_{k,j}$表示观测噪声</p>
-<hr>
-<p>以二维运动为例：</p>
+<h3 id="2-例子"><a href="#2-例子" class="headerlink" title="2. 例子"></a>2. 例子</h3><p>以二维运动为例：</p>
 <p>如图所示</p>
 <p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215033742.png" style="zoom:60%;" /></p>
 <p>已知上一时刻k-1的相机位姿 $\vec x_{k-1}$ 和运动输入$\vec{u}_{k}$（在视觉SLAM中可以由视觉里程计得出或通过传感器得出）</p>
@@ -5706,14 +5749,32 @@ r_{j} \\
 \end{array}\right]_k=\left[\begin{array}{c}
 \sqrt{\left(x_{1,k}-y_{1, j}\right)^{2}+\left(x_{2,k}, -y_{2, j}\right)^{2}} \\
 \arctan \left(\frac{y_{2,j} -x_{2, k}}{y_{1, j}-x_{1, k}}\right)
-\end{array}\right]+\vec{v}</script><p>$\vec{v}$是观测误差，现在就要求 $\vec x_k$和 $\vec y_j$</p>
+\end{array}\right]+\vec{v}</script><p>其中$\vec{v}$是观测误差。</p>
+<p>SLAM问题就是已知观测数据 $\boldsymbol{z_{k,j}}=[r_j,\phi_j]^T$  来求 $\vec x_k$和 $\vec y_j$ 。</p>
 <blockquote>
 <p>注意：这里求 $\vec x_k$表示定位问题，即求出相机自己本身在世界坐标系下的坐标，而求出 $\vec y_j$表示建图问题，即求出周围环境中路标点在世界坐标系下的坐标</p>
 </blockquote>
-<p>如果求出了 $\vec x_k$和 $\vec y_j$，这样就可以确定相机位置与路标点的位置，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
+<p>如果求出了 $\vec x_k$和 $\vec y_j$，也就完成了定位和建图，而反看上面的运动方程和观测方程，假如没有噪声的存在，那么直接解方程就是了，就可以准确的求出相机和路标点在世界坐标系下的位置，然而现实并不是这样，由于噪声的存在，<strong>解方程的问题就变成了一个状态估计问题</strong>，这也是SLAM的最基本问题。</p>
 <p>按照运动和观测方程是否为线性和噪声是否服从高斯分布，可以分为以下几类以及解决其状态估计的办法：</p>
-<p>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</p>
-<p>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</p>
+<ul>
+<li>线性高斯分布（LG）$\longrightarrow$ 卡尔曼滤波（KF）</li>
+</ul>
+<ul>
+<li>非线性非高斯分布（NLNG）$\longrightarrow$扩展卡尔曼滤波（EKF）或非线性优化</li>
+<li>主流使用的是图优化（Graph Optimization）</li>
+</ul>
+<h2 id="II-思考"><a href="#II-思考" class="headerlink" title="II. 思考"></a>II. 思考</h2><p>SLAM问题的状态和观测方程为：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{ll}
+\boldsymbol{x}_{k}=f\left(\boldsymbol{x}_{k-1}, \boldsymbol{u}_{k}, \boldsymbol{w}_{k}\right), & k=1, \cdots, K \\
+\boldsymbol{z}_{k, j}=h\left(\boldsymbol{y}_{j}, \boldsymbol{x}_{k}, \boldsymbol{v}_{k, j}\right), & (k, j) \in \mathcal{O}
+\end{array} .\right.</script><p>这里 $\mathcal{O}$ 是一个集合，记录这哪个时刻观察了哪个路标，即每个 $k$ 对应着一些列的 $j$ ，因为通常情况下每个时刻仅能看到一部分的路标。</p>
+<p>在视觉SLAM中，$\boldsymbol{z_{k,j}}$ 就是观测量，也就是每一张图片。而输入量 $\boldsymbol{u}_{k}$ 是相机的位姿变化量，也就是后面中说到的相机的变换矩阵 $T$ 。有人认为应该把 $\boldsymbol{u}_{k}$ 放入到观测方程中，因为这是通过前端观测量$\boldsymbol{z_{k,j}}$ 计算出来的，写成：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\boldsymbol{z}_{k, j}=h\left(\boldsymbol{y}_{j}, \boldsymbol{x}_{k-1}, \boldsymbol{u}_{k},\boldsymbol{v}_{k, j}\right), & (k, j) \in \mathcal{O}
+\end{array}</script><p>这在实际中是没有差别的。</p>
+<p>那么视觉SLAM的一个过程就是先知道 $\boldsymbol{z_{k,j}}$ ，然后可以计算出 $\boldsymbol{u}_{k}$ ，然后再分别计算出 $\boldsymbol{x}_{k}$ 和 $\boldsymbol{y}_{k}$ 。此时是带噪声的，还要通过后端优化和回环检测两个步骤。</p>
 ]]></content>
       <categories>
         <category>专业技能</category>
@@ -6324,6 +6385,26 @@ r_{j} \\
       </categories>
       <tags>
         <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【视觉SLAM3】三维空间刚体运动描述</title>
+    <url>/2022/07/12/%E3%80%90%E8%A7%86%E8%A7%89SLAM3%E3%80%91%E4%B8%89%E7%BB%B4%E7%A9%BA%E9%97%B4%E5%88%9A%E4%BD%93%E8%BF%90%E5%8A%A8%E6%8F%8F%E8%BF%B0/</url>
+    <content><![CDATA[<p>本节主要讨论如何来描述三维空间刚体的运动。主要由六个参数来表示一个刚体在三维空间中的运动状态（平移+旋转）。</p>
+<span id="more"></span>
+<p>描述位移的方法很简单，用一个向量。而描述旋转的方法有很多：</p>
+<ul>
+<li>欧拉角</li>
+<li>旋转矩阵</li>
+<li>旋转向量</li>
+<li>四元数</li>
+</ul>
+]]></content>
+      <categories>
+        <category>专业技能</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
       </tags>
   </entry>
 </search>
