@@ -3950,28 +3950,28 @@ r_{31} & r_{32} & r_{33}
 <p>来看<code>wp</code>向量，它在w系下的坐标为 $\boldsymbol x_p-\boldsymbol x_w$ ，在b系下的坐标为$\boldsymbol x_p’-\boldsymbol x_w’$ ，这里的$\boldsymbol x_w=\bold 0$ 。  <strong>$R$ 表示从b系到w系的旋转矩阵</strong>，用来描述坐标系变化后，<strong>向量坐标</strong>的变化。所以有如下关系：</p>
 <script type="math/tex; mode=display">
 \begin{array}{lll}\\
-\bold x_p - \bold x_w
-&=R(\bold x'_p - \bold{x'}_w)\\
+\boldsymbol x_p - \boldsymbol x_w
+&=R(\boldsymbol x'_p - \boldsymbol{x'}_w)\\
 &=R\bold x'_p-R\bold x'_w\\
-&=R\bold x'_p-R(\bold x'_w -\bold x'_b)\\
-&=R\bold x'_p - (\bold x_w-\bold x_b)\\
-&=R\bold x'_p+\bold x_b \\
+&=R\bold x'_p-R(\boldsymbol x'_w -\boldsymbol x'_b)\\
+&=R\bold x'_p - (\boldsymbol x_w-\boldsymbol x_b)\\
+&=R\bold x'_p+\boldsymbol x_b \\
 \end{array}
 \tag{5}</script><p>同理：</p>
 <script type="math/tex; mode=display">
 \begin{array}{lll}\\
-\bold x'_p - \bold x'_b
-&=R^T(\bold x_p - \bold x_b)\\
+\boldsymbol x'_p - \boldsymbol x'_b
+&=R^T(\boldsymbol x_p - \boldsymbol x_b)\\
 &=R^T\bold x_p-R^T\bold x_b\\
-&=R^T\bold x_p-R^T(\bold x_b -\bold x_w)\\
-&=R^T\bold x_p - (\bold x'_b-\bold x'_w)\\
-&=R^T\bold x_p+\bold x'_w \\
+&=R^T\bold x_p-R^T(\boldsymbol x_b -\boldsymbol x_w)\\
+&=R^T\bold x_p - (\boldsymbol x'_b-\boldsymbol x'_w)\\
+&=R^T\bold x_p+\boldsymbol x'_w \\
 \end{array}
 \tag{6}</script><p>所以刚体系到世界系，世界系到刚体系的点的坐标变换可以描述为：</p>
 <script type="math/tex; mode=display">
 \left\{\begin{array}{l}
-\bold x_p=R\bold x'_p+\bold x_b\\
-\bold x'_p=R^T\bold x_p+\bold x'_w
+\boldsymbol x_p=R\bold x'_p+\boldsymbol x_b\\
+\boldsymbol x'_p=R^T\bold x_p+\boldsymbol x'_w
 \tag{7}
 \end{array}
 \right.</script><p>在式(5)中，我们可以看出，p点在世界系下的坐标等于，p点在刚体系下的坐标向量左乘旋转矩阵，再加上刚体系原点在世界系下的坐标向量。当然上述写法并不是线性变换，所以我们可以使用齐次坐标来表示，由(5)可得：</p>
@@ -4084,15 +4084,15 @@ R_{i,j,k}(\phi,\theta,\psi)=R_i(\phi)R_j(\theta)R_k(\psi) \tag{13}</script><p>�
 <script type="math/tex; mode=display">
 \theta=\arccos \frac{\operatorname{tr}(\boldsymbol{R})-1}{2}\tag{17}</script><p>对于旋转向量来说，它是旋转轴上的一个单位向量，所以有：</p>
 <script type="math/tex; mode=display">
-R \bold n=\bold n \tag{18}</script><p>因此转轴向量$\boldsymbol n$是旋转矩阵$R$ 特征值为1对应的特征向量。</p>
+R \boldsymbol n=\bold n \tag{18}</script><p>因此转轴向量$\boldsymbol n$是旋转矩阵$R$ 特征值为1对应的特征向量。</p>
 <h2 id="V-四元数"><a href="#V-四元数" class="headerlink" title="V. 四元数"></a>V. 四元数</h2><p>四元数的来源就不多说了，直接说怎么用。</p>
 <p>四元数拥有一个实部和三个虚部。我们可以记为：</p>
 <script type="math/tex; mode=display">
 \boldsymbol{q}=q_{0}+q_{1} \mathrm{i}+{q}_{2} \mathrm{j}+{q}_{3} \mathrm{k}\\
-\boldsymbol{q}=[s,\bold v]^T\quad s=q_0\in\mathbb R  \quad \bold v=[q_1,q_2,q_3]^T\in\mathbb{R}^3\tag{19}</script><p>如果实部为0，则我们称为纯虚四元数，我们接下来会用<strong>纯虚四元数来表示向量</strong>，<strong>单位四元数来表示旋转</strong>。</p>
+\boldsymbol{q}=[s,\boldsymbol v]^T\quad s=q_0\in\mathbb R  \quad \boldsymbol v=[q_1,q_2,q_3]^T\in\mathbb{R}^3\tag{19}</script><p>如果实部为0，则我们称为纯虚四元数，我们接下来会用<strong>纯虚四元数来表示向量</strong>，<strong>单位四元数来表示旋转</strong>。</p>
 <p>假设有一点p在世界系下的坐标为$\boldsymbol p\in \mathbb R^3$，在刚体系下的坐标为$\boldsymbol{p’}\in \mathbb R^3$ ，单位四元数$\boldsymbol q$ 表示指定的旋转，则有如下的关系：</p>
 <script type="math/tex; mode=display">
-\bold p^{\prime}=\bold q \bold p \bold q^{-1}\tag{20}</script><p>实际上四元数的乘法可以转化成矩阵的乘法，也就是说四元数在进行四元数乘法的时候，每一个四元数对应着一个矩阵，<strong>注意：四元数乘法对应着左乘和右乘</strong> ，因此一个四元数对应着<strong>左乘矩阵</strong>和<strong>右乘矩阵</strong>。</p>
+\boldsymbol p^{\prime}=\bold q \boldsymbol p \boldsymbol q^{-1}\tag{20}</script><p>实际上四元数的乘法可以转化成矩阵的乘法，也就是说四元数在进行四元数乘法的时候，每一个四元数对应着一个矩阵，<strong>注意：四元数乘法对应着左乘和右乘</strong> ，因此一个四元数对应着<strong>左乘矩阵</strong>和<strong>右乘矩阵</strong>。</p>
 <script type="math/tex; mode=display">
 \boldsymbol{q}^{+}=\left[\begin{array}{cc}
 s & -\boldsymbol{v}^{\mathrm{T}} \\
@@ -4100,7 +4100,7 @@ s & -\boldsymbol{v}^{\mathrm{T}} \\
 \end{array}\right], \quad \boldsymbol{q}^{\oplus}=\left[\begin{array}{cc}
 s & -\boldsymbol{v}^{\mathrm{T}} \\
 \boldsymbol{v} & s \boldsymbol{I}-\boldsymbol{v}^{\wedge}
-\end{array}\right]\tag{21}</script><p>式(21)中左边的是四元数 $\boldsymbol q$ 对应的左乘矩阵，右边的是四元数 $\boldsymbol q$ 对应的右乘矩阵。例如四元数 $\boldsymbol q_1 \bold q_2$ 相乘，等价于：</p>
+\end{array}\right]\tag{21}</script><p>式(21)中左边的是四元数 $\boldsymbol q$ 对应的左乘矩阵，右边的是四元数 $\boldsymbol q$ 对应的右乘矩阵。例如四元数 $\boldsymbol q_1 \boldsymbol q_2$ 相乘，等价于：</p>
 <script type="math/tex; mode=display">
 \boldsymbol{q}_{1}^{+} \boldsymbol{q}_{2}=\left[\begin{array}{cc}
 s_{1} & -\boldsymbol{v}_{1}^{\mathrm{T}} \\
