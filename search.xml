@@ -6748,4 +6748,267 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
         <tag>其他</tag>
       </tags>
   </entry>
+  <entry>
+    <title>【视觉SLAM5】李群和李代数</title>
+    <url>/2022/07/18/%E3%80%90%E8%A7%86%E8%A7%89SLAM5%E3%80%91%E6%9D%8E%E7%BE%A4%E5%92%8C%E6%9D%8E%E4%BB%A3%E6%95%B0/</url>
+    <content><![CDATA[<p>在学习了旋转和平移的表示方法之后，我们可以描述相机的位姿。但是在视觉SLAM中，相机的位姿是我们想要求得的，例如我们得到了一个旋转矩阵，但是该矩阵并不是最佳的结果，还需要进行优化。对一个矩阵优化是很复杂的，如三维旋转矩阵，有9个参数，这9个参数中还要满足一些条件，如旋转矩阵的行列式为1，且正交。这给优化问题带来了额外的约束，十分复杂。</p>
+<p>因此，引入李群和李代数的知识，来使优化问题变得简单。</p>
+<span id="more"></span>
+<h2 id="I-李群和李代数基础"><a href="#I-李群和李代数基础" class="headerlink" title="I. 李群和李代数基础"></a>I. 李群和李代数基础</h2><h3 id="1-群的定义"><a href="#1-群的定义" class="headerlink" title="1. 群的定义"></a>1. 群的定义</h3><p>群是一种集合加上一种运算的代数结构，我们把集合记作 $A$ ，运算记作 $·$ ，那么群可以记作 $G=(A,·)$ ，群要求这个运算满足下列条件：</p>
+<p> <img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220718165122.png" alt="image-20220718165122499" style="zoom: 50%;" /></p>
+<p>这个条件看似复杂，我们可以不用管。总之，我们前面所学的<strong>旋转矩阵</strong>和<strong>变换矩阵</strong>都属于群。</p>
+<ul>
+<li>$SO(3)$ ：旋转矩阵群</li>
+<li>$SE(3)$：欧式变换群</li>
+</ul>
+<p><strong>李群</strong>是指具有连续性质的群。旋转矩阵和变换矩阵群在实数空间上是连续的，所以属于李群。</p>
+<h3 id="2-李代数的引出"><a href="#2-李代数的引出" class="headerlink" title="2. 李代数的引出"></a>2. 李代数的引出</h3><p>实际上，每一个李群都对应一个李代数，下面我们来看李代数是如何得到的。</p>
+<p>对于任意的旋转矩阵 $R$ ，满足：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R} \boldsymbol{R}^{\mathrm{T}}=\boldsymbol{I} \tag{1}</script><p>$R$ 表示相机的旋转，随时间的变化，用 $R(t)$ 来表示，所以有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}(t) \boldsymbol{R}(t)^{\mathrm{T}}=\boldsymbol{I}\tag{2}</script><p>对两边同时对时间求导：</p>
+<script type="math/tex; mode=display">
+\dot{\boldsymbol{R}}(t) \boldsymbol{R}(t)^{\mathrm{T}}+\boldsymbol{R}(t) \dot{\boldsymbol{R}}(t)^{\mathrm{T}}=0\tag{3}</script><p>移项得：</p>
+<script type="math/tex; mode=display">
+\dot{\boldsymbol{R}}(t) \boldsymbol{R}(t)^{\mathrm{T}}=-\left(\dot{\boldsymbol{R}}(t) \boldsymbol{R}(t)^{\mathrm{T}}\right)^{\mathrm{T}}\tag{4}</script><p>可以看到，矩阵 $\dot{\boldsymbol{R}}(t) \boldsymbol{R}(t)^{\mathrm{T}}$ 是一个反对称矩阵，在向量进行叉积时，我们可以将其转换成反对称矩阵的形式，那么当我们有一个反对称矩阵时，也可以转换成其向量的形式与之对应，$\dot{\boldsymbol{R}}(t) \boldsymbol{R}(t)^{\mathrm{T}}$ 是一个三维的反对称矩阵，因此我们可以找到一个三维向量 $\phi(t)$ 与之对应：</p>
+<script type="math/tex; mode=display">
+\dot{\boldsymbol{R}}(t) \boldsymbol{R}(t)^{\mathrm{T}}=\boldsymbol{\phi}(t)^{\wedge}\tag{5}</script><p>现在我们在等式两边右乘 $R(t)$ ，有：</p>
+<script type="math/tex; mode=display">
+\dot{\boldsymbol{R}}(t)=\phi(t)^{\wedge} \boldsymbol{R}(t)=\left[\begin{array}{ccc}
+0 & -\phi_{3} & \phi_{2} \\
+\phi_{3} & 0 & -\phi_{1} \\
+-\phi_{2} & \phi_{1} & 0
+\end{array}\right] \boldsymbol{R}(t)\tag{6}</script><p>可以看到，<strong>对 $R(t)$ 每求一次导，就相当于在其左边乘上一个 $\phi(t)^{\wedge}$ 即可。</strong> </p>
+<p>我们再假设在 $t_0$ 附近，$\phi(t_0) = \phi_0$ 是一个常数，则根据式（6）有：</p>
+<script type="math/tex; mode=display">
+\dot{\boldsymbol{R}}(t)=\boldsymbol{\phi}\left(t_{0}\right)^{\wedge} \boldsymbol{R}(t)=\boldsymbol{\phi}_{0}^{\wedge} \boldsymbol{R}(t)\tag{7}</script><p>这是一个关于 $R(t)$ 的微分方程，且初始值为 $R(0)=I$ ，解得：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}(t)=\exp \left(\phi_{0}^{\wedge} t\right)\tag{8}</script><p><strong>这说明在 $t=0$ 附近，旋转矩阵可以由 $\exp \left(\phi_{0}^{\wedge} t\right)$ 计算出来。</strong></p>
+<blockquote>
+<p>这个结论也适用于 $t\neq0$ 的其他任何情况，当 $R(t_0)\neq I$ 时，$R(t)=R(t_0)\exp(\phi_0^{\wedge}t)$ </p>
+</blockquote>
+<p>现在假设在 $t_0 = 0$ 时，旋转矩阵 $R(t_0)=I$ ，按照导数的定义，可以把 $R(t)$ 在 $t=0$ 附近进行一阶泰勒展开：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{R}(t) & \approx \boldsymbol{R}\left(t_{0}\right)+\dot{\boldsymbol{R}}\left(t_{0}\right)\left(t-t_{0}\right) \\
+&=\boldsymbol{I}+\boldsymbol{\phi}\left(t_{0}\right)^{\wedge}\boldsymbol{R}(t_0)(t-t_0)\\
+&=\boldsymbol{I}+\boldsymbol{\phi}\left(t_{0}\right)^{\wedge}(t)
+\end{aligned}\tag{9}</script><p>这里可以看到 $\phi$ 反映了 $R$ 的导数性质，固称它为在 $SO(3)$ <strong>原点附近</strong>的正切空间。</p>
+<p>通过上面的推导，我们可以知道：</p>
+<ul>
+<li>给定某时刻的 $R$ ，我们就可以求得一个 $\phi$ ，它描述了 $R$ 在局部的导数性质。这里的 $\phi$ 正是对应到 $SO(3)$ 上的李代数 $\mathfrak{s o}(3)$ 。</li>
+<li>我们可以通过指数/对数映射来完成李群和李代数之间的转化。</li>
+</ul>
+<h3 id="3-李代数的定义"><a href="#3-李代数的定义" class="headerlink" title="3. 李代数的定义"></a>3. 李代数的定义</h3><p>每个李群都有与之对应的李代数，李代数描述了李群的局部性质。李代数的定义也十分抽象，李代数由一个集合 $\mathbb{V}$ ，一个数域 $\mathbb{F}$ 和一个二元运算[ ，]组成，满足以下性质：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719092825.png" alt="image-20220719092825479" style="zoom:50%;" /></p>
+<p>则 $(\mathbb{V},\mathbb{F},[,])$ 为一个李代数，记为 $\mathfrak{g}$。</p>
+<p>同样看似复杂的性质我们先不用管，我们只需知道，三维向量的叉积是一种李括号，因此 $\mathfrak{g}=(\mathbb{R}^3,\mathbb{R},\times)$ 构成了一个李代数。</p>
+<h4 id="1-李代数-mathfrak-so-3"><a href="#1-李代数-mathfrak-so-3" class="headerlink" title="(1)李代数 $\mathfrak{so(3)}$"></a>(1)李代数 $\mathfrak{so(3)}$</h4><p>$SO(3)$ 对应的李代数是定义在 $\mathbb{R}^3$ 上的向量，记为 $\phi$ ，每一个 $\phi$ 对应着一个反对称矩阵：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\Phi}=\phi^{\wedge}=\left[\begin{array}{ccc}
+0 & -\phi_{3} & \phi_{2} \\
+\phi_{3} & 0 & -\phi_{1} \\
+-\phi_{2} & \phi_{1} & 0
+\end{array}\right] \in \mathbb{R}^{3 \times 3}</script><p>在此定义下，两个向量 $\phi_1$ ，$\phi_2$ 的李括号定义为：</p>
+<script type="math/tex; mode=display">
+\left[\phi_{1}, \phi_{2}\right]=\left(\Phi_{1} \Phi_{2}-\Phi_{2} \Phi_{1}\right)^{\vee}</script><blockquote>
+<p>由于向量 $\phi$ 和反对称矩阵是一一对应的，我们可以认为李代数 $\mathfrak{so(3)}$ 的元素是三维向量或者是三维反对称矩阵。</p>
+<script type="math/tex; mode=display">
+\mathfrak{s o}(3)=\left\{\phi \in \mathbb{R}^{3}, \Phi=\phi^{\wedge} \in \mathbb{R}^{3 \times 3}\right\}</script></blockquote>
+<p>它与 $SO(3)$ 的关系可以有指数映射给定：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}=\exp \left(\phi^{\wedge}\right)</script><h4 id="2-李代数-mathfrak-se-3"><a href="#2-李代数-mathfrak-se-3" class="headerlink" title="(2) 李代数 $\mathfrak{se(3)}$"></a>(2) 李代数 $\mathfrak{se(3)}$</h4><p>对于 $SE(3)$ ，也有对应的李代数 $\mathfrak{se(3)}$ 。它位于 $\mathbb{R}^6$ 空间中：</p>
+<script type="math/tex; mode=display">
+\mathfrak{s e}(3)=\left\{\boldsymbol{\xi}=\left[\begin{array}{c}
+\rho \\
+\phi
+\end{array}\right] \in \mathbb{R}^{6}, \rho \in \mathbb{R}^{3}, \phi \in \mathfrak{s o}(3), \xi^{\wedge}=\left[\begin{array}{cc}
+\phi^{\wedge} & \rho \\
+\mathbf{0}^{\mathrm{T}} & 0
+\end{array}\right] \in \mathbb{R}^{4 \times 4}\right\}</script><p>我们把每个 $\mathfrak{se(3)}$ 的元素记为 $\boldsymbol{\xi}$ ，它是一个6维向量，前三维表示平移（但含义和变换矩阵中的平移不同），记为 $\rho$  。后三维为旋转，记为 $\phi$ ，实质上是 $\mathfrak{so(3)}$ 中的元素。</p>
+<p>还有我们要拓展符号 <code>^</code> 的含义，之前三维的时候表示一个向量对应的反对称矩阵，这里我们还是保留这种概念，但此处不是反对称矩阵，而是表示：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\xi}^{\wedge}=\left[\begin{array}{ll}
+\phi^{\wedge} & \rho \\
+\mathbf{0}^{\mathrm{T}} & 0
+\end{array}\right] \in \mathbb{R}^{4 \times 4}</script><p>但是它们依然是一一对应的关系。此时的李括号的定义和 $\mathfrak{so(3)}$ 的类似，为：</p>
+<script type="math/tex; mode=display">
+\left[\boldsymbol{\xi}_{1}, \boldsymbol{\xi}_{2}\right]=\left(\boldsymbol{\xi}_{1}^{\wedge} \boldsymbol{\xi}_{2}^{\wedge}-\boldsymbol{\xi}_{2}^{\wedge} \boldsymbol{\xi}_{1}^{\wedge}\right)^{\vee}</script><h2 id="II-指数映射和对数映射"><a href="#II-指数映射和对数映射" class="headerlink" title="II. 指数映射和对数映射"></a>II. 指数映射和对数映射</h2><h3 id="1-SO-3-上的指数映射和对数映射"><a href="#1-SO-3-上的指数映射和对数映射" class="headerlink" title="1. $SO(3)$ 上的指数映射和对数映射"></a>1. $SO(3)$ 上的指数映射和对数映射</h3><p>由李代数到李群，为指数映射；由李群到李代数，为对数映射。</p>
+<h4 id="1-指数映射"><a href="#1-指数映射" class="headerlink" title="(1) 指数映射"></a>(1) 指数映射</h4><p>我们如何来求 $\exp \left(\phi^{\wedge}\right)$ 呢？</p>
+<p>任意矩阵的指数映射可以写成一个泰勒展开，但只有在收敛的情况下才会有结果，结果仍为一个矩阵：</p>
+<script type="math/tex; mode=display">
+\exp (\boldsymbol{A})=\sum_{n=0}^{\infty} \frac{1}{n !} A^{n}</script><p>因此，对于 $\exp \left(\phi^{\wedge}\right)$ ，有：</p>
+<script type="math/tex; mode=display">
+\exp \left(\boldsymbol{\phi}^{\wedge}\right)=\sum_{n=0}^{\infty} \frac{1}{n !}\left(\phi^{\wedge}\right)^{n}</script><p>尽管我们有了这个公式，理论上可以求出来，但是这里面有无穷次幂，是很难计算的。因此我们寻求其他方式来计算。我们用模长和方向向量来表示每一个 $\boldsymbol{\phi}$ ，即 $\boldsymbol{\phi}=\theta\boldsymbol{a}$ 。这里的 $\boldsymbol {a}$ 是一个长度为1 的单位向量。对于 $\boldsymbol{a}^{\wedge}$ 有如下性质：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}=\left[\begin{array}{ccc}
+-a_{2}^{2}-a_{3}^{2} & a_{1} a_{2} & a_{1} a_{3} \\
+a_{1} a_{2} & -a_{1}^{2}-a_{3}^{2} & a_{2} a_{3} \\
+a_{1} a_{3} & a_{2} a_{3} & -a_{1}^{2}-a_{2}^{2}
+\end{array}\right]=\boldsymbol{aa ^ { \mathrm { T } } - \boldsymbol { I }}</script><p>以及：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}=\boldsymbol{a}^{\wedge}\left(\boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}-\boldsymbol{I}\right)=-\boldsymbol{a}^{\wedge}</script><p>这两个式子提供了处理  $\boldsymbol{a}^{\wedge}$ 高阶项的方法，因此我们可以把指数映射 $\exp \left(\boldsymbol{\phi}^{\wedge}\right)$ 写成：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\exp \left(\boldsymbol{\phi}^{\wedge}\right)=\exp \left(\theta \boldsymbol{a}^{\wedge}\right)=\sum_{n=0}^{\infty} \frac{1}{n !}\left(\theta \boldsymbol{a}^{\wedge}\right)^{n}
+
+&=\boldsymbol{I}+\theta \boldsymbol{a}^{\wedge}+\frac{1}{2 !} \theta^{2} \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}+\frac{1}{3 !} \theta^{3} \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}+\frac{1}{4 !} \theta^{4}\left(\boldsymbol{a}^{\wedge}\right)^{4}+\cdots \\
+&=\boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}-\boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}+\theta \boldsymbol{a}^{\wedge}+\frac{1}{2 !} \theta^{2} \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}-\frac{1}{3 !} \theta^{3} \boldsymbol{a}^{\wedge}-\frac{1}{4 !} \theta^{4}\left(\boldsymbol{a}^{\wedge}\right)^{2}+\cdots \\
+&=\boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}+\underbrace{\left(\theta-\frac{1}{3 !} \theta^{3}+\frac{1}{5 !} \theta^{5}-\cdots\right)}_{\sin \theta} \boldsymbol{a}^{\wedge}-\underbrace{\left(1-\frac{1}{2 !} \theta^{2}+\frac{1}{4 !} \theta^{4}-\cdots\right)}_{\cos \theta} \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge} \\
+&=\boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}+\boldsymbol{I}+\sin \theta \boldsymbol{a}^{\wedge}-\cos \theta \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge} \\
+&=(1-\cos \theta) \boldsymbol{a}^{\wedge} \boldsymbol{a}^{\wedge}+\boldsymbol{I}+\sin \theta \boldsymbol{a}^{\wedge} \\
+&=\cos \theta \boldsymbol{I}+(1-\cos \theta) \boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}+\sin \theta \boldsymbol{a}^{\wedge} .
+\end{aligned}</script><p>即：</p>
+<script type="math/tex; mode=display">
+\exp \left(\theta \boldsymbol{a}^{\wedge}\right)=\cos \theta \boldsymbol{I}+(1-\cos \theta) \boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}+\sin \theta \boldsymbol{a}^{\wedge}</script><p>这个式子我们似曾相识，这就是在刚体运动描述中旋转向量转化成旋转矩阵的<strong>罗德里格斯</strong>公式。所以我们现在可以明白，其实李代数 $\mathfrak{so(3)}$ 实际上就是由所谓的<strong>旋转向量</strong>组成的向量空间，而<strong>指数映射即罗德里格斯公式</strong>。我们可以通过该公式把 $\mathfrak{so(3)}$ 中的任意一个向量对应到一个位于 $SO(3)$ 中的旋转矩阵。</p>
+<h4 id="2-对数映射"><a href="#2-对数映射" class="headerlink" title="(2) 对数映射"></a>(2) 对数映射</h4><p>反之，通过定义对数映射，即可把 $SO(3)$ 中的元素对应到 $\mathfrak{so(3)}$ 中：</p>
+<script type="math/tex; mode=display">
+\phi=\ln (\boldsymbol{R})^{\vee}=\left(\sum_{n=0}^{\infty} \frac{(-1)^{n}}{n+1}(\boldsymbol{R}-\boldsymbol{I})^{n+1}\right)</script><p>但实际上，我们没有必要再通过计算该式来求旋转向量了，我们可以根据：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}\operatorname{tr}(\boldsymbol{R}) &=\cos \theta \operatorname{tr}(\boldsymbol{I})+(1-\cos \theta) \operatorname{tr}\left(\boldsymbol{n} \boldsymbol{n}^{\mathrm{T}}\right)+\sin \theta \operatorname{tr}\left(\boldsymbol{n}^{\wedge}\right) \\&=3 \cos \theta+(1-\cos \theta) \\&=1+2 \cos \theta\end{aligned}</script><script type="math/tex; mode=display">
+\theta=\arccos \frac{\operatorname{tr}(\boldsymbol{R})-1}{2}</script><p>这两个式子，利用迹的性质来求得旋转向量。</p>
+<p>另外，<strong>关于指数映射有什么性质呢？是否对于任意的 $R$ 都能找到唯一的 $\phi$ 与之对应呢？</strong></p>
+<p>事实上，指数映射只是一个满射，并不是单射，即每一个旋转矩阵 $R$ 都可以找到一个旋转向量与之对应，但是可能存在多个旋转向量对应着同一个旋转矩阵（例如一个旋转向量，旋转角度是30°和30°+360°）。但是如果我们把旋转角度固定在$\pm\pi$ 中时，此时的李群和李代数是一一对应的。</p>
+<p>根据指数映射，我们知道旋转矩阵和旋转向量的关系就是一对李群和李代数的关系。<strong>因此旋转矩阵的导数可以由旋转向量指定，指导着如何在旋转矩阵中进行微积分运算。</strong></p>
+<h3 id="2-SE-3-上的指数映射和对数映射"><a href="#2-SE-3-上的指数映射和对数映射" class="headerlink" title="2. $SE(3)$ 上的指数映射和对数映射"></a>2. $SE(3)$ 上的指数映射和对数映射</h3><h4 id="1-指数映射-1"><a href="#1-指数映射-1" class="headerlink" title="(1) 指数映射"></a>(1) 指数映射</h4><p>$\mathfrak{se(3)}$ 上的指数映射形式如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\exp \left(\boldsymbol{\xi}^{\wedge}\right) &=\left[\begin{array}{cc}
+\sum_{n=0}^{\infty} \frac{1}{n !}\left(\phi^{\wedge}\right)^{n} & \sum_{n=0}^{\infty} \frac{1}{(n+1) !}\left(\phi^{\wedge}\right)^{n} \boldsymbol{\rho} \\
+\mathbf{0}^{\mathrm{T}}
+\end{array}\right] \\
+& \triangleq\left[\begin{array}{cc}
+\boldsymbol{R} & \boldsymbol{J} \boldsymbol{\rho} \\
+\mathbf{0}^{\mathrm{T}} & 1
+\end{array}\right]=\boldsymbol{T} 
+\end{aligned}</script><p>这里定义：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\sum_{n=0}^{\infty} \frac{1}{(n+1) !}\left(\phi^{\wedge}\right)^{n} &=\boldsymbol{I}+\frac{1}{2 !} \theta \boldsymbol{a}^{\wedge}+\frac{1}{3 !} \theta^{2}\left(\boldsymbol{a}^{\wedge}\right)^{2}+\frac{1}{4 !} \theta^{3}\left(\boldsymbol{a}^{\wedge}\right)^{3}+\frac{1}{5 !} \theta^{4}\left(\boldsymbol{a}^{\wedge}\right)^{4} \cdots \\
+&=\frac{1}{\theta}\left(\frac{1}{2 !} \theta^{2}-\frac{1}{4 !} \theta^{4}+\cdots\right)\left(\boldsymbol{a}^{\wedge}\right)+\frac{1}{\theta}\left(\frac{1}{3 !} \theta^{3}-\frac{1}{5} \theta^{5}+\cdots\right)\left(\boldsymbol{a}^{\wedge}\right)^{2}+\boldsymbol{I} \\
+&=\frac{1}{\theta}(1-\cos \theta)\left(\boldsymbol{a}^{\wedge}\right)+\frac{\theta-\sin \theta}{\theta}\left(\boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}-\boldsymbol{I}\right)+\boldsymbol{I} \\
+&=\frac{\sin \theta}{\theta} \boldsymbol{I}+\left(1-\frac{\sin \theta}{\theta}\right) \boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}+\frac{1-\cos \theta}{\theta} \boldsymbol{a}^{\wedge} \stackrel{\text { def }}{=} \boldsymbol{J}
+\end{aligned}</script><p>可以从结果上看出，$\boldsymbol{\xi}$ 的指数映射左上角的 $\boldsymbol{R}$ 是我们熟知的 $SO(3)$ 中的元素，而右上角的平移部分，发生了一次以 $\boldsymbol{J}$ </p>
+<p>为系数的线性变换。</p>
+<h4 id="2-对数映射-1"><a href="#2-对数映射-1" class="headerlink" title="(2) 对数映射"></a>(2) 对数映射</h4><p>对于对数映射，在已知 $\boldsymbol T$ 后，我们可以知道其右上角的表示平移的向量：</p>
+<script type="math/tex; mode=display">
+t=J \rho</script><p>而这个 $\boldsymbol{J}$ 是和 $\phi$ 有关。因此可以先根据左上角的旋转矩阵 $\boldsymbol R$ 先求出 $\phi$ ，再求出  $\boldsymbol{J}$ ，最后求解方程得到 $\rho$ 。</p>
+<h2 id="III-李代数求导与扰动模型"><a href="#III-李代数求导与扰动模型" class="headerlink" title="III. 李代数求导与扰动模型"></a>III. 李代数求导与扰动模型</h2><h3 id="1-BCH公式与近似形式"><a href="#1-BCH公式与近似形式" class="headerlink" title="1. BCH公式与近似形式"></a>1. BCH公式与近似形式</h3><p>我们学习李代数的动机就是在优化矩阵的时候，可以方便的求出矩阵的导数。</p>
+<p>我们已经知道在 $SO(3)$ 和 $SE(3)$ 上李群和李代数的关系，但是还有一件事没有明确，例如在 $SO(3)$ 中完成两个矩阵的乘法时，所对应的李代数在 $\mathfrak{so(3)}$ 上发生了什么改变呢？是否有如下式子成立：</p>
+<script type="math/tex; mode=display">
+\exp \left(\phi_{1}^{\wedge}\right) \exp \left(\phi_{2}^{\wedge}\right)=\exp \left(\left(\phi_{1}+\phi_{2}\right)^{\wedge}\right) ?</script><p>或：</p>
+<script type="math/tex; mode=display">
+\ln (\exp (\boldsymbol{A}) \exp (\boldsymbol{B}))=\boldsymbol{A}+\boldsymbol{B} ?</script><p>如果 $\phi$ 是标量，这是成立的。但 $\boldsymbol\phi$ 表示一个向量时，是不成立的。</p>
+<p>根据 <strong><em>baker-Campbell-Hausdorff</em></strong> 公式，矩阵的指数函数与矩阵的指数函数相乘：</p>
+<script type="math/tex; mode=display">
+\ln (\exp (\boldsymbol{A}) \exp (\boldsymbol{B}))=\boldsymbol{A}+\boldsymbol{B}+\frac{1}{2}[\boldsymbol{A}, \boldsymbol{B}]+\frac{1}{12}[\boldsymbol{A},[\boldsymbol{A}, \boldsymbol{B}]]-\frac{1}{12}[\boldsymbol{B},[\boldsymbol{A}, \boldsymbol{B}]]+\cdots</script><p>其中[]表示李括号。该公式告诉我们，当求两个矩阵指数函数之积时，<strong>会产生一些李括号组成的余项</strong>。</p>
+<p>现在我们考虑在 $SO(3)$ 上的李代数 $\ln \left(\exp \left(\phi_{1}^{\wedge}\right) \exp \left(\phi_{2}^{\wedge}\right)\right)^{\vee}$ ，当 $\phi_1$ 和 $\phi_2$ 为小量时，小量二次以上的项都可以忽略，此时 <strong>BCH</strong> 公式拥有线性近似表达：</p>
+<script type="math/tex; mode=display">
+\ln \left(\exp \left(\phi_{1}^{\wedge}\right) \exp \left(\phi_{2}^{\wedge}\right)\right)^{\vee} \approx \begin{cases}J_{l}\left(\phi_{2}\right)^{-1} \phi_{1}+\phi_{2} & \text { 当 } \phi_{1} \text { 为小量, } \\ J_{r}\left(\phi_{1}\right)^{-1} \phi_{2}+\phi_{1} & \text { 当 } \phi_{2} \text { 为小量. }\end{cases}</script><p>该式说明了：</p>
+<ul>
+<li>当对一个旋转矩阵 $R_2$ （李代数为 $\phi_2$ ）左乘一个微小旋转矩阵 $R_1$ （李代数为 $\phi_1$ ）时，可以近似看作，在原有的李代数 $\phi_2$ 上加上了一项 $\boldsymbol J_l(\phi_2)^{-1}\phi_1$ 。</li>
+<li>当对一个旋转矩阵 $R_1$ （李代数为 $\phi_1$ ）右乘一个微小旋转矩阵 $R_2$ （李代数为 $\phi_2$ ）时，可以近似看作，在原有的李代数 $\phi_1$ 上加上了一项 $\boldsymbol J_r(\phi_1)^{-1}\phi_2$ 。</li>
+</ul>
+<p>于是李代数在<strong>BCH</strong>近似下，分成了左乘和右乘近似两种，所以我们要注意是左乘模型还是右乘模型。</p>
+<p>左乘近似雅可比矩阵为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{J}_{l}=\boldsymbol{J}=\frac{\sin \theta}{\theta} \boldsymbol{I}+\left(1-\frac{\sin \theta}{\theta}\right) \boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}+\frac{1-\cos \theta}{\theta} \boldsymbol{a}^{\wedge}</script><p>它的逆为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{J}_{l}^{-1}=\frac{\theta}{2} \cot \frac{\theta}{2} \boldsymbol{I}+\left(1-\frac{\theta}{2} \cot \frac{\theta}{2}\right) \boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}-\frac{\theta}{2} \boldsymbol{a}^{\wedge}</script><p>而右乘雅可比矩阵为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{J}_{r}(\boldsymbol{\phi})=\boldsymbol{J}_{l}(-\boldsymbol{\phi})</script><p><strong>这样，我们就可以谈论李群乘法与李代数假发的关系了。</strong></p>
+<p>我们重新叙述一下 BCH 的意义：</p>
+<p>假设某个旋转 $R$ ，对应的李代数为 $\phi$ ，我们给它左乘一个微笑的旋转，记为 $\Delta R$ ，对应的李代数为 $\Delta \phi$ ，那么在李群上得到的结果就是 $\Delta R ·R$ ，而在李代数上，根据 BCH公式，为$J_{l}^{-1}(\phi) \Delta \phi+\phi$ 。可以写成：</p>
+<script type="math/tex; mode=display">
+\exp \left(\Delta \phi^{\wedge}\right) \exp \left(\phi^{\wedge}\right)=\exp \left(\left(\phi+J_{l}^{-1}(\phi) \Delta \phi\right)^{\wedge}\right)</script><p>反之，我们在李代数进行加法，让 $\phi$ 加上 $\Delta \phi$ ，那么可以近似为李群上带左右雅可比的乘法：</p>
+<script type="math/tex; mode=display">
+\exp \left((\boldsymbol{\phi}+\Delta \boldsymbol{\phi})^{\wedge}\right)=\exp \left(\left(\boldsymbol{J}_{l} \Delta \boldsymbol{\phi}\right)^{\wedge}\right) \exp \left(\boldsymbol{\phi}^{\wedge}\right)=\exp \left(\boldsymbol{\phi}^{\wedge}\right) \exp \left(\left(\boldsymbol{J}_{r} \Delta \boldsymbol{\phi}\right)^{\wedge}\right)</script><p>同样，对于 $SE(3)$ 来说，也有类似的BCH公式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\exp \left(\Delta \boldsymbol{\xi}^{\wedge}\right) \exp \left(\boldsymbol{\xi}^{\wedge}\right) \approx \exp \left(\left(\mathcal{J}_{l}^{-1} \Delta \boldsymbol{\xi}+\boldsymbol{\xi}\right)^{\wedge}\right) \\
+&\exp \left(\boldsymbol{\xi}^{\wedge}\right) \exp \left(\Delta \boldsymbol{\xi}^{\wedge}\right) \approx \exp \left(\left(\mathcal{J}_{r}^{-1} \Delta \boldsymbol{\xi}+\boldsymbol{\xi}\right)^{\wedge}\right)
+\end{aligned}</script><p>这里 $\mathcal{J}_{l}$ 稍微复杂，是一个 6维方阵。</p>
+<h3 id="2-SO-3-上的李代数求导"><a href="#2-SO-3-上的李代数求导" class="headerlink" title="2. $SO(3)$ 上的李代数求导"></a>2. $SO(3)$ 上的李代数求导</h3><p>下面来讨论一个带有李代数的函数，以及关于该李代数函数求导的问题。这个问题有很强的实际背景，就是在SLAM中，我们要估计相机的位姿，而位姿通常是由 $SO(3)$ 和 $SE(3)$ 中的矩阵来描述的。</p>
+<p>假设世界坐标系下一点的坐标为 $\boldsymbol p$ ，产生了一个观测数据 $\boldsymbol z$ ，由坐标变换关系可知：</p>
+<script type="math/tex; mode=display">
+\boldsymbol z=\boldsymbol{T} \boldsymbol p+\boldsymbol w</script><p>这里的 $\boldsymbol w$ 为随机噪声。因为它的存在，我们的观测值一定是不准确的，所以我们想要计算理想的观测与实际观测值的误差为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol e=\boldsymbol z-\boldsymbol{T} \boldsymbol{p}</script><p>假设有N个这样的路标点和观测，我们要考虑这N个点的误差，让它们的误差和最小，从而得到一个最优的 $T$ ，则：</p>
+<script type="math/tex; mode=display">
+\min _{\boldsymbol{T}} J(\boldsymbol{T})=\sum_{i=1}^{N}\left\|\boldsymbol{z}_{i}-\boldsymbol{T}{\boldsymbol{p}_i}\right\|_{2}^{2}</script><p>这里的 $J(T)$ 就是一个关于李群或李代数的函数。我们要计算它的最小值，就要使目标函数 $J$ 关于变换矩阵 $T$ 进行求导。在SLAM中，我们会经常构建与位姿相关的函数，然后求其导数。</p>
+<p>然而，在 $SO(3)$ 和 $SE(3)$ 中，并没有良好定义的加法，它们只是群。而从李代数的角度来说，由于李代数由向量组成，具有良好的加法运算，因此使用李代数解决求导问题的思路分为两种：</p>
+<ul>
+<li>用李代数表示位姿，然后根据李代数加法对李代数求导</li>
+<li>对李群左乘或右乘微小扰动，然后对该扰动进行求导，称为左扰动和右扰动模型。</li>
+</ul>
+<h4 id="1-李代数求导"><a href="#1-李代数求导" class="headerlink" title="(1) 李代数求导"></a>(1) 李代数求导</h4><p>首先考虑 $SO(3)$ 上，假设我们对一个空间点 $\boldsymbol p$ 进行了旋转，得到了 $R\boldsymbol p$ 。现在要计算旋转后点的坐标相对于旋转的导数，我们非正式地记为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial(\boldsymbol{R} \boldsymbol{p})}{\partial \boldsymbol{R}}</script><blockquote>
+<p>这里不能按照矩阵微分来定义导数，只是一个记号</p>
+</blockquote>
+<p>由于 $SO(3)$ 没有加法，所以该导数无法按照导数的定义进行计算，设矩阵 $R$ 对应的李代数为 $\phi$ ，我们转而计算：</p>
+<script type="math/tex; mode=display">
+\frac{\partial\left(\exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}\right)}{\partial \boldsymbol{\phi}}</script><p>按照导数的定义，有</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial\left(\exp \left(\phi^{\wedge}\right) \boldsymbol{p}\right)}{\partial \boldsymbol{\phi}} &=\lim _{\delta \boldsymbol{\phi} \rightarrow \mathbf{0}} \frac{\exp \left((\boldsymbol{\phi}+\delta \boldsymbol{\phi})^{\wedge}\right) \boldsymbol{p}-\exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}}{\delta \boldsymbol{\phi}} \\
+&=\lim _{\delta \boldsymbol{\phi} \rightarrow \mathbf{0}} \frac{\exp \left(\left(\boldsymbol{J}_{l} \delta \boldsymbol{\phi}\right)^{\wedge}\right) \exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}-\exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}}{\delta \boldsymbol{\phi}} \\
+&=\lim _{\delta \boldsymbol{\phi} \rightarrow \mathbf{0}} \frac{\left(\boldsymbol{I}+\left(\boldsymbol{J}_{l} \delta \boldsymbol{\phi}\right)^{\wedge}\right) \exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}-\exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}}{\delta \boldsymbol{\phi}} \\
+&=\lim _{\delta \boldsymbol{\phi} \rightarrow \mathbf{0}} \frac{\left(\boldsymbol{J}_{l} \delta \boldsymbol{\phi}\right)^{\wedge} \exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}}{\delta \boldsymbol{\phi}} \\
+&=\lim _{\delta \boldsymbol{\phi} \rightarrow \mathbf{0}} \frac{-\left(\exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}\right)^{\wedge} \boldsymbol{J}_{l} \delta \boldsymbol{\phi}}{\delta \boldsymbol{\phi}}=-(\boldsymbol{R} \boldsymbol{p})^{\wedge} \boldsymbol{J}_{l}
+\end{aligned}</script><p>于是我们推出了旋转后的点相对于李代数的导数为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial(\boldsymbol{R} \boldsymbol{p})}{\partial \boldsymbol{\phi}}=(-\boldsymbol{R} \boldsymbol{p})^{\wedge} \boldsymbol{J}_{l}</script><p>这里仍包含形式复杂的 $\boldsymbol J_l$ ，可以通过先求出 $\phi$ 再求出它。但是我们不太希望计算它，接下来我们会看到扰动模型提供了简单的导数计算方式。</p>
+<h4 id="2-扰动模型（左乘）"><a href="#2-扰动模型（左乘）" class="headerlink" title="(2) 扰动模型（左乘）"></a>(2) 扰动模型（左乘）</h4><p>另一种求导方式是对 $R$ 进行一次扰动 $\Delta R$ ，这个扰动可以乘在左边也可以在右边，最后的结果会有一点微小的差异，设左扰动 $\Delta R$ 对应的李代数为 $\boldsymbol\varphi$ ，然后对 $\boldsymbol\varphi$ 求导，即：</p>
+<script type="math/tex; mode=display">
+\frac{\partial(\boldsymbol{R} \boldsymbol{p})}{\partial \varphi}=\lim _{\boldsymbol{\varphi} \rightarrow \mathbf{0}} \frac{\exp \left(\boldsymbol{\varphi}^{\wedge}\right) \exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}-\exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}}{\boldsymbol{\varphi}}</script><p>计算：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial(\boldsymbol{R} \boldsymbol{p})}{\partial \boldsymbol{\varphi}} &=\lim _{\boldsymbol{\varphi} \rightarrow 0} \frac{\exp \left(\boldsymbol{\varphi}^{\wedge}\right) \exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}-\exp \left(\boldsymbol{\phi}^{\wedge}\right) \boldsymbol{p}}{\boldsymbol{\varphi}} \\
+&=\lim _{\varphi \rightarrow 0} \frac{\left(\boldsymbol{I}+\boldsymbol{\varphi}^{\wedge}\right) \exp \left(\phi^{\wedge}\right) \boldsymbol{p}-\exp \left(\phi^{\wedge}\right) \boldsymbol{p}}{\boldsymbol{\varphi}} \\
+&=\lim _{\boldsymbol{\varphi} \rightarrow 0} \frac{\boldsymbol{\varphi}^{\wedge} \boldsymbol{R} \boldsymbol{p}}{\boldsymbol{\varphi}}=\lim _{\boldsymbol{\varphi} \rightarrow \mathbf{0}} \frac{-(\boldsymbol{R} \boldsymbol{p})^{\wedge} \boldsymbol{\varphi}}{\boldsymbol{\varphi}}=-(\boldsymbol{R} \boldsymbol{p})^{\wedge}
+\end{aligned}</script><p>该方法的结果省去了一个雅可比矩阵 $J_l$ 。</p>
+<h3 id="3-SE-3-上的李代数求导"><a href="#3-SE-3-上的李代数求导" class="headerlink" title="3. $SE(3)$ 上的李代数求导"></a>3. $SE(3)$ 上的李代数求导</h3><p>李代数求导就不介绍了，直接介绍扰动模型。</p>
+<p>$\Delta T = \exp(\delta\boldsymbol{\xi}^{\wedge})$ ，我们设扰动项的李代数为$\delta \boldsymbol{\xi}=[\delta \boldsymbol{\rho}, \delta \boldsymbol{\phi}]^{\mathrm{T}}$ ，则：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{\partial(\boldsymbol{T} \boldsymbol{p})}{\partial \delta \boldsymbol{\xi}}&=\lim _{\delta \boldsymbol{\xi} \rightarrow 0} \frac{\exp \left(\delta \boldsymbol{\xi}^{\wedge}\right) \exp \left(\boldsymbol{\xi}^{\wedge}\right) \boldsymbol{p}-\exp \left(\boldsymbol{\xi}^{\wedge}\right) \boldsymbol{p}}{\delta \boldsymbol{\xi}}\\
+
+&=\lim _{\delta \xi \rightarrow 0} \frac{\left(\boldsymbol{I}+\delta \boldsymbol{\xi}^{\wedge}\right) \exp \left(\boldsymbol{\xi}^{\wedge}\right) \boldsymbol{p}-\exp \left(\boldsymbol{\xi}^{\wedge}\right) \boldsymbol{p}}{\delta \boldsymbol{\xi}} \\
+&=\lim _{\delta \boldsymbol{\xi} \rightarrow 0} \frac{\delta \boldsymbol{\xi}^{\wedge} \exp \left(\boldsymbol{\xi}^{\wedge}\right) \boldsymbol{p}}{\delta \boldsymbol{\xi}} \\
+&=\lim _{\delta \boldsymbol{\xi} \rightarrow 0} \frac{\left[\begin{array}{cc}
+\delta \boldsymbol{\phi}^{\wedge} & \delta \boldsymbol{\rho} \\
+\mathbf{0}^{\mathrm{T}} & 0
+\end{array}\right]\left[\begin{array}{c}
+\boldsymbol{R} \boldsymbol{p}+\boldsymbol{t} \\
+1
+\end{array}\right]}{\delta \boldsymbol{\xi}} \\
+&=\lim _{\delta \boldsymbol{\xi} \rightarrow 0} \frac{\left[\begin{array}{c}
+\delta \boldsymbol{\phi}^{\wedge}(\boldsymbol{R} \boldsymbol{p}+\boldsymbol{t})+\delta \boldsymbol{\rho} \\
+\mathbf{0}^{\mathrm{T}}
+\end{array}\right]}{[\delta \boldsymbol{\rho}, \delta \boldsymbol{\phi}]^{\mathrm{T}}}=\left[\begin{array}{cc}
+\boldsymbol{I} & -(\boldsymbol{R} \boldsymbol{p}+\boldsymbol{t})^{\wedge} \\
+\mathbf{0}^{\mathrm{T}} & \mathbf{0}^{\mathrm{T}}
+\end{array}\right] \stackrel{\text { def }}{=}(\boldsymbol{T} \boldsymbol{p})^{\odot}
+\end{aligned}</script><p>这个形式很复杂，但只要记住最后的结论就是该扰动模型的结果是一个矩阵，这个矩阵是 $4\times 6$ 维的。</p>
+<h2 id="IV-总结"><a href="#IV-总结" class="headerlink" title="IV. 总结"></a>IV. 总结</h2><p>前面讲了李群李代数的由来，现在进行简单的总结，该总结仅建立在个人理解上，并没有证明过程。</p>
+<ol>
+<li>李群和李代数的引入是为了解决矩阵求导问题。</li>
+<li>旋转矩阵和变换矩阵就是李群，每一个矩阵都对应着一个李代数，李代数是一个向量。特别地对于一个旋转矩阵对应的李代数是一个旋转向量。</li>
+<li>李代数可以描述李群的局部性质。</li>
+<li><p>李群和李代数之间由指数映射和对数映射来转换。如旋转向量所对应的反对称矩阵的指数函数就是一个旋转矩阵，而旋转矩阵求对数再变化成向量（这里旋转矩阵求对数之后还是一个矩阵，要根据反对称矩阵的关系变换一下），就是一个旋转向量。</p>
+</li>
+<li><p>BCH近似公式，两个李群相乘，等于其对应的两个李代数乘其中一个乘以一个雅可比矩阵，再加上另一个对应的李代数。（具体看左乘和右乘）。</p>
+</li>
+<li>对李群求导，可以转化为对其对应的李代数求导。对于求导过程中，增量的表示可以用扰动模型表示或是利用李代数的加法运算来表示。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>专业原理</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
 </search>
