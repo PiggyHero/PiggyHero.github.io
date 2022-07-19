@@ -20,20 +20,26 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="强制退出同时按 option ，command 和 esc 键，即可弹出强退窗口。 无法打开“*”，因为无法验证开发者 打开方达，在右侧菜单栏选择应用程序 找到提示无法验证的应用，右键点击打开 第一次会出现以下提示，继续点击打开即可">
+  <meta name="description" content="介绍相机的成像过程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【mac问题解决】Mac强制退出软件和打开未验证的软件">
-<meta property="og:url" content="http://example.com/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%89%93%E5%BC%80%E6%9C%AA%E9%AA%8C%E8%AF%81%E7%9A%84%E8%BD%AF%E4%BB%B6/index.html">
+<meta property="og:title" content="【视觉SLAM7】相机模型">
+<meta property="og:url" content="http://example.com/2022/07/19/%E3%80%90%E8%A7%86%E8%A7%89SLAM7%E3%80%91%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="PiggyHero Wiki">
-<meta property="og:description" content="强制退出同时按 option ，command 和 esc 键，即可弹出强退窗口。 无法打开“*”，因为无法验证开发者 打开方达，在右侧菜单栏选择应用程序 找到提示无法验证的应用，右键点击打开 第一次会出现以下提示，继续点击打开即可">
+<meta property="og:description" content="介绍相机的成像过程">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-10-17T22:31:08.000Z">
-<meta property="article:modified_time" content="2022-01-14T19:17:33.287Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719205915.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719215156.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719230611.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719231120.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220720012007.png">
+<meta property="article:published_time" content="2022-07-19T08:41:33.000Z">
+<meta property="article:modified_time" content="2022-07-19T17:46:09.133Z">
 <meta property="article:author" content="PiggyHero">
-<meta property="article:tag" content="Mac">
+<meta property="article:tag" content="SLAM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719205915.png">
 
-<link rel="canonical" href="http://example.com/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%89%93%E5%BC%80%E6%9C%AA%E9%AA%8C%E8%AF%81%E7%9A%84%E8%BD%AF%E4%BB%B6/">
+<link rel="canonical" href="http://example.com/2022/07/19/%E3%80%90%E8%A7%86%E8%A7%89SLAM7%E3%80%91%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -46,7 +52,7 @@
   };
 </script>
 
-  <title>【mac问题解决】Mac强制退出软件和打开未验证的软件 | PiggyHero Wiki</title>
+  <title>【视觉SLAM7】相机模型 | PiggyHero Wiki</title>
   
 
 
@@ -195,7 +201,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Mac%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA%E8%BD%AF%E4%BB%B6%E5%92%8C%E6%89%93%E5%BC%80%E6%9C%AA%E9%AA%8C%E8%AF%81%E7%9A%84%E8%BD%AF%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/19/%E3%80%90%E8%A7%86%E8%A7%89SLAM7%E3%80%91%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/cutexiaoxin.gif">
@@ -208,7 +214,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【mac问题解决】Mac强制退出软件和打开未验证的软件
+          【视觉SLAM7】相机模型
         </h1>
 
         <div class="post-meta">
@@ -218,14 +224,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-10-18 06:31:08" itemprop="dateCreated datePublished" datetime="2021-10-18T06:31:08+08:00">2021-10-18</time>
+              <time title="创建时间：2022-07-19 16:41:33" itemprop="dateCreated datePublished" datetime="2022-07-19T16:41:33+08:00">2022-07-19</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-15 03:17:33" itemprop="dateModified" datetime="2022-01-15T03:17:33+08:00">2022-01-15</time>
+                <time title="修改时间：2022-07-20 01:46:09" itemprop="dateModified" datetime="2022-07-20T01:46:09+08:00">2022-07-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +239,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" itemprop="url" rel="index"><span itemprop="name">问题解决</span></a>
+                  <a href="/categories/%E4%B8%93%E4%B8%9A%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">专业原理</span></a>
                 </span>
             </span>
 
@@ -255,13 +261,121 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <span id="more"></span>
-<h3 id="强制退出"><a href="#强制退出" class="headerlink" title="强制退出"></a>强制退出</h3><p>同时按 <code>option</code> ，<code>command</code> 和 <code>esc</code> 键，即可弹出强退窗口。</p>
-<h3 id="无法打开“-”，因为无法验证开发者"><a href="#无法打开“-”，因为无法验证开发者" class="headerlink" title="无法打开“*”，因为无法验证开发者"></a>无法打开“<em>*</em>”，因为无法验证开发者</h3><ol>
-<li>打开方达，在右侧菜单栏选择应用程序</li>
-<li>找到提示无法验证的应用，右键点击打开</li>
-<li>第一次会出现以下提示，继续点击打开即可</li>
+        <p>介绍相机的成像过程</p>
+<span id="more"></span>
+<p>相机模型主要用来描述将三维世界中的坐标点（单位为米）映射到二维图像平面（单位为像素）的过程。对于常见的相机，我们可以用针孔模型和畸变模型来描述整个投影过程。</p>
+<h2 id="I-针孔模型"><a href="#I-针孔模型" class="headerlink" title="I. 针孔模型"></a>I. 针孔模型</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719205915.png" alt="image-20220719205914876" style="zoom:50%;" /></p>
+<p>现在对针孔模型进行数学建模。设 $O-x-y-z$ 为相机坐标系，习惯上我们让 $z$ 轴指向前方，如上图所示。现实世界中有一 $P$ 点，经过小孔 $O$ 投影后，落在成像平面 $O’-x’-y’$上， 成像点为 $P’$ 。设 $P=[X,Y,Z]^T$，$P’=[X’,Y’,Z’]^T$ ，并且设物理成像平面到小孔的距离为 $f$ （焦距），那么根据三角形相似关系，有：</p>
+<script type="math/tex; mode=display">
+\frac{Z}{f}=-\frac{X}{X^{\prime}}=-\frac{Y}{Y^{\prime}}\tag{1}</script><p>其中负号表示成像是倒的，不过实际上成像并不是倒的，因此我们可以把负号去掉，使式子更加简介（实际上相机已经帮我们把倒立的像正过来了）：</p>
+<script type="math/tex; mode=display">
+\frac{Z}{f}=\frac{X}{X^{\prime}}=\frac{Y}{Y^{\prime}}\tag{2}</script><p>整理可以得到：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+X^{\prime} &=f \frac{X}{Z} \\
+Y^{\prime} &=f \frac{Y}{Z}
+\end{aligned}\tag{3}</script><p>此刻的 $X’, Y’$ 的单位都是米，也就是在相机成像平面上，距离成像中心的真实距离。但图像终究是由一个个像素构成的，所以我们还要将  $X’, Y’$ 转化成对应的像素坐标 $[u,v]^T$。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719215156.png" alt="image-20220719215155983" style="zoom: 33%;" /></p>
+<p>像素坐标系与成像平面之间，相差了一个缩放和一个原点的平移，如上图所示，我们设像素坐标在 $u$ 轴上缩放了 $\alpha$ 倍，在 $v$ 轴上缩放了 $\beta$ 倍，同时原点平移了 $[c_x,c_y]^T$ ，那么，$P’$ 的坐标与像素坐标 $[u,v]^T$ 的关系为：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+u=\alpha X^{\prime}+c_{x} \\
+v=\beta Y^{\prime}+c_{y}
+\end{array}\right.\tag{4}</script><p>把（3）式带入到（4）中，并令 $\alpha f=f_x,\beta f= f_y$  ，可得：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+u=f_{x} \frac{X}{Z}+c_{x} \\
+v=f_{y} \frac{Y}{Z}+c_{y}
+\end{array}\right.</script><p>其中 $f$ 的单位是米，$\alpha,\beta$ 的单位为像素/米，所以 $f_x,f_y,c_x,c_y$ 的单位为像素，把该式写成矩阵形式会更加简洁，不过左侧需要用齐次坐标，右侧为非齐次坐标：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)=\frac{1}{Z}\left(\begin{array}{ccc}
+f_{x} & 0 & c_{x} \\
+0 & f_{y} & c_{y} \\
+0 & 0 & 1
+\end{array}\right)\left(\begin{array}{l}
+X \\
+Y \\
+Z
+\end{array}\right) \stackrel{\operatorname{def}}{=} \frac{1}{Z} \boldsymbol{K} \boldsymbol{P}</script><p>习惯性地把Z移到左侧：</p>
+<script type="math/tex; mode=display">
+Z\left(\begin{array}{c}
+u \\
+v \\
+1
+\end{array}\right)=\left(\begin{array}{ccc}
+f_{x} & 0 & c_{x} \\
+0 & f_{y} & c_{y} \\
+0 & 0 & 1
+\end{array}\right)\left(\begin{array}{c}
+X \\
+Y \\
+Z
+\end{array}\right) \stackrel{\text { def }}{=} \boldsymbol{K} \boldsymbol{P}</script><p>也可以写为：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{c}
+u \\
+v \\
+1
+\end{array}\right)=\left(\begin{array}{ccc}
+f_{x} & 0 & c_{x} \\
+0 & f_{y} & c_{y} \\
+0 & 0 & 1
+\end{array}\right)\left(\begin{array}{c}
+\frac{X}{Z} \\
+\frac{Y}{Z} \\
+1
+\end{array}\right)</script><p>从这个式子可以看出，只要 $\frac{X}{Z}， \frac{Y}{Z}$ 的比值保持不变时，像素坐标就不变，因此可以从另一个角度来知道，单目丢失了深度信息，即当仅仅知道一点的像素坐标时，是无法还原出其真实的空间位置的，只是知道它在哪一条射线上。这里的 $[\frac{X}{Z},\frac{Y}{Z},1]^T$ 称为归一化坐标，表示相机坐标系下，$Z=1$ 平面与这条射线相交的点。</p>
+<p>我们把中间的 $K$ 矩阵称为相机的内参矩阵，通常认为相机的内参在出厂之后是固定的，不会在使用过程中发生变化。</p>
+<p>另外，有内参自然相对的有外参，在之前的推导中，我们使用的 $P$ 点是相机坐标系下的坐标，但实际上由于相机在运动，所以 $P$ 的相机系下的坐标应该是它的世界坐标（记为 $P_w$ ）根据相机的当前位姿变换到相机坐标系下的结果。则有：</p>
+<script type="math/tex; mode=display">
+Z \boldsymbol{P}_{u v}=Z\left[\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right]=\boldsymbol{K}\left(\boldsymbol{R} \boldsymbol{P}_{\mathrm{w}}+\boldsymbol{t}\right)=\boldsymbol{K} \boldsymbol{T} \boldsymbol{P}_{\mathrm{w}}</script><p>这里的 $R$ 和 $t$ 称为相机的外参数。</p>
+<h2 id="II-畸变模型"><a href="#II-畸变模型" class="headerlink" title="II. 畸变模型"></a>II. 畸变模型</h2><p>相机中加入透镜会导致图片发生畸变，畸变分为两种：</p>
+<ul>
+<li>有透镜自身对光线传播的影响，导致的<strong>径向畸变</strong>。</li>
+<li>由透镜与成像平面不完全平行造成的<strong>切向畸变</strong>。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719230611.png" alt="image-20220719230611310" style="zoom:50%;" /></p>
+<p>径向畸变分为桶形畸变和枕形畸变两种，桶形畸变中，图像放大倍率随着与光轴之间的距离增大而减小，而枕形畸变则恰好相反。穿过图像中心和光轴有交点的直线还能保持形状不变。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719231120.png" alt="image-20220719231120811" style="zoom: 50%;" /></p>
+<p>切向畸变如上图所示。我们现在用更严格的数学形式对两者进行描述，考虑归一化平面上的一点 $P=[x,y]^T$ ，极坐标形式为 $[r,\theta]^T$ ，径向畸变中，坐标点随着该点距离原点的长度发生变化，切向畸变可以看成坐标点沿着切线方向发生了变化，也就是水平夹角发生了变化。通常假设这些畸变呈多项式关系：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&x_{\text {distorted }}=x\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right) \\
+&y_{\text {distorted }}=y\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right)
+\end{aligned}</script><p>其中，$[x_{distorted},y_{distorted}]^T$ 是畸变后点的归一化坐标。对于切向畸变，我们使用另外两个参数 $p_1,p_2$ 进行纠正：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&x_{\text {distorted }}=x+2 p_{1} x y+p_{2}\left(r^{2}+2 x^{2}\right) \\
+&y_{\text {distorted }}=y+p_{1}\left(r^{2}+2 y^{2}\right)+2 p_{2} x y
+\end{aligned}</script><p>因此，对于相机坐标系中的任意一点 $P$ ，我们能够通过5个畸变系数找到这个点在像素平面上的正确位置，即：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+x_{\text {distorted }}=x\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right)+2 p_{1} x y+p_{2}\left(r^{2}+2 x^{2}\right) \\
+y_{\text {distorted }}=y\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right)+p_{1}\left(r^{2}+2 y^{2}\right)+2 p_{2} x y
+\end{array}\right.</script><p>对于去畸变，可以这样做：</p>
+<ol>
+<li>任选畸变图象上的一点 $[u,v]^T$ ，计算该像素点对应归一化平面上的坐标 $[x,y]^T$ 。</li>
+<li>计算 $r = \sqrt{x^2+y^2}$ ，然后带入到畸变方程中，求出畸变后的归一化平面上的坐标 $[x_{distorted},y_{distorted}]^T$ 。</li>
+<li>然后根据$[x_{distorted},y_{distorted}]^T$和相机的内参计算出像素平面上的坐标 $[u_{distorted},v_{distorted}]^T$ </li>
+<li>将$[u_{distorted},v_{distorted}]^T$ 处的像素值赋给$[u,v]^T$ 处的像素。</li>
 </ol>
+<p>该方法就是找这个像素点本应该对应的像素值，因为畸变，本应该投影到该点的点被投到别处，所以要找到这个投到别处的点。</p>
+<h2 id="III-双目相机模型"><a href="#III-双目相机模型" class="headerlink" title="III. 双目相机模型"></a>III. 双目相机模型</h2><p>双目相机和人眼一样，可以根据视差来计算出深度。双目相机的几何模型如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220720012007.png" alt="image-20220720012007271" style="zoom:50%;" /></p>
+<p>两个相机中心间的距离称为基线，是双目相机重要的参数，记为 $b$ 。假设空间中有一点 $P$ ，在左眼相机和右眼相机上各成一个像，记为 $P_L$ 和 $P_R$ ，由于观看角度不同，这两个点的成像位置也不同。理想情况下，由于左右相机仅在 $x$ 轴上有位移，所以 $P$ 的像也只在 $x$ 轴上有差异。记它在左边相机上的坐标为 $u_L$ ，右边相机上的坐标为 $u_R$ （注意这里的 $u_L , u_R$ 是相机坐标系的坐标，单位是米）。根据几何关系，可以得到：</p>
+<script type="math/tex; mode=display">
+\frac{z-f}{z}=\frac{b-u_{\mathrm{L}}+u_{\mathrm{R}}}{b}</script><p>这里的 $u_R$ 是负数，所以表示距离时取负。整理可得：</p>
+<script type="math/tex; mode=display">
+z=\frac{f b}{d}, \quad d \stackrel{\text { def }}{=} u_{\mathrm{L}}-u_{\mathrm{R}}</script><p>其中 $d$ 定义为左右图的横坐标之差，称为视差。由上式可以知道，视差越小，深度越大。因为视差最小也就是一个像素所表示的长度，所以所能探测到的深度是有一定范围的，由 $fb$ 来确定。因此基线越长，探测的范围越大。</p>
+<p>虽然双目相机可以直接指导深度，但是也有很多问题，我们需要确切知道哪两个像素点是同一物体的投影，这就需要进行像素点匹配，而这又很占用计算资源，且精度不高。</p>
 
     </div>
 
@@ -271,7 +385,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Mac/" rel="tag"># Mac</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
           </div>
 
         
@@ -280,13 +394,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/18/%E3%80%90mac%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E3%80%91Word%E4%B8%AD%E4%BD%BF%E7%94%A8Endnote%E6%8F%92%E4%BB%B6/" rel="prev" title="【mac问题解决】Word中使用Endnote插件">
-      <i class="fa fa-chevron-left"></i> 【mac问题解决】Word中使用Endnote插件
+    <a href="/2022/07/19/%E3%80%90%E8%A7%86%E8%A7%89SLAM6%E3%80%91Sophus%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="prev" title="【视觉SLAM6】Sophus库的使用">
+      <i class="fa fa-chevron-left"></i> 【视觉SLAM6】Sophus库的使用
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/10/18/%E3%80%90%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E3%80%91%E5%8C%97%E9%82%AE%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="【计算机视觉】北邮机器视觉学习笔记">
-      【计算机视觉】北邮机器视觉学习笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -345,7 +456,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E9%80%80%E5%87%BA"><span class="nav-text">强制退出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E2%80%9C-%E2%80%9D%EF%BC%8C%E5%9B%A0%E4%B8%BA%E6%97%A0%E6%B3%95%E9%AA%8C%E8%AF%81%E5%BC%80%E5%8F%91%E8%80%85"><span class="nav-text">无法打开“*”，因为无法验证开发者</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E9%92%88%E5%AD%94%E6%A8%A1%E5%9E%8B"><span class="nav-text">I. 针孔模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-%E7%95%B8%E5%8F%98%E6%A8%A1%E5%9E%8B"><span class="nav-text">II. 畸变模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-%E5%8F%8C%E7%9B%AE%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">III. 双目相机模型</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

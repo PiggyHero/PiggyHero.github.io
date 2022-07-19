@@ -108,14 +108,14 @@
 <p>上面的写法是一种大气规范的写法。只有构造函数有这种写法。</p>
 <p><code>re(r)</code> 和 <code>im(i)</code> 就是把r和i的值赋值给class的数据。当然也可以写到大括号里，但是这样的写法不好。</p>
 <blockquote>
-<p>不带指针的类一般不用写西沟函数。</p>
+<p>不带指针的类一般不用写析构函数。</p>
 </blockquote>
 <h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><p>构造函数可以有多个重载。因为要被初始化，可能有很多种情况的设定，所以需要不同方法的构造函数。</p>
 <blockquote>
 <p>当然一般的函数也可以重载，事实上，在我们写代码的时候，函数名是一样的，但是当进行编译的时候，由于传入的参数类型，个数还有返回值的类型不同，编译器编译后的代码显示的函数名是不一样的。只是我们人类在看的时候是一样的。</p>
 </blockquote>
 <p>下面这种重载是不允许的：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">  	<span class="built_in">complex</span>(<span class="keyword">double</span> r=<span class="number">0</span> , <span class="keyword">double</span> i=<span class="number">0</span>):<span class="built_in">re</span>(r),<span class="built_in">im</span>(i)&#123;&#125;</span><br><span class="line">  	<span class="built_in">complex</span>()<span class="built_in">re</span>(<span class="number">0</span>),<span class="built_in">im</span>(<span class="number">0</span>)&#123;&#125;<span class="comment">//这两种写法是不行的，编译后的代码是一样的，这时编译器就不知道调用哪个函数了。</span></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">  	<span class="keyword">double</span> re;</span><br><span class="line">  	<span class="keyword">double</span> im;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">complex</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">  	<span class="built_in">complex</span>(<span class="keyword">double</span> r=<span class="number">0</span> , <span class="keyword">double</span> i=<span class="number">0</span>):<span class="built_in">re</span>(r),<span class="built_in">im</span>(i)&#123;&#125;</span><br><span class="line">  	<span class="built_in">complex</span>():<span class="built_in">re</span>(<span class="number">0</span>),<span class="built_in">im</span>(<span class="number">0</span>)&#123;&#125;<span class="comment">//这两种写法是不行的，编译后的代码是一样的，这时编译器就不知道调用哪个函数了。</span></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">  	<span class="keyword">double</span> re;</span><br><span class="line">  	<span class="keyword">double</span> im;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h1 id="Lesson4-参数传递与返回值"><a href="#Lesson4-参数传递与返回值" class="headerlink" title="Lesson4 参数传递与返回值"></a>Lesson4 参数传递与返回值</h1><p>构造函数一般不可以被放在private，如果放在private里，就说明外界不可以创建对象。</p>
 <p>有一种设计模式叫做singleton就是把构造函数写到private里。</p>
 <h2 id="常数成员函数"><a href="#常数成员函数" class="headerlink" title="常数成员函数"></a>常数成员函数</h2><p>class中的函数有两种，会改变数据内容的和不会改变数据内容的。</p>
@@ -166,7 +166,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215005524.png" alt="image-20211215005524527" style="zoom:50%;" /></p>
 <p>这里是没有this的存在的。</p>
 <blockquote>
-<p>这种情况必是return by reference ，因为返回的必定是local object。</p>
+<p>这种情况必是return by value ，因为返回的必定是local object。</p>
 </blockquote>
 <h2 id="临时对象-typename"><a href="#临时对象-typename" class="headerlink" title="临时对象 typename()"></a>临时对象 typename()</h2><p>在上面的return中，我们可以看见，<code>complex (,)</code> ，这就是一个临时对象。</p>
 <p>这种形如 <code>typename ()</code> ，是临时对象。它的声明到下一行就结束了。</p>
@@ -6864,11 +6864,14 @@ a_{1} a_{3} & a_{2} a_{3} & -a_{1}^{2}-a_{2}^{2}
 \exp \left(\theta \boldsymbol{a}^{\wedge}\right)=\cos \theta \boldsymbol{I}+(1-\cos \theta) \boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}+\sin \theta \boldsymbol{a}^{\wedge}</script><p>这个式子我们似曾相识，这就是在刚体运动描述中旋转向量转化成旋转矩阵的<strong>罗德里格斯</strong>公式。所以我们现在可以明白，其实李代数 $\mathfrak{so(3)}$ 实际上就是由所谓的<strong>旋转向量</strong>组成的向量空间，而<strong>指数映射即罗德里格斯公式</strong>。我们可以通过该公式把 $\mathfrak{so(3)}$ 中的任意一个向量对应到一个位于 $SO(3)$ 中的旋转矩阵。</p>
 <h4 id="2-对数映射"><a href="#2-对数映射" class="headerlink" title="(2) 对数映射"></a>(2) 对数映射</h4><p>反之，通过定义对数映射，即可把 $SO(3)$ 中的元素对应到 $\mathfrak{so(3)}$ 中：</p>
 <script type="math/tex; mode=display">
-\phi=\ln (\boldsymbol{R})^{\vee}=\left(\sum_{n=0}^{\infty} \frac{(-1)^{n}}{n+1}(\boldsymbol{R}-\boldsymbol{I})^{n+1}\right)</script><p>但实际上，我们没有必要再通过计算该式来求旋转向量了，我们可以根据：</p>
+\phi=\ln (\boldsymbol{R})^{\vee}=\left(\sum_{n=0}^{\infty} \frac{(-1)^{n}}{n+1}(\boldsymbol{R}-\boldsymbol{I})^{n+1}\right)^{\vee}</script><p>但实际上，我们没有必要再通过计算该式来求旋转向量了，我们可以根据：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}\operatorname{tr}(\boldsymbol{R}) &=\cos \theta \operatorname{tr}(\boldsymbol{I})+(1-\cos \theta) \operatorname{tr}\left(\boldsymbol{n} \boldsymbol{n}^{\mathrm{T}}\right)+\sin \theta \operatorname{tr}\left(\boldsymbol{n}^{\wedge}\right) \\&=3 \cos \theta+(1-\cos \theta) \\&=1+2 \cos \theta\end{aligned}</script><script type="math/tex; mode=display">
-\theta=\arccos \frac{\operatorname{tr}(\boldsymbol{R})-1}{2}</script><p>这两个式子，利用迹的性质来求得旋转向量。</p>
-<p>另外，<strong>关于指数映射有什么性质呢？是否对于任意的 $R$ 都能找到唯一的 $\phi$ 与之对应呢？</strong></p>
+\theta=\arccos \frac{\operatorname{tr}(\boldsymbol{R})-1}{2}</script><p>然后根据旋转轴旋转后不变的性质，可以求出旋转轴上的单位向量：</p>
+<script type="math/tex; mode=display">
+R \boldsymbol n=\boldsymbol n</script><p>这两个式子，利用迹的性质来求得旋转向量。</p>
+<p><strong>注意：</strong></p>
+<p><strong>关于指数映射有什么性质呢？是否对于任意的 $R$ 都能找到唯一的 $\phi$ 与之对应呢？</strong></p>
 <p>事实上，指数映射只是一个满射，并不是单射，即每一个旋转矩阵 $R$ 都可以找到一个旋转向量与之对应，但是可能存在多个旋转向量对应着同一个旋转矩阵（例如一个旋转向量，旋转角度是30°和30°+360°）。但是如果我们把旋转角度固定在$\pm\pi$ 中时，此时的李群和李代数是一一对应的。</p>
 <p>根据指数映射，我们知道旋转矩阵和旋转向量的关系就是一对李群和李代数的关系。<strong>因此旋转矩阵的导数可以由旋转向量指定，指导着如何在旋转矩阵中进行微积分运算。</strong></p>
 <h3 id="2-SE-3-上的指数映射和对数映射"><a href="#2-SE-3-上的指数映射和对数映射" class="headerlink" title="2. $SE(3)$ 上的指数映射和对数映射"></a>2. $SE(3)$ 上的指数映射和对数映射</h3><h4 id="1-指数映射-1"><a href="#1-指数映射-1" class="headerlink" title="(1) 指数映射"></a>(1) 指数映射</h4><p>$\mathfrak{se(3)}$ 上的指数映射形式如下：</p>
@@ -7034,6 +7037,132 @@ t=J \rho</script><p>而这个 $\boldsymbol{J}$ 是和 $\phi$ 有关。因此可�
 T_{esti,3}^{-1}T_{esti,3+5}</script><p>同理，我们也可以仅考虑这段时间内的平移：</p>
 <script type="math/tex; mode=display">
 \mathrm{RPE}_{\mathrm{all}}=\sqrt{\left.\frac{1}{N-\Delta t} \sum_{i=1}^{N-\Delta t} \| \log \left(\left(\boldsymbol{T}_{\mathrm{gt}, i}^{-1} \boldsymbol{T}_{\mathrm{gt}, i+\Delta t}\right)\right)^{-1}\left(\boldsymbol{T}_{\text {esti }, i}^{-1} \boldsymbol{T}_{\text {esti }, i+\Delta t}\right)\right)^{\vee} \|_{2}^{2}}</script><h3 id="4-代码"><a href="#4-代码" class="headerlink" title="4. 代码"></a>4. 代码</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pangolin/pangolin.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sophus/se3.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Sophus;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">string groundtruth_file = <span class="string">&quot;./example/groundtruth.txt&quot;</span>;</span><br><span class="line">string estimated_file = <span class="string">&quot;./example/estimated.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> vector&lt;Sophus::SE3d, Eigen::aligned_allocator&lt;Sophus::SE3d&gt;&gt; TrajectoryType;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DrawTrajectory</span><span class="params">(<span class="keyword">const</span> TrajectoryType &amp;gt, <span class="keyword">const</span> TrajectoryType &amp;esti)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">TrajectoryType <span class="title">ReadTrajectory</span><span class="params">(<span class="keyword">const</span> string &amp;path)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">  TrajectoryType groundtruth = <span class="built_in">ReadTrajectory</span>(groundtruth_file);</span><br><span class="line">  TrajectoryType estimated = <span class="built_in">ReadTrajectory</span>(estimated_file);</span><br><span class="line">  <span class="built_in">assert</span>(!groundtruth.<span class="built_in">empty</span>() &amp;&amp; !estimated.<span class="built_in">empty</span>());</span><br><span class="line">  <span class="built_in">assert</span>(groundtruth.<span class="built_in">size</span>() == estimated.<span class="built_in">size</span>());</span><br><span class="line"></span><br><span class="line">  <span class="comment">// compute rmse</span></span><br><span class="line">  <span class="keyword">double</span> rmse = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; estimated.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">    Sophus::SE3d p1 = estimated[i], p2 = groundtruth[i];</span><br><span class="line">    <span class="keyword">double</span> error = (p2.<span class="built_in">inverse</span>() * p1).<span class="built_in">log</span>().<span class="built_in">norm</span>();</span><br><span class="line">    rmse += error * error;</span><br><span class="line">  &#125;</span><br><span class="line">  rmse = rmse / <span class="built_in"><span class="keyword">double</span></span>(estimated.<span class="built_in">size</span>());</span><br><span class="line">  rmse = <span class="built_in">sqrt</span>(rmse);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;RMSE = &quot;</span> &lt;&lt; rmse &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">DrawTrajectory</span>(groundtruth, estimated);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TrajectoryType <span class="title">ReadTrajectory</span><span class="params">(<span class="keyword">const</span> string &amp;path)</span> </span>&#123;</span><br><span class="line">  <span class="function">ifstream <span class="title">fin</span><span class="params">(path)</span></span>;</span><br><span class="line">  TrajectoryType trajectory;</span><br><span class="line">  <span class="keyword">if</span> (!fin) &#123;</span><br><span class="line">    cerr &lt;&lt; <span class="string">&quot;trajectory &quot;</span> &lt;&lt; path &lt;&lt; <span class="string">&quot; not found.&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> trajectory;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (!fin.<span class="built_in">eof</span>()) &#123;</span><br><span class="line">    <span class="keyword">double</span> time, tx, ty, tz, qx, qy, qz, qw;</span><br><span class="line">    fin &gt;&gt; time &gt;&gt; tx &gt;&gt; ty &gt;&gt; tz &gt;&gt; qx &gt;&gt; qy &gt;&gt; qz &gt;&gt; qw;</span><br><span class="line">    <span class="function">Sophus::SE3d <span class="title">p1</span><span class="params">(Eigen::Quaterniond(qw, qx, qy, qz), Eigen::Vector3d(tx, ty, tz))</span></span>;</span><br><span class="line">    trajectory.<span class="built_in">push_back</span>(p1);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> trajectory;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DrawTrajectory</span><span class="params">(<span class="keyword">const</span> TrajectoryType &amp;gt, <span class="keyword">const</span> TrajectoryType &amp;esti)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// create pangolin window and plot the trajectory</span></span><br><span class="line">  pangolin::<span class="built_in">CreateWindowAndBind</span>(<span class="string">&quot;Trajectory Viewer&quot;</span>, <span class="number">1024</span>, <span class="number">768</span>);</span><br><span class="line">  <span class="built_in">glEnable</span>(GL_DEPTH_TEST);</span><br><span class="line">  <span class="built_in">glEnable</span>(GL_BLEND);</span><br><span class="line">  <span class="built_in">glBlendFunc</span>(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);</span><br><span class="line"></span><br><span class="line">  <span class="function">pangolin::OpenGlRenderState <span class="title">s_cam</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">      pangolin::ProjectionMatrix(<span class="number">1024</span>, <span class="number">768</span>, <span class="number">500</span>, <span class="number">500</span>, <span class="number">512</span>, <span class="number">389</span>, <span class="number">0.1</span>, <span class="number">1000</span>),</span></span></span><br><span class="line"><span class="params"><span class="function">      pangolin::ModelViewLookAt(<span class="number">0</span>, <span class="number">-0.1</span>, <span class="number">-1.8</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.0</span>, <span class="number">-1.0</span>, <span class="number">0.0</span>)</span></span></span><br><span class="line"><span class="params"><span class="function">  )</span></span>;</span><br><span class="line"></span><br><span class="line">  pangolin::View &amp;d_cam = pangolin::<span class="built_in">CreateDisplay</span>()</span><br><span class="line">      .<span class="built_in">SetBounds</span>(<span class="number">0.0</span>, <span class="number">1.0</span>, pangolin::Attach::<span class="built_in">Pix</span>(<span class="number">175</span>), <span class="number">1.0</span>, <span class="number">-1024.0f</span> / <span class="number">768.0f</span>)</span><br><span class="line">      .<span class="built_in">SetHandler</span>(<span class="keyword">new</span> pangolin::<span class="built_in">Handler3D</span>(s_cam));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (pangolin::<span class="built_in">ShouldQuit</span>() == <span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="built_in">glClear</span>(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line"></span><br><span class="line">    d_cam.<span class="built_in">Activate</span>(s_cam);</span><br><span class="line">    <span class="built_in">glClearColor</span>(<span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">glLineWidth</span>(<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; gt.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">      <span class="built_in">glColor3f</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);  <span class="comment">// blue for ground truth</span></span><br><span class="line">      <span class="built_in">glBegin</span>(GL_LINES);</span><br><span class="line">      <span class="keyword">auto</span> p1 = gt[i], p2 = gt[i + <span class="number">1</span>];</span><br><span class="line">      <span class="built_in">glVertex3d</span>(p1.<span class="built_in">translation</span>()[<span class="number">0</span>], p1.<span class="built_in">translation</span>()[<span class="number">1</span>], p1.<span class="built_in">translation</span>()[<span class="number">2</span>]);</span><br><span class="line">      <span class="built_in">glVertex3d</span>(p2.<span class="built_in">translation</span>()[<span class="number">0</span>], p2.<span class="built_in">translation</span>()[<span class="number">1</span>], p2.<span class="built_in">translation</span>()[<span class="number">2</span>]);</span><br><span class="line">      <span class="built_in">glEnd</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; esti.<span class="built_in">size</span>() - <span class="number">1</span>; i++) &#123;</span><br><span class="line">      <span class="built_in">glColor3f</span>(<span class="number">1.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>);  <span class="comment">// red for estimated</span></span><br><span class="line">      <span class="built_in">glBegin</span>(GL_LINES);</span><br><span class="line">      <span class="keyword">auto</span> p1 = esti[i], p2 = esti[i + <span class="number">1</span>];</span><br><span class="line">      <span class="built_in">glVertex3d</span>(p1.<span class="built_in">translation</span>()[<span class="number">0</span>], p1.<span class="built_in">translation</span>()[<span class="number">1</span>], p1.<span class="built_in">translation</span>()[<span class="number">2</span>]);</span><br><span class="line">      <span class="built_in">glVertex3d</span>(p2.<span class="built_in">translation</span>()[<span class="number">0</span>], p2.<span class="built_in">translation</span>()[<span class="number">1</span>], p2.<span class="built_in">translation</span>()[<span class="number">2</span>]);</span><br><span class="line">      <span class="built_in">glEnd</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    pangolin::<span class="built_in">FinishFrame</span>();</span><br><span class="line">    <span class="built_in">usleep</span>(<span class="number">5000</span>);   <span class="comment">// sleep 5 ms</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>专业原理</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【视觉SLAM7】相机模型</title>
+    <url>/2022/07/19/%E3%80%90%E8%A7%86%E8%A7%89SLAM7%E3%80%91%E7%9B%B8%E6%9C%BA%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>介绍相机的成像过程</p>
+<span id="more"></span>
+<p>相机模型主要用来描述将三维世界中的坐标点（单位为米）映射到二维图像平面（单位为像素）的过程。对于常见的相机，我们可以用针孔模型和畸变模型来描述整个投影过程。</p>
+<h2 id="I-针孔模型"><a href="#I-针孔模型" class="headerlink" title="I. 针孔模型"></a>I. 针孔模型</h2><p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719205915.png" alt="image-20220719205914876" style="zoom:50%;" /></p>
+<p>现在对针孔模型进行数学建模。设 $O-x-y-z$ 为相机坐标系，习惯上我们让 $z$ 轴指向前方，如上图所示。现实世界中有一 $P$ 点，经过小孔 $O$ 投影后，落在成像平面 $O’-x’-y’$上， 成像点为 $P’$ 。设 $P=[X,Y,Z]^T$，$P’=[X’,Y’,Z’]^T$ ，并且设物理成像平面到小孔的距离为 $f$ （焦距），那么根据三角形相似关系，有：</p>
+<script type="math/tex; mode=display">
+\frac{Z}{f}=-\frac{X}{X^{\prime}}=-\frac{Y}{Y^{\prime}}\tag{1}</script><p>其中负号表示成像是倒的，不过实际上成像并不是倒的，因此我们可以把负号去掉，使式子更加简介（实际上相机已经帮我们把倒立的像正过来了）：</p>
+<script type="math/tex; mode=display">
+\frac{Z}{f}=\frac{X}{X^{\prime}}=\frac{Y}{Y^{\prime}}\tag{2}</script><p>整理可以得到：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+X^{\prime} &=f \frac{X}{Z} \\
+Y^{\prime} &=f \frac{Y}{Z}
+\end{aligned}\tag{3}</script><p>此刻的 $X’, Y’$ 的单位都是米，也就是在相机成像平面上，距离成像中心的真实距离。但图像终究是由一个个像素构成的，所以我们还要将  $X’, Y’$ 转化成对应的像素坐标 $[u,v]^T$。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719215156.png" alt="image-20220719215155983" style="zoom: 33%;" /></p>
+<p>像素坐标系与成像平面之间，相差了一个缩放和一个原点的平移，如上图所示，我们设像素坐标在 $u$ 轴上缩放了 $\alpha$ 倍，在 $v$ 轴上缩放了 $\beta$ 倍，同时原点平移了 $[c_x,c_y]^T$ ，那么，$P’$ 的坐标与像素坐标 $[u,v]^T$ 的关系为：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+u=\alpha X^{\prime}+c_{x} \\
+v=\beta Y^{\prime}+c_{y}
+\end{array}\right.\tag{4}</script><p>把（3）式带入到（4）中，并令 $\alpha f=f_x,\beta f= f_y$  ，可得：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+u=f_{x} \frac{X}{Z}+c_{x} \\
+v=f_{y} \frac{Y}{Z}+c_{y}
+\end{array}\right.</script><p>其中 $f$ 的单位是米，$\alpha,\beta$ 的单位为像素/米，所以 $f_x,f_y,c_x,c_y$ 的单位为像素，把该式写成矩阵形式会更加简洁，不过左侧需要用齐次坐标，右侧为非齐次坐标：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right)=\frac{1}{Z}\left(\begin{array}{ccc}
+f_{x} & 0 & c_{x} \\
+0 & f_{y} & c_{y} \\
+0 & 0 & 1
+\end{array}\right)\left(\begin{array}{l}
+X \\
+Y \\
+Z
+\end{array}\right) \stackrel{\operatorname{def}}{=} \frac{1}{Z} \boldsymbol{K} \boldsymbol{P}</script><p>习惯性地把Z移到左侧：</p>
+<script type="math/tex; mode=display">
+Z\left(\begin{array}{c}
+u \\
+v \\
+1
+\end{array}\right)=\left(\begin{array}{ccc}
+f_{x} & 0 & c_{x} \\
+0 & f_{y} & c_{y} \\
+0 & 0 & 1
+\end{array}\right)\left(\begin{array}{c}
+X \\
+Y \\
+Z
+\end{array}\right) \stackrel{\text { def }}{=} \boldsymbol{K} \boldsymbol{P}</script><p>也可以写为：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{c}
+u \\
+v \\
+1
+\end{array}\right)=\left(\begin{array}{ccc}
+f_{x} & 0 & c_{x} \\
+0 & f_{y} & c_{y} \\
+0 & 0 & 1
+\end{array}\right)\left(\begin{array}{c}
+\frac{X}{Z} \\
+\frac{Y}{Z} \\
+1
+\end{array}\right)</script><p>从这个式子可以看出，只要 $\frac{X}{Z}， \frac{Y}{Z}$ 的比值保持不变时，像素坐标就不变，因此可以从另一个角度来知道，单目丢失了深度信息，即当仅仅知道一点的像素坐标时，是无法还原出其真实的空间位置的，只是知道它在哪一条射线上。这里的 $[\frac{X}{Z},\frac{Y}{Z},1]^T$ 称为归一化坐标，表示相机坐标系下，$Z=1$ 平面与这条射线相交的点。</p>
+<p>我们把中间的 $K$ 矩阵称为相机的内参矩阵，通常认为相机的内参在出厂之后是固定的，不会在使用过程中发生变化。</p>
+<p>另外，有内参自然相对的有外参，在之前的推导中，我们使用的 $P$ 点是相机坐标系下的坐标，但实际上由于相机在运动，所以 $P$ 的相机系下的坐标应该是它的世界坐标（记为 $P_w$ ）根据相机的当前位姿变换到相机坐标系下的结果。则有：</p>
+<script type="math/tex; mode=display">
+Z \boldsymbol{P}_{u v}=Z\left[\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right]=\boldsymbol{K}\left(\boldsymbol{R} \boldsymbol{P}_{\mathrm{w}}+\boldsymbol{t}\right)=\boldsymbol{K} \boldsymbol{T} \boldsymbol{P}_{\mathrm{w}}</script><p>这里的 $R$ 和 $t$ 称为相机的外参数。</p>
+<h2 id="II-畸变模型"><a href="#II-畸变模型" class="headerlink" title="II. 畸变模型"></a>II. 畸变模型</h2><p>相机中加入透镜会导致图片发生畸变，畸变分为两种：</p>
+<ul>
+<li>有透镜自身对光线传播的影响，导致的<strong>径向畸变</strong>。</li>
+<li>由透镜与成像平面不完全平行造成的<strong>切向畸变</strong>。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719230611.png" alt="image-20220719230611310" style="zoom:50%;" /></p>
+<p>径向畸变分为桶形畸变和枕形畸变两种，桶形畸变中，图像放大倍率随着与光轴之间的距离增大而减小，而枕形畸变则恰好相反。穿过图像中心和光轴有交点的直线还能保持形状不变。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220719231120.png" alt="image-20220719231120811" style="zoom: 50%;" /></p>
+<p>切向畸变如上图所示。我们现在用更严格的数学形式对两者进行描述，考虑归一化平面上的一点 $P=[x,y]^T$ ，极坐标形式为 $[r,\theta]^T$ ，径向畸变中，坐标点随着该点距离原点的长度发生变化，切向畸变可以看成坐标点沿着切线方向发生了变化，也就是水平夹角发生了变化。通常假设这些畸变呈多项式关系：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&x_{\text {distorted }}=x\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right) \\
+&y_{\text {distorted }}=y\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right)
+\end{aligned}</script><p>其中，$[x_{distorted},y_{distorted}]^T$ 是畸变后点的归一化坐标。对于切向畸变，我们使用另外两个参数 $p_1,p_2$ 进行纠正：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&x_{\text {distorted }}=x+2 p_{1} x y+p_{2}\left(r^{2}+2 x^{2}\right) \\
+&y_{\text {distorted }}=y+p_{1}\left(r^{2}+2 y^{2}\right)+2 p_{2} x y
+\end{aligned}</script><p>因此，对于相机坐标系中的任意一点 $P$ ，我们能够通过5个畸变系数找到这个点在像素平面上的正确位置，即：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+x_{\text {distorted }}=x\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right)+2 p_{1} x y+p_{2}\left(r^{2}+2 x^{2}\right) \\
+y_{\text {distorted }}=y\left(1+k_{1} r^{2}+k_{2} r^{4}+k_{3} r^{6}\right)+p_{1}\left(r^{2}+2 y^{2}\right)+2 p_{2} x y
+\end{array}\right.</script><p>对于去畸变，可以这样做：</p>
+<ol>
+<li>任选畸变图象上的一点 $[u,v]^T$ ，计算该像素点对应归一化平面上的坐标 $[x,y]^T$ 。</li>
+<li>计算 $r = \sqrt{x^2+y^2}$ ，然后带入到畸变方程中，求出畸变后的归一化平面上的坐标 $[x_{distorted},y_{distorted}]^T$ 。</li>
+<li>然后根据$[x_{distorted},y_{distorted}]^T$和相机的内参计算出像素平面上的坐标 $[u_{distorted},v_{distorted}]^T$ </li>
+<li>将$[u_{distorted},v_{distorted}]^T$ 处的像素值赋给$[u,v]^T$ 处的像素。</li>
+</ol>
+<p>该方法就是找这个像素点本应该对应的像素值，因为畸变，本应该投影到该点的点被投到别处，所以要找到这个投到别处的点。</p>
+<h2 id="III-双目相机模型"><a href="#III-双目相机模型" class="headerlink" title="III. 双目相机模型"></a>III. 双目相机模型</h2><p>双目相机和人眼一样，可以根据视差来计算出深度。双目相机的几何模型如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220720012007.png" alt="image-20220720012007271" style="zoom:50%;" /></p>
+<p>两个相机中心间的距离称为基线，是双目相机重要的参数，记为 $b$ 。假设空间中有一点 $P$ ，在左眼相机和右眼相机上各成一个像，记为 $P_L$ 和 $P_R$ ，由于观看角度不同，这两个点的成像位置也不同。理想情况下，由于左右相机仅在 $x$ 轴上有位移，所以 $P$ 的像也只在 $x$ 轴上有差异。记它在左边相机上的坐标为 $u_L$ ，右边相机上的坐标为 $u_R$ （注意这里的 $u_L , u_R$ 是相机坐标系的坐标，单位是米）。根据几何关系，可以得到：</p>
+<script type="math/tex; mode=display">
+\frac{z-f}{z}=\frac{b-u_{\mathrm{L}}+u_{\mathrm{R}}}{b}</script><p>这里的 $u_R$ 是负数，所以表示距离时取负。整理可得：</p>
+<script type="math/tex; mode=display">
+z=\frac{f b}{d}, \quad d \stackrel{\text { def }}{=} u_{\mathrm{L}}-u_{\mathrm{R}}</script><p>其中 $d$ 定义为左右图的横坐标之差，称为视差。由上式可以知道，视差越小，深度越大。因为视差最小也就是一个像素所表示的长度，所以所能探测到的深度是有一定范围的，由 $fb$ 来确定。因此基线越长，探测的范围越大。</p>
+<p>虽然双目相机可以直接指导深度，但是也有很多问题，我们需要确切知道哪两个像素点是同一物体的投影，这就需要进行像素点匹配，而这又很占用计算资源，且精度不高。</p>
 ]]></content>
       <categories>
         <category>专业原理</category>
