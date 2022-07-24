@@ -7175,6 +7175,9 @@ z=\frac{f b}{d}, \quad d \stackrel{\text { def }}{=} u_{\mathrm{L}}-u_{\mathrm{R
       <categories>
         <category>专业原理</category>
       </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
   <entry>
     <title>【视觉SLAM8】非线性优化</title>
@@ -7212,145 +7215,126 @@ P(\boldsymbol{x}, \boldsymbol{y} \mid \boldsymbol{z}, \boldsymbol{u})=\frac{P(\b
 \boldsymbol{z}_{k, j}=h\left(\boldsymbol{y}_{j}, \boldsymbol{x}_{k}\right)+\boldsymbol{v}_{k, j}\tag{7}</script><p>这里的噪声项$\boldsymbol{v}_{k} \sim \mathcal{N}\left(\mathbf{0}, \boldsymbol{Q}_{k, j}\right)<br>$为高斯分布，所以观测数据的条件概率为：</p>
 <script type="math/tex; mode=display">
 P\left(\boldsymbol{z}_{j, k} \mid \boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)=N\left(h\left(\boldsymbol{y}_{j}, \boldsymbol{x}_{k}\right), \boldsymbol{Q}_{k, j}\right)\tag{8}</script><p>所以观测数据依然符合高斯分布。</p>
-<p>我们可以<strong>最小化负对数</strong>来求一个高斯分布的最大似然，现有任意高维高斯分布$$<br>\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})</p>
-<script type="math/tex; mode=display">，它的**概率密度函数**展开形式为：</script><p>P(\boldsymbol{x})=\frac{1}{\sqrt{(2 \pi)^{N} \operatorname{det}(\boldsymbol{\Sigma})}} \exp \left(-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^{\mathrm{T}} \boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right)\tag{9}</p>
+<p>我们可以<strong>最小化负对数</strong>来求一个高斯分布的最大似然，现有任意高维高斯分布$\boldsymbol{x} \sim \mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma})$ ，它的<strong>概率密度函数</strong>展开形式为：</p>
 <script type="math/tex; mode=display">
-对其取负对数，变为：</script><p>-\ln (P(\boldsymbol{x}))=\frac{1}{2} \ln \left((2 \pi)^{N} \operatorname{det}(\boldsymbol{\Sigma})\right)+\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^{\mathrm{T}} \boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\tag{10}</p>
+P(\boldsymbol{x})=\frac{1}{\sqrt{(2 \pi)^{N} \operatorname{det}(\boldsymbol{\Sigma})}} \exp \left(-\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^{\mathrm{T}} \boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\right)\tag{9}</script><p>对其取负对数，变为：</p>
 <script type="math/tex; mode=display">
-因为对数函数是单调递增的，所以**对原函数求最大化相当于对负对数求最小化**。第一项与 $\boldsymbol x$ 无关，可以略去。**于是只要最小化右侧的二次型项，就得到了对状态的最大似然估计**，代入SLAM的观测模型，相当于求：</script><p>\begin{aligned}<br>\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)^{*} &amp;=\arg \max \mathcal{N}\left(h\left(\boldsymbol{y}_{j}, \boldsymbol{x}_{k}\right), \boldsymbol{Q}_{k, j}\right) \\<br>&amp;=\arg \min \left(\left(\boldsymbol{z}_{k, j}-h\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)\right)^{\mathrm{T}} \boldsymbol{Q}_{k, j}^{-1}\left(\boldsymbol{z}_{k, j}-h\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)\right)\right)<br>\end{aligned} \tag{11}</p>
+-\ln (P(\boldsymbol{x}))=\frac{1}{2} \ln \left((2 \pi)^{N} \operatorname{det}(\boldsymbol{\Sigma})\right)+\frac{1}{2}(\boldsymbol{x}-\boldsymbol{\mu})^{\mathrm{T}} \boldsymbol{\Sigma}^{-1}(\boldsymbol{x}-\boldsymbol{\mu})\tag{10}</script><p>因为对数函数是单调递增的，所以<strong>对原函数求最大化相当于对负对数求最小化</strong>。第一项与 $\boldsymbol x$ 无关，可以略去。<strong>于是只要最小化右侧的二次型项，就得到了对状态的最大似然估计</strong>，代入SLAM的观测模型，相当于求：</p>
 <script type="math/tex; mode=display">
-
-> 我们发现，该式等价于最小化噪声项的二次型。这个二次型称为马哈拉诺比斯距离，又叫马氏距离。他可以看成由 $\boldsymbol{Q}_{k, j}^{-1}$ 加权之后的欧氏距离，$\boldsymbol{Q}_{k, j}^{-1}$ 称为信息矩阵，即高斯分布协方差矩阵之逆。
-
-如式（11）所示，我们就是通过找到合适的 $\boldsymbol{x}_k$ 和 $\boldsymbol{y}_j$ ，来使上述值最小。
-
-同样，我们考虑**批量时刻**的数据。通常假设各个时刻的输入和观测是相互独立的，这意味着各个输入之间是独立的，各个观测之间是独立的，并且输入和观测也是独立的。于是我们可以对联合分布进行因式分解：</script><p>P(\boldsymbol{z}, \boldsymbol{u} \mid \boldsymbol{x}, \boldsymbol{y})=\prod_{k} P\left(\boldsymbol{u}_{k} \mid \boldsymbol{x}_{k-1}, \boldsymbol{x}_{k}\right) \prod_{k, j} P\left(\boldsymbol{z}_{k, j} \mid \boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)\tag{12}</p>
+\begin{aligned}
+\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)^{*} &=\arg \max \mathcal{N}\left(h\left(\boldsymbol{y}_{j}, \boldsymbol{x}_{k}\right), \boldsymbol{Q}_{k, j}\right) \\
+&=\arg \min \left(\left(\boldsymbol{z}_{k, j}-h\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)\right)^{\mathrm{T}} \boldsymbol{Q}_{k, j}^{-1}\left(\boldsymbol{z}_{k, j}-h\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)\right)\right)
+\end{aligned} \tag{11}</script><blockquote>
+<p>我们发现，该式等价于最小化噪声项的二次型。这个二次型称为马哈拉诺比斯距离，又叫马氏距离。他可以看成由 $\boldsymbol{Q}_{k, j}^{-1}$ 加权之后的欧氏距离，$\boldsymbol{Q}_{k, j}^{-1}$ 称为信息矩阵，即高斯分布协方差矩阵之逆。</p>
+</blockquote>
+<p>如式（11）所示，我们就是通过找到合适的 $\boldsymbol{x}_k$ 和 $\boldsymbol{y}_j$ ，来使上述值最小。</p>
+<p>同样，我们考虑<strong>批量时刻</strong>的数据。通常假设各个时刻的输入和观测是相互独立的，这意味着各个输入之间是独立的，各个观测之间是独立的，并且输入和观测也是独立的。于是我们可以对联合分布进行因式分解：</p>
 <script type="math/tex; mode=display">
-这说明我们可以独立的处理各时刻的运动和观测，定义各个时刻的输入和观测数据与模型之间的误差：</script><p>\begin{aligned}<br>\boldsymbol{e}_{\boldsymbol{u}, k} &amp;=\boldsymbol{x}_{k}-f\left(\boldsymbol{x}_{k-1}, \boldsymbol{u}_{k}\right) \\<br>\boldsymbol{e}_{\boldsymbol{z}, j, k} &amp;=\boldsymbol{z}_{k, j}-h\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)<br>\end{aligned}\tag{13}</p>
+P(\boldsymbol{z}, \boldsymbol{u} \mid \boldsymbol{x}, \boldsymbol{y})=\prod_{k} P\left(\boldsymbol{u}_{k} \mid \boldsymbol{x}_{k-1}, \boldsymbol{x}_{k}\right) \prod_{k, j} P\left(\boldsymbol{z}_{k, j} \mid \boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)\tag{12}</script><p>这说明我们可以独立的处理各时刻的运动和观测，定义各个时刻的输入和观测数据与模型之间的误差：</p>
 <script type="math/tex; mode=display">
-那么最小化所有时刻估计值与真实读数之间的马氏距离，等价于求最大似然估计，负对数将乘积变成求和：</script><p>\min J(\boldsymbol{x}, \boldsymbol{y})=\sum_{k} e_{\boldsymbol{u}, k}^{\mathrm{T}} \boldsymbol{R}_{k}^{-1} e_{\boldsymbol{u}, k}+\sum_{k} \sum_{j} e_{\boldsymbol{z}, k, j}^{\mathrm{T}} \boldsymbol{Q}_{k, j}^{-1} \boldsymbol{e}_{\boldsymbol{z}, k, j}\tag{14}</p>
+\begin{aligned}
+\boldsymbol{e}_{\boldsymbol{u}, k} &=\boldsymbol{x}_{k}-f\left(\boldsymbol{x}_{k-1}, \boldsymbol{u}_{k}\right) \\
+\boldsymbol{e}_{\boldsymbol{z}, j, k} &=\boldsymbol{z}_{k, j}-h\left(\boldsymbol{x}_{k}, \boldsymbol{y}_{j}\right)
+\end{aligned}\tag{13}</script><p>那么最小化所有时刻估计值与真实读数之间的马氏距离，等价于求最大似然估计，负对数将乘积变成求和：</p>
 <script type="math/tex; mode=display">
-这样就得到了一个**最小二乘问题**，它等价于状态的最大似然估计。由于噪声的存在，我们把估计的轨迹和地图带入到SLAM的运动和观测方程中，并不会完美的成立，所以我们要对轨迹和地图进行微调，使整体的误差下降一些。当然这个下降也是有限的，一般会达到一个极小值，这就是一个典型的非线性优化的过程。
-
-式（14）可以代表着SLAM中最小二乘问题具有一些特定的结构：
-
-- 尽管优化变量的维度很高（因为有许多的位置点和路标点），但是要注意，每个观测误差都很简单，仅与一两个状态变量有关。例如运动误差仅与 $\boldsymbol{x_{k-1},x_k}$ 有关，观测误差仅与 $\boldsymbol{x_k,y_j}$ 有关，这种关系会让整个问题有一种稀疏的形式。
-- 如果用李代数表示增量，则该问题是无约束的最小二乘问题。
-
-
-
-## III. 非线性最小二乘
-
-我们建立好了代价函数，如何来优化呢？本节就来讨论具体的优化方法。
-
-一个简单的最小二乘问题：</script><p>\min _{\boldsymbol{x}} F(\boldsymbol{x})=\frac{1}{2}|f(\boldsymbol{x})|_{2}^{2}\tag{15}</p>
+\min J(\boldsymbol{x}, \boldsymbol{y})=\sum_{k} e_{\boldsymbol{u}, k}^{\mathrm{T}} \boldsymbol{R}_{k}^{-1} e_{\boldsymbol{u}, k}+\sum_{k} \sum_{j} e_{\boldsymbol{z}, k, j}^{\mathrm{T}} \boldsymbol{Q}_{k, j}^{-1} \boldsymbol{e}_{\boldsymbol{z}, k, j}\tag{14}</script><p>这样就得到了一个<strong>最小二乘问题</strong>，它等价于状态的最大似然估计。由于噪声的存在，我们把估计的轨迹和地图带入到SLAM的运动和观测方程中，并不会完美的成立，所以我们要对轨迹和地图进行微调，使整体的误差下降一些。当然这个下降也是有限的，一般会达到一个极小值，这就是一个典型的非线性优化的过程。</p>
+<p>式（14）可以代表着SLAM中最小二乘问题具有一些特定的结构：</p>
+<ul>
+<li>尽管优化变量的维度很高（因为有许多的位置点和路标点），但是要注意，每个观测误差都很简单，仅与一两个状态变量有关。例如运动误差仅与 $\boldsymbol{x_{k-1},x_k}$ 有关，观测误差仅与 $\boldsymbol{x_k,y_j}$ 有关，这种关系会让整个问题有一种稀疏的形式。</li>
+<li>如果用李代数表示增量，则该问题是无约束的最小二乘问题。</li>
+</ul>
+<h2 id="III-非线性最小二乘"><a href="#III-非线性最小二乘" class="headerlink" title="III. 非线性最小二乘"></a>III. 非线性最小二乘</h2><p>我们建立好了代价函数，如何来优化呢？本节就来讨论具体的优化方法。</p>
+<p>一个简单的最小二乘问题：</p>
 <script type="math/tex; mode=display">
-其中自变量 $\boldsymbol{x} \in \mathbb{R}^{n}$ ，$f$ 是任意标量非线性函数 $f(x): \mathbb{R}^{n} \mapsto \mathbb{R}$ 。如果 $f$ 是个数学形式很简单的函数，那么该问题可以用解析形式来求。令目标函数的导数为零，然后求解 $\boldsymbol {x}$ 的最优值，和求解二元函数的极值一样，即：</script><p>\frac{\mathrm{d} F}{\mathrm{~d} \boldsymbol{x}}=\mathbf{0}\tag{16}</p>
+\min _{\boldsymbol{x}} F(\boldsymbol{x})=\frac{1}{2}\sum\|f_i(\boldsymbol{x})\|_{2}^{2}\tag{15}</script><p>其中自变量 $\boldsymbol{x} \in \mathbb{R}^{n}$ ，<strong>$f_i$ 是任意标量非线性函数 $f_i(x): \mathbb{R}^{n} \mapsto \mathbb{R}$ ，它描述每一个观测数据 $i$ 与要估计值间的误差。</strong></p>
+<blockquote>
+<p>对于视觉SLAM中，式（15）对应的公式是式（14）</p>
+</blockquote>
+<p>如果 $f_i$ 是个数学形式很简单的函数，那么该问题可以用解析形式来求。令目标函数的导数为零，然后求解 $\boldsymbol {x}$ 的最优值，和求解二元函数的极值一样，即：</p>
 <script type="math/tex; mode=display">
-解此方程，得到了导数为0的点，它可能是极大值、极小值或鞍点处的值，只需要逐个比较它们的函数大小即可。**当 $f$ 为简单的线性函数，那么这个问题就是简单的线性最小二乘问题。**但如果 $f$ 的形式复杂，使得该方程不能直接求解，此时我们使用**迭代**的方法，从一个初值出发，不断地更新当前的优化变量，使目标函数下降。
-
-具体步骤：
-
-1. 给定某个初始值 $\boldsymbol {x}_0$ 
-2. 对于第 $k$ 次迭代，寻找一个增量 $\Delta\boldsymbol{x}_k$ ，使得 $\left\|f\left(\boldsymbol{x}_{k}+\Delta \boldsymbol{x}_{k}\right)\right\|_{2}^{2}$ 达到极小值
-3. 若 $\Delta\boldsymbol{x}_k$ 足够小，则停止
-4. 否则，令 $\boldsymbol{x}_{k+1}=\boldsymbol{x}_k+\Delta\boldsymbol{x}_k$ ，然后返回第二步
-5. 
-
-> 该方法就是不断寻找让代价函数变小的增量 $\Delta\boldsymbol{x}_k$ ，由于可以对 $f$ 进行线性化，增量的计算将简单很多。当函数下降直到增量非常小的时候，可以认为算法收敛。
-
-**找到增量是一个局部问题，我们只需要关心函数 $f$ 在迭代处的局部性质即可。**
-
-
-
-### 1. 一阶和二阶梯度法
-
-#### (1)最速下降法（一阶梯度）
-
-现在考虑第 $k$ 次迭代，假设我们在 $\boldsymbol{x}_k$ 处，想要寻找增量$\Delta\boldsymbol{x}_k$ ，**那么最直观的方法就是将代价函数在  $\boldsymbol{x}_k$ 处进行泰勒展开**：</script><p>F\left(\boldsymbol{x}_{k}+\Delta \boldsymbol{x}_{k}\right) \approx F\left(\boldsymbol{x}_{k}\right)+\boldsymbol{J}\left(\boldsymbol{x}_{k}\right)^{\mathrm{T}} \Delta \boldsymbol{x}_{k}+\frac{1}{2} \Delta \boldsymbol{x}_{k}^{\mathrm{T}} \boldsymbol{H}\left(\boldsymbol{x}_{k}\right) \Delta \boldsymbol{x}_{k}\tag{17}</p>
+\frac{\mathrm{d} F}{\mathrm{~d} \boldsymbol{x}}=\mathbf{0}\tag{16}</script><p>解此方程，得到了导数为0的点，它可能是极大值、极小值或鞍点处的值，只需要逐个比较它们的函数大小即可。<strong>当 $f$ 为简单的线性函数，那么这个问题就是简单的线性最小二乘问题。</strong>但如果 $f$ 的形式复杂，使得该方程不能直接求解，此时我们使用<strong>迭代</strong>的方法，从一个初值出发，不断地更新当前的优化变量，使目标函数下降。</p>
+<p>具体步骤：</p>
+<ol>
+<li>给定某个初始值 $\boldsymbol {x}_0$ </li>
+<li>对于第 $k$ 次迭代，寻找一个增量 $\Delta\boldsymbol{x}_k$ ，使得 $\sum\left|f_i\left(\boldsymbol{x}_{k}+\Delta \boldsymbol{x}_{k}\right)\right|_{2}^{2}$ 达到极小值</li>
+<li>若 $\Delta\boldsymbol{x}_k$ 足够小，则停止</li>
+<li>否则，令 $\boldsymbol{x}_{k+1}=\boldsymbol{x}_k+\Delta\boldsymbol{x}_k$ ，然后返回第二步</li>
+<li></li>
+</ol>
+<blockquote>
+<p>该方法就是不断寻找让代价函数变小的增量 $\Delta\boldsymbol{x}_k$ ，由于可以对 $f$ 进行线性化，增量的计算将简单很多。当函数下降直到增量非常小的时候，可以认为算法收敛。</p>
+</blockquote>
+<p><strong>找到增量是一个局部问题，我们只需要关心函数 $f$ 在迭代处的局部性质即可。</strong></p>
+<h3 id="1-一阶和二阶梯度法"><a href="#1-一阶和二阶梯度法" class="headerlink" title="1. 一阶和二阶梯度法"></a>1. 一阶和二阶梯度法</h3><h4 id="1-最速下降法（一阶梯度）"><a href="#1-最速下降法（一阶梯度）" class="headerlink" title="(1)最速下降法（一阶梯度）"></a>(1)最速下降法（一阶梯度）</h4><p>现在考虑第 $k$ 次迭代，假设我们在 $\boldsymbol{x}_k$ 处，想要寻找增量$\Delta\boldsymbol{x}_k$ ，<strong>那么最直观的方法就是将代价函数在  $\boldsymbol{x}_k$ 处进行泰勒展开</strong>：</p>
 <script type="math/tex; mode=display">
-这里的 $\boldsymbol{J}(\boldsymbol{x}_{k})$ 是 $F\left(\boldsymbol{x}_{k}\right)$ 关于 $\boldsymbol{x}$ 的一阶导数，也叫雅可比矩阵（表示梯度），$\boldsymbol{H}\left(\boldsymbol{x}_{k}\right) $ 则是二阶导数，称为海塞矩阵。**如果仅保留一阶梯度**，那么取增量为反向梯度，即可保证函数下降，即：</script><p>\Delta \boldsymbol{x}^{*}=-\boldsymbol{J}\left(\boldsymbol{x}_{k}\right)\tag{18}</p>
+F\left(\boldsymbol{x}_{k}+\Delta \boldsymbol{x}_{k}\right) \approx F\left(\boldsymbol{x}_{k}\right)+\boldsymbol{J}\left(\boldsymbol{x}_{k}\right)^{\mathrm{T}} \Delta \boldsymbol{x}_{k}+\frac{1}{2} \Delta \boldsymbol{x}_{k}^{\mathrm{T}} \boldsymbol{H}\left(\boldsymbol{x}_{k}\right) \Delta \boldsymbol{x}_{k}\tag{17}</script><p>这里的 $\boldsymbol{J}(\boldsymbol{x}_{k})$ 是 $F\left(\boldsymbol{x}_{k}\right)$ 关于 $\boldsymbol{x}$ 的一阶导数，也叫雅可比矩阵（表示梯度），$\boldsymbol{H}\left(\boldsymbol{x}_{k}\right) $ 则是二阶导数，称为海塞矩阵。<strong>如果仅保留一阶梯度</strong>，那么取增量为反向梯度，即可保证函数下降，即：</p>
 <script type="math/tex; mode=display">
-现在的 $\Delta \boldsymbol{x}$ 还仅是一个方向，我们还要指定一个步长 $\lambda$ 。这种方法称为**最速下降法**。
-
-#### (2)牛顿法（二阶梯度）
-
-我们每次讨论的都是第 $k$ 次迭代，为了简化，省略下标 $k$ 。 另外我们还可以保留二阶梯度信息，此时的增量方程为：</script><p>\Delta \boldsymbol{x}^{*}=\arg \min \left(F(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}+\frac{1}{2} \Delta \boldsymbol{x}^{\mathrm{T}} \boldsymbol{H} \Delta \boldsymbol{x}\right)\tag{19}</p>
+\Delta \boldsymbol{x}^{*}=-\boldsymbol{J}\left(\boldsymbol{x}_{k}\right)\tag{18}</script><p>现在的 $\Delta \boldsymbol{x}$ 还仅是一个方向，我们还要指定一个步长 $\lambda$ 。这种方法称为<strong>最速下降法</strong>。</p>
+<h4 id="2-牛顿法（二阶梯度）"><a href="#2-牛顿法（二阶梯度）" class="headerlink" title="(2)牛顿法（二阶梯度）"></a>(2)牛顿法（二阶梯度）</h4><p>我们每次讨论的都是第 $k$ 次迭代，为了简化，省略下标 $k$ 。 另外我们还可以保留二阶梯度信息，此时的增量方程为：</p>
 <script type="math/tex; mode=display">
-即找到一个 $\Delta\boldsymbol{x}_k$ ，让泰勒展开后近似的 $F(\boldsymbol{x}_k+\Delta\boldsymbol{x}_k)$ 最小。我们可以令式（19）对 $\Delta\boldsymbol{x}_k$ 求导，并令其为0，得到：</script><p>\boldsymbol{J}+\boldsymbol{H} \Delta \boldsymbol{x}=\mathbf{0} \Rightarrow \boldsymbol{H} \Delta \boldsymbol{x}=-\boldsymbol{J}\tag{20}</p>
+\Delta \boldsymbol{x}^{*}=\arg \min \left(F(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}+\frac{1}{2} \Delta \boldsymbol{x}^{\mathrm{T}} \boldsymbol{H} \Delta \boldsymbol{x}\right)\tag{19}</script><p>即找到一个 $\Delta\boldsymbol{x}_k$ ，让泰勒展开后近似的 $F(\boldsymbol{x}_k+\Delta\boldsymbol{x}_k)$ 最小。我们可以令式（19）对 $\Delta\boldsymbol{x}_k$ 求导，并令其为0，得到：</p>
 <script type="math/tex; mode=display">
-求解这个线性方程，即可得到增量 $\Delta\boldsymbol{x}_k$ ，该方法称为牛顿法。
-
-**总结：**
-
-一阶和二阶梯度方法实际上就是对原代价函数进行泰勒展开，用一个一次或二次的函数近似原函数，然后用近似函数的最小值来猜测原函数的极小值。但这类方法也有一定的问题，一个是最速下降方法过于贪心，容易走出锯齿路线，反而增加了迭代次数。而牛顿法需要计算代价函数的 $H$ 矩阵，这在问题规模较大时非常困难计算出来。
-
-### 2. 高斯牛顿法
-
-为了避免计算 $H$ 矩阵，采用高斯牛顿法。它的思想就是将 $f(x)$ 进行一阶泰勒展开：</script><p>f(\boldsymbol{x}+\Delta \boldsymbol{x}) \approx f(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\tag{21}</p>
+\boldsymbol{J}+\boldsymbol{H} \Delta \boldsymbol{x}=\mathbf{0} \Rightarrow \boldsymbol{H} \Delta \boldsymbol{x}=-\boldsymbol{J}\tag{20}</script><p>求解这个线性方程，即可得到增量 $\Delta\boldsymbol{x}_k$ ，该方法称为牛顿法。</p>
+<p><strong>总结：</strong></p>
+<p>一阶和二阶梯度方法实际上就是对原代价函数进行泰勒展开，用一个一次或二次的函数近似原函数，然后用近似函数的最小值来猜测原函数的极小值。但这类方法也有一定的问题，一个是最速下降方法过于贪心，容易走出锯齿路线，反而增加了迭代次数。而牛顿法需要计算代价函数的 $H$ 矩阵，这在问题规模较大时非常困难计算出来。</p>
+<h3 id="2-高斯牛顿法"><a href="#2-高斯牛顿法" class="headerlink" title="2. 高斯牛顿法"></a>2. 高斯牛顿法</h3><p>为了避免计算 $H$ 矩阵，采用高斯牛顿法。它的思想就是将 $f_i(x)$ 进行一阶泰勒展开：</p>
 <script type="math/tex; mode=display">
-这里的 $J(\boldsymbol x)^T$ 为 $f(\boldsymbol x)$ 关于 $\boldsymbol x$ 的导数，为 $n\times 1$ 的列向量。
-
-**现在的目标是寻找 $\Delta\boldsymbol x$ 使得 $\|f(\boldsymbol{x}+\Delta \boldsymbol{x})\|^{2}$ 达到最小。** 为了找到这个增量，我们知道这个增量可以使线性化后的代价函数最小，所以有：</script><p>\Delta \boldsymbol{x}^{*}=\arg \min _{\Delta \boldsymbol{x}} F(\boldsymbol x)=\arg \min _{\Delta \boldsymbol{x}} \frac{1}{2}\left|f(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right|^{2}\tag{22}</p>
+f_i(\boldsymbol{x}+\Delta \boldsymbol{x}) \approx f_i(\boldsymbol{x})+\boldsymbol{J}_i(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\tag{21}</script><p>这里的 $J_i(\boldsymbol x)^T$ 为 $f_i(\boldsymbol x)$ 关于 $\boldsymbol x$ 的导数，为 $n\times 1$ 的列向量。</p>
+<p><strong>现在的目标是寻找 $\Delta\boldsymbol x$ 使得 $\sum|f_i(\boldsymbol{x}+\Delta \boldsymbol{x})|^{2}$ 达到最小。</strong> 为了找到这个增量，我们知道这个增量可以使线性化后的代价函数最小，所以有：</p>
 <script type="math/tex; mode=display">
-我们使式（22）右边的平方项展开，得到：</script><p>\begin{aligned}<br>\frac{1}{2}\left|f(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right|^{2} &amp;=\frac{1}{2}\left(f(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right)^{\mathrm{T}}\left(f(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right) \\<br>&amp;=\frac{1}{2}\left(|f(\boldsymbol{x})|_{2}^{2}+2 f(\boldsymbol{x}) \boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}+\Delta \boldsymbol{x}^{\mathrm{T}} \boldsymbol{J}(\boldsymbol{x}) \boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right)<br>\end{aligned}\tag{23}</p>
+\Delta \boldsymbol{x}^{*}=\arg \min _{\Delta \boldsymbol{x}} F(\boldsymbol x)=\arg \min _{\Delta \boldsymbol{x}} \frac{1}{2}\sum\left\|f_i(\boldsymbol{x})+\boldsymbol{J}_i(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right\|^{2}\tag{22}</script><p>我们使式（22）右边的平方项展开，得到：</p>
 <script type="math/tex; mode=display">
-令式（23）对 $\Delta\boldsymbol x$ 求导并令其为零：</script><p>\boldsymbol{J}(\boldsymbol{x}) f(\boldsymbol{x})+\boldsymbol{J}(\boldsymbol{x}) \boldsymbol{J}^{\mathrm{T}}(\boldsymbol{x}) \Delta \boldsymbol{x}=\mathbf{0}\tag{24}</p>
+\begin{aligned}
+\frac{1}{2}\left\|f_i(\boldsymbol{x})+\boldsymbol{J_i}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right\|^{2} &=\frac{1}{2}\left(f_i(\boldsymbol{x})+\boldsymbol{J}_i(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right)^{\mathrm{T}}\left(f_i(\boldsymbol{x})+\boldsymbol{J}_i(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right) \\
+&=\frac{1}{2}\left(\|f_i(\boldsymbol{x})\|_{2}^{2}+2 f_i(\boldsymbol{x}) \boldsymbol{J}_i(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}+\Delta \boldsymbol{x}^{\mathrm{T}} \boldsymbol{J}_i(\boldsymbol{x}) \boldsymbol{J}_i(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}\right)
+\end{aligned}\tag{23}</script><p>令式（23）对 $\Delta\boldsymbol x$ 求导并令其为零：</p>
 <script type="math/tex; mode=display">
-可以得到如下方程组：</script><p>\underbrace{\boldsymbol{J}(\boldsymbol{x}) \boldsymbol{J}^{\mathrm{T}}}_{\boldsymbol{H}(\boldsymbol{x})}(\boldsymbol{x}) \Delta \boldsymbol{x}=\underbrace{-\boldsymbol{J}(\boldsymbol{x}) f(\boldsymbol{x})}_{\boldsymbol{g}(\boldsymbol{x})}\tag{25}</p>
+\sum\left[\boldsymbol{J}_i(\boldsymbol{x}) f_i(\boldsymbol{x})+\boldsymbol{J}_i(\boldsymbol{x}) \boldsymbol{J}_i^{\mathrm{T}}(\boldsymbol{x}) \Delta \boldsymbol{x}\right]=\mathbf{0}\tag{24}</script><p>可以得到如下方程组：</p>
 <script type="math/tex; mode=display">
-这个方程是关于变量 $\Delta\boldsymbol x$ 的线性方程组，我们称为**增量方程**，也可以称为高**斯牛顿方程**（Gauss-Newton equation）或**正规方程**（Normal equation）。
-
-式（25）中，把左边的系数部分定义为 $H$ ，右边定义为 $\boldsymbol{g}$ ，则式（25）变为：</script><p>\boldsymbol{H} \Delta \boldsymbol{x}=\boldsymbol{g}\tag{26}</p>
+\underbrace{\sum\boldsymbol{J}_i(\boldsymbol{x}) \boldsymbol{J}_i^{\mathrm{T}}(\boldsymbol{x})}_{\boldsymbol{H}(\boldsymbol{x})} \Delta \boldsymbol{x}=\underbrace{-\sum\boldsymbol{J}_i(\boldsymbol{x}) f_i(\boldsymbol{x})}_{\boldsymbol{g}(\boldsymbol{x})}\tag{25}</script><p>这个方程是关于变量 $\Delta\boldsymbol x$ 的线性方程组，我们称为<strong>增量方程</strong>，也可以称为高<strong>斯牛顿方程</strong>（Gauss-Newton equation）或<strong>正规方程</strong>（Normal equation）。</p>
+<p>式（25）中，把左边的系数部分定义为 $H$ ，右边定义为 $\boldsymbol{g}$ ，则式（25）变为：</p>
 <script type="math/tex; mode=display">
-**这里把左边记为 $H$ 是有意义的，对比牛顿法可见，高斯牛顿法是用 $\boldsymbol{J}\boldsymbol{J}^{\mathrm{T}}$ 来作为牛顿法中的二阶海塞矩阵的近似。**从而省略了 $H$ 矩阵的计算过程。
-
-那么高斯牛顿法的算法步骤为：
-
-1. 给定初始值 $\boldsymbol {x}_0$ 
-2. 对于第 $k$ 次迭代，求出当前的雅可比矩阵 $J(\boldsymbol{x}_k)$ 和误差 $f(\boldsymbol{x}_k)$ 
-3. 求解增量方程 $\boldsymbol{H} \Delta \boldsymbol{x}=\boldsymbol{g}$
-4. 若 $\Delta\boldsymbol{x}_k$ 足够小，则停止。否则，令 $\boldsymbol{x}_{k+1}=\boldsymbol{x}_k+\Delta\boldsymbol{x}_k$ ，然后返回第二步
-
- **注意：**
-
-为了求解增量方程，我们需要求解 $H^{-1}$ ，但实际中计算得到的 $\boldsymbol{J}\boldsymbol{J}^{\mathrm{T}}$ 只有半正定性。因此 $\boldsymbol{J}\boldsymbol{J}^{\mathrm{T}}$ 可能为奇异矩阵或者病态的情况，此时增量的稳定性较差，导致算法不收敛。直观地说，原函数在这个点的局部近似不像一个二次函数，更重要的是即使 $H$ 非奇异也非病态，如果求出的步长太大，也会导致我们局部近似不够准确，这样一来我们无法保证它迭代收敛。
-
-在一些算法中，为了保证合适的步长，采用一些其他的方法，例如**线搜索法**，加入了一个步长 $\alpha$ ，在确定了 $\Delta\boldsymbol{x}$ 后，还要找到一个合适的 $\alpha$ 使 $\|f(x+\alpha \Delta x)\|^{2}$ 最小。
-
-### 3. 列文伯格—马夸尔特法
-
-列文伯格—马夸尔特是建立在高斯牛顿法的基础上，该方法也叫作**阻尼牛顿法** ，它的主要思想是，给 $\Delta\boldsymbol{x}$ 添加了一个范围，称为**信赖区间** 。**这个范围定义了在什么情况下二阶近似是有效的。** 在这个区域里，我们认为近似是有效的，除了这个区域，近似可能会出问题。
-
-我们**通过近似模型和实际函数之间的差异来确定区域的范围。**如果差异小，说明近似效果好，我们扩大近似的范围。反之如果差异大，就缩小范围，我们定义了一个指标 $\rho$ 来刻画近似的好坏程度：</script><p>\rho=\frac{f(\boldsymbol{x}+\Delta \boldsymbol{x})-f(\boldsymbol{x})}{\boldsymbol{J}(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}}\tag{27}</p>
+\boldsymbol{H} \Delta \boldsymbol{x}=\boldsymbol{g}\tag{26}</script><p><strong>这里把左边记为 $H$ 是有意义的，对比牛顿法可见，高斯牛顿法是用 $\sum\boldsymbol{J}\boldsymbol{J}^{\mathrm{T}}$ 来作为牛顿法中的二阶海塞矩阵的近似。</strong>从而省略了 $H$ 矩阵的计算过程。</p>
+<p>那么高斯牛顿法的算法步骤为：</p>
+<ol>
+<li>给定初始值 $\boldsymbol {x}_0$ </li>
+<li>对于第 $k$ 次迭代，求出当前的雅可比矩阵 $J_i(\boldsymbol{x}_k)$ 和误差 $f_i(\boldsymbol{x}_k)$ </li>
+<li>求解增量方程 $\boldsymbol{H} \Delta \boldsymbol{x}=\boldsymbol{g}$</li>
+<li><p>若 $\Delta\boldsymbol{x}_k$ 足够小，则停止。否则，令 $\boldsymbol{x}_{k+1}=\boldsymbol{x}_k+\Delta\boldsymbol{x}_k$ ，然后返回第二步</p>
+<p><strong>注意：</strong></p>
+</li>
+</ol>
+<p>为了求解增量方程，我们需要求解 $H^{-1}$ ，但实际中计算得到的 $\sum \boldsymbol{J}\boldsymbol{J}^{\mathrm{T}}$ 只有半正定性。因此 $\sum \boldsymbol{J}\boldsymbol{J}^{\mathrm{T}}$ 可能为奇异矩阵或者病态的情况，此时增量的稳定性较差，导致算法不收敛。直观地说，原函数在这个点的局部近似不像一个二次函数，更重要的是即使 $H$ 非奇异也非病态，如果求出的步长太大，也会导致我们局部近似不够准确，这样一来我们无法保证它迭代收敛。</p>
+<p>在一些算法中，为了保证合适的步长，采用一些其他的方法，例如<strong>线搜索法</strong>，加入了一个步长 $\alpha$ ，在确定了 $\Delta\boldsymbol{x}$ 后，还要找到一个合适的 $\alpha$ 使 $\sum |f_i(x+\alpha \Delta x)|^{2}$ 最小。</p>
+<h3 id="3-列文伯格—马夸尔特法"><a href="#3-列文伯格—马夸尔特法" class="headerlink" title="3. 列文伯格—马夸尔特法"></a>3. 列文伯格—马夸尔特法</h3><p>列文伯格—马夸尔特是建立在高斯牛顿法的基础上，该方法也叫作<strong>阻尼牛顿法</strong> ，它的主要思想是，给 $\Delta\boldsymbol{x}$ 添加了一个范围，称为<strong>信赖区间</strong> 。<strong>这个范围定义了在什么情况下二阶近似是有效的。</strong> 在这个区域里，我们认为近似是有效的，除了这个区域，近似可能会出问题。</p>
+<p>我们<strong>通过近似模型和实际函数之间的差异来确定区域的范围。</strong>如果差异小，说明近似效果好，我们扩大近似的范围。反之如果差异大，就缩小范围，我们定义了一个指标 $\rho$ 来刻画近似的好坏程度：</p>
 <script type="math/tex; mode=display">
-$\rho$ 的分子是实际函数下降的值，分母是近似模型下降的值。如果 $\rho$ 接近于1，则近似是好的。**如果 $\rho$ 太小**，则说明实际下降的值远小于近似模型下降的值，则认为近似比较差，**需要缩小范围**。相反，如果 $\rho$ 太大，则说明近似模型下降的少，而实际函数下降的大，这是件好事，所以我们可以放大近似范围。
-
-所以该算法的步骤为：
-
-1. 给定初始值 $\boldsymbol {x}_0$ ，以及初始优化半径 $µ$ 
-
-2. 对于第 $k$ 次迭代，在高斯牛顿法的基础上（先求当前的雅可比矩阵 $J(\boldsymbol{x}_k)$ 和误差 $f(\boldsymbol{x}_k)$ ），加上信赖区域，求解增量：</script><p>   \min _{\Delta \boldsymbol{x}_{k}} \frac{1}{2}\left|f\left(\boldsymbol{x}_{k}\right)+\boldsymbol{J}\left(\boldsymbol{x}_{k}\right)^{\mathrm{T}} \Delta \boldsymbol{x}_{k}\right|^{2}, \quad \text { s.t. } \quad\left|\boldsymbol{D} \Delta \boldsymbol{x}_{k}\right|^{2} \leqslant \mu\tag{28}</p>
+\rho=\frac{\sum \left[f_i(\boldsymbol{x}+\Delta \boldsymbol{x})-f_i(\boldsymbol{x})\right]}{\sum\boldsymbol{J}_i(\boldsymbol{x})^{\mathrm{T}} \Delta \boldsymbol{x}}\tag{27}</script><p>$\rho$ 的分子是实际函数下降的值，分母是近似模型下降的值。如果 $\rho$ 接近于1，则近似是好的。<strong>如果 $\rho$ 太小</strong>，则说明实际下降的值远小于近似模型下降的值，则认为近似比较差，<strong>需要缩小范围</strong>。相反，如果 $\rho$ 太大，则说明近似模型下降的少，而实际函数下降的大，这是件好事，所以我们可以放大近似范围。</p>
+<p>所以该算法的步骤为：</p>
+<ol>
+<li><p>给定初始值 $\boldsymbol {x}_0$ ，以及初始优化半径 $µ$ </p>
+</li>
+<li><p>对于第 $k$ 次迭代，在高斯牛顿法的基础上（先求当前的雅可比矩阵 $J(\boldsymbol{x}_k)$ 和误差 $f(\boldsymbol{x}_k)$ ），加上信赖区域，求解增量：</p>
 <script type="math/tex; mode=display">
-
-​       这里的 $D$ 是系数矩阵，$µ$ 是信赖区域半径
-
-3. 计算 $\rho$
-4. 若 $\rho>\frac{3}{4}$, 则设置 $\mu=2 \mu$ 
-5. 若$\rho<\frac{1}{4}$, 则设置 $\mu=0.5 \mu$
-6.  如果 $\rho $ 大于某阈值, 则认为近似可行。令 $x_{k+1}=x_{k}+\Delta x_{k}$
-7. 判断算法是否收敛，如不收敛则返回第2步，否则结束
-
-**注意：**
-
-这里近似范围扩大的倍数和阈值都是经验值，可以替换成别的。在式（28）中，我们把增量限制于一个半径为 $µ$ 的球中，带上 $D$ 之后，这个球可以看成一个椭球。列文伯格提出的优化方法中，$D=I$ ，相当于把增量 $\Delta\boldsymbol{x}$ 约束在一个球内；而马夸尔特提出 $D$ 取非负数对角阵，实际中通常用 $J^TJ$ 的对角元素平方根。
-
-在式（28）中，我们要求解一个带不等式约束的优化问题，我们用拉格朗日乘子把约束项放到代价函数中，构成拉格朗日函数：</script><p>\mathcal{L}\left(\Delta \boldsymbol{x}_{k}, \lambda\right)=\frac{1}{2}\left|f\left(\boldsymbol{x}_{k}\right)+\boldsymbol{J}\left(\boldsymbol{x}_{k}\right)^{\mathrm{T}} \Delta \boldsymbol{x}_{k}\right|^{2}+\frac{\lambda}{2}\left(\left|\boldsymbol{D} \Delta \boldsymbol{x}_{k}\right|^{2}-\mu\right)\tag{29}</p>
+\min _{\Delta \boldsymbol{x}_{k}} \frac{1}{2}\sum\left\|f_i\left(\boldsymbol{x}_{k}\right)+\boldsymbol{J}_i\left(\boldsymbol{x}_{k}\right)^{\mathrm{T}} \Delta \boldsymbol{x}_{k}\right\|^{2}, \quad \text { s.t. } \quad\left\|\boldsymbol{D} \Delta \boldsymbol{x}_{k}\right\|^{2} \leqslant \mu\tag{28}</script></li>
+</ol>
+<p>​       这里的 $D$ 是系数矩阵，$µ$ 是信赖区域半径</p>
+<ol>
+<li>计算 $\rho$</li>
+<li>若 $\rho&gt;\frac{3}{4}$, 则设置 $\mu=2 \mu$ </li>
+<li>若$\rho&lt;\frac{1}{4}$, 则设置 $\mu=0.5 \mu$</li>
+<li>如果 $\rho $ 大于某阈值, 则认为近似可行。令 $x_{k+1}=x_{k}+\Delta x_{k}$</li>
+<li>判断算法是否收敛，如不收敛则返回第2步，否则结束</li>
+</ol>
+<p><strong>注意：</strong></p>
+<p>这里近似范围扩大的倍数和阈值都是经验值，可以替换成别的。在式（28）中，我们把增量限制于一个半径为 $µ$ 的球中，带上 $D$ 之后，这个球可以看成一个椭球。列文伯格提出的优化方法中，$D=I$ ，相当于把增量 $\Delta\boldsymbol{x}$ 约束在一个球内；而马夸尔特提出 $D$ 取非负数对角阵，实际中通常用 $J^TJ$ 的对角元素平方根。</p>
+<p>在式（28）中，我们要求解一个带不等式约束的优化问题，我们用拉格朗日乘子把约束项放到代价函数中，构成拉格朗日函数：</p>
 <script type="math/tex; mode=display">
-令式（29）对  $\Delta\boldsymbol{x}$ 求导并等于0，得到：</script><p>\left(\boldsymbol{H}+\lambda \boldsymbol{D}^{\mathrm{T}} \boldsymbol{D}\right) \Delta \boldsymbol{x}_{k}=\boldsymbol{g}\tag{30}</p>
+\mathcal{L}\left(\Delta \boldsymbol{x}_{k}, \lambda\right)=\frac{1}{2}\sum\left\|f_i\left(\boldsymbol{x}_{k}\right)+\boldsymbol{J}_i\left(\boldsymbol{x}_{k}\right)^{\mathrm{T}} \Delta \boldsymbol{x}_{k}\right\|^{2}+\frac{\lambda}{2}\left(\left\|\boldsymbol{D} \Delta \boldsymbol{x}_{k}\right\|^{2}-\mu\right)\tag{29}</script><p>令式（29）对  $\Delta\boldsymbol{x}$ 求导并等于0，得到：</p>
 <script type="math/tex; mode=display">
-可以看到，相比于高斯牛顿法，增量方程多了一项 $\lambda \boldsymbol{D}^{T} \boldsymbol{D}$ ，如果考虑简化形式，即 $D=I$ ，那么式（30）可以写为：</script><p>(\boldsymbol{H}+\lambda \boldsymbol{I}) \Delta \boldsymbol{x}_{k}=\boldsymbol{g}\tag{31}</p>
-<p>$$<br>我们看到一方面, <strong>当参数 $\lambda$ 比较小时</strong>, $\boldsymbol{H}$ 占主要地位, 这说明二次近似模型在该范围内是比较好的, <strong>列文伯格一马夸尔特方法更接近于高斯牛顿法</strong>。另一方面, <strong>当 $\lambda$ 比较大时</strong>, $\lambda \boldsymbol{I}$ 占据主要地位, <strong>列文伯格一马夸尔特方法更接近于一阶梯度下降法 (即最速下降),</strong> 这说明附近的二次近似不够好。列文伯格一马夸尔特方法的求解方式, 可在一定程度上避免线性方程组的系数矩阵的奇异和病态问题，提供更稳定、更准确的增量 $\Delta \boldsymbol{x}$ 。</p>
+\left(\boldsymbol{H}+\lambda \boldsymbol{D}^{\mathrm{T}} \boldsymbol{D}\right) \Delta \boldsymbol{x}_{k}=\boldsymbol{g}\tag{30}</script><p>可以看到，相比于高斯牛顿法，增量方程多了一项 $\lambda \boldsymbol{D}^{T} \boldsymbol{D}$ ，如果考虑简化形式，即 $D=I$ ，那么式（30）可以写为：</p>
+<script type="math/tex; mode=display">
+(\boldsymbol{H}+\lambda \boldsymbol{I}) \Delta \boldsymbol{x}_{k}=\boldsymbol{g}\tag{31}</script><p>我们看到一方面, <strong>当参数 $\lambda$ 比较小时</strong>, $\boldsymbol{H}$ 占主要地位, 这说明二次近似模型在该范围内是比较好的, <strong>列文伯格一马夸尔特方法更接近于高斯牛顿法</strong>。另一方面, <strong>当 $\lambda$ 比较大时</strong>, $\lambda \boldsymbol{I}$ 占据主要地位, <strong>列文伯格一马夸尔特方法更接近于一阶梯度下降法 (即最速下降),</strong> 这说明附近的二次近似不够好。列文伯格一马夸尔特方法的求解方式, 可在一定程度上避免线性方程组的系数矩阵的奇异和病态问题，提供更稳定、更准确的增量 $\Delta \boldsymbol{x}$ 。</p>
 <h2 id="IV-总结"><a href="#IV-总结" class="headerlink" title="IV. 总结"></a>IV. 总结</h2><ol>
 <li>在批量法求得SLAM中的状态变量时，使用最大似然估计，<strong>该方法最终转化为一个最小二乘问题</strong>。其代价函数是由误差项（包括实际观测值与观测方程计算求得的观测量的差，和实际运动量与运动方程计算出来的运动值的差）和协方差矩阵（观测协方差矩阵和运动协方差矩阵）组成。</li>
 <li>在非线性优化时，可以直接将代价函数进行泰勒展开，利用泰勒展开来近似在某一点处的代价函数，从而可以求出增量。但是仅用一阶项（最速下降法）来求会导致算法更加贪心，反复震荡。而考虑二阶项的方法称为牛顿法，需要求海塞矩阵，这是很难求的。</li>
@@ -7375,5 +7359,8 @@ $\rho$ 的分子是实际函数下降的值，分母是近似模型下降的值�
       <categories>
         <category>专业原理</category>
       </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
   </entry>
 </search>
