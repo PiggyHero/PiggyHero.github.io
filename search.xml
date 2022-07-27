@@ -3433,7 +3433,7 @@ A^{-1}A=AA^{-1}=I</script><p><strong>但是当矩阵的行列式为0时</strong>
 <p>关于秩更准确的定义：矩阵秩表示矩阵列空间的维数</p>
 <p><strong>当秩等于矩阵的列时，意味着它达到了它所能达到的最大值，此时叫作满秩</strong></p>
 <p>0向量一定包含在列空间中，因为线性变换不改变原点的位置，也就是 $A\vec0=\vec 0$ </p>
-<p>对于一个满秩变换来说，唯一能在变换后落在原点的向量就是0向量本身。但是对于一个非满秩的矩阵，它将空间压缩到一个低维的空间，也就是说有一系列向量在变换后被压缩到原点。例如对于原二维的空间，当进行压缩到一维空间的变换时，会使原二维空间中某一方向直线上的所有的向量都压缩到原点。再如原三维空间，压缩到一个二维空间时，也会使原三维空间中某一方向直线上所有的向量压缩到原点，当压缩到一个一维空间时，会使原三维空间中过原点的某一平面上的所有向量压缩到原点。</p>
+<p><strong>对于一个满秩变换来说，唯一能在变换后落在原点的向量就是0向量本身。但是对于一个非满秩的矩阵，它将空间压缩到一个低维的空间，也就是说有一系列向量在变换后被压缩到原点。</strong>例如对于原二维的空间，当进行压缩到一维空间的变换时，会使原二维空间中某一方向直线上的所有的向量都压缩到原点。再如原三维空间，压缩到一个二维空间时，也会使原三维空间中某一方向直线上所有的向量压缩到原点，当压缩到一个一维空间时，会使原三维空间中过原点的某一平面上的所有向量压缩到原点。</p>
 <h3 id="·零空间-核空间"><a href="#·零空间-核空间" class="headerlink" title="·零空间/核空间"></a>·零空间/核空间</h3><p>变换后被压缩到原点的向量的集合，叫作矩阵的零空间或者核空间</p>
 <p>==被压缩空间的维数==就是零空间的维数。例如三维空间中的一个向量经过一个方阵的线性变换后，被限制在二维平面上，那么该方阵的零空间维数为1，如果是将该向量变换成一个点，那么该方阵的零空间维数为2。零空间的维数就是表示方阵可以将几维的空间压缩到原点。也可以看作是方程 $A\vec x =0$​​​的解的情况，首先A得为方阵，当A的零空间为0时，也就是A满秩，那么只有零向量是该方程的解。如果A的零空间为2时，那么解向量的维数为2。</p>
 <h3 id="·非方阵"><a href="#·非方阵" class="headerlink" title="·非方阵"></a>·非方阵</h3><p>非方阵的几何意义和之前的方阵稍稍有些不同，先来说之前的方阵，方阵表示将一个向量进行变换，这些变换有旋转这个向量，拉伸压缩这个向量，无论怎么变换这个向量，这个向量都处于原空间中，即变换前是一个n维的向量，变换后还是n维的向量。举一个例子，对于三维空间中的一个向量，当矩阵A的秩为2时，表示将这个向量压缩到一个二维的平面中，尽管是压缩到二维平面中，只是把这个向量限制在二维平面上，但这个向量仍是三维空间中的向量。</p>
@@ -7446,7 +7446,245 @@ e_{i}=y_{i}-\exp \left(a x_{i}^{2}+b x_{i}+c\right)</script><p>求出每个误�
 <li>直接法：直接根据图像求解相机位姿</li>
 </ul>
 <p>所以可以看出特征点匹配在一路中占有重要的用处。要想匹配出特征点，就得先要知道什么是特征点。</p>
-<h2 id="I-特征点"><a href="#I-特征点" class="headerlink" title="I. 特征点"></a>I. 特征点</h2><h2 id="II-特征点匹配"><a href="#II-特征点匹配" class="headerlink" title="II. 特征点匹配"></a>II. 特征点匹配</h2>]]></content>
+<h2 id="I-ORB特征点"><a href="#I-ORB特征点" class="headerlink" title="I. ORB特征点"></a>I. ORB特征点</h2><h3 id="1-什么是特征点"><a href="#1-什么是特征点" class="headerlink" title="1. 什么是特征点"></a>1. 什么是特征点</h3><p>我们需要找到一些图像上有代表的点，这些点在相机视角发生少量变化后回保持不变。这些点我们称为<strong>路标</strong>，也称为<strong>图像特征</strong>。一开始人们用角点来作为图像的特征，但是该方法不稳定，例如很多远处看上去是角点的地方，当相机离近之后，可能就不显示为角点了。因此，计算机视觉领域的研究者们在长年的研究中设计了许多更加稳定的<strong>局部图像特征</strong>。</p>
+<p>这些特征有如下性质：</p>
+<ol>
+<li>可重复性（Repeatability ）相同的特征可以在不同的图像中找到。</li>
+<li>可区别性（Distinctiveness )：不同的特征有不同的表达。</li>
+<li>高效率 (Efficiency)：同一图像中, 特征点的数量应远小于像素的数量。</li>
+<li>本地性 (Locality )：特征仅与一小片图像区域相关。</li>
+</ol>
+<p>特征点由<strong>关键点</strong>和<strong>描述子</strong>两部分组成。所以提取特征点包括<strong>确定关键点位置和计算描述子</strong>两件事。描述子的设计原则是外观相似的特征应该有相似的描述子，因此只要两个描述子在向量空间上距离相近，就可以认为他们是同样的特征点。</p>
+<h3 id="2-ORB特征点"><a href="#2-ORB特征点" class="headerlink" title="2. ORB特征点"></a>2. ORB特征点</h3><p>ORB特征由<strong>关键点</strong>和<strong>描述子</strong>两部分组成。它的关键点是一种<strong>改进的FAST角点</strong>，而<strong>描述子称为BRIEF</strong>。</p>
+<h4 id="1-FAST角点"><a href="#1-FAST角点" class="headerlink" title="(1) FAST角点"></a>(1) FAST角点</h4><p>FAST 是一种角点，主要检测<strong>局部像素灰度变化明显</strong>的地方，以速度快著称。它的思想是：如果一个像素与邻域的像素差别较大 (过亮或过暗)，那么它更可能是角点。相比于其他角点检测算法， FAST 只需比较像素亮度的大小，十分快捷。它的检测过程如下：</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727171721.png" alt="image-20220727171721537" style="zoom:50%;" /></p>
+<ol>
+<li>在图像中选取像素 $p$, 假设它的亮度为 $I_{p}$ 。</li>
+<li>设置一个阈值 $T\left(\right.$ 比如, $I_{p}$ 的 $20 \%$ )。</li>
+<li>以像素 $p$ 为中心, 选取半径为 3 的圆上的 16 个像素点。</li>
+<li>假如选取的圆上有连续的 $N$ 个点的亮度大于 $I_{p}+T$ 或小于 $I_{p}-T$, 那么像素 $p$ 可以被 认为是特征点 ( $N$ 通常取 12, 即 FAST-12。其他常用的 $N$ 取值为 9 和 11 , 它们分别被 称为 FAST-9 和 FAST-11)。</li>
+<li>循环以上四步, 对每一个像素执行相同的操作。</li>
+</ol>
+<p><strong>注：</strong> 为了提高提取速度，可以加上一步<strong>预测试</strong>，具体操作为直接检测当前像素临域圆上的第1，5，9，13个像素的亮度。只有这4个中的3个像素同时大于$I_{p}+T $ 或小于 $I_{p}-T$ 时，当前像素才有可能是一个角点。如果检测到的角点扎堆，还需要非极大值抑制，保留响应极大值的角点。</p>
+<p>ORB为了解决FAST角点的<strong>尺度问题</strong>和<strong>旋转问题</strong>，添加了尺度方向和旋转方向的描述。尺度不变由通过构建图像金字塔，并在其每一层上检测角点来实现。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727172001.png" alt="image-20220727172000938" style="zoom:50%;" /></p>
+<p>金字塔是计算图视觉中常用的一种处理方法。金字塔底层是原始图像， 每往上一层，就对图像进行一个<strong>固定倍率的缩放</strong>，这样我们就有了不同分辨率的图像。较小的图像可以看成是远处看过来的场景。<strong>在特征匹配算法中，我们可以匹配不同层上的图像</strong>， 从而实现尺度不变性。例如，如果相机在后退，那么我们应该能够在上一个图像金字塔的上层和下一个图像金字塔的下层中找到匹配。</p>
+<p>在旋转方面，我们可以计算特征点附近的<strong>图像灰度质心</strong>，所谓质心就是以图像块灰度值作为权重的中心。具体的计算过程为：</p>
+<ol>
+<li><p>在一个小的图像块 $B$ 中，定义图像块的矩为 </p>
+<script type="math/tex; mode=display">
+m_{p q}=\sum_{x, y \in B} x^{p} y^{q} I(x, y), \quad p, q=\{0,1\}</script></li>
+<li><p>通过拒可以找到图像块的质心</p>
+<script type="math/tex; mode=display">
+C=\left(\frac{m_{10}}{m_{00}}, \frac{m_{01}}{m_{00}}\right)</script></li>
+<li><p>连接图像块的几何中心 $O$ 与质心 $C$, 得到一个方向向量 $\overrightarrow{O C}$, 于是特征点的方向可以定义为</p>
+<script type="math/tex; mode=display">
+\theta=\arctan \left(m_{01} / m_{10}\right)</script></li>
+</ol>
+<h4 id="2-BRIEF描述子"><a href="#2-BRIEF描述子" class="headerlink" title="(2) BRIEF描述子"></a>(2) BRIEF描述子</h4><p>BRIEF 是一种二进制描述子， 其描述向量由许多个 0 和 1 组成，这里的 0 和 1 编码了关键点附近两个随机像素（比如 $p$ 和 $q$ ）的大小关系：如果 $p$ 比 $q$ 大，则取 1 ，反之就取 0 。如果我们取 了 128 个这样的 $p，q$ ，则最后得到 128 维由 $0 、 1$ 组成的向量。BRIEF 使用了随机选点的比较，速度非常快，而且由于使用了二进制表达，存储起来也十分方便，适用于实时的图像匹配。原始 的 BRIEF 描述子不具有旋转不变性，因此在图像发生旋转时容易丢失。而 ORB 在 FAST 特征点提取阶段计算了关键点的方向，所以可以利用方向信息, 计算旋转之后的 “Steer BRIEF” 特征使 ORB 的描述子具有较好的旋转不变性。</p>
+<h2 id="II-特征点匹配"><a href="#II-特征点匹配" class="headerlink" title="II. 特征点匹配"></a>II. 特征点匹配</h2><p>匹配的方法就是计算描述子间的距离，来刻画特征点间的相似程度。这些距离可以使用不同的范数来度量，例如可以使用欧氏距离来进行度量，对于二进制描述子，如BRIEF，可以使用<strong>汉明距离</strong>来度量，两个二进制串的汉明距离就是指不同位数的个数。</p>
+<p>而对于如何匹配，最简单最直接的就是<strong>暴力匹配（Brute-Force Matcher）</strong>，也就是说，把当前特征点和另一帧图像上的所有特征点的描述子距离都计算一遍。当然这种方法耗时耗力，因此人们常用<strong>快速近似最临近（FLANN）</strong>算法。 </p>
+<h2 id="III-总结"><a href="#III-总结" class="headerlink" title="III. 总结"></a>III. 总结</h2><p>特征匹配是很重要的一步工作。特征点是由<strong>关键点</strong>和<strong>描述子</strong>来组成。在视觉SLAM中常用的是ORB特征，该特征考虑了尺度和旋转特性，因此更加稳定。ORB特征使用的是改进的FAST关键点，即某一像素点比其邻域的像素点的亮度都大或者特别小，则该像素点就是一个关键点。另外，还要考虑尺度和旋转的问题，ORB的关键点通过图像金字塔和计算关键点区域的图像灰度值中心来解决这两个问题。而对于描述子，ORB使用的是BRIEF描述子，该描述子通过随机抽取两个关键点邻域内的像素，并对其进行亮度值比较，来确定描述子的形式。该描述子由二进制位来描述。最后通过计算描述子的汉明距离来匹配特征点。</p>
+]]></content>
+      <categories>
+        <category>专业原理</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【视觉SLAM12】前端——根据匹配好的特征点计算相机位姿</title>
+    <url>/2022/07/27/%E3%80%90%E8%A7%86%E8%A7%89SLAM12%E3%80%91%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E6%A0%B9%E6%8D%AE%E5%8C%B9%E9%85%8D%E5%A5%BD%E7%9A%84%E7%89%B9%E5%BE%81%E7%82%B9%E8%AE%A1%E7%AE%97%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF/</url>
+    <content><![CDATA[<p>在匹配好两张图像的特征点后，就可以用来求取相机的位姿了。根据相机的原理不同，可以分为三种情况：</p>
+<ul>
+<li><p><strong>2D—2D（对极几何问题）</strong>：当使用单目相机时，仅知道所匹配特征点的两组像素坐标。</p>
+</li>
+<li><p><strong>3D—2D（PnP问题）</strong>：知道所匹配特征点的一个相机坐标系下的坐标和一个像素坐标系下的坐标。</p>
+</li>
+<li><p><strong>3D—3D（ICP问题）</strong>：当使用的是RGB-D相机或双目相机时，即知道所匹配特征点的两组相机坐标系下的坐标。</p>
+<span id="more"></span>
+</li>
+</ul>
+<p>本节我们还要学另一个东东，就是已知相机的运动后，如何求路标点的空间位置，也叫作<strong>三角测量</strong>。</p>
+<h2 id="I-对极几何"><a href="#I-对极几何" class="headerlink" title="I. 对极几何"></a>I. 对极几何</h2><p>我们先对匹配好的一对特征点建立关系：</p>
+<h3 id="1-对极约束"><a href="#1-对极约束" class="headerlink" title="1. 对极约束"></a>1. 对极约束</h3><p>以下图为例，我们希望求取两帧图像 $I_{1}, I_{2}$ 之间的运动，<strong>设第一帧到第二帧的运动为</strong> $\boldsymbol{R}, \boldsymbol{t}$ 。 两个相机中心分别为 $O_{1}, O_{2}$ 。现在，考虑 $I_{1}$ 中有一个特征点 $p_{1}$ ，它在 $I_{2}$ 中对应着特征点 $p_{2}$ 。我们知道两者是通过特征匹配得到的。如果匹配正确，<strong>说明它们确实是同一个空间点在两个成像平面上的投影。</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727205714.png" alt="image-20220727205714351" style="zoom:67%;" /></p>
+<p><strong>我们现在就是要建立这两个投影的像素坐标之间的关系。所建立的根据是</strong></p>
+<script type="math/tex; mode=display">
+\boldsymbol{O_2P}\cdot (\boldsymbol{O_1O_2}\times \boldsymbol{O_1P})=\boldsymbol{0}\tag{1}</script><p>而要想建立这个方程，就需要在同一坐标系下描述各个向量。</p>
+<p>以相机1为基准建立相机坐标系，所以点 $P$ 的坐标为 $[X,Y,Z]^T$ ，根据相机模型，可以得到点 $P$ 在相机1和2的像素坐标系下的坐标为 $\boldsymbol{p_1,p_2}$ ，所以有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+s_1\boldsymbol{p_1}&=K\boldsymbol{P}\\
+s_2\boldsymbol{p_2}&=K(R\boldsymbol{P}+\boldsymbol{t})
+\end{aligned}\tag{2}</script><p>在已知像素坐标 $\boldsymbol{p_1,p_2}$ 时，我们无法直接求出 $\boldsymbol{P}$ 的具体坐标，但是我们是知道点 $P$ 在哪个射线上，所以我们就求点 $P$ 在相机1和2归一化平面上的投影点的坐标 $\boldsymbol{X_1,X_2}$ (分别在1和2相机系下的坐标)，则有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{X_1}&=K^{-1}\boldsymbol{p_1}\\
+\boldsymbol{X_2}&=K^{-1}\boldsymbol{p_2}
+\end{aligned}\tag{3}</script><p>因为投影点 $X_1和X_2$ 在射线 $O_1P和O_2P$ 上，所以向量 $\boldsymbol{O_1X_1,O_2X_2}$ 是这两条射线上的向量，接下来就可以用这两个向量来代替式（1）中的两个向量 $\boldsymbol{O_1P}和\boldsymbol{O_2P}$ 。</p>
+<p>要想完成式（1）方程的建立，我们需要把所有向量都在同一坐标系下表示，我们在2系下表示：</p>
+<ul>
+<li>向量 $\boldsymbol{O_1X_1}$ 的坐标在1系下为 $\boldsymbol{X_1}$ ，所以在2系下需要进行坐标变换，即 $R\boldsymbol{X_1}$ 。</li>
+<li>向量 $\boldsymbol{O_1O_2}$ 在2系下的坐标是 $-\boldsymbol{t}$ （$\boldsymbol{t}$ 表示由1到2的平移向量，所以是点 $O_1$ 在坐标系2下的坐标）。</li>
+<li>向量 $\boldsymbol{O_2X_2}$ 在2系下的坐标为 $\boldsymbol{X_2}$ 。</li>
+</ul>
+<p>所以将三个向量的坐标带入（1）式中，有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{X_2}^T\cdot(-\boldsymbol{t}^{\wedge}\cdot R\boldsymbol{X_1})=0\\
+\end{aligned}\tag{4}</script><p>整理有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{X_2}^T\boldsymbol{t}^{\wedge}R\boldsymbol{X_1}=0\tag{5}</script><p>重新带入 $\boldsymbol{p_1,p_2}$ ：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p_2}^TK^{-T}\boldsymbol{t}^{\wedge}RK^{-1}\boldsymbol{p_1}=0\tag{6}</script><p>式（5）和（6）就是对极约束，注意这两个式子中间包括了<strong>旋转矩阵</strong>和<strong>平移向量</strong>，现在我们令：</p>
+<script type="math/tex; mode=display">
+E=\boldsymbol{t}^{\wedge}R\tag{7}</script><p>或：</p>
+<script type="math/tex; mode=display">
+F=K^{-T}\boldsymbol{t}^{\wedge}RK^{-1}\tag{8}</script><p>则式（5）和式（6）还可以写为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{X}_{2}^{\mathrm{T}} \boldsymbol{E} \boldsymbol{X}_{1}=\boldsymbol{p}_{2}^{\mathrm{T}} \boldsymbol{F} \boldsymbol{p}_{1}=0\tag{9}</script><p>其中 $E$ 被称为<strong>本质矩阵</strong>，包含了相机的旋转和平移信息，主要用于已知相机内参时进行位姿求解。而 $F$ 称为<strong>基础矩阵</strong>，包括了相机的内参信息以及旋转平移信息。</p>
+<h3 id="2-求解相机位姿（八点法）"><a href="#2-求解相机位姿（八点法）" class="headerlink" title="2. 求解相机位姿（八点法）"></a>2. 求解相机位姿（八点法）</h3><p><strong>当我们建立好了一组特征点的关系后，我们就可以通过已匹配的特征点来求相机的位姿了，根本上就是来求解本质矩阵 $E$ 或基础矩阵 $F$</strong> <strong>，然后由矩阵再求出旋转 $R$ 和平移 $\boldsymbol t$</strong> ，从本质上来讲，基础矩阵和本质矩阵并没有多大区别，一般相机的内参矩阵是已知的，所以我们主要讨论本质矩阵。</p>
+<p>本质矩阵 $E=\boldsymbol{t}^{\wedge}R$ ，是一个 $3\times 3$ 的矩阵，有9个未知数，但这并不意味着任意一个 $3\times 3$ 的矩阵就是本质矩阵。本质矩阵有以下几点注意：</p>
+<ul>
+<li>由于本质矩阵是由对极约束来定义的，可以看到式（9）中乘以任意系数都成立，所以这表面本质矩阵 $E$ 在不同尺度下是等价的（可以在对极约束的图上想一下，当三角形 $O_1PO_2$ 任意放大缩小多少倍，投影的像素点位置都不变）。</li>
+<li>本质矩阵有一个内在的性质，它的奇异值必定是 $[\sigma, \sigma, 0]^{\mathrm{T}}$ 的形式。</li>
+<li>由于旋转和平移共有6个自由度，所以本质矩阵也有6个自由度，但由于尺度等价性，故 $E$ 实际上只能求5个自由度。</li>
+</ul>
+<p>求解本质矩阵 $E$ 最常用的方法就是<strong>八点法</strong>，考虑一对匹配点，它的归一化坐标为：$\boldsymbol{X}_{1}=\left[u_{1}, v_{1}, 1\right]^{\mathrm{T}}, \boldsymbol{X}_{2}=\left[u_{2}, v_{2}, 1\right]$ ，根据对极约束，有：</p>
+<script type="math/tex; mode=display">
+\left(u_{2}, v_{2}, 1\right)\left(\begin{array}{lll}
+e_{1} & e_{2} & e_{3} \\
+e_{4} & e_{5} & e_{6} \\
+e_{7} & e_{8} & e_{9}
+\end{array}\right)\left(\begin{array}{c}
+u_{1} \\
+v_{1} \\
+1
+\end{array}\right)=0\tag{10}</script><p>我们把矩阵 $E$ 展开写成向量的形式：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{e}=\left[e_{1}, e_{2}, e_{3}, e_{4}, e_{5}, e_{6}, e_{7}, e_{8}, e_{9}\right]^{\mathrm{T}}\tag{11}</script><p> 式（10）还可以写成：</p>
+<script type="math/tex; mode=display">
+\left[u_{2} u_{1}, u_{2} v_{1}, u_{2}, v_{2} u_{1}, v_{2} v_{1}, v_{2}, u_{1}, v_{1}, 1\right] \cdot \boldsymbol{e}=0\tag{12}</script><p>同理，对于所有的8对点对也同样以该形式进行表示，并写到一个方程组中，则得到：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{ccccccccc}
+u_{2}^{1} u_{1}^{1} & u_{2}^{1} v_{1}^{1} & u_{2}^{1} & v_{2}^{1} u_{1}^{1} & v_{2}^{1} v_{1}^{1} & v_{2}^{1} & u_{1}^{1} & v_{1}^{1} & 1 \\
+u_{2}^{2} u_{1}^{2} & u_{2}^{2} v_{1}^{2} & u_{2}^{2} & v_{2}^{2} u_{1}^{2} & v_{2}^{2} v_{1}^{2} & v_{2}^{2} & u_{1}^{2} & v_{1}^{2} & 1 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \\
+u_{2}^{8} u_{1}^{8} & u_{2}^{8} v_{1}^{8} & u_{2}^{8} & v_{2}^{8} u_{1}^{8} & v_{2}^{8} v_{1}^{8} & v_{2}^{8} & u_{1}^{8} & v_{1}^{8} & 1
+\end{array}\right)\left(\begin{array}{l}
+e_{1} \\
+e_{2} \\
+e_{3} \\
+e_{4} \\
+e_{5} \\
+e_{6} \\
+e_{7} \\
+e_{8} \\
+e_{9}
+\end{array}\right)=0\tag{13}</script><p>这8个方程构成了一个线性方程组，它的系数矩阵由特征点位置构成，大小为 $8\times 9$，$\boldsymbol e$ 位于该矩阵的<strong>零空间中</strong>，如果系数矩阵是满秩的，那么它的零空间的维数为1，也就是 $\boldsymbol e$ 构成了一条线，这与 $\boldsymbol e$ 的尺度等价性是一致的。</p>
+<p>在求得本质矩阵 $E$ 之后，我们便可以回复出相机的运动 $R$ 和 $\boldsymbol{t}$ 了，这个过程由奇异值分解得到，设本质矩阵 $E$ 的奇异值分解为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{E}=\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\mathrm{T}}\tag{14}</script><p>具体过程省略，我们可以得到4种情况：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\boldsymbol{t}_{1}^{\wedge}=\boldsymbol{U} \boldsymbol{R}_{Z}\left(\frac{\pi}{2}\right) \boldsymbol{\Sigma} \boldsymbol{U}^{\mathrm{T}}, \quad \boldsymbol{R}_{1}=\boldsymbol{U} \boldsymbol{R}_{Z}^{\mathrm{T}}\left(\frac{\pi}{2}\right) \boldsymbol{V}^{\mathrm{T}} \\
+\boldsymbol{t}_{2}^{\wedge}=\boldsymbol{U} \boldsymbol{R}_{Z}\left(-\frac{\pi}{2}\right) \boldsymbol{\Sigma} \boldsymbol{U}^{\mathrm{T}}, \quad \boldsymbol{R}_{2}=\boldsymbol{U} \boldsymbol{R}_{Z}^{\mathrm{T}}\left(-\frac{\pi}{2}\right) \boldsymbol{V}^{\mathrm{T}}
+\end{array}\tag{15}</script><p>虽然有四种情况，但是只有一种情况是 $P$ 在两个相机中都具有正深度，因此只要把任意一点代入4种解中，检测该点在两个相机下的深度，就可以确定哪个解是正确的了。如果我们求出的 $E$ 不满足奇异值为 $\sigma, \sigma, 0$ 的形式。这时, 我们会刻意地把 $\boldsymbol{\Sigma}$ 矩阵调整成上面的样子。通常的做法是，对八点法求得的 $E$ 进行 SVD，会得到奇异值矩阵 $\boldsymbol{\Sigma}=\operatorname{diag}\left(\sigma_{1}, \sigma_{2}, \sigma_{3}\right)$，不妨设 $\sigma_{1} \geqslant \sigma_{2} \geqslant \sigma_{3}$ 。取:</p>
+<script type="math/tex; mode=display">
+\boldsymbol{E}=\boldsymbol{U} \operatorname{diag}\left(\frac{\sigma_{1}+\sigma_{2}}{2}, \frac{\sigma_{1}+\sigma_{2}}{2}, 0\right) \boldsymbol{V}^{\mathrm{T}} \tag{16}</script><h3 id="3-单应矩阵"><a href="#3-单应矩阵" class="headerlink" title="3. 单应矩阵"></a>3. 单应矩阵</h3><p>当特征点在同一平面上时（这种情况在无人机携带相机俯视地面比较常见），可以借助该<strong>平面方程</strong>来进行推导特征点间的关系。这就说到了<strong>单应矩阵</strong>，它通常用来描述处于共同平面上的一些点在两张图像之间的变换关系。</p>
+<p>当点 $P$ 位于某个平面 $\pi$ 上时，有平面方程：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{n}^{T}\boldsymbol{P}+d=0\tag{17}</script><p>整理有：</p>
+<script type="math/tex; mode=display">
+-\frac{\boldsymbol{n}^{T}\boldsymbol{P}}{d}=1\tag{18}</script><p>把式（18）带入到式（2）中，得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+s_2\boldsymbol{p_{2}} & = K(R \boldsymbol P+\boldsymbol t) \\
+& = K\left(R \boldsymbol P+\boldsymbol t \cdot\left(-\frac{\boldsymbol n^{\mathrm{T}} \boldsymbol{P}}{d}\right)\right) \\
+& = K\left(R-\frac{\boldsymbol{t} \boldsymbol n^{\mathrm{T}}}{d}\right) \boldsymbol P \\
+& = s_1 K\left(R-\frac{\boldsymbol{t} \boldsymbol n^{\mathrm{T}}}{d}\right) K^{-1} \boldsymbol {p_{1}} 
+\end{aligned}\tag{19}</script><p>式（19）虽然是两面相等，但要注意的是由于像素坐标 $\boldsymbol{p_1,p_2}$ 都是由<strong>齐次坐标</strong>表示的，<strong>因此对其放大或缩小一定的倍率，并不影响结果。</strong>所以说式（19）可以写成：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p_2}\simeq K\left(\boldsymbol{R}-\frac{\boldsymbol{t} \boldsymbol{n}^{\mathrm{T}}}{d}\right) K^{-1} \boldsymbol{p}_{1}\tag{20}</script><p>这表示尺度一致性，现令中间部分：</p>
+<script type="math/tex; mode=display">
+H=K\left(\boldsymbol{R}-\frac{\boldsymbol{t} \boldsymbol{n}^{\mathrm{T}}}{d}\right) K^{-1}\tag{21}</script><p>则式（20）可写为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p}_{2} \simeq H \boldsymbol{p}_1\tag{22}</script><p><strong>这里的 $H$ 放大或缩小任意倍数，原方程均成立。</strong> $H$ 的定义与<strong>旋转，平移和平面的参数</strong>有关，所以求解它的思路和求解本质矩阵一样，我们先将式（22）展开：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{c}
+u_{2} \\
+v_{2} \\
+1
+\end{array}\right) \simeq\left(\begin{array}{lll}
+h_{1} & h_{2} & h_{3} \\
+h_{4} & h_{5} & h_{6} \\
+h_{7} & h_{8} & h_{9}
+\end{array}\right)\left(\begin{array}{c}
+u_{1} \\
+v_{1} \\
+1
+\end{array}\right)\tag{23}</script><p>因为 $H$ 尺度不确定，我们在实际计算中令 $h_9=1$ （在它取非零值时），然后根据第3行，去掉这个非零因子，于是有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+u_{2} &=\frac{h_{1} u_{1}+h_{2} v_{1}+h_{3}}{h_{7} u_{1}+h_{8} v_{1}+h_{9}} \\
+v_{2} &=\frac{h_{4} u_{1}+h_{5} v_{1}+h_{6}}{h_{7} u_{1}+h_{8} v_{1}+h_{9}}
+\end{aligned}\tag{24}</script><p>整理得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&h_{1} u_{1}+h_{2} v_{1}+h_{3}-h_{7} u_{1} u_{2}-h_{8} v_{1} u_{2}=u_{2} \\
+&h_{4} u_{1}+h_{5} v_{1}+h_{6}-h_{7} u_{1} v_{2}-h_{8} v_{1} v_{2}=v_{2}
+\end{aligned}</script><p>这样一组匹配点可以<strong>构造出两个约束方程</strong>，于是自由度为8的单应矩阵可以通过4对匹配特征点算出（这些特征点不能有三点共线的情况），求解线性方程组：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{cccccccc}
+u_{1}^{1} & v_{1}^{1} & 1 & 0 & 0 & 0 & -u_{1}^{1} u_{2}^{1} & -v_{1}^{1} u_{2}^{1} \\
+0 & 0 & 0 & u_{1}^{1} & v_{1}^{1} & 1 & -u_{1}^{1} v_{2}^{1} & -v_{1}^{1} v_{2}^{1} \\
+u_{1}^{2} & v_{1}^{2} & 1 & 0 & 0 & 0 & -u_{1}^{2} u_{2}^{2} & -v_{1}^{2} u_{2}^{2} \\
+0 & 0 & 0 & u_{1}^{2} & v_{1}^{2} & 1 & -u_{1}^{2} v_{2}^{2} & -v_{1}^{2} v_{2}^{2} \\
+u_{1}^{3} & v_{1}^{3} & 1 & 0 & 0 & 0 & -u_{1}^{3} u_{2}^{3} & -v_{1}^{3} u_{2}^{3} \\
+0 & 0 & 0 & u_{1}^{3} & v_{1}^{3} & 1 & -u_{1}^{3} v_{2}^{3} & -v_{1}^{3} v_{2}^{3} \\
+u_{1}^{4} & v_{1}^{4} & 1 & 0 & 0 & 0 & -u_{1}^{4} u_{2}^{4} & -v_{1}^{4} u_{2}^{4} \\
+0 & 0 & 0 & u_{1}^{4} & v_{1}^{4} & 1 & -u_{1}^{4} v_{2}^{4} & -v_{1}^{4} v_{2}^{4}
+\end{array}\right)\left(\begin{array}{l}
+h_{1} \\
+h_{2} \\
+h_{3} \\
+h_{4} \\
+h_{5} \\
+h_{6} \\
+h_{7} \\
+h_{8}
+\end{array}\right)=\left(\begin{array}{l}
+u_{2}^{1} \\
+v_{2}^{1} \\
+u_{2}^{2} \\
+v_{2}^{2} \\
+u_{2}^{3} \\
+v_{2}^{3} \\
+u_{2}^{4} \\
+v_{2}^{4}
+\end{array}\right)\tag{25}</script><p><strong>注意：</strong> 当  $h_9=0$ 时，式（25）右侧为0。</p>
+<p>这种方法称为<strong>直接线性变换法（DLT）</strong>，求解后可以对 $H$ 矩阵进行分解，得到相应的旋转矩阵 $R$ 和 $\boldsymbol{t}$ 。它可以分解为四种情况，也可以根据深度信息，最后进行判断得到一组正确的解，具体不做介绍。</p>
+<h3 id="4-小结"><a href="#4-小结" class="headerlink" title="4. 小结"></a>4. 小结</h3><p>对极几何问题中，我们可以根据匹配好的特征点计算出本质矩阵或基础矩阵。也可以根据同一平面上的特征点计算出单应矩阵。对上面的问题进行总结：</p>
+<ul>
+<li><p>本质矩阵 $E$ 是尺度不确定的，我们可以从它分解得到旋转矩阵$R$ 和平移向量 $\boldsymbol{t}$ ，但是我们知道旋转矩阵 $R\in SO(3)$ ，有自身的约束，所以我们认为 $\boldsymbol{t}$ 具有一个尺度，即任意非零常数乘以 $\boldsymbol{t}$ 都符合，所以我们通常把  $\boldsymbol{t}$  归一化，令其长度为1。</p>
+</li>
+<li><p>在单目视觉中，我们对两张图像的 $\boldsymbol{t}$ 归一化相当于固定了尺度。虽然我们不知道它的实际长度是多少，但我们以这时的 $\boldsymbol t$ 为单位 1 , 计算相机运动和特征点的 3D 位置。这被称为单目 SLAM 的初始化。在初始化之后, 就可以用 <strong>3D-2D</strong> 计算相机运动了。初始化之后的轨迹和地图的单位，就是初始化时固定的尺度。因此, 单目 SLAM 有一步不可避免的初始化。初始化的两张图像<strong>必须有一定程度的平移</strong>，而后的轨迹和地图都将以此步的平移为单位。</p>
+</li>
+<li><p>当相机做纯旋转运动时，此时  $\boldsymbol{t}$ 为0，所以本质矩阵也将为零，这将导致无法求解 $R$ ，此时我们可以靠求单应矩阵 $H$ 来求取旋转，但是仅有旋转，<strong>我们无法用三角测量</strong>估计特征点的空间位置。<strong>所以单目初始化不能只有纯旋转，必须有一定程度的平移。</strong></p>
+</li>
+</ul>
+<h2 id="II-3D-2D-PnP"><a href="#II-3D-2D-PnP" class="headerlink" title="II. 3D-2D: PnP"></a>II. 3D-2D: PnP</h2><h2 id="IV-三角测量"><a href="#IV-三角测量" class="headerlink" title="IV. 三角测量"></a>IV. 三角测量</h2><p>当我们求得两帧图像间的相机运动，就可以求得特征点在3D空间的位置了。这也就是三角测量问题，三角测量就是通过两帧图像，来确定一个特征点的深度。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728040641.png" alt="image-20220728040641018" style="zoom: 67%;" /></p>
+<p>考虑图像 $I_{1}$ 和 $I_{2}$，以左图为参考， 右图的变换矩阵为 $\boldsymbol{T}$ 。相机光心为 $O_{1}$ 和 $O_{2}$ 。在 $I_{1}$ 中有特征点 $\boldsymbol p_{1}$， 对应 $I_{2}$ 中有特征点 $\boldsymbol p_{2}$ 。 理论上，直线 $O_{1} p_{1}$ 与 $O_{2} p_{2}$ 在场景中会相交于一点 $P$ ，该点即两个特征点所对应的地图点在三维场景中的位置。然而由于噪声的影响，这两条直线往往无法相交。因此，可以通过最小二乘法求解。按照对极几何中的定义, 设 $\boldsymbol{x}_{1}, \boldsymbol{x}_{2}$ 为两个特征点的归一化坐标, 那么它们满足:</p>
+<script type="math/tex; mode=display">
+s_{2} \boldsymbol{x}_{2}=s_{1} \boldsymbol{R} \boldsymbol{x}_{1}+\boldsymbol{t} \tag{}</script><p>现在已知 $R, \boldsymbol{t}$ ，我们想求解两个特征点的深度 $s_{1}, s_{2}$ 。从几何上看, 可以在射线 $O_{1} p_{1}$ 上寻找 3D 点，使其投影位置接近 $\boldsymbol{p}_{2}$ 。同理，也可以在 $O_{2} p_{2}$ 上找，或者在两条线的中间找。不同的策略对应着不同的计算方式，当然它们大同小异。例如，我们希望计算 $s_{1}$，那么先对上式两侧左乘一 个 $\boldsymbol{x}_{2}^{\wedge}$，得</p>
+<script type="math/tex; mode=display">
+s_{2} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{x}_{2}=0=s_{1} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{R} \boldsymbol{x}_{1}+\boldsymbol{x}_{2}^{\wedge} \boldsymbol{t}</script><p>该式左侧为零，右侧可看成 $s_{2}$ 的一个方程，可以根据它直接求得 $s_{2}$ 。有了 $s_{2}, s_{1}$ 也非常容易求出。于是，我们就得到了两帧下的点的深度，确定了它们的空间坐标。当然，由于噪声的存在，我们估得的 $R, \boldsymbol{t}$ 不一定精确使上式为零，所以更常见的做法是求<strong>最小二乘解</strong>而不是直接的解。</p>
+<p>三角测量是由平移得到的，有平移才会有对极几何中的三角形，才谈得上三角测量。因此，<strong>纯旋转是无法使用三角测量的</strong>，因为在平移为零时，对极约束一直为零。当然，实际数据往往不会完全等于零。在平移存在的情况下, 我们还要关心三角测量的不确定性，这会引出一个三角测量的矛盾。<strong>这个矛盾是，平移小了，深度的不确定性变大，因为相较于大平移，深度稍微差一点，就差出很多。而另一方面，大平移时，这会导致图像外观发生明显变化，使特征提取和匹配变得困难。</strong></p>
+<p>在单目视觉中，由于单目图像没有深度信息，我们要等待特征点被追踪几帧之后，产生了足够的视角，再用三角化来确定新增特征点的深度值。这有时也被称为<strong>延迟三角化</strong> 。但是，如果相机发生了原地旋转，导致视差很小，就不好估计新观测到的特征点的深度。</p>
+]]></content>
       <categories>
         <category>专业原理</category>
       </categories>

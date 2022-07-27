@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在匹配好两张图像的特征点后，就可以用来求取相机的位姿了。根据相机的原理不同，可以分为三种情况：  2D—2D（对极几何问题）：当使用单目相机时，仅知道所匹配特征点的两组像素坐标。  3D—2D（PnP问题）：知道所匹配特征点的一个相机坐标系下的坐标和一个像素坐标系下的坐标。  3D—3D（ICP问题）：当使用的是RGB-D相机或双目相机时，即知道所匹配特征点的两组相机坐标系下的坐标。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【视觉SLAM12】前端——根据匹配好的特征点计算相机位姿">
+<meta property="og:url" content="http://example.com/2022/07/27/%E3%80%90%E8%A7%86%E8%A7%89SLAM12%E3%80%91%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E6%A0%B9%E6%8D%AE%E5%8C%B9%E9%85%8D%E5%A5%BD%E7%9A%84%E7%89%B9%E5%BE%81%E7%82%B9%E8%AE%A1%E7%AE%97%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF/index.html">
+<meta property="og:site_name" content="PiggyHero Wiki">
+<meta property="og:description" content="在匹配好两张图像的特征点后，就可以用来求取相机的位姿了。根据相机的原理不同，可以分为三种情况：  2D—2D（对极几何问题）：当使用单目相机时，仅知道所匹配特征点的两组像素坐标。  3D—2D（PnP问题）：知道所匹配特征点的一个相机坐标系下的坐标和一个像素坐标系下的坐标。  3D—3D（ICP问题）：当使用的是RGB-D相机或双目相机时，即知道所匹配特征点的两组相机坐标系下的坐标。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727205714.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728040641.png">
+<meta property="article:published_time" content="2022-07-27T12:08:34.000Z">
+<meta property="article:modified_time" content="2022-07-27T20:22:43.920Z">
+<meta property="article:author" content="PiggyHero">
+<meta property="article:tag" content="SLAM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727205714.png">
+
+<link rel="canonical" href="http://example.com/2022/07/27/%E3%80%90%E8%A7%86%E8%A7%89SLAM12%E3%80%91%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E6%A0%B9%E6%8D%AE%E5%8C%B9%E9%85%8D%E5%A5%BD%E7%9A%84%E7%89%B9%E5%BE%81%E7%82%B9%E8%AE%A1%E7%AE%97%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>【视觉SLAM12】前端——根据匹配好的特征点计算相机位姿 | PiggyHero Wiki</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/PiggyHero" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">PiggyHero Wiki</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/27/%E3%80%90%E8%A7%86%E8%A7%89SLAM12%E3%80%91%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E6%A0%B9%E6%8D%AE%E5%8C%B9%E9%85%8D%E5%A5%BD%E7%9A%84%E7%89%B9%E5%BE%81%E7%82%B9%E8%AE%A1%E7%AE%97%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cutexiaoxin.gif">
+      <meta itemprop="name" content="PiggyHero">
+      <meta itemprop="description" content="不学习咋整啊！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PiggyHero Wiki">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【视觉SLAM12】前端——根据匹配好的特征点计算相机位姿
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-27 20:08:34" itemprop="dateCreated datePublished" datetime="2022-07-27T20:08:34+08:00">2022-07-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-28 04:22:43" itemprop="dateModified" datetime="2022-07-28T04:22:43+08:00">2022-07-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%93%E4%B8%9A%E5%8E%9F%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">专业原理</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在匹配好两张图像的特征点后，就可以用来求取相机的位姿了。根据相机的原理不同，可以分为三种情况：</p>
+<ul>
+<li><p><strong>2D—2D（对极几何问题）</strong>：当使用单目相机时，仅知道所匹配特征点的两组像素坐标。</p>
+</li>
+<li><p><strong>3D—2D（PnP问题）</strong>：知道所匹配特征点的一个相机坐标系下的坐标和一个像素坐标系下的坐标。</p>
+</li>
+<li><p><strong>3D—3D（ICP问题）</strong>：当使用的是RGB-D相机或双目相机时，即知道所匹配特征点的两组相机坐标系下的坐标。</p>
+<span id="more"></span>
+</li>
+</ul>
+<p>本节我们还要学另一个东东，就是已知相机的运动后，如何求路标点的空间位置，也叫作<strong>三角测量</strong>。</p>
+<h2 id="I-对极几何"><a href="#I-对极几何" class="headerlink" title="I. 对极几何"></a>I. 对极几何</h2><p>我们先对匹配好的一对特征点建立关系：</p>
+<h3 id="1-对极约束"><a href="#1-对极约束" class="headerlink" title="1. 对极约束"></a>1. 对极约束</h3><p>以下图为例，我们希望求取两帧图像 $I_{1}, I_{2}$ 之间的运动，<strong>设第一帧到第二帧的运动为</strong> $\boldsymbol{R}, \boldsymbol{t}$ 。 两个相机中心分别为 $O_{1}, O_{2}$ 。现在，考虑 $I_{1}$ 中有一个特征点 $p_{1}$ ，它在 $I_{2}$ 中对应着特征点 $p_{2}$ 。我们知道两者是通过特征匹配得到的。如果匹配正确，<strong>说明它们确实是同一个空间点在两个成像平面上的投影。</strong></p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727205714.png" alt="image-20220727205714351" style="zoom:67%;" /></p>
+<p><strong>我们现在就是要建立这两个投影的像素坐标之间的关系。所建立的根据是</strong></p>
+<script type="math/tex; mode=display">
+\boldsymbol{O_2P}\cdot (\boldsymbol{O_1O_2}\times \boldsymbol{O_1P})=\boldsymbol{0}\tag{1}</script><p>而要想建立这个方程，就需要在同一坐标系下描述各个向量。</p>
+<p>以相机1为基准建立相机坐标系，所以点 $P$ 的坐标为 $[X,Y,Z]^T$ ，根据相机模型，可以得到点 $P$ 在相机1和2的像素坐标系下的坐标为 $\boldsymbol{p_1,p_2}$ ，所以有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+s_1\boldsymbol{p_1}&=K\boldsymbol{P}\\
+s_2\boldsymbol{p_2}&=K(R\boldsymbol{P}+\boldsymbol{t})
+\end{aligned}\tag{2}</script><p>在已知像素坐标 $\boldsymbol{p_1,p_2}$ 时，我们无法直接求出 $\boldsymbol{P}$ 的具体坐标，但是我们是知道点 $P$ 在哪个射线上，所以我们就求点 $P$ 在相机1和2归一化平面上的投影点的坐标 $\boldsymbol{X_1,X_2}$ (分别在1和2相机系下的坐标)，则有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{X_1}&=K^{-1}\boldsymbol{p_1}\\
+\boldsymbol{X_2}&=K^{-1}\boldsymbol{p_2}
+\end{aligned}\tag{3}</script><p>因为投影点 $X_1和X_2$ 在射线 $O_1P和O_2P$ 上，所以向量 $\boldsymbol{O_1X_1,O_2X_2}$ 是这两条射线上的向量，接下来就可以用这两个向量来代替式（1）中的两个向量 $\boldsymbol{O_1P}和\boldsymbol{O_2P}$ 。</p>
+<p>要想完成式（1）方程的建立，我们需要把所有向量都在同一坐标系下表示，我们在2系下表示：</p>
+<ul>
+<li>向量 $\boldsymbol{O_1X_1}$ 的坐标在1系下为 $\boldsymbol{X_1}$ ，所以在2系下需要进行坐标变换，即 $R\boldsymbol{X_1}$ 。</li>
+<li>向量 $\boldsymbol{O_1O_2}$ 在2系下的坐标是 $-\boldsymbol{t}$ （$\boldsymbol{t}$ 表示由1到2的平移向量，所以是点 $O_1$ 在坐标系2下的坐标）。</li>
+<li>向量 $\boldsymbol{O_2X_2}$ 在2系下的坐标为 $\boldsymbol{X_2}$ 。</li>
+</ul>
+<p>所以将三个向量的坐标带入（1）式中，有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{X_2}^T\cdot(-\boldsymbol{t}^{\wedge}\cdot R\boldsymbol{X_1})=0\\
+\end{aligned}\tag{4}</script><p>整理有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{X_2}^T\boldsymbol{t}^{\wedge}R\boldsymbol{X_1}=0\tag{5}</script><p>重新带入 $\boldsymbol{p_1,p_2}$ ：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p_2}^TK^{-T}\boldsymbol{t}^{\wedge}RK^{-1}\boldsymbol{p_1}=0\tag{6}</script><p>式（5）和（6）就是对极约束，注意这两个式子中间包括了<strong>旋转矩阵</strong>和<strong>平移向量</strong>，现在我们令：</p>
+<script type="math/tex; mode=display">
+E=\boldsymbol{t}^{\wedge}R\tag{7}</script><p>或：</p>
+<script type="math/tex; mode=display">
+F=K^{-T}\boldsymbol{t}^{\wedge}RK^{-1}\tag{8}</script><p>则式（5）和式（6）还可以写为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{X}_{2}^{\mathrm{T}} \boldsymbol{E} \boldsymbol{X}_{1}=\boldsymbol{p}_{2}^{\mathrm{T}} \boldsymbol{F} \boldsymbol{p}_{1}=0\tag{9}</script><p>其中 $E$ 被称为<strong>本质矩阵</strong>，包含了相机的旋转和平移信息，主要用于已知相机内参时进行位姿求解。而 $F$ 称为<strong>基础矩阵</strong>，包括了相机的内参信息以及旋转平移信息。</p>
+<h3 id="2-求解相机位姿（八点法）"><a href="#2-求解相机位姿（八点法）" class="headerlink" title="2. 求解相机位姿（八点法）"></a>2. 求解相机位姿（八点法）</h3><p><strong>当我们建立好了一组特征点的关系后，我们就可以通过已匹配的特征点来求相机的位姿了，根本上就是来求解本质矩阵 $E$ 或基础矩阵 $F$</strong> <strong>，然后由矩阵再求出旋转 $R$ 和平移 $\boldsymbol t$</strong> ，从本质上来讲，基础矩阵和本质矩阵并没有多大区别，一般相机的内参矩阵是已知的，所以我们主要讨论本质矩阵。</p>
+<p>本质矩阵 $E=\boldsymbol{t}^{\wedge}R$ ，是一个 $3\times 3$ 的矩阵，有9个未知数，但这并不意味着任意一个 $3\times 3$ 的矩阵就是本质矩阵。本质矩阵有以下几点注意：</p>
+<ul>
+<li>由于本质矩阵是由对极约束来定义的，可以看到式（9）中乘以任意系数都成立，所以这表面本质矩阵 $E$ 在不同尺度下是等价的（可以在对极约束的图上想一下，当三角形 $O_1PO_2$ 任意放大缩小多少倍，投影的像素点位置都不变）。</li>
+<li>本质矩阵有一个内在的性质，它的奇异值必定是 $[\sigma, \sigma, 0]^{\mathrm{T}}$ 的形式。</li>
+<li>由于旋转和平移共有6个自由度，所以本质矩阵也有6个自由度，但由于尺度等价性，故 $E$ 实际上只能求5个自由度。</li>
+</ul>
+<p>求解本质矩阵 $E$ 最常用的方法就是<strong>八点法</strong>，考虑一对匹配点，它的归一化坐标为：$\boldsymbol{X}_{1}=\left[u_{1}, v_{1}, 1\right]^{\mathrm{T}}, \boldsymbol{X}_{2}=\left[u_{2}, v_{2}, 1\right]$ ，根据对极约束，有：</p>
+<script type="math/tex; mode=display">
+\left(u_{2}, v_{2}, 1\right)\left(\begin{array}{lll}
+e_{1} & e_{2} & e_{3} \\
+e_{4} & e_{5} & e_{6} \\
+e_{7} & e_{8} & e_{9}
+\end{array}\right)\left(\begin{array}{c}
+u_{1} \\
+v_{1} \\
+1
+\end{array}\right)=0\tag{10}</script><p>我们把矩阵 $E$ 展开写成向量的形式：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{e}=\left[e_{1}, e_{2}, e_{3}, e_{4}, e_{5}, e_{6}, e_{7}, e_{8}, e_{9}\right]^{\mathrm{T}}\tag{11}</script><p> 式（10）还可以写成：</p>
+<script type="math/tex; mode=display">
+\left[u_{2} u_{1}, u_{2} v_{1}, u_{2}, v_{2} u_{1}, v_{2} v_{1}, v_{2}, u_{1}, v_{1}, 1\right] \cdot \boldsymbol{e}=0\tag{12}</script><p>同理，对于所有的8对点对也同样以该形式进行表示，并写到一个方程组中，则得到：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{ccccccccc}
+u_{2}^{1} u_{1}^{1} & u_{2}^{1} v_{1}^{1} & u_{2}^{1} & v_{2}^{1} u_{1}^{1} & v_{2}^{1} v_{1}^{1} & v_{2}^{1} & u_{1}^{1} & v_{1}^{1} & 1 \\
+u_{2}^{2} u_{1}^{2} & u_{2}^{2} v_{1}^{2} & u_{2}^{2} & v_{2}^{2} u_{1}^{2} & v_{2}^{2} v_{1}^{2} & v_{2}^{2} & u_{1}^{2} & v_{1}^{2} & 1 \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \\
+u_{2}^{8} u_{1}^{8} & u_{2}^{8} v_{1}^{8} & u_{2}^{8} & v_{2}^{8} u_{1}^{8} & v_{2}^{8} v_{1}^{8} & v_{2}^{8} & u_{1}^{8} & v_{1}^{8} & 1
+\end{array}\right)\left(\begin{array}{l}
+e_{1} \\
+e_{2} \\
+e_{3} \\
+e_{4} \\
+e_{5} \\
+e_{6} \\
+e_{7} \\
+e_{8} \\
+e_{9}
+\end{array}\right)=0\tag{13}</script><p>这8个方程构成了一个线性方程组，它的系数矩阵由特征点位置构成，大小为 $8\times 9$，$\boldsymbol e$ 位于该矩阵的<strong>零空间中</strong>，如果系数矩阵是满秩的，那么它的零空间的维数为1，也就是 $\boldsymbol e$ 构成了一条线，这与 $\boldsymbol e$ 的尺度等价性是一致的。</p>
+<p>在求得本质矩阵 $E$ 之后，我们便可以回复出相机的运动 $R$ 和 $\boldsymbol{t}$ 了，这个过程由奇异值分解得到，设本质矩阵 $E$ 的奇异值分解为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{E}=\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\mathrm{T}}\tag{14}</script><p>具体过程省略，我们可以得到4种情况：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\boldsymbol{t}_{1}^{\wedge}=\boldsymbol{U} \boldsymbol{R}_{Z}\left(\frac{\pi}{2}\right) \boldsymbol{\Sigma} \boldsymbol{U}^{\mathrm{T}}, \quad \boldsymbol{R}_{1}=\boldsymbol{U} \boldsymbol{R}_{Z}^{\mathrm{T}}\left(\frac{\pi}{2}\right) \boldsymbol{V}^{\mathrm{T}} \\
+\boldsymbol{t}_{2}^{\wedge}=\boldsymbol{U} \boldsymbol{R}_{Z}\left(-\frac{\pi}{2}\right) \boldsymbol{\Sigma} \boldsymbol{U}^{\mathrm{T}}, \quad \boldsymbol{R}_{2}=\boldsymbol{U} \boldsymbol{R}_{Z}^{\mathrm{T}}\left(-\frac{\pi}{2}\right) \boldsymbol{V}^{\mathrm{T}}
+\end{array}\tag{15}</script><p>虽然有四种情况，但是只有一种情况是 $P$ 在两个相机中都具有正深度，因此只要把任意一点代入4种解中，检测该点在两个相机下的深度，就可以确定哪个解是正确的了。如果我们求出的 $E$ 不满足奇异值为 $\sigma, \sigma, 0$ 的形式。这时, 我们会刻意地把 $\boldsymbol{\Sigma}$ 矩阵调整成上面的样子。通常的做法是，对八点法求得的 $E$ 进行 SVD，会得到奇异值矩阵 $\boldsymbol{\Sigma}=\operatorname{diag}\left(\sigma_{1}, \sigma_{2}, \sigma_{3}\right)$，不妨设 $\sigma_{1} \geqslant \sigma_{2} \geqslant \sigma_{3}$ 。取:</p>
+<script type="math/tex; mode=display">
+\boldsymbol{E}=\boldsymbol{U} \operatorname{diag}\left(\frac{\sigma_{1}+\sigma_{2}}{2}, \frac{\sigma_{1}+\sigma_{2}}{2}, 0\right) \boldsymbol{V}^{\mathrm{T}} \tag{16}</script><h3 id="3-单应矩阵"><a href="#3-单应矩阵" class="headerlink" title="3. 单应矩阵"></a>3. 单应矩阵</h3><p>当特征点在同一平面上时（这种情况在无人机携带相机俯视地面比较常见），可以借助该<strong>平面方程</strong>来进行推导特征点间的关系。这就说到了<strong>单应矩阵</strong>，它通常用来描述处于共同平面上的一些点在两张图像之间的变换关系。</p>
+<p>当点 $P$ 位于某个平面 $\pi$ 上时，有平面方程：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{n}^{T}\boldsymbol{P}+d=0\tag{17}</script><p>整理有：</p>
+<script type="math/tex; mode=display">
+-\frac{\boldsymbol{n}^{T}\boldsymbol{P}}{d}=1\tag{18}</script><p>把式（18）带入到式（2）中，得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+s_2\boldsymbol{p_{2}} & = K(R \boldsymbol P+\boldsymbol t) \\
+& = K\left(R \boldsymbol P+\boldsymbol t \cdot\left(-\frac{\boldsymbol n^{\mathrm{T}} \boldsymbol{P}}{d}\right)\right) \\
+& = K\left(R-\frac{\boldsymbol{t} \boldsymbol n^{\mathrm{T}}}{d}\right) \boldsymbol P \\
+& = s_1 K\left(R-\frac{\boldsymbol{t} \boldsymbol n^{\mathrm{T}}}{d}\right) K^{-1} \boldsymbol {p_{1}} 
+\end{aligned}\tag{19}</script><p>式（19）虽然是两面相等，但要注意的是由于像素坐标 $\boldsymbol{p_1,p_2}$ 都是由<strong>齐次坐标</strong>表示的，<strong>因此对其放大或缩小一定的倍率，并不影响结果。</strong>所以说式（19）可以写成：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p_2}\simeq K\left(\boldsymbol{R}-\frac{\boldsymbol{t} \boldsymbol{n}^{\mathrm{T}}}{d}\right) K^{-1} \boldsymbol{p}_{1}\tag{20}</script><p>这表示尺度一致性，现令中间部分：</p>
+<script type="math/tex; mode=display">
+H=K\left(\boldsymbol{R}-\frac{\boldsymbol{t} \boldsymbol{n}^{\mathrm{T}}}{d}\right) K^{-1}\tag{21}</script><p>则式（20）可写为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p}_{2} \simeq H \boldsymbol{p}_1\tag{22}</script><p><strong>这里的 $H$ 放大或缩小任意倍数，原方程均成立。</strong> $H$ 的定义与<strong>旋转，平移和平面的参数</strong>有关，所以求解它的思路和求解本质矩阵一样，我们先将式（22）展开：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{c}
+u_{2} \\
+v_{2} \\
+1
+\end{array}\right) \simeq\left(\begin{array}{lll}
+h_{1} & h_{2} & h_{3} \\
+h_{4} & h_{5} & h_{6} \\
+h_{7} & h_{8} & h_{9}
+\end{array}\right)\left(\begin{array}{c}
+u_{1} \\
+v_{1} \\
+1
+\end{array}\right)\tag{23}</script><p>因为 $H$ 尺度不确定，我们在实际计算中令 $h_9=1$ （在它取非零值时），然后根据第3行，去掉这个非零因子，于是有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+u_{2} &=\frac{h_{1} u_{1}+h_{2} v_{1}+h_{3}}{h_{7} u_{1}+h_{8} v_{1}+h_{9}} \\
+v_{2} &=\frac{h_{4} u_{1}+h_{5} v_{1}+h_{6}}{h_{7} u_{1}+h_{8} v_{1}+h_{9}}
+\end{aligned}\tag{24}</script><p>整理得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&h_{1} u_{1}+h_{2} v_{1}+h_{3}-h_{7} u_{1} u_{2}-h_{8} v_{1} u_{2}=u_{2} \\
+&h_{4} u_{1}+h_{5} v_{1}+h_{6}-h_{7} u_{1} v_{2}-h_{8} v_{1} v_{2}=v_{2}
+\end{aligned}</script><p>这样一组匹配点可以<strong>构造出两个约束方程</strong>，于是自由度为8的单应矩阵可以通过4对匹配特征点算出（这些特征点不能有三点共线的情况），求解线性方程组：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{cccccccc}
+u_{1}^{1} & v_{1}^{1} & 1 & 0 & 0 & 0 & -u_{1}^{1} u_{2}^{1} & -v_{1}^{1} u_{2}^{1} \\
+0 & 0 & 0 & u_{1}^{1} & v_{1}^{1} & 1 & -u_{1}^{1} v_{2}^{1} & -v_{1}^{1} v_{2}^{1} \\
+u_{1}^{2} & v_{1}^{2} & 1 & 0 & 0 & 0 & -u_{1}^{2} u_{2}^{2} & -v_{1}^{2} u_{2}^{2} \\
+0 & 0 & 0 & u_{1}^{2} & v_{1}^{2} & 1 & -u_{1}^{2} v_{2}^{2} & -v_{1}^{2} v_{2}^{2} \\
+u_{1}^{3} & v_{1}^{3} & 1 & 0 & 0 & 0 & -u_{1}^{3} u_{2}^{3} & -v_{1}^{3} u_{2}^{3} \\
+0 & 0 & 0 & u_{1}^{3} & v_{1}^{3} & 1 & -u_{1}^{3} v_{2}^{3} & -v_{1}^{3} v_{2}^{3} \\
+u_{1}^{4} & v_{1}^{4} & 1 & 0 & 0 & 0 & -u_{1}^{4} u_{2}^{4} & -v_{1}^{4} u_{2}^{4} \\
+0 & 0 & 0 & u_{1}^{4} & v_{1}^{4} & 1 & -u_{1}^{4} v_{2}^{4} & -v_{1}^{4} v_{2}^{4}
+\end{array}\right)\left(\begin{array}{l}
+h_{1} \\
+h_{2} \\
+h_{3} \\
+h_{4} \\
+h_{5} \\
+h_{6} \\
+h_{7} \\
+h_{8}
+\end{array}\right)=\left(\begin{array}{l}
+u_{2}^{1} \\
+v_{2}^{1} \\
+u_{2}^{2} \\
+v_{2}^{2} \\
+u_{2}^{3} \\
+v_{2}^{3} \\
+u_{2}^{4} \\
+v_{2}^{4}
+\end{array}\right)\tag{25}</script><p><strong>注意：</strong> 当  $h_9=0$ 时，式（25）右侧为0。</p>
+<p>这种方法称为<strong>直接线性变换法（DLT）</strong>，求解后可以对 $H$ 矩阵进行分解，得到相应的旋转矩阵 $R$ 和 $\boldsymbol{t}$ 。它可以分解为四种情况，也可以根据深度信息，最后进行判断得到一组正确的解，具体不做介绍。</p>
+<h3 id="4-小结"><a href="#4-小结" class="headerlink" title="4. 小结"></a>4. 小结</h3><p>对极几何问题中，我们可以根据匹配好的特征点计算出本质矩阵或基础矩阵。也可以根据同一平面上的特征点计算出单应矩阵。对上面的问题进行总结：</p>
+<ul>
+<li><p>本质矩阵 $E$ 是尺度不确定的，我们可以从它分解得到旋转矩阵$R$ 和平移向量 $\boldsymbol{t}$ ，但是我们知道旋转矩阵 $R\in SO(3)$ ，有自身的约束，所以我们认为 $\boldsymbol{t}$ 具有一个尺度，即任意非零常数乘以 $\boldsymbol{t}$ 都符合，所以我们通常把  $\boldsymbol{t}$  归一化，令其长度为1。</p>
+</li>
+<li><p>在单目视觉中，我们对两张图像的 $\boldsymbol{t}$ 归一化相当于固定了尺度。虽然我们不知道它的实际长度是多少，但我们以这时的 $\boldsymbol t$ 为单位 1 , 计算相机运动和特征点的 3D 位置。这被称为单目 SLAM 的初始化。在初始化之后, 就可以用 <strong>3D-2D</strong> 计算相机运动了。初始化之后的轨迹和地图的单位，就是初始化时固定的尺度。因此, 单目 SLAM 有一步不可避免的初始化。初始化的两张图像<strong>必须有一定程度的平移</strong>，而后的轨迹和地图都将以此步的平移为单位。</p>
+</li>
+<li><p>当相机做纯旋转运动时，此时  $\boldsymbol{t}$ 为0，所以本质矩阵也将为零，这将导致无法求解 $R$ ，此时我们可以靠求单应矩阵 $H$ 来求取旋转，但是仅有旋转，<strong>我们无法用三角测量</strong>估计特征点的空间位置。<strong>所以单目初始化不能只有纯旋转，必须有一定程度的平移。</strong></p>
+</li>
+</ul>
+<h2 id="II-3D-2D-PnP"><a href="#II-3D-2D-PnP" class="headerlink" title="II. 3D-2D: PnP"></a>II. 3D-2D: PnP</h2><h2 id="IV-三角测量"><a href="#IV-三角测量" class="headerlink" title="IV. 三角测量"></a>IV. 三角测量</h2><p>当我们求得两帧图像间的相机运动，就可以求得特征点在3D空间的位置了。这也就是三角测量问题，三角测量就是通过两帧图像，来确定一个特征点的深度。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728040641.png" alt="image-20220728040641018" style="zoom: 67%;" /></p>
+<p>考虑图像 $I_{1}$ 和 $I_{2}$，以左图为参考， 右图的变换矩阵为 $\boldsymbol{T}$ 。相机光心为 $O_{1}$ 和 $O_{2}$ 。在 $I_{1}$ 中有特征点 $\boldsymbol p_{1}$， 对应 $I_{2}$ 中有特征点 $\boldsymbol p_{2}$ 。 理论上，直线 $O_{1} p_{1}$ 与 $O_{2} p_{2}$ 在场景中会相交于一点 $P$ ，该点即两个特征点所对应的地图点在三维场景中的位置。然而由于噪声的影响，这两条直线往往无法相交。因此，可以通过最小二乘法求解。按照对极几何中的定义, 设 $\boldsymbol{x}_{1}, \boldsymbol{x}_{2}$ 为两个特征点的归一化坐标, 那么它们满足:</p>
+<script type="math/tex; mode=display">
+s_{2} \boldsymbol{x}_{2}=s_{1} \boldsymbol{R} \boldsymbol{x}_{1}+\boldsymbol{t} \tag{}</script><p>现在已知 $R, \boldsymbol{t}$ ，我们想求解两个特征点的深度 $s_{1}, s_{2}$ 。从几何上看, 可以在射线 $O_{1} p_{1}$ 上寻找 3D 点，使其投影位置接近 $\boldsymbol{p}_{2}$ 。同理，也可以在 $O_{2} p_{2}$ 上找，或者在两条线的中间找。不同的策略对应着不同的计算方式，当然它们大同小异。例如，我们希望计算 $s_{1}$，那么先对上式两侧左乘一 个 $\boldsymbol{x}_{2}^{\wedge}$，得</p>
+<script type="math/tex; mode=display">
+s_{2} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{x}_{2}=0=s_{1} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{R} \boldsymbol{x}_{1}+\boldsymbol{x}_{2}^{\wedge} \boldsymbol{t}</script><p>该式左侧为零，右侧可看成 $s_{2}$ 的一个方程，可以根据它直接求得 $s_{2}$ 。有了 $s_{2}, s_{1}$ 也非常容易求出。于是，我们就得到了两帧下的点的深度，确定了它们的空间坐标。当然，由于噪声的存在，我们估得的 $R, \boldsymbol{t}$ 不一定精确使上式为零，所以更常见的做法是求<strong>最小二乘解</strong>而不是直接的解。</p>
+<p>三角测量是由平移得到的，有平移才会有对极几何中的三角形，才谈得上三角测量。因此，<strong>纯旋转是无法使用三角测量的</strong>，因为在平移为零时，对极约束一直为零。当然，实际数据往往不会完全等于零。在平移存在的情况下, 我们还要关心三角测量的不确定性，这会引出一个三角测量的矛盾。<strong>这个矛盾是，平移小了，深度的不确定性变大，因为相较于大平移，深度稍微差一点，就差出很多。而另一方面，大平移时，这会导致图像外观发生明显变化，使特征提取和匹配变得困难。</strong></p>
+<p>在单目视觉中，由于单目图像没有深度信息，我们要等待特征点被追踪几帧之后，产生了足够的视角，再用三角化来确定新增特征点的深度值。这有时也被称为<strong>延迟三角化</strong> 。但是，如果相机发生了原地旋转，导致视差很小，就不好估计新观测到的特征点的深度。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/26/%E3%80%90%E8%A7%86%E8%A7%89SLAM11%E3%80%91%E5%89%8D%E7%AB%AF%E2%80%94%E7%89%B9%E5%BE%81%E7%82%B9%E5%8C%B9%E9%85%8D/" rel="prev" title="【视觉SLAM11】前端——特征点匹配">
+      <i class="fa fa-chevron-left"></i> 【视觉SLAM11】前端——特征点匹配
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95"><span class="nav-text">I. 对极几何</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AF%B9%E6%9E%81%E7%BA%A6%E6%9D%9F"><span class="nav-text">1. 对极约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B1%82%E8%A7%A3%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF%EF%BC%88%E5%85%AB%E7%82%B9%E6%B3%95%EF%BC%89"><span class="nav-text">2. 求解相机位姿（八点法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5"><span class="nav-text">3. 单应矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B0%8F%E7%BB%93"><span class="nav-text">4. 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-3D-2D-PnP"><span class="nav-text">II. 3D-2D: PnP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-%E4%B8%89%E8%A7%92%E6%B5%8B%E9%87%8F"><span class="nav-text">IV. 三角测量</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PiggyHero"
+      src="/images/cutexiaoxin.gif">
+  <p class="site-author-name" itemprop="name">PiggyHero</p>
+  <div class="site-description" itemprop="description">不学习咋整啊！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/PiggyHero" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;PiggyHero" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:a363158526@gmail.com" title="E-Mail → mailto:a363158526@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PiggyHero</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>-->
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
