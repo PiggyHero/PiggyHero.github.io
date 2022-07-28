@@ -3277,7 +3277,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/img/20211222034647.png" alt="image-20211222034647771"></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>专业原理</category>
       </categories>
       <tags>
         <tag>数字图像处理</tag>
@@ -3726,7 +3726,7 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
 </blockquote>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>专业原理</category>
       </categories>
       <tags>
         <tag>数字图像处理</tag>
@@ -3785,7 +3785,7 @@ P(X,\theta)&=P(X\mid\theta)P(\theta)\\
 <h4 id="（2）拓扑地图"><a href="#（2）拓扑地图" class="headerlink" title="（2）拓扑地图"></a>（2）拓扑地图</h4><p>拓扑地图更强调地图元素之间的关系。主要考虑节点间的连通性。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>专业原理</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -3867,7 +3867,7 @@ r_{j} \\
 <p>那么视觉SLAM的一个过程就是先知道 $\boldsymbol{z_{k,j}}$ ，然后可以计算出 $\boldsymbol{u}_{k}$ ，然后再分别计算出 $\boldsymbol{x}_{k}$ 和 $\boldsymbol{y}_{k}$ 。此时是带噪声的，还要通过后端优化和回环检测两个步骤。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>专业原理</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -4139,7 +4139,7 @@ s & \boldsymbol{v}^{\mathrm{T}} \\
 {\left[n_{x}, n_{y}, n_{z}\right]^{\mathrm{T}}=\left[q_{1}, q_{2}, q_{3}\right]^{\mathrm{T}} / \sin \frac{\theta}{2}}
 \end{array}\right. \tag{27}</script>]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>专业原理</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
