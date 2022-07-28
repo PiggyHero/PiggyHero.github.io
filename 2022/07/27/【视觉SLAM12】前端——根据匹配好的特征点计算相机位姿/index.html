@@ -28,9 +28,11 @@
 <meta property="og:description" content="在匹配好两张图像的特征点后，就可以用来求取相机的位姿了。根据相机的原理不同，可以分为三种情况：  2D—2D（对极几何问题）：当使用单目相机时，仅知道所匹配特征点的两组像素坐标。  3D—2D（PnP问题）：知道所匹配特征点的一个相机坐标系下的坐标和一个像素坐标系下的坐标。  3D—3D（ICP问题）：当使用的是RGB-D相机或双目相机时，即知道所匹配特征点的两组相机坐标系下的坐标。">
 <meta property="og:locale">
 <meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727205714.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728180736.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728190253.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728040641.png">
 <meta property="article:published_time" content="2022-07-27T12:08:34.000Z">
-<meta property="article:modified_time" content="2022-07-27T20:22:43.920Z">
+<meta property="article:modified_time" content="2022-07-28T16:46:59.759Z">
 <meta property="article:author" content="PiggyHero">
 <meta property="article:tag" content="SLAM">
 <meta name="twitter:card" content="summary">
@@ -228,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-07-28 04:22:43" itemprop="dateModified" datetime="2022-07-28T04:22:43+08:00">2022-07-28</time>
+                <time title="修改时间：2022-07-29 00:46:59" itemprop="dateModified" datetime="2022-07-29T00:46:59+08:00">2022-07-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,7 +271,7 @@
 </li>
 </ul>
 <p>本节我们还要学另一个东东，就是已知相机的运动后，如何求路标点的空间位置，也叫作<strong>三角测量</strong>。</p>
-<h2 id="I-对极几何"><a href="#I-对极几何" class="headerlink" title="I. 对极几何"></a>I. 对极几何</h2><p>我们先对匹配好的一对特征点建立关系：</p>
+<h2 id="I-2D-2D：对极几何"><a href="#I-2D-2D：对极几何" class="headerlink" title="I. 2D-2D：对极几何"></a>I. 2D-2D：对极几何</h2><p>我们先对匹配好的一对特征点建立关系：</p>
 <h3 id="1-对极约束"><a href="#1-对极约束" class="headerlink" title="1. 对极约束"></a>1. 对极约束</h3><p>以下图为例，我们希望求取两帧图像 $I_{1}, I_{2}$ 之间的运动，<strong>设第一帧到第二帧的运动为</strong> $\boldsymbol{R}, \boldsymbol{t}$ 。 两个相机中心分别为 $O_{1}, O_{2}$ 。现在，考虑 $I_{1}$ 中有一个特征点 $p_{1}$ ，它在 $I_{2}$ 中对应着特征点 $p_{2}$ 。我们知道两者是通过特征匹配得到的。如果匹配正确，<strong>说明它们确实是同一个空间点在两个成像平面上的投影。</strong></p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220727205714.png" alt="image-20220727205714351" style="zoom:67%;" /></p>
 <p><strong>我们现在就是要建立这两个投影的像素坐标之间的关系。所建立的根据是</strong></p>
@@ -430,14 +432,168 @@ v_{2}^{4}
 <p>这种方法称为<strong>直接线性变换法（DLT）</strong>，求解后可以对 $H$ 矩阵进行分解，得到相应的旋转矩阵 $R$ 和 $\boldsymbol{t}$ 。它可以分解为四种情况，也可以根据深度信息，最后进行判断得到一组正确的解，具体不做介绍。</p>
 <h3 id="4-小结"><a href="#4-小结" class="headerlink" title="4. 小结"></a>4. 小结</h3><p>对极几何问题中，我们可以根据匹配好的特征点计算出本质矩阵或基础矩阵。也可以根据同一平面上的特征点计算出单应矩阵。对上面的问题进行总结：</p>
 <ul>
-<li><p>本质矩阵 $E$ 是尺度不确定的，我们可以从它分解得到旋转矩阵$R$ 和平移向量 $\boldsymbol{t}$ ，但是我们知道旋转矩阵 $R\in SO(3)$ ，有自身的约束，所以我们认为 $\boldsymbol{t}$ 具有一个尺度，即任意非零常数乘以 $\boldsymbol{t}$ 都符合，所以我们通常把  $\boldsymbol{t}$  归一化，令其长度为1。</p>
-</li>
-<li><p>在单目视觉中，我们对两张图像的 $\boldsymbol{t}$ 归一化相当于固定了尺度。虽然我们不知道它的实际长度是多少，但我们以这时的 $\boldsymbol t$ 为单位 1 , 计算相机运动和特征点的 3D 位置。这被称为单目 SLAM 的初始化。在初始化之后, 就可以用 <strong>3D-2D</strong> 计算相机运动了。初始化之后的轨迹和地图的单位，就是初始化时固定的尺度。因此, 单目 SLAM 有一步不可避免的初始化。初始化的两张图像<strong>必须有一定程度的平移</strong>，而后的轨迹和地图都将以此步的平移为单位。</p>
-</li>
-<li><p>当相机做纯旋转运动时，此时  $\boldsymbol{t}$ 为0，所以本质矩阵也将为零，这将导致无法求解 $R$ ，此时我们可以靠求单应矩阵 $H$ 来求取旋转，但是仅有旋转，<strong>我们无法用三角测量</strong>估计特征点的空间位置。<strong>所以单目初始化不能只有纯旋转，必须有一定程度的平移。</strong></p>
-</li>
+<li>本质矩阵 $E$ 是尺度不确定的，我们可以从它分解得到旋转矩阵$R$ 和平移向量 $\boldsymbol{t}$ ，但是我们知道旋转矩阵 $R\in SO(3)$ ，有自身的约束，所以我们认为 $\boldsymbol{t}$ 具有一个尺度，即任意非零常数乘以 $\boldsymbol{t}$ 都符合，所以我们通常把  $\boldsymbol{t}$  归一化，令其长度为1。</li>
+<li>在单目视觉中，我们对两张图像的 $\boldsymbol{t}$ 归一化相当于固定了尺度。虽然我们不知道它的实际长度是多少，但我们以这时的 $\boldsymbol t$ 为单位 1 , 计算相机运动和特征点的 3D 位置。这被称为单目 SLAM 的初始化。在初始化之后, 就可以用 <strong>3D-2D</strong> 计算相机运动了。初始化之后的轨迹和地图的单位，就是初始化时固定的尺度。因此, 单目 SLAM 有一步不可避免的初始化。初始化的两张图像<strong>必须有一定程度的平移</strong>，而后的轨迹和地图都将以此步的平移为单位。</li>
+<li>当相机做纯旋转运动时，此时  $\boldsymbol{t}$ 为0，所以本质矩阵也将为零，这将导致无法求解 $R$ ，此时我们可以靠求单应矩阵 $H$ 来求取旋转，但是仅有旋转，<strong>我们无法用三角测量</strong>估计特征点的空间位置。<strong>所以单目初始化不能只有纯旋转，必须有一定程度的平移。</strong></li>
 </ul>
-<h2 id="II-3D-2D-PnP"><a href="#II-3D-2D-PnP" class="headerlink" title="II. 3D-2D: PnP"></a>II. 3D-2D: PnP</h2><h2 id="IV-三角测量"><a href="#IV-三角测量" class="headerlink" title="IV. 三角测量"></a>IV. 三角测量</h2><p>当我们求得两帧图像间的相机运动，就可以求得特征点在3D空间的位置了。这也就是三角测量问题，三角测量就是通过两帧图像，来确定一个特征点的深度。</p>
+<h2 id="II-3D-2D-PnP"><a href="#II-3D-2D-PnP" class="headerlink" title="II. 3D-2D: PnP"></a>II. 3D-2D: PnP</h2><p>如果两张图片中的一张图片上的特征点的3D位置已知，那么最少只需三个点对就可以估计相机运动。这种方法在双目或RGB-D的视觉里程计中常用。<strong>在单目视觉里程计中，必须在初始化后，才能使用PnP进行求解</strong>（初始化后可以得到一些特征点的3D坐标，并确定当前尺度为单位，接下来用PnP方法来求解，这样之后的位姿估计都是建立在初始化尺度下的）。</p>
+<p>求解PnP问题可以用以下的方法。</p>
+<h3 id="1-直接线性变换"><a href="#1-直接线性变换" class="headerlink" title="1. 直接线性变换"></a>1. 直接线性变换</h3><p>考虑某个空间点 $P$ ，它的齐次坐标为 $\boldsymbol{P}=(X, Y, Z, 1)^{\mathrm{T}}$ 。在图像 $I_{1}$ 中，投影到特征点 $\boldsymbol{x}_{1}=$ $\left(u_{1}, v_{1}, 1\right)^{\mathrm{T}}$ (以齐次坐标表示 )。此时，相机的位姿 $R, \boldsymbol{t}$ 是末知的，<strong>假设内参矩阵 $K$ 已知</strong>。与单应矩阵的求解类似，我们定义增广矩阵 $K[R \mid \boldsymbol{t}]$ 为一个 $3 \times 4$ 的矩阵，包含了旋转与平移信息。我们将其展开形式列写如下：</p>
+<script type="math/tex; mode=display">
+s\left(\begin{array}{c}
+u_{1} \\
+v_{1} \\
+1
+\end{array}\right)=\left(\begin{array}{llll}
+t_{1} & t_{2} & t_{3} & t_{4} \\
+t_{5} & t_{6} & t_{7} & t_{8} \\
+t_{9} & t_{10} & t_{11} & t_{12}
+\end{array}\right)\left(\begin{array}{c}
+X \\
+Y \\
+Z \\
+1
+\end{array}\right)\tag{26}</script><p>最后一行把 $s$ 消去，得到两个约束：</p>
+<script type="math/tex; mode=display">
+u_{1}=\frac{t_{1} X+t_{2} Y+t_{3} Z+t_{4}}{t_{9} X+t_{10} Y+t_{11} Z+t_{12}}, \quad v_{1}=\frac{t_{5} X+t_{6} Y+t_{7} Z+t_{8}}{t_{9} X+t_{10} Y+t_{11} Z+t_{12}}\tag{27}</script><p>为了简化表示，定义行向量：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{t}_{1}=\left(t_{1}, t_{2}, t_{3}, t_{4}\right)^{\mathrm{T}}, \boldsymbol{t}_{2}=\left(t_{5}, t_{6}, t_{7}, t_{8}\right)^{\mathrm{T}}, \boldsymbol{t}_{3}=\left(t_{9}, t_{10}, t_{11}, t_{12}\right)^{\mathrm{T}}\tag{28}</script><p>于是式（27）可以简写为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\boldsymbol{t}_{1}^{\mathrm{T}} \boldsymbol{P}-\boldsymbol{t}_{3}^{\mathrm{T}} \boldsymbol{P} u_{1}=0 \\
+&\boldsymbol{t}_{2}^{\mathrm{T}} \boldsymbol{P}-\boldsymbol{t}_{3}^{\mathrm{T}} \boldsymbol{P} v_{1}=0
+\end{aligned}\tag{29}</script><p>这样，每个特征点可以建立两个约束方程，假设一共有 $N$ 个特征点，则可以列出线性方程组为：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{ccc}
+\boldsymbol{P}_{1}^{\mathrm{T}} & 0 & -u_{1} \boldsymbol{P}_{1}^{\mathrm{T}} \\
+0 & \boldsymbol{P}_{1}^{\mathrm{T}} & -v_{1} \boldsymbol{P}_{1}^{\mathrm{T}} \\
+\vdots & \vdots & \vdots \\
+\boldsymbol{P}_{N}^{\mathrm{T}} & 0 & -u_{N} \boldsymbol{P}_{N}^{\mathrm{T}} \\
+0 & \boldsymbol{P}_{N}^{\mathrm{T}} & -v_{N} \boldsymbol{P}_{N}^{\mathrm{T}}
+\end{array}\right)\left(\begin{array}{c}
+\boldsymbol{t}_{1} \\
+\boldsymbol{t}_{2} \\
+\boldsymbol{t}_{3}
+\end{array}\right)=0\tag{30}</script><p>一共有12个未知量，因此最少可以通过6对匹配点就可以实现矩阵的线性求解。如果大于6对匹配点，则可以通过最小二乘方法求解。在得到这个矩阵后，我们需要对其进行划分，来求旋转矩阵 $R$ 和 $\boldsymbol{t}$ 。</p>
+<p>$\boldsymbol{t}$ 比较好办，它属于向量空间。而对于 $R$ ，要符合 $R\in SO(3)$ ，所以我们根据所求出来的矩阵左边 $3\times 3$ 的矩阵块，寻找一个最好的旋转矩阵对它进行近似。</p>
+<h3 id="2-P3P方法"><a href="#2-P3P方法" class="headerlink" title="2. P3P方法"></a>2. P3P方法</h3><p>我们还可以用P3P方法来求解PnP问题。它仅需使用3对匹配点就可以求解。</p>
+<p>P3P 需要利用给定的 3 个点的几何关系。它的输人数据为 3 对 3D-2D 匹配点。记 3D 点为 $A, B, C$ ； 2D点为 $a, b, c$ ，其中小写字母代表的点为对应大写字母代表的点在相机成像平面上的投影。此外，P3P 还需要使用一对验证点，以从可能的解中选出正确的那一个 (类似于对极几何情形 ）记验证点对为 $D-d$，相机光心为 $O$ 。请注意，我们知道的是 $A, B, C$ 在<strong>世界坐标系中的坐标</strong>（此处也可以认为是上一个相机坐标系下的坐标），但一定不是当前相机坐标系下的坐标。一旦 3D 点在相机坐标系下的坐标能够算出，我们就得到了 3D-3D 的对应点，把 PnP 问题转换为了 ICP 问题。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728180736.png" alt="image-20220728180736043" style="zoom:50%;" /></p>
+<p>根据三角形之间的对应关系，有：</p>
+<script type="math/tex; mode=display">
+\Delta O a b-\triangle O A B, \quad \triangle O b c-\triangle O B C, \quad \triangle O a c-\triangle O A C\tag{31}</script><p>利用余弦定理有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&O A^{2}+O B^{2}-2 O A \cdot O B \cdot \cos \langle a, b\rangle=A B^{2} \\
+&O B^{2}+O C^{2}-2 O B \cdot O C \cdot \cos \langle b, c\rangle=B C^{2} \\
+&O A^{2}+O C^{2}-2 O A \cdot O C \cdot \cos \langle a, c\rangle=A C^{2}
+\end{aligned}\tag{32}</script><p>对式（32）除以 $OC^2$ ，并且记 $x=O A / O C, y=O B / O C $ ，得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&x^{2}+y^{2}-2 x y \cos \langle a, b\rangle=A B^{2} / O C^{2} \\
+&y^{2}+1^{2}-2 y \cos \langle b, c\rangle=B C^{2} / O C^{2} \\
+&x^{2}+1^{2}-2 x \cos \langle a, c\rangle=A C^{2} / O C^{2} 
+\end{aligned}\tag{33}</script><p>记 $v=A B^{2} / O C^{2}, u v=B C^{2} / O C^{2}, w v=A C^{2} / O C^{2}$， 有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&x^{2}+y^{2}-2 x y \cos \langle a, b\rangle-v=0 \\
+&y^{2}+1^{2}-2 y \cos \langle b, c\rangle-u v=0 \\
+&x^{2}+1^{2}-2 x \cos \langle a, c\rangle-w v=0
+\end{aligned}\tag{34}</script><p>我们可以把第一个式子中的 $v$ 放到等式一边，并代人其后两式，得：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&(1-u) y^{2}-u x^{2}-\cos \langle b, c\rangle y+2 u x y \cos \langle a, b\rangle+1=0 \\
+&(1-w) x^{2}-w y^{2}-\cos \langle a, c\rangle x+2 w x y \cos \langle a, b\rangle+1=0
+\end{aligned}\tag{35}</script><p>我们现在来看已知量：三个余弦角是知道的，我们可以通过投影点在归一化平面上的坐标来求得。同时，$u=B C^{2} / A B^{2}$ ， $w=A C^{2} / A B^{2} $ 可以通过 $A, B, C$ 在世界坐标系下的坐标算出来。</p>
+<p>在式（35）中，只有 $x,y$ 是未知的，随着相机移动会发生变化。因此式（35）是关于 $x,y$ 的二元二次方程，该方程解析解的求解是一个复杂的过程，要用到<strong>吴消元法</strong>。解得后可以得到4个解，同样我们可以通过验证点来得到最可能的解，<strong>即得到点 $A,B,C$ 在当前相机系下的坐标，然后再通过3D-3D的点对，计算相机的位姿。</strong></p>
+<h3 id="3-最小化重投影误差求解PnP"><a href="#3-最小化重投影误差求解PnP" class="headerlink" title="3. 最小化重投影误差求解PnP"></a>3. 最小化重投影误差求解PnP</h3><h4 id="1-最小化重投影误差"><a href="#1-最小化重投影误差" class="headerlink" title="(1) 最小化重投影误差"></a>(1) 最小化重投影误差</h4><p>之前求解的方法中，如<strong>对极几何约束</strong>和<strong>直接线性变换方法求PnP</strong>这些方法，我们都是先根据匹配的特征点，求出相机的位姿，再进行三角化来求特征点的空间位置。但是在非线性优化中，<strong>则是同时把相机位姿和特征点的空间位置看为优化变量，放在一起优化。</strong>这一类方法称为 <strong>Bundle Adjustment</strong>，简称<strong>BA</strong>。</p>
+<p>下面我们来看如何用BA来求解PnP问题，我们现在仅考虑在<strong>两个视图下</strong>的基本形式。</p>
+<p>考虑 $n$ 个三维空间点 $P$ 及其投影 $p$，我们希望计算相机的位姿 $R, \boldsymbol{t}$，它的李群表示为 $T$ 。假设某空间点坐标为 $\boldsymbol{P}_{i}=\left[X_{i}, Y_{i}, Z_{i}\right]^{\mathrm{T}}$，其投影的像素坐标为 $\boldsymbol{u}_{i}=\left[u_{i}, v_{i}\right]^{\mathrm{T}}$ 。由相机模型，像素位置与空间点位置的关系如下（其中自动包括一次齐次坐标转换为非齐次坐标）：</p>
+<script type="math/tex; mode=display">
+s_{i} \boldsymbol{u}_{i}=KT \boldsymbol{P}_{i}\tag{36}</script><p>由于相机的位姿 $T$ 未知，以及观测点噪声，该等式存在一个误差。现在将误差求和，构建最小二乘问题，寻求最佳的相机位姿，使误差和最小：</p>
+<script type="math/tex; mode=display">
+T^{*}=\arg \min _{T} \frac{1}{2} \sum_{i=1}^{n}\left\|\boldsymbol{u}_{i}-\frac{1}{s_{i}} KT\boldsymbol{P}_{i}\right\|_{2}^{2}\tag{37}</script><p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728190253.png" alt="image-20220728190253089" style="zoom:50%;" /></p>
+<p>该问题的误差项，是将 3D 点的投影位置与观测位置作差，所以称为<strong>重投影误差</strong>。如图所示，我们通过特征匹配知道了 $p_{1}$ 和 $p_{2}$ 是同一个空间点 $P$ 的投影，但是不知道相机的位姿。在初始值中，$P$ 的投影 $\hat{p}_{2}$ 与实际的 $p_{2}$ 之 间有一定的距离。于是我们调整相机的位姿，使得这个距离变小。不过，由于这个调整需要考虑很多个点， 所以最后的效果是整体误差的缩小，而每个点的误差通常都不会精确为零。</p>
+<p>之前我们学习了如何进行非线性优化，只其中很<strong>重要的一点是求误差项关于优化变量的导数</strong>，也就是雅可比矩阵 $J^T$ ，我们可以使用数值导数来求解，但是如果能得到解析形式，当然更好了。现在我们的误差 $\boldsymbol{e}$ 是2维的，而优化的变量是相机的位姿有6维，所以 $J^T$ 将是一个 $2\times6$ 的矩阵。</p>
+<h4 id="2-推导-J-T"><a href="#2-推导-J-T" class="headerlink" title="(2) 推导 $J^T$"></a>(2) 推导 $J^T$</h4><p>记变换到相机坐标系下的空间点坐标系为: </p>
+<script type="math/tex; mode=display">
+\boldsymbol{P'}=[X',Y',Z']^T=T\boldsymbol{P}\tag{38}</script><p>根据相机模型，由 $\boldsymbol{P’}$ 到像素点坐标为：</p>
+<script type="math/tex; mode=display">
+s \boldsymbol{u}=K \boldsymbol{P}^{\prime}\tag{39}</script><p>由齐次坐标变为非齐次坐标，可以得到：</p>
+<script type="math/tex; mode=display">
+u=f_{x} \frac{X^{\prime}}{Z^{\prime}}+c_{x}, \quad v=f_{y} \frac{Y^{\prime}}{Z^{\prime}}+c_{y} \tag{40}</script><p>所以误差 $\boldsymbol{e}$ 为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{e}=\left[\begin{array}{c}
+u'-u\\
+v'-v
+\end{array}\right]=\left[\begin{array}{c}
+u'-f_x\frac{X'}{Z'}-c_x\\
+v'-f_y\frac{Y'}{Z'}-c_y
+\end{array}\right]\tag{41}</script><p>现在求误差 $\boldsymbol{e}$ 对相机的位姿进行求导。我们在李代数那一节已经推出，李群的导数可以转化成其左乘扰动 $\delta \boldsymbol\xi$ 后对扰动量 $\delta \boldsymbol\xi$ 的导数。利用链式求导法则，有：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{e}}{\partial \delta \boldsymbol{\xi}}=\lim _{\delta \boldsymbol{\xi} \rightarrow 0} \frac{\boldsymbol{e}(\delta \boldsymbol{\xi} \oplus \boldsymbol{\xi})-\boldsymbol{e}(\boldsymbol{\xi})}{\delta \boldsymbol{\xi}}=\frac{\partial \boldsymbol{e}}{\partial \boldsymbol{P}^{\prime}} \frac{\partial \boldsymbol{P}^{\prime}}{\partial \delta \boldsymbol{\xi}}\tag{42}</script><p>这里的 $\oplus$ 表示李代数上的左乘扰动。第一项是误差关于投影点的导数，因为误差中的 $u’和 v’$ 都是观测量，因此导数为0，所以有：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{e}}{\partial \boldsymbol{P}^{\prime}}=-\left[\begin{array}{ccc}
+\frac{\partial u}{\partial X^{\prime}} & \frac{\partial u}{\partial Y^{\prime}} & \frac{\partial u}{\partial Z^{\prime}} \\
+\frac{\partial v}{\partial X^{\prime}} & \frac{\partial v}{\partial Y^{\prime}} & \frac{\partial v}{\partial Z^{\prime}}
+\end{array}\right]=-\left[\begin{array}{ccc}
+\frac{f_{x}}{Z^{\prime}} & 0 & -\frac{f_{x} X^{\prime}}{Z^{\prime 2}} \\
+0 & \frac{f_{y}}{Z^{\prime}} & -\frac{f_{y} Y^{\prime}}{Z^{\prime 2}}
+\end{array}\right]\tag{43}</script><p>再来看第二项的导数为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial\boldsymbol{P'}}{\partial\delta\boldsymbol\xi}=\frac{\partial(T \boldsymbol{P})}{\partial \delta \boldsymbol\xi}=(T\boldsymbol{P})^{\odot}=\left[\begin{array}{cc}
+I & -\boldsymbol{P}^{\prime \wedge} \\
+\mathbf{0}^{\mathrm{T}} & \mathbf{0}^{\mathrm{T}}
+\end{array}\right]\tag{44}</script><p>取前3维即：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{P}^{\prime}}{\partial \delta \boldsymbol{\xi}}=\left[I,-\boldsymbol{P}^{\prime \wedge}\right] \tag{45}</script><p>将这两项相乘, 就得到了 $2 \times 6$ 的雅可比矩阵:</p>
+<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{e}}{\partial \delta \xi}=-\left[\begin{array}{cccccc}
+\frac{f_{x}}{Z^{\prime}} & 0 & -\frac{f_{x} X^{\prime}}{Z^{\prime 2}} & -\frac{f_{x} X^{\prime} Y^{\prime}}{Z^{\prime 2}} & f_{x}+\frac{f_{x} X^{\prime 2}}{Z^{\prime 2}} & -\frac{f_{x} Y^{\prime}}{Z^{\prime}} \\
+0 & \frac{f_{y}}{Z^{\prime}} & -\frac{f_{y} Y^{\prime}}{Z^{\prime 2}} & -f_{y}-\frac{f_{y} Y^{\prime 2}}{Z^{\prime 2}} & \frac{f_{y} X^{\prime} Y^{\prime}}{Z^{\prime 2}} & \frac{f_{y} X^{\prime}}{Z^{\prime}}
+\end{array}\right] \tag{46}</script><p>除了对相机位姿优化，我们说过BA还可以对路标点的位置进行优化，这就需要求对空间点坐标 $\boldsymbol{P}$ 的导数，利用链式求导法则：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{e}}{\partial \boldsymbol{P}}=\frac{\partial \boldsymbol{e}}{\partial \boldsymbol{P}^{\prime}} \frac{\partial \boldsymbol{P}^{\prime}}{\partial \boldsymbol{P}}\tag{47}</script><p>因为我们知道：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{P'}=R\boldsymbol{P}+\boldsymbol{t}\tag{48}</script><p>所以 $\frac{\partial \boldsymbol{P}^{\prime}}{\partial \boldsymbol{P}}=R$ ，带入式（47）为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{e}}{\partial \boldsymbol{P}}=-\left[\begin{array}{ccc}
+\frac{f_{x}}{Z^{\prime}} & 0 & -\frac{f_{x} X^{\prime}}{Z^{\prime 2}} \\
+0 & \frac{f_{y}}{Z^{\prime}} & -\frac{f_{y} Y^{\prime}}{Z^{\prime 2}}
+\end{array}\right]\tag{49}</script><h2 id="III-3D-3D：ICP"><a href="#III-3D-3D：ICP" class="headerlink" title="III. 3D-3D：ICP"></a>III. 3D-3D：ICP</h2><p>当知道某一路标点在两相机坐标系下的坐标时，就可以通过ICP来求解这两相机间的相对位姿。</p>
+<p>假设我们有一组匹配好的3D点，在各自相机系下的坐标分别为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{P}=\left\{\boldsymbol{p}_{1}, \cdots, \boldsymbol{p}_{n}\right\}, \quad \boldsymbol{P}^{\prime}=\left\{\boldsymbol{p}_{1}^{\prime}, \cdots, \boldsymbol{p}_{n}^{\prime}\right\}\tag{50}</script><p>现在，想要找一个欧氏变换 $R, \boldsymbol t$，使得 $\forall i$ 有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p}_{i}=R \boldsymbol{p}_{i}^{\prime}+\boldsymbol{t}\tag{51}</script><p>在ICP中，并没有出现相机模型，也就是说当考虑两组3D点变换时，和相机并没有关系。在激光SLAM中也会碰到ICP（只不过激光的数据信息不丰富，我们无从知道两个点集之间的匹配关系，只能认为距离最近的两个点为同一个）。和PnP问题类似，解决ICP问题也可以通过线性代数的方法求解，也可以通过非线性优化的方法求解。</p>
+<h3 id="1-代数方法—SVD"><a href="#1-代数方法—SVD" class="headerlink" title="1. 代数方法—SVD"></a>1. 代数方法—SVD</h3><p>首先来看以 SVD 为代表的代数方法。根据前面描述的 ICP 问题，我们先定义第 $i$ 对点的误差项:</p>
+<script type="math/tex; mode=display">
+\boldsymbol{e}_{i}=\boldsymbol{p}_{i}-\left(R\boldsymbol{p}_{i}^{\prime}+\boldsymbol{t}\right)\tag{52}</script><p>然后构建最小二乘问题，找到使误差平方和达到极小的 $R 和 \boldsymbol{t}$ ：</p>
+<script type="math/tex; mode=display">
+\min _{R, \boldsymbol{t}} \frac{1}{2} \sum_{i=1}^{n}\left\|\left(\boldsymbol{p}_{i}-\left(R \boldsymbol{p}_{i}{ }^{\prime}+\boldsymbol{t}\right)\right)\right\|_{2}^{2}\tag{53}</script><p>现在求解式（53），首先定义两组点的质心：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p}=\frac{1}{n} \sum_{i=1}^{n}\left(\boldsymbol{p}_{i}\right), \quad \boldsymbol{p}^{\prime}=\frac{1}{n} \sum_{i=1}^{n}\left(\boldsymbol{p}_{i}^{\prime}\right)\tag{54}</script><p>然后随后在误差函数中做如下处理：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{1}{2} \sum_{i=1}^{n}\left\|\boldsymbol{p}_{i}-\left(\boldsymbol{R} \boldsymbol{p}_{i}{ }^{\prime}+\boldsymbol{t}\right)\right\|^{2}=& \frac{1}{2} \sum_{i=1}^{n}\left\|\boldsymbol{p}_{i}-\boldsymbol{R} \boldsymbol{p}_{i}{ }^{\prime}-\boldsymbol{t}-\boldsymbol{p}+\boldsymbol{R} \boldsymbol{p}^{\prime}+\boldsymbol{p}-\boldsymbol{R} \boldsymbol{p}^{\prime}\right\|^{2} \\
+=& \frac{1}{2} \sum_{i=1}^{n}\left\|\left(\boldsymbol{p}_{i}-\boldsymbol{p}-\boldsymbol{R}\left(\boldsymbol{p}_{i}{ }^{\prime}-\boldsymbol{p}^{\prime}\right)\right)+\left(\boldsymbol{p}-\boldsymbol{R} \boldsymbol{p}^{\prime}-\boldsymbol{t}\right)\right\|^{2} \\
+=& \frac{1}{2} \sum_{i=1}^{n}\left(\left\|\boldsymbol{p}_{i}-\boldsymbol{p}-\boldsymbol{R}\left(\boldsymbol{p}_{i}{ }^{\prime}-\boldsymbol{p}^{\prime}\right)\right\|^{2}+\left\|\boldsymbol{p}-\boldsymbol{R} \boldsymbol{p}^{\prime}-\boldsymbol{t}\right\|^{2}+2\left(\boldsymbol{p}_{i}-\boldsymbol{p}-\boldsymbol{R}\left(\boldsymbol{p}_{i}{ }^{\prime}-\boldsymbol{p}^{\prime}\right)\right)^{\mathrm{T}}\left(\boldsymbol{p}-\boldsymbol{R} \boldsymbol{p}^{\prime}-\boldsymbol{t}\right)\right) 
+\end{aligned}\tag{55}</script><p>在式（55）中，注意到交叉项部分中 $\left(\boldsymbol{p}_{i}-\boldsymbol{p}-\boldsymbol{R}\left(\boldsymbol{p}_{i}{ }^{\prime}-\boldsymbol{p}^{\prime}\right)\right)$ 在求和之后为零，因此优化目标函数可以简化为：</p>
+<script type="math/tex; mode=display">
+\min _{R, \boldsymbol{t}} J=\frac{1}{2} \sum_{i=1}^{n}\left[\left\|\boldsymbol{p}_{i}-\boldsymbol{p}-R\left(\boldsymbol{p}_{i}^{\prime}-\boldsymbol{p}^{\prime}\right)\right\|^{2}+\left\|\boldsymbol{p}-R \boldsymbol{p}^{\prime}-\boldsymbol{t}\right\|^{2}\right]\tag{56}</script><p>仔细观察式（56）左右两项，左边一项只和旋转矩阵 $R$ 相关，而右边既有 $\boldsymbol{t}$ 也有 $R$ ，但只和质心相关（质心是一个确定的值）。所以我们只要获得了 $R$ ，再令右边一项为零就能得到 $\boldsymbol{t}$ 。</p>
+<p>我们先定义去掉质心坐标 $\boldsymbol{q_i}，\boldsymbol{q_i}^{\prime}$ :</p>
+<script type="math/tex; mode=display">
+\boldsymbol{q}_{i}=\boldsymbol{p}_{i}-\boldsymbol{p}, \quad \boldsymbol{q}_{i}^{\prime}=\boldsymbol{p}_{i}^{\prime}-\boldsymbol{p}^{\prime}\tag{57}</script><p>现在把式（57）也就是去质心的坐标带入到（56）中，并展开右边第一项有：</p>
+<script type="math/tex; mode=display">
+\frac{1}{2} \sum_{i=1}^{n}\left\|\boldsymbol{q}_{i}-R \boldsymbol{q}_{i}^{\prime}\right\|^{2}=\frac{1}{2} \sum_{i=1}^{n}\left(\boldsymbol{q}_{i}^{\mathrm{T}} \boldsymbol{q}_{i}+\boldsymbol{q}_{i}^{\prime \mathrm{T}} R^{\mathrm{T}} R \boldsymbol{q}_{i}^{\prime}-2 \boldsymbol{q}_{i}^{\mathrm{T}} R \boldsymbol{q}_{i}^{\prime}\right)\tag{58}</script><p>看式（58）可知，我们想要通过调整 $R$ 来使这个式子最小，发现（58）中的前两项和 $R$ 都无关，所以只剩下最后一项了：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^{n}-\boldsymbol{q}_{i}^{\mathrm{T}} R \boldsymbol{q}_{i}^{\prime}=\sum_{i=1}^{n}-\operatorname{tr}\left(R \boldsymbol{q}_{i}^{\prime} \boldsymbol{q}_{i}^{\mathrm{T}}\right)=-\operatorname{tr}\left(R \sum_{i=1}^{n} \boldsymbol{q}_{i}^{\prime} \boldsymbol{q}_{i}^{\mathrm{T}}\right)\tag{59}</script><p><strong>可以通过SVD方法求解出最优的 $R$</strong> ，然后可以求出最佳的 $\boldsymbol{t}$：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{t^{*}}=p-R\boldsymbol p^{\prime}\tag{60}</script><h3 id="2-非线性优化方法"><a href="#2-非线性优化方法" class="headerlink" title="2. 非线性优化方法"></a>2. 非线性优化方法</h3><p>我们通过李代数来表达位姿，代价函数可以写成：</p>
+<script type="math/tex; mode=display">
+\min _{\boldsymbol{\xi}}=\frac{1}{2} \sum_{i=1}^{n}\left\|\left(\boldsymbol{p}_{i}-\exp \left(\boldsymbol{\xi}^{\wedge}\right) \boldsymbol{p}_{i}^{\prime}\right)\right\|_{2}^{2}\tag{61}</script><p>这里说明一下，可以证明ICP 问题存在唯一解或无穷多解的情况。在唯一解的情况下，只要能找到极小值解，这个极小值就是全局最优值，这也意味着 ICP 求解可以任意选定初始值。 这是已匹配点时求解 ICP 的一大好处。需要说明的是，我们这里讲的 ICP 是指已由图像特征给定了匹配的情况下进行位姿估计的问题。<strong>在匹配已知的情况下，这个最小二乘问题实际上具有解析解</strong>，所以并没有必要进行迭代 优化。</p>
+<p><strong>既然在已知匹配的情况下可以得到解析解，为什么要用优化的方法呢？</strong>这是因为，某些场合下，例如在 RGB-D SLAM 中，一个像素的深度数据可能有，也可能测量不到，所以我们可以混合着使用 PnP 和 ICP 优化: 对于深度已知的特征点，建模它们的 3D-3D 误差；对于深度末知的特征点，则建模 3D-2D 的重投影误差。于是，可以将所有的误差放在同一个问题中考虑，使得求解更加方便。</p>
+<h2 id="IV-三角测量"><a href="#IV-三角测量" class="headerlink" title="IV. 三角测量"></a>IV. 三角测量</h2><p>当我们求得两帧图像间的相机运动，就可以求得特征点在3D空间的位置了。这也就是三角测量问题，三角测量就是通过两帧图像，来确定一个特征点的深度。</p>
 <p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220728040641.png" alt="image-20220728040641018" style="zoom: 67%;" /></p>
 <p>考虑图像 $I_{1}$ 和 $I_{2}$，以左图为参考， 右图的变换矩阵为 $\boldsymbol{T}$ 。相机光心为 $O_{1}$ 和 $O_{2}$ 。在 $I_{1}$ 中有特征点 $\boldsymbol p_{1}$， 对应 $I_{2}$ 中有特征点 $\boldsymbol p_{2}$ 。 理论上，直线 $O_{1} p_{1}$ 与 $O_{2} p_{2}$ 在场景中会相交于一点 $P$ ，该点即两个特征点所对应的地图点在三维场景中的位置。然而由于噪声的影响，这两条直线往往无法相交。因此，可以通过最小二乘法求解。按照对极几何中的定义, 设 $\boldsymbol{x}_{1}, \boldsymbol{x}_{2}$ 为两个特征点的归一化坐标, 那么它们满足:</p>
 <script type="math/tex; mode=display">
@@ -446,6 +602,14 @@ s_{2} \boldsymbol{x}_{2}=s_{1} \boldsymbol{R} \boldsymbol{x}_{1}+\boldsymbol{t} 
 s_{2} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{x}_{2}=0=s_{1} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{R} \boldsymbol{x}_{1}+\boldsymbol{x}_{2}^{\wedge} \boldsymbol{t}</script><p>该式左侧为零，右侧可看成 $s_{2}$ 的一个方程，可以根据它直接求得 $s_{2}$ 。有了 $s_{2}, s_{1}$ 也非常容易求出。于是，我们就得到了两帧下的点的深度，确定了它们的空间坐标。当然，由于噪声的存在，我们估得的 $R, \boldsymbol{t}$ 不一定精确使上式为零，所以更常见的做法是求<strong>最小二乘解</strong>而不是直接的解。</p>
 <p>三角测量是由平移得到的，有平移才会有对极几何中的三角形，才谈得上三角测量。因此，<strong>纯旋转是无法使用三角测量的</strong>，因为在平移为零时，对极约束一直为零。当然，实际数据往往不会完全等于零。在平移存在的情况下, 我们还要关心三角测量的不确定性，这会引出一个三角测量的矛盾。<strong>这个矛盾是，平移小了，深度的不确定性变大，因为相较于大平移，深度稍微差一点，就差出很多。而另一方面，大平移时，这会导致图像外观发生明显变化，使特征提取和匹配变得困难。</strong></p>
 <p>在单目视觉中，由于单目图像没有深度信息，我们要等待特征点被追踪几帧之后，产生了足够的视角，再用三角化来确定新增特征点的深度值。这有时也被称为<strong>延迟三角化</strong> 。但是，如果相机发生了原地旋转，导致视差很小，就不好估计新观测到的特征点的深度。</p>
+<h2 id="V-总结"><a href="#V-总结" class="headerlink" title="V. 总结"></a>V. 总结</h2><ol>
+<li>对极几何约束中，约束不到相机运动的尺度，即不知道具体的平移向量的尺度，仅知道其方向。因此单目相机需要进行初始化，令初始的平移向量为单位，后面根据PnP问题，进行求解得到相机的运动。这些运动都是建立在初始化得到的单位上的。</li>
+<li>单目相机初始化时，一定要有平移，不能是纯旋转，因为纯旋转时，本质矩阵或基础矩阵是0，因此求解不出来。</li>
+<li>当发生纯旋转时，我们可以用单应矩阵来求解。但是此时不能进行三角化，所以还是不能得到空间点的相机坐标系下的坐标，因此初始化还是会失败（因为后面PnP要用到这些点的3D位置）。</li>
+<li>PnP中的P3P方法，在已知空间点的世界坐标（或上一个相机系下的坐标）后，可以通过几何关系<strong>求出该空间点在当前相机系下的坐标</strong>。然后再通过ICP来求解相机的位姿。（先求相机系下坐标，再用ICP求相机运动）</li>
+<li>运用李代数左乘扰动模型，可以计算出重投影误差相对于相机位姿和路标点位置的导数，也就是可以知道雅可比矩阵。</li>
+<li>BA就是让相机位姿和路标点位置共同作为优化变量，而代价函数可以是3D-3D的误差，也可以是3D-2D的误差，然后进行非线性优化。在两帧图像之间，我们可以用BA来求解相机的位姿变化，和求出路标点的位置，这是前端使用的BA。但是BA也可以用在后端，此时是在许多帧图像中进行优化。</li>
+</ol>
 
     </div>
 
@@ -526,7 +690,7 @@ s_{2} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{x}_{2}=0=s_{1} \boldsymbol{x}_{2}^
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95"><span class="nav-text">I. 对极几何</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AF%B9%E6%9E%81%E7%BA%A6%E6%9D%9F"><span class="nav-text">1. 对极约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B1%82%E8%A7%A3%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF%EF%BC%88%E5%85%AB%E7%82%B9%E6%B3%95%EF%BC%89"><span class="nav-text">2. 求解相机位姿（八点法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5"><span class="nav-text">3. 单应矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B0%8F%E7%BB%93"><span class="nav-text">4. 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-3D-2D-PnP"><span class="nav-text">II. 3D-2D: PnP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-%E4%B8%89%E8%A7%92%E6%B5%8B%E9%87%8F"><span class="nav-text">IV. 三角测量</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-2D-2D%EF%BC%9A%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95"><span class="nav-text">I. 2D-2D：对极几何</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AF%B9%E6%9E%81%E7%BA%A6%E6%9D%9F"><span class="nav-text">1. 对极约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B1%82%E8%A7%A3%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF%EF%BC%88%E5%85%AB%E7%82%B9%E6%B3%95%EF%BC%89"><span class="nav-text">2. 求解相机位姿（八点法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8D%95%E5%BA%94%E7%9F%A9%E9%98%B5"><span class="nav-text">3. 单应矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%B0%8F%E7%BB%93"><span class="nav-text">4. 小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-3D-2D-PnP"><span class="nav-text">II. 3D-2D: PnP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%9B%B4%E6%8E%A5%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-text">1. 直接线性变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-P3P%E6%96%B9%E6%B3%95"><span class="nav-text">2. P3P方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%9C%80%E5%B0%8F%E5%8C%96%E9%87%8D%E6%8A%95%E5%BD%B1%E8%AF%AF%E5%B7%AE%E6%B1%82%E8%A7%A3PnP"><span class="nav-text">3. 最小化重投影误差求解PnP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9C%80%E5%B0%8F%E5%8C%96%E9%87%8D%E6%8A%95%E5%BD%B1%E8%AF%AF%E5%B7%AE"><span class="nav-text">(1) 最小化重投影误差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%8E%A8%E5%AF%BC-J-T"><span class="nav-text">(2) 推导 $J^T$</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III-3D-3D%EF%BC%9AICP"><span class="nav-text">III. 3D-3D：ICP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%A3%E6%95%B0%E6%96%B9%E6%B3%95%E2%80%94SVD"><span class="nav-text">1. 代数方法—SVD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-text">2. 非线性优化方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV-%E4%B8%89%E8%A7%92%E6%B5%8B%E9%87%8F"><span class="nav-text">IV. 三角测量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V-%E6%80%BB%E7%BB%93"><span class="nav-text">V. 总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
