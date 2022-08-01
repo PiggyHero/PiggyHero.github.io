@@ -15,7 +15,7 @@
 <p>后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，后来发现一个问题，有两个聪明人编写了两个库，两个库里面居然有相同的方法名称，这下编译器就糊涂了，在自己写的库中，所有的函数名、常量名、解构名都带上自己的姓名做前缀名，这样就算方法名是一样的，但是有不同的前缀名，这样就能区分到底该链接哪个方法了。后来又来一个聪明人，觉得你们这样在每个方法、常量、结构体中都写上你们的姓名累不累啊，这样，我给你们设计一套规则，只要在库的最前面写上你们的姓名不就行了么，用的时候编译器先去找找你们的姓名，然后再你们的姓名下面找方法，这不就多快好省了么。那这样吧我们就给这个姓名取名字<code>namespace</code>吧。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -321,7 +321,7 @@
 <p>其中delegation+inheritance的功能最强大。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -410,7 +410,7 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -710,7 +710,7 @@
 </div>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>Markdown</tag>
@@ -879,7 +879,7 @@
 <p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220616154308.png" alt="image-20220616154308660" style="zoom:50%;" /></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -928,7 +928,7 @@
 <p>发现了一个新的本地嵌入 PDF 的方法，把下面 <code>src</code> 中的 PDF 路径换成自己的即可。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;embed id=&quot;pdfPlayer&quot; src=&quot;C:\Users\question.pdf&quot; type=&quot;application/pdf&quot; width=&quot;1</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>Markdown</tag>
@@ -1019,7 +1019,7 @@
 <p>首先要创建<code>ros::NodeHandle</code>对象。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ros::NodeHandle n1</span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;/param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置全局参数</span></span><br><span class="line"></span><br><span class="line">n1.<span class="built_in">setParam</span>(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>);<span class="comment">//设置相对参数</span></span><br><span class="line"></span><br><span class="line"><span class="function">ros::NodeHandle <span class="title">n2</span><span class="params">(<span class="string">&quot;~&quot;</span>)</span></span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">n2.<span class="title">setParam</span><span class="params">(<span class="string">&quot;param_name&quot;</span>,<span class="number">10</span>)</span><span class="comment">//设置私有参数</span></span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>ROS</tag>
@@ -1374,7 +1374,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215033410.png" alt="image-20211007012025774"></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>ROS</tag>
@@ -1454,7 +1454,7 @@
 <p>接下来要运行某个功能包的节点，就直接可以使用<code>rosrun</code>命令了。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>ROS</tag>
@@ -1571,7 +1571,7 @@
 <h3 id="4-深度相机"><a href="#4-深度相机" class="headerlink" title="(4)深度相机"></a>(4)深度相机</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">robot</span> <span class="attr">name</span>=<span class="string">&quot;my_sensors&quot;</span> <span class="attr">xmlns:xacro</span>=<span class="string">&quot;http://wiki.ros.org/xacro&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">gazebo</span> <span class="attr">reference</span>=<span class="string">&quot;support&quot;</span>&gt;</span>  </span><br><span class="line">      <span class="tag">&lt;<span class="name">sensor</span> <span class="attr">type</span>=<span class="string">&quot;depth&quot;</span> <span class="attr">name</span>=<span class="string">&quot;camera&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">always_on</span>&gt;</span>true<span class="tag">&lt;/<span class="name">always_on</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">update_rate</span>&gt;</span>20.0<span class="tag">&lt;/<span class="name">update_rate</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">camera</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">horizontal_fov</span>&gt;</span>$&#123;60.0*PI/180.0&#125;<span class="tag">&lt;/<span class="name">horizontal_fov</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">format</span>&gt;</span>R8G8B8<span class="tag">&lt;/<span class="name">format</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">width</span>&gt;</span>640<span class="tag">&lt;/<span class="name">width</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">height</span>&gt;</span>480<span class="tag">&lt;/<span class="name">height</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">clip</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">near</span>&gt;</span>0.05<span class="tag">&lt;/<span class="name">near</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">far</span>&gt;</span>8.0<span class="tag">&lt;/<span class="name">far</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">clip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">camera</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">name</span>=<span class="string">&quot;kinect_camera_controller&quot;</span> <span class="attr">filename</span>=<span class="string">&quot;libgazebo_ros_openni_kinect.so&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraName</span>&gt;</span>camera<span class="tag">&lt;/<span class="name">cameraName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">alwaysOn</span>&gt;</span>true<span class="tag">&lt;/<span class="name">alwaysOn</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">updateRate</span>&gt;</span>10<span class="tag">&lt;/<span class="name">updateRate</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">imageTopicName</span>&gt;</span>rgb/image_raw<span class="tag">&lt;/<span class="name">imageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageTopicName</span>&gt;</span>depth/image_raw<span class="tag">&lt;/<span class="name">depthImageTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudTopicName</span>&gt;</span>depth/points<span class="tag">&lt;/<span class="name">pointCloudTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">cameraInfoTopicName</span>&gt;</span>rgb/camera_info<span class="tag">&lt;/<span class="name">cameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">depthImageCameraInfoTopicName</span>&gt;</span>depth/camera_info<span class="tag">&lt;/<span class="name">depthImageCameraInfoTopicName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">frameName</span>&gt;</span>body<span class="tag">&lt;/<span class="name">frameName</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">baseline</span>&gt;</span>0.1<span class="tag">&lt;/<span class="name">baseline</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_k3</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_k3</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t1</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t1</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">distortion_t2</span>&gt;</span>0.0<span class="tag">&lt;/<span class="name">distortion_t2</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">pointCloudCutoff</span>&gt;</span>0.4<span class="tag">&lt;/<span class="name">pointCloudCutoff</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">sensor</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">gazebo</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">robot</span>&gt;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>ROS</tag>
@@ -1607,7 +1607,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>cmake</tag>
@@ -1635,7 +1635,7 @@
 <p>好了现在就会在<code>build</code> 目录下生成了我们编译生成的可执行文件<code>Hello_CMake</code>。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>cmake</tag>
@@ -1654,7 +1654,7 @@
 <h3 id="4-编写tasks-json文件"><a href="#4-编写tasks-json文件" class="headerlink" title="4.编写tasks.json文件"></a>4.编写tasks.json文件</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;version&quot;</span>:<span class="string">&quot;2.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;options&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/build&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;tasks&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;shell&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">                <span class="string">&quot;..&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;group&quot;</span>: &#123;</span><br><span class="line">                <span class="attr">&quot;kind&quot;</span>: <span class="string">&quot;build&quot;</span>,</span><br><span class="line">                <span class="attr">&quot;isDefault&quot;</span>: <span class="literal">true</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">&quot;command&quot;</span>:<span class="string">&quot;make&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line"></span><br><span class="line">            ]</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">&quot;label&quot;</span>: <span class="string">&quot;Build&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOrder&quot;</span>: <span class="string">&quot;sequence&quot;</span>,</span><br><span class="line">            <span class="attr">&quot;dependsOn&quot;</span>:[<span class="string">&quot;cmake&quot;</span>,</span><br><span class="line">                         <span class="string">&quot;make&quot;</span></span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>其他</tag>
@@ -1683,7 +1683,7 @@
 <p>为什么这么写，以后会说。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>cmake</tag>
@@ -1709,7 +1709,7 @@
 <p>这里的参数<code>PRIVATE</code>后面会说。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>cmake</tag>
@@ -1839,7 +1839,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215032630.gif" alt="img"></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>git</tag>
@@ -1878,7 +1878,7 @@
 <p>但是，要注意的是我们现在对PATH变量的修改只能持续到退出或重启系统，是不能一直持续下去的。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -1908,7 +1908,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215032656.png" alt="image-20210711063540634"></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>git</tag>
@@ -2055,7 +2055,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum info package_name</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2136,7 +2136,7 @@
 <p>如上图所示，linux操作系统包括了四大部分，其中核心是linux的内核，处在最底层，建立了软硬件间的桥梁。向上一层是图形化桌面程序和GUN系统工具程序，我们可以通过这一层来直接操作内核来实现一些标准的功能。最上层就是应用程序了，我们可以使用这些应用程序来实现具体的一些功能。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2166,7 +2166,7 @@
 </ul>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2264,7 +2264,7 @@
 <p><strong>友情提示</strong>：如果你参照教程安装出现了问题，极有可能是因为不同电脑之间的差异导致，可能有些问题我也没有遇到过，所以如果出现特殊问题，请移步评论区，说不定就有热心的小伙伴碰到过并完美解决。如果你遇到了实在难以解决的问题，可以向我求助，同时广泛在网络寻找解决办法，如果解决，希望你可以将解决方法放到评论区，帮助遇到同样问题的朋友们尽快解决问题，感谢你的支持与分享。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2380,7 +2380,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tail -5 file1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> head -20 file2</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2480,7 +2480,7 @@
 <p>For example, if the <code>fruit</code> library has the implementation of functions, such as <code>size</code> and <code>color</code>, and the <code>apple</code> library has a function <code>apple_size</code> which called the <code>size</code> from the <code>fruit</code> library and was <code>PRIVATE</code> linked with the <code>fruit</code> library. We could create an executable <code>eat_apple</code> that calls <code>apple_size</code> by <code>PUBLIC</code> or <code>PRIVATE</code> linking with the <code>apple</code> library. However, if we want to create an executable <code>eat_apple</code> that calls the <code>size</code> and <code>color</code> from the <code>fruit</code> library, only linking with the <code>apple</code> library will cause building error, since the <code>fruit</code> library was not part of the interface in the <code>apple</code> library, and is thus inaccessible to <code>eat_apple</code>. To make the <code>apple</code> library to inherit the <code>size</code> and <code>color</code> from the <code>fruit</code> library, we have to make the linking of the <code>apple</code> library to the the <code>fruit</code> library <code>PUBLIC</code> instead of <code>PRIVATE</code>.</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>cmake</tag>
@@ -2533,7 +2533,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/windows_img/image-20220118163833129.png" alt="image-20220118163833129"></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2576,7 +2576,7 @@
 <p>如果安装CentOS系统，在软件选择中，选择带GUI的服务器，并选择附加软件开发工具和兼容性程序库。然后设置安装位置，/boot , /swap, / 。然后设置root密码。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2647,7 +2647,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/windows_img/image-20220121010916486.png" alt="image-20220121010916486"></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
   </entry>
   <entry>
@@ -2716,7 +2716,7 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2787,7 +2787,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chown [ower][:[group]] file</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor:China file  <span class="comment">#将file的所有者改为emperor，所属组改为China</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo chown emperor: file  <span class="comment">#将file的所有者改为emperor，所属组改为emperor的所在组</span></span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2903,7 +2903,7 @@
 <p>上条命令将 <code>ls /usr/bin</code> 的输出重定向到 <code>ls.txt</code> 中，同时也重定向到 <code>grep</code> 的标准输入中。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -2966,7 +2966,7 @@
 <p>同理，<code>killall</code> 和 <code>kill</code> 一样需要注意用户权限。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>linux</tag>
@@ -3199,7 +3199,7 @@
 <p><img src="https://github.com/piggyhero/pic/raw/master/img/20211215000338.png" alt="image-20211115125627092"></p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>软件编程</category>
       </categories>
       <tags>
         <tag>opencv</tag>
@@ -5390,7 +5390,7 @@ f_{x y}=\sum_{i, j=1}^{2} f_{i, j} \max \left(0,1-\left|x-x_{i}\right|\right) \m
 </ul>
 <h2 id="6-3PixelRNN与PixelCNN"><a href="#6-3PixelRNN与PixelCNN" class="headerlink" title="6.3PixelRNN与PixelCNN"></a>6.3PixelRNN与PixelCNN</h2><h2 id="6-4变分自编码器"><a href="#6-4变分自编码器" class="headerlink" title="6.4变分自编码器"></a>6.4变分自编码器</h2><h2 id="6-5GAN"><a href="#6-5GAN" class="headerlink" title="6.5GAN"></a>6.5GAN</h2>]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>专业原理</category>
       </categories>
       <tags>
         <tag>其他</tag>
@@ -6742,7 +6742,7 @@ E(M, X)=\sum_{i=1}^{m} \sum_{j=1}^{n} D\left(x_{i j}, M_{i} X_{j}\right)^{2}\tag
 <p>因此在实际的应用中，常用作结构恢复SFM(structure from motion)的最后一步，通过因式分解法或代数法来求的优化问题的初始解，然后在通过捆绑法进行优化。</p>
 ]]></content>
       <categories>
-        <category>专业技能</category>
+        <category>专业原理</category>
       </categories>
       <tags>
         <tag>其他</tag>
@@ -7481,7 +7481,7 @@ C=\left(\frac{m_{10}}{m_{00}}, \frac{m_{01}}{m_{00}}\right)</script></li>
 <script type="math/tex; mode=display">
 \theta=\arctan \left(m_{01} / m_{10}\right)</script></li>
 </ol>
-<h4 id="2-BRIEF描述子"><a href="#2-BRIEF描述子" class="headerlink" title="(2) BRIEF描述子"></a>(2) BRIEF描述子</h4><p>BRIEF 是一种二进制描述子， 其描述向量由许多个 0 和 1 组成，这里的 0 和 1 编码了关键点附近两个随机像素（比如 $p$ 和 $q$ ）的大小关系：如果 $p$ 比 $q$ 大，则取 1 ，反之就取 0 。如果我们取 了 128 个这样的 $p，q$ ，则最后得到 128 维由 $0 、 1$ 组成的向量。BRIEF 使用了随机选点的比较，速度非常快，而且由于使用了二进制表达，存储起来也十分方便，适用于实时的图像匹配。原始 的 BRIEF 描述子不具有旋转不变性，因此在图像发生旋转时容易丢失。而 ORB 在 FAST 特征点提取阶段计算了关键点的方向，所以可以利用方向信息, 计算旋转之后的 “Steer BRIEF” 特征使 ORB 的描述子具有较好的旋转不变性。</p>
+<h4 id="2-BRIEF描述子"><a href="#2-BRIEF描述子" class="headerlink" title="(2) BRIEF描述子"></a>(2) BRIEF描述子</h4><p>BRIEF 是一种二进制描述子， 其描述向量由许多个 0 和 1 组成，这里的 0 和 1 编码了关键点附近两个随机像素（比如 $p$ 和 $q$ ）的大小关系：如果 $p$ 比 $q$ 大，则取 1 ，反之就取 0 。如果我们取 了 128 个这样的 $p，q$ ，则最后得到 128 维由 $0 、 1$ 组成的向量。BRIEF 使用了随机选点的比较，速度非常快，而且由于使用了二进制表达，存储起来也十分方便，适用于实时的图像匹配。原始 的 BRIEF 描述子不具有旋转不变性，因此在图像发生旋转时容易丢失。而 ORB 在 FAST 特征点提取阶段计算了关键点的方向，所以可以利用方向信息，计算旋转之后的 “Steer BRIEF” 特征使 ORB 的描述子具有较好的旋转不变性。</p>
 <h2 id="II-特征点匹配"><a href="#II-特征点匹配" class="headerlink" title="II. 特征点匹配"></a>II. 特征点匹配</h2><p>匹配的方法就是计算描述子间的距离，来刻画特征点间的相似程度。这些距离可以使用不同的范数来度量，例如可以使用欧氏距离来进行度量，对于二进制描述子，如BRIEF，可以使用<strong>汉明距离</strong>来度量，两个二进制串的汉明距离就是指不同位数的个数。</p>
 <p>而对于如何匹配，最简单最直接的就是<strong>暴力匹配（Brute-Force Matcher）</strong>，也就是说，把当前特征点和另一帧图像上的所有特征点的描述子距离都计算一遍。当然这种方法耗时耗力，因此人们常用<strong>快速近似最临近（FLANN）</strong>算法。 </p>
 <h2 id="III-总结"><a href="#III-总结" class="headerlink" title="III. 总结"></a>III. 总结</h2><p>特征匹配是很重要的一步工作。特征点是由<strong>关键点</strong>和<strong>描述子</strong>来组成。在视觉SLAM中常用的是ORB特征，该特征考虑了尺度和旋转特性，因此更加稳定。ORB特征使用的是改进的FAST关键点，即某一像素点比其邻域的像素点的亮度都大或者特别小，则该像素点就是一个关键点。另外，还要考虑尺度和旋转的问题，ORB的关键点通过图像金字塔和计算关键点区域的图像灰度值中心来解决这两个问题。而对于描述子，ORB使用的是BRIEF描述子，该描述子通过随机抽取两个关键点邻域内的像素，并对其进行亮度值比较，来确定描述子的形式。该描述子由二进制位来描述。最后通过计算描述子的汉明距离来匹配特征点。</p>
@@ -7847,6 +7847,80 @@ s_{2} \boldsymbol{x}_{2}^{\wedge} \boldsymbol{x}_{2}=0=s_{1} \boldsymbol{x}_{2}^
 <li>BA就是让相机位姿和路标点位置共同作为优化变量，而代价函数可以是3D-3D的误差，也可以是3D-2D的误差，然后进行非线性优化。在两帧图像之间，我们可以用BA来求解相机的位姿变化，和求出路标点的位置，这是前端使用的BA。但是BA也可以用在后端，此时是在许多帧图像中进行优化。</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>专业原理</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【视觉SLAM13】前端——直接法计算相机位姿</title>
+    <url>/2022/07/29/%E3%80%90%E8%A7%86%E8%A7%89SLAM13%E3%80%91%E5%89%8D%E7%AB%AF%E2%80%94%E2%80%94%E7%9B%B4%E6%8E%A5%E6%B3%95%E8%AE%A1%E7%AE%97%E7%9B%B8%E6%9C%BA%E4%BD%8D%E5%A7%BF/</url>
+    <content><![CDATA[<p>直接法就是不需要进行特征点匹配。在特征点法中，关键点的提取和描述子的计算特别耗时。另外，如果只提取特征点，就意味着同时也丢弃了大部分可能有用的图像信息。而且有时图像上并没有明显的特征，例如一堵白墙，这类场景下特征点数量会明显的减少。</p>
+<span id="more"></span>
+<p>直接法广义上可以理解为不进行特征点匹配，所以广义上的直接法包括：</p>
+<ul>
+<li>光流法：提取关键点，但并不计算描述子（描述子主要用来匹配的），跟踪关键点的运动（这就节省了特征匹配的步骤），<strong>然后再通过对极几何，PnP或ICP来求解相机位姿。</strong></li>
+<li>直接法：完全不提取什么关键点（随机任意一点都可以），是通过<strong>最小化光度误差</strong>来进行求解。只要图像中存在明暗变化，这种纯直接法就能工作，根据使用像素点的数量，直接法可以分为稀疏、稠密和半稠密三种。所以直接法还具有回复稠密或半稠密结构的能力。</li>
+</ul>
+<h2 id="I-光流"><a href="#I-光流" class="headerlink" title="I. 光流"></a>I. 光流</h2><p>直接法是从光流演变而来的，它们具有相同的假设条件，即灰度不变假设。所以我们先来介绍光流。跟踪部分像素运动的称为<strong>稀疏光流</strong>，跟踪所有像素的称为<strong>稠密光流</strong>。稀疏光流以LK光流为代表，稠密光流以Horn-Schunck光流为代表。</p>
+<h3 id="1-LK光流"><a href="#1-LK光流" class="headerlink" title="1. LK光流"></a>1. LK光流</h3><p>我们认为某一像素点的灰度值是时间的函数，所以可以记为 $I(t)$ ，因而有任意时间 $t$ ，位于 $(x,y)$ 处的像素，它的灰度值为：</p>
+<script type="math/tex; mode=display">
+I(x, y, t)\tag{1}</script><p>现在着眼于这个像素点，当相机发生运动后，这个像素点的位置会发生变化，而我们假设这个像素点在运动后，其灰度值也是不变的。注意这是一个假设性很强的条件，事实上可能是不成立的。所以有：</p>
+<script type="math/tex; mode=display">
+I(x+\mathrm{d} x, y+\mathrm{d} y, t+\mathrm{d} t)=I(x, y, t)\tag{2}</script><p>我们对式（2）左边进行泰勒展开：</p>
+<script type="math/tex; mode=display">
+I(x+\mathrm{d} x, y+\mathrm{d} y, t+\mathrm{d} t) \approx I(x, y, t)+\frac{\partial I}{\partial x} \mathrm{~d} x+\frac{\partial I}{\partial y} \mathrm{~d} y+\frac{\partial I}{\partial t} \mathrm{~d} t\tag{3}</script><p>把（2）带入（3）中可化简为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial I}{\partial x} \mathrm{~d} x+\frac{\partial I}{\partial y} \mathrm{~d} y+\frac{\partial I}{\partial t} \mathrm{~d} t=0 \tag{4}</script><p>两边除以 $\mathrm{d} t$ ，得</p>
+<script type="math/tex; mode=display">
+\frac{\partial I}{\partial x} \frac{\mathrm{d} x}{\mathrm{~d} t}+\frac{\partial I}{\partial y} \frac{\mathrm{d} y}{\mathrm{~d} t}=-\frac{\partial I}{\partial t} \tag{5}</script><p>这里的 $dx/dt$ 和 $dy/dt$ 分别为该像素在 $x,y$ 轴上的运动速度，把它们记为 $u,v$ 。同时 $\partial I/\partial x$ 和 $\partial I/\partial y$ 分别表示该像素点 $x,y$ 方向的的灰度梯度，我们记为 $I_x,I_y$ ，把该像素点的灰度值对时间的变化量记为 $I_t$，则写成矩阵的形式有：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+I_{x} & I_{y}
+\end{array}\right]\left[\begin{array}{l}
+u \\
+v
+\end{array}\right]=-I_{t}\tag{6}</script><p>式（6）有两个变量，所以我们不能直接解出速度 $u,v$ ，所以我们还要假设在某一个窗口内的像素具有相同的运动。考虑一个 $w\times w$ 的窗口，它含有 $w^2$ 数量的像素。该窗口内像素具有同样的运动，因此我们可以建立 $w^2$ 个方程：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+I_{x} & I_{y}
+\end{array}\right]_{k}\left[\begin{array}{l}
+u \\
+v
+\end{array}\right]=-I_{t k}, \quad k=1, \ldots, w^{2}\tag{7}</script><p>写成矩阵为：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{aligned}
+&A\left[\begin{array}{c}
+u \\
+v
+\end{array}\right]=-\boldsymbol{b}\\
+&A=\left[\begin{array}{c}
+{\left[I_{x}, I_{y}\right]_{1}} \\
+\vdots \\
+{\left[I_{x}, I_{y}\right]_{k}}
+\end{array}\right], \boldsymbol{b}=\left[\begin{array}{c}
+I_{t 1} \\
+\vdots \\
+I_{t k}
+\end{array}\right] \\
+\end{aligned}
+\right.\tag{8}</script><p>这是一个超定线性方程，传统解法是求最小二乘解，可以得到一个解析解为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{c}
+u\\
+v
+\end{array}\right]^{*}=-\left(A^{\mathrm{T}} A\right)^{-1} A^{\mathrm{T}} \boldsymbol{b}\tag{9}</script><h3 id="2-优化方法求解光流"><a href="#2-优化方法求解光流" class="headerlink" title="2. 优化方法求解光流"></a>2. 优化方法求解光流</h3><p>我们还可以用优化的方法来追踪关键点位置，假设要追踪 $(x,y)$ 处的关键点，我们可以确定这样一个代价函数：</p>
+<script type="math/tex; mode=display">
+\min _{\Delta x, \Delta y}\left\|I_{1}(x, y)-I_{2}(x+\Delta x, y+\Delta y)\right\|_{2}^{2}\tag{10}</script><p>这里的雅可比矩阵是第二个图像在 $x+\Delta x$ ，$y+\Delta y$ 处的梯度。此外这里的梯度也可以用第一个图像 $I_1(x,y)$ 来替代，这种替代方法称为反向光流。</p>
+<h3 id="3-多层光流"><a href="#3-多层光流" class="headerlink" title="3. 多层光流"></a>3. 多层光流</h3><p>我们把光流写成了优化问题，就必须假设优化的初始值靠近最优值，才能在一定程度上保障算法的收敛。如果相机运动较快, 两张图像差异较明显，那么单层图像光流法容易达到一个局部极小值。这种情况可以通过引人图像金字塔来改善。</p>
+<p>图像金字塔是指对同一个图像进行缩放，得到不同分辨率下的图像，以原始图像作为金字塔底层，每往上一层，就对下层图像进行一定倍率的缩放，就得到了一个金字塔。</p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220729033627.png" alt="image-20220729033627398" style="zoom:50%;" /></p>
+<p>然后，在计算光流时，<strong>先从顶层的图像开始计算，然后把上一层的追踪结果，作为下一层光流的初始值。</strong>由于上层的图像相对粗糙， 所以这个过程也称为<strong>由粗至精</strong> ( Coarse-to-fine) 的光流，也是实用光流法的通常流程。由粗至精的好处在于，当原始图像的像素运动较大时，在金字塔顶层的图像看来，运动仍然在一个很小范围内。</p>
+<p><strong>注意：</strong></p>
+<p>光流的计算速度很快，但是也有着容易跟丢或跟错的情况，这就需要后续算法拥有一定的异常去除机制。</p>
+<h2 id="II-直接法"><a href="#II-直接法" class="headerlink" title="II. 直接法"></a>II. 直接法</h2>]]></content>
       <categories>
         <category>专业原理</category>
       </categories>
