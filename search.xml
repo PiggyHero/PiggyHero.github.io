@@ -6920,7 +6920,7 @@ t=J \rho</script><p>而这个 $\boldsymbol{J}$ 是和 $\phi$ 有关。因此可�
 <script type="math/tex; mode=display">
 \boldsymbol{J}_{l}^{-1}=\frac{\theta}{2} \cot \frac{\theta}{2} \boldsymbol{I}+\left(1-\frac{\theta}{2} \cot \frac{\theta}{2}\right) \boldsymbol{a} \boldsymbol{a}^{\mathrm{T}}-\frac{\theta}{2} \boldsymbol{a}^{\wedge}</script><p>而右乘雅可比矩阵为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol{J}_{r}(\boldsymbol{\phi})=\boldsymbol{J}_{l}(-\boldsymbol{\phi})</script><p><strong>这样，我们就可以谈论李群乘法与李代数假发的关系了。</strong></p>
+\boldsymbol{J}_{r}(\boldsymbol{\phi})=\boldsymbol{J}_{l}(-\boldsymbol{\phi})</script><p><strong>这样，我们就可以谈论李群乘法与李代数加法的关系了。</strong></p>
 <p>我们重新叙述一下 BCH 的意义：</p>
 <p>假设某个旋转 $R$ ，对应的李代数为 $\phi$ ，我们给它左乘一个微笑的旋转，记为 $\Delta R$ ，对应的李代数为 $\Delta \phi$ ，那么在李群上得到的结果就是 $\Delta R ·R$ ，而在李代数上，根据 BCH公式，为$J_{l}^{-1}(\phi) \Delta \phi+\phi$ 。可以写成：</p>
 <script type="math/tex; mode=display">
@@ -7920,7 +7920,65 @@ v
 <p>然后，在计算光流时，<strong>先从顶层的图像开始计算，然后把上一层的追踪结果，作为下一层光流的初始值。</strong>由于上层的图像相对粗糙， 所以这个过程也称为<strong>由粗至精</strong> ( Coarse-to-fine) 的光流，也是实用光流法的通常流程。由粗至精的好处在于，当原始图像的像素运动较大时，在金字塔顶层的图像看来，运动仍然在一个很小范围内。</p>
 <p><strong>注意：</strong></p>
 <p>光流的计算速度很快，但是也有着容易跟丢或跟错的情况，这就需要后续算法拥有一定的异常去除机制。</p>
-<h2 id="II-直接法"><a href="#II-直接法" class="headerlink" title="II. 直接法"></a>II. 直接法</h2>]]></content>
+<h2 id="II-直接法"><a href="#II-直接法" class="headerlink" title="II. 直接法"></a>II. 直接法</h2><h3 id="1-直接法推导"><a href="#1-直接法推导" class="headerlink" title="1.直接法推导"></a>1.直接法推导</h3><p>在光流法中，我们还需要提取特征点，然后进行追踪。而直接法则不需要再提取特征点，直接根据图像来求取相机的位姿变化。考虑到空间点 $P$ 和两个时刻的相机，$P$ 的世界坐标为 $[X,Y,Z]^T$ ，在两个相机上的成像的像素坐标为 $\boldsymbol{p_1},\boldsymbol{p_2}$ 。 </p>
+<p><img src="https://raw.githubusercontent.com/PiggyHero/pic/master/img-mac/20220807181201.png" alt="image-20220807181155545" style="zoom: 67%;" /></p>
+<p>因此我们可以得到$\boldsymbol{p_1},\boldsymbol{p_2}$ ：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{p}_{1} &=\left[\begin{array}{c}
+u \\
+v \\
+1
+\end{array}\right]_{1}=\frac{1}{Z_{1}} K \boldsymbol{P} \\
+\boldsymbol{p}_{2} &=\left[\begin{array}{l}
+u \\
+v \\
+1
+\end{array}\right]_{2}=\frac{1}{Z_{2}}K(R \boldsymbol{P}+\boldsymbol{t})
+\end{aligned}\tag{11}</script><p>在特征点法中，我们是知道 $\boldsymbol{p_1},\boldsymbol{p_2}$ 的对应关系，可以通过最小化重投影误差来求解旋转矩阵 $R$ 和平移向量 $\boldsymbol{t}$ 。而在直接法中，我们不知道 $\boldsymbol{p_1},\boldsymbol{p_2}$ 的具体对应关系，直接法的思路是根据 $\boldsymbol{p_1}$ 所对应的光度值 $I(\boldsymbol{p_1})$ ，通过调整相机的位姿，来寻找 $\boldsymbol{p_2}$ 的位置使 $I(\boldsymbol{p_2})$ 和 $I(\boldsymbol{p_1})$ 相等。但实际上相等是很难做到的，所以我们要让这个误差最小，即光度误差最小：</p>
+<script type="math/tex; mode=display">
+e=I_{1}\left(\boldsymbol{p}_{1}\right)-I_{2}\left(\boldsymbol{p}_{2}\right)\tag{12}</script><p>我们要让这个误差最小，即：</p>
+<script type="math/tex; mode=display">
+\min _{\boldsymbol{T}} J(\boldsymbol{T})=\sum_{i=1}^{N} e_{i}^{\mathrm{T}} e_{i}, \quad e_{i}=\boldsymbol{I}_{1}\left(\boldsymbol{p}_{1, i}\right)-\boldsymbol{I}_{2}\left(\boldsymbol{p}_{2, i}\right)\tag{13}</script><p><strong>直接法的基础也是灰度不变假设，即一个空间点在各个视角下的成像的灰度值是不变的。</strong>为了求解这个优化问题，我们要求得误差 $e$ 是如何根据相机位姿 $T$ 变化的，即它们的导数关系。</p>
+<p>定义中间变量：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{q} &=T \boldsymbol{P} \\
+\boldsymbol{u} &=\frac{1}{Z_{2}} K \boldsymbol{q}
+\end{aligned}\tag{14}</script><p>这里的 $\boldsymbol{q}$ 为 $P$ 在第二个相机坐标系下的坐标，而 $\boldsymbol{u}$ 为它的像素坐标。显然 $\boldsymbol{q}$ 是 $T$ 的函数，$\boldsymbol{u}$ 是 $\boldsymbol{q}$ 的函数，从而也是 $T$ 的函数。</p>
+<p>根据引入的中间变量和根据李代数的左扰动模型，可以求出一阶雅可比矩阵 $J$ ，$e$ 对 $T$ 的导数为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial e}{\partial T}=\frac{\partial {I}_{2}}{\partial \boldsymbol{u}} \frac{\partial \boldsymbol{u}}{\partial \boldsymbol{q}} \frac{\partial \boldsymbol{q}}{\partial \delta \boldsymbol{\xi}}\tag{15}</script><p>根据链式法则，我们将这个导数分为了三个部分：</p>
+<ul>
+<li>$\partial {I}_{2} / \partial \boldsymbol{u}$ 为 $\boldsymbol{u}$ 处的像素梯度。</li>
+<li>$\partial \boldsymbol{u} / \partial \boldsymbol{q}$ 为投影方程关于相机坐标系下的三维点的导数。记 $\boldsymbol{q}=[X, Y, Z]^{\mathrm{T}}$ ，导数为<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{u}}{\partial \boldsymbol{q}}=\left[\begin{array}{lll}
+\frac{\partial u}{\partial X} & \frac{\partial u}{\partial Y} & \frac{\partial u}{\partial Z} \\
+\frac{\partial v}{\partial X} & \frac{\partial v}{\partial Y} & \frac{\partial v}{\partial Z}
+\end{array}\right]=\left[\begin{array}{ccc}
+\frac{f_{x}}{Z} & 0 & -\frac{f_{x} X}{Z^{2}} \\
+0 & \frac{f_{y}}{Z} & -\frac{f_{y} Y}{Z^{2}}
+\end{array}\right]</script></li>
+<li>$\partial \boldsymbol{q} / \partial \delta \boldsymbol{\xi}$ 为变换后的三维点对变换的导数，这在李代数一讲介绍过：</li>
+</ul>
+<script type="math/tex; mode=display">
+\frac{\partial \boldsymbol{q}}{\partial \delta \boldsymbol{\xi}}=\left[\boldsymbol{I},-\boldsymbol{q}^{\wedge}\right]</script><p>所以雅可比矩阵为：</p>
+<script type="math/tex; mode=display">
+J=-\frac{\partial {I}_{2}}{\partial \boldsymbol{u}} \frac{\partial \boldsymbol{u}}{\partial \delta \boldsymbol{\xi}}\tag{16}</script><h3 id="2-直接法讨论"><a href="#2-直接法讨论" class="headerlink" title="2. 直接法讨论"></a>2. 直接法讨论</h3><p>在直接法中，<strong>我们需要知道 $P$ 点的三维坐标，</strong>才能求出相机的位姿变换。这里要说明一下，关于 $P$ 的三维坐标，准确地说也就是知道 $P$ 点的深度，只要知道深度信息，那么三维坐标就可以根据相机模型直接求出来。</p>
+<p>当 $P$ 点的深度已知，我们可以把直接法进行分类：</p>
+<p>（1）当 $P$ 来自于稀疏关键点，我们称之为稀疏直接法。通常，我们使用数百个至上千个关键点，并且像 L-K 光流那样，<strong>假设它周围像素也是不变的</strong>。这种稀疏直接法不必计算描述子，并且只使用数百个像素，因此速度最快，但只能计算稀疏的重构。</p>
+<p>（2）$P$ 来自部分像素。我们看到式（16）中，如果像素梯度为零，那么整项雅可比矩阵就为零，不会对计算运动增量有任何贡献。因此，可以考虑只使用带有梯度的像素点，舍弃像素梯度不明显的地方。这称为半稠密 ( Semi-Dense ) 的直接法，可以重构一个半稠密结构。</p>
+<p>（3）$P$ 为所有像素，称为稠密直接法。稠密重构需要计算所有像素 (一般几十万至几百万个)，因此多数不能在现有的 CPU 上实时计算，需要 GPU 的加速。但是，如前面讨论的，像素梯度不明显的点，在运动估计中不会有太大贡献，在重构时也会难以估计位置。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>直接法相比于传统的特征点法和光流通常会快一些</li>
+<li>直接法完全依靠于优化来求解相机位姿，在优化中像素梯度引导着优化增量变化的方向。然而图像通常是一个很强烈的非凸函数，只有当相机运动很小时，图中的梯度不会有很强的非凸性时，直接法才能成立。</li>
+<li>实际中，单个像素点和周围的像素点的亮度都差不多，所以会使用小图像块和更复杂的差异度量。</li>
+<li>直接法不需要提取特征点，在实际场景中，有些是无法提取出特征点或角点的，所以在这些场景中，直接法的优势很大。</li>
+<li>直接法可以构建半稠密和稠密地图，这是特征点法无法做到的。</li>
+<li>直接法的假设是灰度值不变，但如果相机是自动曝光的，会使图像整体变量或变暗。这时会导致直接法失效。</li>
+</ul>
+]]></content>
       <categories>
         <category>专业原理</category>
       </categories>
